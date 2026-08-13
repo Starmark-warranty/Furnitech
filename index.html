@@ -1544,9 +1544,24 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"Furnitech Cabinet", version:"11.9", build:"2026-08-13/led-lift",
+  name:"Furnitech Cabinet", version:"13.3", build:"2026-08-13/cut-code-apply",
   file:"Furnitech.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["13.3","2026-08-13","รหัสท่อนที่ค้นเจอถูกเอามาใช้แทนรหัสรุ่นแล้ว — รอบก่อนค้นเจอแล้วเอาแค่ชื่อกับหน่วยมาใช้ ช่อง Purchase ID ยังเป็นรหัสรุ่นกลางอยู่ ท่อน 668 จึงแสดงรหัสเดียวกับท่อน 371 · ตอนนี้เจอแล้วใช้รหัสท่อนจริงทั้งในตารางสรุปและตอนส่งออก และเขียนกำกับว่ามาจากคลังอุปกรณ์ จะได้แยกออกจากรหัสที่กรอกเองใน Element · จำรหัสรุ่นต้นทางไว้ต่างหาก รอบถัดไปจึงไม่เอารหัสท่อนไปค้นเป็นรุ่น"],
+    ["13.2","2026-08-13","FIX เส้นเรืองค้างที่สันแผ่นที่เซาะร่องรางไฟ — ตั้งแต่ร่องถูกทำให้เป็นหลุมเนื้อไม้จริง แผ่นสีที่เคยทาบไว้บอกตำแหน่งร่องก็ยังถูกวาดทับซ้ำอยู่ที่เดิม กลายเป็นแผ่นบางลอยค้างอยู่เหนือร่องที่ควักไปแล้ว มองเห็นเป็นเส้นรอบสันแผ่น · ตอนนี้ร่องที่ควักเป็นเนื้อไม้จริงแล้วจะไม่ถูกทาบสีซ้ำ ส่วนร่องแผ่นหลังกับร่องสันที่ยังไม่ได้ควักยังทาบเหมือนเดิม"],
+    ["13.1","2026-08-13","FIX ค้นรหัสท่อนที่ตัดแล้วไปได้สินค้าคนละเรื่อง — รอบแรกค้นจากชื่อสินค้าด้วยคำว่า ตัดขนาด บวกความยาว ซึ่งไปเจอของที่บังเอิญมีเลขนั้นในชื่อ หาราง 371 แล้วได้มุ้งไฟเบอร์ที่ตัดขนาด 544x369 · คลังตั้งรหัสท่อนที่ตัดเป็นรหัสรุ่นบวกเลขลำดับ เช่น ACCLT00245 กลายเป็น ACCLT00245000337 จึงเปลี่ยนมายึดรหัสต้นทางเป็นตัวตั้ง กรองเฉพาะรหัสที่ขึ้นต้นตรงกันก่อน แล้วค่อยหาความยาวในชื่อ ผิดรุ่นจึงเป็นไปไม่ได้ · ความยาวต้องอยู่หลังคำว่า ตัดขนาด จริง ๆ ไม่ใช่เลขรุ่นหรือความยาวม้วนที่อยู่ในชื่อ และต้องตรงตัว 371 ไม่ไปเจอ 1371 หรือ 3710 · ใช้ Purchase ID เป็นตัวตั้งเพราะนั่นคือรหัสที่มีอยู่จริงในคลัง ส่วนรหัสใน Element เป็นชื่อเรียกภายใน"],
+    ["13.0","2026-08-13","โปรแกรมค้นรหัสท่อนที่ตัดจากคลังอุปกรณ์เอง — เดิมส่งรหัสตั้งต้นกับความยาวไปให้ปลายทางจับคู่ ซึ่งต้องพึ่งตารางแปลงรหัสของอีกระบบ และต้องไปแก้โปรแกรมปลายทางถึงจะแยกรายการตามความยาวได้ · เปลี่ยนมาทำแบบเดียวกับถาดฟรอยด์ ค้นคลังอุปกรณ์ตัวเดียวกับที่ปลายทางใช้ แล้วส่งรหัสจริงออกไปเลย ปลายทางจึงได้รหัสที่มีอยู่จริงตรง ๆ ไม่ต้องแตะตารางแปลงรหัสและไม่ต้องแก้โปรแกรมฝั่งนั้น · ค้นด้วยคำว่า ตัดขนาด ตามด้วยความยาว แล้วบังคับให้เลขตรงตัว 867 จึงไม่ไปเจอ 1867 ถ้ามีหลายรุ่นความยาวเดียวกัน จะเลือกตัวที่ชื่อใกล้กับรหัสหรือชื่อรุ่นที่ตั้งไว้มากที่สุด · ไม่เจอก็ไม่เดา ส่งรหัสตั้งต้นพร้อมความยาวไปก่อนแล้วขึ้นเตือนให้ไปเพิ่มในคลัง รายการจึงไม่หาย · ใบอุปกรณ์ในโปรแกรมใช้ชื่อกับหน่วยจากคลังด้วย จะได้ตรงกับที่ส่งออก · ปิดสวิตช์ในตั้งค่าเพื่อกลับไปใช้วิธีเดิมได้"],
+    ["12.10","2026-08-13","FIX ร่องที่วิ่งยาวตลอดแผ่นทำให้เนื้อไม้อีกฝั่งหายไปทั้งแถบ — ร่องแบบนั้นผ่าชั้นที่ถูกเซาะออกเป็นสองท่อน แต่ตัวตัดรูปคืนแค่ท่อนใหญ่สุด ท่อนเล็กจึงหายไปพร้อมเนื้อไม้ที่ควรอยู่ · ตอนนี้เอาทุกท่อนมาปั้นต่อกัน ชั้นนั้นจึงเหลือเนื้อครบทั้งสองฝั่งของร่อง"],
+    ["12.9","2026-08-13","FIX เส้นแปลก ๆ พาดที่สันแผ่นที่เซาะร่องรางไฟ — ร่องรางไฟวิ่งสุดขอบแผ่นเป็นปกติ จึงกินเนื้อจนถึงริมพอดี พอปั้นเป็นรูกลางแผ่น ปากรูแตะเส้นรอบรูปเป๊ะ รูปสามเหลี่ยมที่ปะออกมาเลยพันกัน อาการเดียวกับที่บากเส้นโปรไฟล์เคยเป็น · ตอนนี้ชั้นไหนมีร่องแตะขอบ จะตัดออกจากเส้นรอบรูปของชั้นนั้นแทน ชั้นที่เหลือกับร่องที่อยู่กลางแผ่นยังเจาะเป็นรูตามเดิม เพราะทางนั้นไม่มีปัญหา · มีผลกับร่องทุกชนิดที่วิ่งชนขอบ ไม่ใช่แค่รางไฟ"],
+    ["12.8","2026-08-13","ช่องรหัสกับชื่อสินค้าในหน้าข้อมูลดิบของปลายทางว่างเปล่า — หน้านั้นแปลรหัสผ่านตารางแปลงรหัสเสมอ ไม่มีทางลัดแบบหน้าใบสั่งซื้อที่ลองค้นคลังอุปกรณ์ก่อน รหัสที่ตั้งเองใน Element จึงไม่เคยอยู่ในตารางนั้น ส่งค่าอะไรไปก็ถูกเขียนทับด้วยผลการแปลที่ว่างเปล่า · ตอนส่งขึ้นคลาวด์จึงลงทะเบียนรหัสอุปกรณ์ของออเดอร์นั้นให้เอง โดยชี้กลับหาตัวมันเอง ปลายทางแปลออกแล้วไปดึงชื่อกับหน่วยจากคลังอุปกรณ์ได้ตามปกติ · เพิ่มเฉพาะรหัสที่ยังไม่มีในตาราง ของเดิมที่ระบบอื่นตั้งไว้จึงไม่ถูกทับ และบอกจำนวนที่ลงทะเบียนใหม่ทุกครั้ง"],
+    ["12.7","2026-08-13","แยกบรรทัดตามความยาวได้โดยไม่ต้องแตะโปรแกรมปลายทาง — ปลายทางรวมรายการอุปกรณ์ด้วยรหัสสินค้า ถ้ามี ไม่งั้นใช้ชื่อ แล้วบวกจำนวนเข้าด้วยกัน ส่งรหัสเดิมทุกความยาวจึงถูกยุบเหลือบรรทัดเดียว ความยาวก็เหลือของท่อนแรก · แต่ตอนแปลงเป็นใบสั่งซื้อ ปลายทางอ่านช่องชื่อ ไม่ใช่ช่องรหัสสินค้า จึงใส่ความยาวต่อท้ายเฉพาะช่องรหัสสินค้าซึ่งใช้เป็นกุญแจจัดกลุ่มอย่างเดียว ส่วนชื่อกับ CODE ยังเป็นรหัสที่ตั้งไว้ล้วน ๆ ใบสั่งซื้อจึงได้รหัสถูกและแยกบรรทัดพร้อมกัน · ของที่ไม่ได้ตัดตามยาวไม่มีอะไรต่อท้าย พฤติกรรมเดิมทุกประการ"],
+    ["12.6","2026-08-13","ใส่รหัสลงช่อง CODE ของบรรทัดอุปกรณ์ด้วย — เดิมส่งช่องนั้นว่างไว้ ปลายทางหน้าที่อ่านช่องนี้ตรง ๆ จึงไม่เห็นรหัสเลย ส่วนหน้าที่แปลงรหัสเองอยู่แล้วจะเขียนทับค่านี้ ไม่กระทบกัน"],
+    ["12.5","2026-08-13","บรรทัดอุปกรณ์ส่งรหัสล้วนพร้อมความยาว — รอบก่อนต่อท้ายรหัสด้วยความยาวเพื่อกันปลายทางยุบรายการ ซึ่งเป็นการเดาแทนปลายทาง และทำให้รหัสที่ตั้งไว้เพี้ยนไปจากที่กรอก · ปลายทางจับคู่รหัสกับความยาวแล้วไปหารหัสสินค้าจริงเองอยู่แล้ว ฝั่งนี้จึงส่งของดิบไปตรง ๆ รหัสที่ตั้งไว้ในช่อง Purchase ID ออกไปเหมือนที่กรอกทุกตัวอักษร · ยังแยกเป็นคนละบรรทัดตามความยาวเหมือนเดิม เพราะคนละความยาวคือคนละของ · ถอดสวิตช์กับตัวคั่นที่เพิ่มมารอบก่อนออก ไม่มีอะไรให้ตั้งอีก"],
+    ["12.4","2026-08-13","ส่งความยาวของที่ตัดไปกับไฟล์ส่งออกแล้ว — บรรทัดอุปกรณ์เคยส่งช่องความยาวว่างเปล่าเสมอ ปลายทางจึงเห็นแต่จำนวนท่อน ไม่รู้ว่าตัดยาวเท่าไหร่ ต้องเปิดแบบดูเอง · ตอนนี้เส้นโปรไฟล์กับรางไฟส่งความยาวจริงไปในช่องความยาว ปัดลงตามที่ตกลงไว้ · และเพราะปลายทางรวมรายการด้วยรหัส ถ้าส่งรหัสเดิมทุกความยาวมันจะยุบรวมกันแล้วเหลือความยาวแรก จึงต่อท้ายรหัสด้วยความยาว รายการจึงแยกบรรทัดจริงตามที่ตั้งใจ ส่วนรหัสเดิมยังถูกส่งไปในช่อง CODE ควบคู่กัน ปิดสวิตช์ในตั้งค่าได้ถ้าอยากได้ยอดรวมต่อรหัสมากกว่า · เปลี่ยนตัวคั่นได้ด้วย"],
+    ["12.3","2026-08-13","หน้าต่างรางไฟกลับมาเป็นฟอร์มช่องใหญ่ — รอบก่อนทำเป็นตารางเพื่อให้เห็นหลายเส้นพร้อมกัน แต่ยัดเก้าคอลัมน์ลงแนวนอน ช่องกรอกจึงเล็กจนพิมพ์ลำบาก และป้ายกำกับหดสั้นจนอ่านไม่รู้เรื่อง · กลับมาใช้ฟอร์มแบบเดิมที่กรอกสบาย แต่ทำเป็นการ์ดต่อเส้นเรียงลงมา จึงยังแก้ได้หลายเส้น และยังมีปุ่มขยับทีละขั้นกับผลลัพธ์กำกับใต้ช่องเหมือนเดิม · ของที่ตั้งครั้งเดียวแล้วแทบไม่แตะ อย่างความยาวท่อน การหลบชั้น และรหัสฝาปิด ถูกพับไว้ใต้ตัวเลือกเพิ่มเติม หน้าตาหลักจึงเหลือเฉพาะสิ่งที่ปรับบ่อย"],
+    ["12.2","2026-08-13","หน้าต่างรางไฟเปิดมาแล้วมีเส้นให้ปรับทันที — รอบก่อนเปิดมาเจอตารางว่างเปล่า ดูเหมือนหน้าต่างไม่ทำงานทั้งที่แค่ยังไม่มีเส้น ต้องรู้เองว่าต้องกดเพิ่มเส้นก่อน · คนที่กดเมนูรางไฟคือคนที่ตั้งใจจะใส่อยู่แล้ว จึงใส่เส้นแรกให้เลยแล้วค่อยปรับในตาราง ซึ่งตรงกับกล่องรุ่นก่อนที่กรอกเสร็จได้เส้นทันที ไม่เอาก็กดลบทิ้งได้ · ตารางมีปุ่มใส่เส้นแรกอยู่กลางแถวว่างด้วย เผื่อลบหมดแล้วอยากใส่ใหม่ · ขยายหน้าต่างให้กว้างขึ้นและให้ตารางเลื่อนแนวนอนได้ เพราะเก้าคอลัมน์เบียดกันจนอ่านยากบนจอแคบ"],
+    ["12.1","2026-08-13","ของที่ตัดตามยาวออกใบอุปกรณ์แยกบรรทัดตามขนาดแล้ว — เส้นโปรไฟล์กับรางไฟสั่งซื้อเป็นท่อนตามความยาวที่ตัดจริง คนละความยาวคือคนละรายการ แต่เดิมยุบทุกความยาวไว้บรรทัดเดียวแล้วเขียนต่อท้ายว่ายาวเท่าไหร่บ้าง ซึ่งอ่านออกด้วยตาแต่ระบบผลิตแยกไม่ได้ ต้องไปไล่แตกเองทุกครั้ง · ตอนนี้แยกบรรทัดละความยาว พร้อมเขียนขนาดลงในชื่อด้วยรูปแบบที่ฝั่งผลิตค้นเจอ คือ ตัดขนาด ตามด้วยตัวเลขและหน่วย รหัสยังเป็นตัวเดิมทุกบรรทัด จึงผูก Purchase ID ได้เหมือนเดิม · เศษทศนิยมปัดลงเสมอ 867.5 ออกเป็น 867 เพราะตัดเกินแล้วต่อไม่ได้ แต่สั้นไปนิดเดียวยังเก็บงานได้ · รูปแบบชื่อแก้ได้ในตั้งค่า เผื่อปลายทางใช้คำอื่น"],
+    ["12.0","2026-08-13","แก้และขยับรางไฟที่ใส่ไปแล้วได้ — รอบแรกใช้กล่องกรอกค่ามาตรฐาน ซึ่งกรอกครั้งเดียวจบ อยากขยับไม่กี่มิลก็ต้องลบทิ้งแล้วใส่ใหม่ทั้งเส้น และแผ่นที่มีหลายเส้นก็แก้เส้นที่สองไม่ได้เลย · ตอนนี้เป็นหน้าต่างของตัวเอง โชว์เส้นที่แผ่นนั้นมีอยู่เป็นตาราง แก้ช่องไหนก็เห็นผลใน 3 มิติทันที พร้อมปุ่มบวกลบขยับทีละขั้น เลือกขั้นได้ตั้งแต่ครึ่งมิลถึง 25 มิล ใช้ได้ทั้งตำแหน่งกลางร่องและระยะยกพ้นก้นร่อง · ตำแหน่งที่เขียนแบบอ้างขอบไว้ ปุ่มขยับจะไปบวกลบที่ตัวเลขระยะนั้นตรง ๆ ความหมายจึงไม่เปลี่ยน · แต่ละแถวบอกผลลัพธ์กำกับไว้ ทั้งระยะจากสองขอบ ระยะที่รางโผล่พ้นผิวไม้ และจำนวนท่อนที่ตัดได้พร้อมความยาว · เพิ่มเส้นใหม่โดยก๊อปค่าจากเส้นล่าสุด และลบทีละเส้นได้ · คลิกที่ตัวรางใน 3 มิติถูกนับเป็นคลิกที่แผ่นเจ้าของแล้ว จึงเปิดหน้าต่างแก้จากตัวรางได้ตรง ๆ"],
     ["11.9","2026-08-13","ยกรางไฟพ้นก้นร่องได้แล้ว — เดิมวางตัวรางนอนแนบก้นร่องพอดี ปีกจึงจมลงไปเสมอกับผิวไม้ ทั้งที่ของจริงปีกพักอยู่บนผิวแล้วตัวรางลอยเหนือก้นร่องเล็กน้อย และระยะนี้ต่างกันไปตามรุ่นราง · ตั้งค่ากลางได้ในตั้งค่า ค่าตั้งต้น 2.5 มม. และแก้รายเส้นได้ในกล่องรางไฟ ใส่ค่าลบก็ได้ถ้าเป็นรางที่ฝังมิดลงไปกว่าก้นร่อง"],
     ["11.8","2026-08-13","FIX ปีกรางไฟจมอยู่ก้นร่อง กลับหัวกับของจริง — หน้าตัดรางมีสองฝั่งที่ไม่เหมือนกัน ฝั่งแคบคือตัวที่จมลงร่อง ส่วนฝั่งกว้างคือปีกที่แผ่ออกทับผิวไม้ โค้ดเดิมเหมาว่าจุดศูนย์ของรูปคือก้นร่องเสมอ ซึ่งขึ้นกับว่าคนวาดวางหัวลงหรือหัวขึ้น หน้าตัดที่วาดปีกไว้ด้านล่างจึงถูกกดจมลงร่อง แล้วตัวรางโผล่ออกมาแทน · ตอนนี้ดูจากรูปเอง วัดความกว้างครึ่งบนเทียบครึ่งล่าง แล้วให้ครึ่งที่แคบกว่าเป็นด้านที่จมลงไป ปีกจึงแผ่ออกนอกเสมอไม่ว่าจะวาดมาทางไหน · มีสวิตช์บังคับกลับด้านเองได้ เผื่อหน้าตัดที่ระบบเดาไม่ออก"],
     ["11.7","2026-08-13","ตำแหน่งรางไฟกรอกแบบอ้างขอบได้แล้ว — เดิมต้องกรอกเป็นระยะจากกึ่งกลางแผ่น ซึ่งต้องนั่งคิดเลขเองทุกครั้งว่าจากหน้าเข้ามา 90 คือเท่าไหร่ และพอเปลี่ยนความลึกแผ่น ตัวเลขนั้นก็ผิดทันที · เขียนแบบอ่านซ้ายไปขวาว่าจากขอบไหนเข้ามาเท่าไหร่ 90:1 คือจากขอบหน้าเข้ามา 90 · 1:70 คือจากขอบหลังเข้ามา 70 · 1:1 คือกึ่งกลาง · สองเลขล้วนอย่าง 2:1 คือแบ่งช่วงตามสัดส่วน · ใส่ตัวเลขเดี่ยวยังได้เหมือนเดิมคือระยะจากกึ่งกลาง · ยึดขอบไว้แล้วเปลี่ยนความลึกแผ่น ตำแหน่งรางขยับตามให้เอง · บอกผลกลับมาเป็นระยะจากทั้งสองขอบ จะได้ตรวจได้ทันที"],
@@ -2012,7 +2027,7 @@ const HINGE3D_DEFAULT={
     {name:"สกรูรองยึด R", _shape:"cyl", L:6,   W:6,  T:5,    orient:"front", x:16,   y:0,   z:47.5}
   ], _ts:1 }
 };
-const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, dowelPitch:170, dowelMargin:32, pinD:5, pinInset:37, pinDepth:8, pinPitch:64, pinExtra:1, pinName:"Shelf pin Ø5", dowelName:"เดือยไม้ Ø8", dowelCode:"DOWEL8", pinCode:"PIN5", shelfSupD:5, shelfSupDepth:12, shelfSupFront:15, shelfSupBack:15, shelfSupAuto:true, shelfSupW:200, shelfSupFrontL:50, shelfSupBackL:50, shelfSupCode:"SHELFSUP5", shelfSupName:"ตัวรับชั้นแบบเจาะสันข้าง Ø5", xmlScale:true, overlapWarn:false, slideName:"รางลิ้นชัก", slideCode:"SLIDE", slideDrillD:5, slideDrillDepth:3, slideRailFromBot:0, slideOffBlum:10, slideOffHafele:-17, underSideInner:21, altoSideH:80, altoBackH:63, altoBotMinusW:35, altoBackMinusW:38, altoBotMinusD:10, altoCodeA:"ALTO_S_H80_A", altoCodeW:"ALTO_S_H80_W", altoDrillRear:41, altoDrillH:37, altoPanelT:16, altoFrontDrill:"37,32,5,12 ; -37,32,5,12", legCode:"LEG", legName:"ขาตู้ปรับระดับ", legXmlOn:true, legXmlField:"K_Leg", legXmlMap:"", legXmlNo:"none,ไม่มี,ไม่เอา,-", legXmlD:50, legXmlInset:50, legXmlFitGap:true, legCountMap:"800:6, 1250:8", legMarkMidSingle:true, dxJoinGap:0, ledGrooveW:19, ledGrooveD:8, ledMaxLen:3000, ledSplit:"เต็มท่อนก่อน", ledCapCode:"LED_CAP", ledCornerCode:"", led3D:true, ledLift:2.5, pullXmlOn:true, pullField:"K_Pull", pullOriField:"K_Orientation", pullPosField:"K_Pull_Position", pullXField:"K_Pull_Coordinate_X", pullYField:"K_Pull_Coordinate_Y", pullNo:"nopull,none,-", pullName:"มือจับ", pull3D:true, dxNotchGap:0.5, legClipOn:true, legClipMap:"", legClipCode:"LEGCLIP", legClipName:"กิ๊ฟขาตู้ (ยึดแผ่นปิดขา)", doorSwing:true, shelfT:16, hangRailCode:"HANGRAIL", hangRailName:"ราวแขวนผ้า สแตนเลส C", hangRailThruD:8, hangRailCsD:13, hangRailCsDepth:2, hangRailEndGap:25, hangRailMap:"", drawerSideT:16, drawerBotT:9, drawerBoxH:120, drawerBoxLift:20, screwD:5, screwMateDepth:28, screwInset:9, screwCode:"SCREW5", screwName:"สกรู Ø5", altoMapA:"350:552.35.362, 400:552.35.363, 450:552.35.364, 500:552.35.365", altoMapW:"350:552.35.762, 400:552.35.763, 450:552.35.764, 500:552.35.765",
+const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, dowelPitch:170, dowelMargin:32, pinD:5, pinInset:37, pinDepth:8, pinPitch:64, pinExtra:1, pinName:"Shelf pin Ø5", dowelName:"เดือยไม้ Ø8", dowelCode:"DOWEL8", pinCode:"PIN5", shelfSupD:5, shelfSupDepth:12, shelfSupFront:15, shelfSupBack:15, shelfSupAuto:true, shelfSupW:200, shelfSupFrontL:50, shelfSupBackL:50, shelfSupCode:"SHELFSUP5", shelfSupName:"ตัวรับชั้นแบบเจาะสันข้าง Ø5", xmlScale:true, overlapWarn:false, slideName:"รางลิ้นชัก", slideCode:"SLIDE", slideDrillD:5, slideDrillDepth:3, slideRailFromBot:0, slideOffBlum:10, slideOffHafele:-17, underSideInner:21, altoSideH:80, altoBackH:63, altoBotMinusW:35, altoBackMinusW:38, altoBotMinusD:10, altoCodeA:"ALTO_S_H80_A", altoCodeW:"ALTO_S_H80_W", altoDrillRear:41, altoDrillH:37, altoPanelT:16, altoFrontDrill:"37,32,5,12 ; -37,32,5,12", legCode:"LEG", legName:"ขาตู้ปรับระดับ", legXmlOn:true, legXmlField:"K_Leg", legXmlMap:"", legXmlNo:"none,ไม่มี,ไม่เอา,-", legXmlD:50, legXmlInset:50, legXmlFitGap:true, legCountMap:"800:6, 1250:8", legMarkMidSingle:true, dxJoinGap:0, ledGrooveW:19, ledGrooveD:8, ledMaxLen:3000, ledSplit:"เต็มท่อนก่อน", ledCapCode:"LED_CAP", ledCornerCode:"", led3D:true, ledLift:2.5, cutSizeFmt:"{ชื่อ} ตัดขนาด {ยาว} mm.", cutLookupKey:"ตัดขนาด", cutLookupOn:true, pullXmlOn:true, pullField:"K_Pull", pullOriField:"K_Orientation", pullPosField:"K_Pull_Position", pullXField:"K_Pull_Coordinate_X", pullYField:"K_Pull_Coordinate_Y", pullNo:"nopull,none,-", pullName:"มือจับ", pull3D:true, dxNotchGap:0.5, legClipOn:true, legClipMap:"", legClipCode:"LEGCLIP", legClipName:"กิ๊ฟขาตู้ (ยึดแผ่นปิดขา)", doorSwing:true, shelfT:16, hangRailCode:"HANGRAIL", hangRailName:"ราวแขวนผ้า สแตนเลส C", hangRailThruD:8, hangRailCsD:13, hangRailCsDepth:2, hangRailEndGap:25, hangRailMap:"", drawerSideT:16, drawerBotT:9, drawerBoxH:120, drawerBoxLift:20, screwD:5, screwMateDepth:28, screwInset:9, screwCode:"SCREW5", screwName:"สกรู Ø5", altoMapA:"350:552.35.362, 400:552.35.363, 450:552.35.364, 500:552.35.365", altoMapW:"350:552.35.762, 400:552.35.763, 450:552.35.764, 500:552.35.765",
   /* v7.88: ซีรีส์ราง Kitchen 4.0 — โครงเดียวกับ ALTO แต่มีสีเดียว (ไม่มีตัวเลือกสี) */
   k40Code:"KITCHEN40_H80", k40Name:"ราง Kitchen 4.0", k40SideH:80, k40BackH:63, k40PanelT:16,
   k40BotMinusW:35, k40BackMinusW:38, k40BotMinusD:10, k40DrillRear:41, k40DrillH:37,
@@ -2871,6 +2886,13 @@ function shapeLocalGeo(b){
    ต่อกันแล้วได้หลุมจริงที่มีก้น มองเห็นได้ทุกมุม และเงาตกตามจริง */
 /* v11.6: แปลงร่องหน้าเป็นสี่เหลี่ยมหลุมตื้น เพื่อให้รูปทรง 3 มิติมีความลึกจริง
    เอาเฉพาะร่องบนหน้าแผ่น — ร่องสันกับร่องแผ่นหลังไม่เกี่ยว */
+/* v13.2: ร่องที่ถูกแปลงเป็นหลุมเนื้อไม้จริงแล้ว ไม่ต้องทาบแผ่นสีซ้ำอีก
+   ทาบซ้ำ = แผ่นสีลอยค้างอยู่เหนือร่องที่ควักไปแล้ว มองเห็นเป็นเส้นเรืองอยู่ที่สันแผ่น */
+function grooveIsCarved(b,g){
+  if(!b||!b._pkGeo||!g||g.face==="edge"||g.back) return false;
+  const T=Math.max((+b.T)||18,0.2), d=+g.depth||0;
+  return (d>0)&&(d<T-0.2);
+}
 function grooveBlindRects(b){
   const T=Math.max((b&&b.T)||18,0.2), L=Math.max(+b.L||1,1), W=Math.max(+b.W||1,1);
   const out=[];
@@ -2890,14 +2912,31 @@ function buildLayeredGeo(b,T,blinds,seg){
   const zs=[-T/2,T/2];
   blinds.forEach(p=>{ const d=lim(+p.depth||0); zs.push(pocketZTop(p)?(T/2-d):(-T/2+d)); });
   const uniq=[...new Set(zs.map(v=>Math.round(v*1000)/1000))].sort((a,c)=>a-c);
+  /* v12.9: ร่องที่วิ่งสุดขอบแผ่น (ซึ่งเป็นค่าปกติของร่องรางไฟ) กินเนื้อจนถึงริมพอดี
+     ถ้าปั้นเป็น "รู" กลางแผ่น ปากรูจะแตะเส้นรอบรูปเป๊ะ รูปสามเหลี่ยมที่ปะออกมาเลยพันกัน
+     โผล่เป็นเส้นแปลก ๆ พาดที่สันแผ่น — อาการเดียวกับที่บากเส้นโปรไฟล์เคยเป็น
+     -> ชั้นไหนมีร่องแตะขอบ ให้ตัดออกจากเส้นรอบรูปของชั้นนั้นแทน
+        ชั้นที่เหลือกับร่องที่อยู่กลางแผ่นยังเจาะเป็นรูตามเดิม เพราะทางนั้นไม่มีปัญหา */
+  const hx=(+b.L||1)/2, hy=(+b.W||1)/2;
+  const touches=q=>{ const w=Math.max(+q.w||0,0.2), h=Math.max(+q.h||0,0.2);
+    return ((+q.x||0)-w/2<=-hx+0.3)||((+q.x||0)+w/2>=hx-0.3)
+        ||((+q.y||0)-h/2<=-hy+0.3)||((+q.y||0)+h/2>=hy-0.3); };
   const geos=[];
   for(let i=0;i<uniq.length-1;i++){
     const z0=uniq[i], z1=uniq[i+1], dz=z1-z0; if(dz<0.05) continue;
     const mid=(z0+z1)/2;
     const active=blinds.filter(p=>{ const d=lim(+p.depth||0);
       return pocketZTop(p) ? (mid>T/2-d) : (mid<-T/2+d); });
-    const g=new THREE.ExtrudeGeometry(faceShape(b,active),{depth:dz,bevelEnabled:false,curveSegments:seg});
-    g.translate(0,0,z0); geos.push(g);
+    const edgeCuts=active.filter(touches), midCuts=active.filter(q=>!touches(q));
+    let shapes=null;
+    if(edgeCuts.length&&!(b.profile&&b.profile.length>=3)){
+      try{ const prs=_rectSubtract(+b.L||1,+b.W||1,edgeCuts,true);   // v12.10: เอาทุกท่อนที่เหลือ
+        if(prs&&prs.length) shapes=prs.map(pr=>faceShape(Object.assign({},b,{profile:pr}),midCuts));
+      }catch(e){ console.error("layer:",e); }
+    }
+    if(!shapes) shapes=[faceShape(b,active)];
+    shapes.forEach(sh=>{ const g=new THREE.ExtrudeGeometry(sh,{depth:dz,bevelEnabled:false,curveSegments:seg});
+      g.translate(0,0,z0); geos.push(g); });
   }
   return mergeGeos(geos);
 }
@@ -8314,7 +8353,8 @@ function render3D(refit){
       addEdges(mesh,bm.geo);
       root.add(mesh); meshes.push({mesh,id:b.id,d});
       if(state.overlapIds&&state.overlapIds.includes(b.id)){ const hl=new THREE.Mesh(new THREE.BoxGeometry(d[0],d[1],d[2]), new THREE.MeshBasicMaterial({color:0xe5484d,transparent:true,opacity:.45,depthWrite:false})); hl.position.set(b.x,b.y,b.z); hl.renderOrder=3; hl.userData.id=b.id; root.add(hl); }
-      (b.grooves||[]).forEach(g=>{const gm=buildGrooveMesh(b,g);gm.position.set(b.x,b.y,b.z);gm.userData.id=b.id;root.add(gm);meshes.push({mesh:gm,id:b.id,d,groove:true});});
+      (b.grooves||[]).forEach(g=>{ if(grooveIsCarved(b,g))return;   // v13.2: ควักเป็นเนื้อไม้จริงแล้ว ไม่ต้องทาบสีซ้ำ
+        const gm=buildGrooveMesh(b,g);gm.position.set(b.x,b.y,b.z);gm.userData.id=b.id;root.add(gm);meshes.push({mesh:gm,id:b.id,d,groove:true});});
       buildConnectorMeshes(b).forEach(cm=>{root.add(cm);meshes.push({mesh:cm,id:b.id,d,connector:true});});
       buildBlindHoleMeshes(b).forEach(hm=>root.add(hm));   // รูตัน (โชว์อย่างเดียว ไม่ raycast)
       buildPocketMeshes(b).forEach(pm=>root.add(pm));      // Pocket (โชว์อย่างเดียว)
@@ -8487,8 +8527,8 @@ function bindPointer(dom){
       /* v9.85: เฟรมกับมือจับเป็นชิ้นลูกที่เกาะอยู่บนบาน คลิกโดนมันต้องนับเป็นคลิกที่บานใบนั้น
          บานเฟรมไม่มีแผ่นบานให้คลิกอยู่แล้ว (แผ่นถูกซ่อนเพราะบานจริงคือเส้นเฟรม+กระจก)
          ถ้าไม่แปลงกลับเป็นบานเจ้าของ จะกดเปิดบานนั้นไม่ได้เลย */
-      if(tb&&(tb._frameOwner||tb._pullOwner)){
-        const own=state.boards.find(x=>x.id===(tb._frameOwner||tb._pullOwner)); if(own) tb=own; }
+      if(tb&&(tb._frameOwner||tb._pullOwner||tb._ledOwner)){   // v12.0: รางไฟก็เป็นชิ้นลูกเหมือนกัน
+        const own=state.boards.find(x=>x.id===(tb._frameOwner||tb._pullOwner||tb._ledOwner)); if(own) tb=own; }
       const mv=tb&&(tb._dg||(tb._door&&!tb._box&&!tb._panel&&!tb._dummy));
       if(mv){ const key=tb._dg?((tb.cabInst||"")+"|dg:"+tb._dg):tb.id;   // v9.01: ผูกกับตู้ใบนั้น
         state.doorPick=state.doorPick||[];
@@ -8510,7 +8550,7 @@ function bindPointer(dom){
     // select tool — เลือกชิ้นที่เห็นก่อน · คลิกซ้ำที่เดิม = สลับไปชิ้นถัดไปด้านหลัง
     if(hit && e.button===0){
       /* v9.85: ชิ้นลูก (เฟรม/มือจับ) แปลงกลับเป็นบานเจ้าของ จะได้คลิกเลือกบานเฟรมได้ตามปกติ */
-      const _own=id=>{ const x=state.boards.find(y=>y.id===id); return (x&&(x._frameOwner||x._pullOwner))||id; };
+      const _own=id=>{ const x=state.boards.find(y=>y.id===id); return (x&&(x._frameOwner||x._pullOwner||x._ledOwner))||id; };   // v12.0
       const ids=[]; _h2.filter(h=>!h.object.userData.glass).forEach(h=>{ const id=_own(h.object.userData.id); if(!ids.includes(id))ids.push(id); });
       if(!ids.length && hit) ids.push(_own(hit.object.userData.id));
       const near=_lastPick && Math.abs(e.clientX-_lastPick.x)<6 && Math.abs(e.clientY-_lastPick.y)<6 && _lastPick.ids.join()===ids.join();
@@ -10531,7 +10571,7 @@ function dxTopY(inst,r){
    รูปสามเหลี่ยมที่ปะออกมาจึงพันกัน กลายเป็นเส้นทแยงพาดแผ่น และเนื้อตรงบากก็ไม่ถูกควักออกจริง
    -> ตัดออกจาก "เส้นรอบรูปของแผ่น" แทน แผ่นจึงเว้าเป็นตัวแอลอย่างที่ควรเป็น
       ช่องบากยังอยู่ในรายการงานกัดเหมือนเดิม ไฟล์เจาะจึงไม่เปลี่ยน */
-function _rectSubtract(L,W,cuts){
+function _rectSubtract(L,W,cuts,all){
   const uq=a=>{ const o=[]; a.slice().sort((x,y)=>x-y).forEach(v=>{ if(!o.length||Math.abs(v-o[o.length-1])>0.05) o.push(v); }); return o; };
   const hx=L/2, hy=W/2, cl=(v,a,b)=>Math.max(a,Math.min(b,v));
   const xs=[-hx,hx], ys=[-hy,hy];
@@ -10567,11 +10607,17 @@ function _rectSubtract(L,W,cuts){
   if(!loops.length) return null;
   const ar=l=>{ let a=0; for(let i=0;i<l.length;i++){ const q=l[(i+1)%l.length]; a+=l[i][0]*q[1]-q[0]*l[i][1]; } return Math.abs(a)/2; };
   loops.sort((a,b)=>ar(b)-ar(a));
-  const out=[]; const P=loops[0];
-  for(let i=0;i<P.length;i++){ const a=P[(i-1+P.length)%P.length], b=P[i], c=P[(i+1)%P.length];
-    const d1=[b[0]-a[0],b[1]-a[1]], d2=[c[0]-b[0],c[1]-b[1]];
-    if(Math.abs(d1[0]*d2[1]-d1[1]*d2[0])>0.01) out.push([round(b[0]),round(b[1])]); }
-  return out.length>=3?out:null;
+  /* ตัดจุดที่อยู่บนเส้นตรงเดียวกันทิ้ง เหลือเฉพาะมุมจริง */
+  const clean=P=>{ const o=[];
+    for(let i=0;i<P.length;i++){ const a=P[(i-1+P.length)%P.length], b=P[i], c=P[(i+1)%P.length];
+      const d1=[b[0]-a[0],b[1]-a[1]], d2=[c[0]-b[0],c[1]-b[1]];
+      if(Math.abs(d1[0]*d2[1]-d1[1]*d2[0])>0.01) o.push([round(b[0]),round(b[1])]); }
+    return o.length>=3?o:null; };
+  /* v12.10: ร่องที่วิ่งยาวตลอดแผ่นจะ "ผ่า" ชั้นนั้นออกเป็นสองท่อน
+     คืนแค่ท่อนใหญ่สุดจึงทำให้อีกท่อนหายไปทั้งแถบ ซึ่งกินเนื้อไม้ที่ควรอยู่
+     ขอทุกท่อนได้เมื่อสั่ง all — ส่วนที่ขอรูปเดียว (เว้าขอบแผ่น) ยังได้ท่อนใหญ่สุดเหมือนเดิม */
+  if(all){ const outs=loops.map(clean).filter(Boolean); return outs.length?outs:null; }
+  return clean(loops[0]);
 }
 function applyEdgeNotchProfiles(){
   /* ล้างรูปที่เคยเว้าไว้ก่อน แล้วคิดใหม่จากช่องบากที่มีอยู่จริงตอนนี้ */
@@ -10607,6 +10653,77 @@ function applyEdgeNotchProfiles(){
 
    ร่องกับหน้าตัดเป็นคนละขนาดโดยตั้งใจ — Loox กว้าง 23 แต่ร่อง 19 เพราะปีกรางวางทับผิวไม้
    จึงให้ตั้งความกว้างร่องเอง ไม่ไปอ่านจากหน้าตัด */
+/* ───────── v12.1: ของที่ตัดตามยาว ต้องแยกบรรทัดตามขนาด ─────────
+   เส้นโปรไฟล์กับรางไฟสั่งซื้อเป็นท่อนตามความยาวที่ตัดจริง คนละความยาวคือคนละรายการ
+   เดิมยุบทุกความยาวไว้บรรทัดเดียวแล้วเขียนต่อท้ายว่ายาวเท่าไหร่บ้าง
+   ซึ่งอ่านออกด้วยตาแต่ระบบผลิตแยกไม่ได้ ต้องมาไล่แตกเองทุกครั้ง
+   จึงแยกเป็นบรรทัดละความยาว และเขียนขนาดลงในชื่อด้วยรูปแบบที่ฝั่งผลิตค้นเจอ
+   เศษทศนิยมปัดลงเสมอ เพราะตัดเกินแล้วต่อไม่ได้ แต่ตัดขาดนิดเดียวยังเก็บงานได้ */
+function cutLen(v){ return Math.floor((+v||0)+1e-6); }
+/* ───────── v13.0: ค้นรหัสของที่ตัดตามยาวจากคลังอุปกรณ์เอง ─────────
+   ทางเดิมส่งรหัสตั้งต้นกับความยาวไปให้ปลายทางจับคู่ ซึ่งต้องพึ่งตารางแปลงรหัสของอีกระบบ
+   ทำแบบเดียวกับถาดฟรอยด์แทน — ค้นคลังอุปกรณ์ตัวเดียวกับที่ปลายทางใช้ แล้วส่งรหัสจริงออกไปเลย
+   ค้นด้วยชื่อรุ่นที่กรอกไว้บวกความยาว เช่น "ตัดขนาด 867" จึงเจอเฉพาะท่อนที่ตัดไว้แล้ว
+   ไม่เจอก็ไม่เดา ใช้รหัสตั้งต้นไปก่อนแล้วขึ้นเตือนว่าให้ไปเพิ่มในคลัง */
+const _fgCut={};                        // cache: "รหัสต้นทาง|ยาว" -> {code,name,unit}|null
+function cutKey(code,len){ return String(code||"")+"|"+cutLen(len); }
+async function cutLookup(code,len,hint){
+  const k=cutKey(code,len); if(_fgCut[k]!==undefined) return _fgCut[k];
+  _fgCut[k]=null;
+  try{
+    const sb=await getDB(); if(!sb) return null;
+    const L=cutLen(len), pre=String(code||"").trim();
+    if(!pre) return null;
+    /* v13.1: ยึด "รหัสต้นทาง" เป็นตัวตั้ง ไม่ใช่ค้นจากชื่อสินค้า
+       คลังตั้งรหัสท่อนที่ตัดเป็น รหัสรุ่น + เลขลำดับ เช่น ACCLT00245 -> ACCLT00245000337
+       ค้นจากชื่ออย่างเดียวจึงหลุดไปเจอสินค้าคนละเรื่องที่บังเอิญมีเลขเดียวกัน
+       เช่นหา 371 แล้วไปได้มุ้งไฟเบอร์ที่ตัดขนาด 544x369
+       -> กรองด้วยรหัสที่ขึ้นต้นตรงกันก่อน แล้วค่อยหาความยาวในชื่อ ผิดรุ่นจึงเป็นไปไม่ได้ */
+    const q=await sb.from("fitting_global").select("item_number,product_name,unit")
+      .ilike("item_number",pre+"%").ilike("product_name","%"+L+"%").limit(200);
+    if(q.error||!q.data||!q.data.length) return null;
+    const kw=(String(settings.cutLookupKey||DEF_SETTINGS.cutLookupKey||"ตัดขนาด")).trim();
+    /* ความยาวต้องตรงตัว ไม่ใช่เป็นส่วนหนึ่งของเลขอื่น (371 ต้องไม่ไปเจอ 1371 หรือ 3710) */
+    const exact=new RegExp("(^|[^0-9])"+L+"([^0-9]|$)");
+    /* ที่ดีที่สุดคือเลขที่อยู่หลังคำว่า "ตัดขนาด" จริง ๆ ไม่ใช่เลขรุ่นหรือเลขความยาวม้วน */
+    const cutRe=new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*"+L+"(?![0-9])");
+    let rows=q.data.filter(x=>cutRe.test(String(x.product_name||"")));
+    if(!rows.length) rows=q.data.filter(x=>exact.test(String(x.product_name||"")));
+    if(!rows.length) return null;
+    rows.sort((a,b)=>String(a.item_number||"").localeCompare(String(b.item_number||"")));
+    const pick=rows[0];
+    _fgCut[k]={code:String(pick.item_number||"").trim(),name:String(pick.product_name||""),unit:String(pick.unit||"")};
+    return _fgCut[k];
+  }catch(e){ console.error("cutLookup:",e); return null; }
+}
+/* เรียกค้นทุกรายการที่ตัดตามยาวในฉาก แล้วสั่งคิดใหม่เมื่อผลกลับมา
+   ใช้ Purchase ID เป็นตัวตั้ง เพราะนั่นคือรหัสที่มีอยู่จริงในคลัง ส่วนรหัสใน Element เป็นชื่อเรียกภายใน */
+/* v13.3: หลังค้นเจอ เราเปลี่ยน purchase เป็นรหัสท่อนจริง
+   จึงต้องจำรหัสรุ่นต้นทางไว้ ไม่งั้นรอบถัดไปจะเอารหัสท่อนไปค้นเป็นรุ่น */
+function cutSrcOf(f){ return String((f&&(f._pidSrc||f.purchase||f.art))||"").trim(); }
+function cutLookupAll(list){
+  const miss=list.filter(f=>(+f._cut>0)&&cutSrcOf(f)&&_fgCut[cutKey(cutSrcOf(f),f._cut)]===undefined);
+  if(!miss.length) return false;
+  Promise.all(miss.map(f=>cutLookup(cutSrcOf(f),f._cut,f.name).then(r=>{
+    if(!r) console.warn("ตัดขนาด "+cutSrcOf(f)+" "+cutLen(f._cut)+" มม.: ไม่พบรหัสท่อนนี้ในคลังอุปกรณ์"); })))
+    .then(()=>{ try{ _cabFitSig=""; sync(0); }catch(e){} });
+  return true;
+}
+function cutCodeOf(f){
+  const src=cutSrcOf(f);
+  const hit=(+f._cut>0&&src)?_fgCut[cutKey(src,f._cut)]:undefined;
+  return (hit&&hit.code)?hit:null;
+}
+function cutSizeName(desc,len){
+  const f=String(settings.cutSizeFmt||DEF_SETTINGS.cutSizeFmt||"{ชื่อ} ตัดขนาด {ยาว} mm.");
+  return f.replace(/\{ชื่อ\}/g,String(desc||"")).replace(/\{ยาว\}/g,String(len));
+}
+function bomCutRow(m,code,desc,unit,len,kind){
+  const L=cutLen(len); if(!(L>0)) return;
+  const k=code+"@"+L;                                    // คนละความยาว = คนละบรรทัด
+  (m[k]||(m[k]={art:code,dia:"",kind:kind||"len",name:cutSizeName(desc,L),unit:unit||"เส้น",count:0,_cut:L})).count+=1;
+  /* v13.1: ชื่อจากคลังจะถูกเติมทีหลังตอนรู้ Purchase ID แล้ว (ดู fittingAgg) เพราะรหัสในคลังผูกกับ Purchase ID ไม่ใช่รหัสภายใน */
+}
 function ledList(b){ return ((b&&b._leds)||[]).filter(Boolean); }
 /* v11.8: หน้าตัดรางไฟมีสองฝั่งที่ไม่เหมือนกัน — ฝั่งแคบคือตัวที่จมลงร่อง
    ส่วนฝั่งกว้างคือปีกที่แผ่ออกทับผิวไม้ ซึ่งต้องอยู่ด้านนอกเสมอ
@@ -10775,59 +10892,140 @@ function applyLedStrips(){
   applyLedStrips._g=nG; applyLedStrips._r=nR;
   return nR;
 }
-async function ledDialog(sel){
-  const b=sel||selBoard();
+/* ───────── v12.0: หน้าต่างรางไฟทำใหม่ให้แก้ของที่ใส่ไปแล้วได้ ─────────
+   รอบแรกใช้กล่องกรอกค่ามาตรฐาน ซึ่งกรอกครั้งเดียวจบ แก้ทีหลังไม่ได้เลย
+   ต้องลบทิ้งแล้วใส่ใหม่ทุกครั้งที่อยากขยับไม่กี่มิล และแผ่นที่มีหลายเส้นก็แก้เส้นที่สองไม่ได้
+   ที่นี่โชว์เส้นที่แผ่นนั้นมีอยู่เป็นตาราง แก้ช่องไหนก็เห็นผลใน 3 มิติทันที
+   พร้อมปุ่มขยับทีละขั้น สำหรับจูนตำแหน่งกับระยะยกโดยไม่ต้องคิดเลข */
+/* ───────── v12.3: หน้าต่างรางไฟกลับมาเป็นฟอร์มเต็มตัว ─────────
+   รอบก่อนทำเป็นตารางเพื่อให้เห็นหลายเส้นพร้อมกัน แต่ยัดเก้าคอลัมน์ลงแนวนอน
+   ช่องกรอกจึงเล็กจนพิมพ์ลำบาก และป้ายกำกับหดสั้นจนอ่านไม่รู้เรื่อง
+   กลับมาใช้ฟอร์มช่องใหญ่แบบเดิมที่กรอกสบาย แต่ทำเป็นการ์ดต่อเส้นเรียงลงมา
+   จึงยังแก้ได้หลายเส้นและยังมีปุ่มขยับทีละขั้นเหมือนเดิม
+   ของที่ตั้งครั้งเดียวแล้วแทบไม่แตะ (ความยาวท่อน หลบชั้น ฝาปิด) พับไว้ใต้ตัวเลือกเพิ่มเติม */
+function ledDialog(sel){
+  let b=sel||selBoard();
+  if(b&&b._ledOwner){ const o=state.boards.find(z=>z.id===b._ledOwner); if(o) b=o; }
   if(!b||b._virtual){ toast("เลือกแผ่นไม้ก่อน"); return; }
   ensureSampleSection();
   const secs=Object.keys(settings.sections||{}).sort();
   if(!secs.length){ toast("ยังไม่มีหน้าตัดในคลัง — ไปวาดที่ Fitting 3D → ▤ คลัง Section"); return; }
-  const cur=ledList(b)[0]||{};
-  const v=await promptFields("รางไฟบนแผ่น “"+(b.name||b.id)+"” ("+round(b.L)+" × "+round(b.W)+" × "+b.T+")",[
-    {key:"sec",label:"หน้าตัดราง (คลัง Section)",type:"toggle",options:secs,value:cur.sec||secs[0]},
-    {key:"face",label:"ผิวที่เซาะ — เข้าใน/ออกนอก คิดจากตำแหน่งแผ่นในตู้ให้เอง ใช้ได้กับทั้งแผ่นข้างและแผ่นนอน",
-      type:"toggle",options:["หันเข้าตู้","หันออกนอก","ผิวบน","ผิวล่าง"],
-      value:(cur.face==="top"?"ผิวบน":cur.face==="bottom"?"ผิวล่าง":cur.face==="out"?"หันออกนอก":"หันเข้าตู้")},
-    {key:"axis",label:"แนวราง",type:"toggle",options:["ตามยาว","ตามกว้าง"],value:(cur.axis==="w"?"ตามกว้าง":"ตามยาว")},
-    {key:"pos",label:"ตำแหน่งกลางร่อง ตามแนวขวาง — 90:1 = จากขอบหน้าเข้ามา 90 · 1:70 = จากขอบหลังเข้ามา 70 · 1:1 = กึ่งกลาง · ใส่ตัวเลขเดี่ยว = ระยะจากกึ่งกลาง",
-      type:"text",value:String(cur.pos!=null?cur.pos:"1:1")},
-    {key:"gw",label:"ร่องกว้าง (มม.)",value:(cur.gw||+settings.ledGrooveW||19)},
-    {key:"gd",label:"ร่องลึก (มม.)",value:(cur.gd||+settings.ledGrooveD||8)},
-    {key:"trimA",label:"ร่นหัว (มม. · 0 = วิ่งสุด ไม่ต้องมีฝา)",value:(cur.trimA||0)},
-    {key:"trimB",label:"ร่นท้าย (มม. · 0 = วิ่งสุด)",value:(cur.trimB||0)},
-    {key:"maxLen",label:"ยาวสุดต่อท่อน (มม.)",value:(cur.maxLen||+settings.ledMaxLen||3000)},
-    {key:"split",label:"เกินความยาว",type:"toggle",options:["เต็มท่อนก่อน","แบ่งเท่ากัน"],
-      value:(cur.split||settings.ledSplit||"เต็มท่อนก่อน")},
-    {key:"skip",label:"ตัดรางหลบชั้นที่ขวาง (ร่องยังวิ่งตลอด)",type:"toggle",options:["หลบ","ไม่หลบ"],
-      value:(cur.skipShelf===false?"ไม่หลบ":"หลบ")},
-    {key:"lift",label:"ยกรางพ้นก้นร่อง (มม. · 0 = นอนแนบก้นร่อง · ลบ = กดลึกกว่าก้นร่อง) — กดตกลงแล้วระบบจะบอกว่าตัวรางโผล่พ้นผิวไม้เท่าไหร่",
-      value:(cur.lift!=null?cur.lift:(+settings.ledLift||0))},
-    {key:"flip",label:"ด้านที่จมลงร่อง — อัตโนมัติจะเลือกฝั่งแคบให้จม ปีกจึงแผ่ออกนอก",
-      type:"toggle",options:["อัตโนมัติ","กลับด้าน","ไม่กลับ"],
-      value:(cur.flip==="y"?"กลับด้าน":cur.flip==="n"?"ไม่กลับ":"อัตโนมัติ")},
-    {key:"cap",label:"รหัสฝาปิดปลาย (เว้นว่าง = ใช้รหัสกลางในตั้งค่า)",type:"text",value:(cur.capCode||"")},
-    {key:"more",label:"เพิ่มเป็นเส้นที่สองของแผ่นนี้",type:"toggle",options:["แทนที่","เพิ่ม"],value:"แทนที่"}]);
-  if(!v) return;
-  const rec={ sec:String(v.sec||"").trim(),
-    face:(v.face==="ผิวบน"?"top":v.face==="ผิวล่าง"?"bottom":v.face==="หันออกนอก"?"out":"in"),
-    axis:(v.axis==="ตามกว้าง"?"w":"l"), pos:String(v.pos==null?"1:1":v.pos).trim(),
-    gw:+v.gw||19, gd:+v.gd||8, trimA:+v.trimA||0, trimB:+v.trimB||0,
-    maxLen:+v.maxLen||3000, split:v.split, skipShelf:(v.skip!=="ไม่หลบ"),
-    lift:(String(v.lift).trim()===""?null:(+v.lift||0)),
-    flip:(v.flip==="กลับด้าน"?"y":v.flip==="ไม่กลับ"?"n":"auto"),
-    capCode:String(v.cap||"").trim() };
-  b._leds=(v.more==="เพิ่ม")?(ledList(b).concat([rec])):[rec];
-  sync(1);
-  const runs=state.boards.filter(z=>z._ledPart&&z._ledOwner===b.id);
-  const caps=runs.filter(z=>z._ledCapA).length+runs.filter(z=>z._ledCapB).length;
-  const fc=ledFaceOf(b,rec.face);
-  const cw=(rec.axis==="w")?(+b.L||1):(+b.W||1);
-  const lf=(rec.lift!=null)?rec.lift:(+settings.ledLift||0);
-  const _bb=sectBox(rec.sec)||{h:0};
-  const out=round(_bb.h-(+rec.gd||0)+lf);            // v11.9: ตัวรางโผล่พ้นผิวไม้เท่าไหร่ — ตัวเลขที่ตรวจกับของจริงได้
-  toast("รางไฟ "+rec.sec+" · ผิว"+(fc==="top"?"บน":"ล่าง")+" · "+ledPosLabel(rec.pos,cw)
-    +" · ยกพ้นก้นร่อง "+lf+" → โผล่พ้นผิวไม้ "+out+" มม."
-    +" · ร่อง "+rec.gw+"×"+rec.gd+" มม. · ตัวราง "+runs.length+" ท่อน ("
-    +runs.map(z=>Math.round(z.L)).join(" + ")+")"+(caps?(" · ฝาปิด "+caps+" ตัว"):" · วิ่งสุดทั้งสองปลาย"));
+  let step=parseFloat(localStorage.getItem("furnitech:ledStep"))||1;
+  let open={};
+  const _C=ovCard(640,94), ov=_C.ov;
+  const NEWREC=()=>({sec:secs[0],face:"in",axis:"l",pos:"1:1",
+    gw:+settings.ledGrooveW||19, gd:+settings.ledGrooveD||8, trimA:0, trimB:0,
+    maxLen:+settings.ledMaxLen||3000, split:settings.ledSplit||"เต็มท่อนก่อน",
+    skipShelf:true, lift:null, flip:"auto", capCode:""});
+  const LBL='style="font-size:11.5px;color:var(--ink-dim);margin-bottom:3px"';
+  const draw=()=>{
+    const list=ledList(b);
+    const F=(i,k,val,w)=>'<input data-i="'+i+'" data-k="'+k+'" class="nameinp ledF" style="width:'+(w||"100%")
+      +';font-family:var(--mono)" value="'+escapeHtml(String(val==null?"":val))+'">';
+    const S=(i,k,val,opts)=>'<select data-i="'+i+'" data-k="'+k+'" class="nameinp ledF" style="width:100%">'
+      +opts.map(o=>'<option value="'+o[0]+'"'+(String(val)===String(o[0])?" selected":"")+'>'+o[1]+'</option>').join("")+'</select>';
+    const NB=(i,k,d)=>'<button class="ibtn ledN" data-i="'+i+'" data-k="'+k+'" data-d="'+d
+      +'" style="flex:none;padding:8px 14px;font-size:15px;min-width:0">'+(d<0?"−":"+")+'</button>';
+    const cards=list.length?list.map((r,i)=>{
+      const cw=(r.axis==="w")?(+b.L||1):(+b.W||1);
+      const bb=sectBox(r.sec);
+      const lf=(r.lift!=null)?r.lift:(+settings.ledLift||0);
+      const out=bb?round(bb.h-(+r.gd||0)+lf):0;
+      const parts=state.boards.filter(z=>z._ledPart&&z._ledOwner===b.id&&String(z.id).indexOf(b.id+":led"+i+":")===0);
+      const adv=!!open[i];
+      return '<div style="border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px;background:var(--bg)">'
+        +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">'
+          +'<b style="font-size:13px">เส้นที่ '+(i+1)+'</b>'
+          +'<span style="font-size:11.5px;color:var(--ink-dim)">'+(parts.length?(parts.length+" ท่อน · "+parts.map(z=>cutLen(z.L)).join(" · ")+" มม."):"ยังไม่ได้ท่อน")+'</span>'
+          +'<button class="ibtn ledDel" data-i="'+i+'" style="flex:none;margin-left:auto;padding:4px 10px;font-size:11px">✕ ลบเส้นนี้</button></div>'
+        +'<div '+LBL+'>หน้าตัดราง (คลัง Section)</div>'+S(i,"sec",r.sec,secs.map(c2=>{const q=sectBox(c2);return [c2,c2+(q?("   ("+q.w+" × "+q.h+" มม.)"):"")];}))
+        +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">'
+          +'<div><div '+LBL+'>ผิวที่เซาะ</div>'+S(i,"face",r.face,[["in","หันเข้าตู้"],["out","หันออกนอก"],["top","ผิวบน"],["bottom","ผิวล่าง"]])+'</div>'
+          +'<div><div '+LBL+'>แนวราง</div>'+S(i,"axis",r.axis,[["l","ตามยาวแผ่น"],["w","ตามกว้างแผ่น"]])+'</div></div>'
+        +'<div style="margin-top:10px"><div '+LBL+'>ตำแหน่งกลางร่อง — <span style="font-family:var(--mono)">90:1</span> = จากขอบหน้าเข้ามา 90 · <span style="font-family:var(--mono)">1:70</span> = จากขอบหลัง · <span style="font-family:var(--mono)">1:1</span> = กึ่งกลาง</div>'
+          +'<div style="display:flex;gap:6px;align-items:center">'+NB(i,"pos",-1)+F(i,"pos",r.pos)+NB(i,"pos",1)+'</div>'
+          +'<div style="font-size:11px;color:#2f9e44;margin-top:4px">'+escapeHtml(ledPosLabel(r.pos,cw))+'</div></div>'
+        +'<div style="margin-top:10px"><div '+LBL+'>ยกรางพ้นก้นร่อง (มม. · เว้นว่าง = ใช้ค่ากลาง '+(+settings.ledLift||0)+')</div>'
+          +'<div style="display:flex;gap:6px;align-items:center">'+NB(i,"lift",-1)+F(i,"lift",(r.lift!=null?r.lift:""))+NB(i,"lift",1)+'</div>'
+          +'<div style="font-size:11px;color:#2f9e44;margin-top:4px">ตัวรางโผล่พ้นผิวไม้ '+out+' มม.</div></div>'
+        +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">'
+          +'<div><div '+LBL+'>ร่องกว้าง (มม.)</div>'+F(i,"gw",r.gw)+'</div>'
+          +'<div><div '+LBL+'>ร่องลึก (มม.)</div>'+F(i,"gd",r.gd)+'</div></div>'
+        +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">'
+          +'<div><div '+LBL+'>ร่นหัว (0 = วิ่งสุด ไม่มีฝา)</div>'+F(i,"trimA",r.trimA)+'</div>'
+          +'<div><div '+LBL+'>ร่นท้าย (0 = วิ่งสุด)</div>'+F(i,"trimB",r.trimB)+'</div></div>'
+        +'<button class="ibtn ledAdv" data-i="'+i+'" style="flex:none;margin-top:10px;padding:5px 12px;font-size:11.5px">'
+          +(adv?"▾ ซ่อนตัวเลือกเพิ่มเติม":"▸ ตัวเลือกเพิ่มเติม")+'</button>'
+        +(adv?('<div style="margin-top:10px;border-top:1px dashed var(--line);padding-top:10px">'
+          +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
+            +'<div><div '+LBL+'>ยาวสุดต่อท่อน (มม.)</div>'+F(i,"maxLen",r.maxLen)+'</div>'
+            +'<div><div '+LBL+'>เกินความยาวแล้ว</div>'+S(i,"split",r.split,[["เต็มท่อนก่อน","เต็มท่อนก่อน เหลือเศษ"],["แบ่งเท่ากัน","แบ่งเท่ากัน"]])+'</div></div>'
+          +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">'
+            +'<div><div '+LBL+'>ชั้นที่ขวางแนว</div>'+S(i,"skipShelf",(r.skipShelf===false?"0":"1"),[["1","ตัดรางหลบ (ร่องวิ่งตลอด)"],["0","ไม่หลบ"]])+'</div>'
+            +'<div><div '+LBL+'>ด้านที่จมลงร่อง</div>'+S(i,"flip",(r.flip||"auto"),[["auto","อัตโนมัติ (ฝั่งแคบจม)"],["y","กลับด้าน"],["n","ไม่กลับ"]])+'</div></div>'
+          +'<div style="margin-top:10px"><div '+LBL+'>รหัสฝาปิดปลาย (เว้นว่าง = ใช้รหัสกลางในตั้งค่า)</div>'+F(i,"capCode",r.capCode)+'</div>'
+          +'</div>'):'')
+        +'</div>';
+    }).join("") : '<div style="text-align:center;padding:26px 8px">'
+        +'<div style="font-size:12.5px;color:var(--ink-dim);margin-bottom:12px">แผ่นนี้ยังไม่มีรางไฟ</div>'
+        +'<button class="ibtn" id="ledAdd2" style="flex:none;padding:10px 22px;background:var(--accent);color:#fff;border-color:transparent">＋ ใส่รางไฟเส้นแรก</button></div>';
+    ov.innerHTML='<div style="'+_C.cardCSS+'">'
+      +'<div style="padding:12px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex:none">'
+      +'<b style="font-size:15px">รางไฟบนแผ่น “'+escapeHtml(String(b.name||b.id))+'”</b>'
+      +'<span style="font-size:12px;color:var(--ink-dim)">'+round(b.L)+' × '+round(b.W)+' × '+b.T+'</span>'
+      +'<button class="ibtn" id="ledClose" '+_C.xbtn+'>✕</button></div>'
+      +'<div style="flex:1;min-height:0;overflow:auto;padding:12px 16px">'
+      +'<div style="font-size:11.5px;color:var(--ink-dim);margin-bottom:10px">แก้ช่องไหนก็เห็นผลใน 3D ทันที · ปุ่ม − + ขยับทีละขั้น</div>'
+      +cards+'</div>'
+      +'<div style="padding:10px 16px;border-top:1px solid var(--line);display:flex;gap:8px;align-items:center;flex:none">'
+      +'<span style="font-size:12px;color:var(--ink-dim)">ขั้นการขยับ</span>'
+      +'<select id="ledStep" class="nameinp" style="width:88px">'
+      +[0.5,1,5,10,25].map(v=>'<option value="'+v+'"'+(step===v?" selected":"")+'>'+v+' มม.</option>').join("")+'</select>'
+      +'<button class="ibtn" id="ledAdd" style="flex:none;padding:8px 14px">＋ เพิ่มเส้น</button>'
+      +'<button class="ibtn" id="ledDone" style="flex:none;margin-left:auto;padding:8px 22px;background:var(--accent);color:#fff;border-color:transparent">เสร็จ</button></div></div>';
+    const $$=q=>ov.querySelector(q);
+    const kill=()=>{ if(ov.parentNode) ov.parentNode.removeChild(ov); };
+    $$("#ledClose").onclick=kill; $$("#ledDone").onclick=kill;
+    $$("#ledStep").onchange=e=>{ step=parseFloat(e.target.value)||1;
+      try{ localStorage.setItem("furnitech:ledStep",String(step)); }catch(err){} };
+    const addOne=()=>{ const l2=ledList(b).slice();
+      l2.push(l2.length?JSON.parse(JSON.stringify(l2[l2.length-1])):NEWREC());
+      b._leds=l2; sync(1); draw(); };
+    $$("#ledAdd").onclick=addOne;
+    { const a2=$$("#ledAdd2"); if(a2) a2.onclick=addOne; }
+    ov.querySelectorAll(".ledAdv").forEach(el=>el.onclick=()=>{ const i=+el.dataset.i; open[i]=!open[i]; draw(); });
+    ov.querySelectorAll(".ledDel").forEach(el=>el.onclick=()=>{
+      const l2=ledList(b).slice(); l2.splice(+el.dataset.i,1);
+      if(l2.length) b._leds=l2; else delete b._leds;
+      open={}; sync(1); draw(); });
+    ov.querySelectorAll(".ledF").forEach(el=>{
+      el.onchange=()=>{ const l2=ledList(b).slice(), r=l2[+el.dataset.i]; if(!r) return;
+        const k=el.dataset.k, v=el.value;
+        if(k==="lift") r[k]=(String(v).trim()===""?null:(+v||0));
+        else if(k==="pos") r[k]=String(v).trim();
+        else if(k==="skipShelf") r[k]=(v!=="0");
+        else if(k==="gw"||k==="gd"||k==="trimA"||k==="trimB"||k==="maxLen") r[k]=+v||0;
+        else r[k]=v;
+        b._leds=l2; sync(1); draw(); }; });
+    ov.querySelectorAll(".ledN").forEach(el=>el.onclick=()=>{
+      const l2=ledList(b).slice(), r=l2[+el.dataset.i]; if(!r) return;
+      const k=el.dataset.k, d=(+el.dataset.d||1)*step;
+      if(k==="lift"){ const cur=(r.lift!=null)?(+r.lift||0):(+settings.ledLift||0); r.lift=round(cur+d); }
+      else { const cw=(r.axis==="w")?(+b.L||1):(+b.W||1);
+        /* เขียนแบบอ้างขอบอยู่ ก็ขยับตัวเลขระยะนั้นตรง ๆ ให้ ความหมายจะได้ไม่เปลี่ยน */
+        const t=String(r.pos||"").trim(), m=t.split(":");
+        if(m.length===2&&/\d/.test(m[0])&&Math.abs(parseFloat(m[0]))>=10)
+          r.pos=round(Math.max(parseFloat(m[0])+d,0))+(/mm/i.test(m[0])?"mm":"")+":1";
+        else if(m.length===2&&/\d/.test(m[1])&&Math.abs(parseFloat(m[1]))>=10)
+          r.pos="1:"+round(Math.max(parseFloat(m[1])-d,0))+(/mm/i.test(m[1])?"mm":"");
+        else r.pos=round(ledPosParse(r.pos,cw)+d); }
+      b._leds=l2; sync(1); draw(); });
+  };
+  document.body.appendChild(ov);
+  /* v12.2: คนที่กดเมนูรางไฟคือคนที่ตั้งใจจะใส่อยู่แล้ว จึงใส่เส้นแรกให้เลยแล้วค่อยปรับ */
+  if(!ledList(b).length){ b._leds=[NEWREC()]; sync(1);
+    toast("ใส่รางไฟเส้นแรกให้แล้ว — ปรับตำแหน่ง ผิว และระยะยกได้เลย"); }
+  draw();
 }
 function ledRemove(sel){
   const b=sel||selBoard();
@@ -13740,6 +13938,13 @@ function renderSettings(){
     <div class="sumh" style="margin-top:12px">รางไฟ (LED)</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">${num("ledGrooveW","ร่องกว้าง (มม.)")}${num("ledGrooveD","ร่องลึก (มม.)")}${num("ledLift","ยกรางพ้นก้นร่อง (มม.)")}${num("ledMaxLen","ยาวสุดต่อท่อน (มม.)")}</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${txt("ledCapCode","รหัสฝาปิดปลาย (Element → Fittings)")}${txt("ledSplit","เกินความยาว: เต็มท่อนก่อน / แบ่งเท่ากัน")}</div>
+    ${txt("cutSizeFmt","ชื่อรายการของที่ตัดตามยาว — ใช้กับเส้นโปรไฟล์และรางไฟ · {ชื่อ} และ {ยาว} จะถูกแทนค่าให้")}
+    <label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5;margin-top:6px"><input type="checkbox" id="setCutLookupOn" ${settings.cutLookupOn!==false?"checked":""} style="margin-top:2px">
+      <span><b>ค้นรหัสท่อนที่ตัดจากคลังอุปกรณ์เอง</b> — ทำแบบเดียวกับถาดฟรอยด์ ค้นคลังตัวเดียวกับที่ปลายทางใช้แล้วส่งรหัสจริงออกไปเลย ไม่ต้องให้ใครไปจับคู่ต่อ · ไม่เจอก็ส่งรหัสตั้งต้นพร้อมความยาวไปก่อน แล้วขึ้นเตือนให้ไปเพิ่มในคลัง</span></label>
+    ${txt("cutLookupKey","คำที่ใช้ค้นในชื่อสินค้า (ตั้งต้น ตัดขนาด) — ระบบค้นคำนี้ตามด้วยความยาว")}
+    <div style="font-size:11px;opacity:.62;margin:2px 0 6px;line-height:1.6">ปิดสวิตช์ = ส่งรหัสที่ตั้งไว้พร้อมความยาวในช่อง LENGTH ให้ปลายทางจับคู่เอง</div>
+    <div style="font-size:11px;opacity:.62;margin:2px 0 6px;line-height:1.6"><b>คนละความยาว = คนละบรรทัดในใบอุปกรณ์</b> เพราะสั่งซื้อเป็นท่อนตามที่ตัดจริง · เศษทศนิยมปัดลงเสมอ 867.5 จึงออกเป็น 867<br>
+      รูปแบบชื่อตั้งต้นเขียนว่า <span style="font-family:var(--mono)">ตัดขนาด 867 mm.</span> ซึ่งเป็นรูปแบบที่ระบบผลิตค้นหาขนาดเจอ แก้ได้ถ้าปลายทางใช้คำอื่น</div>
     <div style="font-size:11px;opacity:.62;margin:2px 0 6px;line-height:1.6">ร่องกับหน้าตัดเป็นคนละขนาดโดยตั้งใจ — รางกว้าง 23 แต่ร่อง 19 เพราะปีกรางวางทับผิวไม้ · <b>ร่องวิ่งยาวตลอดแผ่น ไม่หยุดที่ชั้น</b> ส่วนตัวรางตัดเป็นท่อนหลบชั้นและแบ่งตามความยาวสูงสุด<br>
       ฝาปิดออกเฉพาะปลายที่ร่นเข้ามา ปลายที่วิ่งสุดขอบแผ่นไม่ต้องมี · ใส่รางที่ คลิกขวาที่แผ่น → 💡 รางไฟบนแผ่นนี้<br>      <b>ยกรางพ้นก้นร่อง</b> — รางส่วนใหญ่ไม่ได้นอนแนบก้นร่อง ปีกจะพักบนผิวไม้แล้วตัวรางลอยเหนือก้นร่องเล็กน้อย ตั้งค่ากลางไว้ที่นี่ และแก้รายเส้นได้ในกล่องรางไฟ</div>
     <div class="sumh" style="margin-top:12px">เส้นโปรไฟล์พาดตู้ (DX / รางไฟ)</div>
@@ -13854,6 +14059,7 @@ function renderSettings(){
     body.querySelectorAll("[data-sk]").forEach(inp=>{ const k=inp.dataset.sk; settings[k]=(inp.type==="number")?(parseFloat(inp.value)||DEF_SETTINGS[k]):(inp.value.trim()||DEF_SETTINGS[k]); });
     const xs=body.querySelector("#setXmlScale"); if(xs)settings.xmlScale=xs.checked;
     const xf=body.querySelector("#setXmlFlipFace"); if(xf)settings.xmlFlipFace=xf.checked;
+    { const cl=body.querySelector("#setCutLookupOn"); if(cl)settings.cutLookupOn=cl.checked; }  // v13.0
     { const px=body.querySelector("#setPullXmlOn"); if(px)settings.pullXmlOn=px.checked;        // v9.71
       const p3=body.querySelector("#setPull3D"); if(p3)settings.pull3D=p3.checked; }
     { const lc=body.querySelector("#setLegClipOn"); if(lc)settings.legClipOn=lc.checked; }      // v9.64
@@ -18410,9 +18616,7 @@ function fittingAgg(boards){   // รวมเดือย + พินรอง�
   boards.forEach(b=>{ if(!b||!b._ledPart)return;
     const k=String(b._ledSec||"").trim(); if(!k)return;
     const sc=(settings.sections||{})[k]||{};
-    const m4=(m[k]||(m[k]={art:k,dia:"",kind:"led",name:(sc.desc||("รางไฟ "+k)),unit:(sc.unit||"เส้น"),count:0,_len:{}}));
-    const ln=Math.round(+b.L||0); m4.count+=1; m4._len[ln]=(m4._len[ln]||0)+1;
-    m4.name=(sc.desc||("รางไฟ "+k))+" · ยาว "+Object.keys(m4._len).sort((x,y)=>x-y).map(L2=>L2+"×"+m4._len[L2]).join(" · ");
+    bomCutRow(m,k,(sc.desc||("รางไฟ "+k)),(sc.unit||"เส้น"),b.L,"led");   // v12.1
     const nc=(b._ledCapA?1:0)+(b._ledCapB?1:0);
     if(nc){ const ck=String(b._ledCap||settings.ledCapCode||"").trim(); if(ck){
       const el7=(((settings.elements||{}).fittings)||[]).find(x=>x.code===ck);
@@ -18421,9 +18625,7 @@ function fittingAgg(boards){   // รวมเดือย + พินรอง�
   /* v10.0: เส้น DX — 1 เส้น 1 รายการ พร้อมความยาวจริง (รวมข้ามตู้แล้ว) */
   boards.forEach(b=>{ if(!b||!b._dxPart)return; const k=String(b._dxSec||"").trim(); if(!k)return;
     const sc=(settings.sections||{})[k]||{};
-    const m3=(m[k]||(m[k]={art:k,dia:"",kind:"dx",name:(sc.desc||("เส้นโปรไฟล์ "+k)),unit:(sc.unit||"เส้น"),count:0,_len:{}}));
-    const ln=Math.round(+b.L||0); m3.count+=1; m3._len[ln]=(m3._len[ln]||0)+1;
-    m3.name=(sc.desc||("เส้นโปรไฟล์ "+k))+" · ยาว "+Object.keys(m3._len).sort((x,y)=>x-y).map(L2=>L2+"×"+m3._len[L2]).join(" · "); });
+    bomCutRow(m,k,(sc.desc||("เส้นโปรไฟล์ "+k)),(sc.unit||"เส้น"),b.L,"dx"); });   // v12.1
   boards.forEach(b=>{ const ff=b&&b._frameFit; if(!ff||!ff.corners)return;
     const put=(code,qty,nm,un)=>{ const k=String(code||"").trim(); if(!k||!(qty>0))return;
       const el6=(((settings.elements||{}).fittings)||[]).find(x=>x.code===k);
@@ -18467,6 +18669,18 @@ function fittingAgg(boards){   // รวมเดือย + พินรอง�
       else { const k=settings.slideCode||"SLIDE";
         (m[k]||(m[k]={art:k,dia:"",kind:"slide",name:settings.slideName||"รางลิ้นชัก",unit:"ชุด",count:0})).count+=1; } }); }
   const parents=Object.values(m).map(f=>({...f, purchase:fittingOut(f.art)}));   // ผูก Purchase ID จาก Element → Fittings
+  /* v13.0: ของที่ตัดตามยาว ค้นรหัสท่อนนั้นจากคลังอุปกรณ์ (ผลกลับมาแล้วจะสั่งคิดใหม่เอง) */
+  /* v13.1: ค้นด้วย Purchase ID (รหัสจริงในคลัง) แล้วเติมชื่อ/หน่วยที่ค้นเจอกลับเข้ารายการ */
+  try{ if(settings.cutLookupOn!==false){
+    parents.forEach(f=>{ if(+f._cut>0&&!f._pidSrc) f._pidSrc=cutSrcOf(f); });   // v13.3: จำรหัสรุ่นต้นทาง
+    cutLookupAll(parents);
+    parents.forEach(f=>{ const hit=cutCodeOf(f); if(!hit) return;
+      /* เจอรหัสท่อนแล้ว ใช้แทน Purchase ID ทั้งในตารางสรุปและตอนส่งออก
+         ท่อน 668 จึงได้รหัสของ 668 ไม่ใช่รหัสรุ่นกลาง */
+      f._fg=hit; f.purchase=hit.code;
+      if(hit.name) f.name=hit.name; if(hit.unit) f.unit=hit.unit; }); }
+  }catch(e){ console.error(e); }
+  /* v12.4: ของที่ตัดตามยาวพก _cut ติดมาด้วย (ความยาวจริงที่ตัด) เพื่อส่งลงช่อง LENGTH ตอนออกไฟล์ */
   const fitDefs=(settings.elements&&settings.elements.fittings)||[];
   const out=[];
   parents.forEach(f=>{ out.push(f);
@@ -18646,7 +18860,17 @@ function buildImosData(){
           CNT:"1",BARCODE:bc1,BARCODE2:bc2,INFO2:"",INFO3:""}); });
     });
     fittingAgg(grp.boards).forEach(f=>{ const pid=f.purchase||f.art;
-      rows.push({_tp:8,TYP:"8",NAME:pid,ARTICLE_ID:pid,ORDER_ID:"",_FG_NAME:f.name,LENGTH:"",CNT:String(f.count),_FG_UNIT:f.unit}); });
+      /* v12.5: อุปกรณ์ที่ตัดตามยาว (เส้นโปรไฟล์ · รางไฟ) ส่งรหัสที่ตั้งไว้ล้วน ๆ พร้อมความยาว
+         ปลายทางเป็นคนจับคู่รหัสกับความยาวแล้วไปหารหัสสินค้าจริงเอง
+         ฝั่งนี้จึงไม่ต่อท้ายรหัสหรือแต่งอะไรเพิ่ม ส่งของดิบไปให้ตรง ๆ
+         แต่ยังแยกเป็นคนละบรรทัดตามความยาว เพราะคนละความยาวคือคนละของ */
+      const cut=+f._cut||0;
+      /* v13.0: ของที่ตัดตามยาว ถ้าค้นรหัสท่อนนั้นเจอในคลังอุปกรณ์แล้ว ส่งรหัสจริงออกไปเลย
+         ปลายทางจึงได้รหัสที่มีอยู่จริงตรง ๆ ไม่ต้องพึ่งตารางแปลงรหัสหรือให้ใครไปจับคู่ต่อ
+         ยังไม่เจอก็ส่งรหัสตั้งต้นพร้อมความยาวไปก่อน จะได้ไม่มีรายการหาย */
+      const cc=cutCodeOf(f), id=(cc&&cc.code)?cc.code:pid;
+      rows.push({_tp:8,TYP:"8",NAME:id,ARTICLE_ID:id,ORDER_ID:id,_FG_NAME:(cc&&cc.name)||f.name,
+        LENGTH:(cut>0?mm1(cut):""),CNT:String(f.count),_FG_UNIT:(cc&&cc.unit)||f.unit}); });
     groups.push({name:grp.productId, rows});
   });
   if(!groups.length) groups.push({name:oid||"Furnitech", rows:[]});
@@ -18683,7 +18907,11 @@ function renderSummary(){
   // fittings (เดือย + พินรองรับชั้น)
   if((ex.fittings||[]).length){ h+=`<div class="sumh">Fitting (เดือย / พิน / มินิฟิก + ลูก)</div><table class="sumtbl"><thead><tr><th>รายการ</th><th>รหัส</th><th>Purchase ID</th><th>Ø</th><th>จำนวน</th></tr></thead><tbody>`;
     ex.fittings.forEach(f=>{ const fe=(settings.elements&&settings.elements.fittings||[]).find(x=>x.code===f.art); const linked=!!(fe&&fe.itemId);
-      const pid=linked?escapeHtml(fe.itemId):'<span class="warn" style="padding:2px 6px;border-radius:5px">ยังไม่ตั้งใน Element → Fittings</span>';
+      /* v13.3: ของที่ตัดตามยาว ถ้าค้นรหัสท่อนเจอแล้ว โชว์รหัสท่อนจริง ไม่ใช่รหัสรุ่นกลาง
+         พร้อมบอกว่ามาจากคลังอุปกรณ์ จะได้แยกออกจากรหัสที่กรอกเองใน Element */
+      const cut=(f._fg&&f._fg.code)?String(f._fg.code):"";
+      const pid=cut?('<span style="color:#2f9e44">'+escapeHtml(cut)+'</span> <span style="opacity:.55;font-size:11px">จากคลัง</span>')
+        :(linked?escapeHtml(fe.itemId):'<span class="warn" style="padding:2px 6px;border-radius:5px">ยังไม่ตั้งใน Element → Fittings</span>');
       const child=f.kind==="child";
       const nm=child?('<span style="opacity:.6">↳</span> '+escapeHtml(f.name)+' <span style="opacity:.5;font-size:11px">('+f.qtyPer+'/ชุด '+escapeHtml(f.parent||"")+')</span>'):escapeHtml(f.name);
       h+=`<tr${child?' style="opacity:.92"':''}><td${child?' style="padding-left:18px"':''}>${nm}</td><td style="font-family:var(--mono)">${escapeHtml(f.art)}</td><td style="font-family:var(--mono)">${pid}</td><td class="num">${f.dia}</td><td class="num">${f.count} ${f.unit||""}</td></tr>`;});
@@ -18713,6 +18941,29 @@ async function getDB(){
   return _sbClient;
 }
 function sbErr(e){ if(!e)return"unknown"; if(typeof e==="string")return e; return e.message||e.error_description||e.details||e.hint||e.code||JSON.stringify(e); }
+/* ───────── v12.8: ลงทะเบียนรหัสอุปกรณ์ให้ปลายทางแปลรหัสออก ─────────
+   หน้าดูข้อมูลดิบของปลายทางแปลชื่อรหัสผ่านตาราง imos_mapping เสมอ (conid -> order_id)
+   ไม่มีทางลัดแบบหน้าใบสั่งซื้อที่ลองค้นคลังอุปกรณ์ก่อน
+   รหัสที่ตั้งเองใน Element จึงไม่เคยอยู่ในตารางนั้น ช่องรหัสกับชื่อสินค้าเลยว่างเปล่า
+   -> ตอนส่งขึ้นคลาวด์ ลงทะเบียนรหัสของออเดอร์นี้ให้เอง โดยชี้กลับหาตัวมันเอง
+   เพิ่มเฉพาะรหัสที่ยังไม่มีในตาราง ของเดิมที่ระบบอื่นตั้งไว้จึงไม่ถูกทับ */
+async function registerFitMapping(data){
+  try{
+    const codes=new Set();
+    (data.groups||[]).forEach(g=>(g.rows||[]).forEach(r=>{
+      if(r&&r._tp===8){ const c=String(r.NAME||"").trim(); if(c) codes.add(c); } }));
+    if(!codes.size) return 0;
+    const db=await getDB(), list=[...codes];
+    const {data:has,error:e1}=await db.from("imos_mapping").select("conid").in("conid",list);
+    if(e1) throw e1;
+    const have=new Set((has||[]).map(r=>String(r.conid||"").trim()));
+    const add=list.filter(c=>!have.has(c)).map(c=>({conid:c,order_id:c}));
+    if(!add.length) return 0;
+    const {error:e2}=await db.from("imos_mapping").upsert(add,{onConflict:"conid"});
+    if(e2) throw e2;
+    return add.length;
+  }catch(e){ console.error("fit mapping:",sbErr(e)); return -1; }
+}
 async function sendSupabase(){
   if(!state.boards.length){toast("ยังไม่มีชิ้นงาน");return;}
   toast("กำลังส่งเข้า Supabase…");
@@ -18722,7 +18973,9 @@ async function sendSupabase(){
     const {error}=await db.from("imos_orders").upsert({order_id:data.orderID,data:data,loaded_at:new Date().toISOString()},{onConflict:"order_id"});
     if(error)throw error;
     if(data.itemIdSet){ const {error:e2}=await db.from("app_settings").upsert({key:"iids:"+data.orderID,value:data.itemIdSet},{onConflict:"key"}); if(e2)console.error("iids:",sbErr(e2)); }
-    toast("ส่งเข้า Supabase สำเร็จ (IMOS): "+data.orderID+(data.itemIdSet?" · IID "+data.itemIdSet:""));
+    const nm=await registerFitMapping(data);                       // v12.8
+    toast("ส่งเข้า Supabase สำเร็จ (IMOS): "+data.orderID+(data.itemIdSet?" · IID "+data.itemIdSet:"")
+      +(nm>0?(" · ลงทะเบียนรหัสอุปกรณ์ใหม่ "+nm+" รหัส"):(nm<0?" · ⚠ ลงทะเบียนรหัสอุปกรณ์ไม่สำเร็จ":"")));
   }catch(e){ console.error("Supabase error:",e); toast("ส่ง Supabase ไม่สำเร็จ: "+sbErr(e)); }
 }
 /* ---------- Cloud: settings (Variables/Element) + XML history ---------- */
@@ -20615,7 +20868,7 @@ const CurvedShelf = (function(){
   <button data-act="railfix" id="ctxRailFix"><span>⊕ ใส่เดือย + มินิฟิกที่คาน (มาตรฐาน)</span></button>
   <button data-act="conn"><span>⊕ ใส่เดือย (Connector)…</span></button>
   <button data-act="hinge"><span>⊐ ใส่บานพับ (Hinge)…</span></button>
-  <button data-act="ledadd"><span>💡 รางไฟบนแผ่นนี้…</span></button>
+  <button data-act="ledadd"><span>💡 รางไฟบนแผ่นนี้ (ใส่/แก้/ขยับ)…</span></button>
   <button data-act="leddel"><span>💡 เอารางไฟออก</span></button>
   <button data-act="dxadd"><span>▬ เส้นโปรไฟล์ (DX / รางไฟ)…</span></button>
   <button data-act="dxdel"><span>▬ เอาเส้นโปรไฟล์ออกทั้งหมด</span></button>
