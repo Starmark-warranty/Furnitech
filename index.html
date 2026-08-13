@@ -1544,9 +1544,11 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"Furnitech Cabinet", version:"11.7", build:"2026-08-13/led-pos",
+  name:"Furnitech Cabinet", version:"11.9", build:"2026-08-13/led-lift",
   file:"Furnitech.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["11.9","2026-08-13","ยกรางไฟพ้นก้นร่องได้แล้ว — เดิมวางตัวรางนอนแนบก้นร่องพอดี ปีกจึงจมลงไปเสมอกับผิวไม้ ทั้งที่ของจริงปีกพักอยู่บนผิวแล้วตัวรางลอยเหนือก้นร่องเล็กน้อย และระยะนี้ต่างกันไปตามรุ่นราง · ตั้งค่ากลางได้ในตั้งค่า ค่าตั้งต้น 2.5 มม. และแก้รายเส้นได้ในกล่องรางไฟ ใส่ค่าลบก็ได้ถ้าเป็นรางที่ฝังมิดลงไปกว่าก้นร่อง"],
+    ["11.8","2026-08-13","FIX ปีกรางไฟจมอยู่ก้นร่อง กลับหัวกับของจริง — หน้าตัดรางมีสองฝั่งที่ไม่เหมือนกัน ฝั่งแคบคือตัวที่จมลงร่อง ส่วนฝั่งกว้างคือปีกที่แผ่ออกทับผิวไม้ โค้ดเดิมเหมาว่าจุดศูนย์ของรูปคือก้นร่องเสมอ ซึ่งขึ้นกับว่าคนวาดวางหัวลงหรือหัวขึ้น หน้าตัดที่วาดปีกไว้ด้านล่างจึงถูกกดจมลงร่อง แล้วตัวรางโผล่ออกมาแทน · ตอนนี้ดูจากรูปเอง วัดความกว้างครึ่งบนเทียบครึ่งล่าง แล้วให้ครึ่งที่แคบกว่าเป็นด้านที่จมลงไป ปีกจึงแผ่ออกนอกเสมอไม่ว่าจะวาดมาทางไหน · มีสวิตช์บังคับกลับด้านเองได้ เผื่อหน้าตัดที่ระบบเดาไม่ออก"],
     ["11.7","2026-08-13","ตำแหน่งรางไฟกรอกแบบอ้างขอบได้แล้ว — เดิมต้องกรอกเป็นระยะจากกึ่งกลางแผ่น ซึ่งต้องนั่งคิดเลขเองทุกครั้งว่าจากหน้าเข้ามา 90 คือเท่าไหร่ และพอเปลี่ยนความลึกแผ่น ตัวเลขนั้นก็ผิดทันที · เขียนแบบอ่านซ้ายไปขวาว่าจากขอบไหนเข้ามาเท่าไหร่ 90:1 คือจากขอบหน้าเข้ามา 90 · 1:70 คือจากขอบหลังเข้ามา 70 · 1:1 คือกึ่งกลาง · สองเลขล้วนอย่าง 2:1 คือแบ่งช่วงตามสัดส่วน · ใส่ตัวเลขเดี่ยวยังได้เหมือนเดิมคือระยะจากกึ่งกลาง · ยึดขอบไว้แล้วเปลี่ยนความลึกแผ่น ตำแหน่งรางขยับตามให้เอง · บอกผลกลับมาเป็นระยะจากทั้งสองขอบ จะได้ตรวจได้ทันที"],
     ["11.6","2026-08-13","FIX รางไฟตะแคงผิดด้านและล้นออกนอกแผ่น — หน้าตัดรางไฟไม่เหมือนเฟรมบาน ด้านกว้างต้องวางราบไปตามหน้าแผ่น ส่วนด้านสูงจมลงในร่องตามความหนา แต่โค้ดจับสองแกนสลับกัน รางจึงหมุน 90 องศาและกินความหนาเกินแผ่นไปหลายมิล · FIX ร่องไม่มีความลึกจริงใน 3D เพราะวาดเป็นแผ่นสีทาบผิว มองมุมเฉียงเห็นเป็นเส้นแบน ตัวรางที่วางในร่องเลยดูลอยอยู่บนไม้ · ตอนนี้ส่งร่องเข้าทางเดียวกับหลุมตื้นที่ระบบทำเป็นเนื้อไม้จริงอยู่แล้ว ร่องจึงเว้าลงไปจริงทุกมุมมอง ไฟล์เจาะไม่เปลี่ยนเพราะยังเป็นร่องเหมือนเดิม แค่ตอนวาดรูปทรงที่คิดเป็นหลุม · มีผลกับร่องทุกชนิดในโปรแกรม ไม่ใช่แค่ร่างไฟ · FEAT ตัวเลือกผิวเปลี่ยนเป็น หันเข้าตู้ / หันออกนอก แล้วระบบแปลงเป็นผิวจริงของแผ่นนั้นเอง เพราะคำว่าบนกับล่างใช้ไม่ได้กับแผ่นข้าง ซึ่งสองผิวของมันคือซ้ายกับขวา เลือกผิวบน/ล่างตรง ๆ ก็ยังได้"],
     ["11.5","2026-08-12","FEAT รางไฟ (LED) รอบแรก — ใส่ได้ทุกผิวของทุกแผ่น ต่างจากเส้นโปรไฟล์พาดตู้ตรงที่ผูกกับแผ่นไม่ใช่ตู้ เพราะรางไฟไปได้ทั้งใต้ท็อป บนพื้น ด้านในแผ่นข้าง และแต่ละที่ขยับเข้าออกจากขอบไม่เท่ากัน · แยกสามชั้นชัดเจน ร่องเซาะวิ่งยาวตลอดแผ่นไม่หยุดที่ชั้นตายตามที่หน้างานทำจริง · ตัวรางตัดเป็นท่อนหลบชั้นที่ขวาง แล้วแบ่งอีกทีตามความยาวสูงสุดที่สั่งได้ ค่าตั้งต้น 3000 แบบเต็มท่อนก่อนแล้วเหลือเศษ เลือกแบ่งเท่ากันได้ · ฝาปิดออกเฉพาะปลายที่ร่นเข้ามา ปลายที่วิ่งสุดขอบแผ่นไม่ต้องมี · ร่องกับหน้าตัดตั้งแยกกันโดยตั้งใจ รางกว้าง 23 แต่ร่อง 19 เพราะปีกรางวางทับผิวไม้ · ร่องใช้ระบบเซาะร่องเดิม จึงออกไฟล์เจาะได้ทันทีโดยไม่ต้องทำทางใหม่ · ใบอุปกรณ์นับรางเป็นท่อนพร้อมความยาวจริง และนับฝาปิดแยก · ใส่รางได้หลายเส้นต่อแผ่น"],
@@ -2010,7 +2012,7 @@ const HINGE3D_DEFAULT={
     {name:"สกรูรองยึด R", _shape:"cyl", L:6,   W:6,  T:5,    orient:"front", x:16,   y:0,   z:47.5}
   ], _ts:1 }
 };
-const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, dowelPitch:170, dowelMargin:32, pinD:5, pinInset:37, pinDepth:8, pinPitch:64, pinExtra:1, pinName:"Shelf pin Ø5", dowelName:"เดือยไม้ Ø8", dowelCode:"DOWEL8", pinCode:"PIN5", shelfSupD:5, shelfSupDepth:12, shelfSupFront:15, shelfSupBack:15, shelfSupAuto:true, shelfSupW:200, shelfSupFrontL:50, shelfSupBackL:50, shelfSupCode:"SHELFSUP5", shelfSupName:"ตัวรับชั้นแบบเจาะสันข้าง Ø5", xmlScale:true, overlapWarn:false, slideName:"รางลิ้นชัก", slideCode:"SLIDE", slideDrillD:5, slideDrillDepth:3, slideRailFromBot:0, slideOffBlum:10, slideOffHafele:-17, underSideInner:21, altoSideH:80, altoBackH:63, altoBotMinusW:35, altoBackMinusW:38, altoBotMinusD:10, altoCodeA:"ALTO_S_H80_A", altoCodeW:"ALTO_S_H80_W", altoDrillRear:41, altoDrillH:37, altoPanelT:16, altoFrontDrill:"37,32,5,12 ; -37,32,5,12", legCode:"LEG", legName:"ขาตู้ปรับระดับ", legXmlOn:true, legXmlField:"K_Leg", legXmlMap:"", legXmlNo:"none,ไม่มี,ไม่เอา,-", legXmlD:50, legXmlInset:50, legXmlFitGap:true, legCountMap:"800:6, 1250:8", legMarkMidSingle:true, dxJoinGap:0, ledGrooveW:19, ledGrooveD:8, ledMaxLen:3000, ledSplit:"เต็มท่อนก่อน", ledCapCode:"LED_CAP", ledCornerCode:"", led3D:true, pullXmlOn:true, pullField:"K_Pull", pullOriField:"K_Orientation", pullPosField:"K_Pull_Position", pullXField:"K_Pull_Coordinate_X", pullYField:"K_Pull_Coordinate_Y", pullNo:"nopull,none,-", pullName:"มือจับ", pull3D:true, dxNotchGap:0.5, legClipOn:true, legClipMap:"", legClipCode:"LEGCLIP", legClipName:"กิ๊ฟขาตู้ (ยึดแผ่นปิดขา)", doorSwing:true, shelfT:16, hangRailCode:"HANGRAIL", hangRailName:"ราวแขวนผ้า สแตนเลส C", hangRailThruD:8, hangRailCsD:13, hangRailCsDepth:2, hangRailEndGap:25, hangRailMap:"", drawerSideT:16, drawerBotT:9, drawerBoxH:120, drawerBoxLift:20, screwD:5, screwMateDepth:28, screwInset:9, screwCode:"SCREW5", screwName:"สกรู Ø5", altoMapA:"350:552.35.362, 400:552.35.363, 450:552.35.364, 500:552.35.365", altoMapW:"350:552.35.762, 400:552.35.763, 450:552.35.764, 500:552.35.765",
+const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, dowelPitch:170, dowelMargin:32, pinD:5, pinInset:37, pinDepth:8, pinPitch:64, pinExtra:1, pinName:"Shelf pin Ø5", dowelName:"เดือยไม้ Ø8", dowelCode:"DOWEL8", pinCode:"PIN5", shelfSupD:5, shelfSupDepth:12, shelfSupFront:15, shelfSupBack:15, shelfSupAuto:true, shelfSupW:200, shelfSupFrontL:50, shelfSupBackL:50, shelfSupCode:"SHELFSUP5", shelfSupName:"ตัวรับชั้นแบบเจาะสันข้าง Ø5", xmlScale:true, overlapWarn:false, slideName:"รางลิ้นชัก", slideCode:"SLIDE", slideDrillD:5, slideDrillDepth:3, slideRailFromBot:0, slideOffBlum:10, slideOffHafele:-17, underSideInner:21, altoSideH:80, altoBackH:63, altoBotMinusW:35, altoBackMinusW:38, altoBotMinusD:10, altoCodeA:"ALTO_S_H80_A", altoCodeW:"ALTO_S_H80_W", altoDrillRear:41, altoDrillH:37, altoPanelT:16, altoFrontDrill:"37,32,5,12 ; -37,32,5,12", legCode:"LEG", legName:"ขาตู้ปรับระดับ", legXmlOn:true, legXmlField:"K_Leg", legXmlMap:"", legXmlNo:"none,ไม่มี,ไม่เอา,-", legXmlD:50, legXmlInset:50, legXmlFitGap:true, legCountMap:"800:6, 1250:8", legMarkMidSingle:true, dxJoinGap:0, ledGrooveW:19, ledGrooveD:8, ledMaxLen:3000, ledSplit:"เต็มท่อนก่อน", ledCapCode:"LED_CAP", ledCornerCode:"", led3D:true, ledLift:2.5, pullXmlOn:true, pullField:"K_Pull", pullOriField:"K_Orientation", pullPosField:"K_Pull_Position", pullXField:"K_Pull_Coordinate_X", pullYField:"K_Pull_Coordinate_Y", pullNo:"nopull,none,-", pullName:"มือจับ", pull3D:true, dxNotchGap:0.5, legClipOn:true, legClipMap:"", legClipCode:"LEGCLIP", legClipName:"กิ๊ฟขาตู้ (ยึดแผ่นปิดขา)", doorSwing:true, shelfT:16, hangRailCode:"HANGRAIL", hangRailName:"ราวแขวนผ้า สแตนเลส C", hangRailThruD:8, hangRailCsD:13, hangRailCsDepth:2, hangRailEndGap:25, hangRailMap:"", drawerSideT:16, drawerBotT:9, drawerBoxH:120, drawerBoxLift:20, screwD:5, screwMateDepth:28, screwInset:9, screwCode:"SCREW5", screwName:"สกรู Ø5", altoMapA:"350:552.35.362, 400:552.35.363, 450:552.35.364, 500:552.35.365", altoMapW:"350:552.35.762, 400:552.35.763, 450:552.35.764, 500:552.35.765",
   /* v7.88: ซีรีส์ราง Kitchen 4.0 — โครงเดียวกับ ALTO แต่มีสีเดียว (ไม่มีตัวเลือกสี) */
   k40Code:"KITCHEN40_H80", k40Name:"ราง Kitchen 4.0", k40SideH:80, k40BackH:63, k40PanelT:16,
   k40BotMinusW:35, k40BackMinusW:38, k40BotMinusD:10, k40DrillRear:41, k40DrillH:37,
@@ -2820,10 +2822,11 @@ function shapeLocalGeo(b){
       const len=Math.max(+b.L||10,1), Wd=Math.max(+b.W||10,1), Td=Math.max(+b.T||10,1);
       const g3=new THREE.ExtrudeGeometry(sh,{depth:len,bevelEnabled:false});
       const sg=(+b._sectFace<0)?-1:1;
+      const fp=(+b._sectFlip<0)?-1:1;                        // v11.8: กลับหัวหน้าตัดถ้าฝั่งจมอยู่ด้าน y สูง
       g3.applyMatrix4(new THREE.Matrix4().set(
-        0,  0,  1, -len/2,
-        1,  0,  0, -Wd/2,
-        0,  sg, 0, -sg*Td/2,
+        0,  0,     1, -len/2,
+        1,  0,     0, -Wd/2,
+        0,  sg*fp, 0, -sg*fp*Td/2,
         0,0,0,1));
       g3.computeVertexNormals();
       return g3;
@@ -10605,6 +10608,21 @@ function applyEdgeNotchProfiles(){
    ร่องกับหน้าตัดเป็นคนละขนาดโดยตั้งใจ — Loox กว้าง 23 แต่ร่อง 19 เพราะปีกรางวางทับผิวไม้
    จึงให้ตั้งความกว้างร่องเอง ไม่ไปอ่านจากหน้าตัด */
 function ledList(b){ return ((b&&b._leds)||[]).filter(Boolean); }
+/* v11.8: หน้าตัดรางไฟมีสองฝั่งที่ไม่เหมือนกัน — ฝั่งแคบคือตัวที่จมลงร่อง
+   ส่วนฝั่งกว้างคือปีกที่แผ่ออกทับผิวไม้ ซึ่งต้องอยู่ด้านนอกเสมอ
+   จะรู้ว่าฝั่งไหนเป็นฝั่งไหน ต้องดูจากรูปเอง เพราะคนวาดวางหัวลงหรือหัวขึ้นก็ได้ทั้งคู่
+   จึงวัดความกว้างครึ่งบนเทียบครึ่งล่าง แล้วให้ครึ่งที่แคบกว่าเป็นด้านที่จมลงไป */
+function sectDeepEnd(code){
+  const ls=sectLoops(code), bb=sectBox(code);
+  if(!ls||!bb||!(bb.h>0)) return 1;
+  const mid=(bb.y0+bb.y1)/2;
+  const span=(lo,hi)=>{ let a=Infinity,z=-Infinity;
+    ls.forEach(l=>l.forEach(q=>{ if(q[1]>=lo-0.01&&q[1]<=hi+0.01){ a=Math.min(a,q[0]); z=Math.max(z,q[0]); } }));
+    return (isFinite(a)&&z>a)?(z-a):0; };
+  const wLow=span(bb.y0,mid), wHigh=span(mid,bb.y1);
+  if(Math.abs(wLow-wHigh)<0.2) return 1;                    // สองฝั่งเท่ากัน ไม่ต้องเดา
+  return (wHigh<wLow)?-1:1;                                 // -1 = ฝั่ง y สูงคือด้านจม ต้องกลับรูป
+}
 /* ───────── v11.7: ตำแหน่งรางแบบอ้างขอบ ─────────
    เดิมกรอกเป็นระยะจากกึ่งกลางแผ่น ซึ่งต้องนั่งคิดเลขเองทุกครั้งว่าจากหน้าเข้ามา 90 คือเท่าไหร่
    และพอเปลี่ยนความลึกแผ่น ตัวเลขนั้นก็ผิดทันที
@@ -10714,6 +10732,7 @@ function applyLedStrips(){
       const gW=Math.max(+r.gw||+settings.ledGrooveW||19,1);
       const gD=Math.max(+r.gd||+settings.ledGrooveD||8,0.5);
       const face=ledFaceOf(b,r.face);                            // v11.6
+      const flip=(r.flip==='y')?-1:(r.flip==='n')?1:sectDeepEnd(r.sec);   // v11.8: ปีกต้องอยู่นอกเสมอ
       /* ร่องวิ่งยาวตลอดแผ่น หักเฉพาะระยะร่นหัวท้ายที่สั่งไว้ ไม่หยุดที่ชั้น */
       b.grooves=b.grooves||[];
       b.grooves.push({ axis:(r.axis==="w")?"wid":"len", face:face,
@@ -10730,7 +10749,11 @@ function applyLedStrips(){
       const sgn=(face==="bottom")?-1:1;
       runs.forEach((sg,i)=>{
         const mid=(sg[0]+sg[1])/2, len=round(sg[1]-sg[0]); if(!(len>1)) return;
-        const cz=T/2*sgn-gD*sgn+ (bb.h/2)*sgn;                      // ก้นร่อง + ครึ่งความสูงหน้าตัด
+        /* v11.9: รางไฟส่วนใหญ่ไม่ได้นอนแนบก้นร่อง ปีกจะพักอยู่บนผิวไม้แล้วตัวรางลอยอยู่เหนือก้นร่อง
+           ระยะนี้ต่างกันไปตามรุ่นราง จึงตั้งได้ ทั้งค่ากลางในตั้งค่าและรายเส้น
+           บวก = ยกขึ้นพ้นก้นร่อง · ลบ = กดลงไปให้ลึกกว่าก้นร่อง (เผื่อรางที่ฝังมิด) */
+        const lift=(r.lift!=null&&String(r.lift).trim()!=="")?(+r.lift||0):(+settings.ledLift||0);
+        const cz=T/2*sgn-gD*sgn+(bb.h/2)*sgn+lift*sgn;              // ก้นร่อง + ครึ่งความสูงหน้าตัด + ระยะยก
         const px=b.x+eA.x*mid+eC.x*POS+eT.x*cz;
         const py=b.y+eA.y*mid+eC.y*POS+eT.y*cz;
         const pz=b.z+eA.z*mid+eC.z*POS+eT.z*cz;
@@ -10741,7 +10764,7 @@ function applyLedStrips(){
           tone:null, r:0, holes:[], grooves:[], connectors:[], mat:"$CarcassBodyMat",
           surfT:"", surfB:"", edges:["No Edge","No Edge","No Edge","No Edge"],
           _shape:"sect", _sectLoops:sectLoops(r.sec), _sectMode:"led",
-          _sectAxis:(r.axis==="w")?1:0, _sectFace:sgn,
+          _sectAxis:(r.axis==="w")?1:0, _sectFace:sgn, _sectFlip:flip,
           _virtual:true, _ledPart:true, _ledSec:r.sec, _ledOwner:b.id,
           _ledCapA:(i===0)&&((+r.trimA||0)>0.5), _ledCapB:(i===runs.length-1)&&((+r.trimB||0)>0.5),
           _ledCap:String(r.capCode||settings.ledCapCode||"").trim() });
@@ -10776,6 +10799,11 @@ async function ledDialog(sel){
       value:(cur.split||settings.ledSplit||"เต็มท่อนก่อน")},
     {key:"skip",label:"ตัดรางหลบชั้นที่ขวาง (ร่องยังวิ่งตลอด)",type:"toggle",options:["หลบ","ไม่หลบ"],
       value:(cur.skipShelf===false?"ไม่หลบ":"หลบ")},
+    {key:"lift",label:"ยกรางพ้นก้นร่อง (มม. · 0 = นอนแนบก้นร่อง · ลบ = กดลึกกว่าก้นร่อง) — กดตกลงแล้วระบบจะบอกว่าตัวรางโผล่พ้นผิวไม้เท่าไหร่",
+      value:(cur.lift!=null?cur.lift:(+settings.ledLift||0))},
+    {key:"flip",label:"ด้านที่จมลงร่อง — อัตโนมัติจะเลือกฝั่งแคบให้จม ปีกจึงแผ่ออกนอก",
+      type:"toggle",options:["อัตโนมัติ","กลับด้าน","ไม่กลับ"],
+      value:(cur.flip==="y"?"กลับด้าน":cur.flip==="n"?"ไม่กลับ":"อัตโนมัติ")},
     {key:"cap",label:"รหัสฝาปิดปลาย (เว้นว่าง = ใช้รหัสกลางในตั้งค่า)",type:"text",value:(cur.capCode||"")},
     {key:"more",label:"เพิ่มเป็นเส้นที่สองของแผ่นนี้",type:"toggle",options:["แทนที่","เพิ่ม"],value:"แทนที่"}]);
   if(!v) return;
@@ -10784,6 +10812,8 @@ async function ledDialog(sel){
     axis:(v.axis==="ตามกว้าง"?"w":"l"), pos:String(v.pos==null?"1:1":v.pos).trim(),
     gw:+v.gw||19, gd:+v.gd||8, trimA:+v.trimA||0, trimB:+v.trimB||0,
     maxLen:+v.maxLen||3000, split:v.split, skipShelf:(v.skip!=="ไม่หลบ"),
+    lift:(String(v.lift).trim()===""?null:(+v.lift||0)),
+    flip:(v.flip==="กลับด้าน"?"y":v.flip==="ไม่กลับ"?"n":"auto"),
     capCode:String(v.cap||"").trim() };
   b._leds=(v.more==="เพิ่ม")?(ledList(b).concat([rec])):[rec];
   sync(1);
@@ -10791,7 +10821,11 @@ async function ledDialog(sel){
   const caps=runs.filter(z=>z._ledCapA).length+runs.filter(z=>z._ledCapB).length;
   const fc=ledFaceOf(b,rec.face);
   const cw=(rec.axis==="w")?(+b.L||1):(+b.W||1);
+  const lf=(rec.lift!=null)?rec.lift:(+settings.ledLift||0);
+  const _bb=sectBox(rec.sec)||{h:0};
+  const out=round(_bb.h-(+rec.gd||0)+lf);            // v11.9: ตัวรางโผล่พ้นผิวไม้เท่าไหร่ — ตัวเลขที่ตรวจกับของจริงได้
   toast("รางไฟ "+rec.sec+" · ผิว"+(fc==="top"?"บน":"ล่าง")+" · "+ledPosLabel(rec.pos,cw)
+    +" · ยกพ้นก้นร่อง "+lf+" → โผล่พ้นผิวไม้ "+out+" มม."
     +" · ร่อง "+rec.gw+"×"+rec.gd+" มม. · ตัวราง "+runs.length+" ท่อน ("
     +runs.map(z=>Math.round(z.L)).join(" + ")+")"+(caps?(" · ฝาปิด "+caps+" ตัว"):" · วิ่งสุดทั้งสองปลาย"));
 }
@@ -13704,10 +13738,10 @@ function renderSettings(){
     ${txt("pullNo","คำที่แปลว่าไม่มีมือจับ (เพิ่มจาก No… ที่จับให้อยู่แล้ว)")}
     <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;margin-top:4px"><input type="checkbox" id="setPull3D" ${settings.pull3D!==false?"checked":""}> วาดรูปมือจับตั้งต้นใน 3D (คาน+เสา ไว้ดูว่าบานไหนมีมือจับและอยู่ตรงไหน)</label>
     <div class="sumh" style="margin-top:12px">รางไฟ (LED)</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">${num("ledGrooveW","ร่องกว้าง (มม.)")}${num("ledGrooveD","ร่องลึก (มม.)")}${num("ledMaxLen","ยาวสุดต่อท่อน (มม.)")}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">${num("ledGrooveW","ร่องกว้าง (มม.)")}${num("ledGrooveD","ร่องลึก (มม.)")}${num("ledLift","ยกรางพ้นก้นร่อง (มม.)")}${num("ledMaxLen","ยาวสุดต่อท่อน (มม.)")}</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${txt("ledCapCode","รหัสฝาปิดปลาย (Element → Fittings)")}${txt("ledSplit","เกินความยาว: เต็มท่อนก่อน / แบ่งเท่ากัน")}</div>
     <div style="font-size:11px;opacity:.62;margin:2px 0 6px;line-height:1.6">ร่องกับหน้าตัดเป็นคนละขนาดโดยตั้งใจ — รางกว้าง 23 แต่ร่อง 19 เพราะปีกรางวางทับผิวไม้ · <b>ร่องวิ่งยาวตลอดแผ่น ไม่หยุดที่ชั้น</b> ส่วนตัวรางตัดเป็นท่อนหลบชั้นและแบ่งตามความยาวสูงสุด<br>
-      ฝาปิดออกเฉพาะปลายที่ร่นเข้ามา ปลายที่วิ่งสุดขอบแผ่นไม่ต้องมี · ใส่รางที่ คลิกขวาที่แผ่น → 💡 รางไฟบนแผ่นนี้</div>
+      ฝาปิดออกเฉพาะปลายที่ร่นเข้ามา ปลายที่วิ่งสุดขอบแผ่นไม่ต้องมี · ใส่รางที่ คลิกขวาที่แผ่น → 💡 รางไฟบนแผ่นนี้<br>      <b>ยกรางพ้นก้นร่อง</b> — รางส่วนใหญ่ไม่ได้นอนแนบก้นร่อง ปีกจะพักบนผิวไม้แล้วตัวรางลอยเหนือก้นร่องเล็กน้อย ตั้งค่ากลางไว้ที่นี่ และแก้รายเส้นได้ในกล่องรางไฟ</div>
     <div class="sumh" style="margin-top:12px">เส้นโปรไฟล์พาดตู้ (DX / รางไฟ)</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${num("dxJoinGap","ตู้ห่างกันไม่เกินกี่ มม. ถือว่าเป็นเส้นเดียว (ตั้งต้น 0 = ต้องชิดกันจริง)")}${num("dxNotchGap","เผื่อช่องบากแต่ละด้าน (มม. · ตั้งต้น 0.5)")}</div>
     <div style="font-size:11px;opacity:.62;margin:2px 0 6px;line-height:1.6">ค่าตั้งต้น 0 = <b>ตู้ต้องชิดกันจริง</b>ถึงจะรวมเป็นเส้นเดียว ห่างกันแม้แต่มิลเดียวก็ตัดเส้นแยก ตรงกับหน้างาน · ตู้ที่เพิ่งทำสำเนาถูกวางเว้นระยะไว้ก่อน เลื่อนเข้าที่แล้วเส้นจะรวมให้ทันที<br>
