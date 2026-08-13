@@ -1544,9 +1544,11 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"Furnitech Cabinet", version:"13.3", build:"2026-08-13/cut-code-apply",
+  name:"Furnitech Cabinet", version:"13.5", build:"2026-08-13/export-wait",
   file:"Furnitech.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["13.5","2026-08-13","ส่งออกครั้งเดียวได้รหัสท่อนที่ถูกแล้ว — การค้นรหัสท่อนที่ตัดต้องถามคลังก่อน กว่าคำตอบจะมาถึงก็ส่งออกไปเรียบร้อยแล้ว ครั้งแรกจึงได้รหัสตั้งต้นติดไป ต้องกดส่งออกซ้ำอีกรอบถึงจะได้รหัสจริง · ตอนนี้ตัวส่งออกทุกทางรอจนค้นครบก่อนค่อยสร้างไฟล์ ทั้งดาวน์โหลดไฟล์และส่งขึ้นคลาวด์ · วนรอหลายรอบเพราะการคิดใบอุปกรณ์รอบใหม่อาจเจอความยาวที่ยังไม่เคยค้น"],
+    ["13.4","2026-08-13","ปลายร่องรางไฟเป็นครึ่งวงกลมตามดอกกัด และระยะร่นวัดถึงกลางปลายราง — ร่องเซาะด้วยดอกกลมที่เส้นผ่านศูนย์กลางเท่าความกว้างร่อง ปลายที่ไม่วิ่งทะลุขอบจึงมนเสมอ แต่เดิมสั่งเป็นปลายเหลี่ยมไว้ ทั้งรูปสามมิติและไฟล์เจาะจึงไม่ตรงกับของที่กัดออกมาจริง · ระยะร่นที่กรอกตอนนี้วัดจากขอบแผ่นถึงกลางรูปลาย ซึ่งเป็นจุดที่วัดกับของจริงได้และเป็นจุดเดียวกับปลายราง เนื้อร่องจึงยาวเลยไปอีกครึ่งดอกต่อข้าง ส่วนความยาวรางยังเป็นระยะระหว่างปลายทั้งสองเหมือนเดิม ไม่รวมฝาปิด · ร่นน้อยกว่าครึ่งดอกแปลว่าดอกกินทะลุขอบออกไป ปลายนั้นจึงเปิดเป็นเหลี่ยมตามจริง ไม่ฝืนทำให้มน · รูปสามมิติมนตามด้วย รัศมีเท่าครึ่งความกว้างร่องพอดี"],
     ["13.3","2026-08-13","รหัสท่อนที่ค้นเจอถูกเอามาใช้แทนรหัสรุ่นแล้ว — รอบก่อนค้นเจอแล้วเอาแค่ชื่อกับหน่วยมาใช้ ช่อง Purchase ID ยังเป็นรหัสรุ่นกลางอยู่ ท่อน 668 จึงแสดงรหัสเดียวกับท่อน 371 · ตอนนี้เจอแล้วใช้รหัสท่อนจริงทั้งในตารางสรุปและตอนส่งออก และเขียนกำกับว่ามาจากคลังอุปกรณ์ จะได้แยกออกจากรหัสที่กรอกเองใน Element · จำรหัสรุ่นต้นทางไว้ต่างหาก รอบถัดไปจึงไม่เอารหัสท่อนไปค้นเป็นรุ่น"],
     ["13.2","2026-08-13","FIX เส้นเรืองค้างที่สันแผ่นที่เซาะร่องรางไฟ — ตั้งแต่ร่องถูกทำให้เป็นหลุมเนื้อไม้จริง แผ่นสีที่เคยทาบไว้บอกตำแหน่งร่องก็ยังถูกวาดทับซ้ำอยู่ที่เดิม กลายเป็นแผ่นบางลอยค้างอยู่เหนือร่องที่ควักไปแล้ว มองเห็นเป็นเส้นรอบสันแผ่น · ตอนนี้ร่องที่ควักเป็นเนื้อไม้จริงแล้วจะไม่ถูกทาบสีซ้ำ ส่วนร่องแผ่นหลังกับร่องสันที่ยังไม่ได้ควักยังทาบเหมือนเดิม"],
     ["13.1","2026-08-13","FIX ค้นรหัสท่อนที่ตัดแล้วไปได้สินค้าคนละเรื่อง — รอบแรกค้นจากชื่อสินค้าด้วยคำว่า ตัดขนาด บวกความยาว ซึ่งไปเจอของที่บังเอิญมีเลขนั้นในชื่อ หาราง 371 แล้วได้มุ้งไฟเบอร์ที่ตัดขนาด 544x369 · คลังตั้งรหัสท่อนที่ตัดเป็นรหัสรุ่นบวกเลขลำดับ เช่น ACCLT00245 กลายเป็น ACCLT00245000337 จึงเปลี่ยนมายึดรหัสต้นทางเป็นตัวตั้ง กรองเฉพาะรหัสที่ขึ้นต้นตรงกันก่อน แล้วค่อยหาความยาวในชื่อ ผิดรุ่นจึงเป็นไปไม่ได้ · ความยาวต้องอยู่หลังคำว่า ตัดขนาด จริง ๆ ไม่ใช่เลขรุ่นหรือความยาวม้วนที่อยู่ในชื่อ และต้องตรงตัว 371 ไม่ไปเจอ 1371 หรือ 3710 · ใช้ Purchase ID เป็นตัวตั้งเพราะนั่นคือรหัสที่มีอยู่จริงในคลัง ส่วนรหัสใน Element เป็นชื่อเรียกภายใน"],
@@ -2900,10 +2902,13 @@ function grooveBlindRects(b){
     if(!g||g.face==="edge"||g.back) return;
     const d=+g.depth||0; if(!(d>0)||d>=T-0.2) return;
     const w=Math.max(+g.width||0,0.5), o0=Math.max(+g.off0||0,0), o1=Math.max(+g.off1||0,0);
+    /* v13.4: ปลายมนต้องมนใน 3 มิติด้วย ไม่งั้นเห็นเป็นเหลี่ยมทั้งที่ไฟล์เจาะสั่งมน
+       รัศมีเท่าครึ่งความกว้างร่องพอดี จึงได้ปลายเป็นครึ่งวงกลมตามดอกกัด */
+    const rr=(g.end==="r")?Math.max(+g.r||w/2,0):0;
     if(g.axis==="wid"){ const run=Math.max(W-o0-o1,0.5);
-      out.push({x:round(+g.pos||0), y:round((o0-o1)/2), w:round(w), h:round(run), depth:d, face:g.face, r:0, _gr:true}); }
+      out.push({x:round(+g.pos||0), y:round((o0-o1)/2), w:round(w), h:round(run), depth:d, face:g.face, r:round(Math.min(rr,Math.min(w,run)/2)), _gr:true}); }
     else { const run=Math.max(L-o0-o1,0.5);
-      out.push({x:round((o0-o1)/2), y:round(+g.pos||0), w:round(run), h:round(w), depth:d, face:g.face, r:0, _gr:true}); }
+      out.push({x:round((o0-o1)/2), y:round(+g.pos||0), w:round(run), h:round(w), depth:d, face:g.face, r:round(Math.min(rr,Math.min(run,w)/2)), _gr:true}); }
   });
   return out;
 }
@@ -10701,13 +10706,28 @@ async function cutLookup(code,len,hint){
 /* v13.3: หลังค้นเจอ เราเปลี่ยน purchase เป็นรหัสท่อนจริง
    จึงต้องจำรหัสรุ่นต้นทางไว้ ไม่งั้นรอบถัดไปจะเอารหัสท่อนไปค้นเป็นรุ่น */
 function cutSrcOf(f){ return String((f&&(f._pidSrc||f.purchase||f.art))||"").trim(); }
+let _cutPending=[];
 function cutLookupAll(list){
   const miss=list.filter(f=>(+f._cut>0)&&cutSrcOf(f)&&_fgCut[cutKey(cutSrcOf(f),f._cut)]===undefined);
   if(!miss.length) return false;
-  Promise.all(miss.map(f=>cutLookup(cutSrcOf(f),f._cut,f.name).then(r=>{
-    if(!r) console.warn("ตัดขนาด "+cutSrcOf(f)+" "+cutLen(f._cut)+" มม.: ไม่พบรหัสท่อนนี้ในคลังอุปกรณ์"); })))
-    .then(()=>{ try{ _cabFitSig=""; sync(0); }catch(e){} });
+  const ps=miss.map(f=>cutLookup(cutSrcOf(f),f._cut,f.name).then(r=>{
+    if(!r) console.warn("ตัดขนาด "+cutSrcOf(f)+" "+cutLen(f._cut)+" มม.: ไม่พบรหัสท่อนนี้ในคลังอุปกรณ์"); }));
+  _cutPending=_cutPending.concat(ps);                       // v13.5: ไว้ให้ตัวส่งออกรอได้
+  Promise.all(ps).then(()=>{ try{ _cabFitSig=""; sync(0); }catch(e){} });
   return true;
+}
+/* v13.5: การค้นรหัสท่อนเป็นงานที่ต้องถามคลังก่อน กว่าคำตอบจะมาถึงก็ส่งออกไปแล้ว
+   ครั้งแรกจึงได้รหัสตั้งต้น ต้องกดส่งออกซ้ำอีกรอบถึงจะได้รหัสจริง
+   ตัวส่งออกทุกทางเรียกตัวนี้ก่อน แล้วรอจนค้นครบ ครั้งเดียวก็ได้ของถูก
+   วนหลายรอบเพราะการคิดใบอุปกรณ์รอบใหม่อาจเจอความยาวที่ยังไม่เคยค้น */
+async function cutLookupReady(){
+  if(settings.cutLookupOn===false) return;
+  for(let i=0;i<4;i++){
+    try{ fittingAgg(state.boards); }catch(e){ console.error(e); }
+    if(!_cutPending.length) return;
+    const ps=_cutPending; _cutPending=[];
+    try{ await Promise.all(ps); }catch(e){ console.error(e); }
+  }
 }
 function cutCodeOf(f){
   const src=cutSrcOf(f);
@@ -10852,10 +10872,20 @@ function applyLedStrips(){
       const flip=(r.flip==='y')?-1:(r.flip==='n')?1:sectDeepEnd(r.sec);   // v11.8: ปีกต้องอยู่นอกเสมอ
       /* ร่องวิ่งยาวตลอดแผ่น หักเฉพาะระยะร่นหัวท้ายที่สั่งไว้ ไม่หยุดที่ชั้น */
       b.grooves=b.grooves||[];
+      /* ───────── v13.4: ปลายร่องเป็นครึ่งวงกลมตามดอกกัด ─────────
+         ร่องเซาะด้วยดอกกลม เส้นผ่านศูนย์กลางเท่าความกว้างร่อง ปลายที่ไม่วิ่งทะลุขอบจึงมนเสมอ
+         สั่งเป็นปลายเหลี่ยมไว้ ทั้งรูปใน 3 มิติและไฟล์เจาะเลยไม่ตรงกับของที่กัดออกมาจริง
+         ระยะร่นที่กรอกวัดจาก "ขอบแผ่นถึงกลางรูปลาย" ซึ่งเป็นจุดที่วัดกับของจริงได้
+         และเป็นจุดเดียวกับปลายราง — เนื้อร่องจึงยาวเลยไปอีกครึ่งดอกต่อข้าง
+         ร่นน้อยกว่าครึ่งดอก = ดอกกินทะลุขอบออกไป ปลายนั้นจึงเปิดเป็นเหลี่ยมตามจริง */
+      const half=gW/2;
+      const tA=Math.max(+r.trimA||0,0), tB=Math.max(+r.trimB||0,0);
+      const rndA=(tA>=half-0.01), rndB=(tB>=half-0.01);
       b.grooves.push({ axis:(r.axis==="w")?"wid":"len", face:face,
         pos:round(POS), width:round(gW), depth:round(gD),
-        off0:Math.max(+r.trimA||0,0), off1:Math.max(+r.trimB||0,0),
-        end:"sq", _led:true, _ledIdx:ri });
+        off0:round(rndA?(tA-half):0), off1:round(rndB?(tB-half):0),
+        end:(rndA||rndB)?"r":"sq", r:round(half),
+        _led:true, _ledIdx:ri, _ledEndA:rndA, _ledEndB:rndB });
       nG++;
       /* ตัวรางวางในร่อง — จมลงไปเท่าความลึกร่อง ที่เหลือโผล่เหนือผิว */
       const runs=ledRuns(b,r); nR+=runs.length;
@@ -10947,13 +10977,14 @@ function ledDialog(sel){
           +'<div style="font-size:11px;color:#2f9e44;margin-top:4px">'+escapeHtml(ledPosLabel(r.pos,cw))+'</div></div>'
         +'<div style="margin-top:10px"><div '+LBL+'>ยกรางพ้นก้นร่อง (มม. · เว้นว่าง = ใช้ค่ากลาง '+(+settings.ledLift||0)+')</div>'
           +'<div style="display:flex;gap:6px;align-items:center">'+NB(i,"lift",-1)+F(i,"lift",(r.lift!=null?r.lift:""))+NB(i,"lift",1)+'</div>'
-          +'<div style="font-size:11px;color:#2f9e44;margin-top:4px">ตัวรางโผล่พ้นผิวไม้ '+out+' มม.</div></div>'
+          +'<div style="font-size:11px;color:#2f9e44;margin-top:4px">ตัวรางโผล่พ้นผิวไม้ '+out+' มม.'
+          +((+r.trimA>0||+r.trimB>0)?(' · ปลายร่องมน R'+round((+r.gw||19)/2)+' ตามดอกกัด'):'')+'</div></div>'
         +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">'
           +'<div><div '+LBL+'>ร่องกว้าง (มม.)</div>'+F(i,"gw",r.gw)+'</div>'
           +'<div><div '+LBL+'>ร่องลึก (มม.)</div>'+F(i,"gd",r.gd)+'</div></div>'
         +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">'
-          +'<div><div '+LBL+'>ร่นหัว (0 = วิ่งสุด ไม่มีฝา)</div>'+F(i,"trimA",r.trimA)+'</div>'
-          +'<div><div '+LBL+'>ร่นท้าย (0 = วิ่งสุด)</div>'+F(i,"trimB",r.trimB)+'</div></div>'
+          +'<div><div '+LBL+'>ร่นหัว — ขอบถึงกลางปลายราง (0 = วิ่งสุด ไม่มีฝา)</div>'+F(i,"trimA",r.trimA)+'</div>'
+          +'<div><div '+LBL+'>ร่นท้าย — ขอบถึงกลางปลายราง</div>'+F(i,"trimB",r.trimB)+'</div></div>'
         +'<button class="ibtn ledAdv" data-i="'+i+'" style="flex:none;margin-top:10px;padding:5px 12px;font-size:11.5px">'
           +(adv?"▾ ซ่อนตัวเลือกเพิ่มเติม":"▸ ตัวเลือกเพิ่มเติม")+'</button>'
         +(adv?('<div style="margin-top:10px;border-top:1px dashed var(--line);padding-top:10px">'
@@ -18717,7 +18748,8 @@ function buildExport(){
   return { orderID:orderId(), cabinets:gs.map(g=>({article:g.cab,productId:g.productId})), source:"boardforge", loaded:new Date().toLocaleString("th"),
            parts, fittings, summary:{ partCount:parts.length, cabinetCount:gs.length, connectorCount:nc, pinCount, holeCount:nh, grooveCount:ng } };
 }
-function exportProductionJSON(){ download(orderId()+"_boardforge.json", JSON.stringify(buildImosData(),null,2), "application/json"); toast("ดาวน์โหลด JSON (ฟอร์แมต IMOS) แล้ว"); }
+async function exportProductionJSON(){ await cutLookupReady();   // v13.5: รอรหัสท่อนที่ตัดให้ครบก่อน
+  download(orderId()+"_boardforge.json", JSON.stringify(buildImosData(),null,2), "application/json"); toast("ดาวน์โหลด JSON (ฟอร์แมต IMOS) แล้ว"); }
 // ชิ้นมี "การเจาะ" ไหม = มีรู (b.holes) หรือมี connector ที่เจาะ (เดือย/มินิฟิก/บานพับ count>0) — ไม่นับร่องเซาะ (groove)
 // ป้าย หน้า/หลัง/ซ้าย/ขวา ของร่อง → ฝั่ง (±) บนแกน cross ใน local ตาม orient จริง
 // len: cross=local Y · flat: −y=หน้าโลก(+z) · side: +y=หน้า · front: ใช้ หน้า=+(บน)
@@ -18968,6 +19000,7 @@ async function sendSupabase(){
   if(!state.boards.length){toast("ยังไม่มีชิ้นงาน");return;}
   toast("กำลังส่งเข้า Supabase…");
   try{
+    await cutLookupReady();                                        // v13.5: รอรหัสท่อนที่ตัดให้ครบก่อน
     const db=await getDB();
     const data=buildImosData();
     const {error}=await db.from("imos_orders").upsert({order_id:data.orderID,data:data,loaded_at:new Date().toISOString()},{onConflict:"order_id"});
