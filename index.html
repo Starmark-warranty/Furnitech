@@ -1588,7 +1588,8 @@
     <div style="display:flex;flex-direction:column;gap:10px">
       <div class="fld" style="margin:0"><label>Order ID / ชื่อออเดอร์ (สำหรับสรุป &amp; Supabase)</label><input class="nameinp" id="exOrderId" placeholder="เช่น BO69_0420" style="width:100%"></div>
       <div class="fld" style="margin:0"><label>Item Id Set (เช่น RE-0069-0420) — เขียนเข้า app_settings ให้ Production</label><input class="nameinp" id="exItemIdSet" placeholder="เว้นว่างได้" style="width:100%"></div>
-      <button class="ibtn" id="exSummary">📋 ดูสรุป Connector / รายการเจาะ</button>
+      <button class="ibtn" id="exSummary">📋 รายการ BOM Fitting (อุปกรณ์ทั้งงาน)</button>
+      <button class="ibtn" id="exLines">🧾 รายการเส้น / Accessory ของออเดอร์…</button>
       <button class="ibtn" id="exFeatCsv">ดาวน์โหลดสรุป Connector + รูเจาะ (.csv)</button>
       <button class="ibtn" id="exProdJson">ดาวน์โหลด JSON สำหรับ Production</button>
       <button class="ibtn" id="exSupa" style="background:var(--accent);color:#fff;border-color:transparent">⬆ ส่งเข้า Supabase (imos_orders)</button>
@@ -1608,9 +1609,23 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"Furnitech Cabinet", version:"28.2", build:"2026-08-17/viewonly-gating",
+  name:"Furnitech Cabinet", version:"29.2", build:"2026-08-17/rule-order",
   file:"Furnitech.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["29.2","2026-08-17","กฎแปลงรายการเส้น สลับลำดับได้ และจับคู่แบบ ไม่ใช่ค่านี้ ได้แล้ว — ของชิ้นเดียวกันเปลี่ยนความหมายตามสีได้ ตีนตู้สแตนเลสคือของที่ซื้อมาทั้งเส้นจึงออกเป็นรหัสสั่งซื้อ แต่ตีนตู้สีไม้คืองานไม้ ต้องเข้าฉากเป็นตู้จริงแล้วออกใบตัด ซึ่งเป็นคนละเรื่องกันคนละใบ · เขียนแยกกฎทีละสีไม่ไหวเพราะสีไม้มีไม่จำกัด · ใส่เครื่องหมายอัศเจรีย์นำหน้าค่า = ทุกค่ายกเว้นค่านั้น ผสมรายการที่ยอมรับกับรายการที่ตัดออกในช่องเดียวกันได้ · v29.1 ลืมเรื่องลำดับไปเลย ทั้งที่กฎแรกที่ตรงเป็นตัวชนะ กฎที่เจาะจงกว่าจึงต้องอยู่บน แต่ไม่มีทางย้ายเลยนอกจากลบแล้วพิมพ์ใหม่ทั้งกฎ · ตอนนี้มีเลขลำดับกับปุ่มย้ายขึ้นลงทุกกฎ และเขียนกำกับไว้ที่หัวตารางว่ากฎแรกที่ตรงชนะ จะได้ไม่ต้องไปเดาเอง"],
+    ["29.1","2026-08-17","FEAT กฎแปลงรายการเส้น — แถวในแท็บเส้นไม่ได้มีความหมายเดียวกันทุกแถว บางแถวคือของที่ซื้อมาทั้งชิ้น บางแถวคือตู้อีกใบที่ยังไม่ถูกนับ เช่นแผงปิดช่องบนซึ่งต้องเข้าฉากเป็นตู้จริง ไม่ใช่ของในใบอุปกรณ์ และรหัสที่ออเดอร์ส่งมาก็เป็นรหัสของฝั่งออกแบบ ไม่ใช่รหัสสั่งซื้อของเรา · ตอนนี้เขียนเป็นกฎได้ที่หน้า รายการเส้น จับคู่จาก ประเภท รหัส สี ขนาด ช่องที่เว้นว่างคือตรงทุกค่า ใส่หลายค่าคั่นด้วยจุลภาคได้ แล้วบอกว่าจะให้แถวนั้นกลายเป็นอะไร · ออกใบอุปกรณ์ด้วยรหัสที่กำหนด ใช้จำนวนตามช่องจำนวนของแถว และใส่หลายรหัสได้เหมือนช่องรหัสอื่น · สร้างตู้เข้าฉาก ระบุรหัสตู้ในคลัง กว้าง สูง ลึก และให้สีของแถวไปลงที่ Family ที่ต้องการ ช่องขนาดใส่ S1 S2 S3 ได้ = ตัวเลขลำดับที่เท่าไหร่ในช่องขนาดของแถวนั้น 2400*150 จึงส่ง 2400 ไปเป็นความสูงและ 150 ไปเป็นความกว้างได้ จำนวนตู้เท่ากับจำนวนในแถว · หรือสั่งไม่ให้ออกเลยก็ได้ · ตู้ที่มาจากรายการเส้นถูกต่อท้ายรายการตู้ก่อนสร้างฉาก จึงเดินทางเดียวกับตู้ที่มาจากออเดอร์ทุกขั้น ทั้งดึงโมเดลจากคลัง ปรับขนาด ใส่สี วางในฉาก และออกใบตัด ไม่มีเส้นทางพิเศษให้ต้องดูแลแยก · ตารางบอกรายแถวว่าโดนกฎไหนและจะกลายเป็นอะไร และใต้แต่ละกฎบอกว่าไฟล์นี้จับได้กี่แถวจะออกเท่าไหร่"],
+    ["29.0","2026-08-17","ช่องรหัสทุกช่องรับหลายรหัสได้แล้ว ไม่ใช่แค่ช่อง Purchase Item ID — v28.7 ทำเรื่องรหัสเก่า/รหัสใหม่ไว้ที่ช่อง Purchase Item ID อย่างเดียว ซึ่งใช้ได้เฉพาะของที่มี Element ของตัวเอง แต่ลูกอย่างพลาสติกครอบมักถูกพิมพ์รหัสสั่งซื้อลงไปตรง ๆ โดยไม่ได้ทำ Element ให้ พิมพ์สองรหัสคั่นจุลภาคลงช่องรหัสลูกเลยจึงเป็นสิ่งที่ทุกคนจะทำ และเป็นสิ่งที่ควรใช้ได้ตั้งแต่แรก ของเดิมอ่านทั้งบรรทัดเป็นรหัสเดียวยาว ๆ แล้วหาไม่เจอ · ตอนนี้ช่องไหนที่ไม่มี Element รองรับ ทั้งบรรทัดถือเป็นรายชื่อรหัสสั่งซื้อของของตัวเดียวกัน ตัวแรกเป็นตัวตั้งของบรรทัด แล้วไล่ถามทีละรหัสจนเจอความยาวที่ต้องการ เหมือนที่ทำกับช่อง Purchase Item ID · ใช้ได้ทั้งช่องรหัสลูก ช่องอุปกรณ์ที่ฝากไว้กับ Part และรายการในชุดอุปกรณ์ประจำรหัสตู้ · ถ้าตัวแรกที่พิมพ์ไปตรงกับรหัส Element ที่มีอยู่ ระบบใช้ Element ตัวนั้นเป็นเจ้าของบรรทัดตามเดิม ชื่อและหน่วยจึงไม่หาย"],
+    ["28.9","2026-08-17","FEAT ชุดอุปกรณ์ประจำรหัสตู้ — ของบางชุดไม่ได้ผูกกับชิ้นไม้ชิ้นไหนเลย แต่ผูกกับตู้รุ่นนั้นทั้งใบ เช่นตู้ซิงค์ที่ต้องมีถาดฟรอยด์ ก็ต้องมีชุดอุปกรณ์ประจำใบไปด้วยเสมอ เดิมไม่มีที่ให้ผูก ต้องไปไล่ใส่รายตู้เองทุกออเดอร์ · ตั้งค่า → ชุดอุปกรณ์ประจำรหัสตู้ เพิ่มได้หลายชุด แต่ละชุดมีชื่อ รายชื่อรหัสตู้ และรายการอุปกรณ์บรรทัดละรหัสพร้อมจำนวน ตู้ที่ตรงรหัสได้ชุดนั้น 1 ชุดต่อ 1 ใบ ไม่ว่าตู้ใบนั้นจะมีกี่แผ่น เพราะชุดผูกกับใบไม่ได้ผูกกับแผ่น · ช่องรหัสตู้ใส่ @ถาด ได้ = ใช้รายชื่อเดียวกับช่องรหัสตู้ของถาดฟรอยด์ แก้ที่เดียวแล้วตามกันทั้งสองที่ ไม่ต้องมาไล่ให้ตรงกันเอง · ทุกชุดมีสวิตช์เปิดปิดของตัวเอง ปิดไว้ก่อนได้โดยไม่ต้องลบทิ้ง และบอกให้เห็นทันทีว่ากฎนั้นจับตู้ในฉากได้กี่ใบและจะออกกี่ชุด ไม่ต้องกดส่งออกก่อนถึงจะรู้ · ของที่ออกเดินทางเดียวกับอุปกรณ์อื่นทุกประการ ทั้งการกางลูก โหมดรหัสชุด และรหัสสั่งซื้อหลายรหัส · ลายเซ็นที่ใช้ตัดสินว่าต้องคิดอุปกรณ์ใหม่ไหม นับกฎพวกนี้ด้วยแล้ว แก้แล้วเห็นผลทันที ไม่ซ้ำรอย v9.27 ที่แก้รหัสตู้แล้วเงียบ"],
+    ["28.8","2026-08-17","สีจริงของผิว กรอกเป็น RGB ได้แล้ว และมีช่องจิ้มสีให้ด้วย — ค่าสีที่ได้มาจากที่อื่นมักเป็น RGB ไม่ใช่ HEX ทั้งจากโปรแกรมออกแบบและจากสเปกวัสดุที่ผู้ผลิตส่งมา ต้องเปิดตัวแปลงอีกหน้าทุกครั้งก่อนจะกรอกได้ ซึ่งไม่มีเหตุผลอะไรเลย · แต่ละสีตอนนี้ใส่ได้สามทาง จิ้มจากช่องสี พิมพ์ HEX หรือกรอก RGB ในช่องล่าง ทั้งสามผูกค่าเดียวกัน แก้ทางไหนอีกสองทางตามทันที · ช่อง HEX รับค่าที่วางมาแบบ 180,163,131 หรือ rgb(180 163 131) ได้ตรง ๆ แล้วแปลงเก็บเป็น HEX ให้ ค่าที่บันทึกจึงเป็นรูปแบบเดียวเสมอ ไม่มีสองมาตรฐานปนกันในคลัง · ตัวอ่านสีตัวกลางรับ RGB ด้วย ทุกที่ในโปรแกรมที่อ่านค่าสีจึงได้ความสามารถนี้พร้อมกัน · HEX แบบสามหลักอย่าง #abc ก็ขยายเป็นหกหลักให้แล้ว เดิมรับเข้ามาแต่ส่งต่อไปเป็นสามหลัก ซึ่งบางที่ในโปรแกรมอ่านไม่ออก · ค่า RGB ที่เกิน 255 ถูกดึงกลับเข้าขอบ พิมพ์เกินไปนิดจึงไม่กลายเป็นช่องว่าง"],
+    ["28.7","2026-08-17","แก้ความเข้าใจผิดของผมเองอีกรอบ หลายรหัสในช่อง Purchase Item ID คือของชิ้นเดียวกัน ไม่ใช่ของสองอย่าง — ของที่ใช้มานานมีทั้งรหัสเก่าและรหัสใหม่ และยังใช้อยู่ทั้งคู่ คลังไม่ได้ย้ายท่อนทั้งหมดไปรหัสใหม่ทีเดียว ท่อน 300 อาจอยู่ใต้รหัสเก่า ส่วนท่อน 600 มีเฉพาะใต้รหัสใหม่ ถามรหัสเดียวจึงเจอบ้างไม่เจอบ้างแล้วแต่ความยาว · v28.6 ผมอ่านเป็นของคนละตัวแล้วแตกออกเป็นคนละบรรทัด ซึ่งทำให้ของเกินมาเท่าตัว ถอนออกแล้ว · ตอนนี้ระบบไล่ถามทีละรหัสตามลำดับที่พิมพ์ จนเจอความยาวที่ต้องการ เจอที่รหัสไหนก็ใช้รหัสท่อนของที่นั่น ของยังเป็นชิ้นเดียวและออกบรรทัดเดียวเสมอ · ใช้กับลูกด้วย พลาสติกครอบที่ผูกเป็นลูกและติ๊กตัดตามแม่ ก็มีรหัสเก่า/ใหม่ของตัวเองได้เหมือนกัน · หน้า BOM Fitting บอกด้วยว่าบรรทัดไหนไปเจอที่รหัสสำรอง และบรรทัดไหนหาไม่เจอสักรหัสพร้อมรายชื่อรหัสที่ลองไปแล้ว"],
+    ["28.6","2026-08-17","FEAT ของชิ้นเดียวใส่รหัสสั่งซื้อได้หลายรหัส — รางไฟหนึ่งเส้นคือของสองอย่างที่ยาวเท่ากันเป๊ะ และสั่งพร้อมกันเสมอ ตัวรางอลูมิเนียมกับพลาสติกครอบ ไม่ใช่ตัวแม่กับลูกที่นับคนละหน่วย ทางเดิมมีแค่ผูกเป็นลูก ซึ่งเขียนเจตนาผิด และเวลาอ่านใบก็ดูเหมือนรางมีอะไหล่แถมมา · ตอนนี้ช่อง Purchase Item ID ใน Element → Fittings ใส่ได้หลายรหัสคั่นด้วยจุลภาค เช่น 414LT0000007,TPP0000083 ทุกรหัสถือความยาวเดียวกันไปค้นรหัสท่อนของตัวเองในคลัง ขนาดที่เอาไปค้นจึงเป็นขนาดเดียวกันทั้งชุด แล้วแยกเป็นคนละบรรทัดในใบอุปกรณ์และไฟล์ที่ส่งออก พร้อมกำกับว่าเป็นรหัสที่เท่าไหร่จากทั้งหมดกี่รหัสของตัวไหน · การแตกบรรทัดทำก่อนขั้นค้นรหัสท่อน รหัสที่สองจึงถูกค้นจริง ไม่ใช่ติดไปเฉย ๆ · ใส่รหัสเดียวยังทำงานเหมือนเดิมทุกอย่าง ไม่ต้องไปแก้ของเก่า และวิธีผูกเป็นลูกก็ยังใช้ได้เหมือนเดิม สำหรับของที่นับคนละหน่วยจริง ๆ เช่นสกรูหรือฝาปิดหัวท้าย"],
+    ["28.5.4","2026-08-17","FIX ลายไม้ที่ทาบนผิว วิ่งคนละทางกับแผ่นที่ออกไปจริง — ผืนลายถูกวาดให้วิ่งตามแกนแนวนอนของผืน ซึ่งตรงกับด้านยาว L ของชิ้นเสมอ แต่ชิ้นที่กลับแนวลายไว้ ลายจริงวิ่งตามด้านกว้าง W · ระบบคิดแนวลายให้เองตามบทบาทชิ้นและท้ายรหัสสี X/Y มาตั้งแต่ v9.19 และวาดเส้นบอกแนวไว้ถูกต้องอยู่แล้ว แต่ตัวทาสีที่เพิ่มมาตอน v27.1 ไม่เคยรู้เรื่องนี้ ทาลายตามด้านยาวให้ทุกชิ้นเหมือนกันหมด ผิวที่เห็นจึงขัดกับเส้นแนวลายในจอเดียวกัน และขัดกับของจริงที่ออกไป · ตอนนี้ชิ้นที่กลับแนวได้ผืนลายที่หมุน 90° เก็บแยกกันคนละผืน ผิวเดียวกันคนละชิ้นจึงหันลายคนละทางได้ · FIX ปุ่มบังคับ ไม่มีลาย รายชิ้น ไม่เคยมีผลกับผิวที่ทาสี — เงื่อนไขไปเช็คค่าที่ไม่มีอยู่จริงในโปรแกรม ชื่อใกล้เคียงกับตัวจริงแต่คนละตัว ค่าจึงเป็นว่างเปล่าตลอดและเงื่อนไขเป็นจริงเสมอ ตอนนี้อ่านจากปุ่มของชิ้นนั้นตรง ๆ บังคับให้เรียบก็ได้ผิวเรียบจริง"],
+    ["28.5.3","2026-08-17","FIX ตั้งสีจริงของผิวไว้แล้วแต่ 3D ไม่เปลี่ยนสีเลย — ตัวหาสีไปอ่านรหัสผิวจากตัวชิ้นงานตรง ๆ ซึ่งเป็นที่ที่ไม่มีวันมีรหัสจริงอยู่ · ชิ้นที่ผ่าน Part ช่องนั้นว่างเปล่า เพราะรหัสไปอยู่ที่ Part และค่าที่ Part เก็บก็ยังเป็นลิงก์อย่าง $CarcassSurfacetop ไม่ใช่รหัสผิว รหัสจริงอย่าง G01M0349Y_BT4 จะโผล่ก็ต่อเมื่อ resolve ตามสีที่เลือกให้ตู้ใบนั้นแล้ว ค้นด้วยค่าดิบจึงไม่เจออะไรเลย แล้วถอยไปใช้โทนไม้ตั้งต้นเงียบ ๆ ทุกครั้ง ตั้งสีไว้ครบแค่ไหนก็ไม่มีผล และไม่มีอะไรฟ้องสักตัว · ตอนนี้เดินสองด่านเดียวกับที่ ShopPaper และใบตัดใช้อยู่แล้ว ไปเอารหัสจาก Part ก่อน แล้วค่อยแปลงลิงก์ตามสีของตู้ ชิ้นที่ตั้งผิวไว้ตรง ๆ ไม่ผ่าน Part ก็ยังใช้ได้เหมือนเดิม · รหัสผิวที่มีช่องว่างติดมาก็หาเจอแล้วเช่นกัน"],
+    ["28.5.2","2026-08-17","FIX หน้าตรวจ XML ขึ้นแดงว่ารหัสชุด KIT01 ยังไม่มีในคลัง ทั้งที่ตั้งรับไว้เรียบร้อยแล้ว — ชุดอุปกรณ์อยู่ที่ Element → ชุดอุปกรณ์ KIT ซึ่งเป็นคลังของตัวเอง แต่ตัวตรวจเอาค่าไปหาในตัวเลือกของ Family กับคลังสี ไม่เจอก็เลยขึ้นแดงทุกแถวทั้งออเดอร์ ทั้งที่ตอนโหลดจริงระบบหยิบชุดไปใช้ได้ปกติ ไม่ได้พังอะไรเลย · เป็นตระกูลเดียวกับรุ่นขาที่แก้ไปตอน v9.70 และมือจับตอน v9.76 คือช่องที่ระบบอ่านเองมีคลังเฉพาะของมัน แต่กฎการตรวจยังเหมารวมว่าทุกช่องเป็นสี · ตอนนี้ช่องรหัสชุดถูกถามกับคลัง KIT โดยตรง เจอก็จบ ไม่ต้องมีในคลังสีหรือในตัวเลือกของ Family ก่อน · ถ้าไม่เจอจริง ๆ ยังเตือนอยู่ แต่บอกให้ถูกที่ว่าต้องไปเพิ่มที่ไหน และบอกผลตรงว่าตู้ใบนั้นจะไม่ได้อุปกรณ์ของชุด ไม่ใช่ถอยไปใช้สีกลาง · ตัวเลขบนหัวแท็บตรวจของในคลังลดตามไปด้วย"],
+    ["28.5.1","2026-08-17","คลิกชิ้นใน 3D แล้วรายการทางซ้ายวิ่งไปหาตู้ใบนั้นให้เอง — แถวของตู้ที่เลือกถูกทำไฮไลต์มาตลอด แต่ไม่มีใครพามันเข้ามาในสายตา ออเดอร์สี่สิบกว่าตู้ แถวที่สว่างอยู่จึงมักอยู่นอกจอ ต้องไล่เลื่อนหาเองทุกครั้งทั้งที่โปรแกรมรู้อยู่แล้วว่าอยู่แถวไหน · เลื่อนเฉพาะตอนที่ตู้เปลี่ยนจริง ๆ ไม่ใช่ทุกครั้งที่วาดรายการใหม่ ไม่งั้นจะแย่งการเลื่อนจากมือคนใช้ และใช้แบบเข้ามาให้พอดีขอบ ถ้าแถวนั้นอยู่ในจอแล้วก็ไม่ขยับอะไรเลย · ถ้าพับรายการไว้อยู่แล้วคลิกชิ้นใน 3D จะกางให้ด้วย ไม่งั้นไม่มีแถวให้เลื่อนไปหา"],
+    ["28.5","2026-08-17","FEAT ฝากอุปกรณ์ไว้กับ Part ได้แล้ว — ของอย่างตะแกรง ที่กั้น หรือแผ่นกันลื่น ไม่ได้ผูกกับเดือยหรือรูเจาะ จึงไม่มีทางออกใบอุปกรณ์เองเลย ต้องไปไล่ใส่รายตู้ทุกครั้ง ทั้งที่ของพวกนี้มาพร้อมชิ้นส่วนนั้นเสมอ พื้นลิ้นชักรุ่นนี้ต้องมีตะแกรงรุ่นนี้เท่านี้ใบ · Element → Parts มีบล็อกใหม่ อุปกรณ์ที่ฝากไว้กับ Part นี้ ใส่ได้หลายรหัส แต่ละรหัสกำหนดจำนวนเอง และเลือกได้ว่านับต่อชิ้นหรือต่อตู้ ต่อตู้คือตู้ใบหนึ่งได้ชุดเดียวถึง Part จะถูกใช้หลายแผ่นในใบนั้น · ไม่ต้องมีโมเดล 3D เพราะบล็อกนี้คิดแต่ของที่ต้องเบิก ตัวไหนมี 3D อยู่แล้วก็ยังขึ้นตามปกติของมัน · รหัสที่ใส่ควรมีใน Element → Fittings เพื่อให้ได้ชื่อ หน่วย Purchase ID และลูกที่ผูกไว้ ถ้าไม่มีจะขึ้นกรอบแดงเตือนทันทีตั้งแต่ตอนพิมพ์ · ของที่ฝากไว้เดินผ่านทางเดียวกับอุปกรณ์อื่นทุกประการ ทั้งการกางลูก โหมดรหัสชุด และรหัสสั่งซื้อ จึงโผล่ในรายการ BOM Fitting และไฟล์ที่ส่งออกพร้อมกัน"],
+    ["28.4","2026-08-17","FIX ปุ่ม ย้าย · ยืด/หด · ไม้วัด กดแล้วไม่ทำงานมาตั้งแต่ v27.3 — ตอนเติมด่านกันแก้ตอนล็อก ผมวางเครื่องหมายคอมเมนต์ // v27.3 ไว้ท้ายบรรทัด แต่บรรทัดนั้นเป็นโค้ดที่ต่อกันมาหลายคำสั่งอยู่แล้ว ทุกอย่างหลังเครื่องหมายจึงกลายเป็นคำอธิบายไปหมด รวมทั้ง state.tool=t ซึ่งเป็นบรรทัดที่เปลี่ยนเครื่องมือจริง ๆ · ปุ่มยังไฮไลต์ให้เพราะบรรทัดที่ทาสีปุ่มอยู่คนละบรรทัดและไม่โดนกลืน กดแล้วจึงเหมือนติดแล้ว แต่ไม่มีอะไรเปลี่ยน เครื่องมือค้างอยู่ที่ เลือก ตลอด ไม่มีข้อความผิดพลาดสักตัวเพราะโค้ดไม่ได้พัง แค่ไม่ถูกรัน · ตอนนี้แยกทุกคำสั่งลงบรรทัดของตัวเอง คอมเมนต์จึงกลืนได้แค่ตัวมันเอง"],
+    ["28.3","2026-08-17","FEAT รายการเส้น / Accessory ของออเดอร์ อยู่ต่อหลังโหลดแล้ว และออกใบอุปกรณ์ได้ — ของพวกนี้มาในไฟล์ XML โดยซ่อนอยู่ในโหนด CUSTOM_INFO ไม่ใช่โครงสร้างตู้ เดิมแกะมาโชว์ในหน้าตรวจก่อนโหลดแล้วทิ้งไป กดโหลดปุ๊บก็หายทันที ทั้งที่เป็นของที่ต้องเบิกจริง · ตอนนี้เก็บติดฉาก ไปกับไฟล์โปรเจกต์และคลาวด์ด้วย เปิดดูได้ตลอดที่ ส่งออก → รายการเส้น / Accessory พร้อมติ๊กรายตัวว่าตัวไหนให้ออกใบอุปกรณ์ ค่าตั้งต้นเปิดให้เฉพาะ Accessory เพราะ Plinth Worktop และ Edge เป็นงานไม้ที่คิดทางอื่นอยู่แล้ว ใส่ซ้ำจะนับเกิน เปลี่ยนประเภทตั้งต้นได้ในหน้าเดียวกัน · FEAT รหัสชุด (SET) เลือกได้แล้วว่าอะไรออกใบสั่งซื้อ — ของบางตัวขายยกชุด รหัสชุดคือสิ่งที่สั่งจริง ลูกเป็นแค่รายการประกอบไว้ดู ของบางตัวกลับกัน รหัสชุดเป็นชื่อเรียกภายใน ที่สั่งจริงคือลูกทีละรหัส แต่เดิมออกทั้งแม่และลูกเสมอ ครึ่งหนึ่งจึงเกินมาทุกครั้งแล้วต้องไปไล่ตัดทิ้งเอง · เพิ่มช่อง ออกใบสั่งซื้อแบบ ที่ Element → Fittings เลือกได้สามทาง ทั้งรหัสชุดและลูก · เฉพาะลูก · เฉพาะรหัสชุด มีผลทั้งใบอุปกรณ์บนจอและไฟล์ที่ส่งออก ไม่กระทบ 3D · ปุ่ม ดูสรุป Connector / รายการเจาะ เปลี่ยนเป็น รายการ BOM Fitting — เดิมหน้านั้นไล่ทีละชิ้นว่าเดือยลงตรงไหนรูอยู่พิกัดอะไร ซึ่งเป็นข้อมูลของเครื่องเจาะ ไม่ใช่ของคนสั่งของ และมีอยู่ในไฟล์ MPR กับ CSV อยู่แล้ว · ตอนนี้รวมของที่ต้องเบิกทั้งงานมาไว้ที่เดียว อุปกรณ์ เดือย ราง ไฟ ขอบคิดเป็นเมตร และ Accessory จากแท็บเส้น แยกเป็นสามกลุ่ม บอกรหัส Purchase ID ชื่อ จำนวน หน่วย และเตือนตัวที่ยังไม่ได้ใส่รหัสสั่งซื้อ"],
     ["28.2","2026-08-17","FIX โหมดดูอย่างเดียวซ่อนผิดตัวเกือบทั้งชุด — ของที่ใช้ดูหายไป ส่วนของที่ใช้แก้กลับเหลือรอด · การ์ดตู้ในรายการมีสี่ปุ่ม แก้ไข เก็บขึ้นคลาวด์ ทำสำเนา ลบ แต่กฎที่เขียนไว้ซ่อน .rowbtn ซึ่งไม่มีอยู่จริงในหน้าเลย กับ .del อีกตัว ผลคือลบหายไปตัวเดียว อีกสามปุ่มยังกดได้เต็ม ๆ · แผงขวาแก้ไขชิ้นงานก็เหมือนกัน กฎเขียนชื่อว่า inspector แต่ของจริงชื่อ insp จึงไม่เคยถูกซ่อนเลยสักครั้ง · เมนูคลิกขวาไม่เคยถูกแตะ เปิดมาได้ทั้งเมนู ตั้งแต่เจาะรู เซาะร่อง ยันลบชิ้น ตอนนี้เหลือเฉพาะกลุ่มมุมมอง ซ่อนชิ้น Isolate และแสดงทั้งหมด · กลับกัน ปุ่ม เลือก ย้าย ยืด/หด ไม้วัด และ ประกอบ ⇄ แยกชิ้น ถูกซ่อนยกแผง ทั้งที่ เลือก กับ ไม้วัด ไม่ได้แตะตัวงานเลย และคนดูแบบต้องวัดระยะเป็นเรื่องปกติ · ตอนนี้ เลือก ไม้วัด และ ประกอบ ⇄ แยกชิ้น อยู่ต่อ เหลือแค่ ย้าย กับ ยืด/หด ที่ออกไป เพราะสองตัวนั้นเปลี่ยนตัวงานจริง · กติกาที่ใช้ตัดสินตอนนี้มีข้อเดียว อะไรที่ไม่เปลี่ยนตัวงานให้อยู่ อะไรที่เปลี่ยนให้หายไป"],
     ["28.1","2026-08-17","FIX ลิงก์แชร์ยังได้ 404 ทั้งที่ v27.8 เลิกเดาชื่อไฟล์ไปแล้ว — ที่อยู่ที่เคยจำไว้ชนะที่อยู่จริงเสมอ ใครเคยถูก v27.4 เติมชื่อไฟล์ให้ตอนนั้น ค่านั้นก็ถูกบันทึกค้างไว้ แล้วโผล่มาเป็นค่าตั้งต้นให้กดผ่านทุกครั้ง ลิงก์จึงชี้ผิดที่เดิมไม่เลิก · ตอนนี้ถ้าโปรแกรมถูกเสิร์ฟจากเว็บอยู่แล้ว ใช้ที่อยู่ที่กำลังเปิดอยู่จริงเป็นค่าตั้งต้น เพราะนั่นคือที่อยู่ที่พิสูจน์แล้วว่าเปิดได้ ไม่ต้องเดาและไม่ต้องจำ · เปิดจากไฟล์ในเครื่องค่อยใช้ค่าที่จำไว้เหมือนเดิม · และถ้าที่อยู่ชี้ไปที่ชื่อไฟล์ กล่องลิงก์จะเตรียมที่อยู่แบบโฟลเดอร์ของรหัสเดียวกันไว้ให้กดคัดลอกได้เลย ไม่ต้องสร้างลิงก์ใหม่ เพราะข้อมูลอัปโหลดไปแล้ว เหลือแค่ว่าหน้าโปรแกรมวางอยู่ที่ไหน"],
     ["28.0","2026-08-17","FIX ลูกของรางขึ้นว่ายังไม่ได้ใส่ Purchase ID ทั้งที่พิมพ์รหัสสั่งซื้อลงไปตรง ๆ แล้ว — ไม่ใช่ทุกอย่างต้องมี Element ของตัวเอง สกรูหรือฝาปิดที่เบิกด้วยรหัสสั่งซื้อล้วน ๆ พิมพ์รหัสนั้นลงช่องลูกได้เลย และไฟล์ที่ส่งออกก็ใช้รหัสนั้นอยู่แล้ว แต่หน้ารายการไฟเห็นว่า Purchase ID เท่ากับรหัสก็ตีว่ายังไม่ได้ใส่ ทั้งที่นั่นคือรหัสจริง · ตอนนี้แยกสองกรณีออกจากกัน มี Element แต่ช่อง Purchase Item ID ว่าง คือยังไม่ได้ใส่จริง ไม่มี Element เลย คือรหัสที่พิมพ์เองซึ่งเป็นรหัสสั่งซื้ออยู่แล้ว แสดงไปตามนั้นพร้อมกำกับว่ามาจากไหน · FIX รหัสที่มีช่องว่างติดท้ายทำให้หาของใน Element ไม่เจอ — ช่องกรอกเก็บค่าตามที่พิมพ์ทุกตัวอักษร เผลอเคาะเว้นวรรคไปหนึ่งที ตาเห็นเหมือนกันเป๊ะ แต่โปรแกรมเทียบแล้วคนละตัว ทั้งชื่อ หน่วย ลูก และ Purchase ID จึงหายไปเงียบ ๆ โดยไม่มีอะไรบอก ตอนนี้ตัดช่องว่างหัวท้ายทั้งสองฝั่งก่อนเทียบเสมอ"],
@@ -2278,7 +2293,15 @@ const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, d
   boxEqualH:true,   // v8.35: หน้าบานสูงเท่ากัน -> กล่องสูงเท่ากัน (ยึดลูกที่ช่องเหลือน้อยสุด)
   elemFolders:{},   // v8.79: โฟลเดอร์ของรายการ Element (เก็บไว้เพื่อให้โฟลเดอร์เปล่าไม่หาย)
   xmlPreview:true,   // v9.52: เปิดหน้าตรวจ XML ก่อนโหลดเข้าฉาก
+  /* v28.3: ประเภทในแท็บเส้น/Line ที่ให้ออกใบอุปกรณ์เอง (คั่นด้วย ,)
+     Accessory คือของที่ซื้อมาทั้งชิ้นจริง ๆ ส่วน Plinth · Worktop · Edge เป็นงานไม้ที่คิดทางอื่นอยู่แล้ว
+     ติ๊กรายตัวทับได้ที่หน้ารายการเส้น */
+  lineBomKinds:"Accessory",
+  /* v29.1: กฎแปลงรายการเส้น — [{name,kind,code,color,size,act,out,cabCode,w,h,d,colorTo,off}] */
+  lineRules:[],
   hingeModelCode:"K_HF_Hinge_31453511_Soft_110",   // v9.51: รหัสโมเดล 3D ของบานพับที่ใช้วาด
+  /* v28.9: ชุดอุปกรณ์ประจำรหัสตู้ — [{name, cabs, items, per}] */
+  cabFitSets:[],
   sinkTrayCabs:"", sinkTraySide:7, sinkTraySideCore:16, sinkTrayStepD:5, sinkTrayFront:"9:10, 4:5, 16:7", sinkTrayH:30, sinkTrayKeyword:"ถาดฟรอยด์",
   grainAuto:true,   // v9.19: ตั้งแนวลายไม้ให้อัตโนมัติตามบทบาทชิ้นและท้ายรหัสสี
   conEdgeMin:25,   // v9.14: ระยะขั้นต่ำจากขอบชิ้นถึงเดือย/มินิฟิก (0 = ไม่บังคับ)
@@ -2326,7 +2349,10 @@ const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, d
     colors:[{code:"N01M0029N",desc:"StarmarkWhite Emboss",kids:"$CarcassBodyMat = K_PB_16_StarmarkWhite_Embos\n$CarcassSurfacetop = K_N01M0029_StarmarkWhite_Embos\n$CarcassSurfacebottom = K_N01M0029_StarmarkWhite_Embos\n$CarcassBodyEdge1 = K_808xx297_R_ABS_PE136"}]
   } };
 const settings=Object.assign({},DEF_SETTINGS);
-const state={ boards:[], selectedId:null, view:"assembled", globalTone:0, showLabels:false, snap:10, tool:"select", shadows:false, ghost:false, eco:true, snapCorner:true, cabColors:{}, hidden:[], explode:0, doorPick:[], doorProg:{}, bcSeq:{}, bcMax:{} };
+/* v28.3: orderLines = รายการในแท็บ เส้น/Line ของ XML (Accessory · Plinth · Worktop ฯลฯ)
+   เดิมอ่านขึ้นมาโชว์ในหน้าตรวจแล้วทิ้งไป โหลดเข้าฉากปุ๊บก็หายทันที
+   เก็บติดฉากไว้ จึงเปิดดูทีหลังได้ และเอาออกใบอุปกรณ์ตอนส่งออกได้ */
+const state={ boards:[], selectedId:null, view:"assembled", globalTone:0, showLabels:false, snap:10, tool:"select", shadows:false, ghost:false, eco:true, snapCorner:true, cabColors:{}, hidden:[], explode:0, doorPick:[], doorProg:{}, bcSeq:{}, bcMax:{}, orderLines:[] };
 
 /* =====================================================================
    V4 CORE · helper กลาง — ยุบโค้ดซ้ำทั้งไฟล์ให้เหลือที่เดียว
@@ -2830,21 +2856,33 @@ function woodTexture(ti){
 function surfDef(code){
   const c=String(code||"").trim(); if(!c) return null;
   const list=(settings.elements&&settings.elements.surfaces)||[];
-  return list.find(x=>x&&x.code===c)||null;
+  return list.find(x=>x&&String(x.code||"").trim()===c)||null;   // v28.5.3: ตัดช่องว่างก่อนเทียบ
 }
+/* ───────── v28.5.3: สีจริงไม่เคยขึ้นเลย เพราะหาผิดชั้น ─────────
+   ชิ้นงานไม่ได้เก็บรหัสผิวไว้ตรง ๆ · ชิ้นที่ผ่าน Part จะว่างเปล่า เพราะรหัสอยู่ที่ Part
+   และค่าที่ Part เก็บก็ยังเป็นลิงก์ $CarcassSurfacetop ไม่ใช่รหัสจริง
+   รหัสจริงอย่าง G01M0349Y_BT4 โผล่ก็ต่อเมื่อ resolve ตามสีที่เลือกให้ตู้ใบนั้นแล้ว
+   ตัวเดิมเอา b.surfT ดิบ ๆ ไปค้นในคลังผิว จึงไม่มีวันเจอ ต่อให้ตั้งสีไว้ครบ
+   ตอนนี้เดินสองด่านเดียวกับที่ ShopPaper และใบตัดใช้ — Part ก่อน แล้วค่อย resolve ลิงก์ */
 function surfSkin(b){
   if(!b) return null;
-  for(const k of ["surfT","surfB"]){
-    const d=surfDef(b[k]); if(!d) continue;
+  const cands=[];
+  try{ const L=effLinks(b); if(L){ cands.push(L.surfT, L.surfB); } }catch(e){}
+  cands.push(b.surfT, b.surfB);            // ชิ้นที่ตั้งผิวไว้ตรง ๆ ไม่ผ่าน Part
+  const seen={};
+  for(const raw of cands){
+    const r0=String(raw==null?"":raw).trim(); if(!r0||seen[r0]) continue; seen[r0]=1;
+    let code=r0; try{ code=resolveLink(r0,b)||r0; }catch(e){}
+    const d=surfDef(code); if(!d) continue;
     const base=normHex(d.hex); if(!base) continue;
     return { base, light:normHex(d.hex2)||base, grain:normHex(d.hexGrain)||base,
-             pat:String(d.pattern||"ลายไม้"), key:String(d.code) };
+             pat:String(d.pattern||"ลายไม้"), key:String(d.code||code) };
   }
   return null;
 }
 let _skinTexC={}, _skinMatC={};
-function skinTexture(sk){
-  const k=sk.key+"|"+sk.base+"|"+sk.light+"|"+sk.grain+"|"+sk.pat;
+function skinTexture(sk,cross){
+  const k=sk.key+"|"+sk.base+"|"+sk.light+"|"+sk.grain+"|"+sk.pat+"|"+(cross?"W":"L");
   if(_skinTexC[k]) return _skinTexC[k];
   const w=512,h=512, c=document.createElement("canvas"); c.width=w;c.height=h;
   const g=c.getContext("2d");
@@ -2872,13 +2910,25 @@ function skinTexture(sk){
   g.globalAlpha=1;
   const tex=new THREE.CanvasTexture(c);
   tex.wrapS=tex.wrapT=THREE.RepeatWrapping; tex.encoding=THREE.sRGBEncoding; tex.anisotropy=2;
+  /* ───────── v28.5.4: ลายที่ทาสี ต้องวิ่งทางเดียวกับลายจริงของแผ่น ─────────
+     ผืนลายถูกวาดให้วิ่งตามแกน U ซึ่งตรงกับ "ด้านยาว L" ของชิ้นเสมอ
+     แต่ชิ้นที่กลับแนวลายไว้ (grainCross) ลายจริงวิ่งตามด้านกว้าง W
+     ตัวเดิมไม่เคยรู้เรื่องนี้ ทาลายตามด้านยาวให้ทุกชิ้น จึงขัดกับเส้นแนวลายที่วาดไว้เอง
+     และขัดกับแผ่นที่ออกไปจริง · หมุนผืนลาย 90° ให้ชิ้นที่กลับแนว เก็บแยกกันคนละผืน */
+  if(cross){ tex.center.set(.5,.5); tex.rotation=Math.PI/2; }
   return (_skinTexC[k]=tex);
 }
-function skinMat(sk,dbl){
-  const k=sk.key+"|"+sk.base+"|"+sk.pat+"|"+(state.ghost?1:0)+"|"+(dbl?1:0)+"|"+(state.grainOn?1:0);
+function skinMat(sk,dbl,b){
+  /* v28.5.4: แนวลายมาจากตัวชิ้น ไม่ใช่จากผิว — ผิวเดียวกันคนละชิ้นจึงหันลายคนละทางได้
+     เดิมเช็ค state.grainOn ซึ่งไม่มีอยู่จริงในโปรแกรม (ตัวจริงชื่อ state.showGrain)
+     ค่าจึงเป็น undefined ตลอด เงื่อนไขเป็นจริงเสมอ ปุ่มลายไม้ไม่เคยมีผลกับผิวที่ทาสี
+     ตอนนี้ดูจากปุ่ม "มี/ไม่มีลาย" ของชิ้นนั้นแทน ซึ่งเป็นคำสั่งตรงจากคนใช้ */
+  const cross=!!(b&&b.grainCross);
+  const flat=(sk.pat==="เรียบ")||!!(b&&b.grain===false);
+  const k=sk.key+"|"+sk.base+"|"+sk.pat+"|"+(state.ghost?1:0)+"|"+(dbl?1:0)+"|"+(flat?1:0)+"|"+(cross?"W":"L");
   if(_skinMatC[k]) return _skinMatC[k];
   const o={ color:new THREE.Color(sk.base), roughness:.72, metalness:0 };
-  if(state.grainOn!==false && sk.pat!=="เรียบ"){ o.map=skinTexture(sk); o.color=new THREE.Color(0xffffff); }
+  if(!flat){ o.map=skinTexture(sk,cross); o.color=new THREE.Color(0xffffff); }
   const m=new THREE.MeshStandardMaterial(o);
   if(state.ghost){ m.transparent=true; m.opacity=.32; m.depthWrite=false; }
   if(dbl) m.side=THREE.DoubleSide;
@@ -2981,8 +3031,20 @@ function hexMat(hex){
   return (_hexMatC[k]=m); }
 /* รับได้ทั้ง #RRGGBB · RRGGBB · #RGB · หรือ $ชื่อตัวแปรของตู้ (ค่าที่ได้ต้องเป็น HEX) */
 function normHex(v){
-  const m=String(v==null?"":v).trim().match(/^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/);
-  return m?("#"+m[1]):""; }
+  const t=String(v==null?"":v).trim();
+  const m=t.match(/^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/);
+  if(m){ const h=m[1]; return "#"+(h.length===3?h[0]+h[0]+h[1]+h[1]+h[2]+h[2]:h); }
+  /* ───────── v28.8: รับ RGB ด้วย ─────────
+     ค่าสีที่ได้มาจากที่อื่นมักเป็น RGB ไม่ใช่ HEX ทั้งจากโปรแกรมออกแบบและจากสเปกวัสดุ
+     ต้องไปแปลงเองก่อนทุกครั้งซึ่งไม่มีเหตุผลอะไรเลย · รับทั้ง 180,163,131 และ rgb(180 163 131)
+     ค่านอกช่วง 0–255 ถูกดึงกลับเข้าขอบ พิมพ์เกินไปนิดจึงไม่กลายเป็นช่องว่าง */
+  const r=t.match(/^(?:rgb\s*\(\s*)?(\d{1,3})\s*[,\s]\s*(\d{1,3})\s*[,\s]\s*(\d{1,3})\s*\)?$/i);
+  if(r){ const c=i=>Math.max(0,Math.min(255,parseInt(r[i],10)||0));
+    return "#"+[c(1),c(2),c(3)].map(x=>x.toString(16).padStart(2,"0")).join(""); }
+  return ""; }
+/* v28.8: แปลงกลับเป็น RGB ไว้โชว์ให้เทียบกับสเปกที่ถืออยู่ */
+function hexToRgbTxt(v){ const h=normHex(v); if(!h) return "";
+  return [1,3,5].map(i=>parseInt(h.substr(i,2),16)).join(", "); }
 function sectHexOf(p,b){
   let v=String((p&&p.frameSecColor)||"").trim(); if(!v) return "";
   if(v.charAt(0)==="$"){
@@ -2993,7 +3055,7 @@ function sectHexOf(p,b){
 const _matC={};
 /* v27.1: ชิ้นที่ผูก Surface ที่มีสีจริงไว้ ใช้สีนั้นแทนโทนไม้รวม */
 function boardMat(b,dbl){
-  try{ const sk=surfSkin(b); if(sk) return skinMat(sk,!!dbl); }catch(e){}
+  try{ const sk=surfSkin(b); if(sk) return skinMat(sk,!!dbl,b); }catch(e){}   // v28.5.4: ส่งชิ้นไปด้วย ลายจะได้หันตามชิ้น
   return solidMat(toneOf(b),dbl);
 }
 function solidMat(ti,dbl){
@@ -9195,6 +9257,8 @@ function cabFitSig(){   // ลายเซ็น — เปลี่ยนเม
   /* v9.27: ถาดฟรอยด์ก็ต้องอยู่ในลายเซ็นด้วย ไม่งั้นแก้รหัสตู้ในตั้งค่าแล้วไม่มีอะไรเกิดขึ้น
      (บทเรียนเดียวกับ v8.77 — applyCabFittings ทำงานเฉพาะตอนลายเซ็นเปลี่ยน) */
   const p=["D",String(settings.sinkTrayCabs||""),String(settings.sinkTrayFront||""),
+           /* v28.9: บทเรียนเดิมจาก v9.27 — กฎที่ลายเซ็นไม่รู้จัก แก้แล้วจะเงียบ */
+           JSON.stringify(settings.cabFitSets||[]),
            String(settings.sinkTraySide||""),String(settings.sinkTrayH||""),String(settings.sinkTrayKeyword||"")];
   cabDefaultFits().forEach(x=>p.push(x.code,x.cabs.join(","),x.bw,x.bh,x.bd,x.dx,x.dy,x.dz,x.fromBot==null?"-":x.fromBot));
   cabDefaultFits().forEach(d=>p.push("B",d.code,d.cabs.join("|"),JSON.stringify(d.cabQty||{}),d.bw,d.bh,d.bd,d.fromBot,d.bQty,d.bPitch,d.dx,d.dy,d.dz));   // v7.39: จำนวน/ระยะซ้อน (รวมจำนวนรายรหัสตู้)
@@ -9970,7 +10034,17 @@ function rayFrom(e){ndc.x=(e.clientX/innerWidth)*2-1;ndc.y=-(e.clientY/innerHeig
 function groundHit(e,y){const r=rayFrom(e);const p=new THREE.Vector3();return r.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,1,0),-y),p)?p:null;}
 function vertHit(e,at){const r=rayFrom(e);const f=new THREE.Vector3();camera.getWorldDirection(f);f.y=0;if(f.lengthSq()<1e-6)f.set(0,0,1);f.normalize();const p=new THREE.Vector3();return r.ray.intersectPlane(new THREE.Plane(f,-f.dot(at)),p)?p:null;}
 function setTool(t){
-  if(isLocked()&&t!=="select"){ guardEdit("เครื่องมือแก้รูปทรง"); t="select"; }   // v27.3 if(moveSession&&t!=="move")finalizeMove(); if(stretchSession&&t!=="stretch")finalizeStretch(); if(t!=="measure")clearMeasure(); state.tool=t; document.body.dataset.tool=t;
+  /* ───────── v28.4: ทั้งฟังก์ชันเคยถูกคอมเมนต์กลืนไปครึ่งหนึ่ง ─────────
+     v27.3 เติมด่านกันแก้ตอนล็อกเข้ามา แล้ววาง // v27.3 ไว้ท้ายบรรทัด
+     แต่ของเดิมทั้งบรรทัดเป็นโค้ดที่ต่อกันมาอยู่แล้ว ทุกอย่างหลังเครื่องหมายนั้นจึงกลายเป็นคำอธิบาย
+     รวมทั้ง state.tool=t ซึ่งเป็นบรรทัดที่เปลี่ยนเครื่องมือจริง ๆ
+     ปุ่มยังไฮไลต์ให้เพราะบรรทัดถัดไปไม่โดนกลืน กดแล้วจึงเหมือนติด แต่ไม่มีอะไรเปลี่ยน
+     ย้าย ยืด/หด ไม้วัด ตายเงียบมาตั้งแต่ v27.3 · แยกทุกคำสั่งลงบรรทัดของตัวเอง */
+  if(isLocked()&&t!=="select"){ guardEdit("เครื่องมือแก้รูปทรง"); t="select"; }   // v27.3
+  if(moveSession&&t!=="move") finalizeMove();
+  if(stretchSession&&t!=="stretch") finalizeStretch();
+  if(t!=="measure") clearMeasure();
+  state.tool=t; document.body.dataset.tool=t;
   document.querySelectorAll("#toolSeg button").forEach(x=>x.classList.toggle("sel",x.dataset.t===t));
   if(t==="measure")toast("ไม้วัด: คลิกจุดที่ 1 แล้วคลิกจุดที่ 2 เพื่อวัดระยะ"); }
 let _measPts=[], _measDots=[], _measSegs=[], _measHover=null;
@@ -10537,13 +10611,28 @@ function selectCab(g){ if(!g)return; state.selectedCab=g.key; state.selectedId=(
 
 /* ---------- UI: list ---------- */
 let listExpanded={};
+/* ───────── v28.5.1: คลิกชิ้นใน 3D แล้วรายการซ้ายวิ่งไปหาตู้ใบนั้นเอง ─────────
+   แถวที่เลือกถูกทำไฮไลต์มาตลอด แต่ไม่มีใครพามันเข้ามาในสายตา
+   ออเดอร์ 42 ตู้ แถวที่สว่างอยู่จึงมักอยู่นอกจอ ต้องไล่เลื่อนหาเองทุกครั้ง
+   จำไว้ว่าครั้งก่อนพาไปที่ตู้ใบไหน จะได้เลื่อนเฉพาะตอนที่ตู้เปลี่ยนจริง ๆ
+   ไม่ใช่ทุกครั้งที่วาดรายการใหม่ ไม่งั้นจะแย่งการเลื่อนจากมือคนใช้ */
+let _listJumpKey="";
 function renderList(){
   const groups=cabGroups();
   $("count").textContent=groups.length;
   const body=$("listBody"); body.innerHTML="";
   if(!state.boards.length){ body.innerHTML='<div class="empty">ยังไม่มีตู้<br>กด “สร้างตู้”, “นำเข้า XML” หรือ “เพิ่มบอร์ด”</div>'; return; }
   const oid=orderId(); if(listExpanded[oid]===undefined)listExpanded[oid]=true;
+  /* v28.5.1: ตู้ที่ถูกเลือกอยู่คือใบไหน — เลือกทั้งใบ หรือเลือกชิ้นในใบนั้นก็ได้ */
+  const _selKey=(()=>{ if(state.selectedCab) return String(state.selectedCab);
+    const g0=groups.find(x=>x&&x.boards.some(b=>b&&b.id===state.selectedId));
+    return g0?String(g0.key||g0.productId||""):""; })();
+  const _jump=!!_selKey && _selKey!==_listJumpKey;
+  _listJumpKey=_selKey;
+  /* พับรายการไว้แล้วคลิกชิ้นใน 3D — กางให้ ไม่งั้นไม่มีแถวให้เลื่อนไปหา */
+  if(_jump && !listExpanded[oid]) listExpanded[oid]=true;
   const open=listExpanded[oid];
+  let _selRow=null;
   const orow=document.createElement("div"); orow.className="row orderrow";
   orow.innerHTML=`<button class="iact tg" title="แตก/พับ">${open?"▾":"▸"}</button>
     <div class="info"><div class="nm">📦 ${escapeHtml(oid)}</div><div class="dm">${groups.length} ตู้ · ${state.boards.filter(b=>!isGuide(b)).length} ชิ้น</div></div>`;
@@ -10571,7 +10660,12 @@ function renderList(){
     row.querySelector(".dup").onclick=e=>{ e.stopPropagation(); duplicateCabinet(g); };
     row.querySelector(".del").onclick=e=>{ e.stopPropagation(); deleteCabinet(g); };
     body.appendChild(row);
+    if(sel) _selRow=row;
   });
+  /* v28.5.1: block:"nearest" = อยู่ในจอแล้วไม่ขยับ อยู่นอกจอค่อยเลื่อนเข้ามาให้พอดี
+     รอเฟรมถัดไปเพราะแถวเพิ่งถูกใส่เข้าหน้า ความสูงจริงยังไม่ถูกคำนวณ */
+  if(_jump && _selRow){ const _r=_selRow;
+    requestAnimationFrame(()=>{ try{ _r.scrollIntoView({block:"nearest"}); }catch(e){ try{ _r.scrollIntoView(); }catch(e2){} } }); }
 }
 /* v23.9: กรอบไฮไลต์ตู้ — ส่ง null เพื่อซ่อน */
 function hoverCab(g){
@@ -11806,7 +11900,7 @@ const store={
   async get(k){ if(window.storage){ try{ const r=await window.storage.get(k,false); if(r)return r.value; }catch(e){} } try{ return localStorage.getItem(k); }catch(e){ return null; } }
 };
 /* v7.59.1: ตัวแปรตัวเลขรายตู้ (cabNums/cabVarTxt) ต้องถูกเซฟด้วย ไม่งั้นปิดโปรแกรมแล้ว $D4 หาย */
-async function autosave(){ if(state.editing)return; try{ await store.set("boardforge:v1",JSON.stringify({boards:state.boards,globalTone:state.globalTone,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt,cabDX:state.cabDX,bcSeq:state.bcSeq,bcMax:state.bcMax})); }catch(e){} }
+async function autosave(){ if(state.editing)return; try{ await store.set("boardforge:v1",JSON.stringify({boards:state.boards,globalTone:state.globalTone,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt,cabDX:state.cabDX,bcSeq:state.bcSeq,bcMax:state.bcMax,orderLines:state.orderLines})); }catch(e){} }
 async function loadSaved(){ try{ const v=await store.get("boardforge:v1"); return v?JSON.parse(v):null; }catch(e){ return null; } }
 async function lsSet(k,v){ try{ await store.set(k,JSON.stringify(v)); }catch(e){} }
 async function lsGet(k,def){ try{ const v=await store.get(k); return (v!=null)?JSON.parse(v):def; }catch(e){ return def; } }
@@ -12394,12 +12488,35 @@ async function cutLookup(code,len,hint){
 /* v13.3: หลังค้นเจอ เราเปลี่ยน purchase เป็นรหัสท่อนจริง
    จึงต้องจำรหัสรุ่นต้นทางไว้ ไม่งั้นรอบถัดไปจะเอารหัสท่อนไปค้นเป็นรุ่น */
 function cutSrcOf(f){ return String((f&&(f._pidSrc||f.purchase||f.art))||"").trim(); }
+/* ───────── v28.7: ของตัวเดียวกันที่มีหลายรหัสในคลัง ─────────
+   ของที่ใช้มานานมีทั้งรหัสเก่าและรหัสใหม่ และยังใช้อยู่ทั้งคู่
+   คลังไม่ได้ย้ายท่อนทั้งหมดไปรหัสใหม่ทีเดียว ท่อน 300 อาจอยู่ใต้รหัสเก่า
+   ส่วนท่อน 600 มีเฉพาะใต้รหัสใหม่ ถามรหัสเดียวจึงเจอบ้างไม่เจอบ้างแล้วแต่ความยาว
+   จึงต้องไล่ถามทีละรหัสจนกว่าจะเจอความยาวนั้น เจอที่ไหนก็ใช้รหัสท่อนของที่นั่น
+   ของยังเป็นชิ้นเดียวและออกบรรทัดเดียวเสมอ รหัสสำรองไม่ใช่ของเพิ่ม
+   ใช้กับลูกด้วย เพราะพลาสติกครอบก็มีรหัสเก่า/ใหม่ของตัวเองเหมือนกัน */
+function cutSrcList(f){
+  if(f&&Array.isArray(f._pidList)&&f._pidList.length) return f._pidList.filter(Boolean);
+  const s=cutSrcOf(f); return s?[s]:[];
+}
+/* ขึ้นต้นด้วย ~ เพื่อไม่ให้ชนกับกุญแจของ cutLookup รายรหัส (รหัสเดียวจะได้กุญแจหน้าตาเดียวกัน) */
+function cutKeySeq(codes,len){ return "~"+(codes||[]).join(">")+"|"+cutLen(len); }
+async function cutLookupSeq(codes,len,hint){
+  const k=cutKeySeq(codes,len);
+  if(_fgCut[k]!==undefined) return _fgCut[k];
+  _fgCut[k]=null;
+  for(const c of (codes||[])){
+    let r=null; try{ r=await cutLookup(c,len,hint); }catch(e){ console.error(e); }
+    if(r&&r.code){ _fgCut[k]=Object.assign({},r,{src:c}); return _fgCut[k]; }
+  }
+  return null;
+}
 let _cutPending=[];
 function cutLookupAll(list){
-  const miss=list.filter(f=>(+f._cut>0)&&cutSrcOf(f)&&_fgCut[cutKey(cutSrcOf(f),f._cut)]===undefined);
+  const miss=list.filter(f=>(+f._cut>0)&&cutSrcList(f).length&&_fgCut[cutKeySeq(cutSrcList(f),f._cut)]===undefined);
   if(!miss.length) return false;
-  const ps=miss.map(f=>cutLookup(cutSrcOf(f),f._cut,f.name).then(r=>{
-    if(!r) console.warn("ตัดขนาด "+cutSrcOf(f)+" "+cutLen(f._cut)+" มม.: ไม่พบรหัสท่อนนี้ในคลังอุปกรณ์"); }));
+  const ps=miss.map(f=>cutLookupSeq(cutSrcList(f),f._cut,f.name).then(r=>{
+    if(!r) console.warn("ตัดขนาด "+cutSrcList(f).join(" / ")+" "+cutLen(f._cut)+" มม.: ไม่พบรหัสท่อนนี้ในคลังอุปกรณ์"); }));
   _cutPending=_cutPending.concat(ps);                       // v13.5: ไว้ให้ตัวส่งออกรอได้
   Promise.all(ps).then(()=>{ try{ _cabFitSig=""; sync(0); }catch(e){} });
   return true;
@@ -12418,8 +12535,8 @@ async function cutLookupReady(){
   }
 }
 function cutCodeOf(f){
-  const src=cutSrcOf(f);
-  const hit=(+f._cut>0&&src)?_fgCut[cutKey(src,f._cut)]:undefined;
+  const codes=cutSrcList(f);                                   // v28.7: ไล่ทุกรหัสของของชิ้นนั้น
+  const hit=(+f._cut>0&&codes.length)?_fgCut[cutKeySeq(codes,f._cut)]:undefined;
   return (hit&&hit.code)?hit:null;
 }
 function cutSizeName(desc,len){
@@ -13381,7 +13498,12 @@ function ledDialog(sel){
             +'<div><div '+LBL+'>ด้านที่จมลงร่อง</div>'+S(i,"flip",(r.flip||"auto"),[["auto","อัตโนมัติ (ฝั่งแคบจม)"],["y","กลับด้าน"],["n","ไม่กลับ"]])+'</div></div>'
           /* v27.2: รางมีสองรหัส — รหัสรางแม่ (มีลูกในตัวมันเอง) กับพลาสติกปิดราง */
           +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">'
-          +'<div><div '+LBL+'>รหัสราง (Element Fitting · ตัวแม่ที่มีลูก)</div>'+F(i,"trackCode",r.trackCode)+'</div>'
+          +'<div><div '+LBL+'>รหัสราง (Element Fitting · ตัวแม่ที่มีลูก)'
+            +'<div style="font-weight:400;opacity:.62;font-size:10.5px;line-height:1.55;margin-top:2px">'
+            +'พลาสติกครอบเป็นของคนละตัว ให้ผูกเป็นลูกแล้วติ๊ก ตัดตามแม่ · '
+            +'ส่วนของที่มีรหัสเก่ากับรหัสใหม่ในคลังและยังใช้อยู่ทั้งคู่ ใส่ทุกรหัสไว้ในช่อง Purchase Item ID '
+            +'คั่นด้วย , ระบบจะไล่ถามทีละรหัสจนเจอความยาวนั้น (ใช้กับลูกได้เหมือนกัน)</div></div>'
+            +F(i,"trackCode",r.trackCode)+'</div>'
           +'<div><div '+LBL+'>พลาสติกปิดราง</div><div style="font-size:11px;color:var(--ink-dim);padding:5px 0;line-height:1.5">ไม่ต้องใส่ตรงนี้ — ผูกเป็น<b>ลูก</b>ของรางที่ Element → Fittings แล้วติ๊ก “ตัดตามแม่” ระบบจะออกให้ยาวเท่ารางเอง</div></div></div>'
           +'<div style="margin-top:10px"><div '+LBL+'>รหัสฝาปิดปลาย (เว้นว่าง = ใช้รหัสกลางในตั้งค่า)</div>'+F(i,"capCode",r.capCode)+'</div>'
           +'</div>'):'')
@@ -15149,8 +15271,11 @@ const ELEM_FORM={
              ["maxRunM","ไฟต่อหม้อแปลงหนึ่งตัว ยาวได้ไม่เกินกี่เมตร (ตั้งต้น 5)"],
              ["__h","Part List Information"],["itemId","Purchase Item ID (ถ้าชุดนี้มีรหัสของตัวเอง)"],["notes","Notes"]],
   fittings: [["__h","ข้อมูลอุปกรณ์ (เดือย/พิน/มินิฟิก/บานพับ ฯลฯ)"],["desc","คำอธิบาย"],["dia","เส้นผ่านศูนย์กลาง (mm)"],["unit","หน่วย (ชิ้น/ตัว)"],
+             ["outMode","ออกใบสั่งซื้อแบบ — รหัสนี้มีลูกผูกไว้ จะให้อะไรออกไปจริง"],
              ["asSet","ขายเป็นชุด/Set: ใส่ 1 = นับ 1 ต่อตู้ใน BOM (3D ยังครบทุกชิ้น เช่น หูแขวน 2 ตัว) · เว้นว่าง = นับตามจำนวนจริง"],
-             ["__h","Part List Information"],["itemId","Purchase Item ID"],["supplier","Supplier"],["notes","Notes"],
+             ["__h","Part List Information"],
+             ["itemId","Purchase Item ID — ของชิ้นเดียวกันที่มีหลายรหัสในคลัง (รหัสเก่า/รหัสใหม่ ที่ยังใช้อยู่ทั้งคู่) ใส่ได้หลายรหัสคั่นด้วย , เช่น 414LT0000007,TPP0000083 · เวลาหาท่อนตามความยาว ระบบไล่ถามทีละรหัสตามลำดับที่พิมพ์ จนเจอความยาวนั้น เจอที่รหัสไหนก็ใช้ของรหัสนั้น · ยังเป็นของชิ้นเดียวและออกบรรทัดเดียวเสมอ ไม่ใช่ของคนละตัว (ของคนละตัวให้ผูกเป็นลูกข้างล่างแทน)"],
+             ["supplier","Supplier"],["notes","Notes"],
              ["__h","โมเดล 3D (Fitting Studio) — ใช้กับขาตู้/วางอุปกรณ์ · รหัสเดียวกับ Element นี้"],
              ["__fit3d","__fit3d"],
              ["__h","รางลิ้นชัก / ราวแขวน — ตารางความยาว→รหัส (ใส่เฉพาะ Element ที่เป็นซีรีส์ราง/ราว · Save As ทำรุ่นอื่น)"],
@@ -16041,17 +16166,67 @@ function renderElements(){
           d.appendChild(q); }
         form.appendChild(d); }
       { const d=document.createElement("div"); d.className="emFld wide"; d.innerHTML=`<label>Info3 / FrontStyle (เทมเพลต) — {ชื่อ Family}=สีของตู้, $link=ค่า resolve · เช่น <code>Color:{Carcass}</code> หรือ <code>FrontShape:{FrontShape}\\Color:{Front}</code></label><input class="nameinp" value="${escapeHtml(String(cur.info3??""))}" style="width:100%;font-family:var(--mono)" placeholder="Color:{Carcass}">`; d.querySelector("input").oninput=e=>cur.info3=e.target.value; form.appendChild(d); }
+      /* ───────── v28.5: อุปกรณ์ที่ฝากไว้กับ Part นี้ ───────── */
+      { const d=document.createElement("div"); d.className="emFld wide";
+        if(!Array.isArray(cur.fits)) cur.fits=[];
+        const nUse2=state.boards.filter(x=>x&&!x._virtual&&partDef(x.part,x)===cur).length;
+        d.innerHTML='<label><b>🧺 อุปกรณ์ที่ฝากไว้กับ Part นี้</b> — ทุกชิ้นที่ใช้ Part นี้จะพาอุปกรณ์ออกไปในใบอุปกรณ์เอง<br>'
+          +'ใส่ได้หลายรหัสและกำหนดจำนวนต่อชิ้นได้ · <b>ไม่ต้องมีโมเดล 3D</b> ตรงนี้คิดแต่ของที่ต้องเบิก '
+          +'รหัสที่ใส่ต้องมีใน <b>Element → Fittings</b> เพื่อให้ได้ชื่อ หน่วย Purchase ID และลูกของมัน<br>'
+          +'<b>ต่อชิ้น</b> = ทุกแผ่นที่ใช้ Part นี้ได้ครบตามจำนวน · <b>ต่อตู้</b> = ตู้ใบหนึ่งได้ชุดเดียว ถึง Part จะถูกใช้หลายแผ่นในใบนั้น'
+          +(nUse2?('<br><span style="color:var(--ink-dim)">ตอนนี้มี '+nUse2+' ชิ้นในฉากใช้ Part นี้อยู่</span>'):'')+'</label>';
+        const wrap2=document.createElement("div"); wrap2.style.cssText="display:flex;flex-direction:column;gap:6px";
+        const drawFits=()=>{ wrap2.innerHTML="";
+          if(!cur.fits.length){ const e2=document.createElement("div"); e2.style.cssText="font-size:11px;opacity:.7";
+            e2.textContent="ยังไม่ได้ฝากอะไรไว้ — กด ＋ เพิ่มอุปกรณ์ (เช่น ตะแกรง · ที่กั้น · แผ่นกันลื่น)"; wrap2.appendChild(e2); }
+          cur.fits.forEach((x,xi)=>{ const row=document.createElement("div");
+            row.style.cssText="display:grid;grid-template-columns:1fr 74px 110px 32px;gap:6px;align-items:center";
+            const el2=fitDef(x.code), ok=!!el2;
+            row.innerHTML='<input class="nameinp" list="dlFit" placeholder="รหัสอุปกรณ์" value="'+escapeHtml(String(x.code||""))
+                +'" style="font-family:var(--mono)'+((x.code&&!ok)?';border-color:#e5484d':'')+'">'
+              +'<input class="nameinp" type="number" min="0" step="1" title="จำนวนต่อ 1 หน่วย" value="'+escapeHtml(String(x.qty??1))+'" style="font-family:var(--mono);text-align:center">'
+              +'<select class="nameinp" style="font-size:11.5px"><option value="board">ต่อชิ้น</option><option value="cab">ต่อตู้</option></select>'
+              +'<button type="button" title="เอาออก" style="border:1px solid var(--line);background:transparent;color:#e0853b;border-radius:7px;height:30px;cursor:pointer;font-size:14px">✕</button>';
+            const ins=row.querySelectorAll("input"), sel=row.querySelector("select");
+            sel.value=(String(x.per||"")==="cab")?"cab":"board";
+            ins[0].oninput=e=>{ x.code=e.target.value; };
+            ins[0].onchange=()=>renderElements();
+            ins[1].oninput=e=>{ x.qty=parseFloat(e.target.value)||0; };
+            sel.onchange=e=>{ x.per=e.target.value; };
+            row.querySelector("button").onclick=()=>{ cur.fits.splice(xi,1); drawFits(); };
+            wrap2.appendChild(row);
+            if(x.code&&!ok){ const w=document.createElement("div");
+              w.style.cssText="font-size:10.5px;color:#e5484d;margin:-2px 0 2px";
+              w.textContent="ไม่พบรหัสนี้ใน Element → Fittings — จะออกไปโดยไม่มีชื่อ หน่วย และรหัสสั่งซื้อ";
+              wrap2.appendChild(w); } });
+          const add=document.createElement("button"); add.type="button"; add.className="ibtn";
+          add.textContent="＋ เพิ่มอุปกรณ์"; add.style.alignSelf="flex-start";
+          add.onclick=()=>{ cur.fits.push({code:"",qty:1,per:"board"}); drawFits(); };
+          wrap2.appendChild(add); };
+        drawFits(); d.appendChild(wrap2); form.appendChild(d); }
       return; }
     /* ───────── v27.1: บล็อกสีจริงของ Surface ───────── */
     if(f[0]==="__skin"){
       const wrap=document.createElement("div"); wrap.className="emFld wide";
       const sw=(v)=>'<span style="display:inline-block;width:26px;height:16px;border-radius:4px;border:1px solid var(--line);vertical-align:middle;background:'+(normHex(v)||"transparent")+'"></span>';
       const draw=()=>{
-        wrap.innerHTML='<label>สามสีนี้ใช้วาดลายใน 3D — ไม่มีไฟล์รูป จึงไม่หนักเลย · เว้นว่าง = ใช้โทนไม้รวมเหมือนเดิม</label>'
+        wrap.innerHTML='<label>สามสีนี้ใช้วาดลายใน 3D — ไม่มีไฟล์รูป จึงไม่หนักเลย · เว้นว่าง = ใช้โทนไม้รวมเหมือนเดิม<br>'
+          +'<span style="font-weight:400;opacity:.65">แต่ละสีใส่ได้สามทาง — จิ้มจากช่องสี · พิมพ์ HEX · หรือกรอก RGB ในช่องล่าง · '
+          +'ช่อง HEX วาง <span style="font-family:var(--mono)">180,163,131</span> หรือ <span style="font-family:var(--mono)">rgb(180 163 131)</span> ลงไปตรง ๆ ได้เลย ระบบแปลงให้เอง</span></label>'
           +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;align-items:end">'
-          +[["hex","สีพื้น"],["hex2","สีอ่อน"],["hexGrain","สีเส้นลาย"]].map(pr=>
-             '<div><div style="font-size:10.5px;color:var(--ink-dim);margin-bottom:2px">'+pr[1]+' '+sw(cur[pr[0]])+'</div>'
-             +'<input class="nameinp skH" data-k="'+pr[0]+'" value="'+escapeHtml(String(cur[pr[0]]??""))+'" placeholder="#RRGGBB" style="width:100%;font-family:var(--mono);font-size:11px"></div>').join("")
+          +[["hex","สีพื้น"],["hex2","สีอ่อน"],["hexGrain","สีเส้นลาย"]].map(pr=>{
+             /* v28.8: จิ้มสีก็ได้ · พิมพ์ HEX ก็ได้ · วาง RGB ก็ได้ ทั้งสามช่องผูกค่าเดียวกัน */
+             const hx=normHex(cur[pr[0]]);
+             return '<div><div style="font-size:10.5px;color:var(--ink-dim);margin-bottom:2px">'+pr[1]+' '+sw(cur[pr[0]])+'</div>'
+             +'<div style="display:flex;gap:4px;align-items:center">'
+             +'<input type="color" class="skC" data-k="'+pr[0]+'" value="'+(hx||"#cccccc")+'" title="จิ้มเลือกสี"'
+               +' style="width:30px;height:30px;padding:0;border:1px solid var(--line);border-radius:6px;background:none;cursor:pointer;flex:none">'
+             +'<input class="nameinp skH" data-k="'+pr[0]+'" value="'+escapeHtml(String(cur[pr[0]]??""))+'"'
+               +' placeholder="#RRGGBB หรือ 180,163,131" title="พิมพ์ได้ทั้ง HEX และ RGB — วาง 180,163,131 หรือ rgb(180 163 131) ก็ได้ ระบบแปลงให้เอง"'
+               +' style="flex:1;min-width:0;font-family:var(--mono);font-size:11px"></div>'
+             +'<input class="nameinp skR" data-k="'+pr[0]+'" value="'+escapeHtml(hexToRgbTxt(cur[pr[0]]))+'"'
+               +' placeholder="R, G, B" title="กรอกเป็น RGB ตรงนี้ก็ได้ — ช่องบนจะเปลี่ยนเป็น HEX ให้เอง"'
+               +' style="width:100%;font-family:var(--mono);font-size:11px;margin-top:4px;opacity:.85"></div>'; }).join("")
           +'<div><div style="font-size:10.5px;color:var(--ink-dim);margin-bottom:2px">ชนิดลาย</div>'
           +'<select class="nameinp skP" style="width:100%;font-size:11px">'
           +["ลายไม้","ลายหิน","เรียบ"].map(o=>'<option '+((String(cur.pattern||"ลายไม้")===o)?"selected":"")+'>'+o+'</option>').join("")
@@ -16062,7 +16237,15 @@ function renderElements(){
           +'<span class="skMsg" style="font-size:11.5px;color:var(--ink-dim)"></span></div>'
           +'<div style="font-size:11px;color:var(--ink-dim);margin-top:5px;line-height:1.6">รูปที่ดีคือถ่ายผิวแผ่นตรง ๆ แสงสม่ำเสมอ ไม่ติดเงาหรือขอบ · ระบบย่อรูปเหลือ 96 จุดแล้วเรียงความสว่าง เอาค่ากลางเป็นสีพื้น สว่าง 88% เป็นสีอ่อน เข้ม 12% เป็นเส้นลาย · <b>รูปไม่ถูกเก็บ</b> เก็บแค่สามค่าสี</div>';
         wrap.querySelectorAll(".skH").forEach(el=>{ el.oninput=e=>{ cur[el.dataset.k]=e.target.value; };
+          /* v28.8: พิมพ์ RGB มาก็เก็บเป็น HEX ให้ตอนออกจากช่อง ค่าที่เก็บจึงเป็นรูปแบบเดียวเสมอ */
+          el.onchange=e=>{ const h=normHex(e.target.value); if(h) cur[el.dataset.k]=h;
+            _skinTexC={}; _skinMatC={}; draw(); sync(1); }; });
+        wrap.querySelectorAll(".skC").forEach(el=>{ el.oninput=e=>{ cur[el.dataset.k]=e.target.value; };
           el.onchange=()=>{ _skinTexC={}; _skinMatC={}; draw(); sync(1); }; });
+        wrap.querySelectorAll(".skR").forEach(el=>{
+          el.onchange=e=>{ const h=normHex(e.target.value);
+            if(h||!String(e.target.value||"").trim()) cur[el.dataset.k]=h;
+            _skinTexC={}; _skinMatC={}; draw(); sync(1); }; });
         const sp=wrap.querySelector(".skP"); if(sp) sp.onchange=e=>{ cur.pattern=e.target.value; _skinTexC={}; _skinMatC={}; sync(1); };
         const fi=wrap.querySelector(".skF"), bt=wrap.querySelector(".skUp"), ms=wrap.querySelector(".skMsg");
         if(bt) bt.onclick=()=>fi.click();
@@ -16089,7 +16272,7 @@ function renderElements(){
       const renderKids=()=>{ wrap.innerHTML="";
         if(!cur.children.length){ const e=document.createElement("div"); e.style.cssText="font-size:11px;opacity:.7"; e.textContent="ยังไม่มีลูก — กด ＋ เพิ่มลูก (เช่น สลักมินิฟิก · สกรูราง · ฝาครอบพลาสติกของรางไฟ)"; wrap.appendChild(e); }
         cur.children.forEach((ch,ci)=>{ const row=document.createElement("div"); row.style.cssText="display:grid;grid-template-columns:1fr 74px auto 32px;gap:6px;align-items:center";
-          row.innerHTML=`<input class="nameinp" list="dlFit" placeholder="รหัสลูก" value="${escapeHtml(ch.code||"")}" style="font-family:var(--mono)">
+          row.innerHTML=`<input class="nameinp" list="dlFit" placeholder="รหัสลูก (ใส่ได้หลายรหัสคั่นด้วย , ถ้าเป็นของตัวเดียวกันคนละรหัสในคลัง)" title="ใส่รหัส Element หรือรหัสสั่งซื้อตรง ๆ ก็ได้ · ของที่มีทั้งรหัสเก่าและรหัสใหม่ในคลัง ใส่ทุกรหัสคั่นด้วย , ระบบจะไล่ถามทีละรหัสจนเจอความยาวที่ต้องการ" value="${escapeHtml(ch.code||"")}" style="font-family:var(--mono)">
             <input class="nameinp" type="number" min="0" step="1" title="จำนวนต่อ 1 ตัวแม่" value="${escapeHtml(String(ch.qty??1))}" style="font-family:var(--mono);text-align:center">
             <label title="ลูกที่ยาวเท่าแม่ เช่นฝาครอบพลาสติกที่สอดปิดหน้ารางไฟ — จะตัดตามความยาวเดียวกันและไปค้นรหัสท่อนของตัวเองในคลัง" style="display:flex;align-items:center;gap:4px;font-size:11px;white-space:nowrap;cursor:pointer"><input type="checkbox" ${ch.cut?"checked":""}> ตัดตามแม่</label>
             <button type="button" title="ลบลูก" style="border:1px solid var(--line);background:transparent;color:#e0853b;border-radius:7px;height:30px;cursor:pointer;font-size:14px">✕</button>`;
@@ -16102,6 +16285,16 @@ function renderElements(){
       renderKids(); form.appendChild(wrap); return; }
     /* v14.3: ช่องที่รับรหัสอุปกรณ์ ให้เลือกจากรายการที่มีจริงได้เลย
        พิมพ์เองก็ยังได้ แต่ไม่ต้องเปิดอีกแท็บไปหาว่ารหัสชื่ออะไร และไม่พิมพ์ผิด */
+    /* v28.3: ช่อง "ออกใบสั่งซื้อแบบ" เป็นตัวเลือกสามทาง ไม่ใช่ช่องพิมพ์ */
+    if(f[0]==="outMode"){
+      const cur0=fitOutMode(cur);
+      const OPT=[["both","ทั้งรหัสชุดและลูก (ค่าตั้งต้น)"],["kids","เฉพาะลูก — รหัสชุดไม่ออก"],["parent","เฉพาะรหัสชุด — ลูกไม่ออก"]];
+      fld.innerHTML=`<label>${f[1]}</label><select class="nameinp" style="width:100%">`
+        +OPT.map(o=>`<option value="${o[0]}"${o[0]===cur0?" selected":""}>${escapeHtml(o[1])}</option>`).join("")+`</select>`
+        +`<div style="font-size:11px;color:var(--ink-dim);margin-top:4px;line-height:1.6">ของที่ซื้อยกชุดให้เลือกทั้งคู่หรือเฉพาะรหัสชุด · ของที่รหัสชุดเป็นชื่อเรียกภายใน ที่สั่งจริงคือลูกทีละรหัส ให้เลือกเฉพาะลูก · มีผลกับใบอุปกรณ์และไฟล์ส่งออก ไม่กระทบ 3D</div>`;
+      form.appendChild(fld);
+      fld.querySelector("select").onchange=e=>{ cur.outMode=e.target.value; try{ sync(0); }catch(e2){} };
+      return; }
     const _pick={stripCode:1,psuCode:1,wireCode:1,
       hingeCode:1,slideCode:1,shelfPinCode:1,pushCode:1,pushPlateCode:1};   // v15.1
     const _isPick=!!_pick[f[0]];
@@ -16296,10 +16489,12 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
           if(!mp.length) return "";
           const cols=((settings.elements&&settings.elements.colors)||[]).map(c=>String(c.code||"").trim());
           const legFld=String(settings.legXmlField||"K_Leg").trim().toLowerCase();
+          const kitFld=String(settings.kitField||DEF_SETTINGS.kitField).trim().toLowerCase();   // v28.5.2
           const miss=[];
           mp.forEach(m=>{ const fam=findVar(m.target);
             const opts=(fam&&fam.options)||[];
             const isLeg=(String(m.field||"").trim().toLowerCase()===legFld);
+            const isKit=(String(m.field||"").trim().toLowerCase()===kitFld);
             if(isPullField(m.field)) return;   // v9.76: มือจับมีตารางสรุปของตัวเองด้านล่าง ไม่ต้องไปหาในคลังสี
             const seen=new Set();
             parsed.forEach(p=>{ const v=String((p.pv||{})[m.field]||"").trim(); if(!v||seen.has(v))return; seen.add(v);
@@ -16312,6 +16507,16 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
                 if(sp) return;                                   // อ่านออก = ใช้ได้ ไม่ต้องเตือน
                 miss.push({fam:m.target,field:m.field,val:v,inFam,inCol:false,n:nUse,
                   lib:"Element → Fittings (ขาตู้) หรือตารางจับคู่ในตั้งค่า"});
+                return; }
+              /* ───────── v28.5.2: รหัสชุดอุปกรณ์ก็ไม่ใช่รหัสสี ─────────
+                 KIT01 ที่ตั้งไว้แล้วอยู่ที่ Element → ชุดอุปกรณ์ KIT ซึ่งเป็นคลังของตัวเอง
+                 แต่ตัวตรวจเอาไปหาในตัวเลือกของ Family กับคลังสี จึงขึ้นแดงว่ายังไม่มีทุกแถว
+                 ทั้งที่ระบบหยิบไปใช้ได้ปกติอยู่แล้ว เป็นตระกูลเดียวกับรุ่นขา (v9.70) และมือจับ (v9.76)
+                 ถามคลังที่ถูกตัวโดยตรง เจอก็จบ ไม่ต้องมีในคลังสีหรือในตัวเลือกของ Family ก่อน */
+              if(isKit){ let k=null; try{ k=kitOf(v); }catch(e){}
+                if(k) return;
+                miss.push({fam:m.target,field:m.field,val:v,inFam,inCol:false,n:nUse,
+                  lib:"Element → ชุดอุปกรณ์ KIT"});
                 return; }
               const inCol=cols.indexOf(v)>=0;
               if(!inFam||!inCol) miss.push({fam:m.target,field:m.field,val:v,inFam,inCol,n:nUse,
@@ -16369,6 +16574,7 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
           if(hasKid) return false;
           return /^\(from xml\)$/i.test(String(c.desc||"").trim())||!String(c.desc||"").trim(); };
         const legFld=String(settings.legXmlField||"K_Leg").trim().toLowerCase();
+        const kitFld=String(settings.kitField||DEF_SETTINGS.kitField).trim().toLowerCase();   // v28.5.2
         mp.forEach(m=>{
           if(isPullField(m.field)) return;                       // มือจับมีตารางสรุปของตัวเอง
           const fam=findVar(m.target), opts=(fam&&fam.options)||[];
@@ -16377,6 +16583,11 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
           parsed.forEach(p=>{ const v=String((p.pv||{})[m.field]||"").trim(); if(!v||seen.has(v))return; seen.add(v);
             if(isLeg){ let sp=null; try{ sp=parseLegXmlVal(v); }catch(e){}
               if(!sp) out[m.field+"|"+v]="รุ่นขานี้ยังไม่มีใน Element → Fittings (ขาตู้) หรือตารางจับคู่ในตั้งค่า";
+              return; }
+            /* v28.5.2: รหัสชุดอุปกรณ์อยู่ที่ Element → ชุดอุปกรณ์ KIT ไม่ใช่คลังสี — ถามให้ถูกคลัง */
+            if(String(m.field||"").trim().toLowerCase()===kitFld){
+              let k=null; try{ k=kitOf(v); }catch(e){}
+              if(!k) out[m.field+"|"+v]="รหัสชุดนี้ยังไม่มีใน Element → ชุดอุปกรณ์ KIT — โหลดไปตู้ใบนี้จะไม่ได้อุปกรณ์ของชุด";
               return; }
             /* v14.9: ไม่ใช่ทุกช่องที่เป็นสี — รูปทรงหน้าบาน แนวลาย หรือชนิดอุปกรณ์ ก็ส่งมาในช่องแบบเดียวกัน
                เช็คทุกช่องกับตารางสีจึงเตือนมั่วไปหมด ดูจากตัวแปรที่จับคู่ไว้แทน
@@ -16444,20 +16655,15 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
              ไม่ใช่โครงสร้าง XML จริง ตัวอ่านตู้จึงมองไม่เห็น ต้องแยกเองทีละบรรทัด
              ตอนนี้แค่แสดงให้ครบก่อน ยังไม่นำเข้าฉาก */
           if(!doc) return '<div style="padding:14px 16px;font-size:12px;color:var(--ink-dim)">อ่านไฟล์ไม่ได้</div>';
-          const rows2=[];
-          try{ [...doc.querySelectorAll("*")].forEach(el=>{
-            if(!/^CUSTOM_INFO\d+$/i.test(el.tagName)) return;
-            const raw=(el.textContent||"").trim(); if(!raw) return;
-            const a=raw.split("|").map(x=>x.trim());
-            rows2.push({tag:el.tagName, kind:a[0]||"", code:a[1]||"", color:(a[2]&&a[2]!=="-")?a[2]:"",
-                        size:(a[3]&&a[3]!=="0*0*0")?a[3]:"", price:a[4]||"", qty:a[5]||"", raw:raw});
-          }); }catch(e){ return '<div style="padding:14px 16px;font-size:12px;color:var(--ink-dim)">อ่านรายการเส้นไม่ได้</div>'; }
+          const rows2=parseXmlLines(doc);          // v28.3: ตัวอ่านกลาง ใช้ร่วมกับตอนโหลดเข้าฉาก
           if(!rows2.length) return '<div style="padding:14px 16px;font-size:12px;color:var(--ink-dim)">ไฟล์นี้ไม่มีรายการในแท็บ เส้น/Line ของ KDMax</div>';
           let sum=0; rows2.forEach(r=>{ const p2=parseFloat(r.price)||0, q=parseFloat(r.qty)||0; sum+=p2*q; });
           const th=["ช่อง","ประเภท","รหัส","สี","ขนาด","ราคา/หน่วย","จำนวน","รวม"];
           return '<div style="padding:10px 16px">'
             +'<div style="font-size:12px;margin-bottom:5px"><b>รายการเส้น / Line</b> — '+rows2.length+' รายการ · รวม '
-            +sum.toLocaleString(undefined,{minimumFractionDigits:2})+' · <span style="color:var(--ink-dim)">ยังไม่ถูกนำเข้าฉาก แสดงให้ตรวจอย่างเดียว</span></div>'
+            +sum.toLocaleString(undefined,{minimumFractionDigits:2})
+            +' · <span style="color:var(--ink-dim)">v28.3: เก็บติดฉากไปด้วยแล้ว เปิดดูทีหลังได้ที่ ส่งออก → รายการเส้น · '
+            +'ประเภทที่ออกใบอุปกรณ์ตอนนี้คือ '+escapeHtml(String(settings.lineBomKinds==null?DEF_SETTINGS.lineBomKinds:settings.lineBomKinds))+'</span></div>'
             +'<table style="border-collapse:collapse;font-size:11.5px;width:100%">'
             +'<thead><tr>'+th.map(h=>'<th style="text-align:left;padding:3px 7px;color:var(--ink-dim);border-bottom:1px solid var(--line);white-space:nowrap">'+escapeHtml(h)+'</th>').join("")+'</tr></thead><tbody>'
             +rows2.map(r=>{ const tot=(parseFloat(r.price)||0)*(parseFloat(r.qty)||0);
@@ -16752,12 +16958,18 @@ async function processXmlText(text,opts){ opts=opts||{}; try{
         if(pick.orderNo!=null){ const _nn=String(pick.orderNo).trim(); if(_nn) orderNo=_nn; }
         _use=pick;
       }
+      try{ state.orderLines=parseXmlLines(doc); }catch(e){ console.error(e); state.orderLines=[]; }   // v28.3
+      /* v29.1: แถวในแท็บเส้นที่กฎบอกว่าเป็นตู้ ถูกต่อท้ายรายการตู้ก่อนสร้างฉาก
+         จึงเดินทางเดียวกับตู้ที่มาจากออเดอร์ทุกขั้น ไม่มีเส้นทางพิเศษให้ต้องดูแลแยก */
+      let _nLineCab=0;
+      try{ const ex=lineCabSets(); if(ex.length){ _use=_use.concat(ex); _nLineCab=ex.reduce((s2,x)=>s2+(x.count||1),0); } }catch(e){ console.error("lineCabSets:",e); }
       window._xmlOrder={orderNo,sets:_use};
       if(orderNo){ const oi=$("exOrderId"); if(oi)oi.value=orderNo; }
       // โหลด XML = ดึงตู้ของออเดอร์เข้าฉาก (แทนที่ของเดิม)
       try{ applyFamDefaults(); }catch(e){ console.error(e); }   // v9.13: ดึงหัว Family กลับค่าตั้งต้นหลังอ่านไฟล์
       state.boards=[]; state.selectedId=null; await buildFromXmlOrder();
-      toast("โหลด XML: "+orderNo+" · "+_use.length+" ตู้"+(_use.length!==parsed.length?(" (จาก "+parsed.length+")"):"")+" · จับคู่ "+maps.length+" ฟิลด์");
+      toast("โหลด XML: "+orderNo+" · "+_use.length+" ตู้"+(_use.length!==parsed.length?(" (จาก "+parsed.length+")"):"")+" · จับคู่ "+maps.length+" ฟิลด์"
+        +(_nLineCab?(" · เพิ่มตู้จากรายการเส้น "+_nLineCab+" ใบ"):""));
       if(opts.saveCloud){   // โหลดจากไฟล์ → เก็บเข้า Supabase ให้จำได้
         const cust=xText(doc,"CUSTOMER")||xText(doc,"CustomerName")||"";
         const retailer=xText(doc,"RETAILER")||xText(doc,"Retailer")||"";
@@ -17077,6 +17289,15 @@ function renderSettings(){
     <div style="font-size:11px;opacity:.72;line-height:1.6">เลขตู้และเลขชิ้นถูกจำติดตัวไว้ตั้งแต่ครั้งแรกที่ได้รับ แก้งานทีหลังจึงไม่เคลื่อน — ลบชิ้นกลางตู้ เลขที่เหลือคงเดิม เว้นช่องว่างไว้ · ชิ้นที่เพิ่มใหม่ไปต่อท้ายเสมอ ไม่เอาเลขเก่ามาใช้ซ้ำ</div>
     <button class="ibtn" id="setBcReset" style="margin-top:6px">↺ รีเซ็ตเลขบาร์โค้ดทั้งออเดอร์</button>
     <div style="font-size:11px;opacity:.62;margin-top:2px">ใช้ตอนเริ่มงานใหม่เท่านั้น — กดแล้วทุกชิ้นจะถูกไล่เลขใหม่ตั้งแต่ 01 ใบที่ยิงไปแล้วจะไม่ตรงอีก</div>
+    <div class="sumh" style="margin-top:12px">🧰 ชุดอุปกรณ์ประจำรหัสตู้</div>
+    <div style="font-size:11px;opacity:.72;line-height:1.7;margin-bottom:6px">
+      ของที่ผูกกับ<b>ตู้ทั้งใบ</b> ไม่ได้ผูกกับแผ่นไหน — ตู้รหัสที่ระบุไว้ได้ชุดนี้ <b>1 ชุดต่อ 1 ใบ</b> ไม่ว่าตู้ใบนั้นจะมีกี่แผ่น<br>
+      ช่องรหัสตู้ใส่ <span style="font-family:var(--mono)">@ถาด</span> ได้ = ใช้รายชื่อเดียวกับช่องรหัสตู้ของถาดฟรอยด์ข้างล่าง แก้ที่เดียวตามกันทั้งสองที่<br>
+      รายการเขียนบรรทัดละรหัส เว้นวรรคแล้วตามด้วยจำนวน เช่น <span style="font-family:var(--mono)">ETCP001 1</span> · ไม่ใส่จำนวน = 1<br>
+      รหัสที่มีใน Element → Fittings จะได้ชื่อ หน่วย Purchase ID และลูกของมันไปด้วย · ที่ไม่มีก็ยังออกโดยใช้รหัสนั้นเป็นรหัสสั่งซื้อ
+    </div>
+    <div id="setCabFits"></div>
+    <button class="ibtn" id="setCabFitAdd" style="margin-top:6px">＋ เพิ่มชุด</button>
     <div class="sumh" style="margin-top:12px">ถาดฟรอยด์ตู้ซิงค์ (Fitting Global)</div>
     ${txt("sinkTrayCabs","รหัสตู้ที่ต้องมีถาดฟรอยด์ — คั่นด้วยจุลภาค เช่น BAS60, BAS80")}
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${num("sinkTraySide","ระยะหักข้างละ (มม.)",0.5)}${num("sinkTrayH","ความสูงถาดในภาพ 3D (มม.)")}</div>
@@ -17369,6 +17590,49 @@ function renderSettings(){
     paintPrev();
   }
   paintFx();
+  /* ───────── v28.9: ตารางชุดอุปกรณ์ประจำรหัสตู้ ───────── */
+  { const host=body.querySelector("#setCabFits");
+    if(host){
+      if(!Array.isArray(settings.cabFitSets)) settings.cabFitSets=[];
+      const L=settings.cabFitSets;
+      const drawSets=()=>{ host.innerHTML="";
+        if(!L.length){ const e=document.createElement("div");
+          e.style.cssText="font-size:11.5px;opacity:.7;padding:6px 0";
+          e.textContent="ยังไม่มีชุด — กด ＋ เพิ่มชุด แล้วใส่รหัสตู้กับรายการอุปกรณ์"; host.appendChild(e); }
+        L.forEach((r,ri)=>{
+          const cabs=fitSetCabList(r), items=parseFitSetItems(r.items);
+          /* นับให้เห็นเดี๋ยวนั้นว่ากฎนี้จับตู้ในฉากได้กี่ใบ ไม่ต้องกดส่งออกก่อนถึงจะรู้ */
+          let hit=0; try{ const seen={};
+            state.boards.forEach(b=>{ if(!b||b._virtual) return;
+              const k=String(b.cabInst||b.cab||""); if(!k||seen[k]) return; seen[k]=1;
+              if(cabs.indexOf(String(b.cab||"").trim().toUpperCase())>=0) hit++; }); }catch(e){}
+          const box=document.createElement("div");
+          box.style.cssText="border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-bottom:7px;background:var(--bg)";
+          box.innerHTML='<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">'
+            +'<input class="nameinp cfN" placeholder="ชื่อชุด (ไว้จำเอง)" value="'+escapeHtml(String(r.name||""))+'" style="flex:1;min-width:0;font-size:12px">'
+            +'<label style="display:flex;align-items:center;gap:5px;font-size:11.5px;white-space:nowrap;cursor:pointer">'
+              +'<input type="checkbox" class="cfOn" '+(r.off?"":"checked")+'> ใช้งาน</label>'
+            +'<button type="button" class="cfDel" title="ลบชุดนี้" style="border:1px solid var(--line);background:transparent;color:#e0853b;border-radius:7px;height:28px;width:30px;cursor:pointer">✕</button></div>'
+            +'<div style="font-size:10.5px;color:var(--ink-dim);margin-bottom:2px">รหัสตู้ (คั่นด้วย , · ใส่ @ถาด = ตามรายชื่อของถาดฟรอยด์)</div>'
+            +'<input class="nameinp cfC" value="'+escapeHtml(String(r.cabs||""))+'" placeholder="BAS60, BAS80  หรือ  @ถาด" style="width:100%;font-family:var(--mono);font-size:11.5px">'
+            +'<div style="font-size:10.5px;color:var(--ink-dim);margin:6px 0 2px">รายการอุปกรณ์ — บรรทัดละรหัส เว้นวรรคแล้วตามด้วยจำนวน</div>'
+            +'<textarea class="nameinp cfI" rows="5" placeholder="ETCP001 1&#10;ETCP004 1&#10;FITCP00026 1" style="width:100%;font-family:var(--mono);font-size:11.5px;resize:vertical">'+escapeHtml(String(r.items||""))+'</textarea>'
+            +'<div style="font-size:11px;margin-top:5px;color:'+(hit?"#2f9e44":"var(--ink-dim)")+'">'
+              +(cabs.length?("จับรหัสตู้ "+cabs.length+" รหัส · "+items.length+" รายการต่อชุด · "
+                 +(hit?("ฉากนี้เข้าเงื่อนไข "+hit+" ใบ → ออก "+hit+" ชุด"):"ฉากนี้ยังไม่มีตู้รหัสนั้น"))
+                :"ยังไม่ได้ใส่รหัสตู้ — ชุดนี้จะไม่ออก")+'</div>';
+          const q=x=>box.querySelector(x);
+          q(".cfN").oninput=e=>{ r.name=e.target.value; };
+          q(".cfC").oninput=e=>{ r.cabs=e.target.value; };
+          q(".cfI").oninput=e=>{ r.items=e.target.value; };
+          [".cfN",".cfC",".cfI"].forEach(sl=>{ q(sl).onchange=()=>{ drawSets(); try{ _cabFitSig=""; sync(0); }catch(e){} }; });
+          q(".cfOn").onchange=e=>{ r.off=!e.target.checked; drawSets(); try{ _cabFitSig=""; sync(0); }catch(e){} };
+          q(".cfDel").onclick=()=>{ L.splice(ri,1); drawSets(); try{ _cabFitSig=""; sync(0); }catch(e){} };
+          host.appendChild(box); }); };
+      drawSets();
+      const ab=body.querySelector("#setCabFitAdd");
+      if(ab) ab.onclick=()=>{ L.push({name:"",cabs:"",items:"",off:false}); drawSets(); };
+    } }
   { const br=body.querySelector("#setBcReset"); if(br)br.onclick=async()=>{
       const ok=await dialog({title:"ไล่เลขบาร์โค้ดใหม่ทั้งออเดอร์? ใบที่ยิงไปแล้วจะไม่ตรงอีก",ok:"รีเซ็ต"});
       if(!ok) return; bcResetAll(); sync(0); toast("รีเซ็ตเลขบาร์โค้ดแล้ว"); }; }
@@ -17511,7 +17775,7 @@ async function cloudSaveOrder(){
   if(v==null||!String(v).trim())return; const oid=String(v).trim();
   try{ const db=await getDB(); const id="ORD::"+oid;
     const exEl=$("exOrderId"); if(exEl){ exEl.value=oid; }   // ตั้งชื่อออเดอร์ในฉากให้ตรงไฟล์ที่เซฟ
-    const data={order:true,orderId:oid,boards:JSON.parse(JSON.stringify(state.boards)),globalTone:state.globalTone,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt,cabDX:state.cabDX};
+    const data={order:true,orderId:oid,boards:JSON.parse(JSON.stringify(state.boards)),globalTone:state.globalTone,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt,cabDX:state.cabDX,orderLines:state.orderLines};
     const r=await db.from("furnitech_cabinets").upsert({id,name:id,part_count:state.boards.length,data,updated_at:new Date().toISOString()},{onConflict:"id"}); if(r.error)throw r.error;
     toast("☁ บันทึกออเดอร์ “"+oid+"” แล้ว ("+state.boards.length+" ชิ้น) — เปิดกลับมาแก้ได้จากปุ่มคลาวด์"); renderCloudOrders();
   }catch(e){ toast("บันทึกออเดอร์ไม่สำเร็จ: "+sbErr(e)); }
@@ -17524,6 +17788,7 @@ async function cloudLoadOrder(oid){
     remapRuleRefs(norm,idMap); remapHoleSrc(norm,idMap); healHoleSrc(norm);
     state.boards=norm; if(src.globalTone!=null)state.globalTone=src.globalTone; if(src.cabColors)state.cabColors=src.cabColors;
     if(src.cabNums)state.cabNums=src.cabNums; if(src.cabVarTxt)state.cabVarTxt=src.cabVarTxt; if(src.cabDX)state.cabDX=src.cabDX;
+    state.orderLines=src.orderLines||[];                                             // v28.3
     /* v7.16: ออเดอร์ที่เซฟไว้ก่อนหน้านี้มีค่าผิดฝังอยู่ (ชั้นลึกเกิน ทะลุแผ่นหลัง)
        เพราะตอนสร้าง refitInterior ข้ามไปตอนตู้หมุน · เปิดกลับมาก็ต้องซ่อมให้ด้วย
        ไม่งั้นต้องไปแก้มือทุกออเดอร์เก่า */
@@ -18366,6 +18631,100 @@ function elemPick(type,cur,onPick){
     });
   };
   Q.oninput=draw; draw(); setTimeout(()=>{ try{ Q.focus(); }catch(e){} },30);
+}
+/* ───────── v28.3: อ่านรายการแท็บเส้น/Line ของ KDMax ─────────
+   ของพวกนี้ไม่ได้เป็นโหนดของตัวเอง แต่ถูกยัดมาใน CUSTOM_INFO1..n
+   เนื้อในเป็นข้อความคั่นด้วยขีดตั้ง เรียงเป็น ประเภท|รหัส|สี|ขนาด|ราคา|จำนวน
+   เดิมแกะไว้ในหน้าตรวจ XML ที่เดียว พอโหลดเข้าฉากแล้วของหายไปหมด
+   แยกออกมาเป็นตัวอ่านกลาง ทั้งหน้าตรวจและตัวโหลดจึงใช้ตัวเดียวกัน */
+function parseXmlLines(doc){
+  const out=[]; if(!doc) return out;
+  try{ [...doc.querySelectorAll("*")].forEach(el=>{
+    if(!/^CUSTOM_INFO\d+$/i.test(el.tagName)) return;
+    const raw=(el.textContent||"").trim(); if(!raw) return;
+    const a=raw.split("|").map(x=>x.trim());
+    out.push({tag:el.tagName, kind:a[0]||"", code:a[1]||"", color:(a[2]&&a[2]!=="-")?a[2]:"",
+              size:(a[3]&&a[3]!=="0*0*0")?a[3]:"", price:a[4]||"", qty:a[5]||"", raw:raw});
+  }); }catch(e){ console.error("parseXmlLines:",e); }
+  return out;
+}
+/* ประเภทไหนออกใบอุปกรณ์ — ตั้งรวมที่ settings แล้วติ๊กทับรายตัวได้ (r.bom) */
+function lineBomKindOn(kind){
+  const k=String(kind||"").trim().toLowerCase(); if(!k) return false;
+  return String(settings.lineBomKinds==null?DEF_SETTINGS.lineBomKinds:settings.lineBomKinds)
+    .split(/[,\n]+/).map(x=>x.trim().toLowerCase()).filter(Boolean).indexOf(k)>=0;
+}
+function lineBomOn(r){ if(!r) return false;
+  if(r.bom===true||r.bom===false) return r.bom;      // ติ๊กเองแล้ว ชนะค่ากลางเสมอ
+  return lineBomKindOn(r.kind); }
+/* ───────── v29.1: กฎแปลงรายการเส้น ─────────
+   แถวในแท็บเส้นไม่ได้มีความหมายเดียวกันทุกแถว บางแถวคือของที่ซื้อมาทั้งชิ้น
+   บางแถวคือตู้อีกใบที่ยังไม่ถูกนับ (บังตา · แผงปิด) ซึ่งต้องเข้าฉากเป็นตู้จริง ไม่ใช่ของในใบอุปกรณ์
+   และรหัสที่ออเดอร์ส่งมาก็เป็นรหัสของฝั่งออกแบบ ไม่ใช่รหัสสั่งซื้อของเรา
+   เขียนเป็นกฎ จับคู่จาก ประเภท · รหัส · สี · ขนาด แล้วบอกว่าจะให้แถวนั้นกลายเป็นอะไร
+   ช่องจับคู่ที่เว้นว่าง = ตรงทุกค่า · ใส่หลายค่าคั่นด้วยจุลภาคได้ */
+function lineRules(){ const r=settings.lineRules; return Array.isArray(r)?r:[]; }
+function lineSizeNums(sz){ return String(sz||"").split(/[^0-9.]+/).map(x=>parseFloat(x)).filter(v=>isFinite(v)&&v>0); }
+/* ───────── v29.2: จับคู่แบบ "ไม่ใช่ค่านี้" ─────────
+   ของชิ้นเดียวกันเปลี่ยนความหมายตามสีได้ ตีนตู้สแตนเลสคือของที่ซื้อมาทั้งเส้น
+   แต่ตีนตู้สีไม้คืองานไม้ ต้องเข้าฉากเป็นตู้จริง เขียนแยกกฎละสีไม่ไหวเพราะสีไม้มีไม่จำกัด
+   ใส่ ! นำหน้าค่า = ทุกค่ายกเว้นค่านั้น เช่น !Stainless คือสีอะไรก็ได้ที่ไม่ใช่สแตนเลส
+   ผสมกันได้ ทั้งรายการที่ยอมรับและรายการที่ตัดออกในช่องเดียว */
+function lineRuleHit(r,row){
+  if(!r||r.off===true||!row) return false;
+  const eq=(spec,val)=>{ const A=String(spec==null?"":spec).trim(); if(!A) return true;
+    const V=String(val==null?"":val).trim().toUpperCase();
+    const pos=[], neg=[];
+    A.split(/[,;]+/).map(x=>x.trim()).filter(Boolean).forEach(t=>{
+      if(t.charAt(0)==="!"){ const u=t.slice(1).trim().toUpperCase(); if(u) neg.push(u); }
+      else pos.push(t.toUpperCase()); });
+    if(neg.length&&neg.indexOf(V)>=0) return false;
+    if(pos.length&&pos.indexOf(V)<0) return false;
+    return true; };
+  return eq(r.kind,row.kind)&&eq(r.code,row.code)&&eq(r.color,row.color)&&eq(r.size,row.size);
+}
+function lineRuleOf(row){ return lineRules().find(r=>lineRuleHit(r,row))||null; }
+/* ช่องขนาดของตู้รับได้ทั้งตัวเลขตรง ๆ และ S1 S2 S3 = ตัวเลขลำดับที่เท่าไหร่ในช่องขนาดของแถวนั้น */
+function lineDim(spec,nums,def){
+  const t=String(spec==null?"":spec).trim(); if(!t) return def;
+  const m=t.match(/^s\s*(\d+)$/i);
+  if(m){ const v=nums[(parseInt(m[1],10)||1)-1]; return isFinite(v)&&v>0?v:def; }
+  const v=parseFloat(t); return isFinite(v)&&v>0?v:def;
+}
+/* แถวที่กฎบอกว่าเป็นตู้ — แปลงเป็น Set แบบเดียวกับที่ตัวอ่าน XML สร้าง
+   ตัวโหลดตู้จึงรับไปทำต่อได้ทั้งชุด ทั้งดึงโมเดลจากคลัง ปรับขนาด ใส่สี และวางในฉาก */
+function lineCabSets(){
+  const out=[];
+  (state.orderLines||[]).forEach(row=>{
+    const r=lineRuleOf(row); if(!r||r.act!=="cab") return;
+    const code=String(r.cabCode||"").trim(); if(!code) return;
+    const nums=lineSizeNums(row.size);
+    const cnt=Math.max(1,Math.round(parseFloat(row.qty)||1));
+    const vars={};
+    String(r.colorTo||"").split(/[,;]+/).map(x=>x.trim()).filter(Boolean)
+      .forEach(f=>{ if(row.color) vars[f]=row.color; });
+    out.push({ name:code, W:lineDim(r.w,nums,600), H:lineDim(r.h,nums,720), D:lineDim(r.d,nums,100),
+               T:18, count:cnt, vars:vars, pv:{}, numv:{}, _fromLine:true });
+  });
+  return out;
+}
+/* แถวที่จะออกใบอุปกรณ์จริง — รวมยอดตามรหัส */
+function orderLineRows(){
+  const m={};
+  (state.orderLines||[]).forEach(r=>{
+    const ru=lineRuleOf(r);
+    if(ru&&(ru.act==="cab"||ru.act==="skip")) return;          // v29.1: แถวนี้ไปเป็นตู้ หรือสั่งไม่ให้ออก
+    const isBom=!!(ru&&ru.act==="bom"&&String(ru.out||"").trim());
+    if(!isBom&&!lineBomOn(r)) return;
+    const code=isBom?String(ru.out).trim():String(r.code||"").trim();
+    if(!code||code==="-") return;
+    const q=Math.max(parseFloat(r.qty)||0,0); if(!q) return;
+    const a=fitCodeMain(code), el=fitDef(code)||fitDef(a);
+    if(!m[a]) m[a]={art:a,dia:"",kind:"line",
+      name:(el&&el.desc)||[r.kind,r.color,r.size].filter(Boolean).join(" · ")||a,
+      unit:(el&&el.unit)||"ชุด",count:0,_pidList:fitPidList(code)};
+    m[a].count+=q; });
+  return Object.values(m);
 }
 function ovCard(w,mh){
   const ov=document.createElement("div");
@@ -20372,6 +20731,7 @@ async function renderLoader(){
         remapRuleRefs(state.boards,idMap); remapHoleSrc(state.boards,idMap); healHoleSrc(state.boards);
         if(saved.globalTone!=null)state.globalTone=saved.globalTone; if(saved.cabColors)state.cabColors=saved.cabColors;
         if(saved.cabNums)state.cabNums=saved.cabNums; if(saved.cabVarTxt)state.cabVarTxt=saved.cabVarTxt; if(saved.cabDX)state.cabDX=saved.cabDX;
+        state.orderLines=saved.orderLines||[];                                       // v28.3
         if(saved.bcSeq)state.bcSeq=saved.bcSeq; if(saved.bcMax)state.bcMax=saved.bcMax;   // v9.22: เลขบาร์โค้ดที่จำไว้
     if(saved.cabDX)state.cabDX=saved.cabDX;                                          // v11.2
         /* v7.26: ทางนี้คือ "เปิดโปรแกรมแล้วกดทำงานต่อ" — เดิมโยนของที่เซฟไว้เข้าฉากดิบ ๆ
@@ -21955,7 +22315,7 @@ function shareId(){ let s2=""; const A="abcdefghijkmnpqrstuvwxyz23456789";
 function sharePayload(){
   return { v:1, boards:state.boards, globalTone:state.globalTone,
            cabColors:state.cabColors, cabNums:state.cabNums, cabVarTxt:state.cabVarTxt,
-           cabDX:state.cabDX, bcSeq:state.bcSeq, bcMax:state.bcMax };
+           cabDX:state.cabDX, bcSeq:state.bcSeq, bcMax:state.bcMax, orderLines:state.orderLines };
 }
 async function shareLinkDialog(){
   if(VIEW_ONLY){ toast("ลิงก์ดูอย่างเดียว สร้างลิงก์ต่อไม่ได้"); return; }   // v27.3
@@ -22413,7 +22773,7 @@ function exportJSON(){
   /* v11.2: ไฟล์โปรเจกต์เคยเก็บแค่ชิ้นงาน ค่าที่ผูกกับตู้ (เส้นโปรไฟล์ · สี · ตัวแปร) จึงหายไปกับไฟล์
      เปิดไฟล์กลับมาแล้วเส้นโปรไฟล์หายทั้งงาน เพราะตัวสร้างเส้นไม่เจอรายการว่าตู้ไหนติดอะไรไว้ */
   download("board-forge-project.json",JSON.stringify({boards:state.boards,globalTone:state.globalTone,
-    bcSeq:state.bcSeq,bcMax:state.bcMax,
+    bcSeq:state.bcSeq,bcMax:state.bcMax,orderLines:state.orderLines,
     cabDX:state.cabDX,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt},null,2),
     "application/json");
   toast("ดาวน์โหลด .json แล้ว");}
@@ -22454,10 +22814,104 @@ function cabGroups(){   // group by physical unit (cabInst); untagged → fall b
    ตัดช่องว่างหัวท้ายทั้งสองฝั่งก่อนเทียบ รหัสที่พิมพ์ถูกอยู่แล้วไม่มีอะไรเปลี่ยน */
 function fitDef(code){ const c=String(code==null?"":code).trim(); if(!c) return null;
   return (settings.elements&&settings.elements.fittings||[]).find(x=>x&&String(x.code==null?"":x.code).trim()===c)||null; }
-function fittingOut(code){ const f=fitDef(code); const c=String(code==null?"":code).trim();
-  return f?(String(f.itemId||"").trim()||String(f.code||"").trim()||c):c; }
+/* ───────── v28.6: ของชิ้นเดียวที่ต้องสั่งหลายรหัส ─────────
+   รางไฟหนึ่งเส้นคือของสองอย่างที่ยาวเท่ากันเป๊ะและสั่งพร้อมกันเสมอ
+   ตัวรางอลูมิเนียมกับพลาสติกครอบ ไม่ใช่ตัวแม่กับลูกที่นับคนละหน่วย
+   ใส่รหัสสั่งซื้อได้หลายตัวในช่องเดียว คั่นด้วยจุลภาค เช่น 414LT0000007,TPP0000083
+   ทุกรหัสได้ความยาวเดียวกันไปค้นรหัสท่อนของตัวเองในคลัง แยกเป็นคนละบรรทัดตอนออกใบ
+   รหัสเดียวก็ยังทำงานเหมือนเดิมทุกอย่าง ไม่ต้องไปแก้ของเก่า */
+function fitPidList(code){
+  const c=String(code==null?"":code).trim(), f=fitDef(c);
+  const out=[], seen={};
+  const push=x=>{ const t=String(x||"").trim(); if(t&&!seen[t]){ seen[t]=1; out.push(t); } };
+  if(f){ String(f.itemId||"").split(/[,;\n]+/).forEach(push);
+    if(!out.length) push(String(f.code||"").trim()||c);
+    return out; }
+  /* ───────── v29.0: ช่องรหัสก็รับหลายรหัสได้เหมือนกัน ─────────
+     v28.7 ทำไว้ที่ช่อง Purchase Item ID อย่างเดียว ซึ่งใช้ได้เฉพาะของที่มี Element ของตัวเอง
+     แต่ลูกอย่างพลาสติกครอบมักถูกพิมพ์รหัสสั่งซื้อลงไปตรง ๆ ไม่ได้ทำ Element ให้
+     พิมพ์สองรหัสคั่นจุลภาคลงช่องนั้นเลยจึงเป็นสิ่งที่ทุกคนจะทำ และเป็นสิ่งที่ควรใช้ได้
+     ไม่มี Element รองรับ = ทั้งบรรทัดคือรายชื่อรหัสสั่งซื้อ ตัวแรกเป็นตัวตั้งของบรรทัด */
+  c.split(/[,;\n]+/).forEach(push);
+  if(!out.length) push(c);
+  return out;
+}
+/* รหัสหลักที่ใช้เป็นตัวตั้งของบรรทัด — พิมพ์มาหลายรหัสก็ใช้ตัวแรก */
+function fitCodeMain(code){
+  const c=String(code==null?"":code).trim(); if(!c) return "";
+  if(fitDef(c)) return c;                       // เป็นรหัส Element จริง ไม่ต้องแตะ
+  return String(c.split(/[,;\n]+/)[0]||"").trim()||c;
+}
+function fittingOut(code){ return fitPidList(code)[0]; }
+/* ───────── v28.9: ชุดอุปกรณ์ประจำรหัสตู้ ─────────
+   ของบางชุดไม่ได้ผูกกับชิ้นไม้ชิ้นไหนเลย แต่ผูกกับ "ตู้รุ่นนี้" ทั้งใบ
+   เช่นตู้ซิงค์ที่ต้องมีถาดฟรอยด์ ก็ต้องมีชุดอุปกรณ์ประจำใบไปด้วยเสมอ
+   ตู้หนึ่งใบได้หนึ่งชุด ไม่ว่าตู้ใบนั้นจะมีกี่แผ่น เพราะชุดผูกกับใบ ไม่ได้ผูกกับแผ่น
+   เขียนเป็นตารางกฎ แก้เพิ่มลบได้เองทีหลังโดยไม่ต้องแตะโปรแกรม */
+function fitSetRules(){ const r=settings.cabFitSets; return Array.isArray(r)?r:[]; }
+/* รับได้ทั้ง "CODE 2" · "CODE,2" · "CODE x2" · หรือรหัสเปล่า (=1) บรรทัดละรายการ */
+function parseFitSetItems(txt){
+  const out=[];
+  String(txt||"").split(/[\n;]+/).forEach(ln=>{
+    const t=String(ln||"").trim(); if(!t) return;
+    const m=t.match(/^(.+?)[\s,\t]+[x*×]?\s*([\d.]+)$/i);
+    const code=String(m?m[1]:t).trim();
+    const q=m?(parseFloat(m[2])||0):1;
+    if(code&&q>0) out.push({code,qty:q});
+  });
+  return out;
+}
+function fitSetCabList(r){
+  const raw=String((r&&r.cabs)||"").trim();
+  /* @ถาด = ยืมรายชื่อจากช่องรหัสตู้ของถาดฟรอยด์ แก้ที่เดียวแล้วตามกันทั้งสองที่ */
+  if(/^@/.test(raw)) return String(settings.sinkTrayCabs||"").split(/[;,\s]+/).map(x=>x.trim().toUpperCase()).filter(Boolean);
+  return raw.split(/[;,\s]+/).map(x=>x.trim().toUpperCase()).filter(Boolean);
+}
+function fitSetRows(boards){
+  const rules=fitSetRules().filter(r=>r&&r.off!==true); if(!rules.length) return [];
+  /* หนึ่งใบ = หนึ่ง cabInst · ตู้ใบเดียวกันมีหลายแผ่นก็นับครั้งเดียว */
+  const inst={};
+  (boards||[]).forEach(b=>{ if(!b||b._virtual) return;
+    const k=String(b.cabInst||b.cab||""); if(!k) return;
+    if(inst[k]===undefined) inst[k]=String(b.cab||"").trim().toUpperCase(); });
+  const rows=[];
+  Object.keys(inst).forEach(k=>{ const cab=inst[k]; if(!cab) return;
+    rules.forEach(r=>{ if(fitSetCabList(r).indexOf(cab)<0) return;
+      parseFitSetItems(r.items).forEach(it=>rows.push({code:it.code,qty:it.qty,cab:cab})); }); });
+  return rows;
+}
+/* ───────── v28.5: อุปกรณ์ที่ฝากไว้กับ Part ─────────
+   ของอย่างตะแกรง ที่กั้น หรือกันลื่น ไม่ได้ผูกกับเดือยหรือรูเจาะ จึงไม่มีทางออกเองเลย
+   แต่มันมาพร้อม "ชิ้นส่วนนั้น" เสมอ — พื้นลิ้นชักรุ่นนี้ ต้องมีตะแกรงรุ่นนี้เท่านี้ใบ
+   ผูกไว้ที่ Part แล้วทุกชิ้นที่ใช้ Part นั้นก็พาอุปกรณ์ออกไปเอง ไม่ต้องไปไล่ใส่รายตู้
+   ไม่ต้องมีโมเดล 3D — ที่นี่คิดแต่ของที่ต้องเบิก ตัวไหนมี 3D ก็ยังขึ้นตามปกติของมัน */
+function partFitRows(boards){
+  const rows=[], once={};
+  (boards||[]).forEach(b=>{
+    if(!b||b._virtual) return; try{ if(isGuide(b)) return; }catch(e){}
+    const pd=partDef(b.part,b); if(!pd) return;
+    const fs=Array.isArray(pd.fits)?pd.fits:[];
+    fs.forEach(x=>{ if(!x) return;
+      const cd=String(x.code||"").trim(); if(!cd) return;
+      const q=Math.max(parseFloat(x.qty)||1,0); if(!q) return;
+      /* ต่อตู้ = ตู้ใบหนึ่งได้ชุดเดียว ต่อให้ Part นั้นถูกใช้หลายแผ่นในใบเดียวกัน */
+      if(String(x.per||"")==="cab"){
+        const key=cd+"@@"+String(pd.code||"")+"@@"+String(b.cabInst||b.cab||"");
+        if(once[key]) return; once[key]=1; }
+      rows.push({code:cd, qty:q, part:String(pd.code||"")}); }); });
+  return rows;
+}
 function fittingAgg(boards){   // รวมเดือย + พินรองรับชั้น เป็นรายการ fitting
   const m={};
+  /* v29.0: ทุกช่องที่คนพิมพ์รหัสเองใช้กติกาเดียวกัน — หลายรหัส = ของตัวเดียวกัน ไล่หาทีละตัว */
+  try{ partFitRows(boards).forEach(r=>{ const a=fitCodeMain(r.code), el=fitDef(r.code)||fitDef(a);   // v28.5
+    (m[a]||(m[a]={art:a,dia:(el&&el.dia)||"",kind:"part",
+      name:(el&&el.desc)||a,unit:(el&&el.unit)||"ตัว",count:0,_pidList:fitPidList(r.code)})).count+=r.qty; });
+  }catch(e){ console.error("partFits:",e); }
+  try{ fitSetRows(boards).forEach(r=>{ const a=fitCodeMain(r.code), el=fitDef(r.code)||fitDef(a);     // v28.9
+    (m[a]||(m[a]={art:a,dia:(el&&el.dia)||"",kind:"cabset",
+      name:(el&&el.desc)||a,unit:(el&&el.unit)||"ชุด",count:0,_pidList:fitPidList(r.code)})).count+=r.qty; });
+  }catch(e){ console.error("cabFitSets:",e); }
   boards.forEach(b=>{
     /* v9.48: ช่อง Pocket ที่ผูกรหัสอุปกรณ์ไว้ (เช่น Grommet) นับเป็นอุปกรณ์ด้วย
        ช่องเดียวกันใส่คนละรุ่นได้ จึงนับแยกตามรหัสที่กรอกไว้ที่ช่องนั้น ๆ */
@@ -22599,20 +23053,44 @@ function fittingAgg(boards){   // รวมเดือย + พินรอง�
           name:((series&&series.desc)||settings.slideName||"รางลิ้นชัก")+" "+pick+" มม.",unit:(series&&series.unit)||"ชุด",count:0})).count+=1; }
       else { const k=settings.slideCode||"SLIDE";
         (m[k]||(m[k]={art:k,dia:"",kind:"slide",name:settings.slideName||"รางลิ้นชัก",unit:"ชุด",count:0})).count+=1; } }); }
-  const parents=Object.values(m).map(f=>({...f, purchase:fittingOut(f.art)}));   // ผูก Purchase ID จาก Element → Fittings
+  /* ───────── v28.3: Accessory จากแท็บเส้น/Line ของออเดอร์ ─────────
+     ของพวกนี้มาในไฟล์ XML แต่ไม่ใช่ตู้ จึงไม่มีชิ้นงานไหนเป็นเจ้าของ
+     เดิมจึงตกหล่นทั้งที่ต้องเบิกจริง · นับตามยอดในไฟล์ รวมยอดตามรหัส
+     ทำเฉพาะตอนคิดทั้งฉาก ถ้าคิดรายตู้จะถูกบวกซ้ำทุกใบ */
+  if(boards===state.boards){ try{ orderLineRows().forEach(r=>{
+    if(!m[r.art]) m[r.art]=r; else m[r.art].count+=r.count; }); }catch(e){ console.error("lineBOM:",e); } }
+  /* v29.0: บรรทัดที่พกรายชื่อรหัสมาแล้ว (มาจากช่องที่พิมพ์หลายรหัส) ห้ามถูกเขียนทับ
+     ไม่งั้นรหัสสำรองหายตั้งแต่ยังไม่ทันได้ไปค้น */
+  const parents=Object.values(m).map(f=>{ const ps=(f._pidList&&f._pidList.length)?f._pidList:fitPidList(f.art);
+    return {...f, purchase:ps[0], _pidList:ps}; });   // ผูก Purchase ID จาก Element → Fittings · v28.7: พกรหัสสำรองไปด้วย
   return expandFitKids(parents);
 }
 /* v27.6: แยกตัวกางลูกออกมา เพื่อให้หน้ารายการไฟใช้ตัวเดียวกับตอนส่งออก
    สิ่งที่เห็นบนจอกับสิ่งที่ออกไปจริงจึงตรงกันเสมอ */
+/* ───────── v28.3: รหัสชุด (SET) เลือกได้ว่าอะไรออกใบสั่งซื้อ ─────────
+   ของบางตัวขายเป็นชุด รหัสชุดคือสิ่งที่สั่งจริง ลูกเป็นแค่รายการประกอบไว้ดู
+   ของบางตัวกลับกัน รหัสชุดเป็นชื่อเรียกภายใน ที่สั่งจริงคือลูกทีละรหัส
+   เดิมออกทั้งแม่และลูกเสมอ ครึ่งหนึ่งจึงเกินมาทุกครั้งแล้วต้องไปไล่ตัดทิ้งเอง
+   ตั้งได้รายรหัสที่ Element → Fittings ช่อง "ออกใบสั่งซื้อแบบ" */
+function fitOutMode(def){
+  const v=String((def&&def.outMode)||"").trim();
+  if(/^(kids?|child|ลูก)/i.test(v)) return "kids";       // ออกเฉพาะลูก
+  if(/^(parent|set|แม่|ชุด)/i.test(v)) return "parent";  // ออกเฉพาะรหัสชุด
+  return "both";
+}
 function expandFitKids(parents){
-  const fitDefs=(settings.elements&&settings.elements.fittings)||[];
   const out=[];
-  (parents||[]).forEach(f=>{ out.push(f);
+  (parents||[]).forEach(f=>{
     const def=fitDef(f._kidsFrom||f.art);                                        // fitting ลูก (หลายตัวได้): เบิกแยกรหัส · v17.4: รางเอาลูกจากรหัสซีรีส์ · v28.0: ตัดช่องว่างก่อนเทียบ
-    if(def){ const kids = Array.isArray(def.children) ? def.children : (def.childCode ? [{code:def.childCode,qty:def.childQty}] : []);
-      kids.forEach(ch=>{ if(!ch)return; const cc=String(ch.code==null?"":ch.code).trim(); if(!cc)return;
+    const kids0 = def ? (Array.isArray(def.children) ? def.children : (def.childCode ? [{code:def.childCode,qty:def.childQty}] : [])) : [];
+    const mode=fitOutMode(def);
+    const kidsOnly=(mode==="kids" && kids0.some(c=>c&&String(c.code||"").trim()));
+    if(!kidsOnly) out.push(f); else f._setHidden=true;   // รหัสชุดไม่ออก แต่ยังใช้เป็นแม่ให้ลูกอ้างถึง
+    if(def && mode!=="parent"){ const kids = kids0;
+      kids.forEach(ch=>{ if(!ch)return; const raw=String(ch.code==null?"":ch.code).trim(); if(!raw)return;
         const q=Math.max(parseFloat(ch.qty)||1,0); if(!q)return;
-        const cd=fitDef(cc);
+        /* v29.0: ช่องรหัสลูกพิมพ์ได้หลายรหัส (รหัสเก่า/ใหม่ของของตัวเดียวกัน) */
+        const cc=fitCodeMain(raw), cd=fitDef(raw)||fitDef(cc), pids=fitPidList(raw);
         /* ───────── v13.9: ลูกที่เป็นของตัดตามยาวด้วย ─────────
            ฝาครอบพลาสติกที่สอดปิดหน้ารางไฟ ยาวเท่ารางเป๊ะ จึงต้องตัดตามความยาวเดียวกัน
            และมีรหัสของตัวเองแยกตามความยาวเหมือนราง
@@ -22625,8 +23103,11 @@ function expandFitKids(parents){
           unit:(cd&&cd.unit)||(cut?"เส้น":"ตัว"),
           /* v28.0: ลูกที่ไม่มี Element รองรับ = พิมพ์รหัสสั่งซื้อลงไปตรง ๆ ใช้รหัสนั้นเป็น Purchase ID ได้เลย */
           _rawPid:!cd||undefined,
-          count:f.count*q, qtyPer:q, _cut:cut||undefined, purchase:fittingOut(cc) }); }); }
+          count:f.count*q, qtyPer:q, _cut:cut||undefined,
+          purchase:pids[0], _pidList:pids }); }); }   // v28.7: ลูกก็มีรหัสเก่า/ใหม่ของตัวเอง
   });
+  /* v28.7: v28.6 แตกรหัสสำรองเป็นคนละบรรทัด ซึ่งผิด — ถอนออกแล้ว
+     ของยังเป็นชิ้นเดียว บรรทัดเดียว แค่มีหลายรหัสให้ไล่หา (ดูที่ cutLookupSeq) */
   /* v13.1: ค้นด้วย Purchase ID (รหัสจริงในคลัง) แล้วเติมชื่อ/หน่วยที่ค้นเจอกลับเข้ารายการ
      v13.9: ทำหลังสร้างลูกแล้ว ลูกที่ตัดตามแม่จึงได้ค้นรหัสท่อนด้วย ไม่ใช่แค่ตัวแม่ */
   try{ if(settings.cutLookupOn!==false){
@@ -22820,6 +23301,13 @@ function buildImosData(){
         LENGTH:(cut>0?mm1(cut):""),CNT:String(f.count),_FG_UNIT:(cc&&cc.unit)||f.unit}); });
     groups.push({name:grp.productId, rows});
   });
+  /* v28.3: Accessory จากแท็บเส้น ไม่ได้สังกัดตู้ใบไหน จึงต่อท้ายใบแรกครั้งเดียว
+     ผ่านตัวกางลูกเหมือนของอื่น รหัสชุดที่ตั้งไว้ว่าออกเฉพาะลูกจึงถูกกางให้ด้วย */
+  try{ const lr=expandFitKids(orderLineRows().map(f=>Object.assign({},f,{purchase:fittingOut(f.art),_pidList:fitPidList(f.art)})));
+    if(lr.length){ if(!groups.length) groups.push({name:oid||"Furnitech", rows:[]});
+      lr.forEach(f=>groups[0].rows.push({_tp:8,TYP:"8",NAME:f.purchase||f.art,ARTICLE_ID:f.purchase||f.art,
+        ORDER_ID:f.purchase||f.art,_FG_NAME:f.name,LENGTH:"",CNT:String(f.count),_FG_UNIT:f.unit})); }
+  }catch(e){ console.error("lineRows:",e); }
   if(!groups.length) groups.push({name:oid||"Furnitech", rows:[]});
   return { orderID:oid, cabinets:cabGroups().map(g=>({article:g.cab,productId:g.productId})), itemIdSet:itemIdSet(), source:"boardforge", loaded:new Date().toLocaleString("th"),
            groups, _boardforge:buildExport() };
@@ -22838,9 +23326,64 @@ function exportFeatureCSV(){
   (ex.fittings||[]).forEach(f=>row([ex.orderID,"","",f.art,f.name,"","","","FITTING",f.kind,f.count,f.dia,"","","","","",""]));
   download(ex.orderID+"_connectors.csv","\uFEFF"+csv,"text/csv"); toast("ดาวน์โหลด CSV สรุปแล้ว");
 }
+/* ───────── v28.3: หน้านี้เปลี่ยนเป็น "ของที่ต้องเบิก" ทั้งงาน ─────────
+   เดิมเป็นรายการเจาะ — ไล่ทีละชิ้นว่าเดือยลงตรงไหน รูอยู่พิกัดอะไร
+   ซึ่งเป็นข้อมูลของเครื่องเจาะ ไม่ใช่ของคนสั่งของ และมีอยู่ในไฟล์ MPR กับ CSV อยู่แล้ว
+   สิ่งที่ต้องดูก่อนส่งออกจริง ๆ คือ "จะเบิกอะไรกี่ชิ้น" ซึ่งกระจายอยู่หลายที่
+   อุปกรณ์ · ขอบ · รางไฟ · Accessory จากแท็บเส้น รวมมาไว้ที่เดียวพร้อมรหัสสั่งซื้อ */
+function fitBomRows(){
+  const rows=[];
+  let ex=null; try{ ex=buildExport(); }catch(e){ console.error(e); }
+  (ex&&ex.fittings||[]).forEach(f=>rows.push(Object.assign({},f,{grp:(f.kind==="line")?"line":"fit"})));
+  /* ขอบ — คิดเป็นเมตรตามความยาวจริงของทุกชิ้น ไม่ใช่จำนวนชิ้น */
+  try{ edgeTotals(state.boards).forEach(e=>{ if(!e||!e.out) return;
+    rows.push({grp:"edge", kind:"edge", art:e.out, purchase:e.out, dia:"",
+      name:"ขอบ "+(e.tag||e.out), unit:"ม.", count:Math.round(e.mm/10)/100}); }); }catch(e){ console.error(e); }
+  return rows;
+}
 function renderSummary(){
+  const body=$("sumBody"); if(!body) return;
+  const rows=fitBomRows();
+  const GRP=[["fit","อุปกรณ์ · เดือย · ราง · ไฟ"],["edge","ขอบ (PVC / Edge band)"],["line","Accessory จากแท็บเส้น / Line"]];
+  const oid=(()=>{ try{ return orderId(); }catch(e){ return ""; } })();
+  let h='<div class="sumh">ออเดอร์: '+escapeHtml(oid)+' · '+rows.length+' รายการ · '
+    +'<span style="opacity:.7">รหัสชุดที่ตั้งไว้ว่าออกเฉพาะลูก จะไม่ปรากฏในนี้ ตรงกับไฟล์ที่ส่งออกทุกบรรทัด</span></div>';
+  let any=false;
+  GRP.forEach(([g,title])=>{
+    const rs=rows.filter(r=>r.grp===g); if(!rs.length) return; any=true;
+    h+='<div class="sumh">'+escapeHtml(title)+' — '+rs.length+' รายการ</div>'
+      +'<table class="sumtbl"><thead><tr><th>รหัส</th><th>Purchase ID</th><th>ชื่อ</th><th>จำนวน</th><th>หน่วย</th></tr></thead><tbody>';
+    rs.forEach(f=>{
+      const e=fitDef(f.art), isKid=(f.kind==="child");
+      const pid=String(f.purchase||"").trim();
+      const rawPid=(!e&&!!pid&&g!=="edge");
+      const noPid=(!pid)||(pid===String(f.art).trim()&&!!e);
+      const nm=isKid?('<span style="opacity:.55">↳</span> '+escapeHtml(f.name)
+          +' <span style="opacity:.5;font-size:11px">('+f.qtyPer+'/ชุด '+escapeHtml(f.parent||"")+')</span>')
+        :escapeHtml(String(f.name||""));
+      h+='<tr'+(isKid?' style="opacity:.93"':'')+'>'
+        +'<td style="font-family:var(--mono)'+(isKid?';padding-left:18px':'')+'">'+escapeHtml(String(f.art))+'</td>'
+        +'<td style="font-family:var(--mono)">'
+          +(noPid?'<span class="warn" style="padding:2px 6px;border-radius:5px">ยังไม่ได้ใส่ Purchase ID</span>':escapeHtml(pid))
+          +(f._fg?('<div style="font-size:10px;color:#0c7a5a">รหัสท่อนจากคลัง'
+              +((f._fg.src&&(f._pidList||[]).length>1&&f._fg.src!==f._pidList[0])
+                 ?(' · เจอที่รหัสสำรอง '+escapeHtml(String(f._fg.src))):'')+'</div>')
+             :(rawPid?'<div style="font-size:10px;color:var(--ink-dim)">รหัสที่พิมพ์ไว้เอง</div>':''))
+          +((!f._fg&&+f._cut>0&&(f._pidList||[]).length>1)
+             ?('<div style="font-size:10px;color:#e58a24">หาความยาวนี้ไม่เจอสักรหัส ('+escapeHtml(f._pidList.join(" / "))+')</div>'):'')+'</td>'
+        +'<td>'+nm+'</td>'
+        +'<td class="num"><b>'+(Math.round((f.count||0)*100)/100)+'</b></td>'
+        +'<td>'+escapeHtml(String(f.unit||""))+'</td></tr>'; });
+    h+='</tbody></table>'; });
+  if(!any) h+='<div style="padding:16px;color:var(--ink-dim);font-size:12.5px">ยังไม่มีอุปกรณ์ในงานนี้</div>';
+  h+='<div style="padding:10px 2px;font-size:11.5px;color:var(--ink-dim);line-height:1.8">'
+    +'รายการเจาะกับพิกัดรูย้ายไปอยู่ที่ไฟล์เจาะ MPR และปุ่มดาวน์โหลด CSV แทน หน้านี้เหลือเฉพาะของที่ต้องเบิก · '
+    +'แก้ว่ารหัสชุดไหนออกอะไรได้ที่ Element → Fittings → ออกใบสั่งซื้อแบบ</div>';
+  body.innerHTML=h;
+}
+function _renderSummaryOld(){
   const ex=buildExport(); const E={left:"ซ้าย",right:"ขวา",top:"บน",bottom:"ล่าง"};
-  const body=$("sumBody"); let h="";
+  const body={}; let h="";
   h+=`<div class="sumh">ออเดอร์: ${escapeHtml(ex.orderID)} · ตู้ ${ex.summary.cabinetCount} ใบ (${ex.cabinets.map(c=>escapeHtml(c.productId)).join(", ")}) · ชิ้น ${ex.summary.partCount} · เดือยรวม ${ex.summary.connectorCount} · พิน ${ex.summary.pinCount||0} · รู ${ex.summary.holeCount} · ร่อง ${ex.summary.grooveCount}</div>`;
   h+=`<table class="sumtbl"><thead><tr><th>#</th><th>ProductID (ใบ)</th><th>Article</th><th>บาร์โค้ด</th><th>ชื่อชิ้น</th><th>ยาว</th><th>กว้าง</th><th>หนา</th><th>วัสดุ</th><th>เดือย</th><th>รู</th><th>ร่อง</th></tr></thead><tbody>`;
   ex.parts.forEach(p=>{const nc=p.connectors.reduce((s,c)=>s+(c.count||0),0);
@@ -22871,6 +23414,131 @@ function renderSummary(){
   body.innerHTML=h;
 }
 function openSummary(){ renderSummary(); $("expModal").classList.remove("show"); $("sumModal").classList.add("show"); }
+/* ───────── v28.3: รายการเส้น / Accessory ของออเดอร์ที่เปิดอยู่ ─────────
+   เดิมเห็นได้ครั้งเดียวตอนหน้าตรวจก่อนโหลด กดโหลดไปแล้วก็ไม่มีทางกลับมาดูอีก
+   ทั้งที่เป็นของที่ต้องเบิกจริงและมักต้องมาไล่ทีหลังว่าตัวไหนสั่งไปแล้ว
+   ที่นี่เปิดดูได้ตลอด และติ๊กเลือกได้รายตัวว่าตัวไหนให้ออกใบอุปกรณ์ */
+function orderLinesDialog(){
+  const L=state.orderLines||[];
+  const _C=ovCard(980,88), ov=_C.ov;
+  const draw=()=>{
+    const nOn=L.filter(lineBomOn).length;
+    let sum=0; L.forEach(r=>{ sum+=(parseFloat(r.price)||0)*(parseFloat(r.qty)||0); });
+    ov.innerHTML='<div style="'+_C.cardCSS+'">'
+      +'<div style="padding:12px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex:none">'
+      +'<b style="font-size:15px">รายการเส้น / Line ของออเดอร์</b>'
+      +'<span style="font-size:12px;color:var(--ink-dim)">'+L.length+' รายการ · ออกใบอุปกรณ์ '+nOn+' · มูลค่า '
+        +sum.toLocaleString(undefined,{minimumFractionDigits:2})+'</span>'
+      +'<button class="ibtn" id="olX" '+_C.xbtn+'>✕</button></div>'
+      +'<div style="flex:1;min-height:0;overflow:auto;padding:12px 16px">'
+      +(L.length?('<div style="font-size:12px;color:var(--ink-dim);margin-bottom:8px;line-height:1.8">'
+        +'ติ๊กช่องซ้ายสุด = ให้รหัสนั้นออกในใบอุปกรณ์ตอนส่งออก · ค่าตั้งต้นเปิดให้เฉพาะประเภทที่ตั้งไว้ด้านล่าง '
+        +'เพราะ Plinth · Worktop · Edge เป็นงานไม้ที่คิดทางอื่นอยู่แล้ว ใส่ซ้ำจะนับเกิน</div>'
+        +'<table style="border-collapse:collapse;width:100%;font-size:12px"><thead><tr>'
+        +["ออก BOM","ช่อง","ประเภท","รหัส","สี","ขนาด","ราคา/หน่วย","จำนวน","รวม"]
+          .map((x,i)=>'<th style="text-align:'+(i>=6?"right":"left")+';padding:5px 8px;color:var(--ink-dim);font-size:11px;border-bottom:1px solid var(--line);white-space:nowrap">'+escapeHtml(x)+'</th>').join("")
+        +'</tr></thead><tbody>'
+        +L.map((r,i)=>{ const on=lineBomOn(r), tot=(parseFloat(r.price)||0)*(parseFloat(r.qty)||0);
+          const auto=(r.bom!==true&&r.bom!==false);
+          return '<tr'+(on?'':' style="opacity:.5"')+'>'
+            +'<td style="padding:4px 8px;border-bottom:1px solid var(--line);white-space:nowrap">'
+              +'<input type="checkbox" class="olC" data-i="'+i+'"'+(on?" checked":"")+'>'
+              +(auto?'<span style="font-size:10px;color:var(--ink-dim);margin-left:5px">ตามประเภท</span>':'<span style="font-size:10px;color:#e58a24;margin-left:5px">ตั้งเอง</span>')+'</td>'
+            +[r.tag,r.kind,r.code,r.color||"—",r.size||"—",r.price,r.qty,tot.toLocaleString(undefined,{minimumFractionDigits:2})]
+              .map((c,k)=>'<td style="padding:4px 8px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:'+(k>=5?"right":"left")+';font-family:'+(k>=2?"var(--mono)":"inherit")+'">'+escapeHtml(String(c))+'</td>').join("")
+            +'</tr>'; }).join("")
+        +'</tbody></table>')
+        :'<div style="padding:16px;color:var(--ink-dim);font-size:12.5px">ออเดอร์นี้ไม่มีรายการในแท็บเส้น / Line<br>'
+         +'<span style="font-size:11.5px">ของพวกนี้มากับไฟล์ XML · ออเดอร์ที่โหลดไว้ก่อนเวอร์ชัน 28.3 จะยังไม่มี ต้องโหลด XML ใหม่อีกรอบ</span></div>')
+      +'<div style="margin-top:14px;padding:10px 12px;background:var(--bg);border-radius:10px">'
+      +'<div style="font-size:12px;margin-bottom:6px"><b>ประเภทที่ออกใบอุปกรณ์เป็นค่าตั้งต้น</b> <span style="color:var(--ink-dim)">คั่นด้วย ,</span></div>'
+      +'<input id="olKinds" class="nameinp" style="width:100%;font-family:var(--mono);font-size:12px" value="'
+        +escapeHtml(String(settings.lineBomKinds==null?DEF_SETTINGS.lineBomKinds:settings.lineBomKinds))+'">'
+      +'<div style="font-size:11px;color:var(--ink-dim);margin-top:5px">ประเภทที่ไฟล์นี้ส่งมา: '
+        +escapeHtml([...new Set(L.map(r=>r.kind).filter(Boolean))].join(" · ")||"—")+'</div></div>'
+      +'<div style="margin-top:12px"><div style="font-size:12px;margin-bottom:4px"><b>กฎแปลงรายการเส้น</b> '
+        +'<span style="color:#e58a24">กฎแรกที่ตรงชนะ</span> — '
+        +'<span style="color:var(--ink-dim)">จับคู่จาก ประเภท · รหัส · สี · ขนาด — ช่องที่เว้นว่าง = ตรงทุกค่า · ใส่หลายค่าคั่นด้วย , ได้</span></div>'
+        +'<div id="olRules"></div><button class="ibtn" id="olRuleAdd" style="margin-top:6px">＋ เพิ่มกฎ</button></div>'
+      +'</div>'
+      +'<div style="padding:10px 16px;border-top:1px solid var(--line);display:flex;gap:8px;flex:none">'
+      +'<button class="ibtn" id="olBom" style="flex:none;padding:8px 14px">📋 ดูรายการ BOM Fitting</button>'
+      +'<button class="ibtn" id="olOk" style="flex:none;margin-left:auto;padding:8px 22px;background:var(--accent);color:#fff;border-color:transparent">เสร็จ</button></div></div>';
+    const kill=()=>{ if(ov.parentNode) ov.parentNode.removeChild(ov); };
+    ov.querySelector("#olX").onclick=kill; ov.querySelector("#olOk").onclick=kill;
+    ov.onclick=e=>{ if(e.target===ov) kill(); };
+    ov.querySelectorAll(".olC").forEach(c=>c.onchange=e=>{
+      const r=L[+e.target.dataset.i]; if(!r) return;
+      r.bom=e.target.checked; try{ autosave(); }catch(e2){} draw(); });
+    { const k=ov.querySelector("#olKinds");
+      if(k) k.onchange=e=>{ settings.lineBomKinds=e.target.value;
+        try{ lsSet("furnitech:settings",settings); }catch(e2){} draw(); }; }
+    ov.querySelector("#olBom").onclick=()=>{ kill(); openSummary(); };
+    /* ───────── v29.1: ตารางกฎ ───────── */
+    { const host=ov.querySelector("#olRules");
+      if(host){
+        if(!Array.isArray(settings.lineRules)) settings.lineRules=[];
+        const R=settings.lineRules;
+        const save=()=>{ try{ lsSet("furnitech:settings",settings); }catch(e){} };
+        const drawR=()=>{ host.innerHTML="";
+          if(!R.length){ const e0=document.createElement("div");
+            e0.style.cssText="font-size:11.5px;opacity:.7;padding:4px 0";
+            e0.textContent="ยังไม่มีกฎ — ทุกแถวใช้ค่าตั้งต้นตามประเภท"; host.appendChild(e0); }
+          R.forEach((r,ri)=>{
+            const hit=L.filter(x=>lineRuleHit(r,x));
+            const nCab=hit.reduce((s2,x)=>s2+Math.max(1,Math.round(parseFloat(x.qty)||1)),0);
+            const act=String(r.act||"bom");
+            const box=document.createElement("div");
+            box.style.cssText="border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-bottom:7px;background:var(--bg)";
+            const F=(cls,ph,val)=>'<input class="nameinp '+cls+'" placeholder="'+ph+'" value="'+escapeHtml(String(val==null?"":val))+'" style="width:100%;font-family:var(--mono);font-size:11.5px">';
+            box.innerHTML='<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">'
+              /* v29.2: ลำดับสำคัญ — กฎแรกที่ตรงชนะ ตัวที่เจาะจงกว่าจึงต้องอยู่บน */
+              +'<span style="font-size:11px;color:var(--ink-dim);width:16px;text-align:right;flex:none">'+(ri+1)+'</span>'
+              +'<button type="button" class="lrUp" title="ย้ายขึ้น" style="border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;height:26px;width:24px;cursor:'+(ri?"pointer":"default")+';opacity:'+(ri?1:.3)+';flex:none">↑</button>'
+              +'<button type="button" class="lrDn" title="ย้ายลง" style="border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;height:26px;width:24px;cursor:'+((ri<R.length-1)?"pointer":"default")+';opacity:'+((ri<R.length-1)?1:.3)+';flex:none">↓</button>'
+              +'<input class="nameinp lrN" placeholder="ชื่อกฎ (ไว้จำเอง)" value="'+escapeHtml(String(r.name||""))+'" style="flex:1;min-width:0;font-size:12px">'
+              +'<select class="nameinp lrA" style="width:155px;font-size:11.5px">'
+                +[["bom","ออกใบอุปกรณ์"],["cab","สร้างตู้เข้าฉาก"],["skip","ไม่ออกเลย"]]
+                  .map(o=>'<option value="'+o[0]+'"'+((act===o[0])?" selected":"")+'>'+o[1]+'</option>').join("")
+              +'</select>'
+              +'<label style="display:flex;align-items:center;gap:5px;font-size:11.5px;white-space:nowrap;cursor:pointer"><input type="checkbox" class="lrOn" '+(r.off?"":"checked")+'> ใช้งาน</label>'
+              +'<button type="button" class="lrDel" style="border:1px solid var(--line);background:transparent;color:#e0853b;border-radius:7px;height:28px;width:30px;cursor:pointer">✕</button></div>'
+              +'<div style="font-size:10.5px;color:var(--ink-dim);margin-bottom:2px">จับคู่เมื่อ — เว้นว่าง = ตรงทุกค่า · หลายค่าคั่นด้วย <span style="font-family:var(--mono)">,</span> · ขึ้นต้นด้วย <span style="font-family:var(--mono)">!</span> = ทุกค่ายกเว้นค่านั้น</div>'
+              +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px">'
+              +F("lrK","ประเภท",r.kind)+F("lrC","รหัส",r.code)+F("lrL","สี",r.color)+F("lrZ","ขนาด",r.size)+'</div>'
+              +(act==="cab"
+                ?('<div style="font-size:10.5px;color:var(--ink-dim);margin:6px 0 2px">สร้างตู้ — ขนาดใส่ตัวเลขตรง ๆ หรือ <span style="font-family:var(--mono)">S1 S2 S3</span> = ตัวเลขลำดับที่เท่าไหร่ในช่องขนาดของแถวนั้น · จำนวนตู้ใช้ตามช่องจำนวน</div>'
+                  +'<div style="display:grid;grid-template-columns:1.4fr .7fr .7fr .7fr 1.2fr;gap:5px">'
+                  +F("lrCab","รหัสตู้ในคลัง",r.cabCode)+F("lrW","กว้าง",r.w)+F("lrH","สูง",r.h)+F("lrD","ลึก",r.d)
+                  +F("lrCol","สีไปที่ Family",r.colorTo)+'</div>')
+                :(act==="bom"
+                  ?('<div style="font-size:10.5px;color:var(--ink-dim);margin:6px 0 2px">ออกใบอุปกรณ์ด้วยรหัสนี้ · ใส่หลายรหัสคั่นด้วย , ได้ · จำนวนใช้ตามช่องจำนวนของแถว</div>'
+                    +F("lrOut","รหัสสั่งซื้อ เช่น 413LG0000004",r.out))
+                  :''))
+              +'<div style="font-size:11px;margin-top:6px;color:'+(hit.length?"#2f9e44":"var(--ink-dim)")+'">'
+                +(hit.length?("ไฟล์นี้จับได้ "+hit.length+" แถว"
+                   +(act==="cab"?(" → สร้างตู้ "+nCab+" ใบ")
+                     :(act==="bom"?(" → ออกรวม "+hit.reduce((s2,x)=>s2+(parseFloat(x.qty)||0),0)):"")))
+                  :"ไฟล์นี้ยังไม่มีแถวไหนตรงกับกฎนี้")+'</div>';
+            const q=x=>box.querySelector(x);
+            const bind=(sl,k)=>{ const el=q(sl); if(!el) return;
+              el.oninput=e=>{ r[k]=e.target.value; };
+              el.onchange=()=>{ save(); draw(); }; };
+            bind(".lrN","name"); bind(".lrK","kind"); bind(".lrC","code"); bind(".lrL","color"); bind(".lrZ","size");
+            bind(".lrOut","out"); bind(".lrCab","cabCode"); bind(".lrW","w"); bind(".lrH","h"); bind(".lrD","d"); bind(".lrCol","colorTo");
+            q(".lrA").onchange=e=>{ r.act=e.target.value; save(); draw(); };
+            q(".lrOn").onchange=e=>{ r.off=!e.target.checked; save(); draw(); };
+            q(".lrDel").onclick=()=>{ R.splice(ri,1); save(); draw(); };
+            q(".lrUp").onclick=()=>{ if(!ri) return; R.splice(ri-1,0,R.splice(ri,1)[0]); save(); draw(); };
+            q(".lrDn").onclick=()=>{ if(ri>=R.length-1) return; R.splice(ri+1,0,R.splice(ri,1)[0]); save(); draw(); };
+            host.appendChild(box); }); };
+        drawR();
+        const ab=ov.querySelector("#olRuleAdd");
+        if(ab) ab.onclick=()=>{ R.push({name:"",kind:"",code:"",color:"",size:"",act:"bom",out:"",cabCode:"",w:"",h:"",d:"",colorTo:"",off:false}); save(); draw(); };
+      } }
+  };
+  draw(); document.body.appendChild(ov);
+}
 let _sbLoadTried=false;
 function loadSupabase(){return new Promise((res,rej)=>{ if(window.supabase)return res(window.supabase);
   let done=false; const finish=(fn,arg)=>{ if(done)return; done=true; fn(arg); };
@@ -23184,6 +23852,7 @@ function bindChrome(){
   $("exCsv").onclick=exportCSV;
   { bind("exMprZip",exportAllMPR); }
   $("exSummary").onclick=openSummary;
+  { const b2=$("exLines"); if(b2) b2.onclick=()=>{ $("expModal").classList.remove("show"); orderLinesDialog(); }; }
   $("exFeatCsv").onclick=exportFeatureCSV;
   $("exProdJson").onclick=exportProductionJSON;
   $("exSupa").onclick=sendSupabase;
@@ -23270,6 +23939,7 @@ function readFile(f){const r=new FileReader();
     if(o.cabVarTxt)state.cabVarTxt=o.cabVarTxt;
     if(o.cabDX)state.cabDX=o.cabDX;
     if(o.bcSeq)state.bcSeq=o.bcSeq; if(o.bcMax)state.bcMax=o.bcMax;
+    state.orderLines=o.orderLines||[];                                               // v28.3
     state.selectedId=null;buildGTones();sync(1);
     const _nv=Object.keys(o.cabVarTxt||{}).length;
     toast("เปิดโปรเจกต์แล้ว"+(_nv?(" · คืนค่าตัวแปรของตู้ "+_nv+" ใบ"):""));
@@ -25131,7 +25801,7 @@ const CurvedShelf = (function(){
 
 <!-- summary modal -->
 <div class="modal" id="sumModal"><div class="card" style="width:min(860px,96vw)">
-  <div class="mh"><h3>สรุป Connector / รายการเจาะ</h3><button class="closeX" data-close>&times;</button></div>
+  <div class="mh"><h3>รายการ BOM Fitting — อุปกรณ์ทั้งงาน</h3><button class="closeX" data-close>&times;</button></div>
   <div class="mbody" id="sumBody" style="max-height:72vh;overflow:auto"></div>
 </div></div>
 
