@@ -1150,15 +1150,30 @@
      เผลอกดทีเดียวงานต้นฉบับเสียหาย ทั้งที่คนกดแค่มาดู
      เอาออกทั้งแถบบน แถบเครื่องมือแก้รูปทรง แจ้งเตือน และตั้งค่า
      เหลือเฉพาะที่ตกลงกัน: เปิดบาน · โปร่งใส · แยกประกอบ · แสงเงา · ลายไม้ · มุมมอง/ซูม */
+  /* ───────── v28.2: โหมดดูอย่างเดียว — แยก "ของที่ใช้ดู" กับ "ของที่ใช้แก้" ให้ขาด ─────────
+     รอบก่อนซ่อนแบบเหวี่ยงแห ของที่ใช้ดูหายไปด้วย ส่วนของที่ใช้แก้กลับเหลือรอด
+     กติกาที่ใช้ตอนนี้: อะไรที่ไม่เปลี่ยนตัวงาน ให้อยู่ · อะไรที่เปลี่ยนตัวงาน ให้หายไป */
   body.viewOnly header .tbtn{display:none}
   body.viewOnly .addbtn, body.viewOnly #editBar{display:none}
-  body.viewOnly #inspector{display:none}
-  body.viewOnly #toolSeg, body.viewOnly #viewSeg{display:none}
+  /* v28.2: แผงขวาชื่อ insp ไม่ใช่ inspector — สะกดผิดมาตั้งแต่ต้น แผง "แก้ไขชิ้นงาน" จึงไม่เคยถูกซ่อนเลย */
+  body.viewOnly #insp{display:none}
+  /* v28.2: เลือกกับไม้วัดเป็นเครื่องมือดู ไม่ได้แตะตัวงาน จึงอยู่ต่อ · ย้ายกับยืด/หด เปลี่ยนงานจริง จึงออก
+     ประกอบ ⇄ แยกชิ้น เป็นมุมมองล้วน ๆ ก็อยู่ต่อเหมือนกัน */
+  body.viewOnly #toolSeg [data-t="move"],
+  body.viewOnly #toolSeg [data-t="stretch"]{display:none}
   body.viewOnly #setBtn, body.viewOnly #labelBtn{display:none}
   body.viewOnly #snapSel, body.viewOnly #gtones{display:none}
   body.viewOnly #statusbar .sb-group:has(#snapSel),
   body.viewOnly #statusbar .sb-group:has(#gtones){display:none}
-  body.viewOnly #list .rowbtn, body.viewOnly #list .del{display:none}
+  /* v28.2: การ์ดตู้ในรายการมีสี่ปุ่ม แก้ไข · เก็บขึ้นคลาวด์ · ทำสำเนา · ลบ
+     เดิมเขียนกฎไว้ซ่อน .rowbtn ซึ่งไม่มีอยู่จริงในหน้าเลย กับ .del อีกตัว ผลคือลบหายไปตัวเดียว
+     อีกสามปุ่มยังกดได้เต็ม ๆ ตอนนี้ซ่อนทั้งแถว */
+  body.viewOnly #list .iact{display:none}
+  /* v28.2: เมนูคลิกขวาไม่เคยถูกแตะเลย เปิดมาได้ทั้งเมนูแก้ไข ตั้งแต่เจาะรูยันลบชิ้น
+     เหลือเฉพาะกลุ่มมุมมอง · ใส่ !important เพราะบางรายการถูกสั่งโชว์ด้วยสไตล์ในบรรทัดตอนเปิดเมนู */
+  body.viewOnly #ctxMenu > *{display:none !important}
+  body.viewOnly #ctxMenu > button[data-view]{display:flex !important}
+  body.viewOnly #ctxMenu > .ctx-h[data-view]{display:block !important}
   body.lockedMode #lockBtn{opacity:1;pointer-events:auto;filter:none}
   .cabrow{transition:background .12s,box-shadow .12s}
   .cabrow.hov{background:rgba(255,149,0,.13);box-shadow:inset 3px 0 0 #ff9500}
@@ -1593,9 +1608,11 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"Furnitech Cabinet", version:"28.0", build:"2026-08-17/raw-pid-trim",
+  name:"Furnitech Cabinet", version:"28.2", build:"2026-08-17/viewonly-gating",
   file:"Furnitech.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["28.2","2026-08-17","FIX โหมดดูอย่างเดียวซ่อนผิดตัวเกือบทั้งชุด — ของที่ใช้ดูหายไป ส่วนของที่ใช้แก้กลับเหลือรอด · การ์ดตู้ในรายการมีสี่ปุ่ม แก้ไข เก็บขึ้นคลาวด์ ทำสำเนา ลบ แต่กฎที่เขียนไว้ซ่อน .rowbtn ซึ่งไม่มีอยู่จริงในหน้าเลย กับ .del อีกตัว ผลคือลบหายไปตัวเดียว อีกสามปุ่มยังกดได้เต็ม ๆ · แผงขวาแก้ไขชิ้นงานก็เหมือนกัน กฎเขียนชื่อว่า inspector แต่ของจริงชื่อ insp จึงไม่เคยถูกซ่อนเลยสักครั้ง · เมนูคลิกขวาไม่เคยถูกแตะ เปิดมาได้ทั้งเมนู ตั้งแต่เจาะรู เซาะร่อง ยันลบชิ้น ตอนนี้เหลือเฉพาะกลุ่มมุมมอง ซ่อนชิ้น Isolate และแสดงทั้งหมด · กลับกัน ปุ่ม เลือก ย้าย ยืด/หด ไม้วัด และ ประกอบ ⇄ แยกชิ้น ถูกซ่อนยกแผง ทั้งที่ เลือก กับ ไม้วัด ไม่ได้แตะตัวงานเลย และคนดูแบบต้องวัดระยะเป็นเรื่องปกติ · ตอนนี้ เลือก ไม้วัด และ ประกอบ ⇄ แยกชิ้น อยู่ต่อ เหลือแค่ ย้าย กับ ยืด/หด ที่ออกไป เพราะสองตัวนั้นเปลี่ยนตัวงานจริง · กติกาที่ใช้ตัดสินตอนนี้มีข้อเดียว อะไรที่ไม่เปลี่ยนตัวงานให้อยู่ อะไรที่เปลี่ยนให้หายไป"],
+    ["28.1","2026-08-17","FIX ลิงก์แชร์ยังได้ 404 ทั้งที่ v27.8 เลิกเดาชื่อไฟล์ไปแล้ว — ที่อยู่ที่เคยจำไว้ชนะที่อยู่จริงเสมอ ใครเคยถูก v27.4 เติมชื่อไฟล์ให้ตอนนั้น ค่านั้นก็ถูกบันทึกค้างไว้ แล้วโผล่มาเป็นค่าตั้งต้นให้กดผ่านทุกครั้ง ลิงก์จึงชี้ผิดที่เดิมไม่เลิก · ตอนนี้ถ้าโปรแกรมถูกเสิร์ฟจากเว็บอยู่แล้ว ใช้ที่อยู่ที่กำลังเปิดอยู่จริงเป็นค่าตั้งต้น เพราะนั่นคือที่อยู่ที่พิสูจน์แล้วว่าเปิดได้ ไม่ต้องเดาและไม่ต้องจำ · เปิดจากไฟล์ในเครื่องค่อยใช้ค่าที่จำไว้เหมือนเดิม · และถ้าที่อยู่ชี้ไปที่ชื่อไฟล์ กล่องลิงก์จะเตรียมที่อยู่แบบโฟลเดอร์ของรหัสเดียวกันไว้ให้กดคัดลอกได้เลย ไม่ต้องสร้างลิงก์ใหม่ เพราะข้อมูลอัปโหลดไปแล้ว เหลือแค่ว่าหน้าโปรแกรมวางอยู่ที่ไหน"],
     ["28.0","2026-08-17","FIX ลูกของรางขึ้นว่ายังไม่ได้ใส่ Purchase ID ทั้งที่พิมพ์รหัสสั่งซื้อลงไปตรง ๆ แล้ว — ไม่ใช่ทุกอย่างต้องมี Element ของตัวเอง สกรูหรือฝาปิดที่เบิกด้วยรหัสสั่งซื้อล้วน ๆ พิมพ์รหัสนั้นลงช่องลูกได้เลย และไฟล์ที่ส่งออกก็ใช้รหัสนั้นอยู่แล้ว แต่หน้ารายการไฟเห็นว่า Purchase ID เท่ากับรหัสก็ตีว่ายังไม่ได้ใส่ ทั้งที่นั่นคือรหัสจริง · ตอนนี้แยกสองกรณีออกจากกัน มี Element แต่ช่อง Purchase Item ID ว่าง คือยังไม่ได้ใส่จริง ไม่มี Element เลย คือรหัสที่พิมพ์เองซึ่งเป็นรหัสสั่งซื้ออยู่แล้ว แสดงไปตามนั้นพร้อมกำกับว่ามาจากไหน · FIX รหัสที่มีช่องว่างติดท้ายทำให้หาของใน Element ไม่เจอ — ช่องกรอกเก็บค่าตามที่พิมพ์ทุกตัวอักษร เผลอเคาะเว้นวรรคไปหนึ่งที ตาเห็นเหมือนกันเป๊ะ แต่โปรแกรมเทียบแล้วคนละตัว ทั้งชื่อ หน่วย ลูก และ Purchase ID จึงหายไปเงียบ ๆ โดยไม่มีอะไรบอก ตอนนี้ตัดช่องว่างหัวท้ายทั้งสองฝั่งก่อนเทียบเสมอ"],
     ["27.9","2026-08-17","FIX หน้ารายการไฟขึ้นว่ายังไม่ได้ใส่ Purchase ID ทั้งที่ใส่ไว้แล้ว และไม่กางลูกออกมาให้เห็น — ตัวคิดของไฟคืนมาเป็นตารางดิบ มีแค่รหัส Element กับจำนวน ตอนส่งออกของก้อนนี้ยังต้องผ่านอีกสองด่าน ด่านแรกไปอ่าน Purchase Item ID จาก Element → Fittings มาใส่ ด่านที่สองกางลูกที่ผูกไว้ออกมาเป็นบรรทัดของตัวเอง หน้ารายการไฟข้ามทั้งสองด่าน ทุกบรรทัดจึงขึ้นสีส้มว่ายังไม่ได้ใส่รหัส และลูกไม่มีทางโผล่เพราะไม่เคยถูกสร้าง ทั้งที่ไฟล์ที่ส่งออกจริงถูกต้องอยู่แล้ว · ตอนนี้หน้านี้เดินสองด่านเดียวกับตอนส่งออก · FIX ตัวรางถูกนับสองเท่าในใบอุปกรณ์ — ตั้งแต่ v27.2 ที่ให้ตัวรางออกทางตัวคิดของไฟ บล็อกเก่าตั้งแต่ v11.5 ก็ยังนับรางอยู่อีกที่หนึ่ง สองที่ใช้รหัสและความยาวเดียวกัน จึงลงช่องเดียวกันแล้วบวกทับ ราง 1 ท่อนออกไปเป็น 2 และหน้ารายการไฟซึ่งนับรอบเดียวก็ไม่ตรงกับไฟล์ที่ส่งออก ตอนนี้เหลือทางเดียว · ฝาปิดปลายรางย้ายมาออกทางเดียวกับของไฟอื่น หน้ารายการไฟจึงเห็นด้วย จากเดิมที่ออกเฉพาะตอนส่งออก"],
     ["27.8","2026-08-17","FIX เปิดลิงก์แชร์แล้วได้ 404 — v27.4 เติมชื่อไฟล์ Furnitech.html ให้อัตโนมัติเมื่อผู้ใช้ใส่มาแค่โฟลเดอร์ แต่ถ้าในเรโปตั้งชื่อไฟล์เป็น index.html หรือสะกดตัวพิมพ์ไม่ตรง ก็ได้ 404 ทันที · เว็บโฮสต์เสิร์ฟ index.html ให้เองอยู่แล้วเมื่อชี้ที่โฟลเดอร์ จึงเลิกเดาชื่อไฟล์ ปล่อยตามที่ผู้ใช้ใส่มา ใส่โฟลเดอร์ก็ได้โฟลเดอร์ อยากชี้ไฟล์ชื่ออื่นก็พิมพ์ชื่อไฟล์มาเอง · เพิ่มคำแนะนำในกล่องลิงก์ ว่าถ้าได้ 404 ให้ลองเปิดที่อยู่นั้นเปล่า ๆ ก่อน และวิธีที่พลาดยากสุดคือตั้งชื่อไฟล์ในเรโปว่า index.html แล้วใส่แค่โฟลเดอร์ พร้อมย้ำว่าชื่อไฟล์บนเว็บแยกตัวพิมพ์ใหญ่เล็ก"],
@@ -21927,8 +21944,12 @@ function bindCtx(){
    ลิงก์เก็บ snapshot ไว้ในคลาวด์ แล้วแชร์แค่รหัสสั้น ๆ ข้อมูลออเดอร์ 39 ตู้ราว 58 KB จึงเบามาก */
 let VIEW_ONLY=false;
 /* ปุ่มที่ยังใช้ได้ในโหมดดูอย่างเดียว — ตรงตามที่ตกลงกันไว้ */
+/* v28.2: เดิมรายชื่อนี้ประกาศไว้เฉย ๆ ไม่มีใครเรียกใช้ การซ่อนทำด้วย CSS ล้วน
+   ทำให้อ่านโค้ดแล้วเข้าใจผิดว่ามีตัวคุมอยู่ · เขียนไว้เป็นบันทึกว่าอะไรที่ตั้งใจให้เหลือ
+   ของจริงอยู่ที่กฎ body.viewOnly ในบล็อก CSS ที่เดียว */
 const VIEW_KEEP=["doorOpenBtn","ghostBtn","expRange","expGrp","expVal","shadowBtn","grainBtn",
-                 "resetView","ecoBtn","notiBtn","zoomIn","zoomOut","viewBtn"];
+                 "resetView","ecoBtn","notiBtn","zoomIn","zoomOut","viewBtn",
+                 "toolSeg:select","toolSeg:measure","viewSeg"];
 function shareId(){ let s2=""; const A="abcdefghijkmnpqrstuvwxyz23456789";
   for(let i=0;i<10;i++) s2+=A[Math.floor(Math.random()*A.length)]; return s2; }
 function sharePayload(){
@@ -21947,7 +21968,13 @@ async function shareLinkDialog(){
      ตัวเองกดแล้วเปิดได้เพราะไฟล์อยู่ในเครื่องตัวเอง แต่คนอื่นเปิดไม่ได้เลย เบราว์เซอร์ห้าม
      จึงต้องถามที่อยู่เว็บที่วางโปรแกรมไว้ แล้วประกอบลิงก์จากตรงนั้น */
   const _isFile=(location.protocol==="file:");
-  const _base0=String(settings.shareBase||"").trim() || (_isFile?"":(location.origin+location.pathname));
+  /* ───────── v28.1: เปิดจากเว็บอยู่แล้ว ที่อยู่ของตัวเองคือคำตอบที่ถูกเสมอ ─────────
+     เดิมค่าที่เคยจำไว้ชนะที่อยู่จริง ใครเคยกรอกผิดไว้ครั้งเดียว (หรือถูก v27.4 เติมชื่อไฟล์ให้)
+     ก็ได้ลิงก์ผิดตัวเดิมซ้ำทุกครั้ง แก้ยังไงก็ยังโผล่มาให้กดผ่านอีก
+     ตอนนี้ถ้าโปรแกรมถูกเสิร์ฟจากเว็บ ใช้ที่อยู่ที่กำลังเปิดอยู่จริงเป็นค่าตั้งต้น
+     เพราะนั่นคือที่อยู่ที่พิสูจน์แล้วว่าเปิดได้ ไม่ต้องเดา · เปิดจากไฟล์ในเครื่องค่อยใช้ค่าที่จำไว้ */
+  const _here=_isFile?"":(location.origin+location.pathname);
+  const _base0=_here || String(settings.shareBase||"").trim();
   const v=await promptFields("สร้างลิงก์ดูอย่างเดียว",[
     {key:"title",label:"ชื่อที่จะให้คนเปิดเห็น",value:ttl,type:"text"},
     {key:"base",label:"ที่อยู่โปรแกรมบนเว็บ (คนอื่นจะเปิดจากตรงนี้)"
@@ -21979,6 +22006,9 @@ async function shareLinkDialog(){
     if(!r.ok) throw new Error("HTTP "+r.status+" "+(await r.text()).slice(0,160));
     const link=base+"?view="+id;
     const badLink=/^file:/i.test(link);
+    /* v28.1: ที่อยู่แบบโฟลเดอร์ของลิงก์เดียวกัน — มีเมื่อ base ชี้ไปที่ชื่อไฟล์เท่านั้น */
+    const baseFile=(base.match(/[^\/]+\.html?$/i)||[""])[0];
+    const altLink=baseFile?(base.replace(/[^\/]+\.html?$/i,"")+"?view="+id):"";
     const _C=ovCard(560,52), ov=_C.ov;
     ov.innerHTML='<div style="'+_C.cardCSS+'">'
       +'<div style="padding:14px 16px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex:none">'
@@ -21992,6 +22022,13 @@ async function shareLinkDialog(){
         +'ต้องเอาโปรแกรมไปวางบนเว็บก่อน แล้วสร้างลิงก์ใหม่โดยใส่ที่อยู่เว็บนั้นในช่อง “ที่อยู่โปรแกรมบนเว็บ”<br>'
         +'<b>ข้อมูลอัปโหลดสำเร็จแล้ว</b> รหัส <span style="font-family:var(--mono)">'+id+'</span> ใช้ต่อได้ แค่เปลี่ยนที่อยู่ข้างหน้า</div>'):'')
       /* v27.8: ได้ 404 บ่อยเพราะชื่อไฟล์ในเว็บไม่ตรง — บอกวิธีตรวจไว้ตรงนี้เลย */
+      /* v28.1: ลิงก์ชี้ไปที่ชื่อไฟล์ ก็เตรียมแบบโฟลเดอร์ไว้ให้กดเลย ไม่ต้องสร้างใหม่
+         รหัสตัวเดียวกันใช้ได้กับทั้งสองที่อยู่ เพราะข้อมูลอัปโหลดไปแล้ว เหลือแค่หน้าโปรแกรมอยู่ที่ไหน */
+      +((!badLink&&altLink)?('<div style="padding:9px 12px;border-radius:9px;background:var(--bg);font-size:11.5px;line-height:1.8">'
+        +'ลิงก์นี้ชี้ไปที่ชื่อไฟล์ <span style="font-family:var(--mono)">'+escapeHtml(baseFile)+'</span> — '
+        +'ถ้าในเรโปตั้งชื่อไฟล์ว่า <span style="font-family:var(--mono)">index.html</span> จะได้ 404 ให้ใช้อันนี้แทน<br>'
+        +'<input id="shU2" class="nameinp" readonly value="'+escapeHtml(altLink)+'" style="width:100%;font-family:var(--mono);font-size:11.5px;margin-top:5px">'
+        +'<button class="ibtn" id="shC2" style="margin-top:6px">คัดลอกแบบโฟลเดอร์</button></div>'):'')
       +(badLink?'':('<div style="font-size:11.5px;color:var(--ink-dim);line-height:1.7;padding:8px 10px;background:var(--bg);border-radius:9px">'
         +'ถ้าเปิดแล้วได้ <b>404</b> แปลว่าที่อยู่นั้นยังไม่มีไฟล์โปรแกรม — ลองเปิด <span style="font-family:var(--mono)">'
         +escapeHtml(base)+'</span> เปล่า ๆ ดูก่อน ต้องเห็นตัวโปรแกรมขึ้นมา<br>'
@@ -22005,6 +22042,8 @@ async function shareLinkDialog(){
     ov.querySelector("#shX").onclick=kill; ov.onclick=e=>{ if(e.target===ov) kill(); };
     ov.querySelector("#shC").onclick=()=>{ try{ navigator.clipboard.writeText(link); toast("คัดลอกลิงก์แล้ว"); }catch(e){} };
     ov.querySelector("#shO").onclick=()=>window.open(link,"_blank");
+    { const c2=ov.querySelector("#shC2");
+      if(c2) c2.onclick=()=>{ try{ navigator.clipboard.writeText(altLink); toast("คัดลอกแบบโฟลเดอร์แล้ว"); }catch(e){} }; }
   }catch(e){ console.error("share:",e); toast("สร้างลิงก์ไม่สำเร็จ: "+e.message); }
 }
 async function openSharedIfAny(){
@@ -25144,11 +25183,11 @@ const CurvedShelf = (function(){
   <button data-act="cabmirror"><span>⇋ กลับตู้ซ้าย ⇄ ขวา (Mirror ทั้งใบ)</span></button>
   <button data-act="cabvars"><span>𝑥 Variables (ตู้นี้)…</span></button>
   <div class="ctx-sep"></div>
-  <div class="ctx-h">มุมมอง</div>
-  <button data-act="hide"><span>👁 ซ่อนชิ้นนี้</span></button>
-  <button data-act="isolate"><span>🔎 แสดงเฉพาะชิ้นนี้ (Isolate)</span></button>
-  <button data-act="isolatecab"><span>🔍 แสดงเฉพาะตู้นี้ (Isolate ตู้)</span></button>
-  <button data-act="showall"><span>แสดงทั้งหมด</span></button>
+  <div class="ctx-h" data-view>มุมมอง</div>
+  <button data-act="hide" data-view><span>👁 ซ่อนชิ้นนี้</span></button>
+  <button data-act="isolate" data-view><span>🔎 แสดงเฉพาะชิ้นนี้ (Isolate)</span></button>
+  <button data-act="isolatecab" data-view><span>🔍 แสดงเฉพาะตู้นี้ (Isolate ตู้)</span></button>
+  <button data-act="showall" data-view><span>แสดงทั้งหมด</span></button>
   <div class="ctx-sep"></div>
   <button data-act="dup"><span>⧉ ทำสำเนา</span></button>
   <button data-act="del" class="danger"><span>🗑 ลบชิ้นนี้</span></button>
