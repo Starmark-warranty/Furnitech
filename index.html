@@ -1609,9 +1609,21 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"Furnitech Cabinet", version:"29.2", build:"2026-08-17/rule-order",
+  name:"Furnitech Cabinet", version:"30.4", build:"2026-08-17/design-params",
   file:"Furnitech.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["30.4","2026-08-17","FEAT ค่าปรับบานจากช่อง K_DesignParameter ตั้งเองได้แล้ว — ช่องนี้ในออเดอร์ไม่ใช่สีและไม่ใช่รุ่น แต่เป็นคำสั่งปรับบานที่เขียนย่อมาเป็นคำ ExtendBottom2cm คือยืดบานล่างลงสองเซนติเมตร TT30mm_TH30mm คือหดบานแถวบนสามสิบกับเว้นรอยต่อสามสิบ ค่าหนึ่งมีหลายคำสั่งต่อกันด้วยขีดล่างได้ และคำสั่งใหม่จะโผล่มาเรื่อย ๆ ตามงาน เขียนตายตัวในโปรแกรมจึงไม่ได้ · ตั้งค่า → ค่าปรับบาน เป็นตารางเพิ่มเองได้ ช่องคำสั่งใส่วงเล็บปีกกา n ตรงที่เป็นตัวเลข ช่องที่ทำเขียนเป็น ด้าน เครื่องหมาย ค่า แล้วต่อขอบเขต ด้านมี top bottom left right และ seamV สำหรับรอยต่อระหว่างบาน ขอบเขตมี ทุกบาน แถวบนสุด แถวล่างสุด และคิดเลขในช่องค่าได้ เช่น n คูณสิบ สำหรับหน่วยเซนติเมตร · ตารางมีบรรทัดลองแปลให้ดูว่าคำที่ออเดอร์ส่งมาจะกลายเป็นอะไร และบอกว่าฉากนี้มีตู้ถือคำสั่งนั้นกี่ใบ · ขนาดบานตั้งต้นถูกเก็บไว้ตั้งแต่ครั้งแรกที่ปรับ ทุกครั้งต่อไปคืนค่าเดิมก่อนค่อยปรับใหม่ กดซ้ำหรือเปลี่ยนค่าแล้วคิดใหม่จึงไม่ทบกันไปเรื่อย ๆ ซึ่งเป็นกับดักคลาสสิกของงานแบบนี้ · ทดสอบได้โดยเปลี่ยนค่าที่ Variables ของตู้แล้วกดปุ่มใช้กับทั้งฉาก · คำสั่งที่ยังไม่มีในตารางถูกนับไว้แล้วบอกตอนโหลดจบ ไม่หายเงียบ"],
+    ["30.3","2026-08-17","FIX กฎตั้งต้นไม่ได้ใส่ให้เองจริง ต้องไปกดปุ่มเอง — v29.6 ใส่กฎให้ครั้งแรกแล้วปักธงไว้ว่าใส่ไปแล้ว กันไม่ให้ใส่ซ้ำ แต่ธงนั้นอยู่คนละที่กับตัวกฎ พอดึงตั้งค่าจากคลาวด์ที่บันทึกไว้ก่อนจะมีฟีเจอร์นี้ กฎถูกทับเป็นว่างเปล่า ส่วนธงยังค้างอยู่ว่าใส่ไปแล้ว ผลคือกฎหายและไม่มีวันถูกใส่คืน ต้องกดปุ่มเองทุกครั้ง ซึ่งไม่ใช่คำว่าอัตโนมัติ · ตอนนี้เลิกพึ่งธง ดูจากของจริงอย่างเดียว ไม่มีกฎเลยก็ใส่ให้ ไม่ว่าจะเคยใส่มาแล้วกี่รอบ ตรวจทั้งตอนเปิดโปรแกรม ตอนดึงตั้งค่าจากคลาวด์ และตอนเปิดตารางกฎ · ยกเว้นกรณีเดียวคือคนลบทิ้งเองจนไม่เหลือสักข้อ อันนั้นถือว่าตั้งใจ จำไว้แล้วไม่ยัดคืนให้ กดปุ่มใส่กฎตั้งต้นเมื่อไหร่ก็เริ่มใหม่ได้"],
+    ["30.2","2026-08-17","FEAT กล่องรอตอนโหลดออเดอร์เข้าฉาก — ออเดอร์สี่สิบใบต้องไปถามคลังทีละรุ่น กว่าจะครบก็หลายวินาที ระหว่างนั้นหน้าจอค้างอยู่กับฉากเดิม ไม่มีอะไรบอกว่ากำลังทำอะไรอยู่หรือค้างไปแล้ว บางคนกดซ้ำเพราะคิดว่าไม่ติด · ตอนนี้มีกล่องบอกว่ากำลังทำตู้ใบไหน ครบไปกี่ใบจากทั้งหมดกี่ใบ พร้อมแถบความคืบหน้า และคืนคิวให้เบราว์เซอร์วาดจริงเป็นระยะ แถบจึงเดินให้เห็น ไม่ใช่กระโดดทีเดียวตอนจบ · FIX ตู้จากรายการเส้นได้ความลึก 100 ซึ่งเป็นเลขที่ผมคิดขึ้นเองล้วน ๆ ไม่ได้มาจากไฟล์เลย ไฟล์ส่งมาแค่สองตัวเลข ความลึกจึงต้องมาจากตัวใดตัวหนึ่งนั้น กฎตั้งต้นเปลี่ยนเป็นใช้ตัวเลขตัวที่สอง CeilingFiller 2400*150 จึงได้ 150 ไม่ใช่ 100 · ช่องนี้พิมพ์ตัวเลขทับได้เสมอถ้าความลึกจริงเป็นค่าอื่น"],
+    ["30.1","2026-08-17","ตารางกฎย้ายมาอยู่ในหน้าตรวจ XML ก่อนโหลดแล้ว — ผมวางกฎไว้ในหน้าส่งออกซึ่งเป็นปลายทาง ทั้งที่ทุกอย่างเกิดขึ้นตอนโหลด คนตรวจไฟล์อยู่หน้าตรวจ เห็นแถวครบอยู่ตรงหน้า แต่จะแก้กฎต้องโหลดเข้าไปก่อน เปิดอีกหน้าหนึ่ง แล้วย้อนกลับมาโหลดใหม่ ซึ่งกลับหัวทั้งลำดับและไม่มีเหตุผลอะไรเลย · ตอนนี้ตารางกฎอยู่ท้ายแท็บรายการเส้นในหน้าตรวจ แก้แล้วคอลัมน์ กฎที่จับได้ กับจำนวนตู้ที่จะสร้างขยับให้เห็นทันทีก่อนกดโหลด พร้อมสวิตช์สร้างตู้อัตโนมัติและปุ่มใส่กฎตั้งต้นอยู่ที่เดียวกัน · ทำเป็นตัวเดียวแล้ววางทั้งสองหน้า หน้าส่งออกยังมีเหมือนเดิมสำหรับแก้ทีหลังกับออเดอร์ที่โหลดไปแล้ว แก้ที่ไหนก็คือกฎชุดเดียวกัน ไม่มีสองชุดให้สับสน"],
+    ["30.0","2026-08-17","เลือกแถวรายการเส้นได้ตั้งแต่หน้าตรวจ XML ก่อนโหลดแล้ว — ตารางตู้ติ๊กเลือกได้มาตั้งแต่ v9.52 แต่รายการเส้นเป็นตารางอ่านอย่างเดียวมาตลอด ทั้งที่เป็นของที่ต้องตัดสินใจเหมือนกัน บางแถวเป็นของที่สั่งไปแล้ว บางแถวไม่เอา เดิมต้องโหลดเข้าไปก่อนแล้วไปปิดทีละแถวที่หน้าส่งออก ซึ่งเป็นคนละจังหวะกับที่กำลังตรวจอยู่ · ตอนนี้มีช่องติ๊กหน้าทุกแถว พร้อมปุ่มเลือกทั้งหมดกับไม่เลือกเลย ติ๊กครบทุกแถวไว้ก่อนตามที่ไฟล์ส่งมา เอาออกเฉพาะแถวที่ไม่เอา · แถวที่ไม่ติ๊กจะไม่ถูกนำเข้าเลย ทั้งใบอุปกรณ์และการสร้างตู้จากกฎ ไม่ใช่แค่ซ่อนจากตาราง · แถบสรุปข้างบนกับจำนวนตู้ที่จะสร้าง คิดจากแถวที่ติ๊กไว้เท่านั้น ติ๊กออกแล้วตัวเลขขยับให้เห็นทันที ไม่ต้องเดาว่าจะได้อะไร"],
+    ["29.9","2026-08-17","หน้าตรวจ XML ก่อนโหลด บอกแล้วว่ากฎรายการเส้นจะทำอะไรกับแถวไหน — หน้านี้คือหน้าที่ทุกคนดูก่อนกดโหลดเสมอ เพราะตั้งใจให้ตรวจตั้งแต่แรก แต่ผลของกฎกลับไปโผล่ที่หน้ารายการเส้นอีกหน้าหนึ่ง ซึ่งเปิดได้ต่อเมื่อโหลดเข้าฉากไปแล้ว จังหวะที่อยากรู้กับจังหวะที่บอกจึงสลับกันอยู่ ต้องโหลดเข้าไปก่อนถึงจะรู้ว่าจะได้อะไร · ตอนนี้แท็บรายการเส้นในหน้าตรวจมีคอลัมน์ กฎที่จับได้ เหมือนอีกหน้าหนึ่ง บอกรายแถวว่าจะสร้างตู้อะไรกี่ใบ หรือจะออกรหัสสั่งซื้ออะไร และมีแถบสรุปข้างบนว่าจะได้ตู้เพิ่มกี่ใบตอนกดโหลด ถ้าปิดการสร้างอัตโนมัติไว้ก็เตือนไว้ตรงนั้นด้วย · ช่องรหัสที่ว่างจริงในไฟล์ขึ้นว่า (ว่าง) เหมือนกันทั้งสองหน้า"],
+    ["29.8","2026-08-17","FIX โหลด XML แล้วกดปุ่มใช้กฎอีกรอบ ได้ตู้ซ้ำสองชุด — v29.1 สร้างตู้จากกฎให้เองตอนโหลดอยู่แล้ว แต่ไม่ได้ติดป้ายไว้ว่าใบไหนมาจากกฎ ส่วนปุ่ม ใช้กฎกับออเดอร์นี้เลย ที่เพิ่มมาทีหลังใน v29.4 ล้างของรอบก่อนด้วยป้ายนั้น ไม่มีป้ายก็ล้างไม่เจอ กดปุ่มหลังโหลดจึงทับถมกันเป็นสองชุด · ตอนนี้ติดป้ายตั้งแต่ตอนโหลด ทั้งสองทางจึงล้างของกันเองได้ · เพิ่มสวิตช์ สร้างตู้จากกฎให้เองตอนโหลด XML ที่หน้ารายการเส้น เปิดไว้เป็นค่าตั้งต้น ปิดได้ถ้าอยากเปิดดูรายการตรวจก่อนแล้วค่อยกดปุ่มเอง"],
+    ["29.7","2026-08-17","FIX กฎตั้งต้นส่งสีไปผิดชื่อ Family — ผมใส่ Front1 ไปตามที่เขียนคุยกัน แต่ชื่อที่ระบบใช้จริงคือ FrontColor1 (เห็นได้จากหน้า Variables ของตู้) สีที่ส่งไปจึงไม่ลงที่ไหนเลย ตู้ถูกสร้างขึ้นมาแต่ได้สีตั้งต้นแทนสีที่ออเดอร์ส่งมา · FEAT เลือกแบบบานจากรหัสสีได้แล้ว — ตู้ที่สร้างจากรายการเส้นไม่ได้มีแค่สี ยังต้องเลือกแบบบานให้ถูกด้วย งานสีกับงานผิวสำเร็จใช้คนละแบบบาน แต่ในไฟล์บอกมาแค่รหัสสี จึงต้องอ่านจากรหัสสีเอาเอง · เขียนเป็นคู่ รูปแบบ=ค่า คั่นด้วยจุลภาค ใช้ดอกจันแทนอะไรก็ได้ ไล่จากซ้ายไปขวา ตัวแรกที่ตรงชนะ ปิดท้ายด้วยดอกจันเท่ากับ ไว้เป็นค่าที่เหลือทั้งหมด · ค่าตั้งต้นที่ใส่มาให้คือรหัสสีที่มีตัว S ใช้ Pxxx01 นอกนั้น Exxx01 ถ้าเกณฑ์จริงไม่ใช่ตัว S แก้บรรทัดเดียวในกฎได้เลย ไม่ต้องแตะโปรแกรม · ปุ่ม ใช้กฎกับออเดอร์นี้เลย ที่กดแล้วเงียบ ตอนนี้บอกเหตุผลแยกสามแบบ ยังไม่มีรายการเส้น ยังไม่มีกฎสร้างตู้ หรือมีทั้งคู่แต่ไม่มีแถวไหนตรงเงื่อนไข จะได้รู้ว่าต้องไปแก้ตรงไหน"],
+    ["29.6","2026-08-17","ใส่กฎรายการเส้นตั้งต้นมาให้แล้ว ไม่ต้องนั่งพิมพ์เอง — v29.1 ถึง v29.5 ผมทำที่ให้กรอกกฎแล้วส่งตารางเปล่าไปให้กรอกเองทั้งหมด ทั้งที่เงื่อนไขทุกข้อถูกบอกไว้ครบแล้วตั้งแต่ตอนคุยกัน ซึ่งเป็นการโยนงานกลับไปโดยไม่มีเหตุผล · ชุดตั้งต้นที่ใส่มาให้ ขาสแตนเลสแยกกฎตามความสูง 100 120 150 โดย 100 มีรหัส 413LG0000004 อยู่แล้ว อีกสองตัวเว้นช่องรหัสไว้เพราะยังไม่รู้ค่าจริง · ขาที่สีไม่ใช่สแตนเลสสร้างเป็นตู้ PN01 · แผงปิดช่องบนสร้างเป็นตู้ CeilingFiller โดยเว้นช่องรหัสไว้เพราะไฟล์ส่งรหัสว่างมา ทั้งสองแบบส่งตัวเลขตัวแรกของช่องขนาดไปเป็นความสูง ตัวที่สองไปเป็นความกว้าง และสีไปลงที่ Front1 · ใส่ให้ครั้งเดียวตอนเปิดโปรแกรมในเครื่องที่ยังไม่เคยมีกฎ ลบทิ้งเองแล้วจะไม่ถูกใส่คืน และมีปุ่ม ใส่กฎตั้งต้น ไว้เรียกคืนเมื่อไหร่ก็ได้ ซึ่งเติมเฉพาะกฎที่ยังไม่มี ไม่ทับของที่แก้ไว้"],
+    ["29.5","2026-08-17","FIX แก้รหัสตู้ในหน้าตรวจ XML แล้วกด เก็บเป็นออเดอร์แก้ไข หรือ Save As ไฟล์ใหม่ รหัสที่แก้ไม่ติดไปด้วย — ชื่อรุ่นของตู้อ่านจากโหนด Pname เป็นตัวหลัก ส่วนใน PVarString มีบ้างไม่มีบ้างแล้วแต่ไฟล์ที่ส่งมา v26.4 เขียนค่ากลับเฉพาะเมื่อคีย์นั้นมีอยู่แล้วใน PVarString ไฟล์ที่ไม่มีคีย์จึงไม่ถูกเขียนอะไรเลยสักตัว · โหลดเข้าฉากยังได้รหัสใหม่ถูกต้อง เพราะตอนโหลดอ่านจากค่าในหน่วยความจำ แต่ปุ่มบันทึกทั้งสองสร้างไฟล์ใหม่จาก PVarString ล้วน ๆ รหัสที่แก้จึงหายไปเงียบ ๆ ทั้งที่แถบล่างขึ้นว่าแก้ค่าไว้แล้วกี่แถว ซึ่งเป็นคำยืนยันที่ผิด · ตอนนี้จำไว้ว่าแถวไหนถูกแก้ชื่อ แล้วเขียนลงโหนด Pname ตอนสร้างไฟล์ ไฟล์ที่ไม่มี Pname ค่อยฝากไว้ใน PVarString เพื่อให้ตัวอ่านหาเจอทางใดทางหนึ่งเสมอ · ไฟล์ต้นฉบับยังไม่ถูกแตะเหมือนเดิม"],
+    ["29.4","2026-08-17","FIX ตั้งกฎ สร้างตู้เข้าฉาก แล้วไม่มีอะไรเกิดขึ้น — v29.1 ผมผูกการสร้างตู้จากกฎไว้กับจังหวะโหลด XML อย่างเดียว ซึ่งกลับหัวกลับหางกับลำดับที่คนทำงานจริง คนโหลดออเดอร์เข้ามาก่อน แล้วค่อยเห็นว่ามีแถวอะไรบ้างและต้องตั้งกฎยังไง พอตั้งเสร็จจังหวะโหลดก็ผ่านไปแล้ว กฎถูกบันทึกไว้เรียบร้อยแต่ไม่มีอะไรเกิดขึ้น และไม่มีอะไรบอกด้วยว่าต้องโหลดใหม่ · เพิ่มปุ่ม ใช้กฎกับออเดอร์นี้เลย ที่หน้ารายการเส้น กดแล้วสร้างตู้เข้าฉากทันทีโดยไม่ต้องโหลด XML ใหม่ ตู้ที่มาจากกฎถูกทำเครื่องหมายไว้ กดซ้ำจึงล้างของรอบก่อนแล้วสร้างใหม่ ไม่ทับถมกันเป็นสองสามชุด · ตารางรายการเส้นเพิ่มคอลัมน์ กฎที่จับได้ บอกรายแถวว่าจะกลายเป็นอะไร แถวที่ไม่มีกฎไหนจับและประเภทก็ไม่ได้เปิดให้ออก ขึ้นสีส้มว่า ไม่มีกฎ ไม่ออกที่ไหนเลย เดิมขึ้นเหมือนแถวปกติทั้งที่ของแถวนั้นหายไปเงียบ ๆ ทั้งแถว · ช่องรหัสที่ว่างจริง ๆ ในไฟล์ ขึ้นว่า (ว่าง) แทนช่องเปล่า จะได้ไม่เข้าใจผิดว่าตารางแสดงไม่ครบ และรู้ว่าเวลาเขียนกฎต้องเว้นช่องรหัสไว้ ไม่ใช่ไปพิมพ์ค่าอื่นลงไป"],
+    ["29.3","2026-08-17","ช่องขนาดในกฎแปลงรายการเส้น จับคู่ทีละตัวเลขได้แล้ว ไม่ต้องตรงทั้งสตริง — ของอย่างตีนตู้ ตัวที่กำหนดรหัสสั่งซื้อคือความสูง ส่วนความยาวเป็นเท่าไหร่ก็ได้ตามหน้างาน เทียบสตริงเต็มจึงต้องเขียนกฎใหม่ทุกครั้งที่เจอความยาวใหม่ ซึ่งไม่มีวันจบและพลาดง่ายมาก · เขียน S2=120 ได้แล้ว แปลว่าตัวเลขตัวที่สองของช่องขนาดเท่ากับ 120 ความยาวจะเป็น 2400 หรือ 3000 ก็เข้ากฎเดียวกัน รับเครื่องหมายมากกว่าน้อยกว่าด้วย และใส่ ! นำหน้าเพื่อตัดออกได้เหมือนช่องอื่น · ใช้ตัวอักษร S1 S2 S3 ชุดเดียวกับช่องขนาดของตู้ที่มีอยู่แล้ว จะได้ไม่ต้องจำสองระบบ"],
     ["29.2","2026-08-17","กฎแปลงรายการเส้น สลับลำดับได้ และจับคู่แบบ ไม่ใช่ค่านี้ ได้แล้ว — ของชิ้นเดียวกันเปลี่ยนความหมายตามสีได้ ตีนตู้สแตนเลสคือของที่ซื้อมาทั้งเส้นจึงออกเป็นรหัสสั่งซื้อ แต่ตีนตู้สีไม้คืองานไม้ ต้องเข้าฉากเป็นตู้จริงแล้วออกใบตัด ซึ่งเป็นคนละเรื่องกันคนละใบ · เขียนแยกกฎทีละสีไม่ไหวเพราะสีไม้มีไม่จำกัด · ใส่เครื่องหมายอัศเจรีย์นำหน้าค่า = ทุกค่ายกเว้นค่านั้น ผสมรายการที่ยอมรับกับรายการที่ตัดออกในช่องเดียวกันได้ · v29.1 ลืมเรื่องลำดับไปเลย ทั้งที่กฎแรกที่ตรงเป็นตัวชนะ กฎที่เจาะจงกว่าจึงต้องอยู่บน แต่ไม่มีทางย้ายเลยนอกจากลบแล้วพิมพ์ใหม่ทั้งกฎ · ตอนนี้มีเลขลำดับกับปุ่มย้ายขึ้นลงทุกกฎ และเขียนกำกับไว้ที่หัวตารางว่ากฎแรกที่ตรงชนะ จะได้ไม่ต้องไปเดาเอง"],
     ["29.1","2026-08-17","FEAT กฎแปลงรายการเส้น — แถวในแท็บเส้นไม่ได้มีความหมายเดียวกันทุกแถว บางแถวคือของที่ซื้อมาทั้งชิ้น บางแถวคือตู้อีกใบที่ยังไม่ถูกนับ เช่นแผงปิดช่องบนซึ่งต้องเข้าฉากเป็นตู้จริง ไม่ใช่ของในใบอุปกรณ์ และรหัสที่ออเดอร์ส่งมาก็เป็นรหัสของฝั่งออกแบบ ไม่ใช่รหัสสั่งซื้อของเรา · ตอนนี้เขียนเป็นกฎได้ที่หน้า รายการเส้น จับคู่จาก ประเภท รหัส สี ขนาด ช่องที่เว้นว่างคือตรงทุกค่า ใส่หลายค่าคั่นด้วยจุลภาคได้ แล้วบอกว่าจะให้แถวนั้นกลายเป็นอะไร · ออกใบอุปกรณ์ด้วยรหัสที่กำหนด ใช้จำนวนตามช่องจำนวนของแถว และใส่หลายรหัสได้เหมือนช่องรหัสอื่น · สร้างตู้เข้าฉาก ระบุรหัสตู้ในคลัง กว้าง สูง ลึก และให้สีของแถวไปลงที่ Family ที่ต้องการ ช่องขนาดใส่ S1 S2 S3 ได้ = ตัวเลขลำดับที่เท่าไหร่ในช่องขนาดของแถวนั้น 2400*150 จึงส่ง 2400 ไปเป็นความสูงและ 150 ไปเป็นความกว้างได้ จำนวนตู้เท่ากับจำนวนในแถว · หรือสั่งไม่ให้ออกเลยก็ได้ · ตู้ที่มาจากรายการเส้นถูกต่อท้ายรายการตู้ก่อนสร้างฉาก จึงเดินทางเดียวกับตู้ที่มาจากออเดอร์ทุกขั้น ทั้งดึงโมเดลจากคลัง ปรับขนาด ใส่สี วางในฉาก และออกใบตัด ไม่มีเส้นทางพิเศษให้ต้องดูแลแยก · ตารางบอกรายแถวว่าโดนกฎไหนและจะกลายเป็นอะไร และใต้แต่ละกฎบอกว่าไฟล์นี้จับได้กี่แถวจะออกเท่าไหร่"],
     ["29.0","2026-08-17","ช่องรหัสทุกช่องรับหลายรหัสได้แล้ว ไม่ใช่แค่ช่อง Purchase Item ID — v28.7 ทำเรื่องรหัสเก่า/รหัสใหม่ไว้ที่ช่อง Purchase Item ID อย่างเดียว ซึ่งใช้ได้เฉพาะของที่มี Element ของตัวเอง แต่ลูกอย่างพลาสติกครอบมักถูกพิมพ์รหัสสั่งซื้อลงไปตรง ๆ โดยไม่ได้ทำ Element ให้ พิมพ์สองรหัสคั่นจุลภาคลงช่องรหัสลูกเลยจึงเป็นสิ่งที่ทุกคนจะทำ และเป็นสิ่งที่ควรใช้ได้ตั้งแต่แรก ของเดิมอ่านทั้งบรรทัดเป็นรหัสเดียวยาว ๆ แล้วหาไม่เจอ · ตอนนี้ช่องไหนที่ไม่มี Element รองรับ ทั้งบรรทัดถือเป็นรายชื่อรหัสสั่งซื้อของของตัวเดียวกัน ตัวแรกเป็นตัวตั้งของบรรทัด แล้วไล่ถามทีละรหัสจนเจอความยาวที่ต้องการ เหมือนที่ทำกับช่อง Purchase Item ID · ใช้ได้ทั้งช่องรหัสลูก ช่องอุปกรณ์ที่ฝากไว้กับ Part และรายการในชุดอุปกรณ์ประจำรหัสตู้ · ถ้าตัวแรกที่พิมพ์ไปตรงกับรหัส Element ที่มีอยู่ ระบบใช้ Element ตัวนั้นเป็นเจ้าของบรรทัดตามเดิม ชื่อและหน่วยจึงไม่หาย"],
@@ -2256,6 +2268,7 @@ const HINGE3D_DEFAULT={
 };
 const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, dowelPitch:170, dowelMargin:32, pinD:5, pinInset:37, pinDepth:8, pinPitch:64, pinExtra:1, pinName:"Shelf pin Ø5", dowelName:"เดือยไม้ Ø8", dowelCode:"DOWEL8", pinCode:"PIN5", shelfSupD:5, shelfSupDepth:12, shelfSupFront:15, shelfSupBack:15, shelfSupAuto:true, shelfSupW:200, shelfSupFrontL:50, shelfSupBackL:50, shelfSupCode:"SHELFSUP5", shelfSupName:"ตัวรับชั้นแบบเจาะสันข้าง Ø5", xmlScale:true, overlapWarn:false, slideName:"รางลิ้นชัก", slideCode:"SLIDE", slideDrillD:5, slideDrillDepth:3, slideRailFromBot:0, slideOffBlum:10, slideOffHafele:-17, underSideInner:21, altoSideH:80, altoBackH:63, altoBotMinusW:35, altoBackMinusW:38, altoBotMinusD:10, altoCodeA:"ALTO_S_H80_A", altoCodeW:"ALTO_S_H80_W", altoDrillRear:41, altoDrillH:37, altoPanelT:16, altoFrontDrill:"37,32,5,12 ; -37,32,5,12", legCode:"LEG", legName:"ขาตู้ปรับระดับ", legXmlOn:true, legXmlField:"K_Leg", legXmlMap:"", legXmlNo:"none,ไม่มี,ไม่เอา,-", legXmlD:50, legXmlInset:50, legXmlFitGap:true, legCountMap:"800:6, 1250:8", legNarrowW:180, sceneFog:true, legMarkMidSingle:true, dxJoinGap:0, ledGrooveW:19, ledGrooveD:8, ledMaxLen:3000, ledSplit:"เต็มท่อนก่อน", ledCapCode:"LED_CAP", ledCornerCode:"", led3D:true, ledLift:2.5, ledNameTag:"LED",
   ledSet:"", ledZoneGap:800, ledShelfClear:1.5,
+  dpField:"K_DesignParameter", designParams:[],   // v30.4
   kitField:"K_Fitting_Concept", kitPushMap:"B:top, W:bottom", xmlThinMin:1, xmlSkipNoModel:false, orderProgNo:"700", doorGapWarn:50, csNewGap:120, ledSets:[{id:"12V-COB", volt:12, wPerM:9.6,
     stripCode:"", psuMap:"30, 60, 100", psuCode:"", psuUse:80, maxRunM:5,
     wireCode:"", wireMode:"ต่อเส้นไฟ", wireQty:1}], ledSetPerRun:false, cutSizeFmt:"{ชื่อ} ตัดขนาด {ยาว} mm.", cutLookupKey:"ตัดขนาด", cutLookupOn:true, pullXmlOn:true, pullField:"K_Pull", pullOriField:"K_Orientation", pullPosField:"K_Pull_Position", pullXField:"K_Pull_Coordinate_X", pullYField:"K_Pull_Coordinate_Y", pullNo:"nopull,none,-", pullName:"มือจับ", pull3D:true, dxNotchGap:0.5, railLikeMaxW:100, pullDefPos:"UpMiddle", pullDefOri:"H", pullDefX:35, pullDefY:0, legClipOn:true, legClipMap:"", legClipCode:"LEGCLIP", legClipName:"กิ๊ฟขาตู้ (ยึดแผ่นปิดขา)", doorSwing:true, shelfT:16, hangRailCode:"HANGRAIL", hangRailName:"ราวแขวนผ้า สแตนเลส C", hangRailThruD:8, hangRailCsD:13, hangRailCsDepth:2, hangRailEndGap:25, hangRailMap:"", drawerSideT:16, drawerBotT:9, drawerBoxH:120, drawerBoxLift:20, screwD:5, screwMateDepth:28, screwInset:9, screwCode:"SCREW5", screwName:"สกรู Ø5", altoMapA:"350:552.35.362, 400:552.35.363, 450:552.35.364, 500:552.35.365", altoMapW:"350:552.35.762, 400:552.35.763, 450:552.35.764, 500:552.35.765",
@@ -2299,6 +2312,7 @@ const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, d
   lineBomKinds:"Accessory",
   /* v29.1: กฎแปลงรายการเส้น — [{name,kind,code,color,size,act,out,cabCode,w,h,d,colorTo,off}] */
   lineRules:[],
+  lineRuleAuto:true,   // v29.8: สร้างตู้จากกฎให้เองตอนโหลด XML
   hingeModelCode:"K_HF_Hinge_31453511_Soft_110",   // v9.51: รหัสโมเดล 3D ของบานพับที่ใช้วาด
   /* v28.9: ชุดอุปกรณ์ประจำรหัสตู้ — [{name, cabs, items, per}] */
   cabFitSets:[],
@@ -5580,6 +5594,131 @@ const _fmDetect=(o,edge,sg)=>{                       // เดาโหมด+�
   cand.forEach(c=>{ const dd=Math.abs(edge-c[1]); if(dd<bd){ bd=dd; best=c; } });
   return {m:(bd<=7?best[0]:"ทับ"), v:Math.round((bd<=7?sg*(edge-best[1]):sg*(edge-o.out))*10)/10};
 };
+/* ═════════ v30.4: K_DesignParameter — ค่าปรับบานที่ออเดอร์ส่งมา ═════════
+   ช่องนี้ไม่ใช่สีและไม่ใช่รุ่น แต่เป็นคำสั่งปรับบานที่เขียนย่อมาเป็นคำ
+   ExtendBottom2cm = ยืดบานล่างลงไป 2 ซม. · TT30mm_TH30mm = หดบานบน 30 กับเว้นรอยต่อ 30
+   หนึ่งค่าอาจมีหลายคำสั่งต่อกันด้วยขีดล่าง และคำสั่งใหม่ ๆ จะโผล่มาเรื่อย ๆ ตามงาน
+   จึงเขียนตายตัวในโปรแกรมไม่ได้ ต้องเป็นตารางที่เพิ่มเองได้
+
+   รูปแบบ: ช่องคำสั่งใส่ {n} แทนตัวเลขที่จะดึงออกมา เช่น ExtendBottom{n}cm
+   ช่องที่ทำ เขียนเป็น ด้าน + เครื่องหมาย + ค่า คั่นด้วยจุลภาค
+     bottom+n*10@last   ยืดขอบล่างของบานแถวล่างสุดออก n*10 มม.
+     top-n@first        หดขอบบนของบานแถวบนสุดเข้ามา n มม.
+     seamV=n            ตั้งรอยต่อระหว่างบานที่ซ้อนกันเป็น n มม.
+   ด้าน: top bottom left right seamV · ขอบเขต: all(ตั้งต้น) first last */
+function dpField(){ return String(settings.dpField||DEF_SETTINGS.dpField||"K_DesignParameter").trim(); }
+function dpRules(){ const r=settings.designParams; return Array.isArray(r)?r:[]; }
+function defaultDesignParams(){
+  return [
+    {token:"Standard", name:"ช่องไฟปกติ — ไม่ปรับอะไร", ops:"", off:false},
+    {token:"ExtendBottom{n}cm", name:"ยืดบานล่างลง n เซนติเมตร", ops:"bottom+n*10@last", off:false},
+    {token:"ExtendBottom{n}mm", name:"ยืดบานล่างลง n มิลลิเมตร", ops:"bottom+n@last", off:false},
+    {token:"TT{n}mm", name:"Trim Top — หดบานแถวบนสุดลง n มม.", ops:"top-n@first", off:false},
+    {token:"TH{n}mm", name:"Trim Horizontal — รอยต่อระหว่างบานที่ซ้อนกัน n มม.", ops:"seamV=n", off:false},
+  ];
+}
+/* แตกค่าที่ส่งมาเป็นคำสั่งทีละตัว แล้วจับกับตารางกฎ */
+function dpParse(val){
+  const out=[], toks=String(val==null?"":val).split(/[_\s,;+]+/).map(x=>x.trim()).filter(Boolean);
+  toks.forEach(t=>{
+    let hit=null, num=null;
+    dpRules().forEach(r=>{ if(hit||!r||r.off===true) return;
+      const pat=String(r.token||"").trim(); if(!pat) return;
+      const rx=new RegExp("^"+pat.replace(/[.*+?^${}()|[\]\\]/g,"\\$&").replace(/\\\{n\\\}/g,"([-\\d.]+)")+"$","i");
+      const m=rx.exec(t); if(!m) return;
+      hit=r; num=(m[1]!=null)?parseFloat(m[1]):null; });
+    out.push({tok:t, rule:hit, n:num});
+  });
+  return out;
+}
+/* แปลงช่อง "ช่องที่ทำ" ของกฎหนึ่งข้อ เป็นรายการปฏิบัติการพร้อมตัวเลขจริง */
+function dpOps(rule,num){
+  const out=[];
+  String((rule&&rule.ops)||"").split(/[,;\n]+/).forEach(t=>{
+    const raw=String(t||"").trim(); if(!raw) return;
+    const m=raw.match(/^(top|bottom|left|right|seamV)\s*([+\-=])\s*([^@]+?)\s*(?:@\s*(all|first|last))?$/i);
+    if(!m) return;
+    let v=null;
+    try{ v=Function("n","return ("+String(m[3])+");")(num==null?0:num); }catch(e){ v=null; }
+    if(v==null||!isFinite(v)) return;
+    out.push({side:m[1].toLowerCase()==="seamv"?"seamV":m[1].toLowerCase(), op:m[2], v:+v, scope:(m[4]||"all").toLowerCase()});
+  });
+  return out;
+}
+/* อธิบายเป็นคำไทยให้อ่านออกก่อนโหลด */
+function dpExplain(val){
+  const P=dpParse(val), out=[];
+  P.forEach(x=>{
+    if(!x.rule){ out.push({tok:x.tok, txt:"ไม่มีกฎรองรับ", bad:true}); return; }
+    const ops=dpOps(x.rule,x.n);
+    if(!ops.length){ out.push({tok:x.tok, txt:(x.rule.name||"ไม่ปรับอะไร")}); return; }
+    const W={top:"ขอบบน",bottom:"ขอบล่าง",left:"ขอบซ้าย",right:"ขอบขวา",seamV:"รอยต่อระหว่างบาน"};
+    const S={all:"ทุกบาน",first:"แถวบนสุด",last:"แถวล่างสุด"};
+    out.push({tok:x.tok, txt:ops.map(o=>W[o.side]+" "
+      +(o.op==="="?("= "+o.v):(o.op==="+"?("ยืดออก "+o.v):("หดเข้า "+o.v)))+" มม."
+      +(o.side==="seamV"?"":(" ("+S[o.scope]+")"))).join(" · ")});
+  });
+  return out;
+}
+/* ───────── ลงมือปรับบานจริง ─────────
+   บานเป็นชิ้น orient front — ด้านยาว L คือความกว้างบาน ด้านกว้าง W คือความสูงบาน
+   เก็บขนาดตั้งต้นของบานไว้ครั้งแรกที่ปรับ แล้วทุกครั้งต่อไปคืนค่าเดิมก่อนค่อยปรับใหม่
+   กดซ้ำหรือเปลี่ยนค่าแล้วปรับใหม่จึงไม่ทบกันไปเรื่อย ๆ ซึ่งเป็นกับดักคลาสสิกของงานแบบนี้ */
+function dpBaseSnap(inst){
+  state.cabDPBase=state.cabDPBase||{};
+  const cur=state.cabDPBase[inst];
+  const doors=state.boards.filter(b=>b&&b.cabInst===inst&&b._door&&!b._virtual);
+  if(cur){ doors.forEach(b=>{ const o=cur[b.id]; if(o){ b.L=o.L; b.W=o.W; b.x=o.x; b.y=o.y; } }); return doors; }
+  const snap={}; doors.forEach(b=>{ snap[b.id]={L:b.L,W:b.W,x:b.x,y:b.y}; });
+  state.cabDPBase[inst]=snap; return doors;
+}
+function dpEdge(b,side,op,v){
+  const d=(op==="-")?-v:v;                       // + = ยืดออก · − = หดเข้า
+  if(side==="bottom"){ b.W=Math.max(round(b.W+d),20); b.y=round(b.y-d/2); return; }
+  if(side==="top"){    b.W=Math.max(round(b.W+d),20); b.y=round(b.y+d/2); return; }
+  if(side==="left"){   b.L=Math.max(round(b.L+d),20); b.x=round(b.x-d/2); return; }
+  if(side==="right"){  b.L=Math.max(round(b.L+d),20); b.x=round(b.x+d/2); return; }
+}
+function applyDesignParam(inst,val){
+  const plan=dpParse(val); if(!plan.length) return null;
+  const doors=dpBaseSnap(inst); if(!doors.length) return {n:0,rows:0,miss:plan.filter(x=>!x.rule).map(x=>x.tok)};
+  let rows=[]; try{ rows=frontGridOf(inst,null)||[]; }catch(e){ rows=[]; }
+  if(!rows.length) rows=[{items:doors}];
+  const pick=sc=>sc==="first"?(rows[0]||{items:[]}).items
+    :sc==="last"?(rows[rows.length-1]||{items:[]}).items
+    :doors;
+  let did=0;
+  plan.forEach(x=>{ if(!x.rule) return;
+    dpOps(x.rule,x.n).forEach(o=>{
+      if(o.side==="seamV"){
+        /* รอยต่อระหว่างแถว — ขยับให้ช่องว่างเท่าที่สั่ง โดยแบ่งคนละครึ่งบนล่าง */
+        for(let i=0;i<rows.length-1;i++){
+          const up=rows[i].items, lo=rows[i+1].items;
+          const upBot=Math.min(...up.map(b=>b.y-(b.W||0)/2));
+          const loTop=Math.max(...lo.map(b=>b.y+(b.W||0)/2));
+          const cur=upBot-loTop, dd=(o.v-cur)/2;
+          if(!isFinite(dd)||Math.abs(dd)<0.01) continue;
+          up.forEach(b=>dpEdge(b,"bottom","-",dd));
+          lo.forEach(b=>dpEdge(b,"top","-",dd));
+          did++;
+        }
+        return; }
+      pick(o.scope).forEach(b=>{ dpEdge(b,o.side,o.op,o.v); did++; });
+    }); });
+  return {n:did, rows:rows.length, miss:plan.filter(x=>!x.rule).map(x=>x.tok)};
+}
+/* ค่าที่ตู้ใบนี้ได้รับ — อ่านจาก Family ที่จับคู่ไว้ก่อน ไม่มีค่อยอ่านชื่อช่องตรง ๆ
+   (กติกาเดียวกับรหัสชุดอุปกรณ์ v17.1 จะได้เลือกทดสอบที่หน้า Variables ของตู้ได้) */
+function cabDesignParam(inst,pv){
+  const key=dpField(); if(!key) return "";
+  try{ const cc=(state.cabColors||{})[inst]||{}; const fam=xmlFamOf(key);
+    const v=String((fam&&cc[fam])||cc[key]||"").trim(); if(v) return v; }catch(e){}
+  return String((pv&&pv[key])||"").trim();
+}
+function applyXmlDesignParam(inst,pv){
+  const v=cabDesignParam(inst,pv); if(!v) return null;
+  try{ return applyDesignParam(inst,v); }catch(e){ console.error("designParam:",e); return null; }
+}
 function frontGridOf(inst,zone){     // rows เรียงบน->ล่าง · ในแถวเรียงซ้าย->ขวา
   const fr=_deDoorsOf(inst,zone); if(!fr.length) return [];
   return _deRows(fr).map(r=>({ lo:r.lo, hi:r.hi, items:r.items.slice().sort((a,b)=>a.x-b.x) }));
@@ -16650,26 +16789,64 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
     }).join("");
     /* v9.81: ย้ายของสรุปทั้งหมดไปคนละแท็บ ตารางตู้จะได้ความสูงเต็มหน้าต่าง
        เดิมทุกก้อนต่อกันลงมาในหน้าเดียว ตารางตู้เลยเหลือที่แค่แถวเดียว มองไม่เห็นว่าออเดอร์มีตู้อะไรบ้าง */
-    const _lineHtml=(()=>{ /* v9.54: รายการในแท็บ เส้น/Line ของ KDMax ถูกส่งมาเป็นโหนด CUSTOM_INFO1..n
+    /* ───────── v30.0: เลือกแถวรายการเส้นได้ตั้งแต่หน้าตรวจ ─────────
+       ตารางตู้ติ๊กเลือกได้มาตั้งแต่ v9.52 แต่รายการเส้นเป็นตารางอ่านอย่างเดียวมาตลอด
+       ทั้งที่เป็นของที่ต้องตัดสินใจเหมือนกัน — บางแถวเป็นของที่สั่งไปแล้ว บางแถวไม่เอา
+       ต้องโหลดเข้าไปก่อนแล้วไปปิดทีละแถวที่หน้าส่งออก ซึ่งเป็นคนละจังหวะกับที่กำลังตรวจอยู่
+       ติ๊กครบทุกแถวไว้ก่อนตามที่ไฟล์ส่งมา เอาออกเฉพาะที่ไม่เอา */
+    const _lineRows=parseXmlLines(doc);
+    const _lineKeep=_lineRows.map(()=>true);
+    const _lineHtml=()=>(()=>{ /* v9.54: รายการในแท็บ เส้น/Line ของ KDMax ถูกส่งมาเป็นโหนด CUSTOM_INFO1..n
              เนื้อในเป็นข้อความคั่นด้วย | ตามลำดับ ประเภท|รหัส|สี|ขนาด|ราคา|จำนวน
              ไม่ใช่โครงสร้าง XML จริง ตัวอ่านตู้จึงมองไม่เห็น ต้องแยกเองทีละบรรทัด
              ตอนนี้แค่แสดงให้ครบก่อน ยังไม่นำเข้าฉาก */
           if(!doc) return '<div style="padding:14px 16px;font-size:12px;color:var(--ink-dim)">อ่านไฟล์ไม่ได้</div>';
-          const rows2=parseXmlLines(doc);          // v28.3: ตัวอ่านกลาง ใช้ร่วมกับตอนโหลดเข้าฉาก
+          const rows2=_lineRows;                   // v30.0: ใช้ชุดเดียวกับที่ติ๊กเลือกไว้
           if(!rows2.length) return '<div style="padding:14px 16px;font-size:12px;color:var(--ink-dim)">ไฟล์นี้ไม่มีรายการในแท็บ เส้น/Line ของ KDMax</div>';
           let sum=0; rows2.forEach(r=>{ const p2=parseFloat(r.price)||0, q=parseFloat(r.qty)||0; sum+=p2*q; });
-          const th=["ช่อง","ประเภท","รหัส","สี","ขนาด","ราคา/หน่วย","จำนวน","รวม"];
+          /* ───────── v29.9: หน้าตรวจก่อนโหลด ต้องบอกด้วยว่ากฎจะทำอะไรกับแถวไหน ─────────
+             คนดูหน้านี้ก่อนกดโหลดเสมอ เพราะเป็นหน้าที่ตั้งใจให้ตรวจ
+             แต่ผลของกฎไปโผล่ที่หน้ารายการเส้นอีกหน้าหนึ่งซึ่งเปิดได้หลังโหลดแล้วเท่านั้น
+             จังหวะที่อยากรู้กับจังหวะที่บอก จึงสลับกันอยู่ · ย้ายมาบอกตรงนี้ด้วย */
+          const _rw=r=>{ const u=lineRuleOf(r); if(!u) return null;
+            const q3=Math.max(1,Math.round(parseFloat(r.qty)||1));
+            return u.act==="cab"?{t:"สร้างตู้ "+(u.cabCode||"?")+" ×"+q3,c:"#0c7a5a",cab:q3}
+              :u.act==="bom"?{t:"ออกรหัส "+(u.out||"(ยังไม่ได้ใส่รหัส)"),c:u.out?"#2f6fd0":"#e58a24"}
+              :{t:"ไม่ออก",c:"var(--ink-dim)"}; };
+          let _nCab=0; rows2.forEach((r,i)=>{ if(!_lineKeep[i]) return; const w=_rw(r); if(w&&w.cab) _nCab+=w.cab; });
+          const _nOn=_lineKeep.filter(Boolean).length;
+          const th=["","ช่อง","กฎที่จับได้","ประเภท","รหัส","สี","ขนาด","ราคา/หน่วย","จำนวน","รวม"];
           return '<div style="padding:10px 16px">'
+            +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">'
+              +'<button type="button" class="ibtn" id="xpLAll" style="flex:none;padding:4px 10px;font-size:11.5px">เลือกทั้งหมด</button>'
+              +'<button type="button" class="ibtn" id="xpLNone" style="flex:none;padding:4px 10px;font-size:11.5px">ไม่เลือกเลย</button>'
+              +'<span style="font-size:11.5px;color:var(--ink-dim)">เลือกไว้ '+_nOn+' จาก '+rows2.length+' แถว — แถวที่ไม่ติ๊กจะไม่ถูกนำเข้าเลย ทั้งใบอุปกรณ์และการสร้างตู้</span></div>'
             +'<div style="font-size:12px;margin-bottom:5px"><b>รายการเส้น / Line</b> — '+rows2.length+' รายการ · รวม '
             +sum.toLocaleString(undefined,{minimumFractionDigits:2})
             +' · <span style="color:var(--ink-dim)">v28.3: เก็บติดฉากไปด้วยแล้ว เปิดดูทีหลังได้ที่ ส่งออก → รายการเส้น · '
             +'ประเภทที่ออกใบอุปกรณ์ตอนนี้คือ '+escapeHtml(String(settings.lineBomKinds==null?DEF_SETTINGS.lineBomKinds:settings.lineBomKinds))+'</span></div>'
+            +(_nCab?('<div style="font-size:12px;margin-bottom:6px;padding:7px 10px;border-radius:8px;background:rgba(47,158,68,.10);color:#0c7a5a">'
+                +'<b>กฎรายการเส้นจะสร้างตู้เพิ่มให้ '+_nCab+' ใบ</b> ตอนกดโหลดเข้าโปรแกรม — ดูที่คอลัมน์ “กฎที่จับได้”'
+                +(settings.lineRuleAuto===false?' <span style="color:#e58a24">(ตอนนี้ปิดการสร้างอัตโนมัติไว้ ต้องไปกดปุ่มใช้กฎเอง)</span>':'')+'</div>')
+              :'<div style="font-size:11.5px;margin-bottom:6px;color:var(--ink-dim)">ยังไม่มีแถวไหนเข้ากฎ “สร้างตู้เข้าฉาก” — ตั้งกฎได้ที่ ส่งออก → รายการเส้น / Accessory</div>')
             +'<table style="border-collapse:collapse;font-size:11.5px;width:100%">'
             +'<thead><tr>'+th.map(h=>'<th style="text-align:left;padding:3px 7px;color:var(--ink-dim);border-bottom:1px solid var(--line);white-space:nowrap">'+escapeHtml(h)+'</th>').join("")+'</tr></thead><tbody>'
-            +rows2.map(r=>{ const tot=(parseFloat(r.price)||0)*(parseFloat(r.qty)||0);
-              return '<tr>'+[r.tag,r.kind,r.code,r.color||"—",r.size||"—",r.price,r.qty,tot.toLocaleString(undefined,{minimumFractionDigits:2})]
-                .map((c,k)=>'<td style="padding:3px 7px;border-bottom:1px solid var(--line);white-space:nowrap;font-family:'+(k>=4?'var(--mono)':'inherit')+'">'+escapeHtml(String(c))+'</td>').join("")+'</tr>'; }).join("")
-            +'</tbody></table></div>'; })();
+            +rows2.map((r,i)=>{ const tot=(parseFloat(r.price)||0)*(parseFloat(r.qty)||0);
+              const w=_rw(r), on=!!_lineKeep[i];
+              return '<tr'+(on?'':' style="opacity:.42"')+'>'
+                +'<td style="padding:3px 7px;border-bottom:1px solid var(--line)"><input type="checkbox" class="xpL" data-i="'+i+'"'+(on?' checked':'')+'></td>'
+                +[r.tag,
+                (w?('<span style="color:'+w.c+'">'+escapeHtml(w.t)+'</span>'):'<span style="opacity:.35">—</span>'),
+                r.kind,r.code||"(ว่าง)",r.color||"—",r.size||"—",r.price,r.qty,tot.toLocaleString(undefined,{minimumFractionDigits:2})]
+                .map((c,k)=>'<td style="padding:3px 7px;border-bottom:1px solid var(--line);white-space:nowrap;font-family:'+(k>=5?'var(--mono)':'inherit')+'">'+(k===1?String(c):escapeHtml(String(c)))+'</td>').join("")+'</tr>'; }).join("")
+            +'</tbody></table>'
+            /* v30.1: ตารางกฎอยู่ตรงนี้ด้วย แก้แล้วเห็นผลในตารางข้างบนทันที ก่อนกดโหลด */
+            +'<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">'
+            +'<div style="font-size:12px;margin-bottom:4px"><b>กฎแปลงรายการเส้น</b> '
+            +'<span style="color:#e58a24">กฎแรกที่ตรงชนะ</span> '
+            +'<span style="color:var(--ink-dim)">— จับคู่จาก ประเภท · รหัส · สี · ขนาด · ช่องที่เว้นว่าง = ตรงทุกค่า</span></div>'
+            +lineRulesBarHtml()+'</div>'
+            +'</div>'; })();
     const _nodeHtml=(()=>{ /* v9.53: ไฟล์ยังมีของนอกเหนือจากตู้ เช่นแท็บ เส้น/Line ที่เก็บ Accessory กับ Plinth
              ตัวอ่านเดิมสนใจเฉพาะโหนด Set (ตู้) ของพวกนี้จึงหายไปเงียบ ๆ ทั้งที่ออเดอร์ส่งมาด้วย
              ยังไม่รู้ว่าจะเอาเข้าฉากยังไง แต่ต้องเห็นก่อนว่ามีอะไรมาบ้าง */
@@ -16681,7 +16858,7 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
           return '<div style="padding:10px 16px;font-size:12px;color:var(--ink-dim);line-height:1.9">'
             +'<b>โหนดอื่นในไฟล์ (ยังไม่ถูกนำเข้า)</b> — ตัวอ่านตอนนี้รับเฉพาะ &lt;Set&gt; ที่เป็นตู้ · '
             +rep.map(k=>escapeHtml(k)+' ×'+cnt[k]).join(' · ')+'</div>'; })();
-    const _nLine=Math.max(0,(String(_lineHtml).match(/<tr>/g)||[]).length-1);   // หัวตารางนับไปหนึ่ง
+    const _nLine=_lineRows.length;                                              // v30.0: นับตรง ๆ จากรายการ
     const _nMiss=Object.keys(_missSet).length;                 // v14.8
     const _xpTabs=[["cab","ตู้ในออเดอร์",parsed.length+" ตู้"+(nWarn?(" · ⚠ "+nWarn):"")],
                    ["lib","ตรวจของในคลัง",_nMiss?("⚠ "+_nMiss+" ค่า"):"✓ ครบ"],
@@ -16707,7 +16884,7 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
             return '<th title="'+(un?'ยังไม่ได้จับคู่ในตั้งค่า XML':'')+'" style="position:sticky;top:0;background:var(--solid);padding:6px 7px;text-align:left;font-size:11px;color:'+(un?'#e58a24':'var(--ink-dim)')+';border-bottom:1px solid var(--line);white-space:nowrap">'+escapeHtml(h)+(un?' *':'')+'</th>'; }).join("")+'</tr></thead>'
         +'<tbody>'+rows+'</tbody></table>'+'</div>'
       +'<div id="xpPaneLib" style="flex:1;overflow:auto;display:none"><div id="xpLib"></div></div>'
-      +'<div id="xpPaneLine" style="flex:1;overflow:auto;display:none">'+_lineHtml+'</div>'
+      +'<div id="xpPaneLine" style="flex:1;overflow:auto;display:none"></div>'
       +'<div id="xpPaneNode" style="flex:1;overflow:auto;display:none">'+_nodeHtml+'</div>'
       +'<div style="padding:10px 16px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:center">'
         +'<span id="xpCount" style="font-size:12px;color:var(--ink-dim)"></span><span style="flex:1"></span>'
@@ -16716,6 +16893,14 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
         +'<button class="ibtn" id="xpCancel">ยกเลิก</button>'
         +'<button class="ibtn" id="xpOk" style="background:var(--accent);color:#fff;border-color:transparent">โหลดเข้าโปรแกรม</button></div></div>';
     document.body.appendChild(ov);
+    /* v30.0: แท็บรายการเส้นวาดใหม่ทุกครั้งที่ติ๊ก ตัวเลขสรุปกับจำนวนตู้จึงขยับตามทันที */
+    const _lineDraw=()=>{ const pane=ov.querySelector("#xpPaneLine"); if(!pane) return;
+      pane.innerHTML=_lineHtml();
+      pane.querySelectorAll(".xpL").forEach(c=>c.onchange=e=>{ _lineKeep[+e.target.dataset.i]=e.target.checked; _lineDraw(); });
+      try{ lineRulesUI(pane.querySelector(".lrHost"),_lineRows,_lineDraw); }catch(e){ console.error(e); }   // v30.1
+      { const a=pane.querySelector("#xpLAll"); if(a) a.onclick=()=>{ _lineKeep.fill(true); _lineDraw(); }; }
+      { const b2=pane.querySelector("#xpLNone"); if(b2) b2.onclick=()=>{ _lineKeep.fill(false); _lineDraw(); }; } };
+    _lineDraw();
     { const tb=ov.querySelector("#xpTabs");                      // v9.81: สลับแท็บ
       if(tb) tb.querySelectorAll("button").forEach(b=>b.onclick=()=>{
         tb.querySelectorAll("button").forEach(x=>x.classList.toggle("sel",x===b));
@@ -16740,10 +16925,16 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
       const v=String(el.value||"").trim();
       if(!v){ el.value=String(p.name||""); return; }
       if(String(p.name||"")===v) return;
+      /* ───────── v29.5: รหัสที่แก้ต้องไปถึงไฟล์ด้วย ไม่ใช่แค่รอบที่โหลด ─────────
+         ชื่อรุ่นของตู้อ่านจากโหนด Pname เป็นตัวหลัก ส่วนใน PVarString มีบ้างไม่มีบ้างแล้วแต่ไฟล์
+         v26.4 เขียนกลับเฉพาะเมื่อคีย์นั้นมีอยู่แล้วใน PVarString ไฟล์ที่ไม่มีคีย์จึงไม่ถูกเขียนอะไรเลย
+         โหลดเข้าฉากยังถูกเพราะอ่านจากค่าในหน่วยความจำ แต่ Save As กับ เก็บเป็นออเดอร์แก้ไข
+         สร้างไฟล์จาก PVarString ล้วน ๆ รหัสที่แก้จึงหายไปทั้งที่แถบล่างขึ้นว่าแก้ไว้แล้ว
+         ตอนนี้จำไว้ว่าแถวนี้ถูกแก้ชื่อ แล้วไปเขียนที่ Pname ตอนสร้างไฟล์ */
       p.name=v; p.pv=p.pv||{};
       if(p.pv.___MODEL_NAME!=null) p.pv.___MODEL_NAME=v;
       if(p.pv.ART_NAME!=null) p.pv.ART_NAME=v;
-      p._dirty=true;
+      p._dirty=true; p._nameEdited=true;
       const bad=_noModel(v);
       el.classList.toggle("xpNbad",bad);
       el.style.borderColor=bad?"rgba(229,72,77,.45)":"transparent";
@@ -16791,6 +16982,12 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
       for(let i=parsed.length-1;i>=0;i--){ const el=cs[i]; if(!el) continue;
         if(!keep[i]){ if(el.parentNode) el.parentNode.removeChild(el); continue; }
         const p2=parsed[i]; if(!p2._dirty) continue;
+        /* v29.5: ชื่อรุ่นอยู่ที่โหนด Pname เป็นตัวหลัก เขียนที่นั่นก่อน
+           ไฟล์ที่ไม่มี Pname ค่อยฝากไว้ใน PVarString เพื่อให้ตัวอ่านหาเจอทางใดทางหนึ่งเสมอ */
+        if(p2._nameEdited){ const pn=el.querySelector("Pname");
+          if(pn) pn.textContent=String(p2.name||"");
+          else { p2.pv=p2.pv||{};
+            if(p2.pv.ART_NAME==null&&p2.pv.___MODEL_NAME==null) p2.pv.___MODEL_NAME=String(p2.name||""); } }
         const pvEl=el.querySelector("PVarString"); if(!pvEl) continue;
         pvEl.textContent=Object.keys(p2.pv||{}).map(k=>k+":="+p2.pv[k]).join("|"); }
       try{ return new XMLSerializer().serializeToString(clone); }catch(e){ console.error(e); return null; }
@@ -16810,6 +17007,7 @@ function xmlPreviewDialog(orderNo,parsed,maps,doc,setEls){
     ov.querySelector("#xpCancel").onclick=()=>done(null);
     ov.querySelector("#xpOk").onclick=()=>{ const out=parsed.filter((p,i)=>keep[i]).map(_reparse);
       out.orderNo=_curName();                                   // v9.92: ส่งชื่อที่แก้กลับไปด้วย
+      out.lines=_lineRows.filter((r,i)=>_lineKeep[i]);          // v30.0: เฉพาะแถวรายการเส้นที่ติ๊กไว้
       done(out); };
     ov.addEventListener("click",e=>{ if(e.target===ov) done(null); });
     upd(); _libDraw();
@@ -16820,8 +17018,15 @@ async function buildFromXmlOrder(){
   let left = state.boards.length? sceneXRange(state.boards)[1]+80 : 0; let made=0, fromLib=0, placed=0;
   let legOn=0, legOff=0; const legBad={};   // v9.62: สรุปขาตู้จากช่อง K_Leg ไว้ต่อท้าย toast ตอนจบ
   let pullOn=0; const pullNoSpec={};        // v9.71: สรุปมือจับ
+  let dpOn=0; const dpBad={};               // v30.4: สรุปค่าปรับบาน
   let _skipNoModel=0;
-  for(const s of o.sets){ for(let c=0;c<(s.count||1);c++){ if(s.W<10||s.H<10||s.D<10)continue;
+  /* v30.2: กล่องรอ — นับจากจำนวนใบทั้งหมด ไม่ใช่จำนวนรายการ เพราะรายการหนึ่งมีได้หลายใบ */
+  const _tot=o.sets.reduce((a,x)=>a+Math.max(1,(x.count||1)),0);
+  let _did=0, _bz=null;
+  try{ _bz=busyOpen("กำลังโหลดออเดอร์เข้าฉาก"); _bz.step("เตรียมข้อมูล "+_tot+" ใบ",0); }catch(e){}
+  for(const s of o.sets){ for(let c=0;c<(s.count||1);c++){ if(s.W<10||s.H<10||s.D<10){ _did++; continue; }
+    if(_bz){ try{ _bz.step(String(s.name||"")+" ("+(_did+1)+" / "+_tot+")", _did*100/_tot);
+      if(_did%3===0) await _bz.tick(); }catch(e){} }
     /* v15.4: รุ่นที่ยังไม่มีโมเดลในคลัง ปกติโปรแกรมวาดกล่องเปล่าจากขนาดที่ส่งมาให้
        ซึ่งบางงานไม่ต้องการ เพราะได้ตู้ที่ไม่มีชิ้นส่วนจริงปนมาในออเดอร์
        เปิดสวิตช์แล้วข้ามไปเลย พร้อมบอกว่าข้ามไปกี่ใบ จะได้ไม่หายเงียบ */
@@ -16863,6 +17068,11 @@ async function buildFromXmlOrder(){
       state.boards=state.boards.concat(cb);
       try{ applyDefaultParts(cb,false); }catch(e){ console.error(e); }   // v8.77
     }
+    /* ───────── v29.8: ตู้ที่มาจากกฎรายการเส้น ต้องมีป้ายติดไว้ ─────────
+       v29.1 สร้างตู้จากกฎตอนโหลดให้อยู่แล้ว แต่ไม่ได้ติดป้ายว่าใบไหนมาจากกฎ
+       ปุ่ม “ใช้กฎกับออเดอร์นี้เลย” ที่เพิ่มมาทีหลังล้างของเก่าด้วยป้ายนี้
+       ไม่มีป้าย = ล้างไม่เจอ กดปุ่มหลังโหลดจึงได้ตู้ซ้ำอีกชุด */
+    if(s._fromLine){ try{ state.boards.forEach(b=>{ if(b&&b.cabInst===inst) b._lineCab=true; }); }catch(e){} }
     /* v9.62: ใส่ขาตู้ตามช่อง K_Leg — ทำหลังวางตามผังแล้ว เพราะต้องรู้ความสูงก้นตู้จริงในฉาก */
     try{ const lr=applyXmlLeg(inst, s.pv);
          if(lr){ if(lr.unknown) legBad[lr.val]=(legBad[lr.val]||0)+1; else if(lr.none) legOff++; else if(lr.n) legOn++; }
@@ -16871,14 +17081,22 @@ async function buildFromXmlOrder(){
     try{ const pr=applyXmlPulls(inst, s.pv);
          if(pr){ pullOn+=pr.on; (pr.noSpec||[]).forEach(c=>{ pullNoSpec[c]=1; }); }
     }catch(e){ console.error("applyXmlPulls:",e); }
-    made++; } }
+    /* v30.4: ค่าปรับบานจาก K_DesignParameter — ทำท้ายสุด หลังบานถูกสร้างและจัดผังครบแล้ว */
+    try{ const dr=applyXmlDesignParam(inst, s.pv);
+         if(dr){ if(dr.n) dpOn++; (dr.miss||[]).forEach(t=>{ dpBad[t]=(dpBad[t]||0)+1; }); }
+    }catch(e){ console.error("applyXmlDesignParam:",e); }
+    made++; _did++; } }
+  if(_bz){ try{ _bz.step("จัดฉากและคิดชิ้นงาน",100); await _bz.tick(); }catch(e){} }
   buildGTones(); state.selectedId=null; sync(1);
+  if(_bz){ try{ _bz.done(); }catch(e){} }
   const empty=made-fromLib;
   /* v15.4: บอกจำนวนที่ข้ามไปด้วย ไม่งั้นตู้หายแล้วไม่รู้ว่าหายเพราะอะไร */
   toast(made?("โหลด XML "+made+" ใบ"+(_skipNoModel?(" · ข้ามรุ่นที่ไม่มีโมเดล "+_skipNoModel+" ใบ"):"")+(fromLib?(" · จากคลาวด์ "+fromLib):"")+(empty?(" · โครงเปล่า "+empty+" (ไม่พบโมเดลในคลาวด์)"):"")+(placed?(" · วางตามผัง XML "+placed+" ใบ"):"")
     +(legOn?(" · ใส่ขาตู้ "+legOn+" ใบ"):"")+(legOff?(" · ไม่เอาขา "+legOff+" ใบ"):"")
     +(Object.keys(legBad).length?(" · ⚠ อ่านรุ่นขาไม่ออก: "+Object.keys(legBad).join(", ")+" — ไปเพิ่มในตารางจับคู่ที่ ตั้งค่า → นำเข้า XML"):"")
     +(pullOn?(" · ใส่มือจับ "+pullOn+" บาน"):"")
+    +(dpOn?(" · ปรับบานตามค่าที่ส่งมา "+dpOn+" ใบ"):"")
+    +(Object.keys(dpBad).length?(" · ⚠ ไม่รู้จักคำสั่งปรับบาน: "+Object.keys(dpBad).join(", ")+" — เพิ่มได้ที่ ตั้งค่า → ค่าปรับบาน"):"")
     +(Object.keys(pullNoSpec).length?(" · ⚠ มือจับที่ยังไม่ได้ใส่สเปครู: "+Object.keys(pullNoSpec).join(", ")+" — ไปกรอกที่ Element → Fittings"):"")
   ):"ขนาดตู้ใน XML ไม่ครบ จึงสร้างไม่ได้");
 }
@@ -16958,11 +17176,14 @@ async function processXmlText(text,opts){ opts=opts||{}; try{
         if(pick.orderNo!=null){ const _nn=String(pick.orderNo).trim(); if(_nn) orderNo=_nn; }
         _use=pick;
       }
-      try{ state.orderLines=parseXmlLines(doc); }catch(e){ console.error(e); state.orderLines=[]; }   // v28.3
+      /* v30.0: ถ้าผ่านหน้าตรวจมา ใช้เฉพาะแถวที่ติ๊กไว้ · ปิดหน้าตรวจไว้ก็เอาทั้งหมดเหมือนเดิม */
+      try{ state.orderLines=(_use&&_use.lines)?_use.lines:parseXmlLines(doc); }
+      catch(e){ console.error(e); state.orderLines=[]; }   // v28.3
       /* v29.1: แถวในแท็บเส้นที่กฎบอกว่าเป็นตู้ ถูกต่อท้ายรายการตู้ก่อนสร้างฉาก
          จึงเดินทางเดียวกับตู้ที่มาจากออเดอร์ทุกขั้น ไม่มีเส้นทางพิเศษให้ต้องดูแลแยก */
       let _nLineCab=0;
-      try{ const ex=lineCabSets(); if(ex.length){ _use=_use.concat(ex); _nLineCab=ex.reduce((s2,x)=>s2+(x.count||1),0); } }catch(e){ console.error("lineCabSets:",e); }
+      if(settings.lineRuleAuto!==false){   // v29.8: ปิดได้ที่หน้ารายการเส้น ถ้าอยากกดเองทีหลัง
+        try{ const ex=lineCabSets(); if(ex.length){ _use=_use.concat(ex); _nLineCab=ex.reduce((s2,x)=>s2+(x.count||1),0); } }catch(e){ console.error("lineCabSets:",e); } }
       window._xmlOrder={orderNo,sets:_use};
       if(orderNo){ const oi=$("exOrderId"); if(oi)oi.value=orderNo; }
       // โหลด XML = ดึงตู้ของออเดอร์เข้าฉาก (แทนที่ของเดิม)
@@ -16995,6 +17216,9 @@ async function processXmlText(text,opts){ opts=opts||{}; try{
 /* ---------- Settings (default dowel/pin) ---------- */
 async function loadSettings(){ const s=await lsGet("furnitech:settings",null);
   if(s&&typeof s==="object"){ Object.assign(settings,DEF_SETTINGS,s);
+    /* v29.6: เครื่องที่ยังไม่เคยมีกฎรายการเส้นเลย ใส่ชุดตั้งต้นให้ครั้งเดียว
+       ลบทิ้งเองแล้วจะไม่ถูกใส่คืนให้รำคาญ เพราะจำไว้ว่าเคยใส่ไปแล้ว */
+    try{ ensureLineRules(); ensureDesignParams(); }catch(e){ console.error(e); }   // v30.3/v30.4
     if(s.links&&!Array.isArray(s.vars)){ const v=[];
       (s.links.materials||[]).forEach(m=>v.push({name:m.name,type:"Material",def:m.code,order:"",cat:"",comment:""}));
       (s.links.surfaces||[]).forEach(m=>v.push({name:m.name,type:"Surface",def:m.code,order:"",cat:"",comment:""}));
@@ -17289,6 +17513,27 @@ function renderSettings(){
     <div style="font-size:11px;opacity:.72;line-height:1.6">เลขตู้และเลขชิ้นถูกจำติดตัวไว้ตั้งแต่ครั้งแรกที่ได้รับ แก้งานทีหลังจึงไม่เคลื่อน — ลบชิ้นกลางตู้ เลขที่เหลือคงเดิม เว้นช่องว่างไว้ · ชิ้นที่เพิ่มใหม่ไปต่อท้ายเสมอ ไม่เอาเลขเก่ามาใช้ซ้ำ</div>
     <button class="ibtn" id="setBcReset" style="margin-top:6px">↺ รีเซ็ตเลขบาร์โค้ดทั้งออเดอร์</button>
     <div style="font-size:11px;opacity:.62;margin-top:2px">ใช้ตอนเริ่มงานใหม่เท่านั้น — กดแล้วทุกชิ้นจะถูกไล่เลขใหม่ตั้งแต่ 01 ใบที่ยิงไปแล้วจะไม่ตรงอีก</div>
+    <div class="sumh" style="margin-top:12px">📐 ค่าปรับบาน (K_DesignParameter)</div>
+    <div style="font-size:11px;opacity:.72;line-height:1.7;margin-bottom:6px">
+      ช่องนี้ในออเดอร์ไม่ใช่สีและไม่ใช่รุ่น แต่เป็น<b>คำสั่งปรับบานที่เขียนย่อมาเป็นคำ</b> —
+      <span style="font-family:var(--mono)">ExtendBottom2cm</span> คือยืดบานล่างลง 2 ซม. ·
+      <span style="font-family:var(--mono)">TT30mm_TH30mm</span> คือหดบานบน 30 กับเว้นรอยต่อ 30<br>
+      ค่าหนึ่งมีหลายคำสั่งต่อกันด้วย <span style="font-family:var(--mono)">_</span> ได้ · ระบบแตกทีละคำสั่งแล้วจับกับตารางนี้<br>
+      <b>ช่องคำสั่ง</b> ใส่ <span style="font-family:var(--mono)">{n}</span> ตรงที่เป็นตัวเลข เช่น <span style="font-family:var(--mono)">ExtendBottom{n}cm</span><br>
+      <b>ช่องที่ทำ</b> เขียน <span style="font-family:var(--mono)">ด้าน+ค่า@ขอบเขต</span> คั่นด้วย , ·
+      ด้าน: <span style="font-family:var(--mono)">top bottom left right seamV</span> ·
+      <span style="font-family:var(--mono)">+</span> ยืดออก <span style="font-family:var(--mono)">−</span> หดเข้า <span style="font-family:var(--mono)">=</span> ตั้งค่า ·
+      ขอบเขต: <span style="font-family:var(--mono)">all first last</span> (เว้นว่าง = ทุกบาน)<br>
+      คิดเลขได้ เช่น <span style="font-family:var(--mono)">bottom+n*10@last</span> = ยืดขอบล่างของบานแถวล่างสุดออก n×10 มม.
+    </div>
+    ${txt("dpField","ช่องใน XML ที่ส่งค่านี้มา (ตั้งต้น K_DesignParameter)")}
+    <div id="setDp"></div>
+    <div style="display:flex;gap:6px;margin-top:6px">
+      <button class="ibtn" id="setDpAdd" style="flex:none">＋ เพิ่มคำสั่ง</button>
+      <button class="ibtn" id="setDpSeed" style="flex:none">↺ ใส่ชุดตั้งต้น</button>
+      <button class="ibtn" id="setDpApply" style="flex:none" title="คิดใหม่ให้ทุกตู้ในฉากตามค่าที่ตู้นั้นถืออยู่ — เปลี่ยนค่าที่ Variables ของตู้แล้วกดปุ่มนี้เพื่อดูผลทันที">▶ ใช้กับทั้งฉากเลย</button>
+    </div>
+    <div style="font-size:11px;opacity:.62;margin-top:4px;line-height:1.6">ทดสอบได้โดยเปลี่ยนค่าที่ <b>Variables (ตู้นี้)</b> แล้วกด ใช้กับทั้งฉากเลย · ขนาดบานตั้งต้นถูกเก็บไว้ตั้งแต่ครั้งแรก กดกี่รอบก็ไม่ทบกัน</div>
     <div class="sumh" style="margin-top:12px">🧰 ชุดอุปกรณ์ประจำรหัสตู้</div>
     <div style="font-size:11px;opacity:.72;line-height:1.7;margin-bottom:6px">
       ของที่ผูกกับ<b>ตู้ทั้งใบ</b> ไม่ได้ผูกกับแผ่นไหน — ตู้รหัสที่ระบุไว้ได้ชุดนี้ <b>1 ชุดต่อ 1 ใบ</b> ไม่ว่าตู้ใบนั้นจะมีกี่แผ่น<br>
@@ -17632,6 +17877,54 @@ function renderSettings(){
       drawSets();
       const ab=body.querySelector("#setCabFitAdd");
       if(ab) ab.onclick=()=>{ L.push({name:"",cabs:"",items:"",off:false}); drawSets(); };
+    } }
+  /* ───────── v30.4: ตารางค่าปรับบาน ───────── */
+  { const host=body.querySelector("#setDp");
+    if(host){ ensureDesignParams();
+      const R=settings.designParams;
+      const save=()=>{ try{ lsSet("furnitech:settings",settings); }catch(e){} };
+      const drawDp=()=>{ host.innerHTML="";
+        if(!R.length){ const e0=document.createElement("div");
+          e0.style.cssText="font-size:11.5px;opacity:.7;padding:4px 0";
+          e0.textContent="ยังไม่มีคำสั่ง — กด ใส่ชุดตั้งต้น"; host.appendChild(e0); }
+        R.forEach((r,ri)=>{
+          /* นับให้เห็นว่ามีตู้ในฉากถือคำสั่งนี้อยู่กี่ใบ */
+          let hit=0; try{ const seen={};
+            state.boards.forEach(b=>{ if(!b||b._virtual) return; const k=String(b.cabInst||""); if(!k||seen[k])return; seen[k]=1;
+              if(dpParse(cabDesignParam(k,(((window._xmlOrder||{}).sets||[]).find(x=>0)||{}).pv)).some(x=>x.rule===r)) hit++; }); }catch(e){}
+          const box=document.createElement("div");
+          box.style.cssText="border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-bottom:6px;background:var(--bg)";
+          box.innerHTML='<div style="display:grid;grid-template-columns:1.1fr 1.4fr auto auto;gap:5px;align-items:center">'
+            +'<input class="nameinp dpT" placeholder="คำสั่ง เช่น ExtendBottom{n}cm" value="'+escapeHtml(String(r.token||""))+'" style="font-family:var(--mono);font-size:11.5px">'
+            +'<input class="nameinp dpO" placeholder="ที่ทำ เช่น bottom+n*10@last" value="'+escapeHtml(String(r.ops||""))+'" style="font-family:var(--mono);font-size:11.5px">'
+            +'<label style="display:flex;align-items:center;gap:4px;font-size:11px;white-space:nowrap;cursor:pointer"><input type="checkbox" class="dpOn" '+(r.off?"":"checked")+'> ใช้</label>'
+            +'<button type="button" class="dpDel" style="border:1px solid var(--line);background:transparent;color:#e0853b;border-radius:7px;height:28px;width:28px;cursor:pointer">✕</button></div>'
+            +'<input class="nameinp dpN" placeholder="คำอธิบาย (ไว้จำเอง)" value="'+escapeHtml(String(r.name||""))+'" style="font-size:11.5px;margin-top:5px;width:100%">'
+            +(hit?('<div style="font-size:11px;color:#2f9e44;margin-top:4px">ฉากนี้มีตู้ถือคำสั่งนี้อยู่ '+hit+' ใบ</div>'):'');
+          const q=x=>box.querySelector(x);
+          const bind=(sl,k)=>{ const el=q(sl); if(el){ el.oninput=e=>{ r[k]=e.target.value; }; el.onchange=()=>{ save(); drawDp(); }; } };
+          bind(".dpT","token"); bind(".dpO","ops"); bind(".dpN","name");
+          q(".dpOn").onchange=e=>{ r.off=!e.target.checked; save(); drawDp(); };
+          q(".dpDel").onclick=()=>{ R.splice(ri,1); settings.designParamsCleared=(R.length===0); save(); drawDp(); };
+          host.appendChild(box); });
+        /* ตัวอย่างอ่านง่าย ให้เห็นว่าคำที่ออเดอร์ส่งมาแปลออกเป็นอะไร */
+        const ex=document.createElement("div");
+        ex.style.cssText="font-size:11px;color:var(--ink-dim);margin-top:6px;line-height:1.7";
+        ex.innerHTML="<b>ลองแปลดู</b> — "+["ExtendBottom2cm","TT30mm_TH30mm"].map(v=>
+          escapeHtml(v)+" → "+dpExplain(v).map(x=>escapeHtml(x.txt)).join(" · ")).join("<br>");
+        host.appendChild(ex); };
+      drawDp();
+      { const a=body.querySelector("#setDpAdd"); if(a) a.onclick=()=>{ R.push({token:"",name:"",ops:"",off:false}); settings.designParamsCleared=false; save(); drawDp(); }; }
+      { const b2=body.querySelector("#setDpSeed"); if(b2) b2.onclick=()=>{
+          const has=new Set(R.map(x=>String(x.token||"").toUpperCase()));
+          let add=0; defaultDesignParams().forEach(x=>{ if(!has.has(String(x.token||"").toUpperCase())){ R.push(x); add++; } });
+          settings.designParamsCleared=false; save(); drawDp(); toast(add?("ใส่ชุดตั้งต้นแล้ว "+add+" คำสั่ง"):"มีครบแล้ว"); }; }
+      { const c=body.querySelector("#setDpApply"); if(c) c.onclick=()=>{
+          let cab=0,chg=0; const seen={};
+          state.boards.forEach(b=>{ if(!b||b._virtual) return; const k=String(b.cabInst||""); if(!k||seen[k])return; seen[k]=1;
+            const pv=((window._xmlOrder&&window._xmlOrder.sets)||[]).map(x=>x.pv||{})[0]||{};
+            const r2=applyXmlDesignParam(k,pv); cab++; if(r2&&r2.n) chg++; });
+          sync(1); toast(chg?("คิดค่าปรับบานใหม่แล้ว "+chg+" ใบ จากทั้งหมด "+cab+" ใบ"):"ไม่มีตู้ใบไหนถือคำสั่งที่รู้จัก"); }; }
     } }
   { const br=body.querySelector("#setBcReset"); if(br)br.onclick=async()=>{
       const ok=await dialog({title:"ไล่เลขบาร์โค้ดใหม่ทั้งออเดอร์? ใบที่ยิงไปแล้วจะไม่ตรงอีก",ok:"รีเซ็ต"});
@@ -18664,6 +18957,54 @@ function lineBomOn(r){ if(!r) return false;
    เขียนเป็นกฎ จับคู่จาก ประเภท · รหัส · สี · ขนาด แล้วบอกว่าจะให้แถวนั้นกลายเป็นอะไร
    ช่องจับคู่ที่เว้นว่าง = ตรงทุกค่า · ใส่หลายค่าคั่นด้วยจุลภาคได้ */
 function lineRules(){ const r=settings.lineRules; return Array.isArray(r)?r:[]; }
+/* ───────── v29.6: กฎตั้งต้นที่ตกลงกันไว้แล้ว ─────────
+   v29.1–29.5 ผมทำที่ให้กรอกกฎ แล้วส่งตารางเปล่าไปให้กรอกเองทั้งหมด
+   ทั้งที่เงื่อนไขทุกข้อถูกบอกไว้ครบแล้ว เหลือแค่รหัสสั่งซื้อของขา 120 กับ 150 ที่ยังไม่มี
+   ใส่มาให้พร้อมใช้ เว้นเฉพาะช่องที่ยังไม่รู้ค่าจริง จะได้ไม่ต้องนั่งพิมพ์ตามที่คุยกันไปแล้ว */
+/* ───────── v30.3: กฎตั้งต้นต้องมีเองจริง ๆ ไม่ใช่ครั้งเดียวในชีวิต ─────────
+   v29.6 ใส่กฎให้ครั้งแรกแล้วปักธง "ใส่ไปแล้ว" ไว้ กันไม่ให้ใส่ซ้ำ
+   แต่ธงนั้นอยู่คนละที่กับตัวกฎ พอดึงตั้งค่าจากคลาวด์ที่บันทึกไว้ก่อนจะมีฟีเจอร์นี้
+   กฎถูกทับเป็นว่างเปล่า ส่วนธงยังค้างอยู่ในหน่วยความจำว่าใส่ไปแล้ว
+   ผลคือกฎหายและไม่มีวันถูกใส่คืน ต้องไปกดปุ่มเองทุกครั้ง ซึ่งไม่ใช่คำว่าอัตโนมัติ
+   ตอนนี้ดูจากของจริงอย่างเดียว — ไม่มีกฎเลยก็ใส่ให้ ไม่ว่าจะเคยใส่มาแล้วกี่รอบ
+   ยกเว้นคนตั้งใจลบทิ้งเอง (ลบจนหมดด้วยมือ) อันนั้นเคารพการตัดสินใจ ไม่ยัดคืน */
+function ensureDesignParams(){
+  try{
+    if(!Array.isArray(settings.designParams)) settings.designParams=[];
+    if(settings.designParams.length||settings.designParamsCleared===true) return 0;
+    settings.designParams=defaultDesignParams();
+    try{ lsSet("furnitech:settings",settings); }catch(e){}
+    return settings.designParams.length;
+  }catch(e){ console.error("ensureDesignParams:",e); return 0; }
+}
+function ensureLineRules(){
+  try{
+    if(!Array.isArray(settings.lineRules)) settings.lineRules=[];
+    if(settings.lineRules.length) return 0;
+    if(settings.lineRulesCleared===true) return 0;
+    settings.lineRules=defaultLineRules();
+    try{ lsSet("furnitech:settings",settings); }catch(e){}
+    return settings.lineRules.length;
+  }catch(e){ console.error("ensureLineRules:",e); return 0; }
+}
+function defaultLineRules(){
+  /* v29.7: ชื่อ Family ของจริงคือ FrontColor1 กับ FrontShape1 (เห็นจากหน้า Variables ของตู้)
+     v29.6 ผมใส่ Front1 ไปตามที่เขียนคุยกัน ซึ่งไม่ตรงกับชื่อที่ระบบใช้จริง สีจึงไม่ลง */
+  const cab=(nm,extra)=>Object.assign({name:nm,kind:"",code:"",color:"",size:"",act:"cab",out:"",
+    /* v30.2: เดิมผมใส่ 100 ซึ่งเป็นเลขที่ผมคิดขึ้นเองล้วน ๆ ไม่ได้มาจากไฟล์
+       ไฟล์ส่งมาแค่สองตัวเลข ความลึกจึงต้องมาจากตัวใดตัวหนึ่งนั้น ไม่ใช่เลขลอย ๆ */
+    cabCode:"",w:"S2",h:"S1",d:"S2",colorTo:"FrontColor1",
+    shapeTo:"FrontShape1",shapeMap:"*S*=Pxxx01, *=Exxx01",off:false},extra||{});
+  const bom=(nm,extra)=>Object.assign({name:nm,kind:"Plinth",code:"PN01",color:"Stainless",size:"",
+    act:"bom",out:"",cabCode:"",w:"",h:"",d:"",colorTo:"",off:false},extra||{});
+  return [
+    bom("ขาสแตนเลส สูง 100",{size:"S2=100", out:"413LG0000004"}),
+    bom("ขาสแตนเลส สูง 120",{size:"S2=120"}),
+    bom("ขาสแตนเลส สูง 150",{size:"S2=150"}),
+    cab("ขาไม้ (ไม่ใช่สแตนเลส)",{kind:"Plinth",code:"PN01",color:"!Stainless",cabCode:"PN01"}),
+    cab("แผงปิดช่องบน",{kind:"CeilingFiller",cabCode:"CeilingFiller"}),
+  ];
+}
 function lineSizeNums(sz){ return String(sz||"").split(/[^0-9.]+/).map(x=>parseFloat(x)).filter(v=>isFinite(v)&&v>0); }
 /* ───────── v29.2: จับคู่แบบ "ไม่ใช่ค่านี้" ─────────
    ของชิ้นเดียวกันเปลี่ยนความหมายตามสีได้ ตีนตู้สแตนเลสคือของที่ซื้อมาทั้งเส้น
@@ -18681,7 +19022,28 @@ function lineRuleHit(r,row){
     if(neg.length&&neg.indexOf(V)>=0) return false;
     if(pos.length&&pos.indexOf(V)<0) return false;
     return true; };
-  return eq(r.kind,row.kind)&&eq(r.code,row.code)&&eq(r.color,row.color)&&eq(r.size,row.size);
+  return eq(r.kind,row.kind)&&eq(r.code,row.code)&&eq(r.color,row.color)&&lineSizeHit(r.size,row);
+}
+/* ───────── v29.3: จับคู่ขนาดทีละตัวเลข ไม่ต้องตรงทั้งสตริง ─────────
+   ของอย่างตีนตู้ ตัวที่กำหนดรหัสสั่งซื้อคือความสูง ส่วนความยาวเป็นเท่าไหร่ก็ได้ตามหน้างาน
+   เทียบสตริงเต็มจึงต้องเขียนกฎใหม่ทุกครั้งที่เจอความยาวใหม่ ซึ่งไม่มีวันจบและพลาดง่าย
+   เขียน S2=120 = ตัวเลขตัวที่สองของช่องขนาดเท่ากับ 120 · รับ > < >= <= ด้วย
+   ใช้ S1 S2 S3 ชุดเดียวกับช่องขนาดของตู้ จะได้ไม่ต้องจำสองระบบ */
+function lineSizeHit(spec,row){
+  const A=String(spec==null?"":spec).trim(); if(!A) return true;
+  const nums=lineSizeNums(row&&row.size), val=String((row&&row.size)||"").trim().toUpperCase();
+  const pos=[], neg=[];
+  A.split(/[,;]+/).map(x=>x.trim()).filter(Boolean).forEach(t=>{
+    if(t.charAt(0)==="!"){ const u=t.slice(1).trim(); if(u) neg.push(u); } else pos.push(t); });
+  const one=t=>{
+    const m=String(t).match(/^s\s*(\d+)\s*(>=|<=|==|=|>|<)\s*([\d.]+)$/i);
+    if(m){ const v=nums[(parseInt(m[1],10)||1)-1]; if(!isFinite(v)) return false;
+      const x=parseFloat(m[3]), op=m[2];
+      return op===">"?(v>x):op==="<"?(v<x):op===">="?(v>=x):op==="<="?(v<=x):(Math.abs(v-x)<1e-6); }
+    return String(t).toUpperCase()===val; };
+  if(neg.some(one)) return false;
+  if(pos.length&&!pos.some(one)) return false;
+  return true;
 }
 function lineRuleOf(row){ return lineRules().find(r=>lineRuleHit(r,row))||null; }
 /* ช่องขนาดของตู้รับได้ทั้งตัวเลขตรง ๆ และ S1 S2 S3 = ตัวเลขลำดับที่เท่าไหร่ในช่องขนาดของแถวนั้น */
@@ -18693,6 +19055,148 @@ function lineDim(spec,nums,def){
 }
 /* แถวที่กฎบอกว่าเป็นตู้ — แปลงเป็น Set แบบเดียวกับที่ตัวอ่าน XML สร้าง
    ตัวโหลดตู้จึงรับไปทำต่อได้ทั้งชุด ทั้งดึงโมเดลจากคลัง ปรับขนาด ใส่สี และวางในฉาก */
+/* ───────── v29.4: ใช้กฎกับออเดอร์ที่เปิดอยู่แล้ว ─────────
+   v29.1 ผูกการสร้างตู้จากกฎไว้กับจังหวะโหลด XML อย่างเดียว
+   ซึ่งกลับหัวกลับหางกับลำดับที่คนทำงานจริง — โหลดออเดอร์เข้ามาก่อน แล้วค่อยเห็นว่าต้องตั้งกฎอะไร
+   ตั้งกฎเสร็จก็ไม่มีอะไรเกิดขึ้น เพราะจังหวะโหลดผ่านไปแล้ว และไม่มีอะไรบอกด้วย
+   ตอนนี้กดใช้กฎกับออเดอร์ที่เปิดอยู่ได้เลย · ตู้ที่มาจากกฎถูกทำเครื่องหมายไว้
+   กดซ้ำจึงล้างของรอบก่อนแล้วสร้างใหม่ ไม่ทับถมกันเป็นสองสามชุด */
+async function applyLineRulesNow(){
+  const ex=lineCabSets();
+  const old=state.boards.filter(b=>b&&b._lineCab).length;
+  if(!ex.length&&!old){
+    /* v29.7: บอกให้ครบว่าเงียบเพราะอะไร — ไม่มีกฎ · ไม่มีรายการเส้น · หรือมีทั้งคู่แต่ไม่ตรงกัน */
+    const nR=lineRules().filter(r=>r&&r.off!==true&&r.act==="cab").length, nL=(state.orderLines||[]).length;
+    toast(!nL?"ออเดอร์นี้ยังไม่มีรายการในแท็บเส้น — ต้องโหลด XML ใหม่หนึ่งรอบ"
+      :(!nR?"ยังไม่มีกฎแบบ “สร้างตู้เข้าฉาก” — กด ↺ ใส่กฎตั้งต้น ได้"
+        :("มีกฎสร้างตู้ "+nR+" ข้อ กับรายการเส้น "+nL+" แถว แต่ไม่มีแถวไหนตรงเงื่อนไข — ดูคอลัมน์ กฎที่จับได้")));
+    return 0; }
+  if(old) state.boards=state.boards.filter(b=>!(b&&b._lineCab));
+  if(!ex.length){ sync(1); toast("ล้างตู้ที่มาจากกฎออกแล้ว "+old+" ชิ้น"); return 0; }
+  const had=new Set(state.boards.map(b=>b.id));
+  const prev=window._xmlOrder;
+  window._xmlOrder={orderNo:(prev&&prev.orderNo)||orderId(), sets:ex};
+  try{ await buildFromXmlOrder(); }
+  catch(e){ console.error("applyLineRulesNow:",e); toast("สร้างตู้จากกฎไม่สำเร็จ — ดู console"); }
+  finally{ window._xmlOrder=prev; }
+  let made=0;
+  state.boards.forEach(b=>{ if(b&&!had.has(b.id)){ b._lineCab=true; made++; } });
+  sync(1);
+  return made;
+}
+/* ───────── v29.7: สีบอกว่าต้องใช้แบบบานตัวไหน ─────────
+   ตู้ที่สร้างจากรายการเส้นไม่ได้มีแค่สี ยังต้องเลือกแบบบานให้ถูกด้วย
+   งานสีกับงานผิวสำเร็จใช้คนละแบบบาน แต่ในไฟล์บอกมาแค่รหัสสี
+   จึงต้องอ่านจากรหัสสีเอาเอง · เขียนเป็นคู่ รูปแบบ=ค่า คั่นด้วยจุลภาค
+   ใช้ * แทนอะไรก็ได้ เช่น *S*=Pxxx01 แปลว่ารหัสสีที่มีตัว S อยู่ ใช้แบบบาน Pxxx01
+   ไล่จากซ้ายไปขวา ตัวแรกที่ตรงชนะ ปิดท้ายด้วย *=... ไว้เป็นค่าที่เหลือทั้งหมด */
+function lineShapeFor(map,color){
+  const c=String(color==null?"":color).trim().toUpperCase(); let out="";
+  String(map||"").split(/[,;\n]+/).forEach(t=>{
+    if(out) return;
+    const raw=String(t||"").trim(); const i=raw.lastIndexOf("="); if(i<0) return;
+    const pat=raw.slice(0,i).trim().toUpperCase(), val=raw.slice(i+1).trim();
+    if(!pat||!val) return;
+    let rx=null;
+    try{ rx=new RegExp("^"+pat.replace(/[.+?^${}()|[\]\\]/g,"\\$&").replace(/\*/g,".*")+"$"); }catch(e){ return; }
+    if(rx.test(c)) out=val; });
+  return out;
+}
+/* ───────── v30.1: ตารางกฎย้ายมาอยู่หน้าที่ใช้มันจริง ─────────
+   กฎถูกวางไว้ในหน้าส่งออก ซึ่งเป็นปลายทาง ทั้งที่ทุกอย่างเกิดขึ้นตอนโหลด
+   คนตรวจไฟล์อยู่หน้าตรวจ XML เห็นแถวครบอยู่ตรงหน้า แต่จะแก้กฎต้องโหลดเข้าไปก่อน
+   แล้วเปิดอีกหน้าหนึ่ง แล้วย้อนกลับมาโหลดใหม่ ซึ่งกลับหัวทั้งลำดับ
+   ทำเป็นตัวเดียวแล้ววางได้ทั้งสองที่ แก้ที่ไหนก็คือกฎชุดเดียวกัน */
+function lineRulesUI(host,rows,after){
+  if(!host) return;
+  try{ ensureLineRules(); }catch(e){}   // v30.3: เปิดตารางมาแล้วต้องมีกฎอยู่แล้วเสมอ
+        if(!Array.isArray(settings.lineRules)) settings.lineRules=[];
+        const R=settings.lineRules;
+        const save=()=>{ try{ lsSet("furnitech:settings",settings); }catch(e){} };
+        const drawR=()=>{ host.innerHTML="";
+          if(!R.length){ const e0=document.createElement("div");
+            e0.style.cssText="font-size:11.5px;opacity:.7;padding:4px 0";
+            e0.textContent="ยังไม่มีกฎ — ทุกแถวใช้ค่าตั้งต้นตามประเภท"; host.appendChild(e0); }
+          R.forEach((r,ri)=>{
+            const hit=(rows||[]).filter(x=>lineRuleHit(r,x));
+            const nCab=hit.reduce((s2,x)=>s2+Math.max(1,Math.round(parseFloat(x.qty)||1)),0);
+            const act=String(r.act||"bom");
+            const box=document.createElement("div");
+            box.style.cssText="border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-bottom:7px;background:var(--bg)";
+            const F=(cls,ph,val)=>'<input class="nameinp '+cls+'" placeholder="'+ph+'" value="'+escapeHtml(String(val==null?"":val))+'" style="width:100%;font-family:var(--mono);font-size:11.5px">';
+            box.innerHTML='<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">'
+              /* v29.2: ลำดับสำคัญ — กฎแรกที่ตรงชนะ ตัวที่เจาะจงกว่าจึงต้องอยู่บน */
+              +'<span style="font-size:11px;color:var(--ink-dim);width:16px;text-align:right;flex:none">'+(ri+1)+'</span>'
+              +'<button type="button" class="lrUp" title="ย้ายขึ้น" style="border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;height:26px;width:24px;cursor:'+(ri?"pointer":"default")+';opacity:'+(ri?1:.3)+';flex:none">↑</button>'
+              +'<button type="button" class="lrDn" title="ย้ายลง" style="border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;height:26px;width:24px;cursor:'+((ri<R.length-1)?"pointer":"default")+';opacity:'+((ri<R.length-1)?1:.3)+';flex:none">↓</button>'
+              +'<input class="nameinp lrN" placeholder="ชื่อกฎ (ไว้จำเอง)" value="'+escapeHtml(String(r.name||""))+'" style="flex:1;min-width:0;font-size:12px">'
+              +'<select class="nameinp lrA" style="width:155px;font-size:11.5px">'
+                +[["bom","ออกใบอุปกรณ์"],["cab","สร้างตู้เข้าฉาก"],["skip","ไม่ออกเลย"]]
+                  .map(o=>'<option value="'+o[0]+'"'+((act===o[0])?" selected":"")+'>'+o[1]+'</option>').join("")
+              +'</select>'
+              +'<label style="display:flex;align-items:center;gap:5px;font-size:11.5px;white-space:nowrap;cursor:pointer"><input type="checkbox" class="lrOn" '+(r.off?"":"checked")+'> ใช้งาน</label>'
+              +'<button type="button" class="lrDel" style="border:1px solid var(--line);background:transparent;color:#e0853b;border-radius:7px;height:28px;width:30px;cursor:pointer">✕</button></div>'
+              +'<div style="font-size:10.5px;color:var(--ink-dim);margin-bottom:2px">จับคู่เมื่อ — เว้นว่าง = ตรงทุกค่า · หลายค่าคั่นด้วย <span style="font-family:var(--mono)">,</span> · ขึ้นต้นด้วย <span style="font-family:var(--mono)">!</span> = ทุกค่ายกเว้นค่านั้น</div>'
+              +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px">'
+              +F("lrK","ประเภท",r.kind)+F("lrC","รหัส",r.code)+F("lrL","สี",r.color)+F("lrZ","ขนาด · S2=120",r.size)+'</div>'
+              +'<div style="font-size:10.5px;color:var(--ink-dim);margin-top:3px">ช่องขนาดเทียบทั้งสตริงก็ได้ (<span style="font-family:var(--mono)">2400*120</span>) หรือเทียบทีละตัวเลข (<span style="font-family:var(--mono)">S2=120</span> = ตัวเลขตัวที่สองเท่ากับ 120 · ใช้ <span style="font-family:var(--mono)">&gt; &lt; &gt;= &lt;=</span> ได้)</div>'
+              +(act==="cab"
+                ?('<div style="font-size:10.5px;color:var(--ink-dim);margin:6px 0 2px">สร้างตู้ — ขนาดใส่ตัวเลขตรง ๆ หรือ <span style="font-family:var(--mono)">S1 S2 S3</span> = ตัวเลขลำดับที่เท่าไหร่ในช่องขนาดของแถวนั้น · จำนวนตู้ใช้ตามช่องจำนวน</div>'
+                  +'<div style="display:grid;grid-template-columns:1.4fr .7fr .7fr .7fr 1.2fr;gap:5px">'
+                  +F("lrCab","รหัสตู้ในคลัง",r.cabCode)+F("lrW","กว้าง",r.w)+F("lrH","สูง",r.h)+F("lrD","ลึก",r.d)
+                  +F("lrCol","สีไปที่ Family",r.colorTo)+'</div>'
+                  +'<div style="font-size:10.5px;color:var(--ink-dim);margin:6px 0 2px">แบบบาน — คิดจากรหัสสีของแถวนั้น · เขียนคู่ <span style="font-family:var(--mono)">รูปแบบ=ค่า</span> คั่นด้วย , · <span style="font-family:var(--mono)">*</span> แทนอะไรก็ได้ · ตัวแรกที่ตรงชนะ ปิดท้ายด้วย <span style="font-family:var(--mono)">*=</span> ไว้เป็นค่าที่เหลือ</div>'
+                  +'<div style="display:grid;grid-template-columns:1fr 2fr;gap:5px">'
+                  +F("lrShT","แบบบานไปที่ Family",r.shapeTo)+F("lrShM","*S*=Pxxx01, *=Exxx01",r.shapeMap)+'</div>')
+                :(act==="bom"
+                  ?('<div style="font-size:10.5px;color:var(--ink-dim);margin:6px 0 2px">ออกใบอุปกรณ์ด้วยรหัสนี้ · ใส่หลายรหัสคั่นด้วย , ได้ · จำนวนใช้ตามช่องจำนวนของแถว</div>'
+                    +F("lrOut","รหัสสั่งซื้อ เช่น 413LG0000004",r.out))
+                  :''))
+              +'<div style="font-size:11px;margin-top:6px;color:'+(hit.length?"#2f9e44":"var(--ink-dim)")+'">'
+                +(hit.length?("ไฟล์นี้จับได้ "+hit.length+" แถว"
+                   +(act==="cab"?(" → สร้างตู้ "+nCab+" ใบ")
+                     :(act==="bom"?(" → ออกรวม "+hit.reduce((s2,x)=>s2+(parseFloat(x.qty)||0),0)):"")))
+                  :"ไฟล์นี้ยังไม่มีแถวไหนตรงกับกฎนี้")+'</div>';
+            const q=x=>box.querySelector(x);
+            const bind=(sl,k)=>{ const el=q(sl); if(!el) return;
+              el.oninput=e=>{ r[k]=e.target.value; };
+              el.onchange=()=>{ save(); after(); }; };
+            bind(".lrN","name"); bind(".lrK","kind"); bind(".lrC","code"); bind(".lrL","color"); bind(".lrZ","size");
+            bind(".lrOut","out"); bind(".lrCab","cabCode"); bind(".lrW","w"); bind(".lrH","h"); bind(".lrD","d"); bind(".lrCol","colorTo");
+            bind(".lrShT","shapeTo"); bind(".lrShM","shapeMap");
+            q(".lrA").onchange=e=>{ r.act=e.target.value; save(); after(); };
+            q(".lrOn").onchange=e=>{ r.off=!e.target.checked; save(); after(); };
+            q(".lrDel").onclick=()=>{ R.splice(ri,1);
+              /* v30.3: ลบจนไม่เหลือสักข้อ = ตั้งใจไม่เอา จำไว้แล้วไม่ยัดคืนให้ */
+              settings.lineRulesCleared=(R.length===0);
+              save(); after(); };
+            q(".lrUp").onclick=()=>{ if(!ri) return; R.splice(ri-1,0,R.splice(ri,1)[0]); save(); after(); };
+            q(".lrDn").onclick=()=>{ if(ri>=R.length-1) return; R.splice(ri+1,0,R.splice(ri,1)[0]); save(); after(); };
+            host.appendChild(box); }); };
+        drawR();
+        { const au=host.parentNode.querySelector(".lrAuto");
+          if(au) au.onchange=e=>{ settings.lineRuleAuto=e.target.checked; save();
+            toast(e.target.checked?"โหลด XML ครั้งต่อไปจะสร้างตู้จากกฎให้เอง":"ปิดแล้ว — ต้องกดปุ่มใช้กฎเอง"); }; }
+        const ab=host.parentNode.querySelector(".lrAdd");
+        if(ab) ab.onclick=()=>{ R.push({name:"",kind:"",code:"",color:"",size:"",act:"bom",out:"",cabCode:"",w:"",h:"",d:"",colorTo:"",off:false}); save(); after(); };
+        { const sb=host.parentNode.querySelector(".lrSeed");
+          if(sb) sb.onclick=()=>{ const sig=x=>[x.kind,x.code,x.color,x.size,x.act].join("|").toUpperCase();
+            const has=new Set(R.map(sig)); let add=0;
+            defaultLineRules().forEach(x=>{ if(!has.has(sig(x))){ R.push(x); add++; } });
+            settings.lineRulesCleared=false; save(); after();
+            toast(add?("ใส่กฎตั้งต้นแล้ว "+add+" กฎ — เติมรหัสสั่งซื้อของขา 120 กับ 150 เอง"):"มีกฎตั้งต้นครบแล้ว"); }; }
+        drawR();
+}
+/* HTML ของแถบปุ่มด้านบนตารางกฎ — ใช้ร่วมกันทั้งสองหน้า */
+function lineRulesBarHtml(){
+  return '<label style="display:flex;align-items:center;gap:7px;font-size:11.5px;cursor:pointer;margin:2px 0 8px">'
+    +'<input type="checkbox" class="lrAuto"'+(settings.lineRuleAuto!==false?" checked":"")+'>'
+    +'<span>สร้างตู้จากกฎให้เองตอนโหลด XML <span style="color:var(--ink-dim)">— ปิดไว้ถ้าอยากตรวจก่อนแล้วค่อยกดใช้กฎเอง</span></span></label>'
+    +'<div class="lrHost"></div>'
+    +'<div style="display:flex;gap:6px;margin-top:6px">'
+    +'<button type="button" class="ibtn lrAdd" style="flex:none">＋ เพิ่มกฎ</button>'
+    +'<button type="button" class="ibtn lrSeed" style="flex:none" title="ใส่ชุดกฎที่ตกลงกันไว้">↺ ใส่กฎตั้งต้น</button></div>';
+}
 function lineCabSets(){
   const out=[];
   (state.orderLines||[]).forEach(row=>{
@@ -18703,6 +19207,10 @@ function lineCabSets(){
     const vars={};
     String(r.colorTo||"").split(/[,;]+/).map(x=>x.trim()).filter(Boolean)
       .forEach(f=>{ if(row.color) vars[f]=row.color; });
+    /* v29.7: แบบบานคิดจากรหัสสีของแถวนั้น */
+    { const sv=lineShapeFor(r.shapeMap,row.color);
+      if(sv) String(r.shapeTo||"").split(/[,;]+/).map(x=>x.trim()).filter(Boolean)
+        .forEach(f=>{ vars[f]=sv; }); }
     out.push({ name:code, W:lineDim(r.w,nums,600), H:lineDim(r.h,nums,720), D:lineDim(r.d,nums,100),
                T:18, count:cnt, vars:vars, pv:{}, numv:{}, _fromLine:true });
   });
@@ -18725,6 +19233,39 @@ function orderLineRows(){
       unit:(el&&el.unit)||"ชุด",count:0,_pidList:fitPidList(code)};
     m[a].count+=q; });
   return Object.values(m);
+}
+/* ───────── v30.2: กล่องรอตอนโหลดออเดอร์ ─────────
+   โหลดออเดอร์สี่สิบใบต้องไปถามคลังทีละรุ่น กว่าจะครบก็หลายวินาที
+   ระหว่างนั้นหน้าจอค้างอยู่กับฉากเดิม ไม่มีอะไรบอกว่ากำลังทำอะไรอยู่หรือค้างไปแล้ว
+   กล่องนี้บอกว่ากำลังทำใบไหนอยู่ ครบไปเท่าไหร่แล้ว และเหลืออีกเท่าไหร่ */
+function busyOpen(title){
+  const ov=document.createElement("div");
+  ov.style.cssText="position:fixed;inset:0;z-index:600;display:flex;align-items:center;justify-content:center;"
+    +"background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)";
+  ov.innerHTML='<div style="min-width:340px;max-width:min(480px,92vw);background:var(--solid,#fff);color:var(--ink,#111);'
+    +'border-radius:18px;padding:22px 24px;box-shadow:0 30px 80px -18px rgba(0,0,0,.55)">'
+    +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">'
+      +'<div class="bzSpin" style="width:18px;height:18px;border-radius:50%;border:2.5px solid var(--line);'
+        +'border-top-color:var(--accent);animation:bzspin .7s linear infinite;flex:none"></div>'
+      +'<div style="font-size:15px;font-weight:700">'+escapeHtml(String(title||"กำลังทำงาน"))+'</div></div>'
+    +'<div class="bzMsg" style="font-size:12.5px;color:var(--ink-dim);min-height:19px;margin-bottom:12px;'
+      +'white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div>'
+    +'<div style="height:7px;border-radius:99px;background:var(--line);overflow:hidden">'
+      +'<div class="bzBar" style="height:100%;width:0%;background:var(--accent);border-radius:99px;transition:width .18s ease"></div></div>'
+    +'<div class="bzPct" style="font-size:11px;color:var(--ink-dim);margin-top:7px;text-align:right">0%</div></div>';
+  if(!document.getElementById("bzKF")){ const st=document.createElement("style"); st.id="bzKF";
+    st.textContent="@keyframes bzspin{to{transform:rotate(360deg)}}"; document.head.appendChild(st); }
+  document.body.appendChild(ov);
+  const q=c=>ov.querySelector(c);
+  return {
+    step(msg,pct){ const m=q(".bzMsg"); if(m) m.textContent=String(msg==null?"":msg);
+      if(pct!=null){ const v=Math.max(0,Math.min(100,pct));
+        const b=q(".bzBar"); if(b) b.style.width=v+"%";
+        const t=q(".bzPct"); if(t) t.textContent=Math.round(v)+"%"; } },
+    /* คืนคิวให้เบราว์เซอร์วาดจริง ไม่งั้นแถบจะกระโดดทีเดียวตอนจบ */
+    async tick(){ await new Promise(r=>setTimeout(r,0)); },
+    done(){ try{ if(ov.parentNode) ov.parentNode.removeChild(ov); }catch(e){} }
+  };
 }
 function ovCard(w,mh){
   const ov=document.createElement("div");
@@ -23435,16 +23976,29 @@ function orderLinesDialog(){
         +'ติ๊กช่องซ้ายสุด = ให้รหัสนั้นออกในใบอุปกรณ์ตอนส่งออก · ค่าตั้งต้นเปิดให้เฉพาะประเภทที่ตั้งไว้ด้านล่าง '
         +'เพราะ Plinth · Worktop · Edge เป็นงานไม้ที่คิดทางอื่นอยู่แล้ว ใส่ซ้ำจะนับเกิน</div>'
         +'<table style="border-collapse:collapse;width:100%;font-size:12px"><thead><tr>'
-        +["ออก BOM","ช่อง","ประเภท","รหัส","สี","ขนาด","ราคา/หน่วย","จำนวน","รวม"]
-          .map((x,i)=>'<th style="text-align:'+(i>=6?"right":"left")+';padding:5px 8px;color:var(--ink-dim);font-size:11px;border-bottom:1px solid var(--line);white-space:nowrap">'+escapeHtml(x)+'</th>').join("")
+        +["ออก BOM","กฎที่จับได้","ช่อง","ประเภท","รหัส","สี","ขนาด","ราคา/หน่วย","จำนวน","รวม"]
+          .map((x,i)=>'<th style="text-align:'+(i>=7?"right":"left")+';padding:5px 8px;color:var(--ink-dim);font-size:11px;border-bottom:1px solid var(--line);white-space:nowrap">'+escapeHtml(x)+'</th>').join("")
         +'</tr></thead><tbody>'
-        +L.map((r,i)=>{ const on=lineBomOn(r), tot=(parseFloat(r.price)||0)*(parseFloat(r.qty)||0);
+        +L.map((r,i)=>{ const ru=lineRuleOf(r);
+          const isCab=!!(ru&&ru.act==="cab"), isSkip=!!(ru&&ru.act==="skip");
+          const isBom=!!(ru&&ru.act==="bom"&&String(ru.out||"").trim());
+          const on=(!isCab&&!isSkip)&&(isBom||lineBomOn(r));
+          const tot=(parseFloat(r.price)||0)*(parseFloat(r.qty)||0);
           const auto=(r.bom!==true&&r.bom!==false);
-          return '<tr'+(on?'':' style="opacity:.5"')+'>'
+          const q3=Math.max(1,Math.round(parseFloat(r.qty)||1));
+          /* v29.4: แถวที่ไม่มีกฎไหนจับ และประเภทก็ไม่ได้เปิดให้ออก = หายไปเงียบ ๆ ทั้งแถว ต้องเห็น */
+          const tag3=isCab?('<span style="color:#0c7a5a">→ สร้างตู้ '+escapeHtml(String(ru.cabCode||""))+' ×'+q3+'</span>')
+            :isBom?('<span style="color:#2f6fd0">→ ออกรหัส '+escapeHtml(String(ru.out))+'</span>')
+            :isSkip?'<span style="color:var(--ink-dim)">→ ไม่ออก</span>'
+            :(on?'<span style="opacity:.45">— ตามประเภท</span>'
+                :'<span style="color:#e58a24">ไม่มีกฎ · ไม่ออกที่ไหนเลย</span>');
+          return '<tr'+((on||isCab)?'':' style="opacity:.62"')+'>'
             +'<td style="padding:4px 8px;border-bottom:1px solid var(--line);white-space:nowrap">'
-              +'<input type="checkbox" class="olC" data-i="'+i+'"'+(on?" checked":"")+'>'
-              +(auto?'<span style="font-size:10px;color:var(--ink-dim);margin-left:5px">ตามประเภท</span>':'<span style="font-size:10px;color:#e58a24;margin-left:5px">ตั้งเอง</span>')+'</td>'
-            +[r.tag,r.kind,r.code,r.color||"—",r.size||"—",r.price,r.qty,tot.toLocaleString(undefined,{minimumFractionDigits:2})]
+              +(ru?'<span style="font-size:10px;color:var(--ink-dim)">ตามกฎ</span>'
+                 :('<input type="checkbox" class="olC" data-i="'+i+'"'+(on?" checked":"")+'>'
+                   +(auto?'<span style="font-size:10px;color:var(--ink-dim);margin-left:5px">ตามประเภท</span>':'<span style="font-size:10px;color:#e58a24;margin-left:5px">ตั้งเอง</span>')))+'</td>'
+            +'<td style="padding:4px 8px;border-bottom:1px solid var(--line);white-space:nowrap;font-size:11px">'+tag3+'</td>'
+            +[r.tag,r.kind,r.code||"(ว่าง)",r.color||"—",r.size||"—",r.price,r.qty,tot.toLocaleString(undefined,{minimumFractionDigits:2})]
               .map((c,k)=>'<td style="padding:4px 8px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:'+(k>=5?"right":"left")+';font-family:'+(k>=2?"var(--mono)":"inherit")+'">'+escapeHtml(String(c))+'</td>').join("")
             +'</tr>'; }).join("")
         +'</tbody></table>')
@@ -23459,9 +24013,10 @@ function orderLinesDialog(){
       +'<div style="margin-top:12px"><div style="font-size:12px;margin-bottom:4px"><b>กฎแปลงรายการเส้น</b> '
         +'<span style="color:#e58a24">กฎแรกที่ตรงชนะ</span> — '
         +'<span style="color:var(--ink-dim)">จับคู่จาก ประเภท · รหัส · สี · ขนาด — ช่องที่เว้นว่าง = ตรงทุกค่า · ใส่หลายค่าคั่นด้วย , ได้</span></div>'
-        +'<div id="olRules"></div><button class="ibtn" id="olRuleAdd" style="margin-top:6px">＋ เพิ่มกฎ</button></div>'
+        +lineRulesBarHtml()+'</div>'
       +'</div>'
       +'<div style="padding:10px 16px;border-top:1px solid var(--line);display:flex;gap:8px;flex:none">'
+      +'<button class="ibtn" id="olApply" style="flex:none;padding:8px 14px;background:var(--accent);color:#fff;border-color:transparent">▶ ใช้กฎกับออเดอร์นี้เลย</button>'
       +'<button class="ibtn" id="olBom" style="flex:none;padding:8px 14px">📋 ดูรายการ BOM Fitting</button>'
       +'<button class="ibtn" id="olOk" style="flex:none;margin-left:auto;padding:8px 22px;background:var(--accent);color:#fff;border-color:transparent">เสร็จ</button></div></div>';
     const kill=()=>{ if(ov.parentNode) ov.parentNode.removeChild(ov); };
@@ -23474,68 +24029,14 @@ function orderLinesDialog(){
       if(k) k.onchange=e=>{ settings.lineBomKinds=e.target.value;
         try{ lsSet("furnitech:settings",settings); }catch(e2){} draw(); }; }
     ov.querySelector("#olBom").onclick=()=>{ kill(); openSummary(); };
+    { const ap=ov.querySelector("#olApply");
+      if(ap) ap.onclick=async()=>{ ap.disabled=true; ap.textContent="กำลังสร้าง…";
+        let made=0; try{ made=await applyLineRulesNow(); }catch(e){ console.error(e); }
+        ap.disabled=false; ap.textContent="▶ ใช้กฎกับออเดอร์นี้เลย";
+        if(made) toast("เพิ่มตู้จากกฎแล้ว "+made+" ชิ้น — ดูในรายการทางซ้าย");
+        draw(); }; }
     /* ───────── v29.1: ตารางกฎ ───────── */
-    { const host=ov.querySelector("#olRules");
-      if(host){
-        if(!Array.isArray(settings.lineRules)) settings.lineRules=[];
-        const R=settings.lineRules;
-        const save=()=>{ try{ lsSet("furnitech:settings",settings); }catch(e){} };
-        const drawR=()=>{ host.innerHTML="";
-          if(!R.length){ const e0=document.createElement("div");
-            e0.style.cssText="font-size:11.5px;opacity:.7;padding:4px 0";
-            e0.textContent="ยังไม่มีกฎ — ทุกแถวใช้ค่าตั้งต้นตามประเภท"; host.appendChild(e0); }
-          R.forEach((r,ri)=>{
-            const hit=L.filter(x=>lineRuleHit(r,x));
-            const nCab=hit.reduce((s2,x)=>s2+Math.max(1,Math.round(parseFloat(x.qty)||1)),0);
-            const act=String(r.act||"bom");
-            const box=document.createElement("div");
-            box.style.cssText="border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-bottom:7px;background:var(--bg)";
-            const F=(cls,ph,val)=>'<input class="nameinp '+cls+'" placeholder="'+ph+'" value="'+escapeHtml(String(val==null?"":val))+'" style="width:100%;font-family:var(--mono);font-size:11.5px">';
-            box.innerHTML='<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">'
-              /* v29.2: ลำดับสำคัญ — กฎแรกที่ตรงชนะ ตัวที่เจาะจงกว่าจึงต้องอยู่บน */
-              +'<span style="font-size:11px;color:var(--ink-dim);width:16px;text-align:right;flex:none">'+(ri+1)+'</span>'
-              +'<button type="button" class="lrUp" title="ย้ายขึ้น" style="border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;height:26px;width:24px;cursor:'+(ri?"pointer":"default")+';opacity:'+(ri?1:.3)+';flex:none">↑</button>'
-              +'<button type="button" class="lrDn" title="ย้ายลง" style="border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;height:26px;width:24px;cursor:'+((ri<R.length-1)?"pointer":"default")+';opacity:'+((ri<R.length-1)?1:.3)+';flex:none">↓</button>'
-              +'<input class="nameinp lrN" placeholder="ชื่อกฎ (ไว้จำเอง)" value="'+escapeHtml(String(r.name||""))+'" style="flex:1;min-width:0;font-size:12px">'
-              +'<select class="nameinp lrA" style="width:155px;font-size:11.5px">'
-                +[["bom","ออกใบอุปกรณ์"],["cab","สร้างตู้เข้าฉาก"],["skip","ไม่ออกเลย"]]
-                  .map(o=>'<option value="'+o[0]+'"'+((act===o[0])?" selected":"")+'>'+o[1]+'</option>').join("")
-              +'</select>'
-              +'<label style="display:flex;align-items:center;gap:5px;font-size:11.5px;white-space:nowrap;cursor:pointer"><input type="checkbox" class="lrOn" '+(r.off?"":"checked")+'> ใช้งาน</label>'
-              +'<button type="button" class="lrDel" style="border:1px solid var(--line);background:transparent;color:#e0853b;border-radius:7px;height:28px;width:30px;cursor:pointer">✕</button></div>'
-              +'<div style="font-size:10.5px;color:var(--ink-dim);margin-bottom:2px">จับคู่เมื่อ — เว้นว่าง = ตรงทุกค่า · หลายค่าคั่นด้วย <span style="font-family:var(--mono)">,</span> · ขึ้นต้นด้วย <span style="font-family:var(--mono)">!</span> = ทุกค่ายกเว้นค่านั้น</div>'
-              +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px">'
-              +F("lrK","ประเภท",r.kind)+F("lrC","รหัส",r.code)+F("lrL","สี",r.color)+F("lrZ","ขนาด",r.size)+'</div>'
-              +(act==="cab"
-                ?('<div style="font-size:10.5px;color:var(--ink-dim);margin:6px 0 2px">สร้างตู้ — ขนาดใส่ตัวเลขตรง ๆ หรือ <span style="font-family:var(--mono)">S1 S2 S3</span> = ตัวเลขลำดับที่เท่าไหร่ในช่องขนาดของแถวนั้น · จำนวนตู้ใช้ตามช่องจำนวน</div>'
-                  +'<div style="display:grid;grid-template-columns:1.4fr .7fr .7fr .7fr 1.2fr;gap:5px">'
-                  +F("lrCab","รหัสตู้ในคลัง",r.cabCode)+F("lrW","กว้าง",r.w)+F("lrH","สูง",r.h)+F("lrD","ลึก",r.d)
-                  +F("lrCol","สีไปที่ Family",r.colorTo)+'</div>')
-                :(act==="bom"
-                  ?('<div style="font-size:10.5px;color:var(--ink-dim);margin:6px 0 2px">ออกใบอุปกรณ์ด้วยรหัสนี้ · ใส่หลายรหัสคั่นด้วย , ได้ · จำนวนใช้ตามช่องจำนวนของแถว</div>'
-                    +F("lrOut","รหัสสั่งซื้อ เช่น 413LG0000004",r.out))
-                  :''))
-              +'<div style="font-size:11px;margin-top:6px;color:'+(hit.length?"#2f9e44":"var(--ink-dim)")+'">'
-                +(hit.length?("ไฟล์นี้จับได้ "+hit.length+" แถว"
-                   +(act==="cab"?(" → สร้างตู้ "+nCab+" ใบ")
-                     :(act==="bom"?(" → ออกรวม "+hit.reduce((s2,x)=>s2+(parseFloat(x.qty)||0),0)):"")))
-                  :"ไฟล์นี้ยังไม่มีแถวไหนตรงกับกฎนี้")+'</div>';
-            const q=x=>box.querySelector(x);
-            const bind=(sl,k)=>{ const el=q(sl); if(!el) return;
-              el.oninput=e=>{ r[k]=e.target.value; };
-              el.onchange=()=>{ save(); draw(); }; };
-            bind(".lrN","name"); bind(".lrK","kind"); bind(".lrC","code"); bind(".lrL","color"); bind(".lrZ","size");
-            bind(".lrOut","out"); bind(".lrCab","cabCode"); bind(".lrW","w"); bind(".lrH","h"); bind(".lrD","d"); bind(".lrCol","colorTo");
-            q(".lrA").onchange=e=>{ r.act=e.target.value; save(); draw(); };
-            q(".lrOn").onchange=e=>{ r.off=!e.target.checked; save(); draw(); };
-            q(".lrDel").onclick=()=>{ R.splice(ri,1); save(); draw(); };
-            q(".lrUp").onclick=()=>{ if(!ri) return; R.splice(ri-1,0,R.splice(ri,1)[0]); save(); draw(); };
-            q(".lrDn").onclick=()=>{ if(ri>=R.length-1) return; R.splice(ri+1,0,R.splice(ri,1)[0]); save(); draw(); };
-            host.appendChild(box); }); };
-        drawR();
-        const ab=ov.querySelector("#olRuleAdd");
-        if(ab) ab.onclick=()=>{ R.push({name:"",kind:"",code:"",color:"",size:"",act:"bom",out:"",cabCode:"",w:"",h:"",d:"",colorTo:"",off:false}); save(); draw(); };
-      } }
+    { lineRulesUI(ov.querySelector(".lrHost"),L,draw); }
   };
   draw(); document.body.appendChild(ov);
 }
@@ -23630,6 +24131,8 @@ async function cloudLoadSettings(silent){ try{ const db=await getDB();
     /* v10.2: หน้าตัดต้องรวมแบบเดียวกัน ไม่งั้นตัวที่เพิ่งนำเข้าจะหายทันทีที่ดึงคลาวด์ */
     val.sections=_mergeTs((settings&&settings.sections)||{}, val.sections||{});
     await lsSet("furnitech:settings",val); await loadSettings();
+    /* v30.3: ตั้งค่าบนคลาวด์ที่บันทึกไว้ก่อนจะมีกฎรายการเส้น ทับกฎหายทั้งชุด — ใส่คืนให้ */
+    try{ const nAdd=ensureLineRules(); if(nAdd&&!silent) toast("ใส่กฎรายการเส้นตั้งต้นคืนให้แล้ว "+nAdd+" กฎ"); }catch(e){}
     if(!silent)toast("ดึง Variables/Element จากคลาวด์แล้ว"); return true;
   }catch(e){ if(!silent){ console.error(e); toast("ดึงคลาวด์ไม่สำเร็จ: "+sbErr(e)); } return false; } }
 async function cloudSaveXml(o){ // o={orderNo,filename,cust,retailer,cab,xml} — บันทึกไฟล์ที่โหลดเข้า xml_history (best-effort)
