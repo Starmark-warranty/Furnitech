@@ -4,10 +4,10 @@
   >>> AI/DEV: อ่านบล็อกนี้ก่อนแก้โค้ดทุกครั้ง · แก้เสร็จให้บวมเลข VERSION
       แล้วเพิ่มบรรทัด CHANGELOG ใหม่ไว้บนสุด (ห้ามลบของเก่า)
 
-  APP         : WoodX Cabinet
+  APP         : StarNexus Cabinet
   VERSION     : 7.26.1
   BUILD       : 2026-08-01 / export-tdz-fix
-  FILE        : WoodX.html
+  FILE        : StarNexus.html
   BASED_ON    : Furnitech_V3.html  (v3.11)
   STATUS      : CURRENT  <-- ใช้ตัวนี้เป็นฐานแก้ต่อ · สาย V2/V3 ปิดแล้ว (LEGACY)
   STACK       : single-file HTML + three.js r128 (CDN) · ไม่มี build step
@@ -15,7 +15,7 @@
   HELPERS     : บล็อก "V4 CORE" (ใต้ APP_META) + โมดูล SVGKit (ก่อน ShopPaper)
                 >>> ห้ามนิยาม $ / bind / sync / groupOf / selBoard / wd /
                     faceOf / pull / esc / dimH / dimV / frame / grab3D ซ้ำอีก
-  NAMING      : ชื่อไฟล์ = WoodX_V<major>.html เท่านั้น
+  NAMING      : ชื่อไฟล์ = StarNexus_V<major>.html เท่านั้น
                 ห้ามพึ่งเลขวงเล็บ (11)/(12) — นั่นคือเลขดาวน์โหลดของเบราว์เซอร์
 
   --- CHANGELOG (ใหม่สุดอยู่บนสุด) -----------------------------------
@@ -919,7 +919,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WoodX · v32.0</title>
+<title>StarNexus · v33.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,800&family=IBM+Plex+Mono:wght@400;500;600&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -930,7 +930,7 @@
     --panel:rgba(252,252,254,0.72); --panel-strong:rgba(255,255,255,0.86); --solid:#ffffff;
     --line:rgba(0,0,0,0.10); --line-strong:rgba(0,0,0,0.16);
     --ink:#1d1d1f; --ink-dim:#5f5f66; --ink-faint:#8a8a90;
-    /* v32.0: สีหลักมาจากโลโก้ WoodX — กรมท่าเป็นตัวยืน ส้มเป็นตัวเน้น
+    /* v32.0: สีหลัก — กรมท่าเป็นตัวยืน ส้มเป็นตัวเน้น (โลโก้ StarNexus ใช้คู่เดียวกัน)
        เปลี่ยนแค่ค่าสีสามตัวนี้ ทั้งโปรแกรมเปลี่ยนตาม ไม่ได้แตะรูปทรงหรือระยะห่างอะไรเลย */
     --accent:#1F3864; --accent-press:#16294a; --accent-soft:rgba(31,56,100,.12);
     --brand-navy:#1F3864; --brand-orange:#E8901F; --brand-wood:#8A5A2B;
@@ -1444,7 +1444,7 @@
 <body>
 <div id="splash">
   <div class="splash-logo"><div class="brandmark" style="width:240px;height:85px"></div></div>
-  <div class="splash-sub">WoodX Cabinet &middot; ออกแบบ-ถอดแบบตู้ &middot; <span class="ver"></span></div>
+  <div class="splash-sub">StarNexus Cabinet &middot; ออกแบบ-ถอดแบบตู้ &middot; <span class="ver"></span></div>
   <div class="splash-bar"><div class="splash-bar-fill"></div></div>
   <div class="splash-dots"><span></span><span></span><span></span></div>
   <div id="splashErr"></div>
@@ -1488,19 +1488,25 @@
 
 <header id="titlebar">
   <div class="tb-left">
-    <div class="brandlogo" title="WoodX — Design. Engineering. Manufacturing.">
-      <!-- v32.1: โลโก้ทั้งชุด — X ไม้ซ้อนกรมท่า + ตัวอักษร WoodX ที่ตัว X ท้ายเป็นสีส้ม
-           วาดเป็น SVG ไม่ใช่ไฟล์ภาพ จึงคมทุกความละเอียดและเปลี่ยนสีตามธีมได้ -->
-      <svg viewBox="0 0 190 40" role="img" aria-label="WoodX">
-        <g stroke-linecap="round" stroke-linejoin="round" fill="none">
-          <path d="M7 7L33 33" stroke="var(--brand-navy)" stroke-width="12"/>
-          <path d="M33 7L7 33" stroke="var(--brand-navy)" stroke-width="12"/>
-          <path d="M7 7L33 33" stroke="var(--brand-wood)" stroke-width="7"/>
-          <path d="M33 7L7 33" stroke="var(--brand-orange)" stroke-width="7"/>
-          <path d="M7 7L33 33M33 7L7 33" stroke="#fff" stroke-width="1.2" opacity=".45"/>
+    <div class="brandlogo" title="StarNexus — Design. Engineering. Manufacturing.">
+      <!-- ───────── v33.0: โลโก้ StarNexus ─────────
+           ชื่อประกอบจากสองคำ Star กับ Nexus เครื่องหมายจึงเล่าสองอย่างซ้อนกัน
+           ดาวสี่แฉกอยู่กลาง = Star · จุดกับเส้นที่โยงถึงกันรอบ ๆ = Nexus จุดเชื่อมของทุกอย่าง
+           ตรงกับตัวโปรแกรมพอดี ที่รับออเดอร์ คลังวัสดุ และโรงงาน มาบรรจบกันที่เดียว
+           วาดเป็น SVG ไม่ใช่ไฟล์ภาพ จึงคมทุกความละเอียดและใช้ตัวแปรสีชุดเดียวกับทั้งโปรแกรม -->
+      <svg viewBox="0 0 210 40" role="img" aria-label="StarNexus">
+        <g fill="none" stroke="var(--brand-navy)" stroke-width="1.5" opacity=".45" stroke-linecap="round">
+          <path d="M20 5.5L33.5 13.2M33.5 13.2V26.8M33.5 26.8L20 34.5M20 34.5L6.5 26.8M6.5 26.8V13.2M6.5 13.2L20 5.5"/>
         </g>
+        <g fill="var(--brand-navy)">
+          <circle cx="20" cy="5.5" r="2.5"/><circle cx="33.5" cy="13.2" r="2.5"/>
+          <circle cx="33.5" cy="26.8" r="2.5"/><circle cx="20" cy="34.5" r="2.5"/>
+          <circle cx="6.5" cy="26.8" r="2.5"/><circle cx="6.5" cy="13.2" r="2.5"/>
+        </g>
+        <path d="M20 9.5C21.4 16.3 23.7 18.6 30.5 20C23.7 21.4 21.4 23.7 20 30.5C18.6 23.7 16.3 21.4 9.5 20C16.3 18.6 18.6 16.3 20 9.5Z"
+              fill="var(--brand-orange)"/>
         <text x="46" y="29" font-size="25" font-weight="700"
-              letter-spacing="-.4" fill="var(--brand-navy)">Wood<tspan fill="var(--brand-orange)">X</tspan></text>
+              letter-spacing="-.4" fill="var(--brand-navy)">Star<tspan fill="var(--brand-orange)">Nexus</tspan></text>
       </svg>
       <span class="appname"><span class="muted" id="appVerBadge" title="คลิกดูเวอร์ชัน + changelog (คัดลอกอัตโนมัติ)" style="cursor:pointer;text-decoration:underline dotted">v?</span></span>
     </div>
@@ -1636,13 +1642,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* =====================================================================
-   WoodX Cabinet   (เดิมชื่อ Furnitech Cabinet)
+   StarNexus Cabinet   (เดิมชื่อ WoodX / Furnitech Cabinet)
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"WoodX Cabinet", version:"32.6", build:"2026-08-17/export-order",
-  file:"WoodX.html", basedOn:"Furnitech_V3.html (v3.11)",
+  name:"StarNexus Cabinet", version:"33.0", build:"2026-08-17/starnexus",
+  file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["33.0","2026-08-17","เปลี่ยนชื่อโปรแกรมจาก WoodX เป็น StarNexus — ชื่อบนหัวโปรแกรม ชื่อแท็บ หน้าโหลด หน้าเปิดงาน หัวไฟล์เจาะ MPR และชื่อไฟล์ที่ดาวน์โหลดออกไป เปลี่ยนเป็น StarNexus ทั้งหมด ไฟล์โปรเจกต์เป็น starnexus-project.json ภาพเป็น starnexus.png · โลโก้ใหม่เล่าสองคำที่ประกอบเป็นชื่อ ดาวสี่แฉกสีส้มอยู่กลางคือ Star ล้อมด้วยจุดหกจุดที่โยงเส้นถึงกันคือ Nexus จุดที่ทุกอย่างมาบรรจบ ซึ่งตรงกับตัวโปรแกรมพอดี ที่รับออเดอร์ คลังวัสดุ และโรงงาน มารวมกันที่เดียว · ยังวาดเป็น SVG เหมือนเดิม คมทุกความละเอียดและใช้ตัวแปรสีชุดเดียวกับทั้งโปรแกรม สีกรมท่ากับส้มไม่เปลี่ยน เพราะเป็นคู่สีที่ใช้อยู่ทั้งระบบแล้ว · โลโก้ Starmark ที่หน้าโหลดไม่ถูกแตะเหมือนเดิม และกุญแจที่ใช้เก็บข้อมูลในเครื่องยังเป็นชื่อเดิมทุกตัว ตั้งค่า ตัวแปร Element ทั้งคลัง และงานที่ค้างอยู่ จึงไม่หายไปไหน"],
     ["32.6","2026-08-17","สลับลำดับปุ่มในหน้าส่งออก เอาสองปุ่มที่กดทุกออเดอร์ขึ้นบนสุด — ส่งเข้า Supabase กับ ดาวน์โหลดไฟล์เจาะ คือปลายทางจริงของงานทุกใบ แต่เดิมอยู่กลางกับล่างของรายการ ต้องกวาดตาผ่านปุ่มดูข้อมูลก่อนทุกครั้ง ทั้งที่ปุ่มพวกนั้นไม่ได้กดทุกใบ · ตอนนี้สองปุ่มนั้นอยู่บนสุดคู่กัน คั่นเส้นแล้วตามด้วยกลุ่มดูข้อมูล รายการ BOM รายการเส้น CSV และ JSON ปิดท้ายด้วยกลุ่มไฟล์ทั่วไป · ปุ่มไฟล์เจาะเปลี่ยนเป็นสีส้มของโลโก้ แยกจากปุ่มส่งคลาวด์ที่เป็นกรมท่า สองปุ่มติดกันจะได้ไม่กดพลาดกัน"],
     ["32.5","2026-08-17","Preview 2D แสดงบาร์โค้ดแล้ว — เลขนี้คือตัวที่ยิงหน้าเครื่องและเป็นชื่อไฟล์เจาะ ตอนยืนอยู่หน้าเครื่องแล้วเปิดดูแบบ สิ่งที่ต้องเทียบก่อนอย่างอื่นคือเลขนี้ตรงกับที่ยิงมาไหม แต่หน้านี้ไม่เคยมีให้ดูเลย ต้องย้อนไปเปิดแบบผลิตหรือใบตัดอีกที · ขึ้นทั้งท้ายหัวหน้าต่างและในตารางข้อมูลสั่งผลิต ชิ้นที่มีงานเจาะสองหน้าได้สองเลขก็แสดงทั้งคู่ ชิ้นที่ไม่มีงานเจาะเลยบอกกำกับไว้ด้วย จะได้รู้ว่าไม่มีไฟล์ให้ยิง · ข้อความตอนโหลดออเดอร์จบ บอกผลการเชื่อมเดือยทุกครั้ง — เดิมถ้าเชื่อมได้ศูนย์จุด ข้อความก็เงียบไปเลย แยกไม่ออกว่าไม่มีอะไรต้องเชื่อม หรือมันไม่ได้ทำงาน ตอนนี้บอกจำนวนจุด แผ่นที่โดน รูเก่าที่ล้าง และรูฐานบานพับเสมอ ปิดสวิตช์ไว้ก็เตือนว่าปิดอยู่ ไม่ปล่อยให้เดา"],
     ["32.4","2026-08-17","ระยะขั้นต่ำจากขอบ เลิกบังคับกับจุดที่มาจากสูตรเป็นค่าตั้งต้น — v32.3 ตั้งไว้ให้เลื่อนทั้งชุด ระยะระหว่างจุดตรงสูตรก็จริง แต่จุดแรกยังไม่ใช่ 19 ตามที่เขียนไว้ ตัวเลขในสูตรเป็นสิ่งที่คนเขียนกำกับไว้เอง ระบบไม่ควรไปขยับโดยไม่บอก ค่าตั้งต้นจึงเป็น ตามสูตรเป๊ะ · ใครอยากให้บังคับระยะขอบเลือกอีกสองแบบได้ในตั้งค่า · FEAT หน้า Preview 2D ซูมและลากดูได้แล้ว — แบบถูกย่อให้พอดีกรอบเสมอ ชิ้นยาวสองเมตรจึงเหลือสูงไม่กี่สิบพิกเซล ตัวเลขระยะกับรูเล็ก ๆ อ่านไม่ออกเลย ต้องไปเปิดแบบผลิตแล้วขยายทั้งหน้าเอา ซึ่งคนละเรื่องกับการดูชิ้นเดียว · ล้อเมาส์ซูมที่ตำแหน่งเคอร์เซอร์ จุดใต้เมาส์อยู่ที่เดิมหลังซูม ภาพจึงไม่ไถลหนีมือ ลากเพื่อเลื่อน ดับเบิลคลิกกลับพอดีจอ และมีปุ่มบวกลบกับตัวเลขเปอร์เซ็นต์กำกับไว้"],
@@ -21628,7 +21635,7 @@ function importCabinetFile(){
     const r=new FileReader();
     r.onload=()=>{ try{
       const d=JSON.parse(r.result);
-      if(!d||d.app!=="furnitech-cab"||!Array.isArray(d.boards)||!d.boards.length){ toast("ไฟล์ไม่ใช่ตู้ WoodX (.json)"); return; }
+      if(!d||d.app!=="furnitech-cab"||!Array.isArray(d.boards)||!d.boards.length){ toast("ไฟล์ไม่ใช่ตู้ StarNexus (.json)"); return; }
       syncUid(); const inst=uid(); const code=d.name||"CAB";
       const idMap={};
       const boards=d.boards.map(b=>{ const nid=uid(); if(b.id!=null)idMap[b.id]=nid; return Object.assign({yaw:0,tone:null,r:0,holes:[],grooves:[],connectors:[],surfT:"",surfB:"",edges:["No Edge","No Edge","No Edge","No Edge"]},JSON.parse(JSON.stringify(b)),{id:nid,cab:code,cabInst:inst}); });
@@ -23212,7 +23219,7 @@ async function shareLinkDialog(){
   const n=(state.boards||[]).length;
   if(!n){ toast("ยังไม่มีงานให้แชร์"); return; }
   const url0=String(SB_URL_DEFAULT).replace(/\/+$/,"");
-  const ttl=(()=>{ const g=(state.boards||[]).find(b=>b&&b.cab); return g?String(g.cab):"WoodX"; })();
+  const ttl=(()=>{ const g=(state.boards||[]).find(b=>b&&b.cab); return g?String(g.cab):"StarNexus"; })();
   /* ───────── v27.4: ลิงก์ต้องชี้ไปที่ "เว็บ" ไม่ใช่ไฟล์ในเครื่องตัวเอง ─────────
      เปิดโปรแกรมจากไฟล์ในเครื่อง ลิงก์ที่สร้างจะขึ้นต้นด้วย file แล้วตามด้วยพาธในเครื่อง
      ตัวเองกดแล้วเปิดได้เพราะไฟล์อยู่ในเครื่องตัวเอง แต่คนอื่นเปิดไม่ได้เลย เบราว์เซอร์ห้าม
@@ -23480,7 +23487,7 @@ function boardToMPR(b, side){   // side=1/2 → เอาเฉพาะรู�
   ].forEach(v=>{ P(v); P('KM=""'); });
   P('<100 \\Werkstck\\'); P('LA="l"'); P('BR="b"'); P('DI="d"'); P('FNX="FNX_EXP"'); P('FNY="FNY_EXP"'); P(''); P('RNX="0"'); P('RNY="0"'); P('RNZ="0"'); P(''); P('AX="AX_EXP"'); P('AY="AY_EXP"'); P(''); P('');
   P('<101 \\Kommentar\\');
-  P('KM="MPR_PP\t: WoodX "');
+  P('KM="MPR_PP\t: StarNexus "');
   P('KM="Name\t: '+(b.name||b.id||'')+' "');
   P('KM="Order\t: '+((b.cab||'')+(b.cabInst?(' / '+b.cabInst):''))+' "');
   P('KM="Date\t: '+new Date().toLocaleDateString('en-GB')+' "');
@@ -23662,7 +23669,7 @@ function exportAllMPR(){
 function exportJSON(){
   /* v11.2: ไฟล์โปรเจกต์เคยเก็บแค่ชิ้นงาน ค่าที่ผูกกับตู้ (เส้นโปรไฟล์ · สี · ตัวแปร) จึงหายไปกับไฟล์
      เปิดไฟล์กลับมาแล้วเส้นโปรไฟล์หายทั้งงาน เพราะตัวสร้างเส้นไม่เจอรายการว่าตู้ไหนติดอะไรไว้ */
-  download("woodx-project.json",JSON.stringify({boards:state.boards,globalTone:state.globalTone,
+  download("starnexus-project.json",JSON.stringify({boards:state.boards,globalTone:state.globalTone,
     bcSeq:state.bcSeq,bcMax:state.bcMax,orderLines:state.orderLines,cabDP:state.cabDP,
     cabDX:state.cabDX,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt},null,2),
     "application/json");
@@ -24194,11 +24201,11 @@ function buildImosData(){
   /* v28.3: Accessory จากแท็บเส้น ไม่ได้สังกัดตู้ใบไหน จึงต่อท้ายใบแรกครั้งเดียว
      ผ่านตัวกางลูกเหมือนของอื่น รหัสชุดที่ตั้งไว้ว่าออกเฉพาะลูกจึงถูกกางให้ด้วย */
   try{ const lr=expandFitKids(orderLineRows().map(f=>Object.assign({},f,{purchase:fittingOut(f.art),_pidList:fitPidList(f.art)})));
-    if(lr.length){ if(!groups.length) groups.push({name:oid||"WoodX", rows:[]});
+    if(lr.length){ if(!groups.length) groups.push({name:oid||"StarNexus", rows:[]});
       lr.forEach(f=>groups[0].rows.push({_tp:8,TYP:"8",NAME:f.purchase||f.art,ARTICLE_ID:f.purchase||f.art,
         ORDER_ID:f.purchase||f.art,_FG_NAME:f.name,LENGTH:"",CNT:String(f.count),_FG_UNIT:f.unit})); }
   }catch(e){ console.error("lineRows:",e); }
-  if(!groups.length) groups.push({name:oid||"WoodX", rows:[]});
+  if(!groups.length) groups.push({name:oid||"StarNexus", rows:[]});
   return { orderID:oid, cabinets:cabGroups().map(g=>({article:g.cab,productId:g.productId})), itemIdSet:itemIdSet(), source:"boardforge", loaded:new Date().toLocaleString("th"),
            groups, _boardforge:buildExport() };
 }
@@ -24510,7 +24517,7 @@ function exportCSV(){ let csv="OrderID,ProductID,Cabinet,PartNo,PartName,ยา�
   const oid=orderId(); cabGroups().forEach(g=>{ g.boards.filter(b=>!isGuide(b)).forEach((b,i)=>{ ensurePartProps(b); const el=effLinks(b);
     csv+=`${oid},${g.productId},${g.cab},${i+1},"${String(b.name||"").replace(/"/g,'""')}",${Math.round(b.L)},${Math.round(b.W)},${Math.round(b.T)},${resolveLink(el.mat,b)||""},${((b.L*b.W)/1e6).toFixed(4)}\n`; }); });
   download("cut-list.csv","\uFEFF"+csv,"text/csv"); toast("ดาวน์โหลด .csv แล้ว"); }
-function exportPNG(){const a=document.createElement("a");a.download="woodx.png";a.href=renderer.domElement.toDataURL("image/png");a.click();toast("บันทึกภาพแล้ว");}
+function exportPNG(){const a=document.createElement("a");a.download="starnexus.png";a.href=renderer.domElement.toDataURL("image/png");a.click();toast("บันทึกภาพแล้ว");}
 /* ───────── v31.2: ภาพพื้นสำหรับเอาไปเรนเดอร์ต่อด้วย AI ─────────
    ปุ่มบันทึกภาพเดิมถ่ายหน้าจอตามที่เห็น ได้กริด เส้นบอกระยะ ตัวเลข และพื้นหลังสีเทามาด้วย
    ภาพแบบนั้นเอาไปให้ AI ต่อภาพไม่ได้ เพราะมันจะเก็บกริดกับตัวเลขไว้ในภาพที่เรนเดอร์ออกมา
@@ -24538,7 +24545,7 @@ function exportPlatePNG(scale){
     renderer.render(scene,camera);
     const url=renderer.domElement.toDataURL("image/png");
     const a=document.createElement("a");
-    a.download=(function(){ try{ return String(orderId()||"woodx").replace(/[^\w.-]+/g,"_"); }catch(e){ return "woodx"; } })()+"_plate.png";
+    a.download=(function(){ try{ return String(orderId()||"starnexus").replace(/[^\w.-]+/g,"_"); }catch(e){ return "starnexus"; } })()+"_plate.png";
     a.href=url; a.click();
     toast("บันทึกภาพพื้นแล้ว "+Math.round(w0*k)+"×"+Math.round(h0*k)+" px · พื้นหลังโปร่งใส ไม่มีกริดและเส้นบอกระยะ");
   }catch(e){ console.error("exportPlatePNG:",e); toast("บันทึกภาพพื้นไม่สำเร็จ — ดู console"); }
@@ -26645,7 +26652,7 @@ const CurvedShelf = (function(){
 
 <!-- startup loader (Production-style) -->
 <div class="modal" id="loaderModal"><div class="card" style="width:min(640px,96vw)">
-  <div class="mh"><h3>เปิดงาน — WoodX</h3><button class="closeX" data-close>&times;</button></div>
+  <div class="mh"><h3>เปิดงาน — StarNexus</h3><button class="closeX" data-close>&times;</button></div>
   <div class="mbody" id="loaderBody"></div>
 </div></div>
 
