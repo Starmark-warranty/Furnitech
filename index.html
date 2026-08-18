@@ -1646,9 +1646,10 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"34.5", build:"2026-08-18/perm-and-header-fix",
+  name:"StarNexus Cabinet", version:"34.6", build:"2026-08-18/online-status",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["34.6","2026-08-18","FEAT เห็นแล้วว่าใครออนไลน์อยู่ — คอลัมน์ ใช้งานล่าสุด เปลี่ยนเป็น สถานะออนไลน์ เขียว ● ออนไลน์ (มีสัญญาณชีพไม่เกิน 2 นาที) · เหลือง ● พร้อมเวลา (ไม่เกิน 15 นาที) · เทา ○ นานกว่านั้น · เดิมบอกแค่ 2 นาทีที่แล้ว ซึ่งแยกไม่ออกว่ายังเปิดค้างอยู่หรือปิดไปแล้ว · ตารางอัปเดตสถานะเองทุก 15 วินาทีโดยไม่วาดใหม่ทั้งใบ ไม่งั้นดรอปดาวน์ที่กำลังเลือกกับช่องค้นหาจะถูกรีเซ็ตทิ้ง · เกณฑ์เผื่อไว้ถึง 2 นาทีเพราะเบราว์เซอร์หน่วงตัวจับเวลาของแท็บที่ไม่ได้อยู่หน้าจอเหลือนาทีละครั้ง คนที่สลับไปทำอย่างอื่นจะได้ไม่ขึ้นว่าออฟไลน์ทั้งที่ยังเปิดโปรแกรมค้างอยู่ · กลับมาที่หน้าต่างโปรแกรมแล้วเคาะสัญญาณชีพทันที ไม่ต้องรอครบรอบ"],
     ["34.5","2026-08-18","FIX เปลี่ยนระดับ/กดอนุมัติแล้วขึ้น permission denied for table profiles ทำอะไรไม่ได้เลย — ตาราง profiles ถูกสร้างไว้ตั้งแต่ก่อนหน้านี้โดยไม่เคยให้สิทธิ์ UPDATE กับ authenticated policy sx_prof_edit จึงไม่เคยมีโอกาสได้ทำงาน เพราะโดนด่านสิทธิ์ระดับตาราง (GRANT) ตัดก่อน ซึ่งเป็นคนละชั้นกับ RLS และขึ้นข้อความคนละแบบ ทำให้หลงไปแก้ policy ผิดจุด · FIX ป้ายผู้ใช้ล้นไปทับแถบปุ่มบนหัวโปรแกรม — .tb-left ตั้ง min-width:0 ให้กล่องยอมหด แต่ข้างในเป็น nowrap เนื้อหาจึงล้นออกไปทับแทนที่จะถูกบีบ ที่ผ่านมาไม่เห็นเพราะข้างในมีแค่โลโก้กับเลขเวอร์ชัน พอเติมป้ายผู้ใช้กับป้ายรออนุมัติเข้าไปก็ทับทันที · ตอนนี้กล่องตัดส่วนเกินจริง ป้ายผู้ใช้ยาวสุด 190px แล้วต่อด้วย … ระดับสิทธิ์ย้ายไปอยู่ใน tooltip และป้ายรออนุมัติย่อเหลือ 🔔 n · FEAT เครื่องที่ยังไม่เคยมีใครล็อกอินสำเร็จ เปิดมาเจอแท็บสมัครใหม่เลย ไม่ใช่แท็บเข้าสู่ระบบเปล่า ๆ ที่ไม่บอกว่าต้องเอารหัสมาจากไหน · แปลข้อความ permission denied เป็นภาษาคน"],
     ["34.4","2026-08-18","เข้าระบบด้วยรหัสพนักงาน ไม่ต้องใช้อีเมลอีกแล้ว — ช่างส่วนใหญ่ไม่มีอีเมลบริษัท ที่ผ่านมาต้องกรอกอีเมลปลอมซึ่งจำไม่ได้อยู่ดี · Supabase Auth บังคับให้มีอีเมลเสมอ จึงแปลงเป็นอีเมลภายในตายตัว <รหัสพนักงาน>@staff.local อยู่หลังบ้าน ผู้ใช้ไม่เคยเห็น · รหัสพนักงานห้ามซ้ำ ไม่สนตัวพิมพ์เล็กใหญ่ (EMP001 กับ emp001 คือคนเดียวกัน) · หน้าสมัครบังคับกรอกชื่อ-สกุลและพิมพ์รหัสผ่านซ้ำสองครั้ง เพราะไม่มีอีเมลให้กู้คืน พิมพ์ผิดตั้งแต่แรกจะเข้าไม่ได้เลยแล้วผู้ดูแลก็ไม่รู้ว่าคนที่ขอมาคือใคร · บัญชีเจ้าของย้ายมาระบบเดียวกันแล้ว เข้าด้วยรหัสพนักงาน admin รหัสผ่านเดิม · FEAT แจ้งเตือนคำขอเข้าใช้งาน — เจ้าของเห็นป้ายส้ม รออนุมัติ n บนหัวโปรแกรม กดแล้วเข้าหน้าจัดการผู้ใช้ทันที พร้อมเด้งข้อความตอนเข้าโปรแกรมและตอนมีคำขอใหม่เข้ามาระหว่างทำงาน (เช็คทุก 30 วินาทีรอบเดียวกับตัวเช็คสิทธิ์) · หน้าจัดการผู้ใช้เปลี่ยนคอลัมน์อีเมลเป็นรหัสพนักงาน และค้นด้วยรหัสพนักงานได้"],
     ["34.3","2026-08-18","FEAT ปุ่ม รีเซ็ตรหัส ในหน้าจัดการผู้ใช้ — ลูกน้องลืมรหัสแล้วเดิมทำอะไรไม่ได้เลย เจ้าของก็ดูรหัสเดิมไม่ได้เพราะ bcrypt เป็นทางเดียว ทางเดียวที่เหลือคือลบบัญชีทิ้งแล้วให้สมัครใหม่ ซึ่งเสียประวัติทั้งหมด · ตอนนี้ตั้งรหัสใหม่ทับได้เลย สุ่มให้เป็นค่าตั้งต้น (ตัดอักษรที่อ่านสับสน 0 O o l 1 I ออก จะได้บอกทางโทรศัพท์ไม่ผิด) แก้เป็นรหัสที่ต้องการเองก็ได้ ตั้งเสร็จโชว์ครั้งเดียวพร้อมปุ่มคัดลอก · ตั้งใหม่แล้วลบ session เดิมของคนนั้นทิ้งด้วย ไม่งั้น token ที่ค้างอยู่บนเครื่องเก่ายังใช้ได้ทั้งที่รหัสเปลี่ยนไปแล้ว ซึ่งคือกรณีที่ต้องรีเซ็ตรหัสตั้งแต่แรก · บังคับสิทธิ์ในฟังก์ชันฝั่งเซิร์ฟเวอร์ (sx_reset_pw) เช็คว่าคนเรียกเป็นระดับ 1 จริง · FIX ตารางจัดการผู้ใช้จัดความกว้างคอลัมน์ใหม่ รับสองปุ่มท้ายแถวโดยไม่ตกบรรทัด"],
@@ -25064,7 +25065,8 @@ function sxOverlay(inner,full){
       : "width:min(420px,92vw);padding:26px 24px;border-radius:16px;")+
     'background:#fff;box-sizing:border-box;box-shadow:0 24px 70px -20px rgba(0,0,0,.45)">'+inner+'</div>';
   return el; }
-function sxClose(){ const el=document.getElementById("sxAuthWrap"); if(el) el.remove(); }
+function sxClose(){ if(_sxAdmTimer){ clearInterval(_sxAdmTimer); _sxAdmTimer=null; }
+  const el=document.getElementById("sxAuthWrap"); if(el) el.remove(); }
 const sxEsc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const SX_INP="width:100%;box-sizing:border-box;padding:10px 12px;margin:4px 0 10px;border:1px solid rgba(0,0,0,.16);"+
   "border-radius:9px;font:14px system-ui;background:#fbfbfd";
@@ -25179,6 +25181,14 @@ function sxWatch(db){
       sxBadge(); sxWatch(db);
     }catch(e){}
   },30000); }
+
+/* กลับมาที่หน้าต่างโปรแกรม = เคาะสัญญาณชีพทันที ไม่ต้องรอครบรอบ
+   เบราว์เซอร์หน่วงตัวจับเวลาของแท็บที่ถูกบัง สถานะจึงค้างเป็นออฟไลน์ทั้งที่เพิ่งกลับมา */
+(function(){ let last=0;
+  const beat=async()=>{ if(!SX.lvl||document.hidden) return;
+    if(Date.now()-last<10000) return; last=Date.now();
+    try{ const db=await getDB(); db.rpc("sx_touch").then(()=>{},()=>{}); }catch(e){} };
+  addEventListener("visibilitychange",beat); addEventListener("focus",beat); })();
 
 /* ---------- ป้ายผู้ใช้บนหัวโปรแกรม ---------- */
 function sxBadge(){
@@ -25297,6 +25307,18 @@ function sxResetPwUI(id,name,pw,note,bad,done){
   setTimeout(()=>{ try{ q("sxNP").focus(); q("sxNP").select(); }catch(e){} },30); }
 
 /* ---------- หน้าจัดการผู้ใช้ (เฉพาะระดับ 1) ---------- */
+/* v34.6: ออนไลน์ = มีสัญญาณชีพเข้ามาไม่เกิน 2 นาที
+   ตัวโปรแกรมเคาะ sx_touch ทุก 30 วิ (รอบเดียวกับตัวเช็คสิทธิ์) แต่เบราว์เซอร์หน่วงตัวจับเวลา
+   ของแท็บที่ไม่ได้อยู่หน้าจอเหลือนาทีละครั้ง จึงเผื่อไว้ถึง 2 นาที ไม่งั้นคนที่สลับแท็บไปทำอย่างอื่น
+   จะขึ้นว่าออฟไลน์ทั้งที่ยังเปิดโปรแกรมค้างอยู่
+   ปิดเบราว์เซอร์ดื้อ ๆ ไม่มีสัญญาณบอกลา ค่านี้จึงเป็น "เพิ่งมีชีพจร" ไม่ใช่ "กำลังนั่งอยู่หน้าจอ" */
+function sxSeenTag(t){
+  const m=t?((Date.now()-new Date(t).getTime())/60000):1e9;
+  if(!t)      return '<span style="color:#8a8a90">ยังไม่เคยเข้า</span>';
+  if(m<=2)    return '<span style="color:#1c7a2c;font-weight:600">● ออนไลน์</span>';
+  if(m<=15)   return '<span style="color:#8a5a11">● '+sxEsc(sxWhen(t))+'</span>';
+  return '<span style="color:#8a8a90">○ '+sxEsc(sxWhen(t))+'</span>'; }
+let _sxAdmTimer=null;
 function sxWhen(t){ if(!t) return "ยังไม่เคยเข้า";
   const d=new Date(t), m=(Date.now()-d.getTime())/60000;
   if(m<1) return "เมื่อครู่นี้";
@@ -25330,7 +25352,7 @@ async function sxAdminUI(){
              :'<button class="sxApp" style="padding:6px 12px;border:0;border-radius:8px;cursor:pointer;font:600 12px system-ui;'+
               (p.approved?'background:rgba(40,200,64,.16);color:#1c7a2c">อนุมัติแล้ว':'background:rgba(232,144,31,.22);color:#8a5a11">รออนุมัติ')+'</button>')+
         '</td>'+
-        '<td style="padding:9px 10px;color:#8a8a90;font-size:12.5px">'+sxEsc(sxWhen(p.last_seen))+'</td>'+
+        '<td data-seen="'+p.id+'" style="padding:9px 10px;font-size:12.5px">'+sxSeenTag(p.last_seen)+'</td>'+
         '<td style="padding:9px 10px;text-align:right;white-space:nowrap">'+
           (me?"":'<button class="sxPw" title="ตั้งรหัสผ่านใหม่ให้คนนี้" style="padding:6px 11px;border:0;border-radius:8px;cursor:pointer;'+
              'background:rgba(31,56,100,.10);color:#1F3864;font:600 12px system-ui">รีเซ็ตรหัส</button>'+
@@ -25351,7 +25373,7 @@ async function sxAdminUI(){
       (note?'<div style="padding:9px 12px;border-radius:9px;font-size:13px;margin-bottom:10px;background:rgba(31,56,100,.10);color:#1F3864">'+sxEsc(note)+'</div>':"")+
       '<div style="flex:1;min-height:0;overflow:auto;border:1px solid rgba(0,0,0,.10);border-radius:11px">'+
         '<table style="width:100%;border-collapse:collapse;font-size:13.5px"><thead><tr>'+
-        TH("ชื่อ-สกุล","23%")+TH("รหัสพนักงาน","14%")+TH("ระดับสิทธิ์","19%")+TH("สถานะ","11%")+TH("ใช้งานล่าสุด","12%")+TH("","17%")+
+        TH("ชื่อ-สกุล","23%")+TH("รหัสพนักงาน","14%")+TH("ระดับสิทธิ์","19%")+TH("สถานะ","11%")+TH("สถานะออนไลน์","13%")+TH("","17%")+
         '</tr></thead><tbody>'+(rows||'<tr><td colspan="6" style="padding:22px;text-align:center;color:#8a8a90">'+
         (k?"ไม่พบผู้ใช้ที่ตรงกับคำค้น":"ยังไม่มีผู้ใช้อื่น")+'</td></tr>')+'</tbody></table></div>'+
       '<div style="font-size:12px;color:#8a8a90;line-height:1.7;margin-top:12px;display:flex;gap:22px;flex-wrap:wrap">'+
@@ -25365,6 +25387,18 @@ async function sxAdminUI(){
       kb.onkeydown=e=>{ if(e.key==="Enter"){ kw=kb.value; draw(); } };
       kb.onblur=()=>{ if(kb.value!==kw){ kw=kb.value; } };
       if(kw){ kb.focus(); kb.setSelectionRange(kw.length,kw.length); } }
+    /* วาดตารางใหม่ทั้งใบทุก 15 วิ จะไปรีเซ็ตดรอปดาวน์ที่กำลังเลือกอยู่กับช่องค้นหา
+       จึงอัปเดตเฉพาะช่องสถานะ ที่เหลือคาไว้เหมือนเดิม */
+    if(_sxAdmTimer) clearInterval(_sxAdmTimer);
+    _sxAdmTimer=setInterval(async()=>{
+      const tb=document.querySelector("#sxAuthWrap tr[data-id]");
+      if(!tb){ clearInterval(_sxAdmTimer); _sxAdmTimer=null; return; }
+      try{ const q=await db.from("profiles").select("id,last_seen");
+        (q.data||[]).forEach(x=>{ const td=document.querySelector('[data-seen="'+x.id+'"]');
+          if(td) td.innerHTML=sxSeenTag(x.last_seen); });
+      }catch(e){}
+    },15000);
+
     wrap.querySelectorAll("tr[data-id]").forEach(tr=>{
       const id=tr.getAttribute("data-id");
       const sel=tr.querySelector(".sxL"), app=tr.querySelector(".sxApp"), del=tr.querySelector(".sxDel"), rpw=tr.querySelector(".sxPw");
