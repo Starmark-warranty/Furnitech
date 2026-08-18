@@ -1646,9 +1646,10 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"34.1", build:"2026-08-18/user-levels-fix",
+  name:"StarNexus Cabinet", version:"34.2", build:"2026-08-18/admin-fullscreen",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["34.2","2026-08-18","หน้าจัดการผู้ใช้เต็มจอ — เดิมยัดอยู่ในการ์ดกว้าง 420 ตารางถูกหนีบไว้ที่ 46vh ชื่อกับอีเมลกับเวลาใช้งานล่าสุดเลยต้องซ้อนกันสามบรรทัดในช่องเดียว อ่านยากตั้งแต่มีผู้ใช้ไม่กี่คน · ตอนนี้แยกเป็นคอลัมน์จริง (ชื่อ · อีเมล · ระดับ · สถานะ · ใช้งานล่าสุด · ลบ) หัวตารางค้างไว้ตอนเลื่อน ตารางยืดเต็มความสูงจอ ไม่เหลือที่ว่างข้างล่างเปล่า ๆ · เพิ่มช่องค้นชื่อ/อีเมล และตัวนับ รออนุมัติ ไว้บนหัว จะได้เห็นทันทีว่ามีคนรออยู่กี่คนโดยไม่ต้องไล่หา · sxOverlay รับโหมดเต็มจอ กล่องล็อกอิน/เปลี่ยนรหัสยังเป็นการ์ดเล็กเหมือนเดิม"],
     ["34.1","2026-08-18","FIX เวลาเข้าใช้ล่าสุดว่างตลอด ทั้งที่เป็นข้อมูลที่อยากได้ที่สุด — ตัวสร้างคำขอของ supabase-js เป็น thenable มันจะยิงจริงตอนถูก await หรือ .then เท่านั้น v34.0 เขียน db.rpc(\"sx_touch\") ทิ้งไว้เฉย ๆ คำขอจึงไม่เคยออกจากเครื่องเลยสักครั้ง ไม่มี error ให้เห็นด้วย · FEAT เพิ่มปุ่มเปลี่ยนรหัสผ่านในเมนูผู้ใช้ — v34.0 บอกให้รีบเปลี่ยนรหัสตั้งต้นแต่ไม่ได้ทำที่ให้เปลี่ยน · หน้าจัดการผู้ใช้โชว์ ใช้งานล่าสุด ต่อคน (ดึงค่ามาแล้วแต่ไม่เคยแสดง)"],
     ["34.0","2026-08-18","FEAT ระบบผู้ใช้ 4 ระดับ + ปิดรูรั่วคลาวด์ที่เปิดโล่งมาตลอด — เดิมทุกตารางเปิด policy ALL/true ให้ anon และ anon key ฝังอยู่ในไฟล์ HTML ตรง ๆ ใครถือไฟล์จึงลบตู้ทั้ง 245 ใบได้โดยไม่ต้องเปิดโปรแกรมด้วยซ้ำ ยิง REST ตรงก็ได้ และไม่มีทางรู้เลยว่าใครเข้ามาทำอะไร · ตอนนี้ต้องล็อกอินก่อนถึงบูต ใช้ Supabase Auth และสิทธิ์บังคับจริงด้วย RLS ฝั่งเซิร์ฟเวอร์ ไม่ใช่ซ่อนปุ่มในหน้าจอ (กด F12 ก็ไม่ผ่าน) · ระดับ 1 เจ้าของ ทำได้ทุกอย่าง + จัดการผู้ใช้ · 2 รอง เพิ่ม/แก้/ลบได้ทั้งหมด แต่จัดการผู้ใช้ไม่ได้ · 3 เพิ่มได้ แก้ได้เฉพาะของที่ตัวเองเพิ่ม ลบไม่ได้ · 4 ดูอย่างเดียว · สมัครเองได้แต่เข้าไม่ได้จนเจ้าของกดอนุมัติและตั้งระดับให้ · เตะออกแล้วหลุดจริงภายใน 30 วินาที ไม่ใช่รอปิดโปรแกรม · การ์ดสิทธิ์ดักที่ตัวไคลเอนต์จุดเดียว (sxGuardDB) แทนการไล่ใส่ทีละปุ่ม 20 จุดแล้วลืมจุดใดจุดหนึ่ง · ต่อคลาวด์ไม่ได้ = เข้าโหมดออฟไลน์ได้ แต่แตะคลาวด์ไม่ได้เลย · ตาราง fitting_global ยังเปิดอ่านแบบเดิม เพราะ Production V2 ใช้ร่วมอยู่"],
     ["33.8","2026-08-18","FEAT วางตามระยะอ้างอิง แยก กึ่งกลางตู้ (เท่าๆ ทั้งใบ) กับ กึ่งกลางช่องที่อยู่ (เท่าๆ ในช่อง) — ของเดิมมีกึ่งกลางอันเดียว คิดจากบนแผ่นพื้นถึงใต้ฝาบน/ใต้คานเสมอ ซึ่งถูกตอนตู้ยังเป็นช่องเดียว พอแบ่งช่องไว้แล้วสั่งกึ่งกลาง ชิ้นจะกระโดดข้ามชั้นอื่นไปกลางตู้ ไม่ใช่กลางช่องของตัวเอง และไม่มีทางสั่งกลางช่องได้เลย · โหมดใหม่หาแผ่นนอน/คาน/เส้นแบ่งที่ขนาบชิ้นอยู่จริงตอนนี้ แล้ววางกึ่งกลางระหว่างสองตัวนั้น ช่องที่ได้ไม่ต้องมีอยู่ก่อน ขอแค่ชิ้นอยู่ตรงไหนก็คิดจากตรงนั้น · แนวกว้างมีคู่กัน (กึ่งกลางช่องของแผ่นตั้ง) นับเฉพาะแผ่นตั้งที่สูงคร่อมชิ้นจริง ขาตู้/เสาเตี้ยจึงไม่มาบีบช่อง · ทั้งสองโหมดยึดกึ่งกลางของชิ้นเอง ช่องสองข้างจึงเท่ากันเป๊ะ ไม่ต้องหักครึ่งความหนาเอง ช่องระยะกับปุ่มผิวใกล้/ผิวไกลถูกปิดไว้ตอนเลือกโหมดนี้ และป้ายล็อกเลิกโชว์ตัวเลขที่ไม่ได้ใช้ · FIX รายการอ้างอิงของแผ่นตั้ง (ซ้าย/ขวา/ขอบนอก/กึ่งกลาง) ไม่เคยใส่ selected เปิดแผงขวาทีไรก็เด้งกลับไปเลือกตัวแรกทุกครั้ง ทั้งที่ล็อกโหมดอื่นไว้ · ย้ายชื่อโหมดทั้งหมดมาไว้ที่ DATUM_LABEL ที่เดียว เดิมพิมพ์ซ้ำ 5 จุด"],
@@ -25040,13 +25041,18 @@ function sxErrTh(e){ const s=String((e&&(e.message||e.code))||e||"");
   return s; }
 
 /* ---------- หน้าจอเข้าสู่ระบบ ---------- */
-function sxOverlay(inner){
+function sxOverlay(inner,full){
   let el=document.getElementById("sxAuthWrap");
   if(!el){ el=document.createElement("div"); el.id="sxAuthWrap"; document.body.appendChild(el); }
   el.style.cssText="position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;"+
+    (full?"padding:16px;":"")+
     "background:linear-gradient(160deg,#e7e8ee,#c8cddc);font:14px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;color:#1d1d1f";
-  el.innerHTML='<div style="width:min(420px,92vw);background:#fff;border-radius:16px;padding:26px 24px;'+
-    'box-shadow:0 24px 70px -20px rgba(0,0,0,.45)">'+inner+'</div>';
+  /* v34.2: โหมดเต็มจอ — การ์ดกลายเป็นกล่องสูงเต็มแล้วให้ลูกตัวกลางยืดเอง
+     ตารางจึงยาวตามจอจริง ไม่ใช่ค้างที่ 46vh แล้วเหลือที่ว่างข้างล่างเปล่า ๆ */
+  el.innerHTML='<div style="'+(full
+      ? "width:100%;height:100%;display:flex;flex-direction:column;padding:20px 22px;border-radius:14px;"
+      : "width:min(420px,92vw);padding:26px 24px;border-radius:16px;")+
+    'background:#fff;box-sizing:border-box;box-shadow:0 24px 70px -20px rgba(0,0,0,.45)">'+inner+'</div>';
   return el; }
 function sxClose(){ const el=document.getElementById("sxAuthWrap"); if(el) el.remove(); }
 const sxEsc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -25218,31 +25224,63 @@ function sxWhen(t){ if(!t) return "ยังไม่เคยเข้า";
 async function sxAdminUI(){
   if(!sxCan("admin")){ toast("เฉพาะเจ้าของเท่านั้น"); return; }
   const db=await getDB();
+  let kw="";
+  const TH=(t,w)=>'<th style="position:sticky;top:0;background:#f6f7fa;text-align:left;padding:9px 10px;'+
+    'font:600 12px system-ui;color:#5f5f66;border-bottom:1px solid rgba(0,0,0,.12)'+(w?";width:"+w:"")+'">'+t+'</th>';
   const draw=async(note)=>{
     const r=await db.from("profiles").select("id,display_name,email,lvl,approved,last_seen,created_at").order("approved").order("created_at");
-    const rows=(r.data||[]).map(p=>{
+    const all=r.data||[];
+    const k=kw.trim().toLowerCase();
+    const list=k?all.filter(p=>((p.display_name||"")+" "+(p.email||"")).toLowerCase().includes(k)):all;
+    const nWait=all.filter(p=>!p.approved).length;
+    const rows=list.map(p=>{
       const me=p.id===SX.user.id;
-      return '<tr data-id="'+p.id+'" style="border-top:1px solid rgba(0,0,0,.08)">'+
-        '<td style="padding:7px 6px"><div style="font-weight:600">'+sxEsc(p.display_name)+(me?' <span style="font-size:10px;color:#E8901F">(คุณ)</span>':"")+'</div>'+
-        '<div style="font-size:11px;color:#8a8a90">'+sxEsc(p.email||"")+'</div>'+
-        '<div style="font-size:10.5px;color:#8a8a90">ใช้งานล่าสุด: '+sxEsc(sxWhen(p.last_seen))+'</div></td>'+
-        '<td style="padding:7px 6px"><select class="sxL" '+(me?"disabled":"")+' style="padding:5px;border-radius:7px;border:1px solid rgba(0,0,0,.16);font:12px system-ui">'+
-          [1,2,3,4].map(n=>'<option value="'+n+'"'+(+p.lvl===n?" selected":"")+'>'+n+" · "+SX_LVL[n].n+'</option>').join("")+'</select></td>'+
-        '<td style="padding:7px 6px;text-align:right;white-space:nowrap">'+
-          (me?'<span style="font-size:11px;color:#8a8a90">เจ้าของ</span>'
-             :'<button class="sxApp" style="padding:5px 9px;border:0;border-radius:7px;cursor:pointer;font:600 11.5px system-ui;'+
-              (p.approved?'background:rgba(40,200,64,.16);color:#1c7a2c">อนุมัติแล้ว':'background:rgba(232,144,31,.20);color:#8a5a11">รออนุมัติ')+'</button>'+
-              '<button class="sxDel" title="ลบบัญชีถาวร" style="margin-left:5px;padding:5px 8px;border:0;border-radius:7px;cursor:pointer;background:rgba(255,59,48,.12);color:#a3241c;font:600 11.5px system-ui">ลบ</button>')+
+      return '<tr data-id="'+p.id+'" style="border-bottom:1px solid rgba(0,0,0,.07)">'+
+        '<td style="padding:9px 10px"><div style="font-weight:600">'+sxEsc(p.display_name)+
+          (me?' <span style="font-size:10px;color:#E8901F">(คุณ)</span>':"")+'</div></td>'+
+        '<td style="padding:9px 10px;color:#5f5f66">'+sxEsc(p.email||"")+'</td>'+
+        '<td style="padding:9px 10px"><select class="sxL" '+(me?"disabled":"")+
+          ' style="padding:6px 8px;border-radius:8px;border:1px solid rgba(0,0,0,.16);font:13px system-ui;background:#fbfbfd">'+
+          [1,2,3,4].map(n=>'<option value="'+n+'"'+(+p.lvl===n?" selected":"")+'>'+n+" · "+SX_LVL[n].n+'</option>').join("")+
+          '</select></td>'+
+        '<td style="padding:9px 10px">'+
+          (me?'<span style="font-size:12px;color:#8a8a90">เจ้าของระบบ</span>'
+             :'<button class="sxApp" style="padding:6px 12px;border:0;border-radius:8px;cursor:pointer;font:600 12px system-ui;'+
+              (p.approved?'background:rgba(40,200,64,.16);color:#1c7a2c">อนุมัติแล้ว':'background:rgba(232,144,31,.22);color:#8a5a11">รออนุมัติ')+'</button>')+
+        '</td>'+
+        '<td style="padding:9px 10px;color:#8a8a90;font-size:12.5px">'+sxEsc(sxWhen(p.last_seen))+'</td>'+
+        '<td style="padding:9px 10px;text-align:right">'+
+          (me?"":'<button class="sxDel" title="ลบบัญชีถาวร" style="padding:6px 11px;border:0;border-radius:8px;cursor:pointer;'+
+             'background:rgba(255,59,48,.12);color:#a3241c;font:600 12px system-ui">ลบบัญชี</button>')+
         '</td></tr>'; }).join("");
-    sxOverlay('<div style="font:700 16px system-ui;margin-bottom:2px">จัดการผู้ใช้</div>'+
-      '<div style="font-size:12px;color:#5f5f66;margin-bottom:12px">กดปุ่มสถานะเพื่อสลับอนุมัติ/ระงับ · เปลี่ยนระดับแล้วมีผลทันที</div>'+
-      (note?'<div style="padding:8px 11px;border-radius:9px;font-size:12.5px;margin-bottom:10px;background:rgba(31,56,100,.10);color:#1F3864">'+sxEsc(note)+'</div>':"")+
-      '<div style="max-height:46vh;overflow:auto;margin-bottom:12px"><table style="width:100%;border-collapse:collapse;font-size:13px">'+(rows||'<tr><td style="padding:10px;color:#8a8a90">ยังไม่มีผู้ใช้อื่น</td></tr>')+'</table></div>'+
-      '<div style="font-size:11.5px;color:#8a8a90;line-height:1.55;margin-bottom:12px">'+
-      [1,2,3,4].map(n=>"<b>"+n+" "+SX_LVL[n].n+"</b> — "+SX_LVL[n].d).join("<br>")+'</div>'+
-      '<button id="sxBack" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f">ปิด</button>');
-    document.getElementById("sxBack").onclick=sxClose;
+
+    sxOverlay(
+      '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:4px">'+
+        '<div style="font:700 19px system-ui">จัดการผู้ใช้</div>'+
+        '<div style="font-size:12.5px;color:#5f5f66">ทั้งหมด '+all.length+' คน'+
+          (nWait?' · <b style="color:#8a5a11">รออนุมัติ '+nWait+'</b>':"")+'</div>'+
+        '<input id="sxKw" placeholder="ค้นชื่อหรืออีเมล" value="'+sxEsc(kw)+'" style="margin-left:auto;width:230px;'+
+          'padding:8px 11px;border:1px solid rgba(0,0,0,.16);border-radius:9px;font:13px system-ui;background:#fbfbfd">'+
+        '<button id="sxBack" style="padding:8px 16px;border:0;border-radius:9px;background:#eef0f5;'+
+          'color:#1d1d1f;font:600 13px system-ui;cursor:pointer">ปิด</button></div>'+
+      '<div style="font-size:12.5px;color:#5f5f66;margin-bottom:10px">กดปุ่มสถานะเพื่อสลับอนุมัติ/ระงับ · เปลี่ยนระดับแล้วมีผลทันที</div>'+
+      (note?'<div style="padding:9px 12px;border-radius:9px;font-size:13px;margin-bottom:10px;background:rgba(31,56,100,.10);color:#1F3864">'+sxEsc(note)+'</div>':"")+
+      '<div style="flex:1;min-height:0;overflow:auto;border:1px solid rgba(0,0,0,.10);border-radius:11px">'+
+        '<table style="width:100%;border-collapse:collapse;font-size:13.5px"><thead><tr>'+
+        TH("ชื่อ","22%")+TH("อีเมล","26%")+TH("ระดับสิทธิ์","20%")+TH("สถานะ","12%")+TH("ใช้งานล่าสุด","13%")+TH("","7%")+
+        '</tr></thead><tbody>'+(rows||'<tr><td colspan="6" style="padding:22px;text-align:center;color:#8a8a90">'+
+        (k?"ไม่พบผู้ใช้ที่ตรงกับคำค้น":"ยังไม่มีผู้ใช้อื่น")+'</td></tr>')+'</tbody></table></div>'+
+      '<div style="font-size:12px;color:#8a8a90;line-height:1.7;margin-top:12px;display:flex;gap:22px;flex-wrap:wrap">'+
+        [1,2,3,4].map(n=>'<span><b style="color:#1F3864">'+n+" "+SX_LVL[n].n+"</b> — "+SX_LVL[n].d+'</span>').join("")+'</div>'
+      , true);
+
     const wrap=document.getElementById("sxAuthWrap");
+    document.getElementById("sxBack").onclick=sxClose;
+    { const kb=document.getElementById("sxKw");
+      kb.oninput=()=>{ kw=kb.value; };
+      kb.onkeydown=e=>{ if(e.key==="Enter"){ kw=kb.value; draw(); } };
+      kb.onblur=()=>{ if(kb.value!==kw){ kw=kb.value; } };
+      if(kw){ kb.focus(); kb.setSelectionRange(kw.length,kw.length); } }
     wrap.querySelectorAll("tr[data-id]").forEach(tr=>{
       const id=tr.getAttribute("data-id");
       const sel=tr.querySelector(".sxL"), app=tr.querySelector(".sxApp"), del=tr.querySelector(".sxDel");
