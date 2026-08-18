@@ -1646,9 +1646,18 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"33.0", build:"2026-08-17/starnexus",
+  name:"StarNexus Cabinet", version:"34.0", build:"2026-08-18/user-levels",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["34.0","2026-08-18","FEAT ระบบผู้ใช้ 4 ระดับ + ปิดรูรั่วคลาวด์ที่เปิดโล่งมาตลอด — เดิมทุกตารางเปิด policy ALL/true ให้ anon และ anon key ฝังอยู่ในไฟล์ HTML ตรง ๆ ใครถือไฟล์จึงลบตู้ทั้ง 245 ใบได้โดยไม่ต้องเปิดโปรแกรมด้วยซ้ำ ยิง REST ตรงก็ได้ และไม่มีทางรู้เลยว่าใครเข้ามาทำอะไร · ตอนนี้ต้องล็อกอินก่อนถึงบูต ใช้ Supabase Auth และสิทธิ์บังคับจริงด้วย RLS ฝั่งเซิร์ฟเวอร์ ไม่ใช่ซ่อนปุ่มในหน้าจอ (กด F12 ก็ไม่ผ่าน) · ระดับ 1 เจ้าของ ทำได้ทุกอย่าง + จัดการผู้ใช้ · 2 รอง เพิ่ม/แก้/ลบได้ทั้งหมด แต่จัดการผู้ใช้ไม่ได้ · 3 เพิ่มได้ แก้ได้เฉพาะของที่ตัวเองเพิ่ม ลบไม่ได้ · 4 ดูอย่างเดียว · สมัครเองได้แต่เข้าไม่ได้จนเจ้าของกดอนุมัติและตั้งระดับให้ · เตะออกแล้วหลุดจริงภายใน 30 วินาที ไม่ใช่รอปิดโปรแกรม · การ์ดสิทธิ์ดักที่ตัวไคลเอนต์จุดเดียว (sxGuardDB) แทนการไล่ใส่ทีละปุ่ม 20 จุดแล้วลืมจุดใดจุดหนึ่ง · ต่อคลาวด์ไม่ได้ = เข้าโหมดออฟไลน์ได้ แต่แตะคลาวด์ไม่ได้เลย · ตาราง fitting_global ยังเปิดอ่านแบบเดิม เพราะ Production V2 ใช้ร่วมอยู่"],
+    ["33.8","2026-08-18","FEAT วางตามระยะอ้างอิง แยก กึ่งกลางตู้ (เท่าๆ ทั้งใบ) กับ กึ่งกลางช่องที่อยู่ (เท่าๆ ในช่อง) — ของเดิมมีกึ่งกลางอันเดียว คิดจากบนแผ่นพื้นถึงใต้ฝาบน/ใต้คานเสมอ ซึ่งถูกตอนตู้ยังเป็นช่องเดียว พอแบ่งช่องไว้แล้วสั่งกึ่งกลาง ชิ้นจะกระโดดข้ามชั้นอื่นไปกลางตู้ ไม่ใช่กลางช่องของตัวเอง และไม่มีทางสั่งกลางช่องได้เลย · โหมดใหม่หาแผ่นนอน/คาน/เส้นแบ่งที่ขนาบชิ้นอยู่จริงตอนนี้ แล้ววางกึ่งกลางระหว่างสองตัวนั้น ช่องที่ได้ไม่ต้องมีอยู่ก่อน ขอแค่ชิ้นอยู่ตรงไหนก็คิดจากตรงนั้น · แนวกว้างมีคู่กัน (กึ่งกลางช่องของแผ่นตั้ง) นับเฉพาะแผ่นตั้งที่สูงคร่อมชิ้นจริง ขาตู้/เสาเตี้ยจึงไม่มาบีบช่อง · ทั้งสองโหมดยึดกึ่งกลางของชิ้นเอง ช่องสองข้างจึงเท่ากันเป๊ะ ไม่ต้องหักครึ่งความหนาเอง ช่องระยะกับปุ่มผิวใกล้/ผิวไกลถูกปิดไว้ตอนเลือกโหมดนี้ และป้ายล็อกเลิกโชว์ตัวเลขที่ไม่ได้ใช้ · FIX รายการอ้างอิงของแผ่นตั้ง (ซ้าย/ขวา/ขอบนอก/กึ่งกลาง) ไม่เคยใส่ selected เปิดแผงขวาทีไรก็เด้งกลับไปเลือกตัวแรกทุกครั้ง ทั้งที่ล็อกโหมดอื่นไว้ · ย้ายชื่อโหมดทั้งหมดมาไว้ที่ DATUM_LABEL ที่เดียว เดิมพิมพ์ซ้ำ 5 จุด"],
+    ["33.7","2026-08-18","FIX ชั้นปรับหดเหลือ 20 มม. ไปเกาะอยู่หลังคาน DX — findBackPanelGeom กันแค่ isRail ซึ่งดู b.rule.kind ส่วนคาน DX เก็บกฎไว้ที่ _dxRule จึงไม่ถูกนับเป็นคาน · DX Back เป็น orient front หนา 9 มม. ตรงเงื่อนไข “แผ่นบางตามแกนลึก ≤ 30” ทุกข้อ ตู้ที่ยังไม่ใส่แผ่นหลัง ตอนเพิ่มชั้นปรับจึงได้ backZ = ผิวหน้า DX Back ความลึกเหลือติดลบ โดน clamp เป็น 20 มม. แล้วไปนั่งชิดหน้าตู้ รูพินสองแถวก็เจาะห่างกันแค่ 10 มม. · ตอนนี้ findBackPanelGeom ตัด _dx/_dwall/_door/_virtual ทิ้งทั้งหมด และเติม !_dx ให้ตัวหาแผ่นหลังอีก 3 จุด (setDividerDepthFix / addDivider / หาความหนาแผ่นหลังตอนเซาะร่อง) · ตู้ที่ไม่มีแผ่นหลังเลย ชั้นจะยืดถึงหลังตู้ตามเดิม"],
+    ["33.6","2026-08-17","FIX ล็อกความกว้างด้วยสูตรไว้ 100 แต่ได้ 85.3 ทุกครั้ง — หมุดตรึงผิวยืดทับสูตร — หมุดตรึงผิวทำงานด้วยการยืดขนาดให้ผิวที่เลือกไปแตะชิ้นอ้างอิง โดยตรึงผิวตรงข้ามไว้ ซึ่งถูกต้องกับชิ้นที่ขนาดเป็นอิสระ แต่ชิ้นที่ล็อกความกว้างไว้ด้วยสูตรก็โดนยืดทับไปด้วย และหมุดถูกคิดทีหลังสูตรในลำดับการคิดฉาก สูตรจึงแพ้ทุกรอบ · อาการที่เห็นคือช่องสูตรบอกว่าล็อกไว้เรียบร้อย ค่าตัวแปรก็ถูก แต่ขนาดจริงเป็นอีกค่าหนึ่งเสมอ ซึ่งไม่มีทางเดาถูกเลยว่าเป็นเพราะหมุดที่ตั้งไว้คนละที่กัน · ทั้งสองอย่างเป็นคำสั่งที่ตั้งใจตั้งไว้ทั้งคู่ และทำพร้อมกันได้อยู่แล้ว ตอนนี้ถ้าขนาดด้านนั้นถูกล็อกด้วยสูตร หมุดจะเลื่อนทั้งชิ้นแทนการยืด ผิวที่ตรึงไว้ยังไปแตะที่เดิมเป๊ะ ขนาดก็ได้ตามสูตร · ด้านที่ไม่ได้ล็อกยังยืดตามหมุดเหมือนเดิมทุกประการ"],
+    ["33.5","2026-08-17","ล็อกความกว้างตามสูตร บอกแล้วว่าสูตรคิดได้เท่าไหร่ หรือคิดไม่ออกเพราะอะไร — เดิมถ้าสูตรคิดค่าไม่ได้ ตัวคิดจะข้ามไปเงียบ ๆ ชิ้นก็คาความกว้างที่ตัวคิดบานให้มาก่อนหน้า ซึ่งเป็นตัวเลขที่ดูสมเหตุสมผลทุกประการ ไม่มีอะไรบอกเลยว่าการล็อกไม่ได้ทำงาน พิมพ์ชื่อตัวแปรคลาดไปตัวเดียว เช่นใส่ $D3 ทั้งที่ตู้ใบนั้นมี $SD3 ก็หาสาเหตุไม่เจอทั้งวัน เพราะทุกอย่างในกล่องดูถูกหมด · ตอนนี้ใต้ช่องสูตรบอกผลทันที คิดได้ก็ขึ้นเขียวว่าได้กี่มิลลิเมตร และเตือนถ้าตัวเลขยังไม่ตรงกับความกว้างจริง คิดไม่ได้ก็ขึ้นแดงว่าความกว้างไม่ถูกล็อก ตัวเลขที่เห็นมาจากตัวคิดบานไม่ใช่จากสูตร พร้อมแสดงรายชื่อตัวแปรที่ตู้ใบนั้นมีจริงต่อท้าย จะได้เทียบชื่อได้เดี๋ยวนั้น"],
+    ["33.4","2026-08-17","FIX บานตั้งกึ่งกลางสันเสา ทั้งที่ต้องทับผิวเสา — v21.3 มีกฎว่าบานสองใบที่ขนาบเสาต้นเดียวกันห้ามตั้งทับทั้งคู่ ไม่งั้นจะเลยเข้าหากันเท่าความหนาเสา จึงเปลี่ยนทั้งคู่เป็นกลาง ซึ่งถูกต้องเมื่อทั้งสองฝั่งเป็นบานจริง · แต่ถ้าฝั่งหนึ่งเป็นแผงตายที่หมุดติดผิวเสาไว้แล้ว มันไม่ขยับไปไหน ไม่มีใครไปเลยเข้าหาใคร กฎยังนับมันเป็นคู่แล้วดึงบานอีกฝั่งให้หยุดที่กึ่งกลางเสา บานจึงตั้งกลางสันเสาแทนที่จะทับผิว และแก้ในกล่องไม่ได้เลย เพราะตั้งทับไปกี่ครั้งก็ถูกเปลี่ยนกลับทุกรอบที่คิดฉากใหม่ ซึ่งเป็นอาการที่หาต้นตอยากมาก เพราะค่าที่กรอกถูกต้องอยู่แล้วทุกครั้ง · ตอนนี้กฎนับเฉพาะบานจริง แผงตายถูกข้ามไป บานที่เหลือฝั่งเดียวจึงทับผิวเสาได้ตามที่ตั้งไว้ · ถอน v33.2 ออกทั้งชุด — ผมเพิ่มช่องสูตรขนาดโดยใช้ชื่อ _wExpr ซึ่งเป็นชื่อที่โปรแกรมใช้อยู่แล้ว สำหรับล็อกความกว้างด้วยสูตร (มี UI ของตัวเองอยู่ในแผงขวา พร้อมตัวเลือกชิดซ้าย ชิดขวา กึ่งกลาง) ผมไปทับชื่อเดียวกันด้วยรูปแบบข้อมูลคนละอย่าง ซึ่งพร้อมจะทำของเดิมพังทันทีที่มีคนใช้ทั้งสองทาง ของที่ต้องการมีอยู่ในโปรแกรมแล้วสองทาง คือล็อกความกว้างด้วยสูตร กับสเปคขอบบานที่คิดจากช่องให้เอง"],
+    ["33.3","2026-08-17","FIX บานสองใบที่คนละฝั่งเสาได้ความกว้างครึ่งเดียว ทั้งที่ควรเต็มช่องของตัวเอง — ตัวจับกลุ่มหน้าบานใช้ รหัสช่อง เป็นตัวบอกว่าบานใบไหนอยู่ช่องเดียวกัน v22.5 ใส่ตัวตรวจไว้ว่ารหัสช่องต้องชี้ไปยังชิ้นที่ยังมีอยู่ แต่ตรวจแค่ว่ามีอยู่ในฉากไหม ซึ่งหลวมเกินไป รหัสที่ค้างมาจากตู้ใบอื่นจึงผ่านการตรวจ เพราะชิ้นนั้นมีอยู่จริง แค่อยู่คนละใบ · ผลคือหน้าบานทั้งสองฝั่งของเสาได้รหัสช่องเดียวกัน ตัวจับกลุ่มเห็นเป็นช่องเดียวแล้วเลิกทำงานตั้งแต่ต้น ปล่อยค่าจำนวนบานในแถวเดิมไว้ บานสองใบที่คนละฝั่งเสาจึงยังหารกันเอง ได้ครึ่งเดียวทั้งคู่ และไม่มีอะไรฟ้องเลย เพราะสเปคขอบซ้าย-ขวาของแต่ละใบถูกต้องอยู่แล้ว ผิดแค่รหัสช่องตัวเดียว · ตอนนี้ตรวจว่าต้องเป็นชิ้นใน ตู้ใบเดียวกัน ไม่ใช่แค่มีอยู่ในฉาก รหัสค้างจากตู้อื่นถูกล้างแล้วเติมใหม่จากสเปคขอบที่ถูก บานจึงเต็มช่องของตัวเองตามที่ตั้งค่าไว้ ไม่ต้องไปใส่สูตรขนาดทับ"],
+    ["33.2","2026-08-17","FEAT ผูกขนาดชิ้นกับตัวแปรของตู้ได้แล้ว — ขนาดเป็นตัวเลขตายตัวมาตลอด แก้ตัวแปรอย่าง $D2 แล้วบานไม่ตาม ต้องไล่พิมพ์เองทุกใบ ซึ่งเป็นงานที่พลาดง่ายที่สุด เพราะจำไม่ได้ว่าใบไหนคิดมาจากอะไร และไม่มีอะไรบอกด้วยว่าตัวเลขนั้นมีที่มายังไง · ช่องยาวกับกว้างในแผงขวามีช่องสูตรเพิ่มมาข้างล่าง พิมพ์ $D2-3 ได้เลย คิดใหม่ทุกครั้งที่ฉากคิดใหม่ แก้ตัวแปรของตู้แล้วชิ้นขยับตามทันที เว้นว่างก็กลับไปใช้ตัวเลขที่พิมพ์ไว้ · ตัวคิดสูตรใช้ตัวเดียวกับที่มือจับใช้อยู่แล้ว ไวยากรณ์จึงเหมือนกันทั้งโปรแกรม ไม่ต้องจำสองแบบ · เลือกจุดยึดได้ว่าจะให้ขอบไหนอยู่นิ่งตอนขนาดเปลี่ยน ยึดกลาง ยึดซ้าย/ล่าง หรือ ยึดขวา/บน ค่าตั้งต้นยึดกลาง ชิ้นจึงหดหรือขยายออกสองข้างเท่ากัน · พิมพ์สูตรผิดบอกทันทีตั้งแต่ตอนพิมพ์ว่าคิดค่าไม่ได้ ไม่ปล่อยให้ไปงงทีหลังว่าทำไมขนาดไม่ขยับ และคิดขนาดก่อนค่าปรับบานเสมอ ค่าปรับบานจึงทำงานบนขนาดที่ได้จากสูตรแล้ว"],
+    ["33.1","2026-08-17","FEAT กลับด้านทั้งออเดอร์ในคำสั่งเดียว — ปุ่มกลับตู้ที่มีอยู่สะท้อนรอบศูนย์กลางของตู้ใบนั้นเอง ตู้จึงพลิกอยู่กับที่ ครัวทั้งชุดที่ต้องกลับซ้ายขวา ถึงจะกดทีละใบครบสี่สิบใบก็ยังไม่จบ เพราะตำแหน่งตู้ไม่ได้สลับที่กัน ต้องมาลากเรียงใหม่เองอีกรอบ ซึ่งเสี่ยงพลาดกว่าการกลับด้านเสียอีก · ตัวใหม่สะท้อนรอบศูนย์กลางของทั้งฉากทีเดียว ตู้ซ้ายสุดไปอยู่ขวาสุดจริง ๆ พร้อมกลับข้างในทุกชิ้นให้ครบ รูเจาะ ร่อง บานพับ สเปคขอบบาน และลำดับบานในแถว ชื่อชิ้นกับรหัสตู้ที่มีตัวบอกด้านก็สลับให้ คู่ซ้าย-ขวาจึงสลับรหัสกันเอง ตัวตนของตู้ผูกกับรหัสภายในไม่ใช่รหัสตู้ จึงไม่ปนกันแม้รหัสจะไปชนกับอีกใบ · ตู้ที่หมุน 90 หรือ 270 องศารองรับด้วย ทิศหมุนถูกกลับให้ตามการสะท้อน ส่วนตู้ที่หมุนเป็นมุมเอียงยังไม่รองรับ และบอกจำนวนชิ้นที่ติดไว้แทนที่จะทำครึ่ง ๆ กลาง ๆ · เรียกจากคลิกขวา ถัดจากปุ่มกลับตู้ใบเดียว และย้อนกลับได้ด้วยปุ่ม undo ปกติ"],
     ["33.0","2026-08-17","เปลี่ยนชื่อโปรแกรมจาก WoodX เป็น StarNexus — ชื่อบนหัวโปรแกรม ชื่อแท็บ หน้าโหลด หน้าเปิดงาน หัวไฟล์เจาะ MPR และชื่อไฟล์ที่ดาวน์โหลดออกไป เปลี่ยนเป็น StarNexus ทั้งหมด ไฟล์โปรเจกต์เป็น starnexus-project.json ภาพเป็น starnexus.png · โลโก้ใหม่เล่าสองคำที่ประกอบเป็นชื่อ ดาวสี่แฉกสีส้มอยู่กลางคือ Star ล้อมด้วยจุดหกจุดที่โยงเส้นถึงกันคือ Nexus จุดที่ทุกอย่างมาบรรจบ ซึ่งตรงกับตัวโปรแกรมพอดี ที่รับออเดอร์ คลังวัสดุ และโรงงาน มารวมกันที่เดียว · ยังวาดเป็น SVG เหมือนเดิม คมทุกความละเอียดและใช้ตัวแปรสีชุดเดียวกับทั้งโปรแกรม สีกรมท่ากับส้มไม่เปลี่ยน เพราะเป็นคู่สีที่ใช้อยู่ทั้งระบบแล้ว · โลโก้ Starmark ที่หน้าโหลดไม่ถูกแตะเหมือนเดิม และกุญแจที่ใช้เก็บข้อมูลในเครื่องยังเป็นชื่อเดิมทุกตัว ตั้งค่า ตัวแปร Element ทั้งคลัง และงานที่ค้างอยู่ จึงไม่หายไปไหน"],
     ["32.6","2026-08-17","สลับลำดับปุ่มในหน้าส่งออก เอาสองปุ่มที่กดทุกออเดอร์ขึ้นบนสุด — ส่งเข้า Supabase กับ ดาวน์โหลดไฟล์เจาะ คือปลายทางจริงของงานทุกใบ แต่เดิมอยู่กลางกับล่างของรายการ ต้องกวาดตาผ่านปุ่มดูข้อมูลก่อนทุกครั้ง ทั้งที่ปุ่มพวกนั้นไม่ได้กดทุกใบ · ตอนนี้สองปุ่มนั้นอยู่บนสุดคู่กัน คั่นเส้นแล้วตามด้วยกลุ่มดูข้อมูล รายการ BOM รายการเส้น CSV และ JSON ปิดท้ายด้วยกลุ่มไฟล์ทั่วไป · ปุ่มไฟล์เจาะเปลี่ยนเป็นสีส้มของโลโก้ แยกจากปุ่มส่งคลาวด์ที่เป็นกรมท่า สองปุ่มติดกันจะได้ไม่กดพลาดกัน"],
     ["32.5","2026-08-17","Preview 2D แสดงบาร์โค้ดแล้ว — เลขนี้คือตัวที่ยิงหน้าเครื่องและเป็นชื่อไฟล์เจาะ ตอนยืนอยู่หน้าเครื่องแล้วเปิดดูแบบ สิ่งที่ต้องเทียบก่อนอย่างอื่นคือเลขนี้ตรงกับที่ยิงมาไหม แต่หน้านี้ไม่เคยมีให้ดูเลย ต้องย้อนไปเปิดแบบผลิตหรือใบตัดอีกที · ขึ้นทั้งท้ายหัวหน้าต่างและในตารางข้อมูลสั่งผลิต ชิ้นที่มีงานเจาะสองหน้าได้สองเลขก็แสดงทั้งคู่ ชิ้นที่ไม่มีงานเจาะเลยบอกกำกับไว้ด้วย จะได้รู้ว่าไม่มีไฟล์ให้ยิง · ข้อความตอนโหลดออเดอร์จบ บอกผลการเชื่อมเดือยทุกครั้ง — เดิมถ้าเชื่อมได้ศูนย์จุด ข้อความก็เงียบไปเลย แยกไม่ออกว่าไม่มีอะไรต้องเชื่อม หรือมันไม่ได้ทำงาน ตอนนี้บอกจำนวนจุด แผ่นที่โดน รูเก่าที่ล้าง และรูฐานบานพับเสมอ ปิดสวิตช์ไว้ก็เตือนว่าปิดอยู่ ไม่ปล่อยให้เดา"],
@@ -5454,7 +5463,14 @@ function ensureFrontZones(inst){
     /* v22.5: รหัสช่องที่ชี้ไปยังชิ้นที่ไม่มีอยู่แล้ว (ไฟล์เก่าที่ id ถูกสับก่อน v22.0)
        ถือว่าใช้ไม่ได้ ล้างทิ้งแล้วเติมใหม่จากสเปคขอบที่ยังถูกอยู่ */
     if(b._zx&&(b._zx.l||b._zx.r)){
-      const _ex=id=>(id==null)||state.boards.some(z=>z&&z.id===id);
+      /* ───────── v33.3: รหัสช่องต้องชี้ไปยังชิ้นใน "ตู้ใบเดียวกัน" ─────────
+         v22.5 ตรวจแค่ว่าชิ้นนั้นยังมีอยู่ในฉากไหม ซึ่งหลวมเกินไป
+         id ที่ค้างมาจากตู้ใบอื่นก็ผ่านการตรวจ เพราะชิ้นนั้นมีอยู่จริง แค่อยู่คนละใบ
+         ผลคือหน้าบานทั้งสองฝั่งของเสาได้รหัสช่องเดียวกัน (ชี้ไปที่ id ของตู้ใบอื่นเหมือนกัน)
+         ตัวจับกลุ่มจึงเห็นเป็นช่องเดียว เลิกทำงานตั้งแต่ต้น แล้วปล่อยค่าจำนวนบานในแถวเดิมไว้
+         บานสองใบที่คนละฝั่งเสาเลยยังหารกันเองอยู่ ได้ครึ่งเดียวทั้งที่ควรเต็มช่องของตัวเอง
+         และไม่มีอะไรฟ้อง เพราะสเปคขอบซ้าย-ขวาถูกต้องอยู่แล้ว ผิดแค่รหัสช่องตัวเดียว */
+      const _ex=id=>(id==null)||state.boards.some(z=>z&&z.id===id&&z.cabInst===b.cabInst);
       const okL=_ex(b._zx.l), okR=_ex(b._zx.r);
       if(okL&&okR) return;
       b._zx=Object.assign({},b._zx,{l:null,r:null});
@@ -5614,16 +5630,25 @@ function applyDoorSpecs(inst){
       if(sp.L&&sp.L.ref) (useL[sp.L.ref]=useL[sp.L.ref]||[]).push(b);
       if(sp.R&&sp.R.ref) (useR[sp.R.ref]=useR[sp.R.ref]||[]).push(b); });
     Object.keys(useL).forEach(k=>{
-      const rt=useR[k]; if(!rt||!rt.length) return;                 // ชิ้นเดียวกันถูกใช้ทั้งซ้ายและขวา = เสาแบ่ง
+      let rt=useR[k]; if(!rt||!rt.length) return;                   // ชิ้นเดียวกันถูกใช้ทั้งซ้ายและขวา = เสาแบ่ง
+      /* ───────── v33.4: แผงตายที่หมุดติดเสา ไม่ใช่บานที่มาแย่งเสา ─────────
+         กฎนี้มีไว้กันบานสองใบเลยเข้าหากันตรงเสา ซึ่งถูกต้องเมื่อทั้งสองฝั่งเป็นบานจริง
+         แต่ฝั่งหนึ่งเป็นแผงตาย (_panel/_dummy) ที่หมุดติดผิวเสาไว้แล้ว มันไม่ขยับไปไหน
+         ไม่มีใครไปเลยเข้าหาใคร แต่กฎยังนับมันเป็นคู่ แล้วดึงบานอีกฝั่งให้หยุดที่กึ่งกลางเสา
+         บานจึงตั้งกลางสันเสาแทนที่จะทับผิวเสาอย่างที่ควรเป็น และไม่มีทางแก้ในกล่องได้
+         เพราะตั้ง "ทับ" ไปกี่ครั้งก็ถูกเปลี่ยนกลับเป็น "กลาง" ทุกรอบที่คิดฉากใหม่ */
+      const _live=x=>!(x&&(x._panel||x._dummy));
+      rt=rt.filter(_live); const lt=(useL[k]||[]).filter(_live);
+      if(!rt.length||!lt.length) return;
       /* v21.9: แปลงเป็น "กลาง" เฉพาะตอนที่ทั้งสองฝั่งตั้ง "ทับ" ซึ่งเป็นเคสที่ทับกันจริงเท่านั้น
          ถ้าฝั่งใดตั้ง "ใน" ไว้ (แผงหยุดก่อนถึงคาน ปล่อยให้บานอีกฝั่งคลุมคานไปคนเดียว)
          แปลว่าตั้งใจให้ไม่ทับอยู่แล้ว ห้ามไปแก้ ไม่งั้นบานจะหลุดจากคาน */
-      if(!(rt.every(b=>b._de.R&&b._de.R.m==="ทับ") && useL[k].every(b=>b._de.L&&b._de.L.m==="ทับ"))) return;
-      const both=rt.concat(useL[k]);
+      if(!(rt.every(b=>b._de.R&&b._de.R.m==="ทับ") && lt.every(b=>b._de.L&&b._de.L.m==="ทับ"))) return;
+      const both=rt.concat(lt);
       let g2=0; both.forEach(b=>{ g2=Math.max(g2,+b._de.gap||0); });
       if(!(g2>0)) g2=Math.max(+settings.doorGap||3,0);
-      useR[k].forEach(b=>{ const e=b._de.R; if(e&&e.m==="ทับ"){ e.m="กลาง"; e.v=g2; } });
-      useL[k].forEach(b=>{ const e=b._de.L; if(e&&e.m==="ทับ"){ e.m="กลาง"; e.v=g2; } });
+      rt.forEach(b=>{ const e=b._de.R; if(e&&e.m==="ทับ"){ e.m="กลาง"; e.v=g2; } });
+      lt.forEach(b=>{ const e=b._de.L; if(e&&e.m==="ทับ"){ e.m="กลาง"; e.v=g2; } });
     }); }); }catch(e){ console.error("deMid:",e); }
   const fx=(sp,sign)=>{ const ref=sp&&byId(sp.ref); if(!ref) return null; const t=worldDims(ref)[0];
     return faceOf(sp.m, ref.x+sign*t/2, ref.x, ref.x-sign*t/2) + sign*pull(sp.m,sp.v); };
@@ -6992,6 +7017,21 @@ function horizRefsOf(grp,toCabTop,zone){
    ตอนนี้จำ "ผิวอ้างอิง + สูตร" ไว้ที่ตัวเส้น (b._datum) แล้วคิดตำแหน่งใหม่ทุกครั้งที่ sync
    ของที่อิงเส้นแบ่งอยู่ (เช่นแผงปิด/บานหลอกที่จัดผังในช่องนั้น) จึงเลื่อนตามไปเองทั้งชุด */
 function isGuideLine(b){ return !!(b&&b._virtual)&&/^Guide/i.test(String(b.name||"")); }
+/* ───────── v33.8: รายการ "วางตามระยะอ้างอิง" เก็บที่เดียว ─────────
+   ชื่อโหมดเดิมถูกพิมพ์ซ้ำ 5 จุด (แผงเส้นแบ่ง · แผงไม้จริง · ป้ายล็อก) เพิ่มโหมดใหม่ทีต้องไล่แก้ครบทุกจุด
+   และรายการฝั่งแผ่นตั้งไม่เคยใส่ selected เลย เปิดแผงขวาทีไรก็เด้งกลับไปเลือกตัวแรกเสมอ */
+const DATUM_LABEL={floorTop:"จากบนแผ่นพื้น",floorBot:"จากล่างแผ่นพื้น",cabBottom:"จากล่างสุดของตู้ (ใต้แผ่นข้าง)",
+  topUnder:"จากใต้ฝาบน / ใต้คานบนสุด",cabTop:"จากบนสุดของตู้",
+  center:"กึ่งกลางตู้ (เท่าๆ ทั้งใบ)",centerZone:"กึ่งกลางช่องที่อยู่ (เท่าๆ ในช่อง)",
+  leftIn:"จากด้านในแผ่นซ้าย",rightIn:"จากด้านในแผ่นขวา",leftOut:"จากขอบนอกซ้ายของตู้",rightOut:"จากขอบนอกขวาของตู้",
+  centerX:"กึ่งกลางตู้ (เท่าๆ ทั้งใบ)",centerZoneX:"กึ่งกลางช่องที่อยู่ (เท่าๆ ในช่อง)"};
+const DATUM_CENTER=new Set(["center","centerZone","centerX","centerZoneX"]);   // โหมดที่ไม่ใช้ช่องระยะ/ผิวที่วัดถึง
+function datumOptsHTML(b,vertical){
+  const keys=vertical?["leftIn","rightIn","leftOut","rightOut","centerX","centerZoneX"]
+                     :["floorTop","floorBot","cabBottom","topUnder","cabTop","center","centerZone"];
+  const cur=(b&&b._datum&&b._datum.m)||"";
+  return keys.map(k=>`<option value="${k}"${cur===k?" selected":""}>${DATUM_LABEL[k]}</option>`).join("");
+}
 function guideDatumPlace(b,datum,val,face){
   const grp=groupOf(b); if(!grp) return false;
   /* v9.03: ใช้กับไม้จริงด้วย — เส้นแบ่งไม่มีความหนา วัดถึงกึ่งกลางได้เลย
@@ -7017,11 +7057,30 @@ function guideDatumPlace(b,datum,val,face){
     if(tU==null) tU=cabTop;
     /* v9.10: far = วัดทะลุความหนาชิ้นไปผิวอีกด้าน จึงกลับทิศครึ่งความหนา */
     const oy=(face==="far")?-hy:hy;
+    /* ───────── v33.8: กึ่งกลาง "ช่องที่ชิ้นนี้อยู่" ─────────
+       กึ่งกลางเดิมคิดจากพื้นตู้ถึงใต้ฝาบนเสมอ = กึ่งกลางทั้งใบ ซึ่งถูกเมื่อตู้ยังเป็นช่องเดียว
+       ตู้ที่แบ่งช่องไว้แล้ว พอสั่งกึ่งกลางชิ้นจะกระโดดข้ามชั้นอื่นไปกลางตู้ ไม่ใช่กลางช่องของตัวเอง
+       ตัวนี้หาแผ่นนอน/คาน/เส้นแบ่งที่ขนาบชิ้นอยู่จริงตอนนี้ แล้วเอากึ่งกลางของช่องนั้น
+       ทั้งสองโหมดยึด "กึ่งกลางชิ้นเอง" ช่องบน-ล่างจึงเท่ากันเป๊ะ ไม่ต้องหักครึ่งความหนาเอง */
+    const zoneY=()=>{ let lo=fT, hi=tU; const cy=b.y;
+      const bx0=b.x-dW[0]/2, bx1=b.x+dW[0]/2, bz0=b.z-dW[2]/2, bz1=b.z+dW[2]/2;
+      grp.boards.forEach(x=>{ if(x===b||x._door) return;
+        if(!(x.orient==="flat"||isRail(x)||x._dx)) return;
+        const d=worldDims(x);
+        /* ต้องซ้อนกันในผังจริง ๆ ถึงจะนับว่าขนาบกัน — ชั้นของช่องกว้างอื่น
+           หรือคานที่อยู่หลังแผ่นหลัง ไม่ได้อยู่เหนือ/ใต้ชิ้นนี้ จึงไม่ใช่ขอบช่องของมัน */
+        if(Math.min(x.x+d[0]/2,bx1)-Math.max(x.x-d[0]/2,bx0)<=1) return;
+        if(Math.min(x.z+d[2]/2,bz1)-Math.max(x.z-d[2]/2,bz0)<=1) return;
+        const l=x.y-d[1]/2, h=x.y+d[1]/2;
+        if(h<=cy+0.5) lo=Math.max(lo,h);
+        if(l>=cy-0.5) hi=Math.min(hi,l); });
+      return (hi-lo>Math.max(dW[1],1))?[lo,hi]:[fT,tU]; };
     if(datum==="floorBot") b.y=round((bot.y-(bot.T||18)/2)+val+oy);
     else if(datum==="cabBottom") b.y=round(cabBot+val+oy);
     else if(datum==="cabTop") b.y=round(cabTop-val-oy);
     else if(datum==="topUnder") b.y=round(tU-val-oy);
     else if(datum==="center") b.y=round((fT+tU)/2);
+    else if(datum==="centerZone"){ const z=zoneY(); b.y=round((z[0]+z[1])/2); }
     else b.y=round(fT+val+oy);
     return true;
   }
@@ -7033,10 +7092,21 @@ function guideDatumPlace(b,datum,val,face){
      ขอบนอก = ผิวนอกสุดของแผ่นข้างใบนั้น ไม่ใช่ขอบของบานหรือของที่ยื่นออกมา */
   const lOut=ls.x-worldDims(ls)[0]/2, rOut=rs?rs.x+worldDims(rs)[0]/2:lOut;
   const ox=(face==="far")?-hx:hx;
+  /* v33.8: กึ่งกลางช่องแนวกว้าง — นับเฉพาะแผ่นตั้งที่สูงคร่อมชิ้นนี้จริง ขาตู้/เสาเตี้ยจึงไม่มาบีบช่อง */
+  const zoneX=()=>{ let lo=lIn, hi=rIn; const cx=b.x, by0=b.y-dW[1]/2, by1=b.y+dW[1]/2, bz0=b.z-dW[2]/2, bz1=b.z+dW[2]/2;
+    grp.boards.forEach(x=>{ if(x===b||x._door||x.orient!=="side"||isRail(x)) return;
+      const d=worldDims(x);
+      if(!((x.y-d[1]/2)<by1-1 && (x.y+d[1]/2)>by0+1)) return;               // ต้องสูงคร่อมชิ้นนี้จริง
+      if(Math.min(x.z+d[2]/2,bz1)-Math.max(x.z-d[2]/2,bz0)<=1) return;      // และอยู่ในความลึกเดียวกัน
+      const l=x.x-d[0]/2, h=x.x+d[0]/2;
+      if(h<=cx+0.5) lo=Math.max(lo,h);
+      if(l>=cx-0.5) hi=Math.min(hi,l); });
+    return (hi-lo>Math.max(dW[0],1))?[lo,hi]:[lIn,rIn]; };
   if(datum==="rightIn"&&rs) b.x=round(rIn-val-ox);
   else if(datum==="leftOut") b.x=round(lOut+val+ox);
   else if(datum==="rightOut"&&rs) b.x=round(rOut-val-ox);
   else if(datum==="centerX") b.x=round((lIn+rIn)/2);
+  else if(datum==="centerZoneX"){ const z=zoneX(); b.x=round((z[0]+z[1])/2); }
   else b.x=round(lIn+val+ox);
   return true;
 }
@@ -7049,7 +7119,13 @@ function applyPanelWidths(){
   let n=0;
   (state.boards||[]).forEach(b=>{ const w=b&&b._wExpr; if(!w||!w.e) return;
     const v=evalCabExpr(w.e,b.cabInst,null);
-    if(v==null||!isFinite(v)||v<5) return;
+    /* ───────── v33.5: สูตรที่คิดไม่ออก ต้องรู้ว่าคิดไม่ออก ─────────
+       เดิมคิดไม่ออกก็ return เงียบ ๆ ชิ้นเลยคาความกว้างที่ตัวคิดบานให้มาก่อนหน้า
+       ซึ่งเป็นตัวเลขที่ดูสมเหตุสมผล ไม่มีอะไรบอกว่าสูตรไม่ทำงาน
+       พิมพ์ชื่อตัวแปรผิดไปตัวเดียว (เช่น $D3 ทั้งที่ตู้มี $SD3) ก็หาไม่เจอทั้งวัน
+       จำผลไว้กับชิ้น แล้วให้แผงขวาแสดงให้เห็น */
+    if(v==null||!isFinite(v)||v<5){ b._wErr=String(w.e); return; }
+    delete b._wErr;
     const l0=+b.L||0; if(Math.abs(l0-v)<0.01) return;
     const hi=b.x+l0/2, lo=b.x-l0/2;
     b.L=round(v);
@@ -7298,7 +7374,7 @@ function isShelfBoard(b){ return !!(b && b.orient==="flat" && /shelf|ชั้�
 function isAdjShelf(b){ return /adj|ปรับ/i.test(b.name||""); }
 // หาแผ่นหลังเชิงเรขาคณิต (orient-agnostic): แผ่นที่บางตามแกนลึก (Z เป็นมิติเล็กสุด ≤30) ที่อยู่ท้ายสุด · ไม่นับคาน
 function findBackPanelGeom(boards){
-  const cands=boards.filter(x=>{ if(isRail(x))return false; const d=worldDims(x);
+  const cands=boards.filter(x=>{ if(isRail(x)||x._dx||x._dwall||x._door||x._virtual)return false; const d=worldDims(x);
     return d[2]<=Math.min(d[0],d[1])-0.5 && d[2]<=30; });
   if(!cands.length)return null;
   return cands.slice().sort((a,b)=>a.z-b.z)[0];
@@ -8448,7 +8524,7 @@ function setDividerDepthFix(b,n,fromFront){
   n=Math.max(round(n||0),0);
   const grp=groupOf(b); let frontZ=b.z+(b.W||0)/2, backFront=b.z-(b.W||0)/2;
   if(grp){ frontZ=-Infinity; grp.boards.filter(x=>!x._door&&!x._virtual&&x!==b).forEach(x=>{frontZ=Math.max(frontZ,x.z+worldDims(x)[2]/2);});
-    let bk=grp.boards.filter(x=>x.orient==="front"&&!x._door&&!x._virtual&&!isRail(x)).sort((a,c)=>a.z-c.z)[0]||findBackPanelGeom(grp.boards.filter(x=>!x._door&&!x._virtual&&x!==b));
+    let bk=grp.boards.filter(x=>x.orient==="front"&&!x._door&&!x._virtual&&!x._dx&&!x._dwall&&!isRail(x)).sort((a,c)=>a.z-c.z)[0]||findBackPanelGeom(grp.boards.filter(x=>!x._door&&!x._virtual&&x!==b));
     backFront=bk? bk.z+worldDims(bk)[2]/2 : (b.z-(b.W||0)/2); }
   if(n>0){ b.W=round(n); b.depthFix=round(n); b.depthRef=fromFront?"front":"back";
     b.z=round(fromFront? frontZ-n/2 : backFront+n/2); }
@@ -9669,7 +9745,7 @@ async function addDivider(){
   const inL=ls.x+worldDims(ls)[0]/2, inR=rs.x-worldDims(rs)[0]/2;
   const Tdef=worldDims(ls)[0]||18;
   let frontZ=-Infinity; grp.boards.filter(b=>!b._door&&!b._virtual).forEach(b=>{frontZ=Math.max(frontZ,b.z+worldDims(b)[2]/2);});
-  let bk=grp.boards.filter(b=>b.orient==="front"&&!b._door&&!b._virtual&&!b._dwall&&!isRail(b)).sort((a,b)=>a.z-b.z)[0] || findBackPanelGeom(grp.boards.filter(b=>!b._door&&!b._virtual&&!b._dwall));
+  let bk=grp.boards.filter(b=>b.orient==="front"&&!b._door&&!b._virtual&&!b._dwall&&!b._dx&&!isRail(b)).sort((a,b)=>a.z-b.z)[0] || findBackPanelGeom(grp.boards.filter(b=>!b._door&&!b._virtual&&!b._dwall));
   const backFront = bk? bk.z+worldDims(bk)[2]/2 : ls.z-worldDims(ls)[2]/2;   // ผิวหน้าแผ่นหลัง · ไม่มีแผ่นหลัง=เต็มตู้
   const D=Math.max(frontZ-backFront,20), zc=(frontZ+backFront)/2;
   const ycomps=[]; for(let i=0;i<horiz.length-1;i++){ const lo=horiz[i].y+(horiz[i].T||18)/2, hi=horiz[i+1].y-(horiz[i+1].T||18)/2;
@@ -10681,6 +10757,18 @@ function applyPins(list){
     const fixedFace=b[ax]-sgn*d[i]/2;                          // ผิวตรงข้ามอยู่กับที่
     const rFace=rb[ax]+((p.refSide==="hi")?1:-1)*rd[i]/2;
     const target=rFace+sgn*(+p.off||0);
+    /* ───────── v33.6: ขนาดที่ถูกล็อกด้วยสูตร ต้องไม่ถูกหมุดยืดทับ ─────────
+       หมุดตรึงผิวทำงานด้วยการ "ยืดขนาด" ให้ผิวที่เลือกไปแตะชิ้นอ้างอิง โดยตรึงผิวตรงข้ามไว้
+       ซึ่งถูกต้องกับชิ้นที่ขนาดเป็นอิสระ แต่ชิ้นที่ล็อกความกว้างไว้ด้วยสูตรก็ถูกยืดทับไปด้วย
+       และหมุดทำงานทีหลังสูตรในลำดับการคิดฉาก สูตรจึงแพ้ทุกรอบ
+       ผลคือตั้งสูตรไว้ 100 แต่ได้ 85.3 ทุกครั้ง โดยช่องสูตรยังแสดงว่าล็อกไว้เรียบร้อย
+       ทั้งสองอย่างเป็นคำสั่งที่ตั้งใจตั้งไว้ทั้งคู่ และทำพร้อมกันได้
+       ถ้าขนาดถูกล็อก ให้หมุด "เลื่อนทั้งชิ้น" แทนการยืด ผิวที่ตรึงไว้ก็ยังไปแตะที่เดิม */
+    const _lockDim=(b._wExpr&&b._wExpr.e)?"L":((b._hExpr&&b._hExpr.e)?"W":null);
+    if(_lockDim&&p.dim===_lockDim){
+      const nx=round(target-sgn*d[i]/2);
+      if(Math.abs(b[ax]-nx)>0.05){ b[ax]=nx; n++; }
+      return; }
     let nd=sgn*(target-fixedFace);
     if(!(nd>=3)) nd=3;
     nd=round(nd);
@@ -11125,17 +11213,18 @@ function showInspector(){
         <div class="num"><span>Z</span><input type="number" step="any" id="f_z" value="${fmt(b.z)}"></div></div></div>
       <div class="fld"><label>วางตามระยะอ้างอิง</label>
         <div class="ibtns" style="gap:6px;align-items:center">
-          <select class="nameinp" id="g_datum" style="flex:1">${horizG
-            ? `${[["floorTop","จากบนแผ่นพื้น"],["floorBot","จากล่างแผ่นพื้น"],["cabBottom","จากล่างสุดของตู้ (ใต้แผ่นข้าง)"],["topUnder","จากใต้ฝาบน / ใต้คานบนสุด"],["cabTop","จากบนสุดของตู้"],["center","กึ่งกลาง (เท่าๆ กัน)"]].map(o2=>`<option value="${o2[0]}"${(b._datum&&b._datum.m===o2[0])?" selected":""}>${o2[1]}</option>`).join("")}`
-            : `<option value="leftIn">จากด้านในแผ่นซ้าย</option><option value="rightIn">จากด้านในแผ่นขวา</option><option value="leftOut">จากขอบนอกซ้ายของตู้</option><option value="rightOut">จากขอบนอกขวาของตู้</option><option value="centerX">กึ่งกลาง (เท่าๆ กัน)</option>`}</select>
+          <select class="nameinp" id="g_datum" style="flex:1">${datumOptsHTML(b,!horizG)}</select>
           <input class="nameinp" type="text" id="g_val" value="${escapeHtml((b._datum&&b._datum.e!=null)?String(b._datum.e):"70")}" style="width:110px;font-family:var(--mono)">
           <button class="ibtn" id="g_apply">วาง</button>
         </div>
-        <div class="muted" style="font-size:11px;margin-top:4px;line-height:1.55;white-space:normal">ใส่สูตรได้ เช่น <b>$D4+$D5</b>${cabNumHint(b.cabInst)}</div></div>
+        <div class="muted" style="font-size:11px;margin-top:4px;line-height:1.55;white-space:normal">ใส่สูตรได้ เช่น <b>$D4+$D5</b> · <b>กึ่งกลาง</b> ยึดกึ่งกลางของชิ้นเอง ช่องสองข้างเท่ากัน (ไม่ใช้ช่องระยะ)${cabNumHint(b.cabInst)}</div></div>
       <div class="ibtns" style="gap:6px;margin-top:8px"><button class="ibtn" id="g_toReal">แปลงเป็นไม้จริง</button><button class="iact del" id="g_del" title="ลบ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></button></div>`;
     const upd=()=>{render3D(false);renderList();autosave();};
     body.querySelector("#f_name").oninput=e=>{b.name=e.target.value;renderList();autosave();};
     ["L","W","x","y","z"].forEach(k=>{ const el=body.querySelector("#f_"+k); if(el)el.oninput=ev=>{const val=parseFloat(ev.target.value); if(!isNaN(val)){b[k]=val; upd();}}; });
+    { const gs=body.querySelector("#g_datum"), gv=body.querySelector("#g_val");
+      const gu=()=>{ const c=DATUM_CENTER.has(gs.value); if(gv){ gv.disabled=c; gv.style.opacity=c?".45":"1"; } };
+      if(gs){ gs.onchange=gu; gu(); } }
     body.querySelector("#g_apply").onclick=()=>{ const datum=body.querySelector("#g_datum").value;
       const _raw=body.querySelector("#g_val").value;
       const val=evalCabExpr(_raw,b.cabInst,null);                       // v9.00: รับสูตร $D4+$D5 เหมือนช่องของไม้จริง
@@ -11343,20 +11432,18 @@ function showInspector(){
       <div class="num"><span>Z</span><input type="number" step="any" id="f_z" value="${fmt(b.z)}"></div></div></div>
     <div class="fld"><label>วางตามระยะอ้างอิง</label>
       <div class="ibtns" style="gap:6px;align-items:center">
-        <select class="nameinp" id="d_datum" style="flex:1">${b.orient==="side"
-          ? `<option value="leftIn">จากด้านในแผ่นซ้าย</option><option value="rightIn">จากด้านในแผ่นขวา</option><option value="leftOut">จากขอบนอกซ้ายของตู้</option><option value="rightOut">จากขอบนอกขวาของตู้</option><option value="centerX">กึ่งกลาง (เท่าๆ กัน)</option>`
-          : `${[["floorTop","จากบนแผ่นพื้น"],["floorBot","จากล่างแผ่นพื้น"],["cabBottom","จากล่างสุดของตู้ (ใต้แผ่นข้าง)"],["topUnder","จากใต้ฝาบน"],["cabTop","จากบนสุดของตู้"],["center","กึ่งกลาง (เท่าๆ กัน)"]].map(o2=>`<option value="${o2[0]}"${(b._datum&&b._datum.m===o2[0])?" selected":""}>${o2[1]}</option>`).join("")}`}</select>
+        <select class="nameinp" id="d_datum" style="flex:1">${datumOptsHTML(b,b.orient==="side")}</select>
         <input class="nameinp" type="text" id="d_val" value="${escapeHtml((b._datum&&b._datum.e!=null)?String(b._datum.e):"70")}" style="width:110px;font-family:var(--mono)">
         <button class="ibtn" id="d_apply">วาง</button>
       </div>
       ${/* v9.10: เลือกได้ว่าจะวัดถึงผิวไหนของชิ้น — ก่อนหน้านี้บังคับวัดถึงผิวที่ใกล้ผิวอ้างอิงเสมอ
              เคสจริงที่เจอ: อยากได้ "จากบนสุดของตู้ ถึงใต้ชั้น = 70" ซึ่งคือผิวไกล ทำไม่ได้เลย */""}
-      <div class="ibtns" style="gap:6px;align-items:center;margin-top:6px">
+      <div class="ibtns" id="d_faceRow" style="gap:6px;align-items:center;margin-top:6px">
         <span style="font-size:12px;opacity:.85;white-space:nowrap">วัดถึง</span>
         <button class="ibtn d_face" data-f="near" style="${(b._datum&&b._datum.f==="far")?"":"background:var(--accent);color:#fff;border-color:transparent"}">ผิวใกล้</button>
         <button class="ibtn d_face" data-f="far" style="${(b._datum&&b._datum.f==="far")?"background:var(--accent);color:#fff;border-color:transparent":""}">ผิวไกล (อีกด้านของชิ้น)</button>
       </div>
-      <div class="muted" style="font-size:11px;margin-top:4px;line-height:1.55;white-space:normal">ผิวใกล้ = ระยะถึงผิวที่หันเข้าหาผิวอ้างอิง · ผิวไกล = วัดทะลุความหนาชิ้นไปอีกด้าน (เช่น จากบนสุดของตู้ ถึง<b>ใต้</b>ชั้น) · ใส่สูตรได้ เช่น <b>$D4+$D5</b>${cabNumHint(b.cabInst)}</div>
+      <div class="muted" style="font-size:11px;margin-top:4px;line-height:1.55;white-space:normal">ผิวใกล้ = ระยะถึงผิวที่หันเข้าหาผิวอ้างอิง · ผิวไกล = วัดทะลุความหนาชิ้นไปอีกด้าน (เช่น จากบนสุดของตู้ ถึง<b>ใต้</b>ชั้น) · ใส่สูตรได้ เช่น <b>$D4+$D5</b><br><b>กึ่งกลางตู้</b> = พื้นตู้ ↔ ใต้ฝาบน/ใต้คาน ทั้งใบ · <b>กึ่งกลางช่องที่อยู่</b> = เฉพาะช่องที่ชิ้นนี้อยู่ตอนนี้ (ชั้น/คาน/เส้นแบ่งที่ขนาบอยู่) · ทั้งคู่ยึด<b>กึ่งกลางชิ้นเอง</b> ช่องบน-ล่างเท่ากัน จึงไม่ใช้ช่องระยะและผิวที่วัดถึง${cabNumHint(b.cabInst)}</div>
       ${/* v9.12: แก้สูตรความสูงของแผงปิด/หน้าบานได้จากแผงขวา
              เดิมตั้งได้ครั้งเดียวตอนสร้างในกล่อง เพิ่มหน้าบาน พอสร้างเสร็จก็ไม่มีที่ให้แก้หรือปลดอีกเลย */""}
       ${(!b.rule&&canRailFix(b))?`
@@ -11388,12 +11475,21 @@ function showInspector(){
         ${[["left","ชิดซ้าย"],["right","ชิดขวา"],["center","กึ่งกลาง"]].map(a=>`<button class="ibtn w_anc" data-a="${a[0]}" style="${((b._wExpr&&b._wExpr.a||"left")===a[0])?"background:var(--accent);color:#fff;border-color:transparent":""}">${a[1]}</button>`).join("")}
       </div>
       <div class="muted" style="font-size:11px;margin-top:4px;line-height:1.55;white-space:normal">ตอนนี้กว้าง ${fmt(b.L)} มม.${b._wExpr?(" · 🔒 ล็อกไว้ที่ "+escapeHtml(String(b._wExpr.e))):""}</div>
+      ${(()=>{ if(!b._wExpr||!b._wExpr.e) return "";
+        const v=evalCabQuiet(String(b._wExpr.e),b.cabInst,null);
+        /* v33.5: บอกตรง ๆ ว่าสูตรออกมาเป็นเท่าไหร่ หรือคิดไม่ออกเพราะอะไร */
+        if(v==null||!isFinite(v)||v<5) return `<div style="font-size:11.5px;margin-top:5px;padding:6px 8px;border-radius:8px;background:rgba(229,72,77,.12);color:#c92a2f;line-height:1.6">
+          ⚠ สูตร <b>${escapeHtml(String(b._wExpr.e))}</b> คิดค่าไม่ได้ — ความกว้างจึงไม่ถูกล็อก ตัวเลขที่เห็นมาจากตัวคิดบาน ไม่ใช่จากสูตร<br>
+          ตรวจชื่อตัวแปรว่าตรงกับที่ตู้ใบนี้มีจริงไหม${escapeHtml(cabNumHint(b.cabInst))}</div>`;
+        return `<div style="font-size:11.5px;margin-top:5px;padding:6px 8px;border-radius:8px;background:rgba(18,184,134,.12);color:#0c7a5a">
+          สูตรคิดได้ <b>${fmt(round(v))} มม.</b>${(Math.abs((+b.L||0)-v)>0.05)?" — แต่ชิ้นยังกว้าง "+fmt(b.L)+" มม. (กด ใช้ อีกครั้ง)":" ✓ ตรงกับความกว้างปัจจุบัน"}</div>`;
+      })()}
       ${b._hExpr?`<div style="font-size:11px;margin-top:6px;padding:6px 8px;border-radius:8px;background:rgba(18,184,134,.12);color:#0c7a5a;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <span>🔒 ล็อกความสูงไว้: <b>${escapeHtml(String(b._hExpr.e||""))}</b> · ยึด${({top:"ขอบบน",bottom:"ขอบล่าง",center:"กึ่งกลาง"})[b._hExpr.a||"top"]}</span>
         <button class="ibtn" id="h_unlock" style="margin-left:auto">ปลดล็อก</button></div>`:""}
       `:""}
       ${b._datum?`<div style="font-size:11px;margin-top:6px;padding:6px 8px;border-radius:8px;background:rgba(18,184,134,.12);color:#0c7a5a;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        <span>🔒 ล็อกระยะไว้: <b>${escapeHtml(String(b._datum.e||""))}</b> ${escapeHtml({floorTop:"จากบนแผ่นพื้น",floorBot:"จากล่างแผ่นพื้น",cabBottom:"จากล่างสุดของตู้",topUnder:"จากใต้ฝาบน",cabTop:"จากบนสุดของตู้",center:"กึ่งกลาง",leftIn:"จากด้านในแผ่นซ้าย",rightIn:"จากด้านในแผ่นขวา",leftOut:"จากขอบนอกซ้ายของตู้",rightOut:"จากขอบนอกขวาของตู้",centerX:"กึ่งกลางแนวกว้าง"}[b._datum.m]||b._datum.m)} · ถึง${b._datum.f==="far"?"ผิวไกล":"ผิวใกล้"}</span>
+        <span>🔒 ${DATUM_CENTER.has(b._datum.m)?`ล็อกไว้: <b>${escapeHtml(DATUM_LABEL[b._datum.m]||b._datum.m)}</b> — ยึดกึ่งกลางชิ้นเอง`:`ล็อกระยะไว้: <b>${escapeHtml(String(b._datum.e||""))}</b> ${escapeHtml(DATUM_LABEL[b._datum.m]||b._datum.m)} · ถึง${b._datum.f==="far"?"ผิวไกล":"ผิวใกล้"}`}</span>
         <span style="opacity:.75">คิดใหม่ทุกครั้งที่ค่าตัวแปร/ขนาดตู้เปลี่ยน</span>
         <button class="ibtn" id="d_unlock" style="margin-left:auto">ปลดล็อก</button></div>`:""}</div>
       <div class="obtn ${b.orient==="flat"?"sel":""}" data-o="flat">ราบ</div>
@@ -11763,6 +11859,11 @@ function showInspector(){
       body.querySelectorAll(".d_face").forEach(x=>{ const on=(x.getAttribute("data-f")===_dFace);
         x.style.cssText=on?"background:var(--accent);color:#fff;border-color:transparent":""; }); });
     { const ul=body.querySelector("#d_unlock"); if(ul)ul.onclick=()=>{ delete b._datum; showInspector(); commit(); toast("ปลดล็อกระยะแล้ว — ชิ้นนี้จะอยู่กับที่ ไม่คิดตามตัวแปรอีก"); }; }
+    { const ds=body.querySelector("#d_datum"), dv=body.querySelector("#d_val"), dr=body.querySelector("#d_faceRow");
+      const du=()=>{ const c=DATUM_CENTER.has(ds.value);
+        if(dv){ dv.disabled=c; dv.style.opacity=c?".45":"1"; }
+        if(dr){ dr.style.opacity=c?".45":"1"; dr.style.pointerEvents=c?"none":""; } };
+      if(ds){ ds.onchange=du; du(); } }
     const da=body.querySelector("#d_apply"); if(da)da.onclick=()=>{
       const datum=body.querySelector("#d_datum").value;
       const _raw=body.querySelector("#d_val").value;
@@ -18753,6 +18854,44 @@ function _flipCabCodeAuto(code){
   const c=s2[2]; if(!/[LRlr]/.test(c)) return null;
   return setCodeSide(s2, c==="L"||c==="l");
 }
+/* ───────── v33.1: กลับด้านทั้งออเดอร์ ─────────
+   กลับตู้ทีละใบมีมานานแล้ว แต่มันสะท้อนรอบศูนย์กลางของตู้ใบนั้นเอง ตู้จึงอยู่ที่เดิม
+   ครัวทั้งชุดที่ต้องพลิกซ้ายขวา ถ้ากดทีละใบสี่สิบครั้งก็ยังไม่จบ เพราะตำแหน่งตู้ไม่สลับที่กัน
+   ตัวนี้สะท้อนรอบศูนย์กลางของทั้งฉากทีเดียว ตู้ซ้ายสุดจึงไปอยู่ขวาสุดจริง ๆ
+
+   ตู้ที่หมุน 90 หรือ 270 ก็ทำได้ การสะท้อนกลับทิศหมุน (yaw ใหม่ = 360 − ของเดิม)
+   และ localAxis คืนแกนตัวเดียวกันทั้ง 90 และ 270 ลำดับก่อนหลังจึงไม่มีผล
+   ตู้ที่หมุนเป็นมุมเอียงยังไม่รองรับ เพราะแกนภายในไม่ตรงกับแกนโลก */
+function mirrorOrder(){
+  if(isLocked()){ guardEdit("กลับด้านทั้งออเดอร์"); return 0; }
+  const all=state.boards.filter(Boolean);
+  const solid=all.filter(b=>!b._virtual);
+  if(!solid.length){ toast("ยังไม่มีงานในฉาก"); return 0; }
+  const odd=solid.filter(b=>((((+b.yaw||0)%360)+360)%360)%90!==0);
+  if(odd.length){ toast("มีชิ้นที่หมุนเป็นมุมเอียง "+odd.length+" ชิ้น — กลับด้านทั้งออเดอร์ยังไม่รองรับ หมุนให้ตรงแกนก่อน"); return 0; }
+  let mn=Infinity,mx=-Infinity;
+  solid.forEach(b=>{ const d=worldDims(b); mn=Math.min(mn,b.x-d[0]/2); mx=Math.max(mx,b.x+d[0]/2); });
+  if(!isFinite(mn)){ toast("วัดขนาดฉากไม่ได้"); return 0; }
+  const cx=(mn+mx)/2;
+  all.forEach(b=>{
+    b.x=round(2*cx-b.x);                                   // สะท้อนตำแหน่งรอบกลางฉาก
+    const y=(((+b.yaw||0)%360)+360)%360; if(y) b.yaw=(360-y)%360;
+    _mirrorBoard(b);                                       // กลับข้างในชิ้น รู ร่อง บานพับ สเปคขอบ
+  });
+  let nRen=0; all.forEach(b=>{ const nn=_flipNameAuto(b.name); if(nn&&nn!==b.name){ b.name=nn; nRen++; } });
+  /* รหัสตู้: ทำทีเดียวทั้งฉาก คู่ซ้าย-ขวาจึงสลับรหัสกันเอง
+     ตัวตนของตู้ผูกกับ cabInst ไม่ใช่รหัส จึงไม่ปนกันแม้รหัสจะไปชนกับอีกใบ */
+  const ren={}; [...new Set(all.map(b=>b&&b.cab).filter(Boolean))]
+    .forEach(old=>{ const nc=_flipCabCodeAuto(old); if(nc&&nc!==old) ren[old]=nc; });
+  all.forEach(b=>{ if(b.cab&&ren[b.cab]!==undefined) b.cab=ren[b.cab]; });
+  const nCab=Object.keys(ren).length;
+  const nInst=new Set(solid.map(b=>b.cabInst||"")).size;
+  sync(1); try{ commit(); }catch(e){}
+  toast("กลับด้านทั้งออเดอร์แล้ว — "+nInst+" ตู้ · "+solid.length+" ชิ้น · ตู้สลับตำแหน่งซ้ายขวาให้ด้วย"
+    +(nRen?(" · เปลี่ยนชื่อชิ้น "+nRen):"")
+    +(nCab?(" · รหัสตู้ "+nCab+" รหัส"):" · รหัสตู้ไม่มีตัวบอกด้านที่ตำแหน่งที่ 3 จึงไม่เปลี่ยนให้"));
+  return solid.length;
+}
 function mirrorCabinet(inst){
   const all=state.boards.filter(b=>b&&b.cabInst===inst);
   if(!all.length){ toast("ไม่พบชิ้นในตู้นี้"); return 0; }
@@ -20415,6 +20554,10 @@ function pullLive(d,pu){
            X:Math.abs(evalCabQuiet(pu.X, inst, +pu.X0||0)),
            Y:Math.abs(evalCabQuiet(pu.Y, inst, +pu.Y0||0)) };
 }
+/* v33.4: v33.2 เพิ่มช่องสูตรขนาดโดยใช้ชื่อ _lExpr/_wExpr
+   แต่ _wExpr เป็นของที่มีอยู่แล้วในโปรแกรม (ล็อกความกว้าง {e,a} พร้อม UI ของตัวเอง)
+   ผมไปทับชื่อเดียวกันด้วยรูปแบบคนละอย่าง ซึ่งอันตรายมาก ถอนออกทั้งชุดแล้ว
+   ของที่ต้องการมีอยู่แล้วสองทาง — ล็อกความกว้างด้วยสูตร และสเปคขอบบาน */
 function pullDefs(){
   const out=[]; ((settings.elements&&settings.elements.fittings)||[]).forEach(el=>{
     if(!/มือจับ|\bpull\b|\bhandle\b/i.test(String(el.kind||""))) return;
@@ -23172,6 +23315,7 @@ function bindCtx(){
     else if(a==="mate")connectMate(b);
     else if(a==="cabrot"){ try{ rotateCabQuick(b, ctxShift?-90:90); }catch(err){ console.error(err); toast("หมุนตู้ไม่สำเร็จ: "+err.message); } }
     else if(a==="cabmirror"){ try{ if(b&&b.cabInst) mirrorCabinet(b.cabInst); else toast("เลือกชิ้นในตู้ก่อน"); }catch(err){ console.error(err); toast("กลับด้านไม่สำเร็จ: "+err.message); } }
+    else if(a==="ordmirror"){ try{ mirrorOrder(); }catch(err){ console.error(err); toast("กลับด้านทั้งออเดอร์ไม่สำเร็จ: "+err.message); } }
     else if(a==="ledpower"){ try{ ledPowerDialog(); }catch(err){ console.error(err); toast("เปิดรายการไฟไม่สำเร็จ: "+err.message); } }
     else if(a==="ledadd"){ try{ ledDialog(b); }catch(err){ console.error(err); toast("เปิดหน้าต่างรางไฟไม่สำเร็จ: "+err.message); } }
     else if(a==="leddel"){ try{ ledRemove(b); }catch(err){ console.error(err); } }
@@ -24108,7 +24252,7 @@ function backGrooveMacro(b, grp){
   if(!bg) return "";
   let Tb = bg.backThk;                                              // หนาแผ่นหลัง (เก็บไว้ตอนเซาะ)
   if(Tb==null && grp){                                             // ตู้เก่าที่ยังไม่เก็บค่า → หาแผ่นหลังจริงในตู้
-    const bk = grp.boards.find(z=>z.orient==="front" && !z._door && !z._virtual && !isRail(z))
+    const bk = grp.boards.find(z=>z.orient==="front" && !z._door && !z._virtual && !z._dx && !z._dwall && !isRail(z))
             || (typeof findBackPanelGeom==="function" ? findBackPanelGeom(grp.boards.filter(z=>!z._door&&!z._virtual)) : null);
     if(bk) Tb = bk.T;
   }
@@ -24409,10 +24553,14 @@ async function getDB(){
   const lib=await loadSupabase();
   if(_sbClient)return _sbClient;
   const url=await lsGet("boardforge:sb_url",SB_URL_DEFAULT), key=await lsGet("boardforge:sb_key",SB_KEY_DEFAULT);
-  _sbClient=lib.createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}});
+  /* v34.0: ต้องเก็บ session ไว้ ไม่งั้นรีเฟรชทีก็หลุดล็อกอินทุกครั้ง และคำขอทุกอันต้องแนบ JWT
+     ไม่งั้น RLS เห็นเป็น anon แล้วปิดประตูใส่หมด */
+  _sbClient=sxGuardDB(lib.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"starnexus.auth"}}));
   return _sbClient;
 }
-function sbErr(e){ if(!e)return"unknown"; if(typeof e==="string")return e; return e.message||e.error_description||e.details||e.hint||e.code||JSON.stringify(e); }
+function sbErr(e){ if(!e)return"unknown";
+  const raw=(typeof e==="string")?e:(e.message||e.error_description||e.details||e.hint||e.code||JSON.stringify(e));
+  try{ return sxErrTh(raw); }catch(_){ return raw; } }
 /* ───────── v12.8: ลงทะเบียนรหัสอุปกรณ์ให้ปลายทางแปลรหัสออก ─────────
    หน้าดูข้อมูลดิบของปลายทางแปลชื่อรหัสผ่านตาราง imos_mapping เสมอ (conid -> order_id)
    ไม่มีทางลัดแบบหน้าใบสั่งซื้อที่ลองค้นคลังอุปกรณ์ก่อน
@@ -24851,11 +24999,233 @@ function readFile(f){const r=new FileReader();
 }
 
 /* ---------- boot ---------- */
+/* ═══════════ v34.0: ผู้ใช้ + สิทธิ์ 4 ระดับ (Supabase Auth + RLS) ═══════════
+   เดิมโปรแกรมยิงคลาวด์ด้วย anon key ที่ฝังอยู่ในไฟล์ ใครถือไฟล์ = ลบตู้ทั้งคลังได้
+   โดยไม่ต้องเปิดโปรแกรมด้วยซ้ำ ยิง REST ตรงก็ได้ หน้าล็อกอินที่เช็คในไฟล์อย่างเดียว
+   จึงเป็นแค่ป้าย กด F12 ก็ผ่าน ตัวที่กันจริงคือ RLS ฝั่ง Supabase — ตรงนี้เป็นแค่หน้าบ้าน
+   ระดับ 1 เจ้าของ · 2 รอง (ข้อมูลทำได้เท่าเจ้าของ แต่จัดการผู้ใช้ไม่ได้)
+        3 เพิ่มได้ + แก้ของตัวเอง ลบไม่ได้ · 4 ดูอย่างเดียว                          */
+const SX={ user:null, lvl:0, offline:false };
+const SX_TABLES=new Set(["furnitech_cabinets","furnitech_parts","xml_history","imos_orders","imos_mapping","app_settings"]);
+const SX_LVL=[null,
+  {n:"เจ้าของ",     d:"ทำได้ทุกอย่าง + จัดการผู้ใช้"},
+  {n:"รอง",         d:"เพิ่ม/แก้/ลบได้ทั้งหมด · จัดการผู้ใช้ไม่ได้"},
+  {n:"เพิ่มข้อมูล", d:"เพิ่มได้ · แก้ได้เฉพาะของตัวเอง · ลบไม่ได้"},
+  {n:"ดูอย่างเดียว",d:"เปิดดูได้ · บันทึกขึ้นคลาวด์ไม่ได้"}];
+function sxCan(act){ const L=SX.lvl; if(!L) return false;
+  if(act==="add")  return L<=3;
+  if(act==="edit") return L<=3;          // ระดับ 3 ปล่อยผ่านหน้าบ้าน แล้วให้ RLS ตัดของคนอื่นเอง
+  if(act==="del")  return L<=2;
+  if(act==="admin")return L===1;
+  return false; }
+function sxDeny(act){
+  const m={add:"เพิ่มข้อมูลขึ้นคลาวด์",edit:"แก้ไขข้อมูลบนคลาวด์",del:"ลบข้อมูลบนคลาวด์"}[act]||"ทำรายการนี้";
+  try{ toast("ไม่มีสิทธิ์"+m+" — "+(SX.offline?"โหมดออฟไลน์":("ระดับ "+SX.lvl+" "+(SX_LVL[SX.lvl]||{}).n))); }catch(e){}
+  return new Error("SX_DENIED"); }
+/* ดักที่ตัวไคลเอนต์จุดเดียว ดีกว่าไล่ใส่การ์ดทีละปุ่ม 20 จุดแล้วลืมจุดใดจุดหนึ่ง */
+function sxGuardDB(db){
+  const _from=db.from.bind(db);
+  db.from=(t)=>{ const q=_from(t);
+    if(!SX_TABLES.has(t)) return q;
+    [["insert","add"],["upsert","add"],["update","edit"],["delete","del"]].forEach(([m,act])=>{
+      if(typeof q[m]!=="function") return; const o=q[m].bind(q);
+      q[m]=(...a)=>{ if(!sxCan(act)) throw sxDeny(act); return o(...a); }; });
+    return q; };
+  return db; }
+function sxErrTh(e){ const s=String((e&&(e.message||e.code))||e||"");
+  if(/SX_DENIED/.test(s)) return "ไม่มีสิทธิ์ทำรายการนี้";
+  if(/42501|row-level security|violates row-level/i.test(s)) return "คลาวด์ปฏิเสธ — ระดับของคุณแก้/ลบรายการนี้ไม่ได้";
+  if(/JWT|token is expired|not authenticated/i.test(s)) return "หมดเวลาเข้าใช้งาน กรุณาล็อกอินใหม่";
+  return s; }
+
+/* ---------- หน้าจอเข้าสู่ระบบ ---------- */
+function sxOverlay(inner){
+  let el=document.getElementById("sxAuthWrap");
+  if(!el){ el=document.createElement("div"); el.id="sxAuthWrap"; document.body.appendChild(el); }
+  el.style.cssText="position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;"+
+    "background:linear-gradient(160deg,#e7e8ee,#c8cddc);font:14px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;color:#1d1d1f";
+  el.innerHTML='<div style="width:min(420px,92vw);background:#fff;border-radius:16px;padding:26px 24px;'+
+    'box-shadow:0 24px 70px -20px rgba(0,0,0,.45)">'+inner+'</div>';
+  return el; }
+function sxClose(){ const el=document.getElementById("sxAuthWrap"); if(el) el.remove(); }
+const sxEsc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const SX_INP="width:100%;box-sizing:border-box;padding:10px 12px;margin:4px 0 10px;border:1px solid rgba(0,0,0,.16);"+
+  "border-radius:9px;font:14px system-ui;background:#fbfbfd";
+const SX_BTN="width:100%;padding:11px;border:0;border-radius:9px;background:#1F3864;color:#fff;font:600 14px system-ui;cursor:pointer";
+
+function sxLoginUI(db,msg){
+  return new Promise(resolve=>{
+    let mode="in";
+    const draw=(note,noteBad)=>{
+      const t=(k,l)=>'<button data-m="'+k+'" style="flex:1;padding:8px;border:0;border-bottom:2px solid '+
+        (mode===k?"#1F3864":"transparent")+';background:none;font:600 13px system-ui;cursor:pointer;color:'+
+        (mode===k?"#1F3864":"#8a8a90")+'">'+l+'</button>';
+      const el=sxOverlay(
+        '<div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">'+
+          '<div style="width:34px;height:34px;border-radius:9px;background:#1F3864;color:#fff;display:flex;'+
+          'align-items:center;justify-content:center;font:700 17px system-ui">✦</div>'+
+          '<div><div style="font:700 16px system-ui">StarNexus Cabinet</div>'+
+          '<div style="font-size:11px;color:#8a8a90">v'+sxEsc(APP_META.version)+'</div></div></div>'+
+        '<div style="display:flex;margin-bottom:14px">'+t("in","เข้าสู่ระบบ")+t("up","สมัครใหม่")+'</div>'+
+        (note?'<div style="padding:9px 11px;border-radius:9px;font-size:12.5px;margin-bottom:10px;background:'+
+          (noteBad?"rgba(255,59,48,.10);color:#a3241c":"rgba(31,56,100,.10);color:#1F3864")+'">'+sxEsc(note)+'</div>':"")+
+        (mode==="in"
+          ? '<label style="font-size:12px;color:#5f5f66">อีเมล</label><input id="sxEm" type="email" autocomplete="username" style="'+SX_INP+'">'+
+            '<label style="font-size:12px;color:#5f5f66">รหัสผ่าน</label><input id="sxPw" type="password" autocomplete="current-password" style="'+SX_INP+'">'+
+            '<button id="sxGo" style="'+SX_BTN+'">เข้าสู่ระบบ</button>'
+          : '<label style="font-size:12px;color:#5f5f66">ชื่อที่ให้คนอื่นเห็น</label><input id="sxNm" style="'+SX_INP+'">'+
+            '<label style="font-size:12px;color:#5f5f66">อีเมล (ใช้อีเมลภายในก็ได้)</label><input id="sxEm" type="email" style="'+SX_INP+'">'+
+            '<label style="font-size:12px;color:#5f5f66">รหัสผ่าน (อย่างน้อย 6 ตัว)</label><input id="sxPw" type="password" style="'+SX_INP+'">'+
+            '<button id="sxGo" style="'+SX_BTN+'">ขออนุมัติเข้าใช้งาน</button>'+
+            '<div style="font-size:11.5px;color:#8a8a90;margin-top:9px;line-height:1.5">สมัครแล้วยังเข้าใช้ไม่ได้ทันที '+
+            'ต้องรอผู้ดูแลอนุมัติและกำหนดระดับสิทธิ์ให้ก่อน</div>')+
+        '<div id="sxOff" style="text-align:center;margin-top:14px"><button style="border:0;background:none;'+
+        'font-size:11.5px;color:#8a8a90;cursor:pointer;text-decoration:underline dotted">ใช้แบบออฟไลน์ (เปิดคลาวด์ไม่ได้)</button></div>');
+
+      el.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{ mode=b.getAttribute("data-m"); draw(); });
+      const go=el.querySelector("#sxGo"), em=el.querySelector("#sxEm"), pw=el.querySelector("#sxPw");
+      el.querySelector("#sxOff").firstChild.onclick=()=>{ SX.offline=true; SX.lvl=0; sxClose(); resolve(false); };
+      const submit=async()=>{
+        const E=(em.value||"").trim().toLowerCase(), P=pw.value||"";
+        if(!E||!P){ draw("กรอกอีเมลกับรหัสผ่านให้ครบ",true); return; }
+        go.disabled=true; go.textContent="กำลังทำงาน…";
+        try{
+          if(mode==="up"){
+            const nm=(el.querySelector("#sxNm").value||"").trim();
+            const r=await db.rpc("sx_signup",{p_email:E,p_pw:P,p_name:nm});
+            if(r.error) throw r.error;
+            if(r.data!=="OK"){ draw(r.data,true); return; }
+            mode="in"; draw("สมัครเรียบร้อย — รอผู้ดูแลอนุมัติ แล้วค่อยเข้าสู่ระบบ"); return;
+          }
+          const r=await db.auth.signInWithPassword({email:E,password:P});
+          if(r.error){ draw(/Invalid login/i.test(r.error.message)?"อีเมลหรือรหัสผ่านไม่ถูกต้อง":sxErrTh(r.error),true); return; }
+          const st=await sxLoadProfile(db);
+          if(st===true){ sxClose(); resolve(true); return; }
+          await db.auth.signOut();
+          draw(st==="pending"?"บัญชีนี้ยังไม่ได้รับอนุมัติ — ติดต่อผู้ดูแล":"บัญชีนี้ถูกระงับสิทธิ์แล้ว",true);
+        }catch(e){ draw(sxErrTh(e),true); }
+        finally{ const g=document.querySelector("#sxGo"); if(g){ g.disabled=false; } }
+      };
+      go.onclick=submit;
+      [em,pw].forEach(i=>i&&(i.onkeydown=e=>{ if(e.key==="Enter") submit(); }));
+      setTimeout(()=>{ try{ (mode==="up"?el.querySelector("#sxNm"):em).focus(); }catch(e){} },30);
+    };
+    draw(msg,!!msg);
+  }); }
+
+async function sxLoadProfile(db){
+  const u=await db.auth.getUser(); const uid=u&&u.data&&u.data.user&&u.data.user.id;
+  if(!uid) return false;
+  const r=await db.from("profiles").select("id,display_name,email,lvl,approved").eq("id",uid).maybeSingle();
+  if(r.error||!r.data) return false;
+  if(!r.data.approved) return "pending";
+  SX.user=r.data; SX.lvl=+r.data.lvl||4; SX.offline=false;
+  try{ db.rpc("sx_touch"); }catch(e){}
+  return true; }
+
+/* ประตูหน้าสุด — บูตต่อเมื่อผ่านแล้วเท่านั้น */
+async function sxGate(){
+  let db;
+  try{ db=await getDB(); }
+  catch(e){ SX.offline=true; SX.lvl=0;
+    await sxLoginUI({rpc:()=>({error:new Error("ออฟไลน์")}),auth:{signInWithPassword:()=>({error:new Error("ต่อคลาวด์ไม่ได้ — ตรวจอินเทอร์เน็ต")}),signOut:()=>{}}},
+      "ต่อคลาวด์ไม่ได้ — เข้าได้เฉพาะโหมดออฟไลน์");
+    return; }
+  const s=await db.auth.getSession();
+  if(s&&s.data&&s.data.session){ const st=await sxLoadProfile(db); if(st===true){ sxWatch(db); return; }
+    await db.auth.signOut(); }
+  const ok=await sxLoginUI(db);
+  if(ok) sxWatch(db); }
+
+/* เตะออกแล้วต้องหลุดจริงภายในครึ่งนาที ไม่ใช่รอปิดโปรแกรม */
+let _sxTimer=null;
+function sxWatch(db){
+  if(_sxTimer) clearInterval(_sxTimer);
+  _sxTimer=setInterval(async()=>{
+    try{
+      const st=await sxLoadProfile(db);
+      if(st===true) return;
+      clearInterval(_sxTimer); _sxTimer=null; SX.lvl=0; SX.user=null;
+      try{ await db.auth.signOut(); }catch(e){}
+      sxBadge();
+      await sxLoginUI(db, st==="pending"?"สิทธิ์ถูกพักไว้ — ติดต่อผู้ดูแล":"ถูกนำออกจากระบบแล้ว");
+      sxBadge(); sxWatch(db);
+    }catch(e){}
+  },30000); }
+
+/* ---------- ป้ายผู้ใช้บนหัวโปรแกรม ---------- */
+function sxBadge(){
+  const host=document.querySelector(".appname"); if(!host) return;
+  let el=document.getElementById("sxWho");
+  if(!el){ el=document.createElement("span"); el.id="sxWho"; host.appendChild(el); }
+  const L=SX_LVL[SX.lvl];
+  el.style.cssText="margin-left:9px;padding:2px 9px;border-radius:999px;font-size:11px;cursor:pointer;"+
+    "background:"+(SX.lvl===1?"rgba(232,144,31,.18)":SX.lvl?"rgba(31,56,100,.12)":"rgba(255,59,48,.12)")+
+    ";color:"+(SX.lvl===1?"#8a5a11":SX.lvl?"#1F3864":"#a3241c");
+  el.textContent=SX.lvl?("👤 "+(SX.user.display_name||"")+" · "+L.n):"👤 ออฟไลน์";
+  el.title=SX.lvl?L.d:"ยังไม่ได้เข้าสู่ระบบ — ใช้คลาวด์ไม่ได้";
+  el.onclick=sxMenu; }
+function sxMenu(){
+  sxOverlay('<div style="font:700 16px system-ui;margin-bottom:4px">'+sxEsc(SX.lvl?SX.user.display_name:"โหมดออฟไลน์")+'</div>'+
+    '<div style="font-size:12.5px;color:#5f5f66;margin-bottom:14px">'+sxEsc(SX.lvl?(SX.user.email+" · ระดับ "+SX.lvl+" "+SX_LVL[SX.lvl].n):"ยังไม่ได้เข้าสู่ระบบ")+'</div>'+
+    (sxCan("admin")?'<button id="sxAdm" style="'+SX_BTN+';margin-bottom:8px">จัดการผู้ใช้</button>':"")+
+    (SX.lvl?'<button id="sxOut" style="'+SX_BTN+';background:#fff;color:#a3241c;border:1px solid rgba(255,59,48,.35);margin-bottom:8px">ออกจากระบบ</button>':"")+
+    '<button id="sxBack" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f">ปิด</button>');
+  const q=id=>document.getElementById(id);
+  if(q("sxAdm")) q("sxAdm").onclick=sxAdminUI;
+  if(q("sxOut")) q("sxOut").onclick=async()=>{ const db=await getDB(); await db.auth.signOut();
+    SX.lvl=0; SX.user=null; sxBadge(); sxClose(); await sxLoginUI(db,"ออกจากระบบแล้ว"); sxBadge(); sxWatch(db); };
+  q("sxBack").onclick=sxClose; }
+
+/* ---------- หน้าจัดการผู้ใช้ (เฉพาะระดับ 1) ---------- */
+async function sxAdminUI(){
+  if(!sxCan("admin")){ toast("เฉพาะเจ้าของเท่านั้น"); return; }
+  const db=await getDB();
+  const draw=async(note)=>{
+    const r=await db.from("profiles").select("id,display_name,email,lvl,approved,last_seen,created_at").order("approved").order("created_at");
+    const rows=(r.data||[]).map(p=>{
+      const me=p.id===SX.user.id;
+      return '<tr data-id="'+p.id+'" style="border-top:1px solid rgba(0,0,0,.08)">'+
+        '<td style="padding:7px 6px"><div style="font-weight:600">'+sxEsc(p.display_name)+(me?' <span style="font-size:10px;color:#E8901F">(คุณ)</span>':"")+'</div>'+
+        '<div style="font-size:11px;color:#8a8a90">'+sxEsc(p.email||"")+'</div></td>'+
+        '<td style="padding:7px 6px"><select class="sxL" '+(me?"disabled":"")+' style="padding:5px;border-radius:7px;border:1px solid rgba(0,0,0,.16);font:12px system-ui">'+
+          [1,2,3,4].map(n=>'<option value="'+n+'"'+(+p.lvl===n?" selected":"")+'>'+n+" · "+SX_LVL[n].n+'</option>').join("")+'</select></td>'+
+        '<td style="padding:7px 6px;text-align:right;white-space:nowrap">'+
+          (me?'<span style="font-size:11px;color:#8a8a90">เจ้าของ</span>'
+             :'<button class="sxApp" style="padding:5px 9px;border:0;border-radius:7px;cursor:pointer;font:600 11.5px system-ui;'+
+              (p.approved?'background:rgba(40,200,64,.16);color:#1c7a2c">อนุมัติแล้ว':'background:rgba(232,144,31,.20);color:#8a5a11">รออนุมัติ')+'</button>'+
+              '<button class="sxDel" title="ลบบัญชีถาวร" style="margin-left:5px;padding:5px 8px;border:0;border-radius:7px;cursor:pointer;background:rgba(255,59,48,.12);color:#a3241c;font:600 11.5px system-ui">ลบ</button>')+
+        '</td></tr>'; }).join("");
+    sxOverlay('<div style="font:700 16px system-ui;margin-bottom:2px">จัดการผู้ใช้</div>'+
+      '<div style="font-size:12px;color:#5f5f66;margin-bottom:12px">กดปุ่มสถานะเพื่อสลับอนุมัติ/ระงับ · เปลี่ยนระดับแล้วมีผลทันที</div>'+
+      (note?'<div style="padding:8px 11px;border-radius:9px;font-size:12.5px;margin-bottom:10px;background:rgba(31,56,100,.10);color:#1F3864">'+sxEsc(note)+'</div>':"")+
+      '<div style="max-height:46vh;overflow:auto;margin-bottom:12px"><table style="width:100%;border-collapse:collapse;font-size:13px">'+(rows||'<tr><td style="padding:10px;color:#8a8a90">ยังไม่มีผู้ใช้อื่น</td></tr>')+'</table></div>'+
+      '<div style="font-size:11.5px;color:#8a8a90;line-height:1.55;margin-bottom:12px">'+
+      [1,2,3,4].map(n=>"<b>"+n+" "+SX_LVL[n].n+"</b> — "+SX_LVL[n].d).join("<br>")+'</div>'+
+      '<button id="sxBack" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f">ปิด</button>');
+    document.getElementById("sxBack").onclick=sxClose;
+    const wrap=document.getElementById("sxAuthWrap");
+    wrap.querySelectorAll("tr[data-id]").forEach(tr=>{
+      const id=tr.getAttribute("data-id");
+      const sel=tr.querySelector(".sxL"), app=tr.querySelector(".sxApp"), del=tr.querySelector(".sxDel");
+      if(sel) sel.onchange=async()=>{ const e=await db.from("profiles").update({lvl:+sel.value}).eq("id",id);
+        draw(e.error?sxErrTh(e.error):"เปลี่ยนระดับแล้ว"); };
+      if(app) app.onclick=async()=>{ const cur=/อนุมัติแล้ว/.test(app.textContent);
+        const e=await db.from("profiles").update({approved:!cur,approved_at:cur?null:new Date().toISOString(),approved_by:SX.user.id}).eq("id",id);
+        draw(e.error?sxErrTh(e.error):(cur?"ระงับสิทธิ์แล้ว — เขาจะหลุดออกภายใน 30 วินาที":"อนุมัติแล้ว")); };
+      if(del) del.onclick=async()=>{ if(!confirm("ลบบัญชีนี้ถาวร?")) return;
+        const e=await db.rpc("sx_delete_user",{p_id:id});
+        draw(e.error?sxErrTh(e.error):(e.data==="OK"?"ลบบัญชีแล้ว":e.data)); };
+    });
+  };
+  draw(); }
+
 function boot(){ console.log("%c"+appVerStr(),"font-weight:700;color:#007aff");
   /* v9.89: เลขเวอร์ชันบนหน้าโหลดอ่านจาก APP_META ที่เดียว ไม่ต้องไปแก้สองที่ */
   try{ document.querySelectorAll(".ver").forEach(e=>{ e.textContent="v"+APP_META.version; }); }catch(e){}
   try{ const _vb=$("appVerBadge"); if(_vb){ _vb.textContent="v"+APP_META.version; _vb.onclick=showAppVersion; } }catch(e){}
   (async function(){
+  try{ await sxGate(); sxBadge(); }catch(e){ console.error("auth:",e); }   // v34.0: ผ่านประตูก่อน ค่อยบูต
   try{ state.eco = await lsGet("boardforge:eco", true); }catch(e){}
   initScene(); buildGTones(); bindChrome();
   library=await lsGet("boardforge:lib",[]);
@@ -26754,6 +27124,7 @@ const CurvedShelf = (function(){
   <div class="ctx-sep"></div>
   <button data-act="cabrot"><span>↻ หมุนตู้ 90° (ทวนกลับด้วย Shift)</span></button>
   <button data-act="cabmirror"><span>⇋ กลับตู้ซ้าย ⇄ ขวา (Mirror ทั้งใบ)</span></button>
+  <button data-act="ordmirror"><span>⇔ กลับด้านทั้งออเดอร์ (ตู้สลับที่ด้วย)</span></button>
   <button data-act="cabvars"><span>𝑥 Variables (ตู้นี้)…</span></button>
   <div class="ctx-sep"></div>
   <div class="ctx-h" data-view>มุมมอง</div>
