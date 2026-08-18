@@ -1646,9 +1646,11 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"34.2", build:"2026-08-18/admin-fullscreen",
+  name:"StarNexus Cabinet", version:"34.4", build:"2026-08-18/employee-id",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["34.4","2026-08-18","เข้าระบบด้วยรหัสพนักงาน ไม่ต้องใช้อีเมลอีกแล้ว — ช่างส่วนใหญ่ไม่มีอีเมลบริษัท ที่ผ่านมาต้องกรอกอีเมลปลอมซึ่งจำไม่ได้อยู่ดี · Supabase Auth บังคับให้มีอีเมลเสมอ จึงแปลงเป็นอีเมลภายในตายตัว <รหัสพนักงาน>@staff.local อยู่หลังบ้าน ผู้ใช้ไม่เคยเห็น · รหัสพนักงานห้ามซ้ำ ไม่สนตัวพิมพ์เล็กใหญ่ (EMP001 กับ emp001 คือคนเดียวกัน) · หน้าสมัครบังคับกรอกชื่อ-สกุลและพิมพ์รหัสผ่านซ้ำสองครั้ง เพราะไม่มีอีเมลให้กู้คืน พิมพ์ผิดตั้งแต่แรกจะเข้าไม่ได้เลยแล้วผู้ดูแลก็ไม่รู้ว่าคนที่ขอมาคือใคร · บัญชีเจ้าของย้ายมาระบบเดียวกันแล้ว เข้าด้วยรหัสพนักงาน admin รหัสผ่านเดิม · FEAT แจ้งเตือนคำขอเข้าใช้งาน — เจ้าของเห็นป้ายส้ม รออนุมัติ n บนหัวโปรแกรม กดแล้วเข้าหน้าจัดการผู้ใช้ทันที พร้อมเด้งข้อความตอนเข้าโปรแกรมและตอนมีคำขอใหม่เข้ามาระหว่างทำงาน (เช็คทุก 30 วินาทีรอบเดียวกับตัวเช็คสิทธิ์) · หน้าจัดการผู้ใช้เปลี่ยนคอลัมน์อีเมลเป็นรหัสพนักงาน และค้นด้วยรหัสพนักงานได้"],
+    ["34.3","2026-08-18","FEAT ปุ่ม รีเซ็ตรหัส ในหน้าจัดการผู้ใช้ — ลูกน้องลืมรหัสแล้วเดิมทำอะไรไม่ได้เลย เจ้าของก็ดูรหัสเดิมไม่ได้เพราะ bcrypt เป็นทางเดียว ทางเดียวที่เหลือคือลบบัญชีทิ้งแล้วให้สมัครใหม่ ซึ่งเสียประวัติทั้งหมด · ตอนนี้ตั้งรหัสใหม่ทับได้เลย สุ่มให้เป็นค่าตั้งต้น (ตัดอักษรที่อ่านสับสน 0 O o l 1 I ออก จะได้บอกทางโทรศัพท์ไม่ผิด) แก้เป็นรหัสที่ต้องการเองก็ได้ ตั้งเสร็จโชว์ครั้งเดียวพร้อมปุ่มคัดลอก · ตั้งใหม่แล้วลบ session เดิมของคนนั้นทิ้งด้วย ไม่งั้น token ที่ค้างอยู่บนเครื่องเก่ายังใช้ได้ทั้งที่รหัสเปลี่ยนไปแล้ว ซึ่งคือกรณีที่ต้องรีเซ็ตรหัสตั้งแต่แรก · บังคับสิทธิ์ในฟังก์ชันฝั่งเซิร์ฟเวอร์ (sx_reset_pw) เช็คว่าคนเรียกเป็นระดับ 1 จริง · FIX ตารางจัดการผู้ใช้จัดความกว้างคอลัมน์ใหม่ รับสองปุ่มท้ายแถวโดยไม่ตกบรรทัด"],
     ["34.2","2026-08-18","หน้าจัดการผู้ใช้เต็มจอ — เดิมยัดอยู่ในการ์ดกว้าง 420 ตารางถูกหนีบไว้ที่ 46vh ชื่อกับอีเมลกับเวลาใช้งานล่าสุดเลยต้องซ้อนกันสามบรรทัดในช่องเดียว อ่านยากตั้งแต่มีผู้ใช้ไม่กี่คน · ตอนนี้แยกเป็นคอลัมน์จริง (ชื่อ · อีเมล · ระดับ · สถานะ · ใช้งานล่าสุด · ลบ) หัวตารางค้างไว้ตอนเลื่อน ตารางยืดเต็มความสูงจอ ไม่เหลือที่ว่างข้างล่างเปล่า ๆ · เพิ่มช่องค้นชื่อ/อีเมล และตัวนับ รออนุมัติ ไว้บนหัว จะได้เห็นทันทีว่ามีคนรออยู่กี่คนโดยไม่ต้องไล่หา · sxOverlay รับโหมดเต็มจอ กล่องล็อกอิน/เปลี่ยนรหัสยังเป็นการ์ดเล็กเหมือนเดิม"],
     ["34.1","2026-08-18","FIX เวลาเข้าใช้ล่าสุดว่างตลอด ทั้งที่เป็นข้อมูลที่อยากได้ที่สุด — ตัวสร้างคำขอของ supabase-js เป็น thenable มันจะยิงจริงตอนถูก await หรือ .then เท่านั้น v34.0 เขียน db.rpc(\"sx_touch\") ทิ้งไว้เฉย ๆ คำขอจึงไม่เคยออกจากเครื่องเลยสักครั้ง ไม่มี error ให้เห็นด้วย · FEAT เพิ่มปุ่มเปลี่ยนรหัสผ่านในเมนูผู้ใช้ — v34.0 บอกให้รีบเปลี่ยนรหัสตั้งต้นแต่ไม่ได้ทำที่ให้เปลี่ยน · หน้าจัดการผู้ใช้โชว์ ใช้งานล่าสุด ต่อคน (ดึงค่ามาแล้วแต่ไม่เคยแสดง)"],
     ["34.0","2026-08-18","FEAT ระบบผู้ใช้ 4 ระดับ + ปิดรูรั่วคลาวด์ที่เปิดโล่งมาตลอด — เดิมทุกตารางเปิด policy ALL/true ให้ anon และ anon key ฝังอยู่ในไฟล์ HTML ตรง ๆ ใครถือไฟล์จึงลบตู้ทั้ง 245 ใบได้โดยไม่ต้องเปิดโปรแกรมด้วยซ้ำ ยิง REST ตรงก็ได้ และไม่มีทางรู้เลยว่าใครเข้ามาทำอะไร · ตอนนี้ต้องล็อกอินก่อนถึงบูต ใช้ Supabase Auth และสิทธิ์บังคับจริงด้วย RLS ฝั่งเซิร์ฟเวอร์ ไม่ใช่ซ่อนปุ่มในหน้าจอ (กด F12 ก็ไม่ผ่าน) · ระดับ 1 เจ้าของ ทำได้ทุกอย่าง + จัดการผู้ใช้ · 2 รอง เพิ่ม/แก้/ลบได้ทั้งหมด แต่จัดการผู้ใช้ไม่ได้ · 3 เพิ่มได้ แก้ได้เฉพาะของที่ตัวเองเพิ่ม ลบไม่ได้ · 4 ดูอย่างเดียว · สมัครเองได้แต่เข้าไม่ได้จนเจ้าของกดอนุมัติและตั้งระดับให้ · เตะออกแล้วหลุดจริงภายใน 30 วินาที ไม่ใช่รอปิดโปรแกรม · การ์ดสิทธิ์ดักที่ตัวไคลเอนต์จุดเดียว (sxGuardDB) แทนการไล่ใส่ทีละปุ่ม 20 จุดแล้วลืมจุดใดจุดหนึ่ง · ต่อคลาวด์ไม่ได้ = เข้าโหมดออฟไลน์ได้ แต่แตะคลาวด์ไม่ได้เลย · ตาราง fitting_global ยังเปิดอ่านแบบเดิม เพราะ Production V2 ใช้ร่วมอยู่"],
@@ -25040,6 +25042,12 @@ function sxErrTh(e){ const s=String((e&&(e.message||e.code))||e||"");
   if(/JWT|token is expired|not authenticated/i.test(s)) return "หมดเวลาเข้าใช้งาน กรุณาล็อกอินใหม่";
   return s; }
 
+/* Supabase Auth บังคับให้มีอีเมลเสมอ จึงแปลงรหัสพนักงานเป็นอีเมลภายในแบบตายตัว
+   ผู้ใช้ไม่เคยเห็นอีเมลนี้ กรอกแค่รหัสพนักงานอย่างเดียว */
+function sxEmpMail(v){ v=String(v||"").trim().toLowerCase();
+  return v.includes("@")?v:(v+"@staff.local"); }
+function sxEmpOf(u){ return (u&&(u.emp_id||String(u.email||"").split("@")[0]))||""; }
+
 /* ---------- หน้าจอเข้าสู่ระบบ ---------- */
 function sxOverlay(inner,full){
   let el=document.getElementById("sxAuthWrap");
@@ -25077,15 +25085,16 @@ function sxLoginUI(db,msg){
         (note?'<div style="padding:9px 11px;border-radius:9px;font-size:12.5px;margin-bottom:10px;background:'+
           (noteBad?"rgba(255,59,48,.10);color:#a3241c":"rgba(31,56,100,.10);color:#1F3864")+'">'+sxEsc(note)+'</div>':"")+
         (mode==="in"
-          ? '<label style="font-size:12px;color:#5f5f66">อีเมล</label><input id="sxEm" type="email" autocomplete="username" style="'+SX_INP+'">'+
+          ? '<label style="font-size:12px;color:#5f5f66">รหัสพนักงาน</label><input id="sxEm" autocomplete="username" placeholder="เช่น 1042" style="'+SX_INP+'">'+
             '<label style="font-size:12px;color:#5f5f66">รหัสผ่าน</label><input id="sxPw" type="password" autocomplete="current-password" style="'+SX_INP+'">'+
             '<button id="sxGo" style="'+SX_BTN+'">เข้าสู่ระบบ</button>'
-          : '<label style="font-size:12px;color:#5f5f66">ชื่อที่ให้คนอื่นเห็น</label><input id="sxNm" style="'+SX_INP+'">'+
-            '<label style="font-size:12px;color:#5f5f66">อีเมล (ใช้อีเมลภายในก็ได้)</label><input id="sxEm" type="email" style="'+SX_INP+'">'+
-            '<label style="font-size:12px;color:#5f5f66">รหัสผ่าน (อย่างน้อย 6 ตัว)</label><input id="sxPw" type="password" style="'+SX_INP+'">'+
+          : '<label style="font-size:12px;color:#5f5f66">ชื่อ-สกุล (ให้ผู้ดูแลรู้ว่าเป็นใคร)</label><input id="sxNm" style="'+SX_INP+'">'+
+            '<label style="font-size:12px;color:#5f5f66">รหัสพนักงาน (ใช้เป็นชื่อเข้าระบบ)</label><input id="sxEm" placeholder="เช่น 1042" style="'+SX_INP+'">'+
+            '<label style="font-size:12px;color:#5f5f66">ตั้งรหัสผ่าน (อย่างน้อย 6 ตัว)</label><input id="sxPw" type="password" style="'+SX_INP+'">'+
+            '<label style="font-size:12px;color:#5f5f66">พิมพ์รหัสผ่านซ้ำ</label><input id="sxPw2" type="password" style="'+SX_INP+'">'+
             '<button id="sxGo" style="'+SX_BTN+'">ขออนุมัติเข้าใช้งาน</button>'+
-            '<div style="font-size:11.5px;color:#8a8a90;margin-top:9px;line-height:1.5">สมัครแล้วยังเข้าใช้ไม่ได้ทันที '+
-            'ต้องรอผู้ดูแลอนุมัติและกำหนดระดับสิทธิ์ให้ก่อน</div>')+
+            '<div style="font-size:11.5px;color:#8a8a90;margin-top:9px;line-height:1.5">ตั้งรหัสที่จำได้แต่ไม่ซ้ำกับรหัสเข้าเครื่อง '+
+            'ลืมแล้วขอให้ผู้ดูแลตั้งใหม่ให้ได้ · สมัครแล้วยังเข้าใช้ไม่ได้ทันที ต้องรอผู้ดูแลอนุมัติและกำหนดระดับสิทธิ์ก่อน</div>')+
         '<div id="sxOff" style="text-align:center;margin-top:14px"><button style="border:0;background:none;'+
         'font-size:11.5px;color:#8a8a90;cursor:pointer;text-decoration:underline dotted">ใช้แบบออฟไลน์ (เปิดคลาวด์ไม่ได้)</button></div>');
 
@@ -25094,18 +25103,21 @@ function sxLoginUI(db,msg){
       el.querySelector("#sxOff").firstChild.onclick=()=>{ SX.offline=true; SX.lvl=0; sxClose(); resolve(false); };
       const submit=async()=>{
         const E=(em.value||"").trim().toLowerCase(), P=pw.value||"";
-        if(!E||!P){ draw("กรอกอีเมลกับรหัสผ่านให้ครบ",true); return; }
+        if(!E||!P){ draw("กรอกรหัสพนักงานกับรหัสผ่านให้ครบ",true); return; }
         go.disabled=true; go.textContent="กำลังทำงาน…";
         try{
           if(mode==="up"){
             const nm=(el.querySelector("#sxNm").value||"").trim();
-            const r=await db.rpc("sx_signup",{p_email:E,p_pw:P,p_name:nm});
+            const P2=(el.querySelector("#sxPw2").value||"");
+            if(!nm){ draw("กรอกชื่อ-สกุลด้วย ผู้ดูแลจะได้รู้ว่าใครขอเข้าใช้",true); return; }
+            if(P!==P2){ draw("รหัสผ่านสองช่องไม่ตรงกัน",true); return; }
+            const r=await db.rpc("sx_signup_emp",{p_emp:E,p_pw:P,p_name:nm});
             if(r.error) throw r.error;
             if(r.data!=="OK"){ draw(r.data,true); return; }
-            mode="in"; draw("สมัครเรียบร้อย — รอผู้ดูแลอนุมัติ แล้วค่อยเข้าสู่ระบบ"); return;
+            mode="in"; draw("ส่งคำขอแล้ว — รอผู้ดูแลอนุมัติ แล้วค่อยเข้าสู่ระบบด้วยรหัสพนักงาน "+E); return;
           }
-          const r=await db.auth.signInWithPassword({email:E,password:P});
-          if(r.error){ draw(/Invalid login/i.test(r.error.message)?"อีเมลหรือรหัสผ่านไม่ถูกต้อง":sxErrTh(r.error),true); return; }
+          const r=await db.auth.signInWithPassword({email:sxEmpMail(E),password:P});
+          if(r.error){ draw(/Invalid login/i.test(r.error.message)?"รหัสพนักงานหรือรหัสผ่านไม่ถูกต้อง":sxErrTh(r.error),true); return; }
           const st=await sxLoadProfile(db);
           if(st===true){ sxClose(); resolve(true); return; }
           await db.auth.signOut();
@@ -25123,7 +25135,7 @@ function sxLoginUI(db,msg){
 async function sxLoadProfile(db){
   const u=await db.auth.getUser(); const uid=u&&u.data&&u.data.user&&u.data.user.id;
   if(!uid) return false;
-  const r=await db.from("profiles").select("id,display_name,email,lvl,approved").eq("id",uid).maybeSingle();
+  const r=await db.from("profiles").select("id,display_name,email,emp_id,lvl,approved").eq("id",uid).maybeSingle();
   if(r.error||!r.data) return false;
   if(!r.data.approved) return "pending";
   SX.user=r.data; SX.lvl=+r.data.lvl||4; SX.offline=false;
@@ -25141,10 +25153,10 @@ async function sxGate(){
       "ต่อคลาวด์ไม่ได้ — เข้าได้เฉพาะโหมดออฟไลน์");
     return; }
   const s=await db.auth.getSession();
-  if(s&&s.data&&s.data.session){ const st=await sxLoadProfile(db); if(st===true){ sxWatch(db); return; }
+  if(s&&s.data&&s.data.session){ const st=await sxLoadProfile(db); if(st===true){ sxWatch(db); sxPendCheck(db,true); return; }
     await db.auth.signOut(); }
   const ok=await sxLoginUI(db);
-  if(ok) sxWatch(db); }
+  if(ok){ sxWatch(db); sxPendCheck(db,true); } }
 
 /* เตะออกแล้วต้องหลุดจริงภายในครึ่งนาที ไม่ใช่รอปิดโปรแกรม */
 let _sxTimer=null;
@@ -25153,7 +25165,7 @@ function sxWatch(db){
   _sxTimer=setInterval(async()=>{
     try{
       const st=await sxLoadProfile(db);
-      if(st===true) return;
+      if(st===true){ sxPendCheck(db,false); return; }
       clearInterval(_sxTimer); _sxTimer=null; SX.lvl=0; SX.user=null;
       try{ await db.auth.signOut(); }catch(e){}
       sxBadge();
@@ -25172,11 +25184,31 @@ function sxBadge(){
     "background:"+(SX.lvl===1?"rgba(232,144,31,.18)":SX.lvl?"rgba(31,56,100,.12)":"rgba(255,59,48,.12)")+
     ";color:"+(SX.lvl===1?"#8a5a11":SX.lvl?"#1F3864":"#a3241c");
   el.textContent=SX.lvl?("👤 "+(SX.user.display_name||"")+" · "+L.n):"👤 ออฟไลน์";
-  el.title=SX.lvl?L.d:"ยังไม่ได้เข้าสู่ระบบ — ใช้คลาวด์ไม่ได้";
-  el.onclick=sxMenu; }
+  el.title=SX.lvl?(sxEmpOf(SX.user)+" · "+L.d):"ยังไม่ได้เข้าสู่ระบบ — ใช้คลาวด์ไม่ได้";
+  el.onclick=sxMenu;
+  /* v34.4: เจ้าของต้องเห็นทันทีว่ามีคนขอเข้าใช้รออยู่ ไม่ใช่ต้องนึกได้เองแล้วเข้าไปเปิดดู */
+  let dot=document.getElementById("sxPend");
+  if(SX.pending>0&&sxCan("admin")){
+    if(!dot){ dot=document.createElement("span"); dot.id="sxPend"; host.appendChild(dot); }
+    dot.style.cssText="margin-left:6px;padding:2px 8px;border-radius:999px;font:700 11px system-ui;cursor:pointer;"+
+      "background:#E8901F;color:#fff";
+    dot.textContent="รออนุมัติ "+SX.pending;
+    dot.title="มีคนขอเข้าใช้งาน "+SX.pending+" คน — กดเพื่อเปิดหน้าจัดการผู้ใช้";
+    dot.onclick=sxAdminUI;
+  } else if(dot) dot.remove(); }
+
+/* นับคำขอที่รออนุมัติ — เฉพาะระดับ 1 ที่อ่านแถวคนอื่นได้ */
+async function sxPendCheck(db,announce){
+  if(!sxCan("admin")) return;
+  try{
+    const r=await db.from("profiles").select("id",{count:"exact",head:true}).eq("approved",false);
+    const n=r.count||0, was=SX.pending||0;
+    SX.pending=n; sxBadge();
+    if(n>0&&(announce||n>was)) toast("🔔 มีคนขอเข้าใช้งานรออนุมัติ "+n+" คน — กดป้ายส้มบนหัวโปรแกรมเพื่อดู");
+  }catch(e){} }
 function sxMenu(){
   sxOverlay('<div style="font:700 16px system-ui;margin-bottom:4px">'+sxEsc(SX.lvl?SX.user.display_name:"โหมดออฟไลน์")+'</div>'+
-    '<div style="font-size:12.5px;color:#5f5f66;margin-bottom:14px">'+sxEsc(SX.lvl?(SX.user.email+" · ระดับ "+SX.lvl+" "+SX_LVL[SX.lvl].n):"ยังไม่ได้เข้าสู่ระบบ")+'</div>'+
+    '<div style="font-size:12.5px;color:#5f5f66;margin-bottom:14px">'+sxEsc(SX.lvl?("รหัสพนักงาน "+sxEmpOf(SX.user)+" · ระดับ "+SX.lvl+" "+SX_LVL[SX.lvl].n):"ยังไม่ได้เข้าสู่ระบบ")+'</div>'+
     (sxCan("admin")?'<button id="sxAdm" style="'+SX_BTN+';margin-bottom:8px">จัดการผู้ใช้</button>':"")+
     (SX.lvl?'<button id="sxPwd" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f;margin-bottom:8px">เปลี่ยนรหัสผ่าน</button>':"")+
     (SX.lvl?'<button id="sxOut" style="'+SX_BTN+';background:#fff;color:#a3241c;border:1px solid rgba(255,59,48,.35);margin-bottom:8px">ออกจากระบบ</button>':"")+
@@ -25214,6 +25246,49 @@ function sxPwdUI(note,bad){
   [q("sxP1"),q("sxP2")].forEach(i=>i.onkeydown=e=>{ if(e.key==="Enter") go(); });
   setTimeout(()=>{ try{ q("sxP1").focus(); }catch(e){} },30); }
 
+/* ---------- เจ้าของตั้งรหัสใหม่ให้ผู้ใช้คนอื่น ----------
+   ดูรหัสเดิมไม่ได้ (bcrypt เป็นทางเดียว) ทำได้แค่ทับด้วยรหัสใหม่
+   สุ่มให้เป็นค่าตั้งต้นแทนที่จะให้พิมพ์เอง เพราะรหัสที่คนตั้งเองมักเดาง่ายกว่าที่คิด
+   ตัดอักษรที่อ่านสับสน (0 O o l 1 I) ออก จะได้บอกกันทางโทรศัพท์ไม่ผิด */
+function sxGenPw(n){ const c="abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  try{ const a=new Uint32Array(n||10); crypto.getRandomValues(a);
+    return Array.from(a).map(v=>c[v%c.length]).join(""); }
+  catch(e){ let o=""; for(let i=0;i<(n||10);i++) o+=c[Math.floor(Math.random()*c.length)]; return o; } }
+function sxResetPwUI(id,name,pw,note,bad,done){
+  pw=pw||sxGenPw(10);
+  sxOverlay('<div style="font:700 16px system-ui;margin-bottom:2px">ตั้งรหัสผ่านใหม่</div>'+
+    '<div style="font-size:12.5px;color:#5f5f66;margin-bottom:14px">ให้บัญชี <b>'+sxEsc(name)+'</b></div>'+
+    (note?'<div style="padding:9px 11px;border-radius:9px;font-size:12.5px;margin-bottom:12px;background:'+
+      (bad?"rgba(255,59,48,.10);color:#a3241c":"rgba(40,200,64,.14);color:#1c7a2c")+'">'+sxEsc(note)+'</div>':"")+
+    (done
+      ? '<div style="font-size:12px;color:#5f5f66;margin-bottom:4px">รหัสใหม่ — คัดลอกส่งให้เจ้าตัว (หน้านี้ปิดแล้วดูซ้ำไม่ได้)</div>'+
+        '<div id="sxPwOut" style="padding:13px;border-radius:10px;background:#f6f7fa;border:1px dashed rgba(0,0,0,.2);'+
+        'font:700 19px ui-monospace,Menlo,Consolas,monospace;text-align:center;letter-spacing:1px;user-select:all">'+sxEsc(pw)+'</div>'+
+        '<button id="sxCopy" style="'+SX_BTN+';margin-top:12px">คัดลอกรหัส</button>'+
+        '<button id="sxBack" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f;margin-top:8px">เสร็จแล้ว</button>'
+      : '<label style="font-size:12px;color:#5f5f66">รหัสผ่านใหม่ (แก้เองได้ · อย่างน้อย 6 ตัว)</label>'+
+        '<input id="sxNP" value="'+sxEsc(pw)+'" style="'+SX_INP+';font:600 15px ui-monospace,Menlo,Consolas,monospace">'+
+        '<button id="sxGen" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f;margin-bottom:8px">สุ่มใหม่</button>'+
+        '<button id="sxGo" style="'+SX_BTN+'">ตั้งรหัสนี้</button>'+
+        '<button id="sxBack" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f;margin-top:8px">ยกเลิก</button>'+
+        '<div style="font-size:11.5px;color:#8a8a90;margin-top:10px;line-height:1.5">ตั้งแล้วเครื่องที่ค้างล็อกอินไว้ของคนนี้จะหลุดทันที ต้องเข้าใหม่ด้วยรหัสนี้</div>'));
+  const q=i=>document.getElementById(i);
+  q("sxBack").onclick=()=>sxAdminUI();
+  if(done){ q("sxCopy").onclick=()=>{ try{ navigator.clipboard.writeText(pw); toast("คัดลอกรหัสแล้ว"); }
+      catch(e){ const r=document.createRange(); r.selectNode(q("sxPwOut"));
+        getSelection().removeAllRanges(); getSelection().addRange(r); } }; return; }
+  q("sxGen").onclick=()=>sxResetPwUI(id,name,sxGenPw(10));
+  q("sxGo").onclick=async()=>{
+    const v=(q("sxNP").value||"").trim();
+    if(v.length<6){ sxResetPwUI(id,name,v,"รหัสผ่านสั้นเกินไป",true); return; }
+    q("sxGo").disabled=true; q("sxGo").textContent="กำลังตั้ง…";
+    try{ const db=await getDB(); const r=await db.rpc("sx_reset_pw",{p_id:id,p_pw:v});
+      if(r.error) throw r.error;
+      if(r.data!=="OK"){ sxResetPwUI(id,name,v,r.data,true); return; }
+      sxResetPwUI(id,name,v,"ตั้งรหัสใหม่แล้ว · เครื่องที่ค้างล็อกอินของคนนี้หลุดทั้งหมด",false,true);
+    }catch(e){ sxResetPwUI(id,name,v,sxErrTh(e),true); } };
+  setTimeout(()=>{ try{ q("sxNP").focus(); q("sxNP").select(); }catch(e){} },30); }
+
 /* ---------- หน้าจัดการผู้ใช้ (เฉพาะระดับ 1) ---------- */
 function sxWhen(t){ if(!t) return "ยังไม่เคยเข้า";
   const d=new Date(t), m=(Date.now()-d.getTime())/60000;
@@ -25228,7 +25303,7 @@ async function sxAdminUI(){
   const TH=(t,w)=>'<th style="position:sticky;top:0;background:#f6f7fa;text-align:left;padding:9px 10px;'+
     'font:600 12px system-ui;color:#5f5f66;border-bottom:1px solid rgba(0,0,0,.12)'+(w?";width:"+w:"")+'">'+t+'</th>';
   const draw=async(note)=>{
-    const r=await db.from("profiles").select("id,display_name,email,lvl,approved,last_seen,created_at").order("approved").order("created_at");
+    const r=await db.from("profiles").select("id,display_name,email,emp_id,lvl,approved,last_seen,created_at").order("approved").order("created_at");
     const all=r.data||[];
     const k=kw.trim().toLowerCase();
     const list=k?all.filter(p=>((p.display_name||"")+" "+(p.email||"")).toLowerCase().includes(k)):all;
@@ -25238,7 +25313,7 @@ async function sxAdminUI(){
       return '<tr data-id="'+p.id+'" style="border-bottom:1px solid rgba(0,0,0,.07)">'+
         '<td style="padding:9px 10px"><div style="font-weight:600">'+sxEsc(p.display_name)+
           (me?' <span style="font-size:10px;color:#E8901F">(คุณ)</span>':"")+'</div></td>'+
-        '<td style="padding:9px 10px;color:#5f5f66">'+sxEsc(p.email||"")+'</td>'+
+        '<td style="padding:9px 10px;color:#5f5f66;font:600 13px ui-monospace,Menlo,Consolas,monospace">'+sxEsc(sxEmpOf(p))+'</td>'+
         '<td style="padding:9px 10px"><select class="sxL" '+(me?"disabled":"")+
           ' style="padding:6px 8px;border-radius:8px;border:1px solid rgba(0,0,0,.16);font:13px system-ui;background:#fbfbfd">'+
           [1,2,3,4].map(n=>'<option value="'+n+'"'+(+p.lvl===n?" selected":"")+'>'+n+" · "+SX_LVL[n].n+'</option>').join("")+
@@ -25249,8 +25324,10 @@ async function sxAdminUI(){
               (p.approved?'background:rgba(40,200,64,.16);color:#1c7a2c">อนุมัติแล้ว':'background:rgba(232,144,31,.22);color:#8a5a11">รออนุมัติ')+'</button>')+
         '</td>'+
         '<td style="padding:9px 10px;color:#8a8a90;font-size:12.5px">'+sxEsc(sxWhen(p.last_seen))+'</td>'+
-        '<td style="padding:9px 10px;text-align:right">'+
-          (me?"":'<button class="sxDel" title="ลบบัญชีถาวร" style="padding:6px 11px;border:0;border-radius:8px;cursor:pointer;'+
+        '<td style="padding:9px 10px;text-align:right;white-space:nowrap">'+
+          (me?"":'<button class="sxPw" title="ตั้งรหัสผ่านใหม่ให้คนนี้" style="padding:6px 11px;border:0;border-radius:8px;cursor:pointer;'+
+             'background:rgba(31,56,100,.10);color:#1F3864;font:600 12px system-ui">รีเซ็ตรหัส</button>'+
+             '<button class="sxDel" title="ลบบัญชีถาวร" style="margin-left:6px;padding:6px 11px;border:0;border-radius:8px;cursor:pointer;'+
              'background:rgba(255,59,48,.12);color:#a3241c;font:600 12px system-ui">ลบบัญชี</button>')+
         '</td></tr>'; }).join("");
 
@@ -25259,7 +25336,7 @@ async function sxAdminUI(){
         '<div style="font:700 19px system-ui">จัดการผู้ใช้</div>'+
         '<div style="font-size:12.5px;color:#5f5f66">ทั้งหมด '+all.length+' คน'+
           (nWait?' · <b style="color:#8a5a11">รออนุมัติ '+nWait+'</b>':"")+'</div>'+
-        '<input id="sxKw" placeholder="ค้นชื่อหรืออีเมล" value="'+sxEsc(kw)+'" style="margin-left:auto;width:230px;'+
+        '<input id="sxKw" placeholder="ค้นชื่อหรือรหัสพนักงาน" value="'+sxEsc(kw)+'" style="margin-left:auto;width:230px;'+
           'padding:8px 11px;border:1px solid rgba(0,0,0,.16);border-radius:9px;font:13px system-ui;background:#fbfbfd">'+
         '<button id="sxBack" style="padding:8px 16px;border:0;border-radius:9px;background:#eef0f5;'+
           'color:#1d1d1f;font:600 13px system-ui;cursor:pointer">ปิด</button></div>'+
@@ -25267,7 +25344,7 @@ async function sxAdminUI(){
       (note?'<div style="padding:9px 12px;border-radius:9px;font-size:13px;margin-bottom:10px;background:rgba(31,56,100,.10);color:#1F3864">'+sxEsc(note)+'</div>':"")+
       '<div style="flex:1;min-height:0;overflow:auto;border:1px solid rgba(0,0,0,.10);border-radius:11px">'+
         '<table style="width:100%;border-collapse:collapse;font-size:13.5px"><thead><tr>'+
-        TH("ชื่อ","22%")+TH("อีเมล","26%")+TH("ระดับสิทธิ์","20%")+TH("สถานะ","12%")+TH("ใช้งานล่าสุด","13%")+TH("","7%")+
+        TH("ชื่อ-สกุล","23%")+TH("รหัสพนักงาน","14%")+TH("ระดับสิทธิ์","19%")+TH("สถานะ","11%")+TH("ใช้งานล่าสุด","12%")+TH("","17%")+
         '</tr></thead><tbody>'+(rows||'<tr><td colspan="6" style="padding:22px;text-align:center;color:#8a8a90">'+
         (k?"ไม่พบผู้ใช้ที่ตรงกับคำค้น":"ยังไม่มีผู้ใช้อื่น")+'</td></tr>')+'</tbody></table></div>'+
       '<div style="font-size:12px;color:#8a8a90;line-height:1.7;margin-top:12px;display:flex;gap:22px;flex-wrap:wrap">'+
@@ -25283,7 +25360,8 @@ async function sxAdminUI(){
       if(kw){ kb.focus(); kb.setSelectionRange(kw.length,kw.length); } }
     wrap.querySelectorAll("tr[data-id]").forEach(tr=>{
       const id=tr.getAttribute("data-id");
-      const sel=tr.querySelector(".sxL"), app=tr.querySelector(".sxApp"), del=tr.querySelector(".sxDel");
+      const sel=tr.querySelector(".sxL"), app=tr.querySelector(".sxApp"), del=tr.querySelector(".sxDel"), rpw=tr.querySelector(".sxPw");
+      if(rpw) rpw.onclick=()=>sxResetPwUI(id, (tr.querySelector("td")||{}).textContent.trim());
       if(sel) sel.onchange=async()=>{ const e=await db.from("profiles").update({lvl:+sel.value}).eq("id",id);
         draw(e.error?sxErrTh(e.error):"เปลี่ยนระดับแล้ว"); };
       if(app) app.onclick=async()=>{ const cur=/อนุมัติแล้ว/.test(app.textContent);
