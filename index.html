@@ -1646,9 +1646,11 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"34.6", build:"2026-08-18/online-status",
+  name:"StarNexus Cabinet", version:"34.8", build:"2026-08-18/audit-log",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["34.8","2026-08-18","FEAT ประวัติการใช้งาน (เห็นได้เฉพาะระดับ 1) — สองมุมมองในหน้าเดียว การกระทำ (ใครบันทึก/ลบตู้ ส่งออเดอร์ เข้า-ออกเมื่อไหร่ ทำกับรายการไหน) และ เข้า-ออก (เข้ากี่โมง ออกกี่โมง ใช้ไปกี่นาที) กรองตามคน/ช่วงเวลา/คำค้นได้ · บันทึกผ่าน RPC ที่ประทับชื่อผู้ทำจากฝั่งเซิร์ฟเวอร์ ปลอมชื่อคนอื่นไม่ได้ และตาราง sx_log ไม่ให้สิทธิ์เขียนตรงกับใครเลย · ดักที่ sxGuardDB จุดเดียวซึ่งห่อทุกคำสั่งเขียนคลาวด์อยู่แล้ว จึงครอบครบทุกปุ่มโดยไม่ต้องไล่แก้ 20 จุดแล้วลืมจุดใดจุดหนึ่ง · ตอนลบมีปัญหาว่า .delete() ไม่ได้รับพารามิเตอร์ รหัสอยู่ใน .eq() ที่ตามมาทีหลัง จึงดัก .eq เก็บค่าไว้ แล้วบันทึกตอนคำสั่งวิ่งจริงสำเร็จ ไม่ใช่ตอนเรียก ที่ล้มเหลวกลางทางจึงไม่ถูกนับว่าทำแล้ว · เก็บแค่ตัวระบุรายการ ไม่เก็บก้อนข้อมูลตู้ ไม่งั้นตารางบวมเป็นสิบเมกะภายในเดือนเดียว · ออกกี่โมงคิดจากชีพจรครั้งสุดท้าย (sx_touch ต่ออายุแถวเดิมทุก 30 วิ) แม่นกว่ารอปุ่มออกจากระบบที่คนส่วนใหญ่ไม่กด คลาดไม่เกิน 2 นาที · ลบเองทุกวันตี 3 เก็บย้อนหลัง 30 วัน พร้อมปุ่มลบก่อนวันที่ที่เลือก และลบทั้งหมด"],
+    ["34.7","2026-08-18","FIX ระดับ 4 กด ส่งเข้า Supabase ไม่ได้ ทั้งที่เป็นงานประจำวันของฝ่ายผลิต — v34.0 คุมสิทธิ์เป็นระดับล้วน ไม่ได้ดูว่าเขียนตารางไหน ระดับ 4 จึงถูกกันทุกการเขียนรวมถึงการส่งออเดอร์ ซึ่งคนละเรื่องกับการแก้คลังตู้ · แย่กว่านั้นคือตารางกลุ่มออเดอร์ (imos_orders · imos_mapping) เปิดให้ anon อยู่แล้วเพื่อให้ Production V2 ทำงานได้ การกันระดับ 4 จึงไม่ได้กันอะไรจริงสักนิด แค่ทำให้คนทำงานติดขัดเปล่า ๆ · ตอนนี้ดูเป็นรายตาราง ส่งออเดอร์ได้ทุกระดับ ส่วนการลบออเดอร์ยังเป็นระดับ 1-2 · app_settings ระดับ 4 แตะได้เฉพาะคีย์ iids: ที่เป็นส่วนหนึ่งของการส่งออก ค่าตั้งทั้งโปรแกรมกับกฎของ Production ยังคุมตามระดับเดิม · คลังตู้ furnitech_* และ xml_history ไม่เปลี่ยน"],
     ["34.6","2026-08-18","FEAT เห็นแล้วว่าใครออนไลน์อยู่ — คอลัมน์ ใช้งานล่าสุด เปลี่ยนเป็น สถานะออนไลน์ เขียว ● ออนไลน์ (มีสัญญาณชีพไม่เกิน 2 นาที) · เหลือง ● พร้อมเวลา (ไม่เกิน 15 นาที) · เทา ○ นานกว่านั้น · เดิมบอกแค่ 2 นาทีที่แล้ว ซึ่งแยกไม่ออกว่ายังเปิดค้างอยู่หรือปิดไปแล้ว · ตารางอัปเดตสถานะเองทุก 15 วินาทีโดยไม่วาดใหม่ทั้งใบ ไม่งั้นดรอปดาวน์ที่กำลังเลือกกับช่องค้นหาจะถูกรีเซ็ตทิ้ง · เกณฑ์เผื่อไว้ถึง 2 นาทีเพราะเบราว์เซอร์หน่วงตัวจับเวลาของแท็บที่ไม่ได้อยู่หน้าจอเหลือนาทีละครั้ง คนที่สลับไปทำอย่างอื่นจะได้ไม่ขึ้นว่าออฟไลน์ทั้งที่ยังเปิดโปรแกรมค้างอยู่ · กลับมาที่หน้าต่างโปรแกรมแล้วเคาะสัญญาณชีพทันที ไม่ต้องรอครบรอบ"],
     ["34.5","2026-08-18","FIX เปลี่ยนระดับ/กดอนุมัติแล้วขึ้น permission denied for table profiles ทำอะไรไม่ได้เลย — ตาราง profiles ถูกสร้างไว้ตั้งแต่ก่อนหน้านี้โดยไม่เคยให้สิทธิ์ UPDATE กับ authenticated policy sx_prof_edit จึงไม่เคยมีโอกาสได้ทำงาน เพราะโดนด่านสิทธิ์ระดับตาราง (GRANT) ตัดก่อน ซึ่งเป็นคนละชั้นกับ RLS และขึ้นข้อความคนละแบบ ทำให้หลงไปแก้ policy ผิดจุด · FIX ป้ายผู้ใช้ล้นไปทับแถบปุ่มบนหัวโปรแกรม — .tb-left ตั้ง min-width:0 ให้กล่องยอมหด แต่ข้างในเป็น nowrap เนื้อหาจึงล้นออกไปทับแทนที่จะถูกบีบ ที่ผ่านมาไม่เห็นเพราะข้างในมีแค่โลโก้กับเลขเวอร์ชัน พอเติมป้ายผู้ใช้กับป้ายรออนุมัติเข้าไปก็ทับทันที · ตอนนี้กล่องตัดส่วนเกินจริง ป้ายผู้ใช้ยาวสุด 190px แล้วต่อด้วย … ระดับสิทธิ์ย้ายไปอยู่ใน tooltip และป้ายรออนุมัติย่อเหลือ 🔔 n · FEAT เครื่องที่ยังไม่เคยมีใครล็อกอินสำเร็จ เปิดมาเจอแท็บสมัครใหม่เลย ไม่ใช่แท็บเข้าสู่ระบบเปล่า ๆ ที่ไม่บอกว่าต้องเอารหัสมาจากไหน · แปลข้อความ permission denied เป็นภาษาคน"],
     ["34.4","2026-08-18","เข้าระบบด้วยรหัสพนักงาน ไม่ต้องใช้อีเมลอีกแล้ว — ช่างส่วนใหญ่ไม่มีอีเมลบริษัท ที่ผ่านมาต้องกรอกอีเมลปลอมซึ่งจำไม่ได้อยู่ดี · Supabase Auth บังคับให้มีอีเมลเสมอ จึงแปลงเป็นอีเมลภายในตายตัว <รหัสพนักงาน>@staff.local อยู่หลังบ้าน ผู้ใช้ไม่เคยเห็น · รหัสพนักงานห้ามซ้ำ ไม่สนตัวพิมพ์เล็กใหญ่ (EMP001 กับ emp001 คือคนเดียวกัน) · หน้าสมัครบังคับกรอกชื่อ-สกุลและพิมพ์รหัสผ่านซ้ำสองครั้ง เพราะไม่มีอีเมลให้กู้คืน พิมพ์ผิดตั้งแต่แรกจะเข้าไม่ได้เลยแล้วผู้ดูแลก็ไม่รู้ว่าคนที่ขอมาคือใคร · บัญชีเจ้าของย้ายมาระบบเดียวกันแล้ว เข้าด้วยรหัสพนักงาน admin รหัสผ่านเดิม · FEAT แจ้งเตือนคำขอเข้าใช้งาน — เจ้าของเห็นป้ายส้ม รออนุมัติ n บนหัวโปรแกรม กดแล้วเข้าหน้าจัดการผู้ใช้ทันที พร้อมเด้งข้อความตอนเข้าโปรแกรมและตอนมีคำขอใหม่เข้ามาระหว่างทำงาน (เช็คทุก 30 วินาทีรอบเดียวกับตัวเช็คสิทธิ์) · หน้าจัดการผู้ใช้เปลี่ยนคอลัมน์อีเมลเป็นรหัสพนักงาน และค้นด้วยรหัสพนักงานได้"],
@@ -25017,7 +25019,7 @@ const SX_LVL=[null,
   {n:"เจ้าของ",     d:"ทำได้ทุกอย่าง + จัดการผู้ใช้"},
   {n:"รอง",         d:"เพิ่ม/แก้/ลบได้ทั้งหมด · จัดการผู้ใช้ไม่ได้"},
   {n:"เพิ่มข้อมูล", d:"เพิ่มได้ · แก้ได้เฉพาะของตัวเอง · ลบไม่ได้"},
-  {n:"ดูอย่างเดียว",d:"เปิดดูได้ · บันทึกขึ้นคลาวด์ไม่ได้"}];
+  {n:"ดูอย่างเดียว",d:"เปิดดู + ส่งออเดอร์เข้า Supabase ได้ · บันทึก/แก้คลังตู้ไม่ได้"}];
 function sxCan(act){ const L=SX.lvl; if(!L) return false;
   if(act==="add")  return L<=3;
   if(act==="edit") return L<=3;          // ระดับ 3 ปล่อยผ่านหน้าบ้าน แล้วให้ RLS ตัดของคนอื่นเอง
@@ -25028,6 +25030,19 @@ function sxDeny(act){
   const m={add:"เพิ่มข้อมูลขึ้นคลาวด์",edit:"แก้ไขข้อมูลบนคลาวด์",del:"ลบข้อมูลบนคลาวด์"}[act]||"ทำรายการนี้";
   try{ toast("ไม่มีสิทธิ์"+m+" — "+(SX.offline?"โหมดออฟไลน์":("ระดับ "+SX.lvl+" "+(SX_LVL[SX.lvl]||{}).n))); }catch(e){}
   return new Error("SX_DENIED"); }
+/* ───── v34.7: สิทธิ์ต้องดูเป็นรายตาราง ไม่ใช่ระดับล้วน ─────
+   "ส่งเข้า Supabase" คือส่งออเดอร์เข้าสายผลิต เป็นงานประจำวันของฝ่ายผลิตซึ่งเป็นระดับ 4
+   ไม่ใช่การแก้คลังตู้ · และตารางกลุ่มออเดอร์เปิดให้ anon อยู่แล้วเพื่อ Production V2
+   การกันระดับ 4 ตรงนี้จึงไม่ได้กันอะไรจริง แค่ทำให้คนทำงานติดขัดเปล่า ๆ */
+const SX_ORDER_TABLES=new Set(["imos_orders","imos_mapping"]);
+function sxCanTable(t,act,payload){
+  if(!SX.lvl) return false;
+  if(SX_ORDER_TABLES.has(t)) return (act==="del") ? SX.lvl<=2 : true;      // ส่งออเดอร์ได้ทุกระดับ · ลบยังเป็น 1-2
+  if(t==="app_settings" && act!=="del"){
+    const rows=Array.isArray(payload)?payload:[payload];
+    if(rows.length && rows.every(r=>r&&typeof r.key==="string"&&r.key.indexOf("iids:")===0)) return true;
+  }
+  return sxCan(act); }
 /* ดักที่ตัวไคลเอนต์จุดเดียว ดีกว่าไล่ใส่การ์ดทีละปุ่ม 20 จุดแล้วลืมจุดใดจุดหนึ่ง */
 function sxGuardDB(db){
   const _from=db.from.bind(db);
@@ -25035,7 +25050,20 @@ function sxGuardDB(db){
     if(!SX_TABLES.has(t)) return q;
     [["insert","add"],["upsert","add"],["update","edit"],["delete","del"]].forEach(([m,act])=>{
       if(typeof q[m]!=="function") return; const o=q[m].bind(q);
-      q[m]=(...a)=>{ if(!sxCan(act)) throw sxDeny(act); return o(...a); }; });
+      q[m]=(...a)=>{
+        if(!sxCanTable(t,act,a[0])) throw sxDeny(act);
+        const qb=o(...a);
+        /* v34.8: ต้องรู้ให้ได้ว่าลบอะไร แต่ .delete() ไม่ได้รับพารามิเตอร์ รหัสอยู่ใน .eq() ที่ตามมาทีหลัง
+           จึงดัก .eq ไว้เก็บค่า แล้วบันทึกตอนคำสั่งวิ่งจริงสำเร็จ ไม่ใช่ตอนเรียก
+           (ตัวสร้างคำขอเป็น thenable · ครอบ then เอาไว้ก็รู้ผลได้) */
+        try{
+          let target=sxTargetOf(a[0]);
+          if(typeof qb.eq==="function"){ const _eq=qb.eq.bind(qb);
+            qb.eq=(c,v)=>{ if(target==null) target=v; return _eq(c,v); }; }
+          const _then=qb.then.bind(qb);
+          qb.then=(ok,err)=>_then(r=>{ if(!(r&&r.error)) sxLog(act,t,target); return ok?ok(r):r; },err);
+        }catch(e){}
+        return qb; }; });
     return q; };
   return db; }
 function sxErrTh(e){ const s=String((e&&(e.message||e.code))||e||"");
@@ -25127,7 +25155,7 @@ function sxLoginUI(db,msg){
           const r=await db.auth.signInWithPassword({email:sxEmpMail(E),password:P});
           if(r.error){ draw(/Invalid login/i.test(r.error.message)?"รหัสพนักงานหรือรหัสผ่านไม่ถูกต้อง":sxErrTh(r.error),true); return; }
           const st=await sxLoadProfile(db);
-          if(st===true){ sxSeen(true); sxClose(); resolve(true); return; }
+          if(st===true){ sxSeen(true); sxLog("login"); sxClose(); resolve(true); return; }
           await db.auth.signOut();
           draw(st==="pending"?"บัญชีนี้ยังไม่ได้รับอนุมัติ — ติดต่อผู้ดูแล":"บัญชีนี้ถูกระงับสิทธิ์แล้ว",true);
         }catch(e){ draw(sxErrTh(e),true); }
@@ -25226,14 +25254,16 @@ async function sxPendCheck(db,announce){
 function sxMenu(){
   sxOverlay('<div style="font:700 16px system-ui;margin-bottom:4px">'+sxEsc(SX.lvl?SX.user.display_name:"โหมดออฟไลน์")+'</div>'+
     '<div style="font-size:12.5px;color:#5f5f66;margin-bottom:14px">'+sxEsc(SX.lvl?("รหัสพนักงาน "+sxEmpOf(SX.user)+" · ระดับ "+SX.lvl+" "+SX_LVL[SX.lvl].n):"ยังไม่ได้เข้าสู่ระบบ")+'</div>'+
-    (sxCan("admin")?'<button id="sxAdm" style="'+SX_BTN+';margin-bottom:8px">จัดการผู้ใช้</button>':"")+
+    (sxCan("admin")?'<button id="sxAdm" style="'+SX_BTN+';margin-bottom:8px">จัดการผู้ใช้</button>'+
+                    '<button id="sxLg" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f;margin-bottom:8px">ประวัติการใช้งาน</button>':"")+
     (SX.lvl?'<button id="sxPwd" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f;margin-bottom:8px">เปลี่ยนรหัสผ่าน</button>':"")+
     (SX.lvl?'<button id="sxOut" style="'+SX_BTN+';background:#fff;color:#a3241c;border:1px solid rgba(255,59,48,.35);margin-bottom:8px">ออกจากระบบ</button>':"")+
     '<button id="sxBack" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f">ปิด</button>');
   const q=id=>document.getElementById(id);
   if(q("sxAdm")) q("sxAdm").onclick=sxAdminUI;
+  if(q("sxLg"))  q("sxLg").onclick=sxLogUI;
   if(q("sxPwd")) q("sxPwd").onclick=sxPwdUI;
-  if(q("sxOut")) q("sxOut").onclick=async()=>{ const db=await getDB(); await db.auth.signOut();
+  if(q("sxOut")) q("sxOut").onclick=async()=>{ const db=await getDB(); sxLog("logout"); await db.auth.signOut();
     SX.lvl=0; SX.user=null; sxBadge(); sxClose(); await sxLoginUI(db,"ออกจากระบบแล้ว"); sxBadge(); sxWatch(db); };
   q("sxBack").onclick=sxClose; }
 
@@ -25262,6 +25292,105 @@ function sxPwdUI(note,bad){
   q("sxGo").onclick=go;
   [q("sxP1"),q("sxP2")].forEach(i=>i.onkeydown=e=>{ if(e.key==="Enter") go(); });
   setTimeout(()=>{ try{ q("sxP1").focus(); }catch(e){} },30); }
+
+/* ═══════ v34.8: ประวัติการใช้งาน ═══════
+   บันทึกผ่าน RPC ที่ประทับชื่อผู้ทำจากฝั่งเซิร์ฟเวอร์ ปลอมไม่ได้
+   ดักที่ sxGuardDB จุดเดียวซึ่งห่อทุกคำสั่งเขียนคลาวด์อยู่แล้ว จึงไม่ต้องไล่ใส่ทีละปุ่ม 20 จุด */
+function sxLog(op,tbl,target,detail){
+  if(!SX.lvl) return;
+  try{ getDB().then(db=>db.rpc("sx_log_add",{p_op:op,p_tbl:tbl||null,p_target:target?String(target):null,
+    p_detail:detail||null}).then(()=>{},()=>{}),()=>{}); }catch(e){} }
+/* เก็บแค่ตัวระบุรายการ ไม่เก็บก้อนข้อมูลตู้ ไม่งั้นตารางบวมเป็นสิบเมกะภายในเดือนเดียว */
+function sxTargetOf(p){
+  if(!p||typeof p!=="object") return null;
+  const r=Array.isArray(p)?p[0]:p; if(!r||typeof r!=="object") return null;
+  const t=r.id||r.order_id||r.key||r.conid||r.name||null;
+  return (Array.isArray(p)&&p.length>1)?(t+" +อีก "+(p.length-1)):t; }
+const SX_TBL_TH={furnitech_cabinets:"คลังตู้/ออเดอร์",furnitech_parts:"ชิ้นส่วนสำเร็จรูป",
+  xml_history:"ประวัติ XML",imos_orders:"ออเดอร์เข้าผลิต",imos_mapping:"รหัสอุปกรณ์",app_settings:"ค่าตั้ง/Item Id"};
+const SX_OP_TH={add:"บันทึก/ส่งเข้า",edit:"แก้ไข",del:"ลบ",login:"เข้าสู่ระบบ",logout:"ออกจากระบบ",deny:"ถูกปฏิเสธสิทธิ์"};
+
+function sxLogUI(){
+  if(!sxCan("admin")){ toast("เฉพาะเจ้าของเท่านั้น"); return; }
+  let view="log", days=7, who="", kw="";
+  const draw=async(note)=>{
+    const db=await getDB();
+    const since=days?new Date(Date.now()-days*864e5).toISOString():null;
+    let rows="",head="",count=0;
+    if(view==="log"){
+      let q=db.from("sx_log").select("at,emp_id,name,op,tbl,target").order("at",{ascending:false}).limit(500);
+      if(since) q=q.gte("at",since);
+      if(who)   q=q.eq("emp_id",who);
+      const r=await q; let d=r.data||[];
+      if(kw){ const k=kw.toLowerCase();
+        d=d.filter(x=>((x.name||"")+(x.target||"")+(SX_TBL_TH[x.tbl]||x.tbl||"")).toLowerCase().includes(k)); }
+      count=d.length;
+      head='<tr>'+sxTH("เวลา","16%")+sxTH("คน","20%")+sxTH("การกระทำ","18%")+sxTH("ส่วนไหน","18%")+sxTH("รายการ","28%")+'</tr>';
+      rows=d.map(x=>'<tr style="border-bottom:1px solid rgba(0,0,0,.06)">'+
+        '<td style="padding:7px 10px;color:#5f5f66;font-size:12.5px;white-space:nowrap">'+sxEsc(sxTime(x.at))+'</td>'+
+        '<td style="padding:7px 10px">'+sxEsc(x.name||"")+' <span style="color:#8a8a90;font-size:11.5px">'+sxEsc(x.emp_id||"")+'</span></td>'+
+        '<td style="padding:7px 10px;color:'+(x.op==="del"?"#a3241c":x.op==="login"||x.op==="logout"?"#1F3864":"#1c7a2c")+
+          ';font-weight:600;font-size:12.5px">'+sxEsc(SX_OP_TH[x.op]||x.op)+'</td>'+
+        '<td style="padding:7px 10px;color:#5f5f66;font-size:12.5px">'+sxEsc(SX_TBL_TH[x.tbl]||x.tbl||"—")+'</td>'+
+        '<td style="padding:7px 10px;font:12.5px ui-monospace,Menlo,Consolas,monospace;color:#5f5f66">'+sxEsc(x.target||"—")+'</td></tr>').join("");
+    } else {
+      let q=db.from("sx_visits").select("emp_id,name,started_at,last_beat").order("last_beat",{ascending:false}).limit(400);
+      if(since) q=q.gte("last_beat",since);
+      if(who)   q=q.eq("emp_id",who);
+      const r=await q; const d=r.data||[]; count=d.length;
+      head='<tr>'+sxTH("คน","30%")+sxTH("เข้าเมื่อ","22%")+sxTH("ออกเมื่อ (โดยประมาณ)","22%")+sxTH("ใช้ไป","26%")+'</tr>';
+      rows=d.map(x=>{ const mins=Math.max(1,Math.round((new Date(x.last_beat)-new Date(x.started_at))/60000));
+        const live=(Date.now()-new Date(x.last_beat).getTime())<=12e4;
+        return '<tr style="border-bottom:1px solid rgba(0,0,0,.06)">'+
+        '<td style="padding:7px 10px">'+sxEsc(x.name||"")+' <span style="color:#8a8a90;font-size:11.5px">'+sxEsc(x.emp_id||"")+'</span></td>'+
+        '<td style="padding:7px 10px;color:#5f5f66;font-size:12.5px">'+sxEsc(sxTime(x.started_at))+'</td>'+
+        '<td style="padding:7px 10px;font-size:12.5px">'+(live?'<span style="color:#1c7a2c;font-weight:600">● ยังอยู่</span>':'<span style="color:#5f5f66">'+sxEsc(sxTime(x.last_beat))+'</span>')+'</td>'+
+        '<td style="padding:7px 10px;color:#5f5f66;font-size:12.5px">'+(mins>=60?(Math.floor(mins/60)+" ชม. "+(mins%60)+" นาที"):(mins+" นาที"))+'</td></tr>'; }).join("");
+    }
+    const people=await db.from("profiles").select("emp_id,display_name").order("display_name");
+    const seg=(k,l)=>'<button data-v="'+k+'" style="padding:7px 14px;border:0;border-radius:8px;cursor:pointer;font:600 13px system-ui;'+
+      (view===k?"background:#1F3864;color:#fff":"background:#eef0f5;color:#1d1d1f")+'">'+l+'</button>';
+    const dsel=[[1,"วันนี้"],[7,"7 วัน"],[30,"30 วัน"],[0,"ทั้งหมด"]].map(d=>
+      '<option value="'+d[0]+'"'+(days===d[0]?" selected":"")+'>'+d[1]+'</option>').join("");
+    sxOverlay(
+      '<div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:10px">'+
+        '<div style="font:700 19px system-ui">ประวัติการใช้งาน</div>'+seg("log","การกระทำ")+seg("visit","เข้า-ออก")+
+        '<div style="font-size:12.5px;color:#5f5f66">'+count+' รายการ</div>'+
+        '<select id="lgWho" style="margin-left:auto;padding:7px 9px;border:1px solid rgba(0,0,0,.16);border-radius:8px;font:13px system-ui">'+
+          '<option value="">ทุกคน</option>'+(people.data||[]).map(p=>'<option value="'+sxEsc(p.emp_id)+'"'+(who===p.emp_id?" selected":"")+'>'+sxEsc(p.display_name)+'</option>').join("")+'</select>'+
+        '<select id="lgDay" style="padding:7px 9px;border:1px solid rgba(0,0,0,.16);border-radius:8px;font:13px system-ui">'+dsel+'</select>'+
+        (view==="log"?'<input id="lgKw" placeholder="ค้นรายการ" value="'+sxEsc(kw)+'" style="width:150px;padding:7px 10px;border:1px solid rgba(0,0,0,.16);border-radius:8px;font:13px system-ui">':"")+
+        '<button id="lgClose" style="padding:7px 15px;border:0;border-radius:8px;background:#eef0f5;font:600 13px system-ui;cursor:pointer">ปิด</button></div>'+
+      (note?'<div style="padding:9px 12px;border-radius:9px;font-size:13px;margin-bottom:9px;background:rgba(31,56,100,.10);color:#1F3864">'+sxEsc(note)+'</div>':"")+
+      '<div style="flex:1;min-height:0;overflow:auto;border:1px solid rgba(0,0,0,.10);border-radius:11px">'+
+        '<table style="width:100%;border-collapse:collapse;font-size:13.5px"><thead>'+head+'</thead><tbody>'+
+        (rows||'<tr><td colspan="5" style="padding:24px;text-align:center;color:#8a8a90">ไม่มีข้อมูลในช่วงที่เลือก</td></tr>')+'</tbody></table></div>'+
+      '<div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:11px;font-size:12px;color:#8a8a90">'+
+        '<span>ระบบลบให้เองทุกวันตี 3 เก็บย้อนหลัง 30 วัน · ออกกี่โมงคิดจากชีพจรครั้งสุดท้าย คลาดไม่เกิน 2 นาที</span>'+
+        '<input type="date" id="lgDate" style="margin-left:auto;padding:6px 9px;border:1px solid rgba(0,0,0,.16);border-radius:8px;font:12.5px system-ui">'+
+        '<button id="lgPurge" style="padding:6px 12px;border:0;border-radius:8px;background:rgba(232,144,31,.20);color:#8a5a11;font:600 12px system-ui;cursor:pointer">ลบก่อนวันที่นี้</button>'+
+        '<button id="lgWipe" style="padding:6px 12px;border:0;border-radius:8px;background:rgba(255,59,48,.12);color:#a3241c;font:600 12px system-ui;cursor:pointer">ลบทั้งหมด</button></div>'
+      , true);
+    const q=i=>document.getElementById(i);
+    document.querySelectorAll("#sxAuthWrap [data-v]").forEach(b=>b.onclick=()=>{ view=b.getAttribute("data-v"); draw(); });
+    q("lgClose").onclick=sxClose;
+    q("lgWho").onchange=()=>{ who=q("lgWho").value; draw(); };
+    q("lgDay").onchange=()=>{ days=+q("lgDay").value; draw(); };
+    if(q("lgKw")){ q("lgKw").onkeydown=e=>{ if(e.key==="Enter"){ kw=q("lgKw").value; draw(); } }; }
+    q("lgPurge").onclick=async()=>{ const v=q("lgDate").value;
+      if(!v){ draw("เลือกวันที่ก่อน แล้วค่อยกดลบ"); return; }
+      if(!confirm("ลบประวัติทั้งหมดก่อนวันที่ "+v+" ?")) return;
+      const r=await db.rpc("sx_log_purge",{p_before:new Date(v+"T00:00:00").toISOString()});
+      draw(r.error?sxErrTh(r.error):r.data); };
+    q("lgWipe").onclick=async()=>{ if(!confirm("ลบประวัติทั้งหมดถาวร?")) return;
+      const r=await db.rpc("sx_log_purge",{p_before:null});
+      draw(r.error?sxErrTh(r.error):r.data); };
+  };
+  draw(); }
+function sxTH(t,w){ return '<th style="position:sticky;top:0;background:#f6f7fa;text-align:left;padding:9px 10px;'+
+  'font:600 12px system-ui;color:#5f5f66;border-bottom:1px solid rgba(0,0,0,.12);width:'+w+'">'+t+'</th>'; }
+function sxTime(t){ if(!t) return "—";
+  return new Date(t).toLocaleString("th-TH",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}); }
 
 /* ---------- เจ้าของตั้งรหัสใหม่ให้ผู้ใช้คนอื่น ----------
    ดูรหัสเดิมไม่ได้ (bcrypt เป็นทางเดียว) ทำได้แค่ทับด้วยรหัสใหม่
