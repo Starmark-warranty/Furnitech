@@ -1609,9 +1609,16 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"Furnitech Cabinet", version:"30.4", build:"2026-08-17/design-params",
+  name:"Furnitech Cabinet", version:"31.1", build:"2026-08-17/heal-on-var-change",
   file:"Furnitech.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["31.1","2026-08-17","FEAT แก้ค่าตัวแปรของตู้แล้วเชื่อมเดือยใหม่ให้เฉพาะตู้ใบนั้นทันที — ค่าอย่าง $D ถูกใช้ในสูตรตำแหน่งของชั้น เสา ผนังกั้น พอเปลี่ยนค่า ชิ้นพวกนั้นเลื่อนทันที แต่รูเดือย รูมินิฟิก และรูฐานบานพับ ถูกเจาะไว้ตั้งแต่ก่อนหน้า ยังนอนอยู่พิกัดเดิม กลายเป็นรูค้างกลางแผ่นทุกครั้งที่พิมพ์เลขตัวเดียว และไม่มีอะไรบอกเลย ต้องรู้เองว่าต้องไปคลิกขวาสั่งเชื่อมใหม่ ตู้ Hood ที่มีผนังกั้นผูกสูตรกับ $D เจอเต็ม ๆ · ตอนนี้ทำให้เองทันทีที่แก้ค่า และทำเฉพาะตู้ใบที่แตะ ไม่ต้องไล่ยิงตรวจชนทั้งฉากทุกครั้ง ล้างเฉพาะรูที่ชิ้นในตู้ใบนั้นเป็นคนเจาะ ตู้ใบอื่นไม่ถูกแตะเลย · รูฐานบานพับของบานในตู้ใบนั้นถูกเจาะใหม่ด้วย · ข้อความยืนยันบอกจำนวนจุดที่เชื่อมใหม่ต่อท้ายค่าที่เพิ่งตั้ง ปิดได้ที่ ตั้งค่า → ตอนโหลดออเดอร์ ถ้าอยากคุมเอง"],
+    ["31.0","2026-08-17","FEAT โหลดออเดอร์เสร็จแล้วเชื่อมเดือยใหม่และเจาะรูฐานบานพับใหม่ให้เอง — โมเดลที่ดึงจากคลังถูกย่อขยายให้ตรงขนาดที่ออเดอร์สั่ง ชิ้นจึงย้ายที่กันหมด แต่รูที่ติดมากับโมเดลยังนอนอยู่พิกัดเดิมของขนาดเดิม กลายเป็นรูค้างกลางแผ่นตั้งแต่วินาทีที่โหลดเสร็จ เดิมต้องรู้เองว่าต้องไปคลิกขวาสั่งเชื่อมใหม่ทุกครั้ง ใครไม่รู้ก็ส่งไฟล์เจาะที่ผิดออกไปโดยไม่มีอะไรเตือน · ทำให้เองหลังโหลดจบ และใช้ตัวเดียวกับปุ่มคลิกขวาเป๊ะ ๆ ไม่ได้เขียนใหม่ให้เพี้ยนกันคนละทาง ปิดได้ที่ ตั้งค่า → ตอนโหลดออเดอร์ ถ้าอยากคุมเอง · FEAT รูฐานบานพับถูกเจาะใหม่ด้วย ซึ่งเดิมไม่มีใครดูแลเลย ตัวเชื่อมเดือยไม่แตะรูพวกนี้ บานที่ถูกปรับขนาดหรือย้ายทีหลัง รูฐานจึงค้างอยู่ที่ตำแหน่งของบานเก่า และไม่มีทางรู้จนกว่าจะประกอบจริงแล้วรูไม่ตรง ตอนนี้เจาะใหม่ตามบานที่อยู่จริง ทำซ้ำได้ไม่ซ้อนเพราะล้างรูของบานตัวเองก่อนเสมอ · ข้อความตอนโหลดจบบอกจำนวนจุดที่เชื่อมใหม่ รูค้างที่ล้างไป และรูฐานบานพับที่เจาะใหม่"],
+    ["30.9","2026-08-17","ปุ่มเพิ่มกฎย้ายขึ้นมาไว้เหนือรายการ — ทั้งค่าปรับบานและกฎแปลงรายการเส้น ผมวางปุ่มเพิ่มไว้ใต้รายการ ซึ่งใช้ได้ตอนยังไม่มีอะไร แต่พอมีกฎห้าข้อขึ้นไป แต่ละข้อสูงเกือบร้อยพิกเซล ปุ่มก็ถูกดันลงไปจนพ้นจอ คนที่เพิ่งเปิดมาจึงหาไม่เจอว่าจะเพิ่มกฎใหม่ตรงไหน ทั้งที่ปุ่มอยู่ตรงนั้นมาตลอด · ยิ่งกว่านั้นตารางตู้ในฉากที่เพิ่งเพิ่มไปใน 30.8 ไปแทรกอยู่ระหว่างรายการกฎกับปุ่มของมันเอง ปุ่มจึงดูเหมือนเป็นของตารางตู้ ไม่ใช่ของรายการกฎ · ย้ายขึ้นบนทั้งสองที่ จัดลำดับใหม่เป็น ปุ่ม รายการกฎ แล้วค่อยตารางตู้ และจำกัดความสูงรายการให้เลื่อนในกรอบของตัวเอง หน้าตั้งค่าจึงไม่ยืดยาวไปเรื่อย ๆ ตามจำนวนกฎ · กดเพิ่มแล้วพาไปหากล่องใหม่พร้อมโฟกัสช่องแรกให้ด้วย ไม่ใช่เพิ่มไปต่อท้ายเงียบ ๆ แล้วเหมือนกดไม่ติด"],
+    ["30.8","2026-08-17","ตารางบอกว่าตู้แต่ละใบในฉากถือค่าปรับบานอะไรอยู่ และพิมพ์ทับเพื่อทดสอบได้ทันที — ค่านี้เข้ามาทางไฟล์ XML ทางเดียว ฉากที่เปิดค้างไว้จากออเดอร์ที่โหลดก่อนเวอร์ชัน 30.7 จึงว่างเปล่าทั้งหมด และไม่มีที่ไหนให้ดูเลยว่าว่างหรือไม่ว่าง เห็นแต่ว่าบานไม่ยื่นแล้วก็เดาไม่ออกว่าติดตรงไหน จะทดสอบค่าเดียวก็ต้องโหลด XML ใหม่ทั้งออเดอร์ · ตั้งค่า → ค่าปรับบาน มีตารางท้ายบล็อก บอกทุกใบในฉากว่ารหัสอะไร มีกี่บาน ถือค่าอะไร และค่านั้นแปลออกมาเป็นอะไร พิมพ์ทับได้ทันที แก้แล้วฉากคิดใหม่ให้เลย ค่าที่พิมพ์เองมีศักดิ์เท่าค่าที่มากับไฟล์ และติดไปกับไฟล์โปรเจกต์ด้วย · ปุ่มใช้กับทั้งฉากที่กดแล้วเงียบ ตอนนี้บอกจำนวนตู้ที่เจอและชี้ให้ไปดูตารางแทนที่จะบอกแค่ว่าไม่มีใบไหนถือคำสั่ง"],
+    ["30.7","2026-08-17","FIX ค่าปรับบานจาก K_DesignParameter ไม่มีผลอะไรเลย เผยอล่างยังเป็นค่าปกติ — v22.1 ย้ายการคิดบานจากสเปคขอบมาทำทุกครั้งที่คิดฉากใหม่ ผมกลับไปปรับบานตอนโหลดเสร็จ ซึ่งอยู่ก่อนหน้านั้นหนึ่งจังหวะ พอถึงรอบคิดฉาก บานถูกคิดจากสเปคใหม่หมด ค่าที่ปรับไว้จึงถูกเขียนทับทุกครั้ง และไม่มีอะไรฟ้องเพราะไม่ได้พังอะไร แค่หายไปเฉย ๆ ข้อความตอนโหลดจบก็ยังขึ้นว่าปรับให้แล้วกี่ใบ ซึ่งเป็นคำยืนยันที่ผิด · ตอนนี้ปรับต่อท้ายตัวคิดบานในรอบเดียวกัน ตอนที่บานเพิ่งถูกคิดใหม่สด ๆ ทุกครั้งที่ฉากถูกคิดใหม่ค่าปรับก็ตามไปด้วย ไม่ว่าจะเปลี่ยนค่าตัวแปรของตู้หรือปรับขนาด · และเพราะของสดทุกรอบ จึงไม่ต้องเก็บขนาดตั้งต้นไว้คืนอีกแล้ว ไม่มีทางทบกันโดยธรรมชาติ "],
+    ["30.6","2026-08-17","Preview 2D บอกข้อมูลเท่าที่แบบผลิตบอกแล้ว — สองหน้านี้วาดรูปด้วยตัวเดียวกันมาตั้งแต่ v9.90 รูปจึงเหมือนกันเป๊ะอยู่แล้ว ที่ต่างคือแบบผลิตมีตารางข้อมูลสั่งผลิตกับตารางวัสดุสีอยู่ใต้รูป ส่วน Preview มีแต่รูปเปล่ากับคำอธิบายสัญลักษณ์ · ชิ้นอย่างกระจกของบานเฟรมจึงขึ้นว่าแผ่นเปล่าไม่มีอะไรเลย ทั้งที่มีรหัสกระจก หน้าตัดเฟรมรายด้าน จำนวนมุม ฉากยึดมุม และสกรู กำกับอยู่ครบ · ตอนนี้ Preview 2D มีสามตาราง ข้อมูลสั่งผลิต วัสดุ/สี และบานเฟรม ตารางวัสดุใช้ตัวคิดเดียวกับแบบผลิต ค่าจึงตรงกันเสมอโดยไม่ต้องดูแลสองที่ · ตารางบานเฟรมโผล่เฉพาะชิ้นที่อยู่ในบานเฟรมจริง บอกหน้าตัดรายด้าน E1 ถึง E4 พร้อมเตือนถ้ารหัสไหนยังไม่มีในคลังหน้าตัด และบอกว่าชิ้นนี้สังกัดบานใบไหน"],
+    ["30.5","2026-08-17","FIX ปุ่ม ใช้กับทั้งฉากเลย ของค่าปรับบาน เอาค่าของตู้ใบแรกไปใช้กับทุกใบ — ผมเขียนหยิบ pv ของรายการแรกในออเดอร์มาใช้กับทุก cabInst ซึ่งผิดทั้งกระดาน ตู้ที่ควรได้ Standard จะโดนยืดบานตามใบแรกไปด้วย และจะเห็นก็ต่อเมื่อไปวัดของจริง · ตอนนี้ค่าที่ตู้แต่ละใบได้รับถูกจำติดตู้ไว้ตั้งแต่ตอนโหลด ไปกับไฟล์โปรเจกต์ คลาวด์ และลิงก์แชร์ด้วย ปุ่มจึงอ่านค่าของใบนั้นเอง · ลำดับการอ่านคือค่าที่แก้ในหน้า Variables ของตู้ชนะก่อน เพราะนั่นคือช่องทดสอบ รองลงมาคือค่าที่จำไว้ตอนโหลด แล้วค่อยเป็นค่าดิบจากไฟล์"],
     ["30.4","2026-08-17","FEAT ค่าปรับบานจากช่อง K_DesignParameter ตั้งเองได้แล้ว — ช่องนี้ในออเดอร์ไม่ใช่สีและไม่ใช่รุ่น แต่เป็นคำสั่งปรับบานที่เขียนย่อมาเป็นคำ ExtendBottom2cm คือยืดบานล่างลงสองเซนติเมตร TT30mm_TH30mm คือหดบานแถวบนสามสิบกับเว้นรอยต่อสามสิบ ค่าหนึ่งมีหลายคำสั่งต่อกันด้วยขีดล่างได้ และคำสั่งใหม่จะโผล่มาเรื่อย ๆ ตามงาน เขียนตายตัวในโปรแกรมจึงไม่ได้ · ตั้งค่า → ค่าปรับบาน เป็นตารางเพิ่มเองได้ ช่องคำสั่งใส่วงเล็บปีกกา n ตรงที่เป็นตัวเลข ช่องที่ทำเขียนเป็น ด้าน เครื่องหมาย ค่า แล้วต่อขอบเขต ด้านมี top bottom left right และ seamV สำหรับรอยต่อระหว่างบาน ขอบเขตมี ทุกบาน แถวบนสุด แถวล่างสุด และคิดเลขในช่องค่าได้ เช่น n คูณสิบ สำหรับหน่วยเซนติเมตร · ตารางมีบรรทัดลองแปลให้ดูว่าคำที่ออเดอร์ส่งมาจะกลายเป็นอะไร และบอกว่าฉากนี้มีตู้ถือคำสั่งนั้นกี่ใบ · ขนาดบานตั้งต้นถูกเก็บไว้ตั้งแต่ครั้งแรกที่ปรับ ทุกครั้งต่อไปคืนค่าเดิมก่อนค่อยปรับใหม่ กดซ้ำหรือเปลี่ยนค่าแล้วคิดใหม่จึงไม่ทบกันไปเรื่อย ๆ ซึ่งเป็นกับดักคลาสสิกของงานแบบนี้ · ทดสอบได้โดยเปลี่ยนค่าที่ Variables ของตู้แล้วกดปุ่มใช้กับทั้งฉาก · คำสั่งที่ยังไม่มีในตารางถูกนับไว้แล้วบอกตอนโหลดจบ ไม่หายเงียบ"],
     ["30.3","2026-08-17","FIX กฎตั้งต้นไม่ได้ใส่ให้เองจริง ต้องไปกดปุ่มเอง — v29.6 ใส่กฎให้ครั้งแรกแล้วปักธงไว้ว่าใส่ไปแล้ว กันไม่ให้ใส่ซ้ำ แต่ธงนั้นอยู่คนละที่กับตัวกฎ พอดึงตั้งค่าจากคลาวด์ที่บันทึกไว้ก่อนจะมีฟีเจอร์นี้ กฎถูกทับเป็นว่างเปล่า ส่วนธงยังค้างอยู่ว่าใส่ไปแล้ว ผลคือกฎหายและไม่มีวันถูกใส่คืน ต้องกดปุ่มเองทุกครั้ง ซึ่งไม่ใช่คำว่าอัตโนมัติ · ตอนนี้เลิกพึ่งธง ดูจากของจริงอย่างเดียว ไม่มีกฎเลยก็ใส่ให้ ไม่ว่าจะเคยใส่มาแล้วกี่รอบ ตรวจทั้งตอนเปิดโปรแกรม ตอนดึงตั้งค่าจากคลาวด์ และตอนเปิดตารางกฎ · ยกเว้นกรณีเดียวคือคนลบทิ้งเองจนไม่เหลือสักข้อ อันนั้นถือว่าตั้งใจ จำไว้แล้วไม่ยัดคืนให้ กดปุ่มใส่กฎตั้งต้นเมื่อไหร่ก็เริ่มใหม่ได้"],
     ["30.2","2026-08-17","FEAT กล่องรอตอนโหลดออเดอร์เข้าฉาก — ออเดอร์สี่สิบใบต้องไปถามคลังทีละรุ่น กว่าจะครบก็หลายวินาที ระหว่างนั้นหน้าจอค้างอยู่กับฉากเดิม ไม่มีอะไรบอกว่ากำลังทำอะไรอยู่หรือค้างไปแล้ว บางคนกดซ้ำเพราะคิดว่าไม่ติด · ตอนนี้มีกล่องบอกว่ากำลังทำตู้ใบไหน ครบไปกี่ใบจากทั้งหมดกี่ใบ พร้อมแถบความคืบหน้า และคืนคิวให้เบราว์เซอร์วาดจริงเป็นระยะ แถบจึงเดินให้เห็น ไม่ใช่กระโดดทีเดียวตอนจบ · FIX ตู้จากรายการเส้นได้ความลึก 100 ซึ่งเป็นเลขที่ผมคิดขึ้นเองล้วน ๆ ไม่ได้มาจากไฟล์เลย ไฟล์ส่งมาแค่สองตัวเลข ความลึกจึงต้องมาจากตัวใดตัวหนึ่งนั้น กฎตั้งต้นเปลี่ยนเป็นใช้ตัวเลขตัวที่สอง CeilingFiller 2400*150 จึงได้ 150 ไม่ใช่ 100 · ช่องนี้พิมพ์ตัวเลขทับได้เสมอถ้าความลึกจริงเป็นค่าอื่น"],
@@ -2269,6 +2276,8 @@ const HINGE3D_DEFAULT={
 const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, dowelPitch:170, dowelMargin:32, pinD:5, pinInset:37, pinDepth:8, pinPitch:64, pinExtra:1, pinName:"Shelf pin Ø5", dowelName:"เดือยไม้ Ø8", dowelCode:"DOWEL8", pinCode:"PIN5", shelfSupD:5, shelfSupDepth:12, shelfSupFront:15, shelfSupBack:15, shelfSupAuto:true, shelfSupW:200, shelfSupFrontL:50, shelfSupBackL:50, shelfSupCode:"SHELFSUP5", shelfSupName:"ตัวรับชั้นแบบเจาะสันข้าง Ø5", xmlScale:true, overlapWarn:false, slideName:"รางลิ้นชัก", slideCode:"SLIDE", slideDrillD:5, slideDrillDepth:3, slideRailFromBot:0, slideOffBlum:10, slideOffHafele:-17, underSideInner:21, altoSideH:80, altoBackH:63, altoBotMinusW:35, altoBackMinusW:38, altoBotMinusD:10, altoCodeA:"ALTO_S_H80_A", altoCodeW:"ALTO_S_H80_W", altoDrillRear:41, altoDrillH:37, altoPanelT:16, altoFrontDrill:"37,32,5,12 ; -37,32,5,12", legCode:"LEG", legName:"ขาตู้ปรับระดับ", legXmlOn:true, legXmlField:"K_Leg", legXmlMap:"", legXmlNo:"none,ไม่มี,ไม่เอา,-", legXmlD:50, legXmlInset:50, legXmlFitGap:true, legCountMap:"800:6, 1250:8", legNarrowW:180, sceneFog:true, legMarkMidSingle:true, dxJoinGap:0, ledGrooveW:19, ledGrooveD:8, ledMaxLen:3000, ledSplit:"เต็มท่อนก่อน", ledCapCode:"LED_CAP", ledCornerCode:"", led3D:true, ledLift:2.5, ledNameTag:"LED",
   ledSet:"", ledZoneGap:800, ledShelfClear:1.5,
   dpField:"K_DesignParameter", designParams:[],   // v30.4
+  xmlAutoHeal:true,                               // v31.0: โหลดออเดอร์เสร็จแล้วเชื่อมเดือย+รูบานพับใหม่ให้เอง
+  healOnVarChange:true,                           // v31.1: แก้ค่าตัวแปรของตู้แล้วเชื่อมเดือยใหม่ให้ตู้ใบนั้น
   kitField:"K_Fitting_Concept", kitPushMap:"B:top, W:bottom", xmlThinMin:1, xmlSkipNoModel:false, orderProgNo:"700", doorGapWarn:50, csNewGap:120, ledSets:[{id:"12V-COB", volt:12, wPerM:9.6,
     stripCode:"", psuMap:"30, 60, 100", psuCode:"", psuUse:80, maxRunM:5,
     wireCode:"", wireMode:"ต่อเส้นไฟ", wireQty:1}], ledSetPerRun:false, cutSizeFmt:"{ชื่อ} ตัดขนาด {ยาว} mm.", cutLookupKey:"ตัดขนาด", cutLookupOn:true, pullXmlOn:true, pullField:"K_Pull", pullOriField:"K_Orientation", pullPosField:"K_Pull_Position", pullXField:"K_Pull_Coordinate_X", pullYField:"K_Pull_Coordinate_Y", pullNo:"nopull,none,-", pullName:"มือจับ", pull3D:true, dxNotchGap:0.5, railLikeMaxW:100, pullDefPos:"UpMiddle", pullDefOri:"H", pullDefX:35, pullDefY:0, legClipOn:true, legClipMap:"", legClipCode:"LEGCLIP", legClipName:"กิ๊ฟขาตู้ (ยึดแผ่นปิดขา)", doorSwing:true, shelfT:16, hangRailCode:"HANGRAIL", hangRailName:"ราวแขวนผ้า สแตนเลส C", hangRailThruD:8, hangRailCsD:13, hangRailCsDepth:2, hangRailEndGap:25, hangRailMap:"", drawerSideT:16, drawerBotT:9, drawerBoxH:120, drawerBoxLift:20, screwD:5, screwMateDepth:28, screwInset:9, screwCode:"SCREW5", screwName:"สกรู Ø5", altoMapA:"350:552.35.362, 400:552.35.363, 450:552.35.364, 500:552.35.365", altoMapW:"350:552.35.762, 400:552.35.763, 450:552.35.764, 500:552.35.765",
@@ -2366,7 +2375,7 @@ const settings=Object.assign({},DEF_SETTINGS);
 /* v28.3: orderLines = รายการในแท็บ เส้น/Line ของ XML (Accessory · Plinth · Worktop ฯลฯ)
    เดิมอ่านขึ้นมาโชว์ในหน้าตรวจแล้วทิ้งไป โหลดเข้าฉากปุ๊บก็หายทันที
    เก็บติดฉากไว้ จึงเปิดดูทีหลังได้ และเอาออกใบอุปกรณ์ตอนส่งออกได้ */
-const state={ boards:[], selectedId:null, view:"assembled", globalTone:0, showLabels:false, snap:10, tool:"select", shadows:false, ghost:false, eco:true, snapCorner:true, cabColors:{}, hidden:[], explode:0, doorPick:[], doorProg:{}, bcSeq:{}, bcMax:{}, orderLines:[] };
+const state={ boards:[], selectedId:null, view:"assembled", globalTone:0, showLabels:false, snap:10, tool:"select", shadows:false, ghost:false, eco:true, snapCorner:true, cabColors:{}, hidden:[], explode:0, doorPick:[], doorProg:{}, bcSeq:{}, bcMax:{}, orderLines:[], cabDP:{} };
 
 /* =====================================================================
    V4 CORE · helper กลาง — ยุบโค้ดซ้ำทั้งไฟล์ให้เหลือที่เดียว
@@ -2395,7 +2404,9 @@ function sync(rebuild,save,cm){
      ย้ายมาคิดตรงนี้ ต่อจากคานที่เพิ่งขยับ และก่อนสูตรล็อกกว้าง/สูง เพื่อให้สูตรทับได้ทีหลัง */
   if(settings.doorKeepSpec!==false){ try{
     const _insts={}; (state.boards||[]).forEach(b=>{ if(b&&b.cabInst&&b._door) _insts[b.cabInst]=1; });
-    Object.keys(_insts).forEach(i2=>{ try{ withCabAxisAligned(i2,()=>applyDoorSpecs(i2)); }catch(e){ console.error("doorSpec:",e); } });
+    Object.keys(_insts).forEach(i2=>{ try{ withCabAxisAligned(i2,()=>applyDoorSpecs(i2)); }catch(e){ console.error("doorSpec:",e); }
+      /* v30.7: ค่าปรับบานจาก K_DesignParameter ต่อท้ายทันที ตอนบานเพิ่งถูกคิดใหม่สด ๆ */
+      try{ applyXmlDesignParam(i2,null); }catch(e){ console.error("designParam:",e); } });
   }catch(e){ console.error(e); } }
   try{ applyPanelHeights(); }catch(e){ console.error(e); }  // v9.06: แผงปิดที่ผูกสูตรความสูงไว้
   try{ applyPanelWidths(); }catch(e){ console.error(e); }   // v19.0: แผงปิดที่ผูกสูตรความกว้างไว้
@@ -4516,10 +4527,11 @@ function cleanDeadMateHoles(){
   }
   return n;
 }
-function rebuildAllMates(){
-  if(state.view!=="assembled"){ toast("สลับเป็นมุมมอง “ประกอบ” ก่อน แล้วสั่งอีกครั้ง (ต้องยิงตรวจชนใน 3D)"); return; }
+/* v31.0: แกนของ "เชื่อมเดือยใหม่ทั้งฉาก" แยกออกมา เพื่อให้ตอนโหลดออเดอร์เรียกใช้ตัวเดียวกันได้
+   ไม่ใช่เขียนใหม่ให้เพี้ยนกันคนละทาง — ปุ่มคลิกขวากับตอนโหลดจึงได้ผลเหมือนกันเป๊ะ */
+function rebuildMatesCore(){
   const srcs=state.boards.filter(b=>b&&(b.connectors||[]).length&&(b.T||18)>=11);
-  if(!srcs.length){ toast("ยังไม่มีชิ้นไหนมีเดือย/มินิฟิกเลย"); return; }
+  if(!srcs.length) return {none:true,killed:0,added:0,thin:0,mates:0,dup:0,dead:0};
   let killed=0;
   state.boards.forEach(b=>{ const hs=b&&b.holes; if(!hs||!hs.length) return;
     const m=hs.length;
@@ -4529,11 +4541,75 @@ function rebuildAllMates(){
   let added=0, thin=0; const mates=new Set();
   srcs.forEach(b=>{ try{ const r=drillMates(b);
     added+=r.added||0; thin+=r.thin||0; (r.mates||new Set()).forEach(x=>mates.add(x)); }
-    catch(e){ console.error("rebuildAllMates:",e); } });
+    catch(e){ console.error("rebuildMatesCore:",e); } });
   const dup=dedupeHoles(), dead=cleanDeadMateHoles();
+  return {killed,added,thin,mates:mates.size,dup,dead};
+}
+/* ───────── v31.0: รูฐานบานพับก็ต้องถูกเจาะใหม่ตามบานที่อยู่จริง ─────────
+   รูเดือยมีตัวเชื่อมใหม่ให้อยู่แล้ว แต่รูฐานบานพับไม่มีใครดูแล
+   บานที่ถูกปรับขนาดหรือย้ายทีหลัง รูฐานยังนอนอยู่ที่เดิมของบานเก่า
+   drillHingePlateHoles ล้างรูของบานตัวเองก่อนเสมอ เรียกซ้ำได้ไม่ซ้อน */
+function rebuildHingePlates(){
+  let holes=0, doors=0, cleared=0;
+  state.boards.forEach(b=>{ if(!b||!b._door||b._virtual) return;
+    const c=(b.connectors||[]).find(k=>k&&k.type==="hinge"); if(!c||!c.plate) return;
+    try{ const r=drillHingePlateHoles(b); holes+=(r&&r.holes)||0; cleared+=(r&&r.cleared)||0; doors++; }
+    catch(e){ console.error("rebuildHingePlates:",e); } });
+  return {holes,doors,cleared};
+}
+/* ตัวซ่อมรวม — ใช้ทั้งตอนกดปุ่มและตอนโหลดออเดอร์ */
+/* ───────── v31.1: เปลี่ยนค่าตัวแปรของตู้ = ชิ้นย้ายที่ รูต้องตามไปด้วย ─────────
+   ค่าอย่าง $D ถูกใช้ในสูตรตำแหน่งของชั้น เสา ผนังกั้น พอเปลี่ยนค่า ชิ้นพวกนั้นเลื่อนทันที
+   แต่รูเดือย รูมินิฟิก และรูฐานบานพับ ถูกเจาะไว้ตั้งแต่ตอนก่อนหน้า ยังนอนอยู่พิกัดเดิม
+   จนถึงตอนนี้ต้องรู้เองว่าต้องไปคลิกขวาสั่งเชื่อมใหม่ทุกครั้งที่แตะค่า ไม่มีอะไรบอก
+   ทำเฉพาะตู้ใบที่แตะ จะได้ไม่ต้องไล่ยิงตรวจชนทั้งฉากทุกครั้งที่พิมพ์เลขตัวเดียว */
+function healDrillsFor(inst,silent){
+  if(!inst) return healDrills(silent);
+  const back=state.view; if(back!=="assembled") state.view="assembled";
+  const mine=new Set(state.boards.filter(b=>b&&b.cabInst===inst).map(b=>b.id));
+  let killed=0, added=0, dup=0, dead=0, hn=0, hd=0; const mates=new Set();
+  try{
+    /* ล้างเฉพาะรูที่ "ชิ้นในตู้ใบนี้" เป็นคนเจาะ — ตู้ใบอื่นไม่ถูกแตะ */
+    state.boards.forEach(b=>{ const hs=b&&b.holes; if(!hs||!hs.length) return;
+      const m=hs.length;
+      b.holes=hs.filter(h=>!(h&&h.src&&mine.has(h.src)&&(h.dowel||h.screw)&&!h.manual&&!h.pin));
+      killed+=m-b.holes.length; });
+    render3D(true);
+    state.boards.filter(b=>b&&b.cabInst===inst&&(b.connectors||[]).length&&(b.T||18)>=11)
+      .forEach(b=>{ try{ const r=drillMates(b); added+=r.added||0;
+        (r.mates||new Set()).forEach(x=>mates.add(x)); }catch(e){ console.error("healDrillsFor:",e); } });
+    dup=dedupeHoles(); dead=cleanDeadMateHoles();
+    state.boards.forEach(b=>{ if(!b||b.cabInst!==inst||!b._door||b._virtual) return;
+      const c=(b.connectors||[]).find(k=>k&&k.type==="hinge"); if(!c||!c.plate) return;
+      try{ const r=drillHingePlateHoles(b); hn+=(r&&r.holes)||0; hd++; }catch(e){ console.error(e); } });
+  }catch(e){ console.error("healDrillsFor:",e); }
+  finally{ if(back!=="assembled") state.view=back; }
   sync(1);
-  toast("เชื่อมเดือยใหม่ทั้งฉากแล้ว — ล้างรูคู่เก่า "+killed+" · เจาะใหม่ "+added+" จุด บน "+mates.size+" แผ่น"
-    +(dup?(" · รูซ้ำ "+dup):"")+(dead?(" · รูค้าง "+dead):"")+(thin?(" · ข้ามแผ่นบาง <11 มม. "+thin):""));
+  if(!silent&&(killed||added||hn||dead||dup))
+    toast("เชื่อมเดือยใหม่ให้ตู้ใบนี้แล้ว — เจาะใหม่ "+added+" จุด บน "+mates.size+" แผ่น"
+      +(killed?(" · ล้างของเก่า "+killed):"")+(dead||dup?(" · รูค้าง "+(dead+dup)):"")
+      +(hd?(" · รูฐานบานพับ "+hn+" รู"):""));
+  return {killed,added,mates:mates.size,dup,dead,hinge:{holes:hn,doors:hd}};
+}
+function healDrills(silent){
+  const back=state.view;
+  if(back!=="assembled") state.view="assembled";     // ยิงตรวจชนต้องใช้ฉากที่ประกอบแล้ว
+  let r={},h={};
+  try{ r=rebuildMatesCore()||{}; h=rebuildHingePlates()||{}; }
+  catch(e){ console.error("healDrills:",e); }
+  finally{ if(back!=="assembled") state.view=back; }
+  sync(1);
+  if(!silent){
+    if(r.none&&!h.doors) toast("ยังไม่มีชิ้นไหนมีเดือย/มินิฟิก/บานพับเลย");
+    else toast("เชื่อมเดือยใหม่ทั้งฉากแล้ว — ล้างรูคู่เก่า "+(r.killed||0)+" · เจาะใหม่ "+(r.added||0)+" จุด บน "+(r.mates||0)+" แผ่น"
+      +(r.dup?(" · รูซ้ำ "+r.dup):"")+(r.dead?(" · รูค้าง "+r.dead):"")+(r.thin?(" · ข้ามแผ่นบาง <11 มม. "+r.thin):"")
+      +(h.doors?(" · เจาะรูฐานบานพับใหม่ "+h.holes+" รู บน "+h.doors+" บาน"):""));
+  }
+  return {mate:r,hinge:h};
+}
+function rebuildAllMates(){
+  if(state.view!=="assembled"){ toast("สลับเป็นมุมมอง “ประกอบ” ก่อน แล้วสั่งอีกครั้ง (ต้องยิงตรวจชนใน 3D)"); return; }
+  healDrills(false);
 }
 function clearAllDowelHoles(){
   if(isLocked()){ guardEdit("ล้างรูเดือย"); return; }   // v27.3
@@ -5664,10 +5740,19 @@ function dpExplain(val){
    บานเป็นชิ้น orient front — ด้านยาว L คือความกว้างบาน ด้านกว้าง W คือความสูงบาน
    เก็บขนาดตั้งต้นของบานไว้ครั้งแรกที่ปรับ แล้วทุกครั้งต่อไปคืนค่าเดิมก่อนค่อยปรับใหม่
    กดซ้ำหรือเปลี่ยนค่าแล้วปรับใหม่จึงไม่ทบกันไปเรื่อย ๆ ซึ่งเป็นกับดักคลาสสิกของงานแบบนี้ */
+/* ───────── v30.7: ค่าปรับบานต้องเกาะไปกับจังหวะที่บานถูกคิดใหม่ ─────────
+   v22.1 ย้ายการคิดบานจากสเปคขอบมาทำทุกครั้งที่คิดฉากใหม่ (applyDoorSpecs ใน sync)
+   ผมไปปรับบานตอนโหลดเสร็จ ซึ่งอยู่ก่อนหน้านั้น พอ sync ทำงาน บานถูกคิดจากสเปคใหม่หมด
+   ค่าที่ปรับไว้จึงถูกลบทิ้งทุกครั้ง โดยไม่มีอะไรฟ้อง เพราะไม่ได้พังอะไร แค่ถูกเขียนทับ
+   ทางแก้ที่ถูกคือทำต่อท้าย applyDoorSpecs ในรอบเดียวกัน เพราะตรงนั้นบานเพิ่งถูกคิดใหม่สด ๆ
+   ไม่ต้องเก็บค่าตั้งต้นไว้คืนอีกแล้ว ของสดทุกรอบจึงไม่มีทางทบกัน */
+function dpDoorsOf(inst){
+  return state.boards.filter(b=>b&&b.cabInst===inst&&b._door&&!b._virtual);
+}
+/* ทางสำรอง — ปิดสวิตช์คิดบานจากสเปคไว้ บานจึงไม่ถูกคิดใหม่ ต้องคืนค่าเดิมก่อนปรับ */
 function dpBaseSnap(inst){
   state.cabDPBase=state.cabDPBase||{};
-  const cur=state.cabDPBase[inst];
-  const doors=state.boards.filter(b=>b&&b.cabInst===inst&&b._door&&!b._virtual);
+  const cur=state.cabDPBase[inst], doors=dpDoorsOf(inst);
   if(cur){ doors.forEach(b=>{ const o=cur[b.id]; if(o){ b.L=o.L; b.W=o.W; b.x=o.x; b.y=o.y; } }); return doors; }
   const snap={}; doors.forEach(b=>{ snap[b.id]={L:b.L,W:b.W,x:b.x,y:b.y}; });
   state.cabDPBase[inst]=snap; return doors;
@@ -5681,7 +5766,9 @@ function dpEdge(b,side,op,v){
 }
 function applyDesignParam(inst,val){
   const plan=dpParse(val); if(!plan.length) return null;
-  const doors=dpBaseSnap(inst); if(!doors.length) return {n:0,rows:0,miss:plan.filter(x=>!x.rule).map(x=>x.tok)};
+  /* บานถูกคิดใหม่ทุก sync อยู่แล้ว จึงไม่ต้องคืนค่าเดิม · ปิดสวิตช์นั้นไว้ค่อยใช้ทางสำรอง */
+  const doors=(settings.doorKeepSpec!==false)?dpDoorsOf(inst):dpBaseSnap(inst);
+  if(!doors.length) return {n:0,rows:0,miss:plan.filter(x=>!x.rule).map(x=>x.tok)};
   let rows=[]; try{ rows=frontGridOf(inst,null)||[]; }catch(e){ rows=[]; }
   if(!rows.length) rows=[{items:doors}];
   const pick=sc=>sc==="first"?(rows[0]||{items:[]}).items
@@ -5711,12 +5798,16 @@ function applyDesignParam(inst,val){
    (กติกาเดียวกับรหัสชุดอุปกรณ์ v17.1 จะได้เลือกทดสอบที่หน้า Variables ของตู้ได้) */
 function cabDesignParam(inst,pv){
   const key=dpField(); if(!key) return "";
+  /* v30.5: ค่าที่แก้ที่หน้า Variables ของตู้ ชนะเสมอ — นั่นคือช่องทดสอบ
+     รองลงมาคือค่าที่ตู้ใบนี้ได้รับตอนโหลด ซึ่งจำติดตู้ไว้ ไม่ใช่ไปหยิบของใบอื่น */
   try{ const cc=(state.cabColors||{})[inst]||{}; const fam=xmlFamOf(key);
     const v=String((fam&&cc[fam])||cc[key]||"").trim(); if(v) return v; }catch(e){}
+  try{ const v2=String(((state.cabDP||{})[inst])||"").trim(); if(v2) return v2; }catch(e){}
   return String((pv&&pv[key])||"").trim();
 }
 function applyXmlDesignParam(inst,pv){
   const v=cabDesignParam(inst,pv); if(!v) return null;
+  state.cabDP=state.cabDP||{}; state.cabDP[inst]=v;      // v30.5: จำไว้กับตู้ใบนั้น
   try{ return applyDesignParam(inst,v); }catch(e){ console.error("designParam:",e); return null; }
 }
 function frontGridOf(inst,zone){     // rows เรียงบน->ล่าง · ในแถวเรียงซ้าย->ขวา
@@ -12039,7 +12130,7 @@ const store={
   async get(k){ if(window.storage){ try{ const r=await window.storage.get(k,false); if(r)return r.value; }catch(e){} } try{ return localStorage.getItem(k); }catch(e){ return null; } }
 };
 /* v7.59.1: ตัวแปรตัวเลขรายตู้ (cabNums/cabVarTxt) ต้องถูกเซฟด้วย ไม่งั้นปิดโปรแกรมแล้ว $D4 หาย */
-async function autosave(){ if(state.editing)return; try{ await store.set("boardforge:v1",JSON.stringify({boards:state.boards,globalTone:state.globalTone,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt,cabDX:state.cabDX,bcSeq:state.bcSeq,bcMax:state.bcMax,orderLines:state.orderLines})); }catch(e){} }
+async function autosave(){ if(state.editing)return; try{ await store.set("boardforge:v1",JSON.stringify({boards:state.boards,globalTone:state.globalTone,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt,cabDX:state.cabDX,bcSeq:state.bcSeq,bcMax:state.bcMax,orderLines:state.orderLines,cabDP:state.cabDP})); }catch(e){} }
 async function loadSaved(){ try{ const v=await store.get("boardforge:v1"); return v?JSON.parse(v):null; }catch(e){ return null; } }
 async function lsSet(k,v){ try{ await store.set(k,JSON.stringify(v)); }catch(e){} }
 async function lsGet(k,def){ try{ const v=await store.get(k); return (v!=null)?JSON.parse(v):def; }catch(e){ return def; } }
@@ -15339,8 +15430,13 @@ function openCabVars(board){
       const txt=Object.keys(cur).map(x=>x+"="+cur[x]).join("\n");
       if(txt) state.cabVarTxt[inst]=txt; else delete state.cabVarTxt[inst];
       openCabVars(board); sync(0);
+      /* v31.1: ค่าเปลี่ยน = ชิ้นเลื่อน = รูเดิมค้าง — เชื่อมใหม่ให้ตู้ใบนี้ทันที ไม่ต้องไปกดเอง */
+      let _hr=null;
+      if(settings.healOnVarChange!==false){ try{ _hr=healDrillsFor(inst,true); }catch(e){ console.error(e); } }
       const v=cabNumVal(k,inst);
-      toast("$"+k+(t===""?" กลับไปใช้ค่าตั้งต้น":" = "+t)+(v!=null?(" → "+round(v)+" มม."):" (คิดค่าไม่ได้)")); }; });
+      toast("$"+k+(t===""?" กลับไปใช้ค่าตั้งต้น":" = "+t)+(v!=null?(" → "+round(v)+" มม."):" (คิดค่าไม่ได้)")
+        +((_hr&&(_hr.added||_hr.killed||_hr.hinge.holes))
+           ?(" · เชื่อมเดือยใหม่ "+_hr.added+" จุด"+(_hr.hinge.doors?(" · รูบานพับ "+_hr.hinge.holes):"")):"")); }; });
   body.querySelectorAll(".cvColor").forEach(sel=>sel.onchange=e=>{ const f=e.target.dataset.fam; state.cabColors[inst][f]=e.target.value;
     let nch=applyCabinetSkin(inst);   // เลือกสี → บวกผิว + ทอป/พื้นหดตามแผ่นข้าง (กว้างรวมตู้คงที่)
     /* v9.63: Family ที่รับช่อง K_Leg คือรุ่นขาของตู้ใบนี้ เปลี่ยนแล้วต้องจัดขาใหม่ทันที
@@ -17081,13 +17177,26 @@ async function buildFromXmlOrder(){
     try{ const pr=applyXmlPulls(inst, s.pv);
          if(pr){ pullOn+=pr.on; (pr.noSpec||[]).forEach(c=>{ pullNoSpec[c]=1; }); }
     }catch(e){ console.error("applyXmlPulls:",e); }
-    /* v30.4: ค่าปรับบานจาก K_DesignParameter — ทำท้ายสุด หลังบานถูกสร้างและจัดผังครบแล้ว */
-    try{ const dr=applyXmlDesignParam(inst, s.pv);
-         if(dr){ if(dr.n) dpOn++; (dr.miss||[]).forEach(t=>{ dpBad[t]=(dpBad[t]||0)+1; }); }
-    }catch(e){ console.error("applyXmlDesignParam:",e); }
+    /* v30.7: ตอนโหลดแค่จำค่าไว้กับตู้ ส่วนการปรับจริงปล่อยให้รอบคิดฉากทำ
+       เพราะที่นั่นบานถูกคิดจากสเปคใหม่หมด ปรับตรงนี้ก็โดนเขียนทับอยู่ดี */
+    try{ const dv=String((s.pv&&s.pv[dpField()])||"").trim();
+         if(dv){ state.cabDP=state.cabDP||{}; state.cabDP[inst]=dv;
+           const pp=dpParse(dv); if(pp.some(x=>x.rule)) dpOn++;
+           pp.filter(x=>!x.rule).forEach(x=>{ dpBad[x.tok]=(dpBad[x.tok]||0)+1; }); }
+    }catch(e){ console.error("designParam:",e); }
     made++; _did++; } }
   if(_bz){ try{ _bz.step("จัดฉากและคิดชิ้นงาน",100); await _bz.tick(); }catch(e){} }
   buildGTones(); state.selectedId=null; sync(1);
+  /* ───────── v31.0: เชื่อมเดือยใหม่และเจาะรูฐานบานพับใหม่ ทันทีที่โหลดเสร็จ ─────────
+     โมเดลที่ดึงจากคลังถูกย่อ/ขยายให้ตรงขนาดที่ออเดอร์สั่ง ชิ้นจึงย้ายที่กันหมด
+     แต่รูที่ติดมากับโมเดลยังนอนอยู่พิกัดเดิมของขนาดเดิม กลายเป็นรูค้างกลางแผ่นทันทีที่โหลด
+     เดิมต้องรู้เองว่าต้องไปคลิกขวาสั่งเชื่อมใหม่ทุกครั้ง ใครไม่รู้ก็ส่งไฟล์เจาะที่ผิดออกไปเลย
+     ทำให้เองตรงนี้ ใช้ตัวเดียวกับปุ่มคลิกขวา ปิดได้ที่ตั้งค่าถ้าอยากคุมเอง */
+  let _heal=null;
+  if(settings.xmlAutoHeal!==false){
+    if(_bz){ try{ _bz.step("เชื่อมเดือยและตรวจรูบานพับ",100); await _bz.tick(); }catch(e){} }
+    try{ _heal=healDrills(true); }catch(e){ console.error("healDrills:",e); }
+  }
   if(_bz){ try{ _bz.done(); }catch(e){} }
   const empty=made-fromLib;
   /* v15.4: บอกจำนวนที่ข้ามไปด้วย ไม่งั้นตู้หายแล้วไม่รู้ว่าหายเพราะอะไร */
@@ -17096,6 +17205,9 @@ async function buildFromXmlOrder(){
     +(Object.keys(legBad).length?(" · ⚠ อ่านรุ่นขาไม่ออก: "+Object.keys(legBad).join(", ")+" — ไปเพิ่มในตารางจับคู่ที่ ตั้งค่า → นำเข้า XML"):"")
     +(pullOn?(" · ใส่มือจับ "+pullOn+" บาน"):"")
     +(dpOn?(" · ปรับบานตามค่าที่ส่งมา "+dpOn+" ใบ"):"")
+    +((_heal&&_heal.mate)?(" · เชื่อมเดือยใหม่ "+(_heal.mate.added||0)+" จุด"
+        +((_heal.mate.dead||_heal.mate.dup)?(" (ล้างรูค้าง "+((_heal.mate.dead||0)+(_heal.mate.dup||0))+")"):"")
+        +((_heal.hinge&&_heal.hinge.doors)?(" · รูฐานบานพับ "+_heal.hinge.holes+" รู"):"")):"")
     +(Object.keys(dpBad).length?(" · ⚠ ไม่รู้จักคำสั่งปรับบาน: "+Object.keys(dpBad).join(", ")+" — เพิ่มได้ที่ ตั้งค่า → ค่าปรับบาน"):"")
     +(Object.keys(pullNoSpec).length?(" · ⚠ มือจับที่ยังไม่ได้ใส่สเปครู: "+Object.keys(pullNoSpec).join(", ")+" — ไปกรอกที่ Element → Fittings"):"")
   ):"ขนาดตู้ใน XML ไม่ครบ จึงสร้างไม่ได้");
@@ -17513,6 +17625,16 @@ function renderSettings(){
     <div style="font-size:11px;opacity:.72;line-height:1.6">เลขตู้และเลขชิ้นถูกจำติดตัวไว้ตั้งแต่ครั้งแรกที่ได้รับ แก้งานทีหลังจึงไม่เคลื่อน — ลบชิ้นกลางตู้ เลขที่เหลือคงเดิม เว้นช่องว่างไว้ · ชิ้นที่เพิ่มใหม่ไปต่อท้ายเสมอ ไม่เอาเลขเก่ามาใช้ซ้ำ</div>
     <button class="ibtn" id="setBcReset" style="margin-top:6px">↺ รีเซ็ตเลขบาร์โค้ดทั้งออเดอร์</button>
     <div style="font-size:11px;opacity:.62;margin-top:2px">ใช้ตอนเริ่มงานใหม่เท่านั้น — กดแล้วทุกชิ้นจะถูกไล่เลขใหม่ตั้งแต่ 01 ใบที่ยิงไปแล้วจะไม่ตรงอีก</div>
+    <div class="sumh" style="margin-top:12px">🔗 ตอนโหลดออเดอร์</div>
+    <label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5;margin-top:4px"><input type="checkbox" id="setXmlAutoHeal" ${settings.xmlAutoHeal!==false?"checked":""} style="margin-top:2px">
+      <span>โหลดเสร็จแล้ว <b>เชื่อมเดือยใหม่และเจาะรูฐานบานพับใหม่</b> ให้เอง — เท่ากับกดคลิกขวา → 🔗 เชื่อมเดือยใหม่ทั้งฉาก</span></label>
+    <label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.5;margin-top:4px"><input type="checkbox" id="setHealVar" ${settings.healOnVarChange!==false?"checked":""} style="margin-top:2px">
+      <span>แก้ <b>ค่าตัวแปรของตู้</b> (เช่น $D) แล้วเชื่อมเดือยใหม่ให้ <b>เฉพาะตู้ใบนั้น</b> ทันที — ค่าเปลี่ยนแล้วชั้นกับผนังกั้นเลื่อน รูเดิมจะค้างอยู่ที่เก่า</span></label>
+    <div style="font-size:11px;opacity:.72;line-height:1.7;margin:2px 0 6px">
+      โมเดลจากคลังถูกย่อ/ขยายให้ตรงขนาดที่ออเดอร์สั่ง ชิ้นจึงย้ายที่กันหมด แต่รูที่ติดมากับโมเดลยังอยู่พิกัดเดิม
+      <b>กลายเป็นรูค้างทันทีที่โหลด</b> ถ้าไม่เชื่อมใหม่ ไฟล์เจาะที่ส่งออกจะผิดโดยไม่มีอะไรเตือน
+    </div>
+    <button class="ibtn" id="setHealNow" style="margin-top:6px">🔗 เชื่อมเดือย + ตรวจรูบานพับ เดี๋ยวนี้</button>
     <div class="sumh" style="margin-top:12px">📐 ค่าปรับบาน (K_DesignParameter)</div>
     <div style="font-size:11px;opacity:.72;line-height:1.7;margin-bottom:6px">
       ช่องนี้ในออเดอร์ไม่ใช่สีและไม่ใช่รุ่น แต่เป็น<b>คำสั่งปรับบานที่เขียนย่อมาเป็นคำ</b> —
@@ -17527,13 +17649,20 @@ function renderSettings(){
       คิดเลขได้ เช่น <span style="font-family:var(--mono)">bottom+n*10@last</span> = ยืดขอบล่างของบานแถวล่างสุดออก n×10 มม.
     </div>
     ${txt("dpField","ช่องใน XML ที่ส่งค่านี้มา (ตั้งต้น K_DesignParameter)")}
-    <div id="setDp"></div>
-    <div style="display:flex;gap:6px;margin-top:6px">
+    <!-- v30.9: แถบปุ่มอยู่เหนือรายการ · กฎยาวแค่ไหนก็ยังกดเพิ่มได้โดยไม่ต้องเลื่อนหา -->
+    <div style="display:flex;gap:6px;margin:8px 0 6px;flex-wrap:wrap">
       <button class="ibtn" id="setDpAdd" style="flex:none">＋ เพิ่มคำสั่ง</button>
       <button class="ibtn" id="setDpSeed" style="flex:none">↺ ใส่ชุดตั้งต้น</button>
-      <button class="ibtn" id="setDpApply" style="flex:none" title="คิดใหม่ให้ทุกตู้ในฉากตามค่าที่ตู้นั้นถืออยู่ — เปลี่ยนค่าที่ Variables ของตู้แล้วกดปุ่มนี้เพื่อดูผลทันที">▶ ใช้กับทั้งฉากเลย</button>
+      <button class="ibtn" id="setDpApply" style="flex:none" title="คิดใหม่ให้ทุกตู้ในฉากตามค่าที่ตู้นั้นถืออยู่">▶ ใช้กับทั้งฉากเลย</button>
     </div>
-    <div style="font-size:11px;opacity:.62;margin-top:4px;line-height:1.6">ทดสอบได้โดยเปลี่ยนค่าที่ <b>Variables (ตู้นี้)</b> แล้วกด ใช้กับทั้งฉากเลย · ขนาดบานตั้งต้นถูกเก็บไว้ตั้งแต่ครั้งแรก กดกี่รอบก็ไม่ทบกัน</div>
+    <div id="setDp" style="max-height:340px;overflow:auto"></div>
+    <div class="sumh" style="margin-top:12px;font-size:12px">ตู้ในฉากนี้ได้ค่าอะไรอยู่</div>
+    <div style="font-size:11px;opacity:.72;line-height:1.7;margin-bottom:5px">
+      ค่านี้มากับไฟล์ XML ตอนโหลด · <b>ออเดอร์ที่เปิดค้างไว้ก่อนเวอร์ชัน 30.7 จะยังว่าง</b> ต้องโหลด XML ใหม่หนึ่งรอบ
+      หรือพิมพ์ใส่ตรงนี้เพื่อทดสอบได้เลย แก้แล้วเห็นผลทันที
+    </div>
+    <div id="setDpCabs"></div>
+    <div style="font-size:11px;opacity:.62;margin-top:4px;line-height:1.6">ค่าปรับบานถูกคิดต่อท้ายตัวคิดบานทุกครั้งที่ฉากคิดใหม่ · แก้แล้วเห็นผลทันที ไม่ต้องโหลด XML ซ้ำ</div>
     <div class="sumh" style="margin-top:12px">🧰 ชุดอุปกรณ์ประจำรหัสตู้</div>
     <div style="font-size:11px;opacity:.72;line-height:1.7;margin-bottom:6px">
       ของที่ผูกกับ<b>ตู้ทั้งใบ</b> ไม่ได้ผูกกับแผ่นไหน — ตู้รหัสที่ระบุไว้ได้ชุดนี้ <b>1 ชุดต่อ 1 ใบ</b> ไม่ว่าตู้ใบนั้นจะมีกี่แผ่น<br>
@@ -17737,6 +17866,9 @@ function renderSettings(){
     const xs=body.querySelector("#setXmlScale"); if(xs)settings.xmlScale=xs.checked;
     const xf=body.querySelector("#setXmlFlipFace"); if(xf)settings.xmlFlipFace=xf.checked;
     { const sk=body.querySelector("#setXmlSkipNoModel"); if(sk)settings.xmlSkipNoModel=sk.checked; }  // v15.4
+    { const ah=body.querySelector("#setXmlAutoHeal"); if(ah)settings.xmlAutoHeal=ah.checked; }          // v31.0
+    { const hv=body.querySelector("#setHealVar"); if(hv)settings.healOnVarChange=hv.checked; }           // v31.1
+    { const hn=body.querySelector("#setHealNow"); if(hn) hn.onclick=()=>{ try{ healDrills(false); }catch(e){ console.error(e); toast("ซ่อมไม่สำเร็จ — ดู console"); } }; }
     { const cl=body.querySelector("#setCutLookupOn"); if(cl)settings.cutLookupOn=cl.checked; }  // v13.0
     { const px=body.querySelector("#setPullXmlOn"); if(px)settings.pullXmlOn=px.checked;        // v9.71
       const p3=body.querySelector("#setPull3D"); if(p3)settings.pull3D=p3.checked; }
@@ -17891,7 +18023,7 @@ function renderSettings(){
           /* นับให้เห็นว่ามีตู้ในฉากถือคำสั่งนี้อยู่กี่ใบ */
           let hit=0; try{ const seen={};
             state.boards.forEach(b=>{ if(!b||b._virtual) return; const k=String(b.cabInst||""); if(!k||seen[k])return; seen[k]=1;
-              if(dpParse(cabDesignParam(k,(((window._xmlOrder||{}).sets||[]).find(x=>0)||{}).pv)).some(x=>x.rule===r)) hit++; }); }catch(e){}
+              if(dpParse(cabDesignParam(k,null)).some(x=>x.rule===r)) hit++; }); }catch(e){}
           const box=document.createElement("div");
           box.style.cssText="border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-bottom:6px;background:var(--bg)";
           box.innerHTML='<div style="display:grid;grid-template-columns:1.1fr 1.4fr auto auto;gap:5px;align-items:center">'
@@ -17914,17 +18046,57 @@ function renderSettings(){
           escapeHtml(v)+" → "+dpExplain(v).map(x=>escapeHtml(x.txt)).join(" · ")).join("<br>");
         host.appendChild(ex); };
       drawDp();
-      { const a=body.querySelector("#setDpAdd"); if(a) a.onclick=()=>{ R.push({token:"",name:"",ops:"",off:false}); settings.designParamsCleared=false; save(); drawDp(); }; }
+      { const a=body.querySelector("#setDpAdd"); if(a) a.onclick=()=>{
+          R.push({token:"",name:"",ops:"",off:false}); settings.designParamsCleared=false; save(); drawDp();
+          /* v30.9: กล่องใหม่ไปต่อท้ายรายการที่ยาวอยู่แล้ว ถ้าไม่พาไปหาก็เหมือนกดแล้วไม่มีอะไรเกิดขึ้น */
+          try{ const ins=host.querySelectorAll(".dpT");
+            if(ins.length){ const el=ins[ins.length-1];
+              if(el.scrollIntoView) el.scrollIntoView({block:"nearest"}); el.focus(); } }catch(e){} }; }
       { const b2=body.querySelector("#setDpSeed"); if(b2) b2.onclick=()=>{
           const has=new Set(R.map(x=>String(x.token||"").toUpperCase()));
           let add=0; defaultDesignParams().forEach(x=>{ if(!has.has(String(x.token||"").toUpperCase())){ R.push(x); add++; } });
           settings.designParamsCleared=false; save(); drawDp(); toast(add?("ใส่ชุดตั้งต้นแล้ว "+add+" คำสั่ง"):"มีครบแล้ว"); }; }
+      /* ───────── v30.8: ตารางค่าที่ตู้แต่ละใบถืออยู่ ─────────
+         ค่านี้เข้ามาทางไฟล์ XML ทางเดียว ฉากที่เปิดค้างไว้จากออเดอร์เก่าจึงว่างเปล่า
+         และไม่มีที่ไหนให้ดูหรือแก้เลย ต้องไปโหลด XML ใหม่ทั้งออเดอร์เพื่อทดสอบค่าเดียว
+         ตารางนี้บอกว่าใบไหนถืออะไร และพิมพ์ทับเพื่อลองได้ทันที */
+      const dpCabHost=body.querySelector("#setDpCabs");
+      const drawCabs=()=>{ if(!dpCabHost) return; dpCabHost.innerHTML="";
+        const seen={}, list=[];
+        state.boards.forEach(b=>{ if(!b||b._virtual) return; const k=String(b.cabInst||""); if(!k||seen[k])return; seen[k]=1;
+          list.push({inst:k, cab:String(b.cab||""), doors:state.boards.filter(x=>x&&x.cabInst===k&&x._door&&!x._virtual).length}); });
+        if(!list.length){ dpCabHost.innerHTML='<div style="font-size:11.5px;opacity:.7">ยังไม่มีตู้ในฉาก</div>'; return; }
+        const dl='<datalist id="dpTokList">'+dpRules().map(r=>'<option value="'+escapeHtml(String(r.token||"").replace("{n}","2"))+'">').join("")+'</datalist>';
+        dpCabHost.innerHTML=dl+'<div style="max-height:230px;overflow:auto;border:1px solid var(--line);border-radius:10px">'
+          +'<table style="width:100%;border-collapse:collapse;font-size:11.5px">'
+          +list.map(c=>{ const v=cabDesignParam(c.inst,null);
+            const ex=v?dpExplain(v):[];
+            const bad=ex.some(x=>x.bad);
+            return '<tr>'
+              +'<td style="padding:4px 8px;border-top:1px solid var(--line);font-family:var(--mono);white-space:nowrap">'+escapeHtml(c.cab||c.inst)+'</td>'
+              +'<td style="padding:4px 8px;border-top:1px solid var(--line);color:var(--ink-dim);white-space:nowrap">'+c.doors+' บาน</td>'
+              +'<td style="padding:4px 8px;border-top:1px solid var(--line)"><input class="nameinp dpCv" list="dpTokList" data-i="'+escapeHtml(c.inst)+'" value="'+escapeHtml(v)+'" placeholder="— ไม่มีค่า —" style="width:100%;font-family:var(--mono);font-size:11.5px"></td>'
+              +'<td style="padding:4px 8px;border-top:1px solid var(--line);font-size:11px;color:'+(bad?"#e58a24":"var(--ink-dim)")+'">'
+                +(ex.length?escapeHtml(ex.map(x=>x.txt).join(" · ")):"—")+'</td></tr>'; }).join("")
+          +'</table></div>';
+        dpCabHost.querySelectorAll(".dpCv").forEach(el=>{ el.onchange=e=>{
+          state.cabDP=state.cabDP||{};
+          const v=String(e.target.value||"").trim();
+          if(v) state.cabDP[e.target.dataset.i]=v; else delete state.cabDP[e.target.dataset.i];
+          try{ state.cabDPBase={}; }catch(e2){}
+          sync(1); drawCabs(); }; }); };
+      drawCabs();
       { const c=body.querySelector("#setDpApply"); if(c) c.onclick=()=>{
+          /* v30.5: เดิมหยิบค่าของตู้ใบแรกมาใช้กับทุกใบ ซึ่งผิดทั้งกระดาน
+             ตอนนี้อ่านค่าของตู้ใบนั้นเองที่จำไว้ตอนโหลด หรือที่แก้ไว้ในหน้า Variables */
+          /* v30.7: การปรับอยู่ในรอบคิดฉากแล้ว สั่งคิดใหม่ก็พอ */
+          try{ state.cabDPBase={}; }catch(e){}
           let cab=0,chg=0; const seen={};
           state.boards.forEach(b=>{ if(!b||b._virtual) return; const k=String(b.cabInst||""); if(!k||seen[k])return; seen[k]=1;
-            const pv=((window._xmlOrder&&window._xmlOrder.sets)||[]).map(x=>x.pv||{})[0]||{};
-            const r2=applyXmlDesignParam(k,pv); cab++; if(r2&&r2.n) chg++; });
-          sync(1); toast(chg?("คิดค่าปรับบานใหม่แล้ว "+chg+" ใบ จากทั้งหมด "+cab+" ใบ"):"ไม่มีตู้ใบไหนถือคำสั่งที่รู้จัก"); }; }
+            cab++; if(dpParse(cabDesignParam(k,null)).some(x=>x.rule)) chg++; });
+          sync(1); drawCabs();
+          toast(chg?("คิดค่าปรับบานใหม่แล้ว "+chg+" ใบ จากทั้งหมด "+cab+" ใบ")
+            :(cab?("ตู้ "+cab+" ใบในฉาก ยังไม่มีใบไหนถือค่าปรับบาน — ดูตารางด้านล่าง"):"ยังไม่มีตู้ในฉาก")); }; }
     } }
   { const br=body.querySelector("#setBcReset"); if(br)br.onclick=async()=>{
       const ok=await dialog({title:"ไล่เลขบาร์โค้ดใหม่ทั้งออเดอร์? ใบที่ยิงไปแล้วจะไม่ตรงอีก",ok:"รีเซ็ต"});
@@ -18068,7 +18240,7 @@ async function cloudSaveOrder(){
   if(v==null||!String(v).trim())return; const oid=String(v).trim();
   try{ const db=await getDB(); const id="ORD::"+oid;
     const exEl=$("exOrderId"); if(exEl){ exEl.value=oid; }   // ตั้งชื่อออเดอร์ในฉากให้ตรงไฟล์ที่เซฟ
-    const data={order:true,orderId:oid,boards:JSON.parse(JSON.stringify(state.boards)),globalTone:state.globalTone,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt,cabDX:state.cabDX,orderLines:state.orderLines};
+    const data={order:true,orderId:oid,boards:JSON.parse(JSON.stringify(state.boards)),globalTone:state.globalTone,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt,cabDX:state.cabDX,orderLines:state.orderLines,cabDP:state.cabDP};
     const r=await db.from("furnitech_cabinets").upsert({id,name:id,part_count:state.boards.length,data,updated_at:new Date().toISOString()},{onConflict:"id"}); if(r.error)throw r.error;
     toast("☁ บันทึกออเดอร์ “"+oid+"” แล้ว ("+state.boards.length+" ชิ้น) — เปิดกลับมาแก้ได้จากปุ่มคลาวด์"); renderCloudOrders();
   }catch(e){ toast("บันทึกออเดอร์ไม่สำเร็จ: "+sbErr(e)); }
@@ -18081,7 +18253,7 @@ async function cloudLoadOrder(oid){
     remapRuleRefs(norm,idMap); remapHoleSrc(norm,idMap); healHoleSrc(norm);
     state.boards=norm; if(src.globalTone!=null)state.globalTone=src.globalTone; if(src.cabColors)state.cabColors=src.cabColors;
     if(src.cabNums)state.cabNums=src.cabNums; if(src.cabVarTxt)state.cabVarTxt=src.cabVarTxt; if(src.cabDX)state.cabDX=src.cabDX;
-    state.orderLines=src.orderLines||[];                                             // v28.3
+    state.orderLines=src.orderLines||[]; state.cabDP=src.cabDP||{};                  // v28.3/v30.5
     /* v7.16: ออเดอร์ที่เซฟไว้ก่อนหน้านี้มีค่าผิดฝังอยู่ (ชั้นลึกเกิน ทะลุแผ่นหลัง)
        เพราะตอนสร้าง refitInterior ข้ามไปตอนตู้หมุน · เปิดกลับมาก็ต้องซ่อมให้ด้วย
        ไม่งั้นต้องไปแก้มือทุกออเดอร์เก่า */
@@ -19192,10 +19364,11 @@ function lineRulesBarHtml(){
   return '<label style="display:flex;align-items:center;gap:7px;font-size:11.5px;cursor:pointer;margin:2px 0 8px">'
     +'<input type="checkbox" class="lrAuto"'+(settings.lineRuleAuto!==false?" checked":"")+'>'
     +'<span>สร้างตู้จากกฎให้เองตอนโหลด XML <span style="color:var(--ink-dim)">— ปิดไว้ถ้าอยากตรวจก่อนแล้วค่อยกดใช้กฎเอง</span></span></label>'
-    +'<div class="lrHost"></div>'
-    +'<div style="display:flex;gap:6px;margin-top:6px">'
+    /* v30.9: ปุ่มอยู่เหนือรายการ กฎยาวแค่ไหนก็ยังกดเพิ่มได้ทันที */
+    +'<div style="display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap">'
     +'<button type="button" class="ibtn lrAdd" style="flex:none">＋ เพิ่มกฎ</button>'
-    +'<button type="button" class="ibtn lrSeed" style="flex:none" title="ใส่ชุดกฎที่ตกลงกันไว้">↺ ใส่กฎตั้งต้น</button></div>';
+    +'<button type="button" class="ibtn lrSeed" style="flex:none" title="ใส่ชุดกฎที่ตกลงกันไว้">↺ ใส่กฎตั้งต้น</button></div>'
+    +'<div class="lrHost" style="max-height:420px;overflow:auto"></div>';
 }
 function lineCabSets(){
   const out=[];
@@ -21272,7 +21445,7 @@ async function renderLoader(){
         remapRuleRefs(state.boards,idMap); remapHoleSrc(state.boards,idMap); healHoleSrc(state.boards);
         if(saved.globalTone!=null)state.globalTone=saved.globalTone; if(saved.cabColors)state.cabColors=saved.cabColors;
         if(saved.cabNums)state.cabNums=saved.cabNums; if(saved.cabVarTxt)state.cabVarTxt=saved.cabVarTxt; if(saved.cabDX)state.cabDX=saved.cabDX;
-        state.orderLines=saved.orderLines||[];                                       // v28.3
+        state.orderLines=saved.orderLines||[]; state.cabDP=saved.cabDP||{};          // v28.3/v30.5
         if(saved.bcSeq)state.bcSeq=saved.bcSeq; if(saved.bcMax)state.bcMax=saved.bcMax;   // v9.22: เลขบาร์โค้ดที่จำไว้
     if(saved.cabDX)state.cabDX=saved.cabDX;                                          // v11.2
         /* v7.26: ทางนี้คือ "เปิดโปรแกรมแล้วกดทำงานต่อ" — เดิมโยนของที่เซฟไว้เข้าฉากดิบ ๆ
@@ -22334,6 +22507,52 @@ function part2DSvg(b,o){
   part2DSvg.lastUsed=USED;                    // v23.4: ให้ผู้เรียกเอาไปทำคำอธิบายตามของที่มีจริง
   return s;
 }
+/* ───────── v30.6: Preview 2D บอกข้อมูลเท่าที่แบบผลิตบอก ─────────
+   สองหน้านี้วาดรูปด้วยตัวเดียวกันอยู่แล้ว (part2DSvg ตั้งแต่ v9.90) รูปจึงเหมือนกันเป๊ะ
+   ที่ต่างคือแบบผลิตมีตารางข้อมูลสั่งผลิตกับตารางวัสดุ/สี อยู่ข้างล่างรูป ส่วน Preview มีแต่รูปเปล่า
+   ชิ้นอย่างกระจกบานเฟรมจึงดูเหมือนไม่มีอะไรเลย ทั้งที่มีรหัสกระจก หน้าตัดเฟรม และของยึดมุมกำกับอยู่
+   ดึงตารางเดียวกันมาแสดง ใช้ skinRows ตัวเดียวกับแบบผลิต ค่าจึงตรงกันเสมอโดยไม่ต้องดูแลสองที่ */
+function p2dInfoHtml(b){
+  const esc=x=>escapeHtml(String(x==null?"":x));
+  const box=(title,rows)=>{ if(!rows.length) return "";
+    return '<div style="flex:1;min-width:230px;border:1px solid var(--line);border-radius:10px;overflow:hidden">'
+      +'<div style="background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:5px 10px">'+esc(title)+'</div>'
+      +'<table style="width:100%;border-collapse:collapse;font-size:11.5px">'
+      +rows.map(r=>'<tr><td style="padding:4px 10px;color:var(--ink-dim);border-top:1px solid var(--line);white-space:nowrap">'+esc(r[0])+'</td>'
+        +'<td style="padding:4px 10px;border-top:1px solid var(--line);font-family:var(--mono);font-weight:600">'+esc(r[1])+'</td></tr>').join("")
+      +'</table></div>'; };
+
+  /* ข้อมูลสั่งผลิต — แถวเดียวกับที่แบบผลิตใช้ */
+  const bd=(()=>{ try{ return blankDims(b); }catch(e){ return {L:b.L,W:b.W,T:b.T}; } })();
+  const R1=[["ขนาดสั่งไม้", fmt(bd.L)+" × "+fmt(bd.W)+" × "+fmt(bd.T)]];
+  if(bd.dev>0) R1.push(["ความยาวกางออก", fmt(bd.dev)+" มม."]);
+  R1.push(["ความหนา", fmt(b.T)+" มม."]);
+  if(b._glass) R1.push(["ชนิดชิ้น","กระจก"]);
+  else if(b._framePart) R1.push(["ชนิดชิ้น","แผ่นกลางของบานเฟรม"]);
+  if(b._frameGlass) R1.push(["รหัสกระจก", b._frameGlass]);
+
+  /* วัสดุ / สี — ฟังก์ชันเดียวกับแบบผลิต */
+  let R2=[]; try{ R2=skinRows(b,1)||[]; }catch(e){ R2=[]; }
+
+  /* บานเฟรม — หน้าตัดรายด้านของบานที่ชิ้นนี้สังกัด และของที่ใช้ประกอบมุม */
+  const R3=[];
+  try{
+    const own=b._frameOwner?state.boards.find(x=>x&&x.id===b._frameOwner):(b._frameDoor?b:null);
+    if(own){ const pd=partDef(own.part,own);
+      if(pd){ [["frameSec1","E1 ล่าง"],["frameSec2","E2 ซ้าย"],["frameSec3","E3 บน"],["frameSec4","E4 ขวา"]]
+        .forEach(pr=>{ const c=String(pd[pr[0]]||"").trim(); if(c) R3.push([pr[1], c+(sectLoops(c)?"":"  ⚠ ไม่มีในคลัง")]); }); }
+      const ff=own._frameFit;
+      if(ff){ if(ff.corners) R3.push(["มุมเฟรม", ff.corners+" มุม"]);
+        if(ff.cc) R3.push(["ฉากยึดมุม", ff.cc+" × "+(ff.cq*(ff.corners||0))]);
+        if(ff.sc) R3.push(["สกรู", ff.sc+" × "+(ff.sq*(ff.corners||0))]); }
+      if(own!==b) R3.push(["อยู่ในบาน", String(own.name||own.id)]);
+    }
+  }catch(e){ console.error("p2dInfo frame:",e); }
+
+  const parts=[box("ข้อมูลสั่งผลิต",R1),box("วัสดุ / สี",R2),box("บานเฟรม",R3)].filter(Boolean);
+  if(!parts.length) return "";
+  return '<div style="display:flex;flex-wrap:wrap;gap:10px;padding:2px 2px 10px">'+parts.join("")+'</div>';
+}
 function open2D(b){
   if(!b){toast("เลือกชิ้นก่อน");return;}
   const m=$("p2dModal"); if(!m)return;
@@ -22358,7 +22577,8 @@ function open2D(b){
   const legend='<div style="display:flex;flex-wrap:wrap;gap:14px;font-size:12px;padding:4px 2px 10px;color:#555">'
     +(items.length?items.join(""):'<span style="color:#999">แผ่นเปล่า — ไม่มีงานเจาะหรือร่อง</span>')
     +`<button id="p2dDimBtn" style="margin-left:auto;border:1px solid #c0392b;color:#c0392b;background:#fff;border-radius:7px;padding:3px 10px;font-size:12px;cursor:pointer">${window._p2dDim!==false?"📐 ซ่อนระยะ":"📐 แสดงระยะ"}</button></div>`;
-  body.innerHTML=legend+'<div style="flex:1;min-height:0">'+s+'</div>';
+  let _info=""; try{ _info=p2dInfoHtml(b); }catch(e){ console.error("p2dInfo:",e); }
+  body.innerHTML=legend+'<div style="flex:1;min-height:0">'+s+'</div>'+_info;   // v30.6
   const _db=body.querySelector("#p2dDimBtn"); if(_db) _db.onclick=function(){ window._p2dDim=(window._p2dDim===false); open2D(b); };
   m.classList.add("show");
 }
@@ -22856,7 +23076,7 @@ function shareId(){ let s2=""; const A="abcdefghijkmnpqrstuvwxyz23456789";
 function sharePayload(){
   return { v:1, boards:state.boards, globalTone:state.globalTone,
            cabColors:state.cabColors, cabNums:state.cabNums, cabVarTxt:state.cabVarTxt,
-           cabDX:state.cabDX, bcSeq:state.bcSeq, bcMax:state.bcMax, orderLines:state.orderLines };
+           cabDX:state.cabDX, bcSeq:state.bcSeq, bcMax:state.bcMax, orderLines:state.orderLines, cabDP:state.cabDP };
 }
 async function shareLinkDialog(){
   if(VIEW_ONLY){ toast("ลิงก์ดูอย่างเดียว สร้างลิงก์ต่อไม่ได้"); return; }   // v27.3
@@ -23314,7 +23534,7 @@ function exportJSON(){
   /* v11.2: ไฟล์โปรเจกต์เคยเก็บแค่ชิ้นงาน ค่าที่ผูกกับตู้ (เส้นโปรไฟล์ · สี · ตัวแปร) จึงหายไปกับไฟล์
      เปิดไฟล์กลับมาแล้วเส้นโปรไฟล์หายทั้งงาน เพราะตัวสร้างเส้นไม่เจอรายการว่าตู้ไหนติดอะไรไว้ */
   download("board-forge-project.json",JSON.stringify({boards:state.boards,globalTone:state.globalTone,
-    bcSeq:state.bcSeq,bcMax:state.bcMax,orderLines:state.orderLines,
+    bcSeq:state.bcSeq,bcMax:state.bcMax,orderLines:state.orderLines,cabDP:state.cabDP,
     cabDX:state.cabDX,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt},null,2),
     "application/json");
   toast("ดาวน์โหลด .json แล้ว");}
@@ -24442,7 +24662,7 @@ function readFile(f){const r=new FileReader();
     if(o.cabVarTxt)state.cabVarTxt=o.cabVarTxt;
     if(o.cabDX)state.cabDX=o.cabDX;
     if(o.bcSeq)state.bcSeq=o.bcSeq; if(o.bcMax)state.bcMax=o.bcMax;
-    state.orderLines=o.orderLines||[];                                               // v28.3
+    state.orderLines=o.orderLines||[]; state.cabDP=o.cabDP||{};                      // v28.3/v30.5
     state.selectedId=null;buildGTones();sync(1);
     const _nv=Object.keys(o.cabVarTxt||{}).length;
     toast("เปิดโปรเจกต์แล้ว"+(_nv?(" · คืนค่าตัวแปรของตู้ "+_nv+" ใบ"):""));
