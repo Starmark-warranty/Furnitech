@@ -1635,9 +1635,11 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"WoodX Cabinet", version:"32.2", build:"2026-08-17/drop-tone-picker",
+  name:"WoodX Cabinet", version:"32.4", build:"2026-08-17/p2d-zoom",
   file:"WoodX.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["32.4","2026-08-17","ระยะขั้นต่ำจากขอบ เลิกบังคับกับจุดที่มาจากสูตรเป็นค่าตั้งต้น — v32.3 ตั้งไว้ให้เลื่อนทั้งชุด ระยะระหว่างจุดตรงสูตรก็จริง แต่จุดแรกยังไม่ใช่ 19 ตามที่เขียนไว้ ตัวเลขในสูตรเป็นสิ่งที่คนเขียนกำกับไว้เอง ระบบไม่ควรไปขยับโดยไม่บอก ค่าตั้งต้นจึงเป็น ตามสูตรเป๊ะ · ใครอยากให้บังคับระยะขอบเลือกอีกสองแบบได้ในตั้งค่า · FEAT หน้า Preview 2D ซูมและลากดูได้แล้ว — แบบถูกย่อให้พอดีกรอบเสมอ ชิ้นยาวสองเมตรจึงเหลือสูงไม่กี่สิบพิกเซล ตัวเลขระยะกับรูเล็ก ๆ อ่านไม่ออกเลย ต้องไปเปิดแบบผลิตแล้วขยายทั้งหน้าเอา ซึ่งคนละเรื่องกับการดูชิ้นเดียว · ล้อเมาส์ซูมที่ตำแหน่งเคอร์เซอร์ จุดใต้เมาส์อยู่ที่เดิมหลังซูม ภาพจึงไม่ไถลหนีมือ ลากเพื่อเลื่อน ดับเบิลคลิกกลับพอดีจอ และมีปุ่มบวกลบกับตัวเลขเปอร์เซ็นต์กำกับไว้"],
+    ["32.3","2026-08-17","FIX ระยะเดือย/มินิฟิกไม่ตรงสูตร จุดแรกไม่ได้ 19 จากหน้า และช่วงถัดไปไม่ได้ 224 — v9.14 ใส่ระยะขั้นต่ำจากขอบ 25 มม. ไว้กันเดือยชิดขอบจนไม้ปริ ซึ่งถูกต้องสำหรับจุดที่ระบบกระจายเอง แต่มันไปบีบจุดของสูตรตามขนาดด้วย ซึ่งเป็นตัวเลขที่คนเขียนกำกับไว้ตรง ๆ · สูตร 19 : 224 : 224 จึงกลายเป็น 25 : 243 : 467 จุดแรกถูกดันเข้ามา 6 มม. แต่ตัวที่สองอยู่ที่เดิม ช่วงระหว่างจุดที่หนึ่งกับสองเลยเหลือ 218 ไม่ใช่ 224 ตามที่เขียน และไม่มีอะไรบอกสักคำว่าโดนแก้ · ตอนนี้เลื่อนทั้งชุดเข้ามาเท่าที่ขาดแทนที่จะบีบเฉพาะตัวที่ล้ำ ระยะระหว่างจุดจึงตรงตามสูตรทุกช่วง ถ้าเลื่อนแล้วปลายอีกด้านยังล้ำ แปลว่าสูตรกับแผ่นไม่พอดีกันจริง ค่อยบีบแบบเดิมพร้อมเตือนใน console · เลือกได้สามแบบใน ตั้งค่า ตามสูตรเป๊ะไม่บังคับระยะขอบเลย เลื่อนทั้งชุด หรือบีบแบบเดิม · ใช้กับมินิฟิกด้วย เพราะเดือยกับมินิฟิกเดินทางเดียวกันมาที่ตัวคิดตำแหน่งตัวนี้"],
     ["32.2","2026-08-17","เอาแถวเลือกวัสดุออกจากแถบล่างและแผงขวา — สีจริงมาจาก Element → Surfaces ตั้งแต่ v27.1 แล้ว ซึ่งเป็นสีของแผ่นที่ผลิตจริง ไม่ใช่โทนไม้สมมุติที่ตั้งไว้แต่แรก · แถวในแถบล่างทับสีทั้งฉากด้วยโทนสมมุติ กดโดนทีเดียวสีที่ตั้งไว้ทั้งงานเปลี่ยนหมดโดยไม่มีอะไรเตือน ส่วนแถวในแผงขวาทับรายชิ้น ทำให้ชิ้นนั้นหลุดจากสีของผิวที่ผูกไว้แบบไม่ตั้งใจ สองอันนี้เคยจำเป็นตอนยังไม่มีสีจริง ตอนนี้เหลือไว้มีแต่โทษ · ค่าโทนไม้ที่เคยตั้งไว้ในไฟล์เก่ายังอยู่และยังใช้ได้ ไม่ได้ล้างทิ้ง แค่ไม่มีที่ให้กดตั้งใหม่ และยังเป็นสีสำรองของชิ้นที่ยังไม่ได้ผูก Surface เหมือนเดิม"],
     ["32.1","2026-08-17","เอาจุดสามสีที่หัวโปรแกรมออก ใส่โลโก้ WoodX ทั้งชุดแทน — จุดสามสีเป็นของยืมหน้าตาปุ่มหน้าต่างของระบบมาใส่ไว้เฉย ๆ กดก็ไม่ติด ไม่ได้ทำอะไรสักอย่าง กินที่หัวโปรแกรมไปเปล่า ๆ ทั้งที่ตรงนั้นคือที่ที่โลโก้ควรอยู่ · ตอนนี้เป็นโลโก้เต็มชุด เครื่องหมาย X ไม้ซ้อนกรมท่า ต่อด้วยตัวอักษร WoodX ที่ตัว X ท้ายเป็นสีส้ม ย่อให้สูงพอดีแถบหัวโปรแกรม เลขเวอร์ชันยังกดดู changelog ได้เหมือนเดิม · วาดเป็น SVG ไม่ใช่ไฟล์ภาพ จึงคมทุกความละเอียดทั้งจอปกติและจอละเอียดสูง ไม่เพิ่มขนาดไฟล์ และใช้ตัวแปรสีชุดเดียวกับทั้งโปรแกรม เปลี่ยนสีแบรนด์ที่เดียวโลโก้เปลี่ยนตาม"],
     ["32.0","2026-08-17","เปลี่ยนชื่อโปรแกรมจาก Furnitech เป็น WoodX และปรับสีให้เข้ากับโลโก้ — ชื่อบนหัวโปรแกรม ชื่อแท็บ หน้าโหลด หน้าเปิดงาน และชื่อไฟล์ที่ดาวน์โหลดออกไป เปลี่ยนเป็น WoodX ทั้งหมด ไฟล์โปรเจกต์เป็น woodx-project.json ภาพเป็น woodx.png · เครื่องหมายบนหัวโปรแกรมเปลี่ยนเป็นตัว X ของโลโก้ เส้นทแยงสองเส้นสีไม้กับสีส้มบนพื้นกรมท่า โลโก้ Starmark ที่หน้าโหลดไม่ถูกแตะเลย ยังเป็นตัวเดิมทุกจุด · สีหลักของโปรแกรมเปลี่ยนจากฟ้าระบบเป็นกรมท่าของโลโก้ และเพิ่มสีส้มไว้ใช้กับปุ่มยืนยันหลัก แก้ที่ตัวแปรสีสามตัวในที่เดียว ทั้งโปรแกรมจึงเปลี่ยนตาม ไม่ได้แตะรูปทรง ระยะห่าง หรือการจัดวางอะไรเลยสักจุด · กุญแจที่ใช้เก็บข้อมูลในเครื่องยังเป็นชื่อเดิมทั้งหมด ตั้งค่า ตัวแปร Element และงานที่ค้างอยู่จึงไม่หายไปไหน ถ้าเปลี่ยนตามชื่อใหม่ ของเก่าจะกลายเป็นของคนละที่เก็บทันที"],
@@ -2358,6 +2360,9 @@ const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, d
   sinkTrayCabs:"", sinkTraySide:7, sinkTraySideCore:16, sinkTrayStepD:5, sinkTrayFront:"9:10, 4:5, 16:7", sinkTrayH:30, sinkTrayKeyword:"ถาดฟรอยด์",
   grainAuto:true,   // v9.19: ตั้งแนวลายไม้ให้อัตโนมัติตามบทบาทชิ้นและท้ายรหัสสี
   conEdgeMin:25,   // v9.14: ระยะขั้นต่ำจากขอบชิ้นถึงเดือย/มินิฟิก (0 = ไม่บังคับ)
+  /* v32.4: ตั้งต้น = ตามสูตรเป๊ะ — ตัวเลขในสูตรเป็นสิ่งที่คนเขียนกำกับไว้เอง
+     ระบบไม่ควรไปขยับโดยไม่บอก ใครอยากให้บังคับระยะขอบค่อยเลือกอีกสองแบบ */
+  conEdgeRuleMode:"exact",  // exact=ตามสูตรเป๊ะ · shift=เลื่อนทั้งชุด · clamp=บีบเฉพาะตัวที่ล้ำ (แบบเดิม)
   partBevelLand:5,   // v8.78: สันตรงที่เหลือไว้ก่อนตีเพ (วัดจากผิวหน้า)
   partMarkD:3, partMarkDepth:2,   // v8.70: ค่าตั้งต้นของ "รูมาร์ค" ที่ฝากไว้กับ Part (เจาะจริง Ø3 ลึก 2)
   /* v8.73: Part ตั้งต้นตอนสร้างตู้ — ใส่รหัส Part จาก Element ว่างไว้ = ไม่ผูก Part */
@@ -3907,6 +3912,32 @@ function _edgeClampAlong(arr,len){
   const u=[]; out.forEach(p=>{ if(!u.length||Math.abs(u[u.length-1]-p)>0.5)u.push(p); });
   return u;
 }
+/* ───────── v32.3: ระยะขั้นต่ำจากขอบ ห้ามทำลายระยะที่เขียนไว้ในสูตร ─────────
+   v9.14 ใส่ระยะขั้นต่ำ 25 มม. ไว้กันเดือยชิดขอบจนไม้ปริ ซึ่งถูกต้องสำหรับจุดที่ระบบกระจายเอง
+   แต่มันไปบีบจุดของ "สูตรตามขนาด" ด้วย ซึ่งเป็นตัวเลขที่คนเขียนกำกับไว้ตรง ๆ
+   สูตร 19 : 224 : 224 จึงกลายเป็น 25 : 243 : 467 — จุดแรกเลื่อนไป 6 แต่ตัวอื่นอยู่ที่เดิม
+   ระยะระหว่างจุดที่หนึ่งกับสองเลยเหลือ 218 ไม่ใช่ 224 ตามที่เขียน และไม่มีอะไรบอกสักคำ
+   ทางแก้: เลื่อนทั้งชุดเข้ามาเท่าที่ขาด ระยะระหว่างจุดจึงตรงตามสูตรทุกช่วง
+   ถ้าเลื่อนแล้วปลายอีกด้านล้ำออก แปลว่าสูตรกับแผ่นไม่พอดีกันจริง ค่อยบีบแบบเดิมและเตือน */
+function _ruleEdgeFit(arr,len,tag){
+  const lim=Math.max(+settings.conEdgeMin||0,0);
+  if(!arr||!arr.length) return arr;
+  const mode=String(settings.conEdgeRuleMode||"shift");
+  if(mode==="exact"||lim<=0) return arr.slice().sort((a,b)=>a-b);
+  const m=Math.min(lim,len*0.12), half=len/2;
+  const lo=Math.min.apply(null,arr), hi=Math.max.apply(null,arr);
+  const needLo=(-half+m)-lo, needHi=hi-(half-m);
+  if(needLo<=0.01&&needHi<=0.01) return arr.slice().sort((a,b)=>a-b);
+  if(mode==="clamp") return _edgeClampAlong(arr,len);
+  const span=hi-lo;
+  if(span<=len-2*m){                                  // ทั้งชุดยังลงได้ — เลื่อนอย่างเดียว ระยะไม่เพี้ยน
+    const d=(needLo>0)?needLo:-needHi;
+    return arr.map(p=>p+d).sort((a,b)=>a-b);
+  }
+  try{ console.warn("สูตรเดือย"+(tag?(" “"+tag+"”"):"")+" กว้างเกินแผ่น "+Math.round(len)
+    +" มม. เมื่อเว้นขอบข้างละ "+Math.round(m)+" — บีบจุดริมเข้ามา ระยะระหว่างจุดจะไม่ตรงสูตร"); }catch(e){}
+  return _edgeClampAlong(arr,len);
+}
 function dowelAlong0(c,len){
   const half=len/2;
   const useSize=(c.sizeRule===true)||(settings.dowelSizeMode&&c.sizeRule!==false);
@@ -3917,7 +3948,9 @@ function dowelAlong0(c,len){
          ตู้ใบเดียวกันมีทั้งชิ้นที่ต้องนับจากหน้าและชิ้นที่ต้องนับจากหลัง เช่นเสาแบ่งที่ตื้นกว่าตู้
          ใส่ค่าไว้ที่ตัวเชื่อมของชิ้นนั้นได้ ไม่ได้ใส่ก็ตามสวิตช์รวมเหมือนเดิม */
       const fl=(c&&c.flip!=null)?!!c.flip:!!settings.dowelFlipFront;
-      if(u.length) return _edgeClampAlong(u.map(p=> fl ? (half-p) : (p-half) ),len);
+      /* v32.3: จุดจากสูตรใช้ตัวจัดขอบที่รักษาระยะ ไม่ใช่ตัวบีบที่ทำระยะเพี้ยน
+         ใช้ทั้งเดือยและมินิฟิก เพราะสองอย่างนี้เดินทางเดียวกันมาตรงนี้ */
+      if(u.length) return _ruleEdgeFit(u.map(p=> fl ? (half-p) : (p-half) ),len,(c&&c.formula)||"");
     } /* X outside every range -> fall through to even spacing below */ }
   if(c.first!=null){   // manual explicit: first dowel measured from front or back, step by pitch toward the other end
     const n=Math.max(1,c.count|0), pitch=Math.max(c.pitch||settings.dowelPitch||32,1);
@@ -17648,7 +17681,13 @@ function renderSettings(){
     <div class="sumh" style="margin-top:12px">รูมาร์คที่ฝากไว้กับ Part</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${num("partMarkD","Ø รูมาร์ค (มม.)")}${num("partMarkDepth","ลึกรูมาร์ค (มม.)")}</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${num("partBevelLand","สันตรงตั้งต้นของ “เพ” (มม. · วัดจากผิวหน้า)")}</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${num("conEdgeMin","ระยะขั้นต่ำจากขอบถึงเดือย/มินิฟิก (มม.)")}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${num("conEdgeMin","ระยะขั้นต่ำจากขอบถึงเดือย/มินิฟิก (มม.)")}
+    ${pick("conEdgeRuleMode","จุดที่มาจาก “สูตรตามขนาด” เจอระยะขั้นต่ำแล้วทำยังไง",[["exact","ตามสูตรเป๊ะ — ไม่บังคับระยะขอบ (แนะนำ)"],["shift","เลื่อนทั้งชุดเข้ามา — ระยะระหว่างจุดตรงสูตร"],["clamp","บีบเฉพาะตัวที่ล้ำ — ระยะจะเพี้ยน (แบบเดิม)"]])}</div>
+    <div style="font-size:11px;opacity:.72;line-height:1.7;margin:2px 0 6px">
+      ระยะขั้นต่ำมีไว้กันเดือยชิดขอบจนไม้ปริ ซึ่งถูกสำหรับจุดที่ระบบกระจายเอง
+      แต่จุดที่มาจากสูตรเป็นตัวเลขที่เขียนกำกับไว้ตรง ๆ ถ้าไปบีบเฉพาะตัวที่ล้ำ <b>ระยะระหว่างจุดจะไม่ตรงสูตร</b>
+      เช่น <span style="font-family:var(--mono)">19 : 224 : 224</span> ที่ระยะขั้นต่ำ 25 จะได้ 25 · 243 · 467 ซึ่งช่วงแรกเหลือ 218
+    </div>
     <div class="sumh" style="margin-top:12px">บาร์โค้ด</div>
     <div style="font-size:11px;opacity:.72;line-height:1.6">เลขตู้และเลขชิ้นถูกจำติดตัวไว้ตั้งแต่ครั้งแรกที่ได้รับ แก้งานทีหลังจึงไม่เคลื่อน — ลบชิ้นกลางตู้ เลขที่เหลือคงเดิม เว้นช่องว่างไว้ · ชิ้นที่เพิ่มใหม่ไปต่อท้ายเสมอ ไม่เอาเลขเก่ามาใช้ซ้ำ</div>
     <button class="ibtn" id="setBcReset" style="margin-top:6px">↺ รีเซ็ตเลขบาร์โค้ดทั้งออเดอร์</button>
@@ -22606,8 +22645,46 @@ function open2D(b){
     +(items.length?items.join(""):'<span style="color:#999">แผ่นเปล่า — ไม่มีงานเจาะหรือร่อง</span>')
     +`<button id="p2dDimBtn" style="margin-left:auto;border:1px solid #c0392b;color:#c0392b;background:#fff;border-radius:7px;padding:3px 10px;font-size:12px;cursor:pointer">${window._p2dDim!==false?"📐 ซ่อนระยะ":"📐 แสดงระยะ"}</button></div>`;
   let _info=""; try{ _info=p2dInfoHtml(b); }catch(e){ console.error("p2dInfo:",e); }
-  body.innerHTML=legend+'<div style="flex:1;min-height:0">'+s+'</div>'+_info;   // v30.6
+  /* ───────── v32.4: ซูมและลากดูได้ ─────────
+     แบบถูกย่อให้พอดีกรอบเสมอ ชิ้นยาว 2 เมตรจึงเหลือสูงไม่กี่สิบพิกเซล
+     ตัวเลขระยะกับรูเล็ก ๆ อ่านไม่ออก ต้องไปเปิดแบบผลิตแล้วขยายเอาทั้งหน้า
+     ล้อเมาส์ซูมที่ตำแหน่งเคอร์เซอร์ · ลากเพื่อเลื่อน · ดับเบิลคลิกกลับพอดีจอ */
+  body.innerHTML=legend
+    +'<div style="display:flex;align-items:center;gap:6px;padding:0 2px 6px">'
+      +'<button class="ibtn" id="p2dOut" style="padding:2px 10px;font-size:14px;line-height:1.4">−</button>'
+      +'<span id="p2dPct" style="font-size:12px;color:var(--ink-dim);min-width:48px;text-align:center;font-family:var(--mono)">100%</span>'
+      +'<button class="ibtn" id="p2dIn" style="padding:2px 10px;font-size:14px;line-height:1.4">+</button>'
+      +'<button class="ibtn" id="p2dFit" style="padding:2px 10px;font-size:12px">พอดีจอ</button>'
+      +'<span style="font-size:11px;color:var(--ink-dim)">ล้อเมาส์ = ซูม · ลาก = เลื่อน · ดับเบิลคลิก = พอดีจอ</span></div>'
+    +'<div id="p2dWrap" style="flex:1;min-height:0;overflow:hidden;position:relative;cursor:grab;touch-action:none">'
+      +'<div id="p2dPan" style="transform-origin:0 0;width:100%;height:100%">'+s+'</div></div>'
+    +_info;
   const _db=body.querySelector("#p2dDimBtn"); if(_db) _db.onclick=function(){ window._p2dDim=(window._p2dDim===false); open2D(b); };
+  { const wrap=body.querySelector("#p2dWrap"), pan=body.querySelector("#p2dPan"), pct=body.querySelector("#p2dPct");
+    let k=1, tx=0, ty=0;
+    const apply=()=>{ pan.style.transform="translate("+tx+"px,"+ty+"px) scale("+k+")";
+      if(pct) pct.textContent=Math.round(k*100)+"%"; };
+    const fit=()=>{ k=1; tx=0; ty=0; apply(); };
+    /* ซูมที่ตำแหน่งเคอร์เซอร์ — จุดใต้เมาส์ต้องอยู่ที่เดิมหลังซูม ไม่งั้นภาพจะไถลหนีมือ */
+    const zoomAt=(cx,cy,nk)=>{ nk=Math.max(0.25,Math.min(12,nk));
+      const r=wrap.getBoundingClientRect(), px=cx-r.left, py=cy-r.top;
+      tx=px-(px-tx)*(nk/k); ty=py-(py-ty)*(nk/k); k=nk; apply(); };
+    wrap.addEventListener("wheel",e=>{ e.preventDefault();
+      zoomAt(e.clientX,e.clientY,k*(e.deltaY<0?1.14:1/1.14)); },{passive:false});
+    let drag=null;
+    wrap.addEventListener("pointerdown",e=>{ drag={x:e.clientX,y:e.clientY,tx,ty};
+      wrap.style.cursor="grabbing"; try{ wrap.setPointerCapture(e.pointerId); }catch(e2){} });
+    wrap.addEventListener("pointermove",e=>{ if(!drag) return;
+      tx=drag.tx+(e.clientX-drag.x); ty=drag.ty+(e.clientY-drag.y); apply(); });
+    const up=()=>{ drag=null; wrap.style.cursor="grab"; };
+    wrap.addEventListener("pointerup",up); wrap.addEventListener("pointercancel",up);
+    wrap.addEventListener("dblclick",fit);
+    { const bi=body.querySelector("#p2dIn"), bo=body.querySelector("#p2dOut"), bf=body.querySelector("#p2dFit");
+      const mid=()=>{ const r=wrap.getBoundingClientRect(); return [r.left+r.width/2, r.top+r.height/2]; };
+      if(bi) bi.onclick=()=>{ const c=mid(); zoomAt(c[0],c[1],k*1.25); };
+      if(bo) bo.onclick=()=>{ const c=mid(); zoomAt(c[0],c[1],k/1.25); };
+      if(bf) bf.onclick=fit; }
+    apply(); }
   m.classList.add("show");
 }
 async function addGroove(b){
