@@ -4,10 +4,10 @@
   >>> AI/DEV: อ่านบล็อกนี้ก่อนแก้โค้ดทุกครั้ง · แก้เสร็จให้บวมเลข VERSION
       แล้วเพิ่มบรรทัด CHANGELOG ใหม่ไว้บนสุด (ห้ามลบของเก่า)
 
-  APP         : Furnitech Cabinet
+  APP         : WoodX Cabinet
   VERSION     : 7.26.1
   BUILD       : 2026-08-01 / export-tdz-fix
-  FILE        : Furnitech.html
+  FILE        : WoodX.html
   BASED_ON    : Furnitech_V3.html  (v3.11)
   STATUS      : CURRENT  <-- ใช้ตัวนี้เป็นฐานแก้ต่อ · สาย V2/V3 ปิดแล้ว (LEGACY)
   STACK       : single-file HTML + three.js r128 (CDN) · ไม่มี build step
@@ -15,7 +15,7 @@
   HELPERS     : บล็อก "V4 CORE" (ใต้ APP_META) + โมดูล SVGKit (ก่อน ShopPaper)
                 >>> ห้ามนิยาม $ / bind / sync / groupOf / selBoard / wd /
                     faceOf / pull / esc / dimH / dimV / frame / grab3D ซ้ำอีก
-  NAMING      : ชื่อไฟล์ = Furnitech_V<major>.html เท่านั้น
+  NAMING      : ชื่อไฟล์ = WoodX_V<major>.html เท่านั้น
                 ห้ามพึ่งเลขวงเล็บ (11)/(12) — นั่นคือเลขดาวน์โหลดของเบราว์เซอร์
 
   --- CHANGELOG (ใหม่สุดอยู่บนสุด) -----------------------------------
@@ -919,7 +919,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Furnitech · v9.61</title>
+<title>WoodX · v32.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,800&family=IBM+Plex+Mono:wght@400;500;600&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -930,7 +930,10 @@
     --panel:rgba(252,252,254,0.72); --panel-strong:rgba(255,255,255,0.86); --solid:#ffffff;
     --line:rgba(0,0,0,0.10); --line-strong:rgba(0,0,0,0.16);
     --ink:#1d1d1f; --ink-dim:#5f5f66; --ink-faint:#8a8a90;
-    --accent:#007aff; --accent-press:#0064d6; --accent-soft:rgba(0,122,255,.12);
+    /* v32.0: สีหลักมาจากโลโก้ WoodX — กรมท่าเป็นตัวยืน ส้มเป็นตัวเน้น
+       เปลี่ยนแค่ค่าสีสามตัวนี้ ทั้งโปรแกรมเปลี่ยนตาม ไม่ได้แตะรูปทรงหรือระยะห่างอะไรเลย */
+    --accent:#1F3864; --accent-press:#16294a; --accent-soft:rgba(31,56,100,.12);
+    --brand-navy:#1F3864; --brand-orange:#E8901F; --brand-wood:#8A5A2B;
     --red:#ff5f57; --yellow:#febc2e; --green:#28c840;
     --axx:#ff3b30; --axy:#0a84ff; --axz:#34c759;
     --radius:11px; --radius-lg:14px;
@@ -955,12 +958,16 @@
   #titlebar{position:fixed;top:0;left:0;right:0;height:var(--tb);z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;
     padding:0 14px;background:var(--panel);backdrop-filter:blur(26px) saturate(1.8);-webkit-backdrop-filter:blur(26px) saturate(1.8);border-bottom:.5px solid var(--line)}
   .tb-left{display:flex;align-items:center;gap:14px;min-width:0}
-  .traffic{display:flex;gap:8px;padding-left:2px}
-  .tl{width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.12)}
-  .tl.r{background:var(--red)} .tl.y{background:var(--yellow)} .tl.g{background:var(--green)}
-  .appname{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap}
-  .appname .muted{color:var(--ink-faint);font-weight:500}
-  .appmark{width:22px;height:22px;border-radius:7px;background:linear-gradient(150deg,#caa15e,#8a6334);display:grid;place-items:center;box-shadow:var(--ctl-shadow)}
+  /* ───────── v32.1: โลโก้เต็มแทนจุดสามสี ─────────
+     จุดสามสีเป็นของยืมหน้าตาหน้าต่างระบบมา ไม่ได้ทำอะไรเลยสักปุ่ม กดก็ไม่ติด
+     กินที่หัวโปรแกรมไปเปล่า ๆ ทั้งที่ตรงนั้นคือที่ที่โลโก้ควรอยู่
+     เอาออกแล้วใส่โลโก้ทั้งชุด เครื่องหมาย X กับตัวอักษร ย่อให้พอดีความสูงแถบ */
+  .brandlogo{display:flex;align-items:center;gap:8px;min-width:0;text-decoration:none}
+  .brandlogo svg{height:24px;width:auto;display:block;flex:none;font-family:var(--font)}
+  .appname{display:flex;align-items:baseline;gap:7px;font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap}
+  .appname .muted{color:var(--ink-faint);font-weight:500;font-size:12px}
+  /* v32.0: กรอบเครื่องหมายเป็นกรมท่าของโลโก้ ตัว X ข้างในเป็นสีไม้กับส้ม */
+  .appmark{width:22px;height:22px;border-radius:7px;background:linear-gradient(150deg,#2b4a80,#16294a);display:grid;place-items:center;box-shadow:var(--ctl-shadow)}
   .appmark svg{width:var(--icon-sm);height:var(--icon-sm)}
   .toolbar{display:flex;gap:6px}
   .tbtn{display:flex;align-items:center;gap:6px;background:var(--solid);border:.5px solid var(--line-strong);border-radius:8px;padding:6px 11px;font-family:var(--font);font-size:12.5px;color:var(--ink-dim);cursor:pointer;transition:.12s;box-shadow:var(--ctl-shadow);white-space:nowrap}
@@ -971,6 +978,9 @@
   #undoBtn,#redoBtn{padding:6px 9px}
   .tbtn svg{width:var(--icon-md);height:var(--icon-md)}
   .tbtn.accent{background:var(--accent);color:#fff;border-color:transparent}
+  /* v32.0: ปุ่มยืนยันหลักใช้ส้มของโลโก้ ให้ต่างจากปุ่มทั่วไปที่เป็นกรมท่า */
+  .tbtn.brand,.ibtn.brand{background:var(--brand-orange);color:#fff;border-color:transparent}
+  .tbtn.brand:hover,.ibtn.brand:hover{filter:brightness(.94)}
   .tbtn.accent:hover{background:var(--accent-press)}
 
   /* ===== docked panels ===== */
@@ -1162,9 +1172,9 @@
   body.viewOnly #toolSeg [data-t="move"],
   body.viewOnly #toolSeg [data-t="stretch"]{display:none}
   body.viewOnly #setBtn, body.viewOnly #labelBtn{display:none}
-  body.viewOnly #snapSel, body.viewOnly #gtones{display:none}
-  body.viewOnly #statusbar .sb-group:has(#snapSel),
-  body.viewOnly #statusbar .sb-group:has(#gtones){display:none}
+  body.viewOnly #snapSel{display:none}
+  body.viewOnly #statusbar .sb-group:has(#snapSel){display:none}
+
   /* v28.2: การ์ดตู้ในรายการมีสี่ปุ่ม แก้ไข · เก็บขึ้นคลาวด์ · ทำสำเนา · ลบ
      เดิมเขียนกฎไว้ซ่อน .rowbtn ซึ่งไม่มีอยู่จริงในหน้าเลย กับ .del อีกตัว ผลคือลบหายไปตัวเดียว
      อีกสามปุ่มยังกดได้เต็ม ๆ ตอนนี้ซ่อนทั้งแถว */
@@ -1434,7 +1444,7 @@
 <body>
 <div id="splash">
   <div class="splash-logo"><div class="brandmark" style="width:240px;height:85px"></div></div>
-  <div class="splash-sub">Furnitech Cabinet &middot; ออกแบบ-ถอดแบบตู้ &middot; <span class="ver"></span></div>
+  <div class="splash-sub">WoodX Cabinet &middot; ออกแบบ-ถอดแบบตู้ &middot; <span class="ver"></span></div>
   <div class="splash-bar"><div class="splash-bar-fill"></div></div>
   <div class="splash-dots"><span></span><span></span><span></span></div>
   <div id="splashErr"></div>
@@ -1478,8 +1488,22 @@
 
 <header id="titlebar">
   <div class="tb-left">
-    <div class="traffic"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span></div>
-    <div class="appname"><span class="appmark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M3 8v8l9 4 9-4V8"/></svg></span>Furnitech <span class="muted" id="appVerBadge" title="คลิกดูเวอร์ชัน + changelog (คัดลอกอัตโนมัติ)" style="cursor:pointer;text-decoration:underline dotted">v?</span></div>
+    <div class="brandlogo" title="WoodX — Design. Engineering. Manufacturing.">
+      <!-- v32.1: โลโก้ทั้งชุด — X ไม้ซ้อนกรมท่า + ตัวอักษร WoodX ที่ตัว X ท้ายเป็นสีส้ม
+           วาดเป็น SVG ไม่ใช่ไฟล์ภาพ จึงคมทุกความละเอียดและเปลี่ยนสีตามธีมได้ -->
+      <svg viewBox="0 0 190 40" role="img" aria-label="WoodX">
+        <g stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <path d="M7 7L33 33" stroke="var(--brand-navy)" stroke-width="12"/>
+          <path d="M33 7L7 33" stroke="var(--brand-navy)" stroke-width="12"/>
+          <path d="M7 7L33 33" stroke="var(--brand-wood)" stroke-width="7"/>
+          <path d="M33 7L7 33" stroke="var(--brand-orange)" stroke-width="7"/>
+          <path d="M7 7L33 33M33 7L7 33" stroke="#fff" stroke-width="1.2" opacity=".45"/>
+        </g>
+        <text x="46" y="29" font-size="25" font-weight="700"
+              letter-spacing="-.4" fill="var(--brand-navy)">Wood<tspan fill="var(--brand-orange)">X</tspan></text>
+      </svg>
+      <span class="appname"><span class="muted" id="appVerBadge" title="คลิกดูเวอร์ชัน + changelog (คัดลอกอัตโนมัติ)" style="cursor:pointer;text-decoration:underline dotted">v?</span></span>
+    </div>
   </div>
   <div class="toolbar">
     <button class="tbtn" id="undoBtn" title="ย้อนกลับ (⌘/Ctrl+Z)" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 015 5 5 5 0 01-5 5h-3"/></svg></button>
@@ -1543,8 +1567,9 @@
   <div class="sb-sep"></div>
   <div class="sb-group"><span class="sb-lbl">สแนป</span><select id="snapSel"><option value="1">1</option><option value="5">5</option><option value="10" selected>10</option><option value="25">25</option><option value="50">50</option></select><span class="sb-unit">mm</span></div>
   <div class="sb-sep"></div>
-  <div class="sb-group"><span class="sb-lbl">วัสดุ</span><div class="gtones" id="gtones"></div></div>
-  <div class="sb-sep"></div>
+  <!-- v32.2: แถวเลือกโทนไม้รวมถูกเอาออก — สีจริงมาจาก Element → Surfaces แล้ว
+       ตัวเลือกนี้ทับสีจริงทั้งฉากด้วยโทนสมมุติ กดโดนทีเดียวสีที่ตั้งไว้หายหมด
+       state.globalTone ยังอยู่เป็นสีสำรองของชิ้นที่ยังไม่ได้ผูก Surface -->
   <button class="chip" id="grainBtn" title="แสดงแนวลายไม้ — ตามรหัสผิวที่ขึ้นต้นด้วย G (บังคับรายชิ้นได้ในแผงขวา)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>ลายไม้</button>
   <button class="chip" id="labelBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M11 8h2v8M9 16h6" stroke-width="1.6"/></svg>เลข</button>
   <button class="chip sel" id="shadowBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>แสง·เงา</button>
@@ -1598,6 +1623,7 @@
       <button class="ibtn" id="exMprZip" style="background:var(--accent);color:#fff;border-color:transparent">⬇ ดาวน์โหลดไฟล์เจาะทั้งออเดอร์ (.zip) — เฉพาะชิ้นที่มีเจาะ</button>
       <button class="ibtn" id="exCsv">ดาวน์โหลดรายการตัด (.csv)</button>
       <button class="ibtn" id="exPng">บันทึกภาพ 3D (.png)</button>
+      <button class="ibtn" id="exPlate" title="ภาพความละเอียดสูง พื้นหลังโปร่งใส ไม่มีกริดและเส้นบอกระยะ — เอาไปให้ AI ต่อห้องและแสงได้เลย โดยตู้กับสียังเป็นของจริงจากฉาก">บันทึกภาพพื้นสำหรับเรนเดอร์ต่อ (.png ×3)</button>
     </div>
   </div>
 </div></div>
@@ -1605,13 +1631,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* =====================================================================
-   Furnitech Cabinet
+   WoodX Cabinet   (เดิมชื่อ Furnitech Cabinet)
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"Furnitech Cabinet", version:"31.1", build:"2026-08-17/heal-on-var-change",
-  file:"Furnitech.html", basedOn:"Furnitech_V3.html (v3.11)",
+  name:"WoodX Cabinet", version:"32.2", build:"2026-08-17/drop-tone-picker",
+  file:"WoodX.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["32.2","2026-08-17","เอาแถวเลือกวัสดุออกจากแถบล่างและแผงขวา — สีจริงมาจาก Element → Surfaces ตั้งแต่ v27.1 แล้ว ซึ่งเป็นสีของแผ่นที่ผลิตจริง ไม่ใช่โทนไม้สมมุติที่ตั้งไว้แต่แรก · แถวในแถบล่างทับสีทั้งฉากด้วยโทนสมมุติ กดโดนทีเดียวสีที่ตั้งไว้ทั้งงานเปลี่ยนหมดโดยไม่มีอะไรเตือน ส่วนแถวในแผงขวาทับรายชิ้น ทำให้ชิ้นนั้นหลุดจากสีของผิวที่ผูกไว้แบบไม่ตั้งใจ สองอันนี้เคยจำเป็นตอนยังไม่มีสีจริง ตอนนี้เหลือไว้มีแต่โทษ · ค่าโทนไม้ที่เคยตั้งไว้ในไฟล์เก่ายังอยู่และยังใช้ได้ ไม่ได้ล้างทิ้ง แค่ไม่มีที่ให้กดตั้งใหม่ และยังเป็นสีสำรองของชิ้นที่ยังไม่ได้ผูก Surface เหมือนเดิม"],
+    ["32.1","2026-08-17","เอาจุดสามสีที่หัวโปรแกรมออก ใส่โลโก้ WoodX ทั้งชุดแทน — จุดสามสีเป็นของยืมหน้าตาปุ่มหน้าต่างของระบบมาใส่ไว้เฉย ๆ กดก็ไม่ติด ไม่ได้ทำอะไรสักอย่าง กินที่หัวโปรแกรมไปเปล่า ๆ ทั้งที่ตรงนั้นคือที่ที่โลโก้ควรอยู่ · ตอนนี้เป็นโลโก้เต็มชุด เครื่องหมาย X ไม้ซ้อนกรมท่า ต่อด้วยตัวอักษร WoodX ที่ตัว X ท้ายเป็นสีส้ม ย่อให้สูงพอดีแถบหัวโปรแกรม เลขเวอร์ชันยังกดดู changelog ได้เหมือนเดิม · วาดเป็น SVG ไม่ใช่ไฟล์ภาพ จึงคมทุกความละเอียดทั้งจอปกติและจอละเอียดสูง ไม่เพิ่มขนาดไฟล์ และใช้ตัวแปรสีชุดเดียวกับทั้งโปรแกรม เปลี่ยนสีแบรนด์ที่เดียวโลโก้เปลี่ยนตาม"],
+    ["32.0","2026-08-17","เปลี่ยนชื่อโปรแกรมจาก Furnitech เป็น WoodX และปรับสีให้เข้ากับโลโก้ — ชื่อบนหัวโปรแกรม ชื่อแท็บ หน้าโหลด หน้าเปิดงาน และชื่อไฟล์ที่ดาวน์โหลดออกไป เปลี่ยนเป็น WoodX ทั้งหมด ไฟล์โปรเจกต์เป็น woodx-project.json ภาพเป็น woodx.png · เครื่องหมายบนหัวโปรแกรมเปลี่ยนเป็นตัว X ของโลโก้ เส้นทแยงสองเส้นสีไม้กับสีส้มบนพื้นกรมท่า โลโก้ Starmark ที่หน้าโหลดไม่ถูกแตะเลย ยังเป็นตัวเดิมทุกจุด · สีหลักของโปรแกรมเปลี่ยนจากฟ้าระบบเป็นกรมท่าของโลโก้ และเพิ่มสีส้มไว้ใช้กับปุ่มยืนยันหลัก แก้ที่ตัวแปรสีสามตัวในที่เดียว ทั้งโปรแกรมจึงเปลี่ยนตาม ไม่ได้แตะรูปทรง ระยะห่าง หรือการจัดวางอะไรเลยสักจุด · กุญแจที่ใช้เก็บข้อมูลในเครื่องยังเป็นชื่อเดิมทั้งหมด ตั้งค่า ตัวแปร Element และงานที่ค้างอยู่จึงไม่หายไปไหน ถ้าเปลี่ยนตามชื่อใหม่ ของเก่าจะกลายเป็นของคนละที่เก็บทันที"],
+    ["31.2","2026-08-17","FEAT บันทึกภาพพื้นสำหรับเอาไปเรนเดอร์ต่อ — ปุ่มบันทึกภาพเดิมถ่ายหน้าจอตามที่เห็น ได้กริด เส้นบอกระยะ ตัวเลข และพื้นหลังสีเทาติดมาด้วย ภาพแบบนั้นเอาไปให้ AI ต่อภาพไม่ได้ เพราะมันจะเก็บกริดกับตัวเลขไว้ในภาพที่เรนเดอร์ออกมา · ปุ่มใหม่ปิดทุกอย่างที่ไม่ใช่ตัวตู้ ถ่ายที่ความละเอียดสามเท่าของจอ และพื้นหลังโปร่งใส ตำแหน่งตู้ สัดส่วน และสีผิว จึงเป็นของจริงจากฉาก ไม่ใช่ของที่ AI เดาจากตัวเลขในไฟล์ เหลือแค่ให้มันเติมห้อง พื้น แสง และของตกแต่ง · ตั้งค่าเดิมของฉากถูกคืนให้ครบหลังถ่ายเสร็จ"],
     ["31.1","2026-08-17","FEAT แก้ค่าตัวแปรของตู้แล้วเชื่อมเดือยใหม่ให้เฉพาะตู้ใบนั้นทันที — ค่าอย่าง $D ถูกใช้ในสูตรตำแหน่งของชั้น เสา ผนังกั้น พอเปลี่ยนค่า ชิ้นพวกนั้นเลื่อนทันที แต่รูเดือย รูมินิฟิก และรูฐานบานพับ ถูกเจาะไว้ตั้งแต่ก่อนหน้า ยังนอนอยู่พิกัดเดิม กลายเป็นรูค้างกลางแผ่นทุกครั้งที่พิมพ์เลขตัวเดียว และไม่มีอะไรบอกเลย ต้องรู้เองว่าต้องไปคลิกขวาสั่งเชื่อมใหม่ ตู้ Hood ที่มีผนังกั้นผูกสูตรกับ $D เจอเต็ม ๆ · ตอนนี้ทำให้เองทันทีที่แก้ค่า และทำเฉพาะตู้ใบที่แตะ ไม่ต้องไล่ยิงตรวจชนทั้งฉากทุกครั้ง ล้างเฉพาะรูที่ชิ้นในตู้ใบนั้นเป็นคนเจาะ ตู้ใบอื่นไม่ถูกแตะเลย · รูฐานบานพับของบานในตู้ใบนั้นถูกเจาะใหม่ด้วย · ข้อความยืนยันบอกจำนวนจุดที่เชื่อมใหม่ต่อท้ายค่าที่เพิ่งตั้ง ปิดได้ที่ ตั้งค่า → ตอนโหลดออเดอร์ ถ้าอยากคุมเอง"],
     ["31.0","2026-08-17","FEAT โหลดออเดอร์เสร็จแล้วเชื่อมเดือยใหม่และเจาะรูฐานบานพับใหม่ให้เอง — โมเดลที่ดึงจากคลังถูกย่อขยายให้ตรงขนาดที่ออเดอร์สั่ง ชิ้นจึงย้ายที่กันหมด แต่รูที่ติดมากับโมเดลยังนอนอยู่พิกัดเดิมของขนาดเดิม กลายเป็นรูค้างกลางแผ่นตั้งแต่วินาทีที่โหลดเสร็จ เดิมต้องรู้เองว่าต้องไปคลิกขวาสั่งเชื่อมใหม่ทุกครั้ง ใครไม่รู้ก็ส่งไฟล์เจาะที่ผิดออกไปโดยไม่มีอะไรเตือน · ทำให้เองหลังโหลดจบ และใช้ตัวเดียวกับปุ่มคลิกขวาเป๊ะ ๆ ไม่ได้เขียนใหม่ให้เพี้ยนกันคนละทาง ปิดได้ที่ ตั้งค่า → ตอนโหลดออเดอร์ ถ้าอยากคุมเอง · FEAT รูฐานบานพับถูกเจาะใหม่ด้วย ซึ่งเดิมไม่มีใครดูแลเลย ตัวเชื่อมเดือยไม่แตะรูพวกนี้ บานที่ถูกปรับขนาดหรือย้ายทีหลัง รูฐานจึงค้างอยู่ที่ตำแหน่งของบานเก่า และไม่มีทางรู้จนกว่าจะประกอบจริงแล้วรูไม่ตรง ตอนนี้เจาะใหม่ตามบานที่อยู่จริง ทำซ้ำได้ไม่ซ้อนเพราะล้างรูของบานตัวเองก่อนเสมอ · ข้อความตอนโหลดจบบอกจำนวนจุดที่เชื่อมใหม่ รูค้างที่ล้างไป และรูฐานบานพับที่เจาะใหม่"],
     ["30.9","2026-08-17","ปุ่มเพิ่มกฎย้ายขึ้นมาไว้เหนือรายการ — ทั้งค่าปรับบานและกฎแปลงรายการเส้น ผมวางปุ่มเพิ่มไว้ใต้รายการ ซึ่งใช้ได้ตอนยังไม่มีอะไร แต่พอมีกฎห้าข้อขึ้นไป แต่ละข้อสูงเกือบร้อยพิกเซล ปุ่มก็ถูกดันลงไปจนพ้นจอ คนที่เพิ่งเปิดมาจึงหาไม่เจอว่าจะเพิ่มกฎใหม่ตรงไหน ทั้งที่ปุ่มอยู่ตรงนั้นมาตลอด · ยิ่งกว่านั้นตารางตู้ในฉากที่เพิ่งเพิ่มไปใน 30.8 ไปแทรกอยู่ระหว่างรายการกฎกับปุ่มของมันเอง ปุ่มจึงดูเหมือนเป็นของตารางตู้ ไม่ใช่ของรายการกฎ · ย้ายขึ้นบนทั้งสองที่ จัดลำดับใหม่เป็น ปุ่ม รายการกฎ แล้วค่อยตารางตู้ และจำกัดความสูงรายการให้เลื่อนในกรอบของตัวเอง หน้าตั้งค่าจึงไม่ยืดยาวไปเรื่อย ๆ ตามจำนวนกฎ · กดเพิ่มแล้วพาไปหากล่องใหม่พร้อมโฟกัสช่องแรกให้ด้วย ไม่ใช่เพิ่มไปต่อท้ายเงียบ ๆ แล้วเหมือนกดไม่ติด"],
@@ -11324,7 +11354,7 @@ function showInspector(){
       <div class="obtn ${b.orient==="side"?"sel":""}" data-o="side">ตั้งข้าง</div></div></div>
     <div class="fld"><label>หมุนแนวนอน (Yaw)</label><div class="orow">
       ${[0,90,180,270].map(a=>`<div class="obtn ${b.yaw===a?"sel":""}" data-yaw="${a}">${a}°</div>`).join("")}</div></div>
-    <div class="fld"><label>วัสดุ</label><div class="tones" id="f_tones"></div></div>
+    <!-- v32.2: แถวเลือกโทนไม้รายชิ้นถูกเอาออก — ผูก Surface ที่หน้า Element แล้วสีจริงมาเอง -->
     <div class="fld"><label>งานเจาะ / เซาะร่อง</label>
       <div class="ibtns"><button class="ibtn" id="f_hole">＋ เจาะรู (${(b.holes||[]).length})</button><button class="ibtn" id="f_groove">＋ ร่อง (${(b.grooves||[]).length})</button><button class="ibtn" id="f_2d">🗎 Preview 2D</button></div>
       ${((b.holes||[]).length||(b.grooves||[]).length)?'<button class="ibtn" id="f_clrfeat" style="margin-top:8px">ล้างรู/ร่องทั้งหมด</button>':''}
@@ -11420,11 +11450,8 @@ function showInspector(){
       </div>
       <button class="ibtn" id="f_mergePart" style="width:100%;margin-top:5px">🔗 รวมชิ้นนี้เข้าตู้อื่น</button>
       <div style="font-size:11px;opacity:.6;margin-top:5px;line-height:1.5">คัดลอกชิ้นจากตู้ที่ทำไว้แล้ว → คลิกชิ้นในตู้ปลายทาง → วาง · เลือก “ยืดให้พอดีตู้ใหม่” แผงหน้าจะเต็มหน้าตู้ใหม่เองแม้ขนาดต่างกัน</div></div>`;
-  // tones
-  const tw=body.querySelector("#f_tones");
-  TONES.forEach((t,i)=>{const el=document.createElement("div");el.className="tone"+(toneOf(b)===i?" sel":"");
-    el.style.background=`linear-gradient(135deg,${t.light},${t.base} 55%,${t.grain})`; el.title=t.name;
-    el.onclick=()=>{b.tone=i;showInspector();render3D(false);renderList();autosave();commit();}; tw.appendChild(el);});
+  /* v32.2: ไม่มีแถวโทนไม้ในแผงขวาแล้ว — ค่า b.tone ที่เคยตั้งไว้ยังอยู่ในไฟล์เก่าและยังใช้ได้
+     แต่ไม่มีที่ให้กดตั้งใหม่ เพราะสีจริงมาจาก Surface ซึ่งถูกกว่าและตรงกับของที่ผลิตจริง */
   // dims/pos inputs
   /* v7.37: เปลี่ยน "หนา" ของหน้าบาน/แผงปิด ต้องอ้างผิวที่ติดตู้ ไม่ใช่กึ่งกลางแผ่น
      เดิมกล่องขยายออกสองข้างเท่า ๆ กัน บานหนาขึ้น 2 มม. = จมเข้าไปในตู้ 1 มม. ทุกครั้ง
@@ -11787,7 +11814,8 @@ function groupifyInspector(body){
   try{ if(!body||body.dataset.grouped)return; const kids=Array.prototype.slice.call(body.children); if(kids.length<6)return;
     const GROUPS=[
       {key:"size",name:"\ud83d\udccf ขนาด · ตำแหน่ง · ชื่อ",open:true,kw:["ขนาด","ตำแหน่ง","วางตามระยะ","หมุน","มุมโค้ง","ชื่อ","รหัสตู้"],ids:["f_L","f_W","f_T","f_adj","f_x","f_y","f_z","g_datum","f_name","f_cab","f_yaw"]},
-      {key:"mat",name:"\ud83c\udfa8 วัสดุ · ผิว · ขอบ",open:false,kw:["วัสดุ","ผิว","ขอบ"],ids:["f_tones"]},
+      /* v32.2: กลุ่มนี้มีแค่แถวโทนไม้ตัวเดียว พอเอาออกก็เหลือหัวข้อเปล่าให้กดแล้วไม่มีอะไร จึงถอดทั้งกลุ่ม
+         เรื่องผิวกับขอบอยู่ที่ Element → Surfaces / Edges ซึ่งเป็นที่ของมันจริง ๆ */
       {key:"struct",name:"\ud83e\udeb5 ชั้น · เสา · คาน · ราวแขวน",open:false,kw:["ชั้น","เสา","คาน","ล็อคลึก","แบ่ง","ราวแขวน","ปรับระดับ"],ids:["f_shelf","f_div","f_dwall","f_supTy","f_pinPitch","f_rail","f_hangRail","f_depthFix","f_divDepth","f_setback","f_toFixed","f_redoDrw"]},
       {key:"drill",name:"\ud83d\udd29 เจาะ · Connector · Fitting",open:false,kw:["เจาะ","ร่อง","เดือย","มินิฟิก","สกรู","บานพับ","Fitting","แปะ","Connector"],ids:["f_fit3d","attachCab"]},
       {key:"misc",name:"\ud83d\uddc4\ufe0f ตู้ · จัดการ",open:false,kw:["ตู้","Cabinet"],ids:[]}
@@ -21549,7 +21577,7 @@ function importCabinetFile(){
     const r=new FileReader();
     r.onload=()=>{ try{
       const d=JSON.parse(r.result);
-      if(!d||d.app!=="furnitech-cab"||!Array.isArray(d.boards)||!d.boards.length){ toast("ไฟล์ไม่ใช่ตู้ Furnitech (.json)"); return; }
+      if(!d||d.app!=="furnitech-cab"||!Array.isArray(d.boards)||!d.boards.length){ toast("ไฟล์ไม่ใช่ตู้ WoodX (.json)"); return; }
       syncUid(); const inst=uid(); const code=d.name||"CAB";
       const idMap={};
       const boards=d.boards.map(b=>{ const nid=uid(); if(b.id!=null)idMap[b.id]=nid; return Object.assign({yaw:0,tone:null,r:0,holes:[],grooves:[],connectors:[],surfT:"",surfB:"",edges:["No Edge","No Edge","No Edge","No Edge"]},JSON.parse(JSON.stringify(b)),{id:nid,cab:code,cabInst:inst}); });
@@ -23083,7 +23111,7 @@ async function shareLinkDialog(){
   const n=(state.boards||[]).length;
   if(!n){ toast("ยังไม่มีงานให้แชร์"); return; }
   const url0=String(SB_URL_DEFAULT).replace(/\/+$/,"");
-  const ttl=(()=>{ const g=(state.boards||[]).find(b=>b&&b.cab); return g?String(g.cab):"Furnitech"; })();
+  const ttl=(()=>{ const g=(state.boards||[]).find(b=>b&&b.cab); return g?String(g.cab):"WoodX"; })();
   /* ───────── v27.4: ลิงก์ต้องชี้ไปที่ "เว็บ" ไม่ใช่ไฟล์ในเครื่องตัวเอง ─────────
      เปิดโปรแกรมจากไฟล์ในเครื่อง ลิงก์ที่สร้างจะขึ้นต้นด้วย file แล้วตามด้วยพาธในเครื่อง
      ตัวเองกดแล้วเปิดได้เพราะไฟล์อยู่ในเครื่องตัวเอง แต่คนอื่นเปิดไม่ได้เลย เบราว์เซอร์ห้าม
@@ -23351,7 +23379,7 @@ function boardToMPR(b, side){   // side=1/2 → เอาเฉพาะรู�
   ].forEach(v=>{ P(v); P('KM=""'); });
   P('<100 \\Werkstck\\'); P('LA="l"'); P('BR="b"'); P('DI="d"'); P('FNX="FNX_EXP"'); P('FNY="FNY_EXP"'); P(''); P('RNX="0"'); P('RNY="0"'); P('RNZ="0"'); P(''); P('AX="AX_EXP"'); P('AY="AY_EXP"'); P(''); P('');
   P('<101 \\Kommentar\\');
-  P('KM="MPR_PP\t: Furnitech "');
+  P('KM="MPR_PP\t: WoodX "');
   P('KM="Name\t: '+(b.name||b.id||'')+' "');
   P('KM="Order\t: '+((b.cab||'')+(b.cabInst?(' / '+b.cabInst):''))+' "');
   P('KM="Date\t: '+new Date().toLocaleDateString('en-GB')+' "');
@@ -23533,7 +23561,7 @@ function exportAllMPR(){
 function exportJSON(){
   /* v11.2: ไฟล์โปรเจกต์เคยเก็บแค่ชิ้นงาน ค่าที่ผูกกับตู้ (เส้นโปรไฟล์ · สี · ตัวแปร) จึงหายไปกับไฟล์
      เปิดไฟล์กลับมาแล้วเส้นโปรไฟล์หายทั้งงาน เพราะตัวสร้างเส้นไม่เจอรายการว่าตู้ไหนติดอะไรไว้ */
-  download("board-forge-project.json",JSON.stringify({boards:state.boards,globalTone:state.globalTone,
+  download("woodx-project.json",JSON.stringify({boards:state.boards,globalTone:state.globalTone,
     bcSeq:state.bcSeq,bcMax:state.bcMax,orderLines:state.orderLines,cabDP:state.cabDP,
     cabDX:state.cabDX,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt},null,2),
     "application/json");
@@ -24065,11 +24093,11 @@ function buildImosData(){
   /* v28.3: Accessory จากแท็บเส้น ไม่ได้สังกัดตู้ใบไหน จึงต่อท้ายใบแรกครั้งเดียว
      ผ่านตัวกางลูกเหมือนของอื่น รหัสชุดที่ตั้งไว้ว่าออกเฉพาะลูกจึงถูกกางให้ด้วย */
   try{ const lr=expandFitKids(orderLineRows().map(f=>Object.assign({},f,{purchase:fittingOut(f.art),_pidList:fitPidList(f.art)})));
-    if(lr.length){ if(!groups.length) groups.push({name:oid||"Furnitech", rows:[]});
+    if(lr.length){ if(!groups.length) groups.push({name:oid||"WoodX", rows:[]});
       lr.forEach(f=>groups[0].rows.push({_tp:8,TYP:"8",NAME:f.purchase||f.art,ARTICLE_ID:f.purchase||f.art,
         ORDER_ID:f.purchase||f.art,_FG_NAME:f.name,LENGTH:"",CNT:String(f.count),_FG_UNIT:f.unit})); }
   }catch(e){ console.error("lineRows:",e); }
-  if(!groups.length) groups.push({name:oid||"Furnitech", rows:[]});
+  if(!groups.length) groups.push({name:oid||"WoodX", rows:[]});
   return { orderID:oid, cabinets:cabGroups().map(g=>({article:g.cab,productId:g.productId})), itemIdSet:itemIdSet(), source:"boardforge", loaded:new Date().toLocaleString("th"),
            groups, _boardforge:buildExport() };
 }
@@ -24381,7 +24409,47 @@ function exportCSV(){ let csv="OrderID,ProductID,Cabinet,PartNo,PartName,ยา�
   const oid=orderId(); cabGroups().forEach(g=>{ g.boards.filter(b=>!isGuide(b)).forEach((b,i)=>{ ensurePartProps(b); const el=effLinks(b);
     csv+=`${oid},${g.productId},${g.cab},${i+1},"${String(b.name||"").replace(/"/g,'""')}",${Math.round(b.L)},${Math.round(b.W)},${Math.round(b.T)},${resolveLink(el.mat,b)||""},${((b.L*b.W)/1e6).toFixed(4)}\n`; }); });
   download("cut-list.csv","\uFEFF"+csv,"text/csv"); toast("ดาวน์โหลด .csv แล้ว"); }
-function exportPNG(){const a=document.createElement("a");a.download="board-forge.png";a.href=renderer.domElement.toDataURL("image/png");a.click();toast("บันทึกภาพแล้ว");}
+function exportPNG(){const a=document.createElement("a");a.download="woodx.png";a.href=renderer.domElement.toDataURL("image/png");a.click();toast("บันทึกภาพแล้ว");}
+/* ───────── v31.2: ภาพพื้นสำหรับเอาไปเรนเดอร์ต่อด้วย AI ─────────
+   ปุ่มบันทึกภาพเดิมถ่ายหน้าจอตามที่เห็น ได้กริด เส้นบอกระยะ ตัวเลข และพื้นหลังสีเทามาด้วย
+   ภาพแบบนั้นเอาไปให้ AI ต่อภาพไม่ได้ เพราะมันจะเก็บกริดกับตัวเลขไว้ในภาพที่เรนเดอร์ออกมา
+   ตัวนี้ปิดของที่ไม่ใช่ตัวตู้ทั้งหมด ถ่ายที่ความละเอียดสูงกว่าจอ และพื้นหลังโปร่งใส
+   เรขาคณิตกับสีจึงเป็นของจริงจากฉาก ไม่ใช่ของที่ AI เดาเอง เหลือแค่ให้มันเติมห้องกับแสง */
+function exportPlatePNG(scale){
+  if(noGL||!renderer||!camera){ toast("โหมดนี้ต้องใช้ 3D"); return; }
+  const k=Math.max(1,Math.min(4,+scale||3));
+  const w0=innerWidth, h0=innerHeight;
+  const oldRatio=renderer.getPixelRatio?renderer.getPixelRatio():1;
+  const oldClear=renderer.getClearAlpha?renderer.getClearAlpha():1;
+  const gridWas=grid?grid.visible:null;
+  const labelWas=state.showLabels, dimWas=state.showGrain;
+  const hid=[];
+  try{
+    if(grid) grid.visible=false;
+    /* ซ่อนทุกอย่างที่ไม่ใช่แผ่นงาน — เส้นวัด ป้าย ลูกศร เส้นแกน */
+    scene.traverse(o=>{ if(!o||o.visible===false) return;
+      const nm=String(o.name||"");
+      if(o.isLine||o.isLineSegments||o.isSprite||/^(dim|measure|axis|helper|guide|hud)/i.test(nm)){
+        hid.push(o); o.visible=false; } });
+    if(state.showLabels){ state.showLabels=false; }
+    renderer.setPixelRatio(k);
+    renderer.setClearAlpha(0);
+    renderer.render(scene,camera);
+    const url=renderer.domElement.toDataURL("image/png");
+    const a=document.createElement("a");
+    a.download=(function(){ try{ return String(orderId()||"woodx").replace(/[^\w.-]+/g,"_"); }catch(e){ return "woodx"; } })()+"_plate.png";
+    a.href=url; a.click();
+    toast("บันทึกภาพพื้นแล้ว "+Math.round(w0*k)+"×"+Math.round(h0*k)+" px · พื้นหลังโปร่งใส ไม่มีกริดและเส้นบอกระยะ");
+  }catch(e){ console.error("exportPlatePNG:",e); toast("บันทึกภาพพื้นไม่สำเร็จ — ดู console"); }
+  finally{
+    hid.forEach(o=>{ try{ o.visible=true; }catch(e){} });
+    if(grid&&gridWas!=null) grid.visible=gridWas;
+    state.showLabels=labelWas; state.showGrain=dimWas;
+    try{ renderer.setClearAlpha(oldClear); renderer.setPixelRatio(oldRatio);
+      renderer.setSize(innerWidth,innerHeight); }catch(e){}
+    invalidate(); sync(0);
+  }
+}
 
 function expCellTxt(link,board,isEdge,isSurf){ if(!link) return {t:"—",w:false};
   const code=resolveLink(link,board);
@@ -24432,7 +24500,10 @@ function renderCutList(){
 }
 
 /* ---------- bottom bar + chrome ---------- */
-function buildGTones(){const w=$("gtones");w.innerHTML="";TONES.forEach((t,i)=>{const el=document.createElement("div");el.className="gtone"+(i===state.globalTone?" sel":"");el.style.background=`linear-gradient(135deg,${t.light},${t.base})`;el.title=t.name;el.onclick=()=>{state.globalTone=i;buildGTones();sync(0);};w.appendChild(el);});}
+/* v32.2: แถวเลือกโทนไม้ถูกเอาออกจากแถบล่างแล้ว ตัวนี้จึงไม่มีอะไรให้วาด
+   เก็บฟังก์ชันไว้เป็นตัวเปล่า เพราะมีคนเรียกอยู่สิบกว่าที่ทั่วโปรแกรม
+   ไล่ลบทุกที่ตอนนี้เสี่ยงพลาดกว่าปล่อยให้เรียกแล้วไม่ทำอะไร */
+function buildGTones(){ const w=$("gtones"); if(w) w.innerHTML=""; }
 /* ───────── v27.0: เก็บประวัติแจ้งเตือนไว้อ่านย้อนหลัง ─────────
    ข้อความเตือนขึ้นแล้วหายไปใน 2.6 วินาที เปิดไฟล์ทีมีขึ้นหลายอันติดกัน อ่านไม่ทัน
    หลายอันเป็นเรื่องสำคัญ เช่น หน้าบานคร่อมเสา หรือรางไฟถูกตัดเพราะอะไร
@@ -24580,6 +24651,7 @@ function bindChrome(){
   $("exProdJson").onclick=exportProductionJSON;
   $("exSupa").onclick=sendSupabase;
   $("exPng").onclick=exportPNG;
+  { const ep=$("exPlate"); if(ep) ep.onclick=()=>exportPlatePNG(3); }   // v31.2
   $("cutBtn").onclick=()=>{renderCutList();$("cutModal").classList.add("show");};
   $("libBtn").onclick=()=>{renderLibrary();renderCloudParts();$("libModal").classList.add("show");};
   $("btnSavePartCloud").onclick=async()=>{ const b=selBoard(); if(!b){toast("เลือกชิ้นก่อน แล้วกดบันทึก");return;} if(await cloudSavePart(b))renderCloudParts(); };
@@ -26472,7 +26544,7 @@ const CurvedShelf = (function(){
 
 <!-- startup loader (Production-style) -->
 <div class="modal" id="loaderModal"><div class="card" style="width:min(640px,96vw)">
-  <div class="mh"><h3>เปิดงาน — Furnitech</h3><button class="closeX" data-close>&times;</button></div>
+  <div class="mh"><h3>เปิดงาน — WoodX</h3><button class="closeX" data-close>&times;</button></div>
   <div class="mbody" id="loaderBody"></div>
 </div></div>
 
