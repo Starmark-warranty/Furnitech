@@ -1646,9 +1646,10 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"34.0", build:"2026-08-18/user-levels",
+  name:"StarNexus Cabinet", version:"34.1", build:"2026-08-18/user-levels-fix",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["34.1","2026-08-18","FIX เวลาเข้าใช้ล่าสุดว่างตลอด ทั้งที่เป็นข้อมูลที่อยากได้ที่สุด — ตัวสร้างคำขอของ supabase-js เป็น thenable มันจะยิงจริงตอนถูก await หรือ .then เท่านั้น v34.0 เขียน db.rpc(\"sx_touch\") ทิ้งไว้เฉย ๆ คำขอจึงไม่เคยออกจากเครื่องเลยสักครั้ง ไม่มี error ให้เห็นด้วย · FEAT เพิ่มปุ่มเปลี่ยนรหัสผ่านในเมนูผู้ใช้ — v34.0 บอกให้รีบเปลี่ยนรหัสตั้งต้นแต่ไม่ได้ทำที่ให้เปลี่ยน · หน้าจัดการผู้ใช้โชว์ ใช้งานล่าสุด ต่อคน (ดึงค่ามาแล้วแต่ไม่เคยแสดง)"],
     ["34.0","2026-08-18","FEAT ระบบผู้ใช้ 4 ระดับ + ปิดรูรั่วคลาวด์ที่เปิดโล่งมาตลอด — เดิมทุกตารางเปิด policy ALL/true ให้ anon และ anon key ฝังอยู่ในไฟล์ HTML ตรง ๆ ใครถือไฟล์จึงลบตู้ทั้ง 245 ใบได้โดยไม่ต้องเปิดโปรแกรมด้วยซ้ำ ยิง REST ตรงก็ได้ และไม่มีทางรู้เลยว่าใครเข้ามาทำอะไร · ตอนนี้ต้องล็อกอินก่อนถึงบูต ใช้ Supabase Auth และสิทธิ์บังคับจริงด้วย RLS ฝั่งเซิร์ฟเวอร์ ไม่ใช่ซ่อนปุ่มในหน้าจอ (กด F12 ก็ไม่ผ่าน) · ระดับ 1 เจ้าของ ทำได้ทุกอย่าง + จัดการผู้ใช้ · 2 รอง เพิ่ม/แก้/ลบได้ทั้งหมด แต่จัดการผู้ใช้ไม่ได้ · 3 เพิ่มได้ แก้ได้เฉพาะของที่ตัวเองเพิ่ม ลบไม่ได้ · 4 ดูอย่างเดียว · สมัครเองได้แต่เข้าไม่ได้จนเจ้าของกดอนุมัติและตั้งระดับให้ · เตะออกแล้วหลุดจริงภายใน 30 วินาที ไม่ใช่รอปิดโปรแกรม · การ์ดสิทธิ์ดักที่ตัวไคลเอนต์จุดเดียว (sxGuardDB) แทนการไล่ใส่ทีละปุ่ม 20 จุดแล้วลืมจุดใดจุดหนึ่ง · ต่อคลาวด์ไม่ได้ = เข้าโหมดออฟไลน์ได้ แต่แตะคลาวด์ไม่ได้เลย · ตาราง fitting_global ยังเปิดอ่านแบบเดิม เพราะ Production V2 ใช้ร่วมอยู่"],
     ["33.8","2026-08-18","FEAT วางตามระยะอ้างอิง แยก กึ่งกลางตู้ (เท่าๆ ทั้งใบ) กับ กึ่งกลางช่องที่อยู่ (เท่าๆ ในช่อง) — ของเดิมมีกึ่งกลางอันเดียว คิดจากบนแผ่นพื้นถึงใต้ฝาบน/ใต้คานเสมอ ซึ่งถูกตอนตู้ยังเป็นช่องเดียว พอแบ่งช่องไว้แล้วสั่งกึ่งกลาง ชิ้นจะกระโดดข้ามชั้นอื่นไปกลางตู้ ไม่ใช่กลางช่องของตัวเอง และไม่มีทางสั่งกลางช่องได้เลย · โหมดใหม่หาแผ่นนอน/คาน/เส้นแบ่งที่ขนาบชิ้นอยู่จริงตอนนี้ แล้ววางกึ่งกลางระหว่างสองตัวนั้น ช่องที่ได้ไม่ต้องมีอยู่ก่อน ขอแค่ชิ้นอยู่ตรงไหนก็คิดจากตรงนั้น · แนวกว้างมีคู่กัน (กึ่งกลางช่องของแผ่นตั้ง) นับเฉพาะแผ่นตั้งที่สูงคร่อมชิ้นจริง ขาตู้/เสาเตี้ยจึงไม่มาบีบช่อง · ทั้งสองโหมดยึดกึ่งกลางของชิ้นเอง ช่องสองข้างจึงเท่ากันเป๊ะ ไม่ต้องหักครึ่งความหนาเอง ช่องระยะกับปุ่มผิวใกล้/ผิวไกลถูกปิดไว้ตอนเลือกโหมดนี้ และป้ายล็อกเลิกโชว์ตัวเลขที่ไม่ได้ใช้ · FIX รายการอ้างอิงของแผ่นตั้ง (ซ้าย/ขวา/ขอบนอก/กึ่งกลาง) ไม่เคยใส่ selected เปิดแผงขวาทีไรก็เด้งกลับไปเลือกตัวแรกทุกครั้ง ทั้งที่ล็อกโหมดอื่นไว้ · ย้ายชื่อโหมดทั้งหมดมาไว้ที่ DATUM_LABEL ที่เดียว เดิมพิมพ์ซ้ำ 5 จุด"],
     ["33.7","2026-08-18","FIX ชั้นปรับหดเหลือ 20 มม. ไปเกาะอยู่หลังคาน DX — findBackPanelGeom กันแค่ isRail ซึ่งดู b.rule.kind ส่วนคาน DX เก็บกฎไว้ที่ _dxRule จึงไม่ถูกนับเป็นคาน · DX Back เป็น orient front หนา 9 มม. ตรงเงื่อนไข “แผ่นบางตามแกนลึก ≤ 30” ทุกข้อ ตู้ที่ยังไม่ใส่แผ่นหลัง ตอนเพิ่มชั้นปรับจึงได้ backZ = ผิวหน้า DX Back ความลึกเหลือติดลบ โดน clamp เป็น 20 มม. แล้วไปนั่งชิดหน้าตู้ รูพินสองแถวก็เจาะห่างกันแค่ 10 มม. · ตอนนี้ findBackPanelGeom ตัด _dx/_dwall/_door/_virtual ทิ้งทั้งหมด และเติม !_dx ให้ตัวหาแผ่นหลังอีก 3 จุด (setDividerDepthFix / addDivider / หาความหนาแผ่นหลังตอนเซาะร่อง) · ตู้ที่ไม่มีแผ่นหลังเลย ชั้นจะยืดถึงหลังตู้ตามเดิม"],
@@ -25120,7 +25121,9 @@ async function sxLoadProfile(db){
   if(r.error||!r.data) return false;
   if(!r.data.approved) return "pending";
   SX.user=r.data; SX.lvl=+r.data.lvl||4; SX.offline=false;
-  try{ db.rpc("sx_touch"); }catch(e){}
+  /* v34.1: ตัวสร้างคำขอของ supabase-js เป็น thenable — ไม่ .then/await มันไม่ยิงจริง
+     เขียนไว้เฉย ๆ แบบเดิม last_seen จึงว่างตลอด ซึ่งคือข้อมูลที่อยากได้ที่สุด (ใครเข้าเมื่อไหร่) */
+  try{ db.rpc("sx_touch").then(()=>{},()=>{}); }catch(e){}
   return true; }
 
 /* ประตูหน้าสุด — บูตต่อเมื่อผ่านแล้วเท่านั้น */
@@ -25169,15 +25172,49 @@ function sxMenu(){
   sxOverlay('<div style="font:700 16px system-ui;margin-bottom:4px">'+sxEsc(SX.lvl?SX.user.display_name:"โหมดออฟไลน์")+'</div>'+
     '<div style="font-size:12.5px;color:#5f5f66;margin-bottom:14px">'+sxEsc(SX.lvl?(SX.user.email+" · ระดับ "+SX.lvl+" "+SX_LVL[SX.lvl].n):"ยังไม่ได้เข้าสู่ระบบ")+'</div>'+
     (sxCan("admin")?'<button id="sxAdm" style="'+SX_BTN+';margin-bottom:8px">จัดการผู้ใช้</button>':"")+
+    (SX.lvl?'<button id="sxPwd" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f;margin-bottom:8px">เปลี่ยนรหัสผ่าน</button>':"")+
     (SX.lvl?'<button id="sxOut" style="'+SX_BTN+';background:#fff;color:#a3241c;border:1px solid rgba(255,59,48,.35);margin-bottom:8px">ออกจากระบบ</button>':"")+
     '<button id="sxBack" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f">ปิด</button>');
   const q=id=>document.getElementById(id);
   if(q("sxAdm")) q("sxAdm").onclick=sxAdminUI;
+  if(q("sxPwd")) q("sxPwd").onclick=sxPwdUI;
   if(q("sxOut")) q("sxOut").onclick=async()=>{ const db=await getDB(); await db.auth.signOut();
     SX.lvl=0; SX.user=null; sxBadge(); sxClose(); await sxLoginUI(db,"ออกจากระบบแล้ว"); sxBadge(); sxWatch(db); };
   q("sxBack").onclick=sxClose; }
 
+/* ---------- เปลี่ยนรหัสผ่านของตัวเอง ---------- */
+function sxPwdUI(note,bad){
+  sxOverlay('<div style="font:700 16px system-ui;margin-bottom:12px">เปลี่ยนรหัสผ่าน</div>'+
+    (note?'<div style="padding:9px 11px;border-radius:9px;font-size:12.5px;margin-bottom:10px;background:'+
+      (bad?"rgba(255,59,48,.10);color:#a3241c":"rgba(40,200,64,.14);color:#1c7a2c")+'">'+sxEsc(note)+'</div>':"")+
+    '<label style="font-size:12px;color:#5f5f66">รหัสผ่านใหม่ (อย่างน้อย 6 ตัว)</label>'+
+    '<input id="sxP1" type="password" autocomplete="new-password" style="'+SX_INP+'">'+
+    '<label style="font-size:12px;color:#5f5f66">พิมพ์ซ้ำอีกครั้ง</label>'+
+    '<input id="sxP2" type="password" autocomplete="new-password" style="'+SX_INP+'">'+
+    '<button id="sxGo" style="'+SX_BTN+'">บันทึกรหัสใหม่</button>'+
+    '<button id="sxBack" style="'+SX_BTN+';background:#eef0f5;color:#1d1d1f;margin-top:8px">ยกเลิก</button>');
+  const q=id=>document.getElementById(id);
+  q("sxBack").onclick=sxMenu;
+  const go=async()=>{
+    const a=q("sxP1").value||"", b=q("sxP2").value||"";
+    if(a.length<6){ sxPwdUI("รหัสผ่านสั้นเกินไป",true); return; }
+    if(a!==b){ sxPwdUI("พิมพ์ซ้ำไม่ตรงกัน",true); return; }
+    q("sxGo").disabled=true; q("sxGo").textContent="กำลังบันทึก…";
+    try{ const db=await getDB(); const r=await db.auth.updateUser({password:a});
+      if(r.error) throw r.error;
+      sxPwdUI("เปลี่ยนรหัสแล้ว — ครั้งหน้าใช้รหัสใหม่");
+    }catch(e){ sxPwdUI(sxErrTh(e),true); } };
+  q("sxGo").onclick=go;
+  [q("sxP1"),q("sxP2")].forEach(i=>i.onkeydown=e=>{ if(e.key==="Enter") go(); });
+  setTimeout(()=>{ try{ q("sxP1").focus(); }catch(e){} },30); }
+
 /* ---------- หน้าจัดการผู้ใช้ (เฉพาะระดับ 1) ---------- */
+function sxWhen(t){ if(!t) return "ยังไม่เคยเข้า";
+  const d=new Date(t), m=(Date.now()-d.getTime())/60000;
+  if(m<1) return "เมื่อครู่นี้";
+  if(m<60) return Math.round(m)+" นาทีที่แล้ว";
+  if(m<1440) return Math.round(m/60)+" ชม.ที่แล้ว";
+  return d.toLocaleString("th-TH",{dateStyle:"short",timeStyle:"short"}); }
 async function sxAdminUI(){
   if(!sxCan("admin")){ toast("เฉพาะเจ้าของเท่านั้น"); return; }
   const db=await getDB();
@@ -25187,7 +25224,8 @@ async function sxAdminUI(){
       const me=p.id===SX.user.id;
       return '<tr data-id="'+p.id+'" style="border-top:1px solid rgba(0,0,0,.08)">'+
         '<td style="padding:7px 6px"><div style="font-weight:600">'+sxEsc(p.display_name)+(me?' <span style="font-size:10px;color:#E8901F">(คุณ)</span>':"")+'</div>'+
-        '<div style="font-size:11px;color:#8a8a90">'+sxEsc(p.email||"")+'</div></td>'+
+        '<div style="font-size:11px;color:#8a8a90">'+sxEsc(p.email||"")+'</div>'+
+        '<div style="font-size:10.5px;color:#8a8a90">ใช้งานล่าสุด: '+sxEsc(sxWhen(p.last_seen))+'</div></td>'+
         '<td style="padding:7px 6px"><select class="sxL" '+(me?"disabled":"")+' style="padding:5px;border-radius:7px;border:1px solid rgba(0,0,0,.16);font:12px system-ui">'+
           [1,2,3,4].map(n=>'<option value="'+n+'"'+(+p.lvl===n?" selected":"")+'>'+n+" · "+SX_LVL[n].n+'</option>').join("")+'</select></td>'+
         '<td style="padding:7px 6px;text-align:right;white-space:nowrap">'+
