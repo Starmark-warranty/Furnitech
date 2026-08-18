@@ -957,7 +957,7 @@
   /* ===== title/toolbar (macOS unified) ===== */
   #titlebar{position:fixed;top:0;left:0;right:0;height:var(--tb);z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;
     padding:0 14px;background:var(--panel);backdrop-filter:blur(26px) saturate(1.8);-webkit-backdrop-filter:blur(26px) saturate(1.8);border-bottom:.5px solid var(--line)}
-  .tb-left{display:flex;align-items:center;gap:14px;min-width:0}
+  .tb-left{display:flex;align-items:center;gap:14px;min-width:0;overflow:hidden}/* v34.5: min-width:0 ทำให้กล่องยอมหด แต่ข้างในเป็น nowrap เนื้อหาจึงล้นออกไปทับแถบปุ่มแทน ที่ผ่านมาไม่เห็นเพราะข้างในมีแค่โลโก้กับเลขเวอร์ชัน พอเติมป้ายผู้ใช้เข้าไปก็ทับทันที */
   /* ───────── v32.1: โลโก้เต็มแทนจุดสามสี ─────────
      จุดสามสีเป็นของยืมหน้าตาหน้าต่างระบบมา ไม่ได้ทำอะไรเลยสักปุ่ม กดก็ไม่ติด
      กินที่หัวโปรแกรมไปเปล่า ๆ ทั้งที่ตรงนั้นคือที่ที่โลโก้ควรอยู่
@@ -1646,9 +1646,10 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"34.4", build:"2026-08-18/employee-id",
+  name:"StarNexus Cabinet", version:"34.5", build:"2026-08-18/perm-and-header-fix",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["34.5","2026-08-18","FIX เปลี่ยนระดับ/กดอนุมัติแล้วขึ้น permission denied for table profiles ทำอะไรไม่ได้เลย — ตาราง profiles ถูกสร้างไว้ตั้งแต่ก่อนหน้านี้โดยไม่เคยให้สิทธิ์ UPDATE กับ authenticated policy sx_prof_edit จึงไม่เคยมีโอกาสได้ทำงาน เพราะโดนด่านสิทธิ์ระดับตาราง (GRANT) ตัดก่อน ซึ่งเป็นคนละชั้นกับ RLS และขึ้นข้อความคนละแบบ ทำให้หลงไปแก้ policy ผิดจุด · FIX ป้ายผู้ใช้ล้นไปทับแถบปุ่มบนหัวโปรแกรม — .tb-left ตั้ง min-width:0 ให้กล่องยอมหด แต่ข้างในเป็น nowrap เนื้อหาจึงล้นออกไปทับแทนที่จะถูกบีบ ที่ผ่านมาไม่เห็นเพราะข้างในมีแค่โลโก้กับเลขเวอร์ชัน พอเติมป้ายผู้ใช้กับป้ายรออนุมัติเข้าไปก็ทับทันที · ตอนนี้กล่องตัดส่วนเกินจริง ป้ายผู้ใช้ยาวสุด 190px แล้วต่อด้วย … ระดับสิทธิ์ย้ายไปอยู่ใน tooltip และป้ายรออนุมัติย่อเหลือ 🔔 n · FEAT เครื่องที่ยังไม่เคยมีใครล็อกอินสำเร็จ เปิดมาเจอแท็บสมัครใหม่เลย ไม่ใช่แท็บเข้าสู่ระบบเปล่า ๆ ที่ไม่บอกว่าต้องเอารหัสมาจากไหน · แปลข้อความ permission denied เป็นภาษาคน"],
     ["34.4","2026-08-18","เข้าระบบด้วยรหัสพนักงาน ไม่ต้องใช้อีเมลอีกแล้ว — ช่างส่วนใหญ่ไม่มีอีเมลบริษัท ที่ผ่านมาต้องกรอกอีเมลปลอมซึ่งจำไม่ได้อยู่ดี · Supabase Auth บังคับให้มีอีเมลเสมอ จึงแปลงเป็นอีเมลภายในตายตัว <รหัสพนักงาน>@staff.local อยู่หลังบ้าน ผู้ใช้ไม่เคยเห็น · รหัสพนักงานห้ามซ้ำ ไม่สนตัวพิมพ์เล็กใหญ่ (EMP001 กับ emp001 คือคนเดียวกัน) · หน้าสมัครบังคับกรอกชื่อ-สกุลและพิมพ์รหัสผ่านซ้ำสองครั้ง เพราะไม่มีอีเมลให้กู้คืน พิมพ์ผิดตั้งแต่แรกจะเข้าไม่ได้เลยแล้วผู้ดูแลก็ไม่รู้ว่าคนที่ขอมาคือใคร · บัญชีเจ้าของย้ายมาระบบเดียวกันแล้ว เข้าด้วยรหัสพนักงาน admin รหัสผ่านเดิม · FEAT แจ้งเตือนคำขอเข้าใช้งาน — เจ้าของเห็นป้ายส้ม รออนุมัติ n บนหัวโปรแกรม กดแล้วเข้าหน้าจัดการผู้ใช้ทันที พร้อมเด้งข้อความตอนเข้าโปรแกรมและตอนมีคำขอใหม่เข้ามาระหว่างทำงาน (เช็คทุก 30 วินาทีรอบเดียวกับตัวเช็คสิทธิ์) · หน้าจัดการผู้ใช้เปลี่ยนคอลัมน์อีเมลเป็นรหัสพนักงาน และค้นด้วยรหัสพนักงานได้"],
     ["34.3","2026-08-18","FEAT ปุ่ม รีเซ็ตรหัส ในหน้าจัดการผู้ใช้ — ลูกน้องลืมรหัสแล้วเดิมทำอะไรไม่ได้เลย เจ้าของก็ดูรหัสเดิมไม่ได้เพราะ bcrypt เป็นทางเดียว ทางเดียวที่เหลือคือลบบัญชีทิ้งแล้วให้สมัครใหม่ ซึ่งเสียประวัติทั้งหมด · ตอนนี้ตั้งรหัสใหม่ทับได้เลย สุ่มให้เป็นค่าตั้งต้น (ตัดอักษรที่อ่านสับสน 0 O o l 1 I ออก จะได้บอกทางโทรศัพท์ไม่ผิด) แก้เป็นรหัสที่ต้องการเองก็ได้ ตั้งเสร็จโชว์ครั้งเดียวพร้อมปุ่มคัดลอก · ตั้งใหม่แล้วลบ session เดิมของคนนั้นทิ้งด้วย ไม่งั้น token ที่ค้างอยู่บนเครื่องเก่ายังใช้ได้ทั้งที่รหัสเปลี่ยนไปแล้ว ซึ่งคือกรณีที่ต้องรีเซ็ตรหัสตั้งแต่แรก · บังคับสิทธิ์ในฟังก์ชันฝั่งเซิร์ฟเวอร์ (sx_reset_pw) เช็คว่าคนเรียกเป็นระดับ 1 จริง · FIX ตารางจัดการผู้ใช้จัดความกว้างคอลัมน์ใหม่ รับสองปุ่มท้ายแถวโดยไม่ตกบรรทัด"],
     ["34.2","2026-08-18","หน้าจัดการผู้ใช้เต็มจอ — เดิมยัดอยู่ในการ์ดกว้าง 420 ตารางถูกหนีบไว้ที่ 46vh ชื่อกับอีเมลกับเวลาใช้งานล่าสุดเลยต้องซ้อนกันสามบรรทัดในช่องเดียว อ่านยากตั้งแต่มีผู้ใช้ไม่กี่คน · ตอนนี้แยกเป็นคอลัมน์จริง (ชื่อ · อีเมล · ระดับ · สถานะ · ใช้งานล่าสุด · ลบ) หัวตารางค้างไว้ตอนเลื่อน ตารางยืดเต็มความสูงจอ ไม่เหลือที่ว่างข้างล่างเปล่า ๆ · เพิ่มช่องค้นชื่อ/อีเมล และตัวนับ รออนุมัติ ไว้บนหัว จะได้เห็นทันทีว่ามีคนรออยู่กี่คนโดยไม่ต้องไล่หา · sxOverlay รับโหมดเต็มจอ กล่องล็อกอิน/เปลี่ยนรหัสยังเป็นการ์ดเล็กเหมือนเดิม"],
@@ -25038,6 +25039,7 @@ function sxGuardDB(db){
   return db; }
 function sxErrTh(e){ const s=String((e&&(e.message||e.code))||e||"");
   if(/SX_DENIED/.test(s)) return "ไม่มีสิทธิ์ทำรายการนี้";
+  if(/permission denied for (table|relation)/i.test(s)) return "คลาวด์ไม่อนุญาต — บัญชีนี้ไม่มีสิทธิ์แตะตารางนั้น";
   if(/42501|row-level security|violates row-level/i.test(s)) return "คลาวด์ปฏิเสธ — ระดับของคุณแก้/ลบรายการนี้ไม่ได้";
   if(/JWT|token is expired|not authenticated/i.test(s)) return "หมดเวลาเข้าใช้งาน กรุณาล็อกอินใหม่";
   return s; }
@@ -25068,9 +25070,13 @@ const SX_INP="width:100%;box-sizing:border-box;padding:10px 12px;margin:4px 0 10
   "border-radius:9px;font:14px system-ui;background:#fbfbfd";
 const SX_BTN="width:100%;padding:11px;border:0;border-radius:9px;background:#1F3864;color:#fff;font:600 14px system-ui;cursor:pointer";
 
+function sxSeen(v){ try{ if(v===undefined) return localStorage.getItem("starnexus.seen")==="1";
+    localStorage.setItem("starnexus.seen","1"); }catch(e){ return false; } }
 function sxLoginUI(db,msg){
   return new Promise(resolve=>{
-    let mode="in";
+    /* v34.5: เครื่องที่ยังไม่เคยมีใครล็อกอินสำเร็จ = คนเปิดครั้งแรก เขาต้องสมัครก่อนอยู่แล้ว
+       เปิดมาเจอแท็บเข้าสู่ระบบเปล่า ๆ มีแต่ทำให้งงว่าต้องเอารหัสจากไหน */
+    let mode=sxSeen()?"in":"up";
     const draw=(note,noteBad)=>{
       const t=(k,l)=>'<button data-m="'+k+'" style="flex:1;padding:8px;border:0;border-bottom:2px solid '+
         (mode===k?"#1F3864":"transparent")+';background:none;font:600 13px system-ui;cursor:pointer;color:'+
@@ -25119,7 +25125,7 @@ function sxLoginUI(db,msg){
           const r=await db.auth.signInWithPassword({email:sxEmpMail(E),password:P});
           if(r.error){ draw(/Invalid login/i.test(r.error.message)?"รหัสพนักงานหรือรหัสผ่านไม่ถูกต้อง":sxErrTh(r.error),true); return; }
           const st=await sxLoadProfile(db);
-          if(st===true){ sxClose(); resolve(true); return; }
+          if(st===true){ sxSeen(true); sxClose(); resolve(true); return; }
           await db.auth.signOut();
           draw(st==="pending"?"บัญชีนี้ยังไม่ได้รับอนุมัติ — ติดต่อผู้ดูแล":"บัญชีนี้ถูกระงับสิทธิ์แล้ว",true);
         }catch(e){ draw(sxErrTh(e),true); }
@@ -25183,16 +25189,17 @@ function sxBadge(){
   el.style.cssText="margin-left:9px;padding:2px 9px;border-radius:999px;font-size:11px;cursor:pointer;"+
     "background:"+(SX.lvl===1?"rgba(232,144,31,.18)":SX.lvl?"rgba(31,56,100,.12)":"rgba(255,59,48,.12)")+
     ";color:"+(SX.lvl===1?"#8a5a11":SX.lvl?"#1F3864":"#a3241c");
-  el.textContent=SX.lvl?("👤 "+(SX.user.display_name||"")+" · "+L.n):"👤 ออฟไลน์";
-  el.title=SX.lvl?(sxEmpOf(SX.user)+" · "+L.d):"ยังไม่ได้เข้าสู่ระบบ — ใช้คลาวด์ไม่ได้";
+  el.style.cssText+=";max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:middle";
+  el.textContent=SX.lvl?("👤 "+(SX.user.display_name||"")):"👤 ออฟไลน์";      // ระดับย้ายไปอยู่ใน tooltip แทน หัวโปรแกรมแคบ
+  el.title=SX.lvl?(sxEmpOf(SX.user)+" · ระดับ "+SX.lvl+" "+L.n+" — "+L.d):"ยังไม่ได้เข้าสู่ระบบ — ใช้คลาวด์ไม่ได้";
   el.onclick=sxMenu;
   /* v34.4: เจ้าของต้องเห็นทันทีว่ามีคนขอเข้าใช้รออยู่ ไม่ใช่ต้องนึกได้เองแล้วเข้าไปเปิดดู */
   let dot=document.getElementById("sxPend");
   if(SX.pending>0&&sxCan("admin")){
     if(!dot){ dot=document.createElement("span"); dot.id="sxPend"; host.appendChild(dot); }
-    dot.style.cssText="margin-left:6px;padding:2px 8px;border-radius:999px;font:700 11px system-ui;cursor:pointer;"+
-      "background:#E8901F;color:#fff";
-    dot.textContent="รออนุมัติ "+SX.pending;
+    dot.style.cssText="margin-left:6px;padding:2px 7px;border-radius:999px;font:700 11px system-ui;cursor:pointer;"+
+      "background:#E8901F;color:#fff;white-space:nowrap;flex:none";
+    dot.textContent="🔔 "+SX.pending;
     dot.title="มีคนขอเข้าใช้งาน "+SX.pending+" คน — กดเพื่อเปิดหน้าจัดการผู้ใช้";
     dot.onclick=sxAdminUI;
   } else if(dot) dot.remove(); }
