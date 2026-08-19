@@ -1646,9 +1646,12 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"36.7", build:"2026-08-19/glass-hanger",
+  name:"StarNexus Cabinet", version:"37.0", build:"2026-08-19/glass-hanger-vertical",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["37.0","2026-08-19","FIX บากหูแขวนกระจกออกมาเป็นแนวนอน ทั้งที่ต้องเป็นแนวตั้งเสมอ — v36.7 หยิบค่าจากไฟล์ตัวอย่าง 2076 (LA=45 BR=18 · WI=-180) ซึ่งเป็นชุดแนวนอน ที่ถูกคือชุดของไฟล์ 2071 (LA=18 BR=45 · WI=0) บากยาวไปตามแกน Y ผมอ่านคำว่า แขวนไม้ด้านนอน ของ 2071 เป็นทิศของบาก ทั้งที่หมายถึงแนววางของแผ่น · ย้ายคำสั่งจากปุ่มในแผงขวาไปอยู่ในเมนูคลิกขวา หมวดใส่หูแขวน ที่เดียวกับหูแขวนตู้ลอย จะได้ไม่ต้องจำว่าอันไหนอยู่ที่ไหน พร้อมเมนูวางผังใหม่และเอาออก"],
+    ["36.9","2026-08-19","FIX แผ่นเดี่ยวที่เลือกแบบบานเดียวกับตู้ปกติ แต่ไม่ได้เฟรมอลูกับหน้าตัดมือจับตัดขนาด — ตัวสร้างเฟรมคัดด้วยธง _door ซึ่งติดให้เฉพาะบานที่เกิดจากผังบานหรือลิ้นชัก ตู้ LTF007 ที่ผูก Part FrontShapeP1 และเลือกรหัสแบบบานเดียวกับ WNL043 (xCAx129) เป๊ะ จึงถูกข้ามเงียบ ๆ ไม่มีข้อความบอกด้วยว่าทำไมไม่ขึ้น · เพิ่มตัวชี้ขาด isFrontPanel() ที่ดูจาก Part ที่ผูกไว้ว่ามีหน้าตัดเฟรมสั่งไว้หรือไม่ ปลอดภัยกว่าดูแนววาง เพราะแผ่นหลังก็ orient front เหมือนกันแต่ผูก Part 0000_Mat09 ซึ่งไม่มีหน้าตัด ใช้ตัวเดียวกันทั้งเฟรมอลู หน้าตัดมือจับ และมือจับ"],
+    ["36.8","2026-08-19","FEAT ใส่มือจับกับไม้แผ่นเดียวได้แล้ว — เดิมด่านคัดดูแค่ธง _door ซึ่งติดให้เฉพาะบานที่เกิดจากผังบานหรือลิ้นชัก แผ่นเดี่ยวที่ผูก Part แบบบานไว้เอง (เช่น FrontShapeP1) จึงถูกปฏิเสธ ทั้งที่เป็นหน้าบานทุกประการ ไม่ใช่ข้อจำกัดทางเทคนิค เป็นแค่เงื่อนไขที่เขียนแคบไป · ตอนนี้เปิดให้แผ่นที่วางแนวหน้าบาน (orient = front) สั่งใส่มือจับได้ · จุดที่ต้องระวังคือแผ่นหลังก็ orient front เหมือนกัน ถ้าปล่อยตามแนววางอย่างเดียวจะกลายเป็นหน้าบานไปทั้งคลัง ตัวเจาะกับตัวสร้างภาพ 3D จึงรับเพิ่มเฉพาะชิ้นที่ถูกสั่งใส่มือจับเองแล้วจริง ๆ ตู้เดิมทุกใบพฤติกรรมไม่เปลี่ยน"],
     ["36.7","2026-08-19","FEAT หูแขวนกระจก — วางผังเจาะอัตโนมัติตามขนาดแผ่น ปุ่มอยู่ในแผงขวา · 1 จุด = 1 ตัว = รูตั้ง Ø15 ลึก 9 + บาก 45×18 ลึก 3 + บาก 20×8 ลึก 8 ซ้อนพิกัดเดียวกัน ตามไฟล์ตัวอย่างเป๊ะ · ร่นขอบ 50 ทุกด้าน · สูงไม่เกิน 250 แถวเดียวกึ่งกลาง · เกิน 250 สองแถว · เกิน 1000 สามแถว กว้างเกิน 1200 เพิ่มคอลัมน์กลาง · ตั้งแต่ 1800 เป็น 4 คอลัมน์ สุดแค่นั้น · แถวกลางแบ่งเท่ากันหลังร่นขอบแล้ว · ทิศบากคงที่ WI=-180 LA=45 BR=18 ทุกจุด เพราะหูแขวนต้องได้แนวตั้งเสมอ · FIX ตัวออกไฟล์ MPR ตั้ง WI=0 กับ ZT=ความลึก ตายตัวมาตลอด บากที่ต้องหมุนหรือตั้ง ZT เองจึงออกให้เครื่องไม่ได้ ตอนนี้บากพก wi/zt ของตัวเองได้"],
     ["36.6","2026-08-19","แบบผลิตรายชิ้นจัดหน้าใหม่ — สองกรอบล่างเคยตั้งต้นที่ y=792 ตายตัว ชิ้นที่มีข้อมูลไม่กี่แถวจึงเหลือที่ว่างเปล่า ๆ ใต้กรอบเกือบ 300 px ขณะที่รูปแบบด้านบนถูกบีบ ตอนนี้วางชิดล่างทั้งคู่ ไต่ขึ้นจากเส้นเดียวกัน สูงเท่าไรก็ไม่ทิ้งช่องว่าง และพื้นที่วาดแบบยืดลงมาอีก 100 px · สลับความกว้างสองกรอบ — สั่งผลิตมีแค่ 3-6 แถวสั้น ๆ ไม่ต้องกว้าง 505 ลดเหลือ 360 ส่วนวัสดุ/สี ใส่ชื่อวัสดุยาว ๆ อย่าง Starmark White Emboss MK630 (N01M0029) แล้วล้นออกนอกช่อง เพิ่มเป็น 548 และขยายคอลัมน์ชื่อหัวข้อจาก 100 เป็น 132 · ลดความสูงแถวจาก 30/28 เหลือ 26 เท่ากันทั้งสองกรอบ"],
     ["36.5","2026-08-19","FIX ชั้นในกล่องโค้งยังไม่สนิทหลังเปลี่ยนวัสดุ — v36.4 หยุดไม่ให้ตัวจัดตู้มาดันชิ้นแล้ว แต่ยังเหลืออีกครึ่ง ชั้นโตออกจากกึ่งกลางตัวเอง ส่วนศูนย์กลางยังเป็นค่าที่คิดไว้ตอนหนา 16 พอผิววัสดุทำให้หนาจริงเป็น 16.2 ชั้นล่างสุดจึงจมใต้พื้นกล่อง 0.1 และชั้นบนสุดโผล่พ้นหัว 0.1 (วัดได้ -0.1 ถึง 862.1) ตอนนี้จัดเรียงใหม่ให้ล่างสุดชิดพื้น บนสุดชิดหัว ที่เหลือแบ่งช่องเท่ากัน · และอัปเดต _csP.T ตามความหนาจริง ระยะบากกับแบบผลิตจึงตามไปด้วย ไม่ค้างอยู่ที่ค่าเดิม"],
@@ -9547,6 +9550,16 @@ function addHangerMenu(b,x,y){   // เมนูเลือกแบบหู�
   const items=defs.map(d=>({label:(curCode===d.code?"● ":"○ ")+(d.desc||d.code)+"  ("+d.bw+"×"+d.bh+"×"+d.bd+")"+(bk?"":" · ไม่มีแผ่นหลัง=ไม่บาก"),
     fn:()=>{ setCode(d.code); toast("ใส่หูแขวน "+(d.desc||d.code)+(bk?(" (บากหลัง "+d.nH+"×"+d.nW+")"):" (ตู้ไม่มีแผ่นหลัง — เฉพาะหู ไม่บาก)")); }}));
   if(curCode) items.push({label:"✕ เอาหูแขวนออก",danger:true,fn:()=>{ setCode(""); toast("เอาหูแขวนออกแล้ว"); }});
+  /* v37.0: หูแขวนกระจกอยู่หมวดเดียวกับหูแขวนตู้ลอย คนหาจากที่เดียว
+     ของเดิมไปแปะเป็นปุ่มในแผงขวาซึ่งเป็นคนละที่กับหูแขวนอื่นทั้งหมด */
+  const hasGH=((b.holes||[]).some(h=>h&&h.src==="glasshanger"));
+  items.push({label:"──────────", fn:()=>{}});
+  items.push({label:(hasGH?"↻ วางผังหูแขวนกระจกใหม่":"🪟 หูแขวนกระจก — วางผังเจาะให้ชิ้นนี้"),
+    fn:()=>sxAddGlassHangers(b)});
+  if(hasGH) items.push({label:"✕ เอาหูแขวนกระจกออก",danger:true,fn:()=>{
+    b.holes=(b.holes||[]).filter(h=>h.src!=="glasshanger");
+    b.pockets=(b.pockets||[]).filter(k=>k.src!=="glasshanger");
+    sync(0); toast("เอาหูแขวนกระจกออกแล้ว"); }});
   varCtxShow(x,y,items);
 }
 /* v7.15: วางอุปกรณ์อัตโนมัติต้องคำนวณตอนตู้ "ขนานแกน" เสมอ
@@ -11639,7 +11652,6 @@ function showInspector(){
         <button class="ibtn bk_gt" data-c="1" style="${b._backCNC?"background:var(--accent);color:#fff;border-color:transparent":""}">ร่อง CNC (เป็นท่อน)</button>
       </div>
       <div class="muted" style="font-size:11px;margin-top:4px;line-height:1.55;white-space:normal">ตู้แบ่งช่องที่มีแผ่นหลังหลายใบ ร่องวิ่งยาวตลอดแผ่นข้างไม่ได้ ช่วงที่ไม่มีแผ่นหลังจะเห็นเป็นร่องโล่ง · เลือก <b>CNC</b> แล้วร่องจะถูกตัดให้เหลือเฉพาะช่วงของแผ่นนี้ และมาโครออกเป็น <b>CNC</b> แทนรหัส V · แผ่นหนา ${SX_BACK_GROOVE_MAX_T} มม. ขึ้นไปไม่เซาะร่องเลย ใช้เดือย/มินิฟิก</div></div>`:""}
-    <div class="ibtns"><button class="ibtn" id="f_glassH" title="วางผังเจาะหูแขวนกระจกอัตโนมัติตามขนาดแผ่น">🪟 หูแขวนกระจก</button></div>
     <div class="ibtns"><button class="ibtn" id="f_hole">＋ เจาะรู (${(b.holes||[]).length})</button><button class="ibtn" id="f_groove">＋ ร่อง (${(b.grooves||[]).length})</button><button class="ibtn" id="f_2d">🗎 Preview 2D</button></div>
       ${((b.holes||[]).length||(b.grooves||[]).length)?'<button class="ibtn" id="f_clrfeat" style="margin-top:8px">ล้างรู/ร่องทั้งหมด</button>':''}
       ${(()=>{ /* v9.09: ล้างเฉพาะร่องรับแผ่นหลังทั้งตู้ — เผื่อเปลี่ยนใจไม่ใส่แผ่นหลัง หรือร่องค้างจากรอบก่อน */
@@ -11957,7 +11969,6 @@ function showInspector(){
   }
   body.querySelector("#f_lib").onclick=()=>saveToLibrary(b);
   body.querySelectorAll(".bk_gt").forEach(btn=>btn.onclick=()=>sxSetBackCNC(b,btn.getAttribute("data-c")==="1"));
-  { const gh=body.querySelector("#f_glassH"); if(gh) gh.onclick=()=>sxAddGlassHangers(b); }
   body.querySelector("#f_hole").onclick=()=>addHole(b);
   { const b2=body.querySelector("#f_2d"); if(b2)b2.onclick=()=>open2D(b); }
   body.querySelector("#f_groove").onclick=()=>addGroove(b);
@@ -14521,7 +14532,7 @@ function applyFrameParts(){
   state.boards.forEach(b=>{ if(b&&b._frameDoor) delete b._frameDoor; if(b&&b._frameFit) delete b._frameFit; });
   const add=[];
   state.boards.forEach(b=>{ try{
-    if(!b||!b._door||b._virtual) return;
+    if(!b||b._virtual||!isFrontPanel(b)) return;   // v36.9: แผ่นเดี่ยวที่ผูก Part แบบบานก็ได้เฟรม/หน้าตัดด้วย
     const p2=partDef(b.part,b); if(!p2) return;
     const secs=[p2.frameSec1,p2.frameSec2,p2.frameSec3,p2.frameSec4].map(x=>String(x||"").trim());
     if(!secs.some(Boolean)) return;
@@ -20925,7 +20936,27 @@ function applyPullDrills(){
    แถมยังกินลำดับบานด้วย ตอนที่ Part ยังไม่ถูกเติม ลำดับจึงเลื่อนไปทั้งชุด
    (พื้นกล่องลูกล่างสุดอยู่ต่ำที่สุด เลยกลายเป็น "บาน 1" แทนหน้าลิ้นชักจริง)
    _noPanel = ลิ้นชักที่สั่งไม่เอาหน้าบาน ไม่มีแผ่นให้เกาะเช่นกัน */
-function isPullHost(b){ return !!(b&&b._door&&!b._box&&!b._virtual&&!b._noPanel); }
+/* ───────── v36.9: "เป็นหน้าบานไหม" ต้องดูที่ Part ที่ผูกไว้ ไม่ใช่ธง _door อย่างเดียว ─────────
+   ธง _door ติดให้เฉพาะบานที่เกิดจากผังบาน/ลิ้นชัก
+   ไม้แผ่นเดียวที่ผู้ใช้ผูก Part แบบบานไว้เอง (FrontShapeP1) จึงตกทุกด่าน
+   ทั้งเฟรมอลู หน้าตัดมือจับตัดขนาด และมือจับ ทั้งที่เลือกสเปกเดียวกันกับบานในตู้ปกติเป๊ะ
+   เช็คจาก Part ปลอดภัยกว่าเช็คแนววาง เพราะแผ่นหลังก็ orient front เหมือนกัน */
+function isFrontPanel(b){
+  if(!b||b._virtual||b._box) return false;
+  if(b._door) return true;
+  if(b.orient!=="front") return false;
+  try{ const p2=partDef(b.part,b);
+    return !!(p2&&[p2.frameSec1,p2.frameSec2,p2.frameSec3,p2.frameSec4].some(x=>String(x||"").trim())); }
+  catch(e){ return false; } }
+function isPullHost(b){
+  if(!b||b._box||b._virtual||b._noPanel) return false;
+  /* ───────── v36.8: แผ่นเดี่ยวที่ตั้งค่ารับแบบบานไว้ ก็ควรใส่มือจับได้ ─────────
+     เดิมด่านนี้ดูแค่ธง _door ซึ่งติดให้เฉพาะบานที่เกิดจากผังบาน/ลิ้นชัก
+     ไม้แผ่นเดียวที่ผูก Part แบบบานไว้เอง (เช่น FrontShapeP1) จึงถูกปฏิเสธทั้งที่เป็นหน้าบานทุกประการ
+     ปล่อยผ่านเพิ่มเฉพาะ "ชิ้นที่ถูกสั่งใส่มือจับเองแล้ว" — ของเดิมจึงไม่เปลี่ยนพฤติกรรมสักตู้
+     (แผ่นหลังก็ orient front เหมือนกัน ถ้าเปิดตามแนววางจะกลายเป็นบานไปทั้งคลัง) */
+  if(b._door) return true;
+  return isFrontPanel(b) || !!(b.orient==="front" && (b._pulls||[]).length); }
 /* บานไหนคือ "บาน 1" — ดูเลขท้ายของ Part ที่ผูกไว้ (Front1/Front2) ก่อน
    ไม่มีเลขค่อยไล่ตามตำแหน่งจริง ซ้ายไปขวา แล้วล่างขึ้นบน (ลิ้นชัก) */
 function cabDoorIndex(inst){
@@ -20958,7 +20989,7 @@ function applyXmlPulls(inst,pv){
   return {on:on, off:off, noSpec:Object.keys(noSpec)};
 }
 async function addPullsDialog(sel){
-  const d=sel; if(!d||!d._door){ toast("เลือกหน้าบาน / หน้าลิ้นชักก่อน"); return; }
+  const d=sel; if(!d||!(d._door||d.orient==="front")){ toast("ใส่มือจับได้กับแผ่นที่วางแนวหน้าบานเท่านั้น"); return; }
   ensureSamplePull();
   const defs=pullDefs(); if(!defs.length){ toast("ยังไม่มีรุ่นมือจับใน Element → Fittings"); return; }
   const cur=(d._pulls||[])[0]||{};
@@ -20983,7 +21014,7 @@ function removePulls(sel){
 }
 async function addPulls(){
   const sel=selBoard(); if(!sel){ toast("เลือกหน้าบานก่อน"); return; }
-  if(!sel._door){ toast("มือจับใส่ได้เฉพาะหน้าบาน / หน้าลิ้นชัก"); return; }
+  if(!(sel._door||sel.orient==="front")){ toast("มือจับใส่ได้กับแผ่นที่วางแนวหน้าบาน (orient = front)"); return; }
   const pb=$("pullFloatBtn"); const r=pb?pb.getBoundingClientRect():null;
   const items=[{label:"⚙ ตั้งมือจับของบานนี้…", fn:()=>addPullsDialog(sel)}];
   if((sel._pulls||[]).length) items.push({label:"✕ เอามือจับออก", fn:()=>removePulls(sel)});
@@ -23513,8 +23544,10 @@ function sxSetBackCNC(b,on){
    1 จุด = 1 ตัว = รูตั้ง Ø15 ลึก 9 + บาก 45×18 ลึก 3 + บาก 20×8 ลึก 8 (ซ้อนพิกัดเดียวกัน)
    ร่นขอบ 50 ทุกด้าน · จำนวนแถว-คอลัมน์โตตามขนาดแผ่น
    ทิศบากคงที่เสมอ (WI=-180 · LA=45 · BR=18) เพราะหูแขวนต้องได้แนวตั้งทุกครั้ง */
+/* v37.0: ทิศบากต้องเป็นแนวตั้ง — v36.7 หยิบค่าจากไฟล์ 2076 (LA=45 BR=18 · WI=-180)
+   ซึ่งเป็นชุดแนวนอน ที่ถูกคือชุดของไฟล์ 2071 (LA=18 BR=45 · WI=0) บากยาวไปตามแกน Y */
 const GLASS_HANGER={ inset:50, dia:15, deep:9,
-  pockets:[{w:45,h:18,depth:3,r:9},{w:20,h:8,depth:8,r:4}], wi:-180, zt:0 };
+  pockets:[{w:18,h:45,depth:3,r:9},{w:8,h:20,depth:8,r:4}], wi:0, zt:0 };
 function sxHangerGrid(L,W){
   const IN=GLASS_HANGER.inset;
   const nCol = (L>=1800) ? 4 : (L>1200 ? 3 : 2);          // กว้าง >1200 เพิ่มกลาง · ≥1800 เป็น 4 สุดแค่นี้
