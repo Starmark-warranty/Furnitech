@@ -1646,9 +1646,10 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"36.6", build:"2026-08-19/part-sheet-layout",
+  name:"StarNexus Cabinet", version:"36.7", build:"2026-08-19/glass-hanger",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["36.7","2026-08-19","FEAT หูแขวนกระจก — วางผังเจาะอัตโนมัติตามขนาดแผ่น ปุ่มอยู่ในแผงขวา · 1 จุด = 1 ตัว = รูตั้ง Ø15 ลึก 9 + บาก 45×18 ลึก 3 + บาก 20×8 ลึก 8 ซ้อนพิกัดเดียวกัน ตามไฟล์ตัวอย่างเป๊ะ · ร่นขอบ 50 ทุกด้าน · สูงไม่เกิน 250 แถวเดียวกึ่งกลาง · เกิน 250 สองแถว · เกิน 1000 สามแถว กว้างเกิน 1200 เพิ่มคอลัมน์กลาง · ตั้งแต่ 1800 เป็น 4 คอลัมน์ สุดแค่นั้น · แถวกลางแบ่งเท่ากันหลังร่นขอบแล้ว · ทิศบากคงที่ WI=-180 LA=45 BR=18 ทุกจุด เพราะหูแขวนต้องได้แนวตั้งเสมอ · FIX ตัวออกไฟล์ MPR ตั้ง WI=0 กับ ZT=ความลึก ตายตัวมาตลอด บากที่ต้องหมุนหรือตั้ง ZT เองจึงออกให้เครื่องไม่ได้ ตอนนี้บากพก wi/zt ของตัวเองได้"],
     ["36.6","2026-08-19","แบบผลิตรายชิ้นจัดหน้าใหม่ — สองกรอบล่างเคยตั้งต้นที่ y=792 ตายตัว ชิ้นที่มีข้อมูลไม่กี่แถวจึงเหลือที่ว่างเปล่า ๆ ใต้กรอบเกือบ 300 px ขณะที่รูปแบบด้านบนถูกบีบ ตอนนี้วางชิดล่างทั้งคู่ ไต่ขึ้นจากเส้นเดียวกัน สูงเท่าไรก็ไม่ทิ้งช่องว่าง และพื้นที่วาดแบบยืดลงมาอีก 100 px · สลับความกว้างสองกรอบ — สั่งผลิตมีแค่ 3-6 แถวสั้น ๆ ไม่ต้องกว้าง 505 ลดเหลือ 360 ส่วนวัสดุ/สี ใส่ชื่อวัสดุยาว ๆ อย่าง Starmark White Emboss MK630 (N01M0029) แล้วล้นออกนอกช่อง เพิ่มเป็น 548 และขยายคอลัมน์ชื่อหัวข้อจาก 100 เป็น 132 · ลดความสูงแถวจาก 30/28 เหลือ 26 เท่ากันทั้งสองกรอบ"],
     ["36.5","2026-08-19","FIX ชั้นในกล่องโค้งยังไม่สนิทหลังเปลี่ยนวัสดุ — v36.4 หยุดไม่ให้ตัวจัดตู้มาดันชิ้นแล้ว แต่ยังเหลืออีกครึ่ง ชั้นโตออกจากกึ่งกลางตัวเอง ส่วนศูนย์กลางยังเป็นค่าที่คิดไว้ตอนหนา 16 พอผิววัสดุทำให้หนาจริงเป็น 16.2 ชั้นล่างสุดจึงจมใต้พื้นกล่อง 0.1 และชั้นบนสุดโผล่พ้นหัว 0.1 (วัดได้ -0.1 ถึง 862.1) ตอนนี้จัดเรียงใหม่ให้ล่างสุดชิดพื้น บนสุดชิดหัว ที่เหลือแบ่งช่องเท่ากัน · และอัปเดต _csP.T ตามความหนาจริง ระยะบากกับแบบผลิตจึงตามไปด้วย ไม่ค้างอยู่ที่ค่าเดิม"],
     ["36.4","2026-08-19","FIX กดเปลี่ยนวัสดุแล้วกล่องโค้งแตก ชั้นไม่สนิท — ไม่ใช่ผู้ใช้พิมพ์ผิด โปรแกรมเขียนทับเอง · ชิ้นแผ่นดัดเก็บ ความสูง ไว้ในช่อง T (862) ส่วนความหนาไม้จริงอยู่ใน _csP.faceT · พอเปลี่ยนวัสดุชิ้นไหนก็ตามในกล่อง ตัวบวกความหนาจะไล่ทำทุกชิ้นทั้งตู้ เห็น T=862 แล้วนึกว่าเป็นความหนา เลยเขียนทับด้วยความหนาวัสดุ 12 ความสูงหายทั้งดุ้นในคลิกเดียว แถม anchorDoorT ยังเลื่อนตำแหน่งตามส่วนต่าง 850 มม. อีก · FIX กล่องโค้งเข้ากติกา ผนังนอกคงผิวนอก ชิ้นในโตออกสองด้าน ของตู้สี่เหลี่ยม ซึ่งใช้กับมันไม่ได้ ผังชั้น ระยะบาก และแผ่นดัดคิดมาจากตัวสร้างเป็นชุดเดียวกัน ตอนนี้เปลี่ยนวัสดุได้ตามปกติแต่ไม่ถูกดันจนไม่สนิท · เพิ่มตัวซ่อมอัตโนมัติตอนเปิดไฟล์ คืนความสูงแผ่นดัดจาก _csP ให้ไฟล์ที่โดนทับไปแล้ว "],
@@ -11638,6 +11639,7 @@ function showInspector(){
         <button class="ibtn bk_gt" data-c="1" style="${b._backCNC?"background:var(--accent);color:#fff;border-color:transparent":""}">ร่อง CNC (เป็นท่อน)</button>
       </div>
       <div class="muted" style="font-size:11px;margin-top:4px;line-height:1.55;white-space:normal">ตู้แบ่งช่องที่มีแผ่นหลังหลายใบ ร่องวิ่งยาวตลอดแผ่นข้างไม่ได้ ช่วงที่ไม่มีแผ่นหลังจะเห็นเป็นร่องโล่ง · เลือก <b>CNC</b> แล้วร่องจะถูกตัดให้เหลือเฉพาะช่วงของแผ่นนี้ และมาโครออกเป็น <b>CNC</b> แทนรหัส V · แผ่นหนา ${SX_BACK_GROOVE_MAX_T} มม. ขึ้นไปไม่เซาะร่องเลย ใช้เดือย/มินิฟิก</div></div>`:""}
+    <div class="ibtns"><button class="ibtn" id="f_glassH" title="วางผังเจาะหูแขวนกระจกอัตโนมัติตามขนาดแผ่น">🪟 หูแขวนกระจก</button></div>
     <div class="ibtns"><button class="ibtn" id="f_hole">＋ เจาะรู (${(b.holes||[]).length})</button><button class="ibtn" id="f_groove">＋ ร่อง (${(b.grooves||[]).length})</button><button class="ibtn" id="f_2d">🗎 Preview 2D</button></div>
       ${((b.holes||[]).length||(b.grooves||[]).length)?'<button class="ibtn" id="f_clrfeat" style="margin-top:8px">ล้างรู/ร่องทั้งหมด</button>':''}
       ${(()=>{ /* v9.09: ล้างเฉพาะร่องรับแผ่นหลังทั้งตู้ — เผื่อเปลี่ยนใจไม่ใส่แผ่นหลัง หรือร่องค้างจากรอบก่อน */
@@ -11955,6 +11957,7 @@ function showInspector(){
   }
   body.querySelector("#f_lib").onclick=()=>saveToLibrary(b);
   body.querySelectorAll(".bk_gt").forEach(btn=>btn.onclick=()=>sxSetBackCNC(b,btn.getAttribute("data-c")==="1"));
+  { const gh=body.querySelector("#f_glassH"); if(gh) gh.onclick=()=>sxAddGlassHangers(b); }
   body.querySelector("#f_hole").onclick=()=>addHole(b);
   { const b2=body.querySelector("#f_2d"); if(b2)b2.onclick=()=>open2D(b); }
   body.querySelector("#f_groove").onclick=()=>addGroove(b);
@@ -23506,6 +23509,36 @@ function sxSetBackCNC(b,on){
   const n=sxSyncBackGrooves(groupOf(b));
   sync(0); try{ showInspector(); }catch(e){}
   toast(on?("ตั้งเป็นร่อง CNC — ตัดร่องเหลือเฉพาะช่วงของแผ่นนี้ "+n+" ร่อง"):("กลับเป็นร่องปกติ ยาวตลอดแผ่น "+n+" ร่อง")); }
+/* ═══════════ v36.7: หูแขวนกระจก — วางผังเจาะอัตโนมัติ ═══════════
+   1 จุด = 1 ตัว = รูตั้ง Ø15 ลึก 9 + บาก 45×18 ลึก 3 + บาก 20×8 ลึก 8 (ซ้อนพิกัดเดียวกัน)
+   ร่นขอบ 50 ทุกด้าน · จำนวนแถว-คอลัมน์โตตามขนาดแผ่น
+   ทิศบากคงที่เสมอ (WI=-180 · LA=45 · BR=18) เพราะหูแขวนต้องได้แนวตั้งทุกครั้ง */
+const GLASS_HANGER={ inset:50, dia:15, deep:9,
+  pockets:[{w:45,h:18,depth:3,r:9},{w:20,h:8,depth:8,r:4}], wi:-180, zt:0 };
+function sxHangerGrid(L,W){
+  const IN=GLASS_HANGER.inset;
+  const nCol = (L>=1800) ? 4 : (L>1200 ? 3 : 2);          // กว้าง >1200 เพิ่มกลาง · ≥1800 เป็น 4 สุดแค่นี้
+  const nRow = (W>1000) ? 3 : (W>250 ? 2 : 1);            // สูง >250 สองแถว · >1000 สามแถว
+  const spread=(n,S)=>{ if(n<=1) return [S/2];            // แถวเดียว = กึ่งกลางแผ่น
+    const a=IN, b=S-IN, st=(b-a)/(n-1); return Array.from({length:n},(_,i)=>round(a+i*st)); };
+  const xs=spread(nCol,L), ys=spread(nRow,W);
+  const pts=[]; xs.forEach(x=>ys.forEach(y=>pts.push({x,y})));
+  return {xs,ys,pts,nCol,nRow}; }
+function sxAddGlassHangers(b){
+  if(!b){ toast("เลือกชิ้นก่อน"); return; }
+  const L=+b.L||0, W=+b.W||0;
+  if(L<2*GLASS_HANGER.inset+10||W<2*GLASS_HANGER.inset+10){ toast("แผ่นเล็กเกินไปสำหรับหูแขวน"); return; }
+  const g=sxHangerGrid(L,W);
+  b.holes=(b.holes||[]).filter(h=>h.src!=="glasshanger");
+  b.pockets=(b.pockets||[]).filter(k=>k.src!=="glasshanger");
+  g.pts.forEach(pt=>{
+    const lx=round(pt.x-L/2), ly=round(pt.y-W/2);
+    b.holes.push({d:GLASS_HANGER.dia,x:lx,y:ly,depth:GLASS_HANGER.deep,face:"top",src:"glasshanger",sys:true});
+    GLASS_HANGER.pockets.forEach(q=>b.pockets.push({x:lx,y:ly,w:q.w,h:q.h,depth:q.depth,r:q.r,
+      wi:GLASS_HANGER.wi, zt:GLASS_HANGER.zt, src:"glasshanger"}));
+  });
+  sync(0); try{ showInspector(); }catch(e){}
+  toast("หูแขวนกระจก "+g.pts.length+" ตัว · "+g.nCol+" คอลัมน์ × "+g.nRow+" แถว (ร่นขอบ "+GLASS_HANGER.inset+")"); }
 function clearFeatures(b){ b.holes=[]; b.grooves=[]; sync(0); }
 function flashInspector(){const insp=$("insp"),body=$("inspBody");if(!insp)return;if(body)body.scrollTop=0;insp.classList.remove("flash");void insp.offsetWidth;insp.classList.add("flash");const fn=$("f_name");if(fn)setTimeout(()=>fn.focus(),60);}
 function bindCtx(){
@@ -23974,10 +24007,12 @@ function boardToMPR(b, side){   // side=1/2 → เอาเฉพาะรู�
     const w=Math.max(pk.w||10,1), h=Math.max(pk.h||10,1);
     const depth=(pk.depth!=null&&pk.depth>0)?pk.depth:(T+2);        // 0/ว่าง = ทะลุ
     const XA=(pk.x||0)+L/2, YA=(pk.y||0)+W/2, RD=Math.max(pk.r||0,0);
-    P('<112 \\RechteckTasche\\'); P('WI="0"'); P('??="rtasche=1 "');
+    /* v36.7: บากบางชนิดต้องหมุนและตั้ง ZT เอง (เช่นบากหูแขวนกระจกที่ใช้ WI=-180 · ZT=0)
+       เดิมตายตัว WI=0 · ZT=ลึก ใครต้องการค่าอื่นก็ออกไฟล์ให้เครื่องไม่ได้ */
+    P('<112 \\RechteckTasche\\'); P('WI="'+((pk.wi!=null)?mprNum(pk.wi):"0")+'"'); P('??="rtasche=1 "');
     P('XA="'+mprNum(mx(XA))+'"'); P('YA="'+mprNum(YA)+'"');
     P('TI="'+mprNum(depth)+'"'); P('LA="'+mprNum(w)+'"'); P('BR="'+mprNum(h)+'"'); P('RD="'+mprNum(RD)+'"');
-    P(''); P('F_="5"'); P('DS="1"'); P('T_="1"'); P('ZT="'+mprNum(depth)+'"'); P('XY="85"'); P(' ');
+    P(''); P('F_="5"'); P('DS="1"'); P('T_="1"'); P('ZT="'+mprNum((pk.zt!=null)?pk.zt:depth)+'"'); P('XY="85"'); P(' ');
   });
   /* v7.82: เดินกัดตามเส้น — รูหย่อนดอก (ถ้าเปิด) แล้วตามด้วยบล็อกกัดคอนทัวร์
      RK = ชดเชยรัศมีดอก · in = กินในเส้น (ช่องที่ได้เท่าเส้นที่วาด) · out = กินนอกเส้น · on = เดินทับเส้น */
