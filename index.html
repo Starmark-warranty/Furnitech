@@ -1646,9 +1646,25 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"34.8", build:"2026-08-18/audit-log",
+  name:"StarNexus Cabinet", version:"36.4", build:"2026-08-19/fix-material-breaks-box",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["36.4","2026-08-19","FIX กดเปลี่ยนวัสดุแล้วกล่องโค้งแตก ชั้นไม่สนิท — ไม่ใช่ผู้ใช้พิมพ์ผิด โปรแกรมเขียนทับเอง · ชิ้นแผ่นดัดเก็บ ความสูง ไว้ในช่อง T (862) ส่วนความหนาไม้จริงอยู่ใน _csP.faceT · พอเปลี่ยนวัสดุชิ้นไหนก็ตามในกล่อง ตัวบวกความหนาจะไล่ทำทุกชิ้นทั้งตู้ เห็น T=862 แล้วนึกว่าเป็นความหนา เลยเขียนทับด้วยความหนาวัสดุ 12 ความสูงหายทั้งดุ้นในคลิกเดียว แถม anchorDoorT ยังเลื่อนตำแหน่งตามส่วนต่าง 850 มม. อีก · FIX กล่องโค้งเข้ากติกา ผนังนอกคงผิวนอก ชิ้นในโตออกสองด้าน ของตู้สี่เหลี่ยม ซึ่งใช้กับมันไม่ได้ ผังชั้น ระยะบาก และแผ่นดัดคิดมาจากตัวสร้างเป็นชุดเดียวกัน ตอนนี้เปลี่ยนวัสดุได้ตามปกติแต่ไม่ถูกดันจนไม่สนิท · เพิ่มตัวซ่อมอัตโนมัติตอนเปิดไฟล์ คืนความสูงแผ่นดัดจาก _csP ให้ไฟล์ที่โดนทับไปแล้ว "],
+    ["36.3","2026-08-19","FEAT เปิดออเดอร์ในแท็บใหม่ได้ ทำสองงานพร้อมกัน — เดิมมีทางเดียวคือทับฉากที่ทำค้างอยู่ อยากดูออเดอร์อื่นทีต้องบันทึกงานปัจจุบันก่อนทุกครั้ง · กล่องยืนยันเพิ่มปุ่ม เปิดแท็บใหม่ คู่กับ แทนฉากนี้ · จุดที่ต้องระวังคือสองแท็บเซฟอัตโนมัติลงคีย์เดียวกัน แท็บที่เซฟทีหลังจะทับงานอีกแท็บทิ้งทั้งดุ้น แท็บใหม่จึงพก ?tab=<เลข> ไปด้วยแล้วใช้คีย์เซฟของตัวเอง ต่างคนต่างเก็บ · แท็บที่เปิดมาพร้อม #order= จะไปดึงออเดอร์นั้นเองหลังผ่านหน้าล็อกอิน แล้วล้าง hash ทิ้งกันโหลดซ้ำตอนรีเฟรช · กล่องถามรองรับคำอธิบายและปุ่มทางเลือกที่สาม เดิมมีแค่ ตกลง/ยกเลิก คำถามสามทางจึงต้องบีบเหลือสองทางเสมอ"],
+    ["36.2","2026-08-19","FIX หน้าแบบผลิตเปิดไม่ขึ้นเลยตั้งแต่ v36.0 — บรรทัดที่ตัดหน้าซ้ำของกล่องโค้งถูกวางไว้เหนือ let nCs ตัวแปรที่ประกาศด้วย let ยังอยู่ใน temporal dead zone อ่านค่าปุ๊บโยน ReferenceError ทันที build() ตายทั้งก้อน ทุกหน้าจึงหายหมดไม่ใช่แค่หน้ากล่องโค้ง · node --check จับไม่ได้เพราะเป็น syntax ที่ถูกต้อง ผิดแค่ลำดับตอนรัน · ย้ายบรรทัดนับลงมาก่อนตัดหน้าซ้ำแล้ว"],
+    ["36.1","2026-08-19","FIX แก้ช่อง หนา ของแผ่นดัดแล้วความสูงหายทั้งดุ้น — ชิ้นแผ่นดัดของกล่องโค้งเก็บ ความสูง ไว้ในช่อง T ส่วนความหนาไม้จริงอ่านจากความกว้างแถบในรูปหน้าตัด ไม่ได้อยู่ใน b.T ผู้ใช้เห็นช่องชื่อ หนา ขึ้นมา 862 ก็แก้เป็น 12 ตามความหนาไม้จริงซึ่งสมเหตุสมผลทุกอย่าง ผลคือความสูงหายไป แบบตกไปใช้ค่า W แทนกลายเป็นสูง 150 แล้วแบบผลิตเพี้ยนตามทั้งใบ ตอนนี้กันไม่ให้แก้ช่องนี้บนชิ้นแผ่นดัด พร้อมบอกว่าเลขนี้คืออะไรและความหนาจริงเท่าไร "],
+    ["36.0","2026-08-19","FIX แบบผลิตออกชิ้นของกล่องโค้งซ้ำสองชุด — ชุดบน (กล่องโค้ง·สรุป / แผ่นชั้น / ครีบ / แผ่นตัด) มาจากตัวสร้างกล่องโค้งโดยตรง แล้วชิ้นเดียวกันยังถูกเอาไปทำหน้าแผ่นทั่วไปอีกชุดใต้ชื่อตู้ (Shelf 1 ×2 · Shelf 2 ×3 · Fin 1 ×6 · Bent Face ×1) ช่างเปิดเจอสองชุดที่พูดเรื่องเดียวกันแล้วต้องเดาว่าใช้ใบไหน ทั้งที่ชุดของตัวสร้างละเอียดกว่ามาก มีร่องเซาะ ระยะกางออก ค่าตั้งเครื่องครบ ตอนนี้ตัดหน้าแผ่นทั่วไปของชิ้นกล่องโค้งทิ้ง วิธีเดียวกับที่เคยทำกับบานเฟรมใน v23.5"],
+    ["35.9","2026-08-19","ใส่เส้นบอกความสูงแผ่นในแบบ Bent Face — พอวาดตามสัดส่วนจริงแล้วรูปสื่อสัดส่วนได้ แต่ยังไม่มีตัวเลขกำกับสักตัว ช่างต้องไปไล่หาในตารางว่าสูงเท่าไร ทั้งที่เป็นระยะที่ใช้ตั้งเครื่องเหมือนความยาว ซึ่งมีเส้นบอกอยู่แล้วสองเส้น · วางไว้ซ้ายมือของแผ่น ตรงช่องว่างระหว่างตารางกับรูป พร้อมเส้นต่อจากขอบบน-ล่าง"],
+    ["35.8","2026-08-19","แบบ Bent Face จัดหน้าใหม่จริง — v35.7 สคริปต์แก้ล้มกลางทางก่อนเขียนไฟล์ ส่วนจัดหน้าจึงไม่ได้ลงเลย ติดไปแค่เรื่องขนาดสั่งไม้ · ตอนนี้ตารางย้ายมาคอลัมน์ซ้ายใต้รูปหลังดัดจริง ย่อแถวจาก 30 เหลือ 21 ตัวอักษรจาก 13/14 เหลือ 10.5/11 และตัดคำบรรยายซ้ายล่างออกทั้งก้อน เพราะทุกบรรทัดพูดเรื่องเดียวกับตารางที่อยู่เหนือมัน · ครึ่งขวาทั้งแถบจึงเป็นของแบบแผ่นแบน FIX แผ่นแบนก่อนดัดเคยวาดด้วยความสูงปลอม (หนาไม้ × 6) แผ่นสูง 862 กับ 200 ออกมาเท่ากันหมด ตอนนี้ใช้สเกลเดียวกันทั้งยาวและสูง เห็นสัดส่วนจริง · ร่องเซาะวาดทะลุเต็มความสูง ไม่เว้นแถบล่าง 22% เหมือนเดิม"],
+    ["35.7","2026-08-19","แบบ Bent Face จัดหน้าใหม่ + ขนาดสั่งไม้ลงตัว — คำบรรยายด้านซ้ายพูดเรื่องเดียวกับตารางแทบทุกบรรทัด (ช่วงตรงก่อนโค้ง · ร่องแรกเริ่มที่ · เผื่อตัด) อ่านซ้ำสองรอบแล้วยังกินที่แนวตั้งของแบบ ย้ายตารางมาไว้คอลัมน์ซ้ายแทน ย่อแถวจาก 30 เหลือ 21 ตัวอักษรจาก 13 เหลือ 10.5 และเหลือคำบรรยายเฉพาะข้อที่ตารางไม่ได้บอก · FIX แผ่นแบนก่อนดัดวาดด้วยความสูงปลอม (หนาไม้ × 6) แผ่นสูง 862 กับสูง 200 จึงออกมาเท่ากันหมด ดูแล้วไม่รู้ว่าชิ้นจริงสูงเท่าไร ตอนนี้ใช้สเกลเดียวกันทั้งยาวและสูง เทียบสัดส่วนกับของจริงได้ · FIX ร่องเซาะวาดแค่ 78% ของความสูง เหลือแถบว่างข้างล่างซึ่งไม่ตรงกับของจริง ดอกกัดเดินตลอดความสูงอยู่แล้ว ตอนนี้วาดทะลุเต็มแผ่น · FEAT ขนาดสั่งไม้ปัดขึ้นเป็นขั้นละ 10 (BLANK.step) กางออก 1046.1 + เผื่อ 10 = 1056.1 ซึ่งสั่งไม้ด้วยเศษทศนิยมแบบนี้ไม่มีใครตัดให้ ตอนนี้ได้ 1060 ส่วนที่ปัดเพิ่มรวมเข้ากับเผื่อตัด ชิ้นงานยังอยู่กึ่งกลางแผ่น ตำแหน่งร่องเลื่อนตามครึ่งหนึ่งของที่ปัดโดยอัตโนมัติ"],
+    ["35.6","2026-08-19","FIX ฝาบนกับแผ่นพื้นไม่มีช่องล็อคความลึกให้ใช้เลย — ช่อง ล็อคลึก ซ่อนอยู่ในบล็อก ชั้นนี้ ซึ่งเปิดด้วย isShelfBoard() ที่ตัดสินจากชื่อชิ้นว่ามีคำว่า shelf หรือ ชั้น หรือ guide หรือไม่ ฝาบนชื่อ Top แผ่นพื้นชื่อ Bottom จึงตกเงื่อนไขทั้งคู่ ทั้งที่เป็นแผ่นนอนที่โดนยืดเต็มลึกเหมือนกันเป๊ะ เงื่อนไขที่ผูกกับชื่อแบบนี้พังทันทีที่มีคนเปลี่ยนชื่อชิ้น · ย้ายช่องล็อคลึกมาไว้ใต้ช่องขนาด ให้แผ่นนอนทุกใบในตู้ที่ไม่ใช่ชั้น (ฝาบน พื้น และอื่น ๆ) มีใช้ · ใส่ 0 = กลับไปยืดตามตู้เอง"],
+    ["35.5","2026-08-19","FIX พิมพ์ความลึกแผ่นนอนแล้วเด้งกลับทุกครั้ง ไม่ว่าตู้จะมีแผ่นหลังหรือไม่ — สาเหตุจริงไม่ใช่เรื่องแผ่นหลัง แต่เป็น refitInterior ที่ยัดความลึกให้แผ่นนอนทุกชิ้นเต็มช่อง [ผิวหน้าแผ่นหลัง .. หน้าตู้] ใหม่ทุกครั้งที่ sync ค่าที่พิมพ์เองจึงถูกเขียนทับทันทีโดยไม่มีอะไรบอก ต้องไปใช้ช่อง ล็อคลึก ที่อยู่คนละที่ในแผงถึงจะอยู่ ซึ่งไม่มีอะไรชี้ให้เห็น · ตอนนี้พิมพ์ในช่องกว้างของแผ่นนอนในตู้ = ถือว่าตั้งใจกำหนดเอง ล็อคให้เลยโดยวัดจากหน้าตู้ พร้อมบอกวิธีปลดล็อกครั้งเดียวตอนพิมพ์ · ใส่ 0 ที่ช่อง ล็อคลึก เพื่อกลับไปยืดตามตู้อัตโนมัติเหมือนเดิม"],
+    ["35.4","2026-08-19","FIX เตือน หน้าบานคร่อมเสาแบ่ง ทั้งที่ตู้ไม่มีเสาแบ่งสักต้น — ตัวตรวจนับแผ่นตั้งทุกใบเป็นเสา รวมแผ่นข้างซ้าย-ขวาของตู้เอง บานทับกว้างคลุมทั้งใบอยู่แล้ว ศูนย์กลางแผ่นข้างจึงตกอยู่ในช่วงบานเสมอ ตู้บานทับทุกใบจึงโดนฟ้องทุกครั้งที่คำนวณใหม่ เช่นตอนพิมพ์ความลึก ทั้งที่ผังไม่ได้พัง เคสจริง TAR030 บานกว้าง 597 คลุม -298.5 ถึง 298.5 แผ่นข้างอยู่ ±291.9 เข้าเงื่อนไขพอดี ตอนนี้นับเฉพาะแผ่นตั้งที่อยู่ระหว่างขอบซ้าย-ขวาสุดจริง ๆ คือเสาแบ่งจริงเท่านั้น"],
+    ["35.3","2026-08-19","FIX พิมพ์ความลึก 520 แล้วเด้งกลับเป็น 541.4 ทุกครั้ง — refitInterior ใช้แผ่นหลังที่อยู่หลังสุดของทั้งตู้ เป็นเส้นตายให้แผ่นนอนทุกชิ้น ฝาบนที่อยู่ช่วงบนซึ่งแผ่นหลังร่นเข้ามา 50 มม. จึงถูกยืดไปจนถึงแนวแผ่นหลังช่วงล่างเสมอ ตอนนี้หาแผ่นหลังของช่องที่ชิ้นนั้นอยู่จริง · FIX กดเซาะร่องแล้วแผ่นหลังหลุดออกจากช่องไปคร่อมทั้งตู้ — ตัวหาแผ่นนอนรับร่องหยิบแผ่นบนสุด/ล่างสุดของทั้งใบเสมอ แผ่นหลังของช่องเดียวจึงถูกยืดจากพื้นตู้ถึงฝาบน เปลี่ยนเป็นเอาแผ่นที่ประชิดช่วงของแผ่นหลังใบนั้น · FIX กดใช้งานทีไรร่องของแผ่นหลังใบอื่นในตู้เดียวกันหายไปด้วย เพราะล้าง g.back ทั้งตู้ ตอนนี้ล้างเฉพาะร่องที่เป็นของแผ่นใบนั้น · FEAT เลือกชนิดร่อง ปกติ/CNC ได้ในกล่องนี้แล้ว ไม่ต้องไปตั้งที่แผงขวาอย่างเดียว และบอกด้วยเมื่อแผ่นหนาเกินเกณฑ์จนไม่เซาะร่อง · FEAT จำค่า BackSet ไว้ที่ตัวแผ่น แผ่นที่ตั้ง 66 ไว้เปิดมาก็ขึ้น 66 ไม่ใช่เด้งกลับเป็น 16 แล้วร่นกลับโดยไม่ตั้งใจ"],
+    ["35.2","2026-08-19","Preview 2D จัดหน้าใหม่ ให้ที่ว่างไปอยู่กับแบบ — ปุ่ม − + พอดีจอ ยืดเต็มความกว้างหน้าต่าง เพราะคลาส .ibtn ตั้ง flex:1 ไว้สำหรับแถวปุ่มในแผงขวา พอเอามาใช้ในแถบซูมที่มีปุ่มแค่สามตัวจึงกางออกจนสุด ใส่ flex:none ให้แล้ว · กล่องข้อมูลสั่งผลิต/วัสดุ ย้ายจากใต้แบบไปเป็นคอลัมน์ซ้ายกว้าง 238px เดิมกางเต็มความกว้างอยู่ข้างล่าง กินที่แนวตั้งซึ่งเป็นด้านที่แบบต้องการที่สุด ตอนนี้แบบได้ความสูงทั้งหมดที่เหลือ · ตัวอักษรในกล่องเล็กลงเป็น 10.5px และตัดคำเมื่อยาวเกิน "],
+    ["35.1","2026-08-18","FEAT เลือกชนิดร่องรับแผ่นหลังได้ทีละใบที่แผงขวา — ร่องปกติ (เลื่อยยาวตลอดแผ่น) หรือ ร่อง CNC (เป็นท่อนเฉพาะช่วงของแผ่นนั้น) · ตู้แบ่งช่องที่มีแผ่นหลังหลายใบ ร่องวิ่งยาวตลอดแผ่นข้างไม่ได้ ช่วงที่ไม่มีแผ่นหลังจะเห็นเป็นร่องโล่ง และเลื่อยเดินยาวก็ทำร่องตันไม่ได้อยู่แล้ว · เลือก CNC แล้วโปรแกรมตัดหัวท้ายร่องด้วย off0/off1 ให้พอดีช่วงแผ่นหลังใบนั้น มาโครออกเป็น CNC แทนรหัส V · FEAT แผ่นหลังหนาตั้งแต่ 12 มม. ขึ้นไปไม่เซาะร่องเลย ใช้เดือย/มินิฟิกตามที่โรงงานทำจริง กดใช้งานกล่องแผ่นหลังจะล้างร่องเดิมทิ้งให้และไม่ออกมาโคร · ไฟล์ที่ส่งมามีร่องบันทึกว่ารับไม้ 9 กว้าง 9.5 แต่แผ่นหลังจริงหนา 16.2 มันจึงเสียบร่องไม่ลงมาตั้งแต่ต้น"],
+    ["35.0","2026-08-18","FIX ชั้นในตู้หลายช่องอ้างแผ่นหลังผิดใบ — ของเดิมหยิบแผ่นที่อยู่หลังสุดของทั้งตู้มาใช้กับทุกชั้น ตู้ปกติที่มีแผ่นหลังใบเดียวจึงถูกเสมอ ไม่มีใครเจอ แต่ตู้ที่ช่วงบนเว้นหลังลึกกว่าช่วงล่าง ชั้นช่วงบนจะยาวไปจนชนแนวแผ่นหลังของช่วงล่าง คือทะลุออกไปหลังแผ่นหลังของตัวเอง ตอนนี้เลือกแผ่นหลังที่คร่อมระดับชั้นนั้นและซ้อนกันในแนวกว้างจริง ช่องใครช่องมัน · FEAT วัดถึง เพิ่ม กึ่งกลางชิ้น ต่อจาก ผิวใกล้/ผิวไกล — ตั้งระยะแล้วเปลี่ยนความหนาชั้นทีหลัง ตำแหน่งไม่ขยับ · FIX มาโครเซาะร่องรับแผ่นหลังผิดรูปแบบ รหัสความหนาต้องเป็นช่วง ไม่ใช่ค่าจริง (9-9.9=100 · 10-10.9=110 · 11-11.9=120) แผ่นหลัง 9.2 เดิมออก V102 · และ backset ต้องคูณสิบ 16 มม. = 160 ไม่ใช่ 016 ของเดิมออก V102016050 ที่ถูกคือ V100160050 · backset เกิน 30 มม. ไม่มีมาโคร ออก CNC แทน"],
+    ["34.9","2026-08-18","ระดับ 4 ทำงานออเดอร์ได้ครบวง — โหลด บันทึก แก้ และลบได้เฉพาะออเดอร์ที่ตัวเองสร้าง · จุดที่ต้องระวังคือออเดอร์กับคลังตู้ต้นแบบอยู่ตารางเดียวกัน (furnitech_cabinets) แยกกันด้วยรหัสนำหน้า ORD:: เท่านั้น ถ้าเปิดสิทธิ์ทั้งตารางก็เท่ากับให้ฝ่ายผลิตลบตู้ต้นแบบได้ด้วย จึงคุมด้วยรหัสนำหน้าทั้งใน RLS และในตัวดักฝั่งโปรแกรม · ระดับ 3 ได้ลบออเดอร์ของตัวเองด้วย เพราะจะให้ระดับต่ำกว่าทำได้มากกว่าไม่ได้ · นำเข้า XML คือขั้นแรกของการโหลดออเดอร์ ระดับ 4 จึงเขียน xml_history ได้ (ลบยังเป็น 1-2) · ตอนลบ .delete() ไม่ได้รับพารามิเตอร์ รหัสอยู่ใน .eq() ที่ตามมาทีหลัง ตัวดักจึงเช็คซ้ำตรงนั้น ส่วนจะเป็นของตัวเองจริงไหมปล่อยให้ RLS ตัดสิน · เปลี่ยนชื่อระดับ 4 จาก ดูอย่างเดียว เป็น งานออเดอร์ ให้ตรงกับสิ่งที่ทำได้จริง"],
     ["34.8","2026-08-18","FEAT ประวัติการใช้งาน (เห็นได้เฉพาะระดับ 1) — สองมุมมองในหน้าเดียว การกระทำ (ใครบันทึก/ลบตู้ ส่งออเดอร์ เข้า-ออกเมื่อไหร่ ทำกับรายการไหน) และ เข้า-ออก (เข้ากี่โมง ออกกี่โมง ใช้ไปกี่นาที) กรองตามคน/ช่วงเวลา/คำค้นได้ · บันทึกผ่าน RPC ที่ประทับชื่อผู้ทำจากฝั่งเซิร์ฟเวอร์ ปลอมชื่อคนอื่นไม่ได้ และตาราง sx_log ไม่ให้สิทธิ์เขียนตรงกับใครเลย · ดักที่ sxGuardDB จุดเดียวซึ่งห่อทุกคำสั่งเขียนคลาวด์อยู่แล้ว จึงครอบครบทุกปุ่มโดยไม่ต้องไล่แก้ 20 จุดแล้วลืมจุดใดจุดหนึ่ง · ตอนลบมีปัญหาว่า .delete() ไม่ได้รับพารามิเตอร์ รหัสอยู่ใน .eq() ที่ตามมาทีหลัง จึงดัก .eq เก็บค่าไว้ แล้วบันทึกตอนคำสั่งวิ่งจริงสำเร็จ ไม่ใช่ตอนเรียก ที่ล้มเหลวกลางทางจึงไม่ถูกนับว่าทำแล้ว · เก็บแค่ตัวระบุรายการ ไม่เก็บก้อนข้อมูลตู้ ไม่งั้นตารางบวมเป็นสิบเมกะภายในเดือนเดียว · ออกกี่โมงคิดจากชีพจรครั้งสุดท้าย (sx_touch ต่ออายุแถวเดิมทุก 30 วิ) แม่นกว่ารอปุ่มออกจากระบบที่คนส่วนใหญ่ไม่กด คลาดไม่เกิน 2 นาที · ลบเองทุกวันตี 3 เก็บย้อนหลัง 30 วัน พร้อมปุ่มลบก่อนวันที่ที่เลือก และลบทั้งหมด"],
     ["34.7","2026-08-18","FIX ระดับ 4 กด ส่งเข้า Supabase ไม่ได้ ทั้งที่เป็นงานประจำวันของฝ่ายผลิต — v34.0 คุมสิทธิ์เป็นระดับล้วน ไม่ได้ดูว่าเขียนตารางไหน ระดับ 4 จึงถูกกันทุกการเขียนรวมถึงการส่งออเดอร์ ซึ่งคนละเรื่องกับการแก้คลังตู้ · แย่กว่านั้นคือตารางกลุ่มออเดอร์ (imos_orders · imos_mapping) เปิดให้ anon อยู่แล้วเพื่อให้ Production V2 ทำงานได้ การกันระดับ 4 จึงไม่ได้กันอะไรจริงสักนิด แค่ทำให้คนทำงานติดขัดเปล่า ๆ · ตอนนี้ดูเป็นรายตาราง ส่งออเดอร์ได้ทุกระดับ ส่วนการลบออเดอร์ยังเป็นระดับ 1-2 · app_settings ระดับ 4 แตะได้เฉพาะคีย์ iids: ที่เป็นส่วนหนึ่งของการส่งออก ค่าตั้งทั้งโปรแกรมกับกฎของ Production ยังคุมตามระดับเดิม · คลังตู้ furnitech_* และ xml_history ไม่เปลี่ยน"],
     ["34.6","2026-08-18","FEAT เห็นแล้วว่าใครออนไลน์อยู่ — คอลัมน์ ใช้งานล่าสุด เปลี่ยนเป็น สถานะออนไลน์ เขียว ● ออนไลน์ (มีสัญญาณชีพไม่เกิน 2 นาที) · เหลือง ● พร้อมเวลา (ไม่เกิน 15 นาที) · เทา ○ นานกว่านั้น · เดิมบอกแค่ 2 นาทีที่แล้ว ซึ่งแยกไม่ออกว่ายังเปิดค้างอยู่หรือปิดไปแล้ว · ตารางอัปเดตสถานะเองทุก 15 วินาทีโดยไม่วาดใหม่ทั้งใบ ไม่งั้นดรอปดาวน์ที่กำลังเลือกกับช่องค้นหาจะถูกรีเซ็ตทิ้ง · เกณฑ์เผื่อไว้ถึง 2 นาทีเพราะเบราว์เซอร์หน่วงตัวจับเวลาของแท็บที่ไม่ได้อยู่หน้าจอเหลือนาทีละครั้ง คนที่สลับไปทำอย่างอื่นจะได้ไม่ขึ้นว่าออฟไลน์ทั้งที่ยังเปิดโปรแกรมค้างอยู่ · กลับมาที่หน้าต่างโปรแกรมแล้วเคาะสัญญาณชีพทันที ไม่ต้องรอครบรอบ"],
@@ -2665,7 +2681,7 @@ function kerfPlan(b){
    BLANK.allow = เผื่อตัดหัวท้าย (มม.) บวกเพิ่มจากความยาวกางออกตอนสั่งไม้
                  กันความยาวจริงขาด (ไม้ยืด/หด ตอนดัด · คลาดจากการวัด R)
                  เผื่อครึ่งละข้าง ชิ้นงานจึงอยู่กึ่งกลางแผ่น */
-const BLANK={ allow:10 };
+const BLANK={ allow:10 , step:10};
 /* รหัสวัสดุมักฝังความหนาไว้ (ME15 / MD19 / K_PB_16) — ถ้าความหนาจริงไม่ตรง
    ให้แทนตัวเลขในรหัสด้วยความหนาจริง แล้วเก็บไว้เตือนผู้ใช้ว่าเปลี่ยนอะไรไปบ้าง
    (สำคัญกับแผ่นดัด: ความหนาเพิ่งมาถูกตอน v4.9 รหัสเลยยังค้างของเดิม) */
@@ -2701,8 +2717,16 @@ function blankDims(b){
      ความหนาเอาจากความกว้างแถบใน profile — ถ้า b.T ไม่ใช่ความหนา แปลว่ามันคือความสูง */
   const mat=panelThickness(b);
   const hgt=(Math.abs(mat-round(T))>0.6) ? T : W;
-  return { L:round(dev+allow), W:round(hgt), T:round(mat), curved:true,
-           chord:round(L), extra:round(dev-L), dev:round(dev), allow:round(allow) };
+  /* ───────── v35.7: ขนาดสั่งไม้ปัดขึ้นเป็นเลขลงตัว ─────────
+     กางออก 1046.1 + เผื่อ 10 = 1056.1 สั่งไม้ด้วยเศษทศนิยมแบบนี้ไม่มีใครตัดให้
+     ปัดขึ้นเป็นขั้นละ BLANK.step (ตั้งต้น 10) -> 1060 · ส่วนที่ปัดเพิ่มไปรวมกับเผื่อตัด
+     ชิ้นงานยังอยู่กึ่งกลางแผ่นเหมือนเดิม ตำแหน่งร่องจึงเลื่อนตามครึ่งหนึ่งของที่ปัด */
+  const step=Math.max(+BLANK.step||0,0);
+  const rawL=dev+allow;
+  const ordL=step>0 ? Math.ceil(rawL/step)*step : rawL;
+  return { L:round(ordL), W:round(hgt), T:round(mat), curved:true,
+           chord:round(L), extra:round(dev-L), dev:round(dev),
+           allow:round(ordL-dev) };
 }
 function groupOf(b){ return cabGroups().find(g=>g.boards.includes(b)); }
 function selBoard(){ return state.boards.find(x=>x.id===state.selectedId); }
@@ -4737,14 +4761,32 @@ function openBackGrooveModal(back){
   const hX=p=>worldDims(p)[0]/2, hY=p=>worldDims(p)[1]/2;
   const thai={left:"ซ้าย",right:"ขวา",top:"บน",bottom:"ล่าง"};
   const m=$("backGrooveModal"), body=m.querySelector("#bgBody");
-  let backset=settings.backset||16, over=settings.backOver||4.5, clear=settings.backClear||0.5, shiftSh=true;
+  /* v35.3: ค่าที่เคยตั้งกับแผ่นใบนี้ต้องขึ้นมาให้เห็น ไม่ใช่เด้งกลับเป็นค่าตั้งต้นของโปรแกรมทุกครั้ง
+     แผ่นที่ตั้ง backset 66 ไว้ เปิดมาเจอ 16 แล้วกดใช้งาน = ร่นกลับโดยไม่ตั้งใจ */
+  const _bgPrev=(()=>{ let g=null;
+    try{ (groupOf(back).boards||[]).forEach(p=>(p.grooves||[]).forEach(x=>{
+      if(!x||!x.back) return;
+      const gz=(p.orient==="side")?(p.z+(x.pos||0)):(p.z-(x.pos||0));
+      if(Math.abs(gz-back.z)<=30) g=x; })); }catch(e){}
+    return g; })();
+  let backset=(back._backset!=null?back._backset:(_bgPrev&&_bgPrev.backset!=null?_bgPrev.backset:(settings.backset||16))),
+      over=settings.backOver||4.5, clear=settings.backClear||0.5, shiftSh=true;
+  let bcnc=!!back._backCNC;
   const Tb=back.T||9;
   // หาแผ่นนอนรับร่อง บน/ล่าง ที่ช่วงลึกครอบแนวร่อง (รวมคานนอน เช่น คานหลัง)
   const targetZof=()=>rearZ+backset+Math.max(Tb+clear,0.5)/2;
+  /* ───────── v35.3: แผ่นหลังต้องอยู่ในช่องของตัวเอง ─────────
+     ของเดิมหยิบแผ่นนอนบนสุด/ล่างสุดของทั้งตู้มาเป็นขอบบน-ล่างเสมอ
+     แผ่นหลังของช่องเดียวจึงถูกยืดจากพื้นตู้ถึงฝาบน = หลุดออกจากช่องไปคร่อมทั้งใบ
+     ต้องเอาแผ่นนอนที่ "ประชิดช่วงของแผ่นหลังใบนี้" ไม่ใช่สุดขอบตู้ */
+  const _bY0=back.y-worldDims(back)[1]/2, _bY1=back.y+worldDims(back)[1]/2;
   function horizRecv(which){ const tz=targetZof();
-    const cands=carc.filter(b=>b.orient==="flat").filter(b=>{const d=worldDims(b);return b.z-d[2]/2<=tz+0.6&&b.z+d[2]/2>=tz-0.6;});
+    const cands=carc.filter(b=>b!==back&&b.orient==="flat").filter(b=>{const d=worldDims(b);return b.z-d[2]/2<=tz+0.6&&b.z+d[2]/2>=tz-0.6;});
     if(!cands.length)return null; cands.sort((a,b)=>a.y-b.y);
-    return which==="top"?cands[cands.length-1]:cands[0]; }
+    if(which==="top"){ const above=cands.filter(b=>b.y+worldDims(b)[1]/2>=_bY1-1);
+      return above.length?above[0]:cands[cands.length-1]; }
+    const below=cands.filter(b=>b.y-worldDims(b)[1]/2<=_bY0+1);
+    return below.length?below[below.length-1]:cands[0]; }
   // โหมดต่อด้าน: groove=เซาะร่อง(ฝังใน) · flush=สุดขอบนอกตู้(ไม่เซาะ) · keep=คงขอบเดิม
   const sel={left:"groove",right:"groove",top:horizRecv("top")?"groove":"flush",bottom:horizRecv("bottom")?"groove":"flush"};
   function paint(){
@@ -4762,10 +4804,18 @@ function openBackGrooveModal(back){
         <div class="fld" style="margin:0"><label>Over (มม.)</label><input type="number" id="bgOv" class="nameinp" value="${over}" style="width:100%;font-family:var(--mono)"></div>
         <div class="fld" style="margin:0"><label>เผื่อ (มม.)</label><input type="number" id="bgCl" class="nameinp" value="${clear}" style="width:100%;font-family:var(--mono)"></div>
       </div>
+      <div class="fld" style="margin-top:8px"><label>ชนิดร่องของแผ่นนี้</label>
+        <div class="seg" style="flex:none">
+          <button type="button" id="bgNormal" class="${bcnc?"":"sel"}" style="flex:1;padding:6px 4px">ร่องปกติ (เลื่อยยาวตลอดแผ่น)</button>
+          <button type="button" id="bgCNC" class="${bcnc?"sel":""}" style="flex:1;padding:6px 4px">ร่อง CNC (เป็นท่อนเฉพาะช่วงนี้)</button></div>
+        <div style="font-size:11px;opacity:.62;margin-top:4px;line-height:1.5">ตู้แบ่งช่องที่มีแผ่นหลังหลายใบ ร่องวิ่งยาวไม่ได้ ช่วงที่ไม่มีแผ่นหลังจะเห็นเป็นร่องโล่ง · CNC จะตัดร่องให้พอดีช่วงของแผ่นนี้ และมาโครออกเป็น CNC${Tb>=SX_BACK_GROOVE_MAX_T?" · <b>แผ่นนี้หนา "+Tb+" มม. — ไม่เซาะร่องเลย ใช้เดือย/มินิฟิก</b>":""}</div></div>
       <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;margin-top:4px"><input type="checkbox" id="bgShift" ${shiftSh?"checked":""}> ขยับชั้น/ของในตู้ร่นเข้า (ปัดเลขเต็ม)</label>
       <div id="bgPrev" style="font-family:var(--mono);font-size:11px;line-height:1.6;background:rgba(127,127,127,.08);border-radius:8px;padding:7px 9px;margin-top:8px"></div>`;
     body.querySelectorAll("[data-md]").forEach(bt=>bt.onclick=()=>{ const e=bt.dataset.side; sel[e]=bt.dataset.md;
       body.querySelectorAll(`[data-side="${e}"]`).forEach(x=>x.classList.toggle("sel",x===bt)); prev(); });
+    { const bn=body.querySelector("#bgNormal"), bc=body.querySelector("#bgCNC");
+      if(bn) bn.onclick=()=>{ bcnc=false; paint(); };
+      if(bc) bc.onclick=()=>{ bcnc=true;  paint(); }; }
     body.querySelector("#bgBs").oninput=e=>{const v=parseFloat(e.target.value);backset=isNaN(v)?backset:v;prev();};
     body.querySelector("#bgOv").oninput=e=>{const v=parseFloat(e.target.value);over=isNaN(v)?0:v;prev();};
     body.querySelector("#bgCl").oninput=e=>{const v=parseFloat(e.target.value);clear=isNaN(v)?0:v;prev();};
@@ -4790,7 +4840,11 @@ function openBackGrooveModal(back){
   m.querySelector("#bgCancel").onclick=close; m.querySelector("#bgX").onclick=close;
   m.querySelector("#bgApply").onclick=()=>{
     const gW=Math.max(Tb+clear,0.5), gD=Math.max(over+clear,0.5), gWc=round(gW), gDc=round(gD);
-    carc.forEach(p=>{ if(p.grooves&&p.grooves.length) p.grooves=p.grooves.filter(g=>!g.back); });   // idempotent
+    /* v35.3: ล้างเฉพาะร่องที่เป็นของแผ่นหลังใบนี้ (เทียบจากระยะ z ของร่อง)
+       เดิมล้าง g.back ทั้งตู้ ตู้ที่มีแผ่นหลังหลายใบจึงเสียร่องของใบอื่นไปด้วยทุกครั้งที่กดใช้งาน */
+    const _mineG=(p,g)=>{ const gz=(p.orient==="side")?(p.z+(g.pos||0)):(p.z-(g.pos||0));
+      return Math.abs(gz-targetZof())<=30 || Math.abs(gz-back.z)<=30; };
+    carc.forEach(p=>{ if(p.grooves&&p.grooves.length) p.grooves=p.grooves.filter(g=>!(g.back&&_mineG(p,g))); });
     const recvT=horizRecv("top"), recvB=horizRecv("bottom");
     // ขอบแผ่นหลังต่อด้าน: groove=ฝังเข้าแผ่นรับ over มม. · inset=ชิดผิวในแผ่น(ไม่ทับ ไม่มี over) · flush=ทับสุดขอบนอกตู้ · keep=เดิม
     let bl=back.x-worldDims(back)[0]/2, br=back.x+worldDims(back)[0]/2, bb=back.y-worldDims(back)[1]/2, bt=back.y+worldDims(back)[1]/2;
@@ -4806,6 +4860,13 @@ function openBackGrooveModal(back){
     if(sel.right==="groove") gv(rightS, rightS.x<centerX?"top":"bottom", targetZ-rightS.z);
     if(sel.bottom==="groove"&&recvB) gv(recvB, recvB.y<centerY?"top":"bottom", recvB.z-targetZ);  // flat/คานนอน: worldZ = panel.z - posLocalW
     if(sel.top==="groove"&&recvT)    gv(recvT, recvT.y<centerY?"top":"bottom", recvT.z-targetZ);
+    back._backset=backset;                            // v35.3: จำค่าไว้ที่แผ่น เปิดมาอีกทีจะได้ขึ้นค่าเดิม
+    if(bcnc) back._backCNC=true; else delete back._backCNC;
+    if(Tb>=SX_BACK_GROOVE_MAX_T){                     // v35.1: ไม้หนา = ไม่เซาะร่อง ใช้เดือย/มินิฟิก
+      carc.forEach(p=>{ if(p.grooves&&p.grooves.length) p.grooves=p.grooves.filter(g=>!g.back); });
+      close(); sync(0);
+      toast("แผ่นหลังหนา "+Tb+" มม. — ไม่เซาะร่อง ใช้เดือย/มินิฟิกแทน"); return; }
+    try{ sxSyncBackGrooves(groupOf(back)); }catch(e){}
     let moved=0;
     if(shiftSh){ const newRear=rearZ+Math.ceil(backset+Tb+clear);
       carc.filter(b=>b.orient==="flat"&&!isRail(b)&&b!==recvT&&b!==recvB).forEach(p=>{ const d=worldDims(p), front=p.z+d[2]/2, curRear=p.z-d[2]/2;
@@ -4818,6 +4879,39 @@ function openBackGrooveModal(back){
   };
   m.classList.add("show"); paint();
 }
+/* ───────── v35.1: ร่องรับแผ่นหลังแบบเป็นท่อน + ไม้หนาไม่เซาะร่อง ─────────
+   ไม้ตั้งแต่ 12 มม. ขึ้นไปไม่ทำร่อง ใช้เดือย/มินิฟิกแทน (โรงงานทำแบบนั้นอยู่แล้ว)
+   ตู้ที่แบ่งช่องแล้วมีแผ่นหลังหลายใบ ร่องจะวิ่งยาวตลอดแผ่นข้างไม่ได้
+   เพราะช่วงกลางไม่มีแผ่นหลังมาปิด เห็นเป็นร่องโล่ง และเลื่อยเดินยาวก็ทำร่องตันไม่ได้
+   ต้องเป็นงาน CNC กัดเฉพาะช่วง -> ตั้งธงที่แผ่นหลังทีละใบ แล้วตัดหัวท้ายร่องด้วย off0/off1 */
+const SX_BACK_GROOVE_MAX_T=12;                       // หนาตั้งแต่นี้ = ไม่เซาะร่อง
+function sxBackPanelsOf(grp){ return ((grp&&grp.boards)||[]).filter(x=>
+  x.orient==="front" && !x._door && !x._virtual && !x._dx && !x._dwall && !isRail(x)); }
+function sxSyncBackGrooves(grp){
+  if(!grp) return 0;
+  const backs=sxBackPanelsOf(grp); if(!backs.length) return 0;
+  let n=0;
+  grp.boards.forEach(p=>{ (p.grooves||[]).forEach(g=>{
+    if(!g||!g.back) return;
+    const d=worldDims(p);
+    // z ของร่องในพิกัดโลก · แผ่นข้าง: p.z+pos · แผ่นนอน: p.z-pos
+    const gz=(p.orient==="side")?(p.z+(g.pos||0)):(p.z-(g.pos||0));
+    let bp=null,best=1e9;
+    backs.forEach(x=>{ const dd=Math.abs(x.z-gz); if(dd<best){ best=dd; bp=x; } });
+    if(!bp||best>60) return;
+    g.backThk=bp.T; g.cnc=!!bp._backCNC;
+    if(bp._backCNC){                                  // ตัดร่องให้เหลือเฉพาะช่วงของแผ่นหลังใบนี้
+      const bd=worldDims(bp);
+      if(p.orient==="side"){                          // แผ่นข้าง: แกน len = ความสูง
+        g.off0=Math.max(round((bp.y-bd[1]/2)-(p.y-d[1]/2)),0);
+        g.off1=Math.max(round((p.y+d[1]/2)-(bp.y+bd[1]/2)),0);
+      } else {                                        // แผ่นนอน: แกน len = ความกว้าง
+        g.off0=Math.max(round((bp.x-bd[0]/2)-(p.x-d[0]/2)),0);
+        g.off1=Math.max(round((p.x+d[0]/2)-(bp.x+bd[0]/2)),0);
+      }
+    } else { delete g.off0; delete g.off1; }
+    n++; }); });
+  return n; }
 function cabBBox(boards){ let x0=Infinity,x1=-Infinity,y0=Infinity,y1=-Infinity,z0=Infinity,z1=-Infinity;
   boards.forEach(b=>{ const d=worldDims(b),hx=d[0]/2,hy=d[1]/2,hz=d[2]/2;
     x0=Math.min(x0,b.x-hx); x1=Math.max(x1,b.x+hx); y0=Math.min(y0,b.y-hy); y1=Math.max(y1,b.y+hy); z0=Math.min(z0,b.z-hz); z1=Math.max(z1,b.z+hz); });
@@ -5724,7 +5818,15 @@ function applyDoorSpecs(inst){
      หน้าบานใบเดียวพาดข้ามเสาไม่ได้ในของจริง ถ้าคำนวณออกมาแล้วคร่อม แปลว่าสเปคขอบจำผิดช่อง
      เงียบไว้แล้วไปเจอตอนออกไฟล์ตัดคือสิ่งที่เสียเวลาที่สุด จึงฟ้องตั้งแต่ตอนนี้ */
   try{
-    const _cols=carc.filter(x=>x&&x.orient==="side"&&!isRail(x));
+    /* ───────── v35.4: แผ่นข้างนอกสุดไม่ใช่ "เสาแบ่ง" ─────────
+       ของเดิมนับแผ่นตั้งทุกใบเป็นเสา รวมแผ่นข้างซ้าย-ขวาของตู้เอง
+       บานทับ (overlay) กว้างคลุมทั้งใบอยู่แล้ว ศูนย์กลางแผ่นข้างจึงตกอยู่ในช่วงบานเสมอ
+       ตู้ที่ไม่มีเสาแบ่งสักต้นก็เลยโดนฟ้องทุกครั้งที่คำนวณใหม่ เช่นตอนพิมพ์ความลึก
+       เคสจริง TAR030: บานกว้าง 597 คลุม -298.5..298.5 · แผ่นข้างอยู่ ±291.9 = เข้าเงื่อนไขพอดี
+       เหลือเฉพาะแผ่นตั้งที่อยู่ "ระหว่าง" ขอบซ้าย-ขวาสุดจริง ๆ */
+    const _sd=carc.filter(x=>x&&x.orient==="side"&&!isRail(x));
+    const _xs=_sd.map(c=>c.x), _xMin=Math.min.apply(null,_xs), _xMax=Math.max.apply(null,_xs);
+    const _cols=_sd.filter(c=>c.x>_xMin+1 && c.x<_xMax-1);
     const bad=[];
     drs.forEach(b=>{ const d=worldDims(b), l=b.x-d[0]/2, r=b.x+d[0]/2;
       if(_cols.some(c=>{ const cd=worldDims(c);
@@ -7064,7 +7166,7 @@ function guideDatumPlace(b,datum,val,face){
       if(isFinite(lo)) tU=lo; }
     if(tU==null) tU=cabTop;
     /* v9.10: far = วัดทะลุความหนาชิ้นไปผิวอีกด้าน จึงกลับทิศครึ่งความหนา */
-    const oy=(face==="far")?-hy:hy;
+    const oy=(face==="mid")?0:((face==="far")?-hy:hy);   // v35.0: กึ่งกลางความหนาชิ้น
     /* ───────── v33.8: กึ่งกลาง "ช่องที่ชิ้นนี้อยู่" ─────────
        กึ่งกลางเดิมคิดจากพื้นตู้ถึงใต้ฝาบนเสมอ = กึ่งกลางทั้งใบ ซึ่งถูกเมื่อตู้ยังเป็นช่องเดียว
        ตู้ที่แบ่งช่องไว้แล้ว พอสั่งกึ่งกลางชิ้นจะกระโดดข้ามชั้นอื่นไปกลางตู้ ไม่ใช่กลางช่องของตัวเอง
@@ -7099,7 +7201,7 @@ function guideDatumPlace(b,datum,val,face){
      มีให้เลือกแค่ผิวในแผ่นข้าง คนใช้จึงต้องมานั่งลบความหนาแผ่นเองทุกครั้ง ซึ่งพลาดง่าย
      ขอบนอก = ผิวนอกสุดของแผ่นข้างใบนั้น ไม่ใช่ขอบของบานหรือของที่ยื่นออกมา */
   const lOut=ls.x-worldDims(ls)[0]/2, rOut=rs?rs.x+worldDims(rs)[0]/2:lOut;
-  const ox=(face==="far")?-hx:hx;
+  const ox=(face==="mid")?0:((face==="far")?-hx:hx);   // v35.0
   /* v33.8: กึ่งกลางช่องแนวกว้าง — นับเฉพาะแผ่นตั้งที่สูงคร่อมชิ้นนี้จริง ขาตู้/เสาเตี้ยจึงไม่มาบีบช่อง */
   const zoneX=()=>{ let lo=lIn, hi=rIn; const cx=b.x, by0=b.y-dW[1]/2, by1=b.y+dW[1]/2, bz0=b.z-dW[2]/2, bz1=b.z+dW[2]/2;
     grp.boards.forEach(x=>{ if(x===b||x._door||x.orient!=="side"||isRail(x)) return;
@@ -7396,7 +7498,16 @@ function shelfCabInfo(b){
   // แผ่นหลัง: orient front ที่ไม่ใช่คาน → ถ้าไม่เจอ หาเชิงเรขาคณิต → ไม่เจอจริงค่อยใช้หลังตู้
   const backs=grp.boards.filter(x=>x.orient==="front"&&!x._door&&!x._virtual&&!x._dx&&!x._dwall&&!isRail(x));   // v7.27.4: กันหูแขวน/ตะแกรง (orient front เหมือนกัน) ถูกอ่านเป็นแผ่นหลัง
   let backZ;
-  if(backs.length){ const bp=backs.slice().sort((a,b)=>a.z-b.z)[0]; backZ=bp.z+worldDims(bp)[2]/2; }   // ผิวหน้าของแผ่นหลัง
+  /* ───────── v35.0: ตู้ที่แบ่งช่องแล้วมีแผ่นหลังคนละแผ่น ต้องอ้างแผ่นของช่องตัวเอง ─────────
+     ของเดิมหยิบแผ่นที่อยู่ "หลังสุดของทั้งตู้" มาใช้กับทุกชั้น ตู้ปกติที่มีแผ่นหลังใบเดียวจึงถูกเสมอ
+     แต่ตู้ 4 ช่องที่ช่วงบนเว้นหลังลึกกว่าช่วงล่าง ชั้นช่วงบนจะยาวเลยไปจนถึงแนวแผ่นหลังของช่วงล่าง
+     คือทะลุออกไปหลังแผ่นหลังของตัวเอง */
+  const _dyb=worldDims(b), _by0=b.y-_dyb[1]/2, _by1=b.y+_dyb[1]/2, _bx0=b.x-_dyb[0]/2, _bx1=b.x+_dyb[0]/2;
+  const mine=backs.filter(x=>{ const d=worldDims(x);
+    if((x.y-d[1]/2)>=_by1-1 || (x.y+d[1]/2)<=_by0+1) return false;              // ต้องคร่อมระดับชั้นนี้
+    return Math.min(x.x+d[0]/2,_bx1)-Math.max(x.x-d[0]/2,_bx0) > 1; });         // และซ้อนกันในแนวกว้าง
+  const pool=mine.length?mine:backs;
+  if(pool.length){ const bp=pool.slice().sort((a,b)=>a.z-b.z)[0]; backZ=bp.z+worldDims(bp)[2]/2; }   // ผิวหน้าของแผ่นหลัง
   else { const gp=findBackPanelGeom(carc.filter(x=>x!==b));
     if(gp) backZ=gp.z+worldDims(gp)[2]/2;
     else { let rear=Infinity; carc.forEach(x=>{ if(x===b)return; rear=Math.min(rear,x.z-worldDims(x)[2]/2); }); backZ=isFinite(rear)?rear:(b.z-worldDims(b)[2]/2); } }
@@ -11254,7 +11365,18 @@ function showInspector(){
   /* v8.62: ชุดควบคุมร่วมของกลุ่ม "ขนาด" (ปรับขอบด้วยสูตร · ยึดผิวตอนเปลี่ยนหนา · ขนาดตัด · คาน DX · ตรึงด้าน · ล็อกไม่ให้ยืด)
      เดิมอยู่เฉพาะกิ่ง "ชิ้นสี่เหลี่ยม" พอแผ่นข้างถูกบากจนมีเส้นรูป ระบบมองเป็นชิ้นวาดเอง ปุ่มพวกนี้จึงหายทั้งชุด
      -> ดึงออกมาเป็นก้อนเดียว ใช้ร่วมทั้งสองกิ่ง */
-  const _szExtra=`${(()=>{ const en=edgeNames(b), a2=b.adj||{};
+  /* ───────── v35.6: ช่องล็อคความลึกต้องมีให้ทุกแผ่นนอนในตู้ ─────────
+     ของเดิมช่อง 🔒 ล็อคลึก ซ่อนอยู่ในบล็อก "ชั้นนี้" ซึ่งเปิดด้วย isShelfBoard()
+     ที่ตัดสินจาก "ชื่อชิ้น" ว่ามีคำว่า shelf / ชั้น / guide หรือไม่
+     ฝาบนชื่อ Top กับแผ่นพื้นชื่อ Bottom จึงไม่เข้าเงื่อนไข ไม่มีช่องให้ล็อกเลยสักที่
+     ทั้งที่ทั้งสองเป็นแผ่นนอนที่โดน refitInterior ยืดเต็มลึกเหมือนกันเป๊ะ */
+  const _depthRow=(!b._door&&!b._virtual&&b.orient==="flat"&&b.cabInst&&!isRail(b)&&!isShelfBoard(b))
+    ? `<div style="display:flex;gap:6px;align-items:center;margin-top:8px"><span style="font-size:12px;opacity:.85;min-width:62px;white-space:nowrap">🔒 ล็อคลึก</span>
+        <input type="number" id="f_flatDepth" class="nameinp" value="${Math.round(b.depthFix||0)}" style="width:96px;font-family:var(--mono)">
+        <button class="ibtn" id="f_flatDepthApply" style="flex:none">ใช้</button></div>
+       <div style="font-size:11px;opacity:.6;margin-top:3px;line-height:1.5">แผ่นนอนถูกยืดเต็มความลึกช่องใหม่ทุกครั้งที่คำนวณตู้ · ใส่เลขที่นี่ = ลึกคงที่วัดจากหน้าตู้ · <b>0 = ยืดตามตู้เอง</b></div>`
+    : "";
+  const _szExtra=`${_depthRow}${(()=>{ const en=edgeNames(b), a2=b.adj||{};
             const fld=(k,lb)=>`<div class="num" style="flex:1"><span>${lb}</span><input type="text" class="f_adj" data-k="${k}" value="${String(a2[k]||"").replace(/"/g,'&quot;')}" placeholder="0" style="font-family:var(--mono)"></div>`;
             const _why=(b._door&&b._de)?doorWidthWhy(b):"";
             return `${_why?`<div style="margin-top:9px;padding:7px 9px;border-radius:8px;background:var(--bg);font-size:11px;line-height:1.65;color:var(--ink-dim)">
@@ -11448,10 +11570,10 @@ function showInspector(){
              เคสจริงที่เจอ: อยากได้ "จากบนสุดของตู้ ถึงใต้ชั้น = 70" ซึ่งคือผิวไกล ทำไม่ได้เลย */""}
       <div class="ibtns" id="d_faceRow" style="gap:6px;align-items:center;margin-top:6px">
         <span style="font-size:12px;opacity:.85;white-space:nowrap">วัดถึง</span>
-        <button class="ibtn d_face" data-f="near" style="${(b._datum&&b._datum.f==="far")?"":"background:var(--accent);color:#fff;border-color:transparent"}">ผิวใกล้</button>
-        <button class="ibtn d_face" data-f="far" style="${(b._datum&&b._datum.f==="far")?"background:var(--accent);color:#fff;border-color:transparent":""}">ผิวไกล (อีกด้านของชิ้น)</button>
+        ${[["near","ผิวใกล้"],["mid","กึ่งกลางชิ้น"],["far","ผิวไกล (อีกด้าน)"]].map(o=>
+          `<button class="ibtn d_face" data-f="${o[0]}" style="${(((b._datum&&b._datum.f)||"near")===o[0])?"background:var(--accent);color:#fff;border-color:transparent":""}">${o[1]}</button>`).join("")}
       </div>
-      <div class="muted" style="font-size:11px;margin-top:4px;line-height:1.55;white-space:normal">ผิวใกล้ = ระยะถึงผิวที่หันเข้าหาผิวอ้างอิง · ผิวไกล = วัดทะลุความหนาชิ้นไปอีกด้าน (เช่น จากบนสุดของตู้ ถึง<b>ใต้</b>ชั้น) · ใส่สูตรได้ เช่น <b>$D4+$D5</b><br><b>กึ่งกลางตู้</b> = พื้นตู้ ↔ ใต้ฝาบน/ใต้คาน ทั้งใบ · <b>กึ่งกลางช่องที่อยู่</b> = เฉพาะช่องที่ชิ้นนี้อยู่ตอนนี้ (ชั้น/คาน/เส้นแบ่งที่ขนาบอยู่) · ทั้งคู่ยึด<b>กึ่งกลางชิ้นเอง</b> ช่องบน-ล่างเท่ากัน จึงไม่ใช้ช่องระยะและผิวที่วัดถึง${cabNumHint(b.cabInst)}</div>
+      <div class="muted" style="font-size:11px;margin-top:4px;line-height:1.55;white-space:normal">ผิวใกล้ = ระยะถึงผิวที่หันเข้าหาผิวอ้างอิง · กึ่งกลางชิ้น = วัดถึงกลางความหนา (ชั้นหนาเท่าไรก็ไม่ขยับ) · ผิวไกล = วัดทะลุความหนาไปอีกด้าน (เช่น จากบนสุดของตู้ ถึง<b>ใต้</b>ชั้น) · ใส่สูตรได้ เช่น <b>$D4+$D5</b><br><b>กึ่งกลางตู้</b> = พื้นตู้ ↔ ใต้ฝาบน/ใต้คาน ทั้งใบ · <b>กึ่งกลางช่องที่อยู่</b> = เฉพาะช่องที่ชิ้นนี้อยู่ตอนนี้ (ชั้น/คาน/เส้นแบ่งที่ขนาบอยู่) · ทั้งคู่ยึด<b>กึ่งกลางชิ้นเอง</b> ช่องบน-ล่างเท่ากัน จึงไม่ใช้ช่องระยะและผิวที่วัดถึง${cabNumHint(b.cabInst)}</div>
       ${/* v9.12: แก้สูตรความสูงของแผงปิด/หน้าบานได้จากแผงขวา
              เดิมตั้งได้ครั้งเดียวตอนสร้างในกล่อง เพิ่มหน้าบาน พอสร้างเสร็จก็ไม่มีที่ให้แก้หรือปลดอีกเลย */""}
       ${(!b.rule&&canRailFix(b))?`
@@ -11507,7 +11629,14 @@ function showInspector(){
       ${[0,90,180,270].map(a=>`<div class="obtn ${b.yaw===a?"sel":""}" data-yaw="${a}">${a}°</div>`).join("")}</div></div>
     <!-- v32.2: แถวเลือกโทนไม้รายชิ้นถูกเอาออก — ผูก Surface ที่หน้า Element แล้วสีจริงมาเอง -->
     <div class="fld"><label>งานเจาะ / เซาะร่อง</label>
-      <div class="ibtns"><button class="ibtn" id="f_hole">＋ เจาะรู (${(b.holes||[]).length})</button><button class="ibtn" id="f_groove">＋ ร่อง (${(b.grooves||[]).length})</button><button class="ibtn" id="f_2d">🗎 Preview 2D</button></div>
+      ${(b.orient==="front"&&!b._door&&!b._virtual&&!b._dx&&!b._dwall&&!isRail(b))?`
+    <div class="fld" style="margin-top:8px"><label>ร่องรับแผ่นหลังใบนี้</label>
+      <div class="ibtns" style="gap:6px">
+        <button class="ibtn bk_gt" data-c="0" style="${b._backCNC?"":"background:var(--accent);color:#fff;border-color:transparent"}">ร่องปกติ (เลื่อยยาว)</button>
+        <button class="ibtn bk_gt" data-c="1" style="${b._backCNC?"background:var(--accent);color:#fff;border-color:transparent":""}">ร่อง CNC (เป็นท่อน)</button>
+      </div>
+      <div class="muted" style="font-size:11px;margin-top:4px;line-height:1.55;white-space:normal">ตู้แบ่งช่องที่มีแผ่นหลังหลายใบ ร่องวิ่งยาวตลอดแผ่นข้างไม่ได้ ช่วงที่ไม่มีแผ่นหลังจะเห็นเป็นร่องโล่ง · เลือก <b>CNC</b> แล้วร่องจะถูกตัดให้เหลือเฉพาะช่วงของแผ่นนี้ และมาโครออกเป็น <b>CNC</b> แทนรหัส V · แผ่นหนา ${SX_BACK_GROOVE_MAX_T} มม. ขึ้นไปไม่เซาะร่องเลย ใช้เดือย/มินิฟิก</div></div>`:""}
+    <div class="ibtns"><button class="ibtn" id="f_hole">＋ เจาะรู (${(b.holes||[]).length})</button><button class="ibtn" id="f_groove">＋ ร่อง (${(b.grooves||[]).length})</button><button class="ibtn" id="f_2d">🗎 Preview 2D</button></div>
       ${((b.holes||[]).length||(b.grooves||[]).length)?'<button class="ibtn" id="f_clrfeat" style="margin-top:8px">ล้างรู/ร่องทั้งหมด</button>':''}
       ${(()=>{ /* v9.09: ล้างเฉพาะร่องรับแผ่นหลังทั้งตู้ — เผื่อเปลี่ยนใจไม่ใส่แผ่นหลัง หรือร่องค้างจากรอบก่อน */
         let nb=0; try{ (state.boards||[]).forEach(o2=>{ if(o2&&o2.cabInst===b.cabInst&&o2.grooves) nb+=o2.grooves.filter(g=>g&&g.back).length; }); }catch(e){}
@@ -11608,12 +11737,37 @@ function showInspector(){
      เดิมกล่องขยายออกสองข้างเท่า ๆ กัน บานหนาขึ้น 2 มม. = จมเข้าไปในตู้ 1 มม. ทุกครั้ง
      บานทับ: ผิวหลังบานแนบหน้าตู้ -> โตออกหน้าอย่างเดียว
      แผงปิด/บานหลอก: ผิวหน้าเสมอหน้าตู้ -> โตเข้าในอย่างเดียว */
+  /* ───────── v35.5: พิมพ์ความลึกแล้วต้องได้ตามที่พิมพ์ ─────────
+     refitInterior ยัดความลึกให้แผ่นนอนทุกชิ้นเต็มช่อง [ผิวหน้าแผ่นหลัง .. หน้าตู้] ทุกครั้งที่ sync
+     ค่าที่พิมพ์เองจึงถูกเขียนทับทันทีโดยไม่มีอะไรบอก ต้องไปหาช่อง "ล็อคลึก" ที่อยู่คนละที่ถึงจะอยู่
+     พิมพ์ในช่องกว้างของแผ่นนอน = ตั้งใจกำหนดเอง -> ล็อคให้เลย (วัดจากหน้าตู้ ซึ่งเป็นด้านที่ชั้นเสมอกัน)
+     อยากให้กลับไปยืดตามตู้เอง ใส่ 0 ที่ช่อง 🔒 ล็อคลึก */
+  let _depthNoted=false;
   const dimChange=(k,el)=>{const v=parseFloat(el.value); if(isNaN(v))return;
+    /* ───────── v36.1: ชิ้นแผ่นดัดของกล่องโค้งเก็บ "ความสูง" ไว้ในช่อง T ─────────
+       ความหนาจริงอ่านจากความกว้างแถบใน profile ไม่ได้อยู่ใน b.T
+       ผู้ใช้เห็นช่องชื่อ "หนา" ขึ้น 862 ก็แก้เป็น 12 ตามความหนาไม้จริง
+       ผลคือความสูงแผ่นหายไปทั้งดุ้น กลายเป็น 150 (ตกไปใช้ค่า W แทน) แล้วแบบก็เพี้ยนตามหมด
+       กันไว้ตรงนี้ อยากเปลี่ยนความหนาไม้ให้ไปแก้ที่กล่องสร้างแล้วสร้างใหม่ */
+    if(k==="T" && b._csType && /^face/.test(b._csType)){
+      const real=(typeof panelThickness==="function")? panelThickness(b) : null;
+      el.value=b.T;
+      toast("แผ่นดัดชิ้นนี้เก็บความสูง "+round(b.T)+" มม. ไว้ในช่องนี้"+(real?(" · ความหนาไม้จริง "+round(real)+" มม. มาจากรูปหน้าตัด"):"")+" — เปลี่ยนความหนาต้องแก้ในกล่องสร้างกล่องโค้งแล้วสร้างใหม่");
+      return; }
     if(k==="T"&&v>0) anchorDoorT(b,v-(b.T||0));
     b[k]=v;
+    if(k==="W"&&v>0&&b.orient==="flat"&&b.cabInst&&!b._door&&!b._virtual&&!isRail(b)){
+      b.depthFix=round(v); b.depthRef="front";
+      if(!_depthNoted){ _depthNoted=true;
+        try{ toast("ล็อคความลึกไว้ที่ "+round(v)+" มม. (วัดจากหน้าตู้) · ใส่ 0 ที่ 🔒 ล็อคลึก เพื่อให้ยืดตามตู้เอง"); }catch(e){} } }
     if(k==="L"||k==="W"||k==="T"||k==="x"||k==="y"||k==="z"){ render3D(false); updateRowText(b); autosave();
       if(k==="T"){ const zf=body.querySelector("#f_z"); if(zf)zf.value=round(b.z); } } };
   (isProf?["T"]:["L","W","T"]).forEach(k=>{const el=body.querySelector("#f_"+k);if(el){el.addEventListener("input",e=>dimChange(k,e.target));el.addEventListener("change",commit);}});
+  { const fd=body.querySelector("#f_flatDepth"), fa=body.querySelector("#f_flatDepthApply");
+    if(fd&&fa) fa.onclick=()=>{ const n=Math.max(parseFloat(fd.value)||0,0);
+      if(n>0){ b.W=round(n); b.depthFix=round(n); b.depthRef="front"; toast("ล็อคลึก "+round(n)+" มม. วัดจากหน้าตู้"); }
+      else { delete b.depthFix; delete b.depthRef; toast("ปลดล็อก — กลับไปยืดเต็มความลึกช่องตามตู้"); }
+      sync(0); showInspector(); }; }
   { const rd=body.querySelector("#f_redoDrw"); if(rd)rd.onclick=()=>redoDrawerColumn(b); }
   { const setDw=()=>{ const inp=body.querySelector("#f_dwD"); if(!inp)return;
       const from=(body.querySelector(".f_dwFrom.sel")||{}).dataset?.v||"back";
@@ -11798,6 +11952,7 @@ function showInspector(){
   body.querySelector("#r_max").onclick=()=>setR(Math.min(b.L,b.W)/2);
   }
   body.querySelector("#f_lib").onclick=()=>saveToLibrary(b);
+  body.querySelectorAll(".bk_gt").forEach(btn=>btn.onclick=()=>sxSetBackCNC(b,btn.getAttribute("data-c")==="1"));
   body.querySelector("#f_hole").onclick=()=>addHole(b);
   { const b2=body.querySelector("#f_2d"); if(b2)b2.onclick=()=>open2D(b); }
   body.querySelector("#f_groove").onclick=()=>addGroove(b);
@@ -12314,8 +12469,13 @@ const store={
   async get(k){ if(window.storage){ try{ const r=await window.storage.get(k,false); if(r)return r.value; }catch(e){} } try{ return localStorage.getItem(k); }catch(e){ return null; } }
 };
 /* v7.59.1: ตัวแปรตัวเลขรายตู้ (cabNums/cabVarTxt) ต้องถูกเซฟด้วย ไม่งั้นปิดโปรแกรมแล้ว $D4 หาย */
-async function autosave(){ if(state.editing)return; try{ await store.set("boardforge:v1",JSON.stringify({boards:state.boards,globalTone:state.globalTone,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt,cabDX:state.cabDX,bcSeq:state.bcSeq,bcMax:state.bcMax,orderLines:state.orderLines,cabDP:state.cabDP})); }catch(e){} }
-async function loadSaved(){ try{ const v=await store.get("boardforge:v1"); return v?JSON.parse(v):null; }catch(e){ return null; } }
+/* ───────── v36.3: เปิดสองแท็บพร้อมกันต้องไม่ทับงานกัน ─────────
+   ทั้งสองแท็บเซฟอัตโนมัติลงคีย์เดียวกัน แท็บที่เซฟทีหลังจะทับงานของอีกแท็บทิ้ง
+   แท็บที่เปิดจากปุ่ม "แท็บใหม่" จึงพก ?tab=<เลข> มาด้วย แล้วใช้คีย์ของตัวเอง */
+const SX_TAB=(()=>{ try{ const m=/[?&#]tab=(\w+)/.exec(location.href); return m?m[1]:""; }catch(e){ return ""; } })();
+const SCENE_KEY="boardforge:v1"+(SX_TAB?(":"+SX_TAB):"");
+async function autosave(){ if(state.editing)return; try{ await store.set(SCENE_KEY,JSON.stringify({boards:state.boards,globalTone:state.globalTone,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt,cabDX:state.cabDX,bcSeq:state.bcSeq,bcMax:state.bcMax,orderLines:state.orderLines,cabDP:state.cabDP})); }catch(e){} }
+async function loadSaved(){ try{ const v=await store.get(SCENE_KEY); return v?JSON.parse(v):null; }catch(e){ return null; } }
 async function lsSet(k,v){ try{ await store.set(k,JSON.stringify(v)); }catch(e){} }
 async function lsGet(k,def){ try{ const v=await store.get(k); return (v!=null)?JSON.parse(v):def; }catch(e){ return def; } }
 
@@ -12325,9 +12485,22 @@ function dialog(opts){ return new Promise(res=>{
   m.querySelector("#askTitle").textContent=opts.title||"";
   const inp=m.querySelector("#askInput"), ok=m.querySelector("#askOk"), cancel=m.querySelector("#askCancel");
   if(opts.input){inp.style.display="block";inp.value=opts.value||"";inp.placeholder=opts.placeholder||"";}else inp.style.display="none";
+  /* v36.3: กล่องถามรองรับคำอธิบายและปุ่มทางเลือกที่สาม
+     เดิมมีแค่ ตกลง/ยกเลิก คำถามที่มีสามทางเลือกจึงต้องบีบให้เหลือสองทางเสมอ */
+  { let ht=m.querySelector("#askHtml");
+    if(opts.html){ if(!ht){ ht=document.createElement("div"); ht.id="askHtml"; ht.style.cssText="margin-bottom:12px";
+        inp.parentNode.insertBefore(ht,inp); } ht.innerHTML=opts.html; ht.style.display="block"; }
+    else if(ht) ht.style.display="none"; }
+  const _ex=m.querySelector("#askExtra"); if(_ex) _ex.remove();
   ok.textContent=opts.ok||"ตกลง";
   m.classList.add("show"); if(opts.input)setTimeout(()=>{inp.focus();inp.select();},40);
-  const done=v=>{m.classList.remove("show");ok.onclick=cancel.onclick=inp.onkeydown=null;res(v);};
+  const done=v=>{m.classList.remove("show");ok.onclick=cancel.onclick=inp.onkeydown=null;
+    const e2=m.querySelector("#askExtra"); if(e2) e2.remove(); res(v);};
+  if(opts.extra){ const eb=document.createElement("button");
+    eb.className="ibtn"; eb.id="askExtra"; eb.textContent=opts.extra.label||"อื่น ๆ";
+    if(opts.extra.primary) eb.style.cssText="background:var(--accent);color:#fff;border-color:transparent";
+    ok.parentNode.insertBefore(eb, ok);
+    eb.onclick=()=>done(opts.extra.id||"extra"); }
   ok.onclick=()=>done(opts.input?inp.value:true);
   cancel.onclick=()=>done(null);
   inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();done(inp.value);}else if(e.key==="Escape")done(null);};
@@ -15039,10 +15212,20 @@ function applyThick(b){
      ตัวนี้คือคนที่เขียนความหนา 16 กลับเข้าไปทุกรอบ (เส้นแบ่งติด mat = $CarcassBodyMat มาตั้งแต่สร้าง)
      v9.40 ล้างเป็นศูนย์ตอนต้น sync แต่ตัวนี้ทำงานทีหลัง ค่าจึงเด้งกลับทุกครั้ง */
   if(isGuideLine(b)){ if((+b.T||0)!==0) b.T=0; return false; }
+  /* ───────── v36.4: แผ่นดัดของกล่องโค้งเก็บ "ความสูง" ไว้ในช่อง T ─────────
+     ตัวนี้เห็น T=862 แล้วนึกว่าเป็นความหนา เลยเขียนทับด้วยความหนาวัสดุ (12)
+     ความสูงหายทั้งดุ้นในคลิกเดียว แถม anchorDoorT ยังเลื่อนตำแหน่งตามส่วนต่าง 850 มม. อีก
+     นี่คือเหตุผลที่กดเปลี่ยนวัสดุแล้วกล่องแตก ไม่ใช่ผู้ใช้พิมพ์ผิด
+     ความหนาจริงของแผ่นดัดอยู่ใน _csP.faceT ตัวสร้างเป็นคนดูแล */
+  if(b._csType && /^face/.test(b._csType)) return false;
   const t=deriveThick(b); if(t>0&&Math.abs((b.T||0)-t)>0.05){ anchorDoorT(b,t-(b.T||0)); b.T=t; return true; } return false; }   // เทียบค่าจริง (เก็บ .8 ไว้)
 // บวกผิวทั้งตู้ + ผูกความสัมพันธ์: แผ่นข้างหนาขึ้นโดยคงผิวนอก (กว้างรวมตู้คงที่) → ทอป/พื้น/ชั้น หดตามผิวใน
 function applyCabinetSkin(inst){
   const cb=state.boards.filter(b=>b.cabInst===inst&&!b._door&&!b._virtual&&!isRail(b));
+  /* v36.4: กล่องโค้งไม่ใช่ตู้สี่เหลี่ยม กติกา "ผนังนอกคงผิวนอก ชิ้นในโตออกสองด้าน" ใช้ไม่ได้
+     ผังชั้น ระยะบาก และแผ่นดัด ถูกคิดมาจากตัวสร้างเป็นชุดเดียวกัน
+     ให้เปลี่ยนวัสดุได้ตามปกติ แต่ปล่อยตำแหน่งไว้ ไม่ให้ตัวจัดตู้มาดันชิ้นจนไม่สนิท */
+  if(cb.some(b=>b&&b._csP)){ let m=0; cb.forEach(b=>{ if(applyThick(b))m++; }); return m; }
   if(cb.length<2){ let m=0; cb.forEach(b=>{ if(applyThick(b))m++; }); return m; }   // ตู้ชิ้นเดียว/ไม่ครบ → แค่บวกหนา
   /* v7.19: กติกาการโต
        ผนังนอก (ข้าง/ทอป/พื้น) — คงผิวนอกไว้ โตเข้าใน  => ขนาดรวมตู้ไม่เปลี่ยน
@@ -18480,7 +18663,14 @@ async function renderCloudOrders(){
       const row=document.createElement("div"); row.style.cssText="display:flex;align-items:center;gap:10px;padding:8px 10px;border-bottom:1px solid var(--line,#eee)";
       row.innerHTML=`<div style="flex:1"><div style="font-family:var(--mono);font-weight:600">${escapeHtml(oid)}</div><div style="font-size:11px;opacity:.6">${r.part_count||0} ชิ้น · ${new Date(r.updated_at).toLocaleString("th")}</div></div>
         <button class="ibtn ordOpen" style="background:var(--accent);color:#fff;border-color:transparent">📂 เปิดแก้</button><button class="ibtn ordDel">🗑</button>`;
-      row.querySelector(".ordOpen").onclick=async()=>{ if(state.boards.length){ if(!await dialog({title:"เปิดออเดอร์ “"+oid+"” แทนฉากปัจจุบัน? (ของที่ยังไม่บันทึกจะหาย)",ok:"เปิด"}))return; } cloudLoadOrder(oid); };
+      row.querySelector(".ordOpen").onclick=async()=>{ if(state.boards.length){
+        const ch=await dialog({title:"เปิดออเดอร์ “"+oid+"” ?",
+          html:'<div style="font-size:12.5px;line-height:1.7;color:var(--ink-dim)">'
+            +'<b>แท็บใหม่</b> — เปิดคู่กับงานที่ทำค้างอยู่ ต่างคนต่างเซฟ ไม่ทับกัน<br>'
+            +'<b>แทนฉากนี้</b> — ปิดงานปัจจุบัน (ของที่ยังไม่บันทึกจะหาย)</div>',
+          ok:"แทนฉากนี้", extra:{id:"newtab",label:"เปิดแท็บใหม่",primary:true}});
+        if(!ch) return;
+        if(ch==="newtab"){ sxOpenOrderTab(oid); return; } } cloudLoadOrder(oid); };
       row.querySelector(".ordDel").onclick=async()=>{ if(await dialog({title:"ลบออเดอร์ “"+oid+"” จากคลาวด์?",ok:"ลบ"})){ try{ await cloudDeleteOrder(oid); renderCloudOrders(); toast("ลบแล้ว"); }catch(e){ toast("ลบไม่สำเร็จ"); } } };
       body.appendChild(row); });
   }catch(e){ body.innerHTML='<div class="empty">โหลดไม่สำเร็จ: '+escapeHtml(sbErr(e))+'</div>'; }
@@ -21209,8 +21399,22 @@ function refitInterior(boards){
   // ความลึกภายใน: หน้าตู้ ↔ หน้าแผ่นหลัง
   const carc=boards.filter(b=>!b._door&&!b._virtual&&!b._dx&&!b._dwall&&!isRail(b));   // v7.27.4/7.43.1: ไม่เอา virtual (ขา/หู/ตะแกรง) และคาน DX มาเป็นแผ่นหลัง
   let frontZ=-Infinity; carc.forEach(b=>{frontZ=Math.max(frontZ,b.z+worldDims(b)[2]/2);});
-  const bk=carc.filter(b=>b.orient==="front").sort((a,b)=>a.z-b.z)[0] || findBackPanelGeom(carc);
+  const bkAll=carc.filter(b=>b.orient==="front");
+  const bk=bkAll.slice().sort((a,b)=>a.z-b.z)[0] || findBackPanelGeom(carc);
   const backFront = bk? bk.z+worldDims(bk)[2]/2 : (()=>{let m=Infinity;carc.forEach(b=>{m=Math.min(m,b.z-worldDims(b)[2]/2);});return m;})();
+  /* ───────── v35.3: ตู้แบ่งช่องที่แผ่นหลังคนละระดับ ต้องคิดของช่องตัวเอง ─────────
+     ของเดิมใช้แผ่นหลังที่อยู่ "หลังสุดของทั้งตู้" เป็นเส้นตายให้ทุกแผ่นนอน
+     ฝาบนที่อยู่ในช่วงบน (ซึ่งแผ่นหลังร่นเข้ามา) จึงถูกยืดไปจนถึงแนวแผ่นหลังช่วงล่างเสมอ
+     พิมพ์ 520 เท่าไรก็ถูกดึงกลับเป็น 541.4 ทุกครั้ง เหมือนมีอะไรดึงไว้ */
+  const backFrontAt=f=>{
+    if(bkAll.length<2) return backFront;
+    const d=worldDims(f), y0=f.y-d[1]/2, y1=f.y+d[1]/2, x0=f.x-d[0]/2, x1=f.x+d[0]/2;
+    const mine=bkAll.filter(x=>{ const q=worldDims(x);
+      if((x.y-q[1]/2)>=y1-0.5 || (x.y+q[1]/2)<=y0+0.5) return false;
+      return Math.min(x.x+q[0]/2,x1)-Math.max(x.x-q[0]/2,x0)>1; });
+    if(!mine.length) return backFront;
+    const bp=mine.sort((a,b)=>a.z-b.z)[0];
+    return bp.z+worldDims(bp)[2]/2; };
   const depth=Math.max(frontZ-backFront,20), zc=(frontZ+backFront)/2;
   // ความลึกต่อชิ้น: เคารพค่าร่นหน้า/หลังของชั้นปรับ (shelfInset/setback) — ไม่ล้างทิ้งตอนปรับขนาดตู้
   /* v7.55: มีผนังกั้นแนวลึก -> ชั้นต้องอยู่ในช่องเดิมของมัน
@@ -21226,11 +21430,11 @@ function refitInterior(boards){
     const lo=backFront+T2/2, hi=frontZ-T2/2, zf=Math.max(lo,Math.min(hi,z));
     if(Math.abs(b.z-zf)>0.05) b.z=round(zf); });
   const dws=boards.filter(b=>b._dwall&&!b._virtual).map(b=>({lo:b.z-worldDims(b)[2]/2,hi:b.z+worldDims(b)[2]/2})).sort((a,b)=>a.lo-b.lo);
-  const zoneOf=b=>{ let lo=backFront, hi=frontZ;
+  const zoneOf=b=>{ let lo=backFrontAt(b), hi=frontZ;
     if(!dws.length) return [lo,hi];
     const c=b.z;
     dws.forEach(w=>{ if(w.hi<=c+0.5) lo=Math.max(lo,w.hi); if(w.lo>=c-0.5) hi=Math.min(hi,w.lo); });
-    return (hi-lo>20)?[lo,hi]:[backFront,frontZ]; };
+    return (hi-lo>20)?[lo,hi]:[backFrontAt(b),frontZ]; };
   const depthOf=f=>{ const ins=f.shelfInset||{};
     const [zLo,zHi]=zoneOf(f);
     if(f.depthFix>0){ if(f.depthRef==="front"){ return [round(f.depthFix), round(zHi-f.depthFix/2)]; } return [round(f.depthFix), round(zLo+f.depthFix/2)]; }   // เสาล็อคลึก วัดจากหน้า/หลัง
@@ -21877,7 +22081,18 @@ function drawXmlOrders(){
       [...box.querySelectorAll(".ordrow")].forEach(z=>z.style.outline="");
       row.style.outline="2px solid var(--accent)"; row.style.outlineOffset="-2px";
       showOrderPreview(oid); };
-    row.querySelector(".oOpen").onclick=async()=>{ if(state.boards.length&&!isCur){ if(!await dialog({title:"เปิดออเดอร์ “"+oid+"” แทนฉากปัจจุบัน?",ok:"เปิด"}))return; } if(await cloudLoadOrder(oid)){ closeXmlImport(); } };
+    row.querySelector(".oOpen").onclick=async()=>{
+      if(state.boards.length&&!isCur){
+        /* v36.3: ทำสองงานพร้อมกันได้ — เดิมมีทางเดียวคือทับฉากที่ทำค้างอยู่ */
+        const ch=await dialog({title:"เปิดออเดอร์ “"+oid+"” ?",
+          html:'<div style="font-size:12.5px;line-height:1.7;color:var(--ink-dim)">'
+            +'<b>แท็บใหม่</b> — เปิดคู่กับงานที่ทำค้างอยู่ ต่างคนต่างเซฟ ไม่ทับกัน<br>'
+            +'<b>แทนฉากนี้</b> — ปิดงานปัจจุบัน (ของที่ยังไม่บันทึกจะหาย)</div>',
+          ok:"แทนฉากนี้", extra:{id:"newtab",label:"เปิดแท็บใหม่",primary:true}});
+        if(!ch) return;
+        if(ch==="newtab"){ sxOpenOrderTab(oid); return; }
+      }
+      if(await cloudLoadOrder(oid)){ closeXmlImport(); } };
     row.querySelector(".oDel").onclick=async()=>{ if(await dialog({title:"ลบออเดอร์ “"+oid+"” ?",ok:"ลบ"})){ try{ await cloudDeleteOrder(oid); renderXmlOrders(1); }catch(e){ toast("ลบไม่สำเร็จ"); } } };
     return row; };
   const open=list.filter(r=>nameOf(r)===cur&&hit(r)), rest=list.filter(r=>nameOf(r)!==cur&&hit(r));
@@ -22751,12 +22966,14 @@ function part2DSvg(b,o){
    ดึงตารางเดียวกันมาแสดง ใช้ skinRows ตัวเดียวกับแบบผลิต ค่าจึงตรงกันเสมอโดยไม่ต้องดูแลสองที่ */
 function p2dInfoHtml(b){
   const esc=x=>escapeHtml(String(x==null?"":x));
+  /* v35.2: กล่องข้อมูลย้ายไปเป็นคอลัมน์ซ้าย จึงต้องแคบและตัวเล็กลง
+     เดิมกางเต็มความกว้างใต้แบบ กินที่แนวตั้งซึ่งเป็นด้านที่แบบต้องการที่สุด */
   const box=(title,rows)=>{ if(!rows.length) return "";
-    return '<div style="flex:1;min-width:230px;border:1px solid var(--line);border-radius:10px;overflow:hidden">'
-      +'<div style="background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:5px 10px">'+esc(title)+'</div>'
-      +'<table style="width:100%;border-collapse:collapse;font-size:11.5px">'
-      +rows.map(r=>'<tr><td style="padding:4px 10px;color:var(--ink-dim);border-top:1px solid var(--line);white-space:nowrap">'+esc(r[0])+'</td>'
-        +'<td style="padding:4px 10px;border-top:1px solid var(--line);font-family:var(--mono);font-weight:600">'+esc(r[1])+'</td></tr>').join("")
+    return '<div style="border:1px solid var(--line);border-radius:9px;overflow:hidden;flex:none">'
+      +'<div style="background:var(--ink);color:#fff;font-size:11px;font-weight:700;padding:4px 8px">'+esc(title)+'</div>'
+      +'<table style="width:100%;border-collapse:collapse;font-size:10.5px;table-layout:fixed">'
+      +rows.map(r=>'<tr><td style="padding:3px 8px;color:var(--ink-dim);border-top:1px solid var(--line);width:44%;word-break:break-word">'+esc(r[0])+'</td>'
+        +'<td style="padding:3px 8px;border-top:1px solid var(--line);font-family:var(--mono);font-weight:600;word-break:break-all">'+esc(r[1])+'</td></tr>').join("")
       +'</table></div>'; };
 
   /* ───────── v32.5: บาร์โค้ดอยู่ในนี้ด้วย ─────────
@@ -22796,7 +23013,7 @@ function p2dInfoHtml(b){
 
   const parts=[box("ข้อมูลสั่งผลิต",R1),box("วัสดุ / สี",R2),box("บานเฟรม",R3)].filter(Boolean);
   if(!parts.length) return "";
-  return '<div style="display:flex;flex-wrap:wrap;gap:10px;padding:2px 2px 10px">'+parts.join("")+'</div>';
+  return '<div style="display:flex;flex-direction:column;gap:8px">'+parts.join("")+'</div>';
 }
 function open2D(b){
   if(!b){toast("เลือกชิ้นก่อน");return;}
@@ -22831,16 +23048,23 @@ function open2D(b){
      แบบถูกย่อให้พอดีกรอบเสมอ ชิ้นยาว 2 เมตรจึงเหลือสูงไม่กี่สิบพิกเซล
      ตัวเลขระยะกับรูเล็ก ๆ อ่านไม่ออก ต้องไปเปิดแบบผลิตแล้วขยายเอาทั้งหน้า
      ล้อเมาส์ซูมที่ตำแหน่งเคอร์เซอร์ · ลากเพื่อเลื่อน · ดับเบิลคลิกกลับพอดีจอ */
-  body.innerHTML=legend
-    +'<div style="display:flex;align-items:center;gap:6px;padding:0 2px 6px">'
-      +'<button class="ibtn" id="p2dOut" style="padding:2px 10px;font-size:14px;line-height:1.4">−</button>'
-      +'<span id="p2dPct" style="font-size:12px;color:var(--ink-dim);min-width:48px;text-align:center;font-family:var(--mono)">100%</span>'
-      +'<button class="ibtn" id="p2dIn" style="padding:2px 10px;font-size:14px;line-height:1.4">+</button>'
-      +'<button class="ibtn" id="p2dFit" style="padding:2px 10px;font-size:12px">พอดีจอ</button>'
-      +'<span style="font-size:11px;color:var(--ink-dim)">ล้อเมาส์ = ซูม · ลาก = เลื่อน · ดับเบิลคลิก = พอดีจอ</span></div>'
-    +'<div id="p2dWrap" style="flex:1;min-height:0;overflow:hidden;position:relative;cursor:grab;touch-action:none">'
-      +'<div id="p2dPan" style="transform-origin:0 0;width:100%;height:100%">'+s+'</div></div>'
-    +_info;
+  /* ───────── v35.2: ที่ว่างต้องไปอยู่กับแบบ ─────────
+     .ibtn ตั้ง flex:1 ไว้ ปุ่มซูมสามตัวจึงยืดเต็มความกว้างหน้าต่าง ทั้งที่เป็นแค่ − + พอดีจอ
+     และกล่องข้อมูลกางอยู่ใต้แบบ กินที่แนวตั้งซึ่งเป็นด้านที่แบบต้องการที่สุด
+     ย้ายข้อมูลไปเป็นคอลัมน์ซ้ายกว้างคงที่ แบบจึงได้ทั้งความสูงที่เหลือ */
+  const bar='<div style="display:flex;align-items:center;gap:5px;padding:0 2px 6px">'
+      +'<button class="ibtn" id="p2dOut" style="flex:none;padding:1px 9px;font-size:14px;line-height:1.35">−</button>'
+      +'<span id="p2dPct" style="font-size:11.5px;color:var(--ink-dim);min-width:42px;text-align:center;font-family:var(--mono)">100%</span>'
+      +'<button class="ibtn" id="p2dIn" style="flex:none;padding:1px 9px;font-size:14px;line-height:1.35">+</button>'
+      +'<button class="ibtn" id="p2dFit" style="flex:none;padding:1px 9px;font-size:11.5px">พอดีจอ</button>'
+      +'<span style="font-size:11px;color:var(--ink-dim);margin-left:4px">ล้อเมาส์ = ซูม · ลาก = เลื่อน · ดับเบิลคลิก = พอดีจอ</span></div>';
+  body.innerHTML='<div style="display:flex;gap:12px;flex:1;min-height:0">'
+    +(_info?('<div style="width:238px;flex:none;overflow:auto;padding-bottom:4px">'+_info+'</div>'):"")
+    +'<div style="flex:1;min-width:0;display:flex;flex-direction:column">'
+      +legend+bar
+      +'<div id="p2dWrap" style="flex:1;min-height:0;overflow:hidden;position:relative;cursor:grab;touch-action:none">'
+        +'<div id="p2dPan" style="transform-origin:0 0;width:100%;height:100%">'+s+'</div></div>'
+    +'</div></div>';
   const _db=body.querySelector("#p2dDimBtn"); if(_db) _db.onclick=function(){ window._p2dDim=(window._p2dDim===false); open2D(b); };
   { const wrap=body.querySelector("#p2dWrap"), pan=body.querySelector("#p2dPan"), pct=body.querySelector("#p2dPct");
     let k=1, tx=0, ty=0;
@@ -23273,6 +23497,11 @@ function managePockets(b){
   m.querySelector("#pkmX").onclick=()=>m.classList.remove("show");
   m.querySelector("#pkmClose").onclick=()=>m.classList.remove("show");
 }
+function sxSetBackCNC(b,on){
+  if(on) b._backCNC=true; else delete b._backCNC;
+  const n=sxSyncBackGrooves(groupOf(b));
+  sync(0); try{ showInspector(); }catch(e){}
+  toast(on?("ตั้งเป็นร่อง CNC — ตัดร่องเหลือเฉพาะช่วงของแผ่นนี้ "+n+" ร่อง"):("กลับเป็นร่องปกติ ยาวตลอดแผ่น "+n+" ร่อง")); }
 function clearFeatures(b){ b.holes=[]; b.grooves=[]; sync(0); }
 function flashInspector(){const insp=$("insp"),body=$("inspBody");if(!insp)return;if(body)body.scrollTop=0;insp.classList.remove("flash");void insp.offsetWidth;insp.classList.add("flash");const fn=$("f_name");if(fn)setTimeout(()=>fn.focus(),60);}
 function bindCtx(){
@@ -24253,8 +24482,10 @@ function boardBarcode(b,sideDigit,seqMap){ const seq=String((seqMap||orderPartSe
   return orderBarcodePrefix()+sideDigit+seq; }
 // IMOS-compatible shape for the Production app: { orderID, groups:[{name, rows:[{_tp,...}]}] }
 // มาโครเซาะร่องรับแผ่นหลัง → ออกที่ช่อง Groove3 (= ฟิลด์ INFO2) ของ Production V.2
-//  รูปแบบ V WWW BBB DDD : WWW = (หนาแผ่นหลัง+1)×10 · BBB = backset · DDD = ลึกร่อง×10
-//  เช่น แผ่นหลัง 9 → ร่อง 10.0 = "100" · backset 16 = "016" · ลึก 5.0 = "050" → V100016050
+//  รูปแบบ V TTT BBB DDD : TTT = ช่วงความหนาแผ่นหลัง (9-9.9=100 · 10-10.9=110 · 11-11.9=120 · ไล่ขึ้นทีละ 10)
+//  BBB = backset×10 (16 มม. = "160" · 27 มม. = "270") · DDD = ลึกร่อง×10 (5 มม. = "050")
+//  เช่น แผ่นหลัง 9 + backset 16 + ลึก 5 → V100160050 · backset เกิน 30 มม. → ออก "CNC" ไม่ออกมาโคร
+const SX_BACKSET_MAX=30;
 function backGrooveMacro(b, grp){
   const bg=(b.grooves||[]).find(g=>g.back);
   if(!bg) return "";
@@ -24268,7 +24499,15 @@ function backGrooveMacro(b, grp){
   const backset = (bg.backset!=null) ? bg.backset : (settings.backset||16);
   const depth   = bg.depth||0;
   const pad3=v=>String(Math.max(Math.round(v),0)).padStart(3,"0");
-  return "V"+pad3((Tb+1)*10)+pad3(backset)+pad3(depth*10);
+  /* ───────── v35.0: แก้รูปแบบมาโครให้ตรงของจริง ─────────
+     เดิม V + (หนา+1)×10 + backset + ลึก×10 -> แผ่นหลัง 9.2 ออก V102016050
+     ที่ถูกคือรหัสหนาเป็น "ช่วง" ไม่ใช่ค่าจริง: 9-9.9 = 100 · 10-10.9 = 110 · 11-11.9 = 120
+     และ backset ต้องคูณสิบ (16 -> 160 ไม่ใช่ 016) -> V100160050
+     backset เกิน 30 หรือแผ่นที่ตั้งเป็นร่อง CNC ไม่มีมาโคร ให้ออก CNC ไปเลย */
+  if(Tb>=SX_BACK_GROOVE_MAX_T) return "";            // v35.1: ไม้ 12 ขึ้นไปไม่ทำร่อง จึงไม่มีมาโคร
+  if(bg.cnc) return "CNC";                            // แผ่นหลังใบนี้ตั้งเป็นร่อง CNC (ร่องเป็นท่อน)
+  if(backset > SX_BACKSET_MAX) return "CNC";
+  return "V"+pad3((Math.floor(Tb)+1)*10)+pad3(backset*10)+pad3(depth*10);
 }
 function buildImosData(){
   const oid=orderId(), oPfx=orderBarcodePrefix(), groups=[]; let pid=0;   // running PartID across whole order (unique)
@@ -25018,8 +25257,8 @@ const SX_TABLES=new Set(["furnitech_cabinets","furnitech_parts","xml_history","i
 const SX_LVL=[null,
   {n:"เจ้าของ",     d:"ทำได้ทุกอย่าง + จัดการผู้ใช้"},
   {n:"รอง",         d:"เพิ่ม/แก้/ลบได้ทั้งหมด · จัดการผู้ใช้ไม่ได้"},
-  {n:"เพิ่มข้อมูล", d:"เพิ่มได้ · แก้ได้เฉพาะของตัวเอง · ลบไม่ได้"},
-  {n:"ดูอย่างเดียว",d:"เปิดดู + ส่งออเดอร์เข้า Supabase ได้ · บันทึก/แก้คลังตู้ไม่ได้"}];
+  {n:"เพิ่มข้อมูล", d:"เพิ่มได้ · แก้ของตัวเอง · ลบได้เฉพาะออเดอร์ของตัวเอง"},
+  {n:"งานออเดอร์",  d:"โหลด/บันทึก/แก้ออเดอร์ + ส่งเข้า Supabase · ลบได้เฉพาะออเดอร์ของตัวเอง · แตะคลังตู้ต้นแบบไม่ได้"}];
 function sxCan(act){ const L=SX.lvl; if(!L) return false;
   if(act==="add")  return L<=3;
   if(act==="edit") return L<=3;          // ระดับ 3 ปล่อยผ่านหน้าบ้าน แล้วให้ RLS ตัดของคนอื่นเอง
@@ -25035,14 +25274,30 @@ function sxDeny(act){
    ไม่ใช่การแก้คลังตู้ · และตารางกลุ่มออเดอร์เปิดให้ anon อยู่แล้วเพื่อ Production V2
    การกันระดับ 4 ตรงนี้จึงไม่ได้กันอะไรจริง แค่ทำให้คนทำงานติดขัดเปล่า ๆ */
 const SX_ORDER_TABLES=new Set(["imos_orders","imos_mapping"]);
+/* v34.9: ออเดอร์กับคลังตู้อยู่ตารางเดียวกัน แยกกันด้วยรหัสนำหน้า ORD::
+   ฝ่ายผลิต (ระดับ 4) ต้องโหลด/บันทึก/แก้ออเดอร์ได้ แต่ยังห้ามแตะคลังตู้ต้นแบบ */
+const sxIsOrd=v=>/^ORD::/.test(String(v||""));
 function sxCanTable(t,act,payload){
   if(!SX.lvl) return false;
   if(SX_ORDER_TABLES.has(t)) return (act==="del") ? SX.lvl<=2 : true;      // ส่งออเดอร์ได้ทุกระดับ · ลบยังเป็น 1-2
+  if(t==="xml_history")      return (act==="del") ? SX.lvl<=2 : true;      // นำเข้า XML = ขั้นแรกของการโหลดออเดอร์
   if(t==="app_settings" && act!=="del"){
     const rows=Array.isArray(payload)?payload:[payload];
     if(rows.length && rows.every(r=>r&&typeof r.key==="string"&&r.key.indexOf("iids:")===0)) return true;
   }
+  if(t==="furnitech_cabinets"){
+    if(SX.lvl<=2) return true;
+    if(act==="del") return true;                       // รหัสแถวมาทีหลังทาง .eq -> ไปเช็คต่อที่ sxCanRow
+    if(SX.lvl===3) return true;
+    return sxIsOrd(sxTargetOf(payload));               // ระดับ 4 เขียนได้เฉพาะออเดอร์
+  }
   return sxCan(act); }
+/* .delete() ไม่ได้รับพารามิเตอร์ รหัสอยู่ใน .eq() ที่ตามมาทีหลัง จึงต้องเช็คซ้ำตรงนั้น
+   ส่วนจะเป็นออเดอร์ของตัวเองจริงไหม ปล่อยให้ RLS ตัดสิน ฝั่งนี้รู้แค่รหัส */
+function sxCanRow(t,act,id){
+  if(t!=="furnitech_cabinets"||SX.lvl<=2) return true;
+  if(act==="del") return sxIsOrd(id);
+  return true; }
 /* ดักที่ตัวไคลเอนต์จุดเดียว ดีกว่าไล่ใส่การ์ดทีละปุ่ม 20 จุดแล้วลืมจุดใดจุดหนึ่ง */
 function sxGuardDB(db){
   const _from=db.from.bind(db);
@@ -25059,7 +25314,9 @@ function sxGuardDB(db){
         try{
           let target=sxTargetOf(a[0]);
           if(typeof qb.eq==="function"){ const _eq=qb.eq.bind(qb);
-            qb.eq=(c,v)=>{ if(target==null) target=v; return _eq(c,v); }; }
+            qb.eq=(c,v)=>{ if(target==null) target=v;
+              if(c==="id"&&!sxCanRow(t,act,v)) throw sxDeny(act);
+              return _eq(c,v); }; }
           const _then=qb.then.bind(qb);
           qb.then=(ok,err)=>_then(r=>{ if(!(r&&r.error)) sxLog(act,t,target); return ok?ok(r):r; },err);
         }catch(e){}
@@ -25544,12 +25801,46 @@ async function sxAdminUI(){
   };
   draw(); }
 
+/* เปิดสำเนาโปรแกรมอีกแท็บ พร้อมบอกให้ไปโหลดออเดอร์นี้เอง
+   เลขแท็บทำให้คีย์เซฟอัตโนมัติแยกกัน สองงานจึงอยู่คู่กันได้โดยไม่ทับ */
+function sxOpenOrderTab(oid){
+  try{
+    const base=location.href.split("#")[0].split("?")[0];
+    const url=base+"?tab="+Date.now().toString(36)+"#order="+encodeURIComponent(oid);
+    const w=window.open(url,"_blank");
+    if(!w) toast("เบราว์เซอร์บล็อกการเปิดแท็บใหม่ — อนุญาต pop-up ให้ไฟล์นี้ก่อน");
+    else toast("เปิดออเดอร์ “"+oid+"” ในแท็บใหม่แล้ว · งานในแท็บนี้ไม่ถูกแตะ");
+  }catch(e){ toast("เปิดแท็บใหม่ไม่สำเร็จ"); } }
+/* แท็บที่ถูกเปิดมาพร้อม #order= ให้ไปดึงออเดอร์นั้นทันทีหลังบูตเสร็จ */
+async function sxAutoOpenOrder(){
+  try{
+    const m=/#order=([^&]+)/.exec(location.href); if(!m) return;
+    const oid=decodeURIComponent(m[1]);
+    history.replaceState(null,"",location.href.split("#")[0]);   // กันโหลดซ้ำตอนรีเฟรช
+    toast("กำลังเปิดออเดอร์ “"+oid+"” …");
+    await cloudLoadOrder(oid);
+  }catch(e){ console.error("autoOpenOrder:",e); } }
+/* v36.4: ซ่อมไฟล์ที่โดนเขียนทับไปแล้ว — คืนความสูงแผ่นดัดจาก _csP
+   ชิ้นที่ T เท่ากับความหนาไม้ (แทนที่จะเป็นความสูง) คือชิ้นที่โดนทับ */
+function sxHealCurvedFaces(){
+  let n=0;
+  (state.boards||[]).forEach(b=>{
+    if(!b||!b._csType||!/^face/.test(b._csType)||!b._csP) return;
+    const H=+b._csP.finH||0; if(!(H>0)) return;
+    const faceT=+b._csP.faceT||0;
+    if(Math.abs((+b.T||0)-H)<0.5) return;                 // ปกติดีอยู่แล้ว
+    if(faceT>0 && Math.abs((+b.T||0)-faceT)>2) return;    // ไม่ใช่ร่องรอยการทับ อย่าเดา
+    b.T=H; n++; });
+  if(n){ try{ toast("ซ่อมความสูงแผ่นดัด "+n+" ชิ้นที่ถูกเขียนทับตอนเปลี่ยนวัสดุ"); }catch(e){} sync(0); }
+  return n; }
 function boot(){ console.log("%c"+appVerStr(),"font-weight:700;color:#007aff");
   /* v9.89: เลขเวอร์ชันบนหน้าโหลดอ่านจาก APP_META ที่เดียว ไม่ต้องไปแก้สองที่ */
   try{ document.querySelectorAll(".ver").forEach(e=>{ e.textContent="v"+APP_META.version; }); }catch(e){}
   try{ const _vb=$("appVerBadge"); if(_vb){ _vb.textContent="v"+APP_META.version; _vb.onclick=showAppVersion; } }catch(e){}
   (async function(){
   try{ await sxGate(); sxBadge(); }catch(e){ console.error("auth:",e); }   // v34.0: ผ่านประตูก่อน ค่อยบูต
+  setTimeout(()=>{ try{ sxAutoOpenOrder(); }catch(e){} }, 400);            // v36.3: แท็บใหม่ไปดึงออเดอร์ของตัวเอง
+  setTimeout(()=>{ try{ sxHealCurvedFaces(); }catch(e){} }, 900);          // v36.4: ซ่อมของที่พังไปแล้ว
   try{ state.eco = await lsGet("boardforge:eco", true); }catch(e){}
   initScene(); buildGTones(); bindChrome();
   library=await lsGet("boardforge:lib",[]);
@@ -26346,10 +26637,20 @@ const ShopPaper = (function(){
        หน้าแผ่นของบานเฟรมบอกได้แค่กรอบสี่เหลี่ยมกับรูถ้วย ซึ่งหน้าเฟรมมีครบกว่า
        ช่างเปิดสองหน้าที่พูดเรื่องเดียวกันแล้วสับสนว่าต้องใช้ใบไหน */
     const _fSkip=new Set(); frms.forEach(f=>{ (f.ids||[]).forEach(id=>_fSkip.add(id)); });
-    const parts=uniqueParts(bs.filter(b=>!(b&&_fSkip.has(b.id))));
+    /* ───────── v36.0: ชิ้นของกล่องโค้งออกแบบสองชุดซ้อนกัน ─────────
+       ชุดบน (กล่องโค้ง·สรุป / แผ่นชั้น / ครีบ / แผ่นตัด) มาจากตัวสร้างกล่องโค้งโดยตรง
+       แล้วชิ้นเดียวกันยังถูกเอาไปทำหน้าแผ่นทั่วไปอีกชุด (Shelf 1 ×2 · Fin 1 ×6 · Bent Face ×1)
+       ช่างเปิดเจอสองชุดที่พูดเรื่องเดียวกันแล้วต้องเดาว่าใช้ใบไหน — ชุดของตัวสร้างละเอียดกว่า
+       (มีร่องเซาะ · ระยะกางออก · ค่าตั้งเครื่อง) จึงตัดหน้าแผ่นทั่วไปของชิ้นพวกนี้ทิ้ง
+       วิธีเดียวกับที่ v23.5 ทำกับบานเฟรมไปแล้ว */
     /* v6.5: ถ้าในฉากมีกล่องโค้ง ให้ยืมชุดแบบของตัวสร้างมาเลย — จะได้เป็นแบบชุดเดียวกัน
-       ไม่ใช่สองชุดหน้าตาคล้าย ๆ กัน · ตัวสร้างเป็นคนวาด ที่นี่แค่ต่อเลขหน้าให้ถูก */
+       ไม่ใช่สองชุดหน้าตาคล้าย ๆ กัน · ตัวสร้างเป็นคนวาด ที่นี่แค่ต่อเลขหน้าให้ถูก
+       v36.2: ต้องนับก่อนตัดหน้าซ้ำ — v36.0 วางบรรทัดตัดไว้เหนือ let nCs
+       ตัวแปร let ยังอยู่ใน temporal dead zone อ่านปุ๊บโยน ReferenceError ทันที
+       build() ตายทั้งก้อน หน้าแบบผลิตจึงเปิดไม่ขึ้นเลย ไม่ใช่แค่กล่องโค้ง */
     let nCs=0; try{ nCs=CurvedShelf.sceneCount(bs); }catch(e){}
+    if(nCs) bs.forEach(b=>{ if(b&&b._csP) _fSkip.add(b.id); });
+    const parts=uniqueParts(bs.filter(b=>!(b&&_fSkip.has(b.id))));
     const pages=1+nCs+parts.length+frms.length;
     const out={ summary:sheetSummary({...P},bs,bb,grab3D(),pages), flat:sheetFlatten({...P},bs,bb) };
     const titles={ summary:"หน้ารวม (Plan+Front+Side+3D)" };
@@ -27090,7 +27391,7 @@ const CurvedShelf = (function(){
       if(sk&&sk.line) s+='<text x="34" y="98" font-family="\'Sarabun\',sans-serif" font-size="12.5" fill="'+DIM+'">'+esc(sk.line)+'</text>'; }
     // (ก) รูปหลังดัด — ผังปลายชิ้น
     s+='<text x="60" y="126" font-family="\'Sarabun\',sans-serif" font-size="15" font-weight="700" fill="'+INK+'">รูปหลังดัด (ผังปลายชิ้น)</text>';
-    const aw=560, ah=380, ax=60, ay=150;
+    const aw=560, ah=300, ax=60, ay=150;   // v35.8: เตี้ยลง เปิดที่ใต้รูปให้ตารางลงมาแทนคำบรรยาย
     const asc=Math.min((aw-120)/Math.max(P.L,1),(ah-100)/Math.max(P.D+2*F.T,1));
     const AX=u=>ax+aw/2+u*asc, AY=v=>ay+ah/2-v*asc;
     s+='<path d="M '+G.prof.map(p=>AX(p[0]).toFixed(1)+" "+AY(p[1]).toFixed(1)).join(" L ")+' Z" fill="#f3efe7" stroke="'+THIN+'" stroke-width="1"/>';
@@ -27100,19 +27401,29 @@ const CurvedShelf = (function(){
       s+=leadR(mx,my,mx+(G.flipX?-70:70),my+(G.flipY?70:-70),"R"+rnd(F.Rin)+" ใน / R"+rnd(F.Rout)+" นอก"); }
     // (ข) แผ่นแบนก่อนดัด + ร่องเซาะ
     s+='<text x="700" y="126" font-family="\'Sarabun\',sans-serif" font-size="15" font-weight="700" fill="'+INK+'">แผ่นแบนก่อนดัด (เข้าเครื่อง)</text>';
-    const bx=700, by=190, bwid=800, bhi=200;
+    /* ───────── v35.8: แผ่นแบนวาดตามสัดส่วนจริง ─────────
+       เดิมความสูงเป็นค่าปลอม (หนาไม้ × 6) แผ่นสูง 862 กับสูง 200 จึงวาดออกมาเท่ากันหมด
+       ดูแล้วไม่รู้ว่าชิ้นจริงสูงเท่าไร ทั้งที่เป็นเลขที่ช่างต้องเห็นตอนตั้งเครื่อง */
+    const bx=700, by=170, bwid=830, bhiMax=700;
     const devL=bd? bd.L : rnd1(F.dev);
-    const bsc=Math.min(bwid/Math.max(devL,1), bhi/Math.max(F.T*6,1));
-    const pw=devL*bsc, phh=Math.max(F.T*bsc*6,26);
+    const PH=Math.max(+F.H||0,1);
+    const bsc=Math.min(bwid/Math.max(devL,1), bhiMax/PH);
+    const pw=devL*bsc, phh=Math.max(PH*bsc,26);
     const off=(bd&&bd.allow)? bd.allow/2 : 0;
     /* ช่วงโค้งอาจมีหลายช่วง (แผ่นหุ้มรอบเดียวของกล่องโค้งสองปลาย) */
     const ZS=(F.spans||[{from:F.arc0,to:F.arc1}]).map(z=>({from:z.from+off,to:z.to+off}));
     s+='<rect x="'+bx+'" y="'+by+'" width="'+pw.toFixed(1)+'" height="'+phh.toFixed(1)+'" fill="#f3efe7" stroke="'+INK+'" stroke-width="1.6"/>';
+    /* v35.9: บอกความสูงแผ่นบนรูปด้วย — พอวาดตามสัดส่วนจริงแล้วรูปสื่อสัดส่วนได้
+       แต่ยังไม่มีตัวเลขกำกับ ช่างต้องไปไล่หาในตารางว่าสูงเท่าไร ทั้งที่เป็นระยะที่ใช้ตั้งเครื่อง
+       วางไว้ซ้ายมือของแผ่น ตรงช่องว่างระหว่างตารางกับรูป */
+    s+=dimV(by, by+phh, bx-26, rnd(PH));
+    s+='<line x1="'+(bx-34)+'" y1="'+by+'" x2="'+bx+'" y2="'+by+'" stroke="'+THIN+'" stroke-width=".6"/>'
+      +'<line x1="'+(bx-34)+'" y1="'+(by+phh).toFixed(1)+'" x2="'+bx+'" y2="'+(by+phh).toFixed(1)+'" stroke="'+THIN+'" stroke-width=".6"/>';
     ZS.forEach((z,i)=>{ [z.from,z.to].forEach(v=>{ const vx=bx+v*bsc;
         s+='<line x1="'+vx.toFixed(1)+'" y1="'+(by-9)+'" x2="'+vx.toFixed(1)+'" y2="'+(by+phh+9).toFixed(1)+'" stroke="'+DIM+'" stroke-width=".9" stroke-dasharray="5 4"/>'; });
       s+=dimH(bx+z.from*bsc,bx+z.to*bsc,by-16,(ZS.length>1?("โค้ง "+(i+1)+" "):"ช่วงที่โค้งจริง ")+rnd(z.to-z.from)); });
     if(kp&&kp.n>0){ kp.cuts.forEach(c=>{ const cx=bx+c*bsc;
-        s+='<rect x="'+(cx-kp.width*bsc/2).toFixed(1)+'" y="'+by+'" width="'+Math.max(kp.width*bsc,1.2).toFixed(1)+'" height="'+(phh*0.78).toFixed(1)+'" fill="#222"/>'; });
+        s+='<rect x="'+(cx-kp.width*bsc/2).toFixed(1)+'" y="'+by+'" width="'+Math.max(kp.width*bsc,1.2).toFixed(1)+'" height="'+phh.toFixed(1)+'" fill="#222"/>'; });   // v35.8: ร่องทะลุเต็มความสูง
       /* โซ่ระยะตามยาวแผ่น: ปลาย -> โซนร่องแต่ละโซน -> ปลาย
          ช่างต้องรู้ว่าตั้งเครื่องเริ่มเซาะห่างจากปลายแผ่นเท่าไร ไม่ใช่รู้แค่ความยาวช่วงร่อง */
       const KZ=kp.zones||[{from:kp.from,to:kp.to,n:kp.n}];
@@ -27141,24 +27452,19 @@ const CurvedShelf = (function(){
       ["ดอก / พิตช์ / ลึกร่อง",kp? (kp.width+" / "+kp.pitch+" / "+kp.depth+" มม."+(kp.pitchNom&&Math.abs(kp.pitch-kp.pitchNom)>0.05? " (พิตช์ตั้งต้น "+kp.pitchNom+" หดให้ลงตัวพอดีช่วงโค้ง)":"")) : "—"],
       ["เนื้อไม้ที่เหลือหลังเซาะ",kp? (kp.leave+" มม.") : "—"],
       ["ฝั่งที่เซาะ",kp? (kp.face==="top"?"ผิวใน (ด้านที่หุบเข้า)":kp.face) : "—"]];
-    const tx=700, ty=470, tw=800, rh=30;
+    /* v35.8: ตารางย้ายมาคอลัมน์ซ้ายใต้รูปหลังดัด แทนคำบรรยายที่พูดเรื่องเดียวกับตารางอยู่แล้ว
+       ครึ่งขวาทั้งแถบจึงเป็นของแบบแผ่นแบน วาดสูงเต็มชิ้นได้ */
+    const tx=60, ty=478, tw=560, rh=21;
     s+='<g font-family="\'Sarabun\',sans-serif"><rect x="'+tx+'" y="'+ty+'" width="'+tw+'" height="'+(rows.length*rh)+'" fill="#fff" stroke="'+INK+'" stroke-width="1"/>';
     rows.forEach((r,i)=>{ const yy=ty+i*rh;
       const bold=/<b>/.test(r[1]), val=String(r[1]).replace(/<\/?b>/g,"");
       s+='<line x1="'+tx+'" y1="'+yy+'" x2="'+(tx+tw)+'" y2="'+yy+'" stroke="'+THIN+'" stroke-width=".5"/>'
-        +'<text x="'+(tx+12)+'" y="'+(yy+20)+'" font-size="13" fill="'+(bold?INK:THIN)+'">'+esc(r[0])+'</text>'
-        +'<text x="'+(tx+420)+'" y="'+(yy+20)+'" font-size="'+(bold?15:14)+'" font-weight="'+(bold?800:600)+'" fill="'+(bold?DIM:INK)+'">'+esc(val)+'</text>'; });
+        +'<text x="'+(tx+9)+'" y="'+(yy+14.5)+'" font-size="10.5" fill="'+(bold?INK:THIN)+'">'+esc(r[0])+'</text>'
+        +'<text x="'+(tx+300)+'" y="'+(yy+14.5)+'" font-size="'+(bold?11.5:11)+'" font-weight="'+(bold?800:600)+'" fill="'+(bold?DIM:INK)+'">'+esc(val)+'</text>'; });
     s+='</g>';
-    s+='<g font-family="\'Sarabun\',sans-serif" font-size="13" fill="'+INK+'">'
-      +'<text x="60" y="600">• แผ่นนี้ "แปะนอก" — แผ่นชั้นคงขนาดเดิม '+rnd(P.L)+' · กล่องรวม '+rnd(G.totW)+' = '+rnd(P.L)+' + ดัด '+(G.faces.length>1?(rnd(F.T)+"×2"):rnd(F.T))+(G.endPanel?' + ปิด '+rnd(G.endPanel.T):'')+'</text>'
-      +'<text x="60" y="626">'+(F.wrap
-          ? ('• แผ่นเดียวพันรอบ: ขอบขวา '+rnd(F.segs.s1)+' → โค้งขวา '+rnd(F.segs.s2)+' → แนวหลัง '+rnd(F.segs.s3)+' → โค้งซ้าย '+rnd(F.segs.s4)+' → ขอบซ้าย '+rnd(F.segs.s5))
-          : ('• เริ่มหุ้มจากมุมขอบ'+(G.tanEdge==="B"?"หน้า":"หลัง")+' พันรอบ R แล้ววิ่งตามขอบ'+(G.tanEdge==="B"?"หลัง":"หน้า")+' อีก '+rnd(F.tail)+' มม.'+(F.full?' (ยาวสุดถึงปลายอีกด้าน คลุมสันแผ่นปิด)':'')))+'</text>'
-      +'<text x="60" y="652">• ร่องเซาะอยู่เฉพาะช่วงที่โค้งจริง — ช่วงเส้นตรงไม่เซาะ จะได้ไม่เสียความแข็งแรงฟรี</text>'
-      +'<text x="60" y="678">• ช่วงตรงก่อนเข้าโค้งบนชิ้นงาน = '+rnd1(F.arc0)+' (ลึกบาก '+rnd1(G.dN)+' + เส้นตรงนำ '+rnd1(G.lead)+') — R เริ่มตรงนี้</text>'
-      +(kp&&kp.n>0? '<text x="60" y="704">• บนแผ่นดิบบวกเผื่อตัดหัวอีก '+rnd1(off)+' → <tspan font-weight="700">ร่องแรกเริ่มที่ '+rnd(kp.from)+' จากปลายแผ่น</tspan> (= '+rnd1(F.arc0)+' + '+rnd1(off)+')</text>'
-        +'<text x="60" y="730">• ร่องคลุมช่วงโค้งพอดีหัวจรดท้าย — ไม่เหลือขอบไม้เต็มที่ไม่ยอมงอ R จะได้ไม่แบนช่วงต้น/ปลาย</text>':'')
-      +'</g>';
+        /* v35.7: คำบรรยายเดิมพูดเรื่องเดียวกับตารางแทบทุกบรรทัด (ช่วงตรงก่อนโค้ง · ร่องแรกเริ่มที่ · เผื่อตัด)
+       อ่านซ้ำสองรอบแล้วยังกินที่แนวตั้งของแบบ เหลือเฉพาะข้อที่ตารางไม่ได้บอก */
+    /* v35.8: คำบรรยายซ้ายล่างถูกตัดออก — ทุกบรรทัดพูดเรื่องเดียวกับตารางที่อยู่เหนือมันแล้ว */
     s+=tb(P,G,pg||4,tot||4,"BENT FACE");
     return s+'</svg>';
   }
