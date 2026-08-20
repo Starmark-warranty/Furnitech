@@ -1646,9 +1646,11 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"38.9", build:"2026-08-20/titleblock-part-size",
+  name:"StarNexus Cabinet", version:"39.1", build:"2026-08-20/pin-beats-backflush",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["39.1","2026-08-20","FIX ตรึงขอบหลังด้วยหมุดแล้วใส่ -50 ขนาดล็อคค้างที่ 541.4 เหมือนหมุดไม่ทำงาน — หมุดทำงานครับ แต่ applyShelfBackFlush (ตัวช่วย v23.1 ที่ดันก้นชั้นซึ่งเกือบถึงแผ่นหลังให้ไปชนพอดี) วิ่ง หลัง applyPins ในลำดับคิดฉาก หมุดจึงแพ้ทุกรอบ · เคสจริง: หมุดตั้ง W=520 ขอบหลัง -235 → ห่างผิวหน้าแผ่นหลังตัวล่าง (-256.4) แค่ 21.4 ซึ่งน้อยกว่าระยะดูด 30 → ตัวช่วยดันกลับไปชนที่ 541.4 / z 14.3 ทุกครั้งที่คิดฉาก โดยช่องหมุดยังโชว์ -50 อยู่ · เลข 541.4 กับ 14.3 ที่เห็นค้างคือผลของตัวดันเป๊ะ ๆ ไม่ใช่ค่าที่หมุดคิด · กรณีเดียวกับ v33.6 (หมุดยืดทับสูตรล็อก): คำสั่งที่คนตั้งเองต้องชนะความสะดวกอัตโนมัติเสมอ · ตัวดันชนแผ่นหลังและตัวดันฟิลเลอร์ ข้ามชิ้นที่หมุดคุมความลึกอยู่ และชิ้นที่สูตรล็อกความลึกไว้ ทั้งคู่"],
+    ["39.0","2026-08-20","แบบหน้าตัดเฟรม ปรับตามที่สั่งสามข้อ · (1) ป้ายบอกเส้น E1–E4 ออกไปอยู่นอกกรอบบานเสมอ ของเดิมวางตัวหนังสือทับอยู่บนแถบเส้นเลย อ่านยากและบังลายเส้นของแถบ · (2) เพิ่มหัวลูกศรสามเหลี่ยมสีไล่ระดับทองชี้กลับเข้าไปที่แถบที่ป้ายนั้นหมายถึง แบบเดียวกับที่ใช้ใน AutoCAD · (3) ป้ายซ้าย-ขวาตะแคงตามแนวเส้น อ่านไปทางเดียวกับเส้นที่มันชี้ · ตัวหนังสือทั้งแบบใหญ่ขึ้นหนึ่งขั้น หัวเรื่อง 22 → 25 · บรรทัดรอง 13 → 15 · ป้ายเส้น 12 → 16 · เลขบอกขนาด 15 → 17 (ตัวนี้เป็นของกลาง แบบแผ่นกับแบบกล่องโค้งได้ไปด้วย) · ระยะกันขอบรอบรูปบานขยายจาก 76 เป็น 112 แล้วดันแถวระยะบานพับกับเส้นบอกขนาดออกไปเป็น 64 กับ 88 เพราะป้ายที่ย้ายออกมาอยู่นอกกรอบไปกินที่ตรงนั้นพอดี ไม่ขยับก็ทับกันทันทีที่ขอบล่างและขอบขวา"],
     ["38.9","2026-08-20","FIX ช่อง W × D × H ในหัวกระดาษเป็นกรอบรวมของทั้งฉาก ไม่ใช่ขนาดของชิ้นในแบบ — ตัวเลขนั้นมาจากผังว่าของวางกินพื้นที่แค่ไหน แบบบานใบเดียวจึงขึ้นขนาดตู้ทั้งจ็อบ ช่างอ่านแล้วเอาไปเทียบอะไรไม่ได้เลย และถ้าย้ายตำแหน่งตู้ในผัง ตัวเลขในหัวแบบก็เปลี่ยนตามทั้งที่บานไม่ได้เปลี่ยนขนาดสักนิด · หน้าหน้าตัดเฟรมใส่ กว้าง × หนา × สูง ของบานสำเร็จ (รวมส่วนที่เส้นยื่นพ้นแผ่นแล้ว) · หน้าแผ่นใส่ขนาดของแผ่นนั้น"],
     ["38.8","2026-08-20","FIX เส้นบอกขนาดในแบบหน้าตัดเฟรมบอกขนาดแผ่นไม้ ไม่ใช่ขนาดบานสำเร็จ — เส้นโปรไฟล์แปะคร่อมขอบไม้ ยื่นพ้นออกไปข้างละเท่ากับระยะเลื่อนที่ตั้งไว้ติดลบ (frameOffX) บานสำเร็จจึงโตกว่าแผ่นข้างละเท่านั้น แผ่น 734 × 744 กับเส้นยื่นข้างละ 3 ได้บาน 740 × 750 แต่ในรูปกลับขึ้น 734 กับ 744 · แบบที่ส่งออกไปคือตัวที่ฝ่ายผลิตใช้ตรวจของหน้างาน ขนาดในรูปต้องเป็นขนาดที่วัดได้จริงตอนบานประกอบเสร็จ · แก้ทั้งเส้นบอกขนาด กรอบในรูป และสเกล ให้เป็นขอบนอกของบานสำเร็จ ส่วนหัวแบบยังบอกขนาดแผ่นในวงเล็บไว้ให้ฝ่ายตัดไม้ · v38.6 คิดจากค่าลดของ Part ซึ่งบังเอิญได้เลขเดียวกันในงานนี้ แต่คนละเรื่องกัน ค่าลดคือช่องว่างที่เว้นให้บานในตู้ ส่วนตัวที่ทำให้บานโตคือเส้นที่ยื่นพ้นแผ่น ตั้งค่าคนละอย่างเมื่อไหร่จะเพี้ยนทันที ตอนนี้คิดจากรูปเรขาคณิตจริง"],
     ["38.7","2026-08-20","FEAT แบบผลิตกรองพิมพ์เฉพาะหน้าตัดเฟรมได้แล้ว ทั้งจ็อบ — ชุดนี้เอาไปให้ฝ่ายตัดอลูอย่างเดียว ไม่ได้เอาหน้าแผ่นไม้ไปด้วย เดิมต้องพิมพ์ทั้งเล่มแล้วไปไล่เลือกหน้าเอาที่เครื่องพิมพ์ ซึ่งหน้าตัดเฟรมแทรกปนอยู่กับหน้าแผ่นทั้งจ็อบ · เลือกแล้วสร้างเฉพาะชุดที่จะพิมพ์จริง แล้วเดินเลขหน้าใหม่ในชุดนั้น ไม่ใช่แค่ซ่อน ไม่งั้นหัวกระดาษเขียนว่า หน้า 12/40 ทั้งที่พิมพ์ออกมาสามแผ่น · ใช้ร่วมกับขอบเขต ทั้งฉาก/ตู้ที่เลือก ได้ตามปกติ · FIX เปลี่ยนชุดกรองแล้วหน้าที่เปิดค้างอยู่อาจไม่มีในชุดใหม่ ของเดิมตกไปที่หน้ารวมซึ่งชุดกรองไม่มี จอจึงว่างเปล่า ตอนนี้เด้งไปหน้าแรกของชุดให้เอง และปุ่มดาวน์โหลด PNG หน้าปัจจุบันก็ตามชุดที่กรองไว้"],
@@ -14127,6 +14129,15 @@ function applyShelfBackFlush(){
     all.forEach(b=>{
       if(!b||b._door||b._virtual||b._box||isRail(b)) return;
       if(b.orient!=="flat") return;
+      /* ───────── v39.1: ความลึกที่ถูกสั่งไว้ตรง ๆ ห้ามตัวดันชนแผ่นหลังไปทับ ─────────
+         ตัวนี้เป็นความสะดวกอัตโนมัติ: ชั้นที่ก้นเกือบถึงแผ่นหลัง (ภายใน snap 30) ดันไปชนให้
+         แต่มันวิ่ง "หลัง" applyPins ในลำดับคิดฉาก หมุดจึงแพ้ทุกรอบ
+         ตรึงขอบหลังร่นเข้า 50 → หมุดตั้ง W=520 (ขอบหลัง -235) → ระยะถึงผิวแผ่นหลัง 21.4 < 30
+         → ตัวนี้ดันกลับไปชนที่ 541.4 / z 14.3 ทุกครั้งที่คิดฉาก เลขจึงดูเหมือน "ล็อคที่ 541"
+         โดยช่องหมุดยังโชว์ -50 อยู่ · กรณีเดียวกับ v33.6 (หมุด vs สูตร): คำสั่งที่คนตั้งเองชนะอัตโนมัติเสมอ
+         ข้ามทั้งชิ้นที่หมุดคุมความลึก (pin dim W ของแผ่นนอน) และชิ้นที่สูตรล็อกความลึกไว้ */
+      if(b.pin&&b.pin.dim==="W") return;
+      if(b._hExpr&&b._hExpr.e) return;
       const d=worldDims(b), rear=b.z-d[2]/2, front=b.z+d[2]/2;
       if(rear<backRear-1) return;                       // วิ่งเลยไปหลังแผ่นหลัง = พื้น/ทอปของตู้ ไม่แตะ
       if(Math.abs(rear-backFace)>snap) return;          // ตั้งใจให้ตื้น ไม่แตะ
@@ -14151,6 +14162,8 @@ function applyFillerDepth(){
     all.forEach(b=>{
       if(!b||b._virtual) return;
       if(!(b._filler||/^Filler\b/.test(String(b.name||"")))) return;
+      if(b.pin&&b.pin.dim==="W") return;                // v39.1: ฟิลเลอร์ที่หมุดคุมความลึก ก็ห้ามทับเช่นกัน
+      if(b._hExpr&&b._hExpr.e) return;
       const d=worldDims(b), rear=b.z-d[2]/2, front=b.z+d[2]/2;
       if(rear>=backFace-0.05) return;                             // ไม่ได้ทะลุ ปล่อยไว้
       const nd=front-backFace;
@@ -26578,8 +26591,8 @@ const SVGKit = (function(){
   const rnd1 = v => Math.round(v*10)/10;
   const esc  = s => String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 
-  function dimH(x1,x2,y,t){ const tx=(x1+x2)/2; return `<g stroke="${DIM}" stroke-width="1" fill="${DIM}"><line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}"/><line x1="${x1}" y1="${y-5}" x2="${x1}" y2="${y+5}"/><line x1="${x2}" y1="${y-5}" x2="${x2}" y2="${y+5}"/><text x="${tx}" y="${y-7}" text-anchor="middle" stroke="none" font-family="monospace" font-size="15">${esc(t)}</text></g>`; }
-  function dimV(y1,y2,x,t){ const ty=(y1+y2)/2; return `<g stroke="${DIM}" stroke-width="1" fill="${DIM}"><line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}"/><line x1="${x-5}" y1="${y1}" x2="${x+5}" y2="${y1}"/><line x1="${x-5}" y1="${y2}" x2="${x+5}" y2="${y2}"/><text x="${x+7}" y="${ty}" stroke="none" font-family="monospace" font-size="15" text-anchor="middle" transform="rotate(90 ${x+7} ${ty})">${esc(t)}</text></g>`; }
+  function dimH(x1,x2,y,t){ const tx=(x1+x2)/2; return `<g stroke="${DIM}" stroke-width="1" fill="${DIM}"><line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}"/><line x1="${x1}" y1="${y-5}" x2="${x1}" y2="${y+5}"/><line x1="${x2}" y1="${y-5}" x2="${x2}" y2="${y+5}"/><text x="${tx}" y="${y-7}" text-anchor="middle" stroke="none" font-family="monospace" font-size="17">${esc(t)}</text></g>`; }
+  function dimV(y1,y2,x,t){ const ty=(y1+y2)/2; return `<g stroke="${DIM}" stroke-width="1" fill="${DIM}"><line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}"/><line x1="${x-5}" y1="${y1}" x2="${x+5}" y2="${y1}"/><line x1="${x-5}" y1="${y2}" x2="${x+5}" y2="${y2}"/><text x="${x+7}" y="${ty}" stroke="none" font-family="monospace" font-size="17" text-anchor="middle" transform="rotate(90 ${x+7} ${ty})">${esc(t)}</text></g>`; }
   function frame(){ return `<rect x="10" y="10" width="${SW-20}" height="${SH-20}" fill="none" stroke="${INK}" stroke-width="2"/><rect x="18" y="18" width="${SW-36}" height="${SH-36}" fill="none" stroke="${INK}" stroke-width="1"/>`; }
   function grab3D(){ try{ if(typeof renderer!=="undefined"&&renderer){ try{ renderer.render(scene,camera); }catch(_){}
     return renderer.domElement.toDataURL("image/png"); } }catch(e){} return null; }
@@ -27007,7 +27020,11 @@ const ShopPaper = (function(){
   function sheetFrameSec(P,fd,page,pages,bb){
     const b=fd.b, p2=fd.p2, T=Math.max(+b.T||18,1);
     let s=`<svg class="sp-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${SW} ${SH}" width="${SW}" height="${SH}"><rect width="${SW}" height="${SH}" fill="#fff"/>`+frame();
-    s+=`<text x="34" y="52" font-family="'Sarabun',sans-serif" font-size="22" font-weight="800" fill="${INK}">หน้าตัดเฟรมบาน · ${esc(b.name||"บาน")}</text>`;
+    /* v39.0: หัวลูกศรสีไล่ระดับแบบเดียวกับที่ใช้ใน AutoCAD — ไล่ทแยงเพื่อให้ใช้ได้ทุกทิศทาง */
+    s+=`<defs><linearGradient id="lblArw" x1="0" y1="0" x2="1" y2="1">`
+      +`<stop offset="0" stop-color="#FFE9A3"/><stop offset="0.45" stop-color="#F7C33F"/><stop offset="1" stop-color="#E08A00"/>`
+      +`</linearGradient></defs>`;
+    s+=`<text x="34" y="56" font-family="'Sarabun',sans-serif" font-size="25" font-weight="800" fill="${INK}">หน้าตัดเฟรมบาน · ${esc(b.name||"บาน")}</text>`;
     /* ───────── v38.8: ขนาดในแบบต้องเป็นขนาดบานสำเร็จ ─────────
        เส้นโปรไฟล์แปะคร่อมขอบไม้ ยื่นพ้นออกไปข้างละเท่ากับระยะเลื่อนที่ตั้งไว้ติดลบ (frameOffX)
        บานสำเร็จจึงโตกว่าแผ่นไม้ข้างละเท่านั้น — แผ่น 734 × 744 กับเส้นยื่นข้างละ 3 ได้บาน 740 × 750
@@ -27020,7 +27037,7 @@ const ShopPaper = (function(){
     const _sizeTxt=(FL!==rnd(b.L)||FW!==rnd(b.W))
       ? (`บานสำเร็จ ${FL} × ${FW} (${p2.frameWood?"แผ่นไม้":"แผ่นบาน"} ${rnd(b.L)} × ${rnd(b.W)})`)
       : (`บานสำเร็จ ${rnd(b.L)} × ${rnd(b.W)}`);
-    s+=`<text x="34" y="76" font-family="'Sarabun',sans-serif" font-size="13" fill="${THIN}">แบบบาน ${esc(String(b.part||"-"))} · ${_sizeTxt} × หนา ${rnd(T)} มม. · จำนวน ${fd.qty} ใบ${p2.frameWood?" · บานไม้ (เส้นเป็นมือจับโปรไฟล์)":" · บานเฟรม"}</text>`;
+    s+=`<text x="34" y="82" font-family="'Sarabun',sans-serif" font-size="15" fill="${THIN}">แบบบาน ${esc(String(b.part||"-"))} · ${_sizeTxt} × หนา ${rnd(T)} มม. · จำนวน ${fd.qty} ใบ${p2.frameWood?" · บานไม้ (เส้นเป็นมือจับโปรไฟล์)":" · บานเฟรม"}</text>`;
 
     /* ───────── v23.7: รูปด้านหน้าบานกินพื้นที่ส่วนใหญ่ · หน้าตัดย่อลงไปเรียงชิดขวา ─────────
        บานสูง ๆ เมื่อวางตั้งจะโดนบีบจนเล็กกว่ารูปหน้าตัดที่อยู่ข้าง ๆ เสียอีก
@@ -27029,7 +27046,9 @@ const ShopPaper = (function(){
     const cx0=SW-60-SCW;
     const ex=60, ey=118, ew=cx0-60-24, eh=560;
     s+=`<rect x="${ex}" y="${ey}" width="${ew}" height="${eh}" fill="#fafbfc" stroke="${THIN}" stroke-width="1"/>`;
-    const mgn=76, aw=ew-2*mgn, ah=eh-2*mgn;
+    /* v39.0: ป้ายเส้นย้ายออกไปอยู่นอกกรอบบานแล้ว จึงต้องกันขอบไว้มากขึ้น
+       ลำดับจากขอบบานออกไป: หัวลูกศร 16 · ตัวหนังสือ ~34 · แถวระยะบานพับ 64 · เส้นบอกขนาด 88 */
+    const mgn=112, aw=ew-2*mgn, ah=eh-2*mgn;
     /* ───────── v23.8: ตัดสินด้วยความสูงบานตรง ๆ ─────────
        เดิมเทียบสเกลสองท่าแล้วเลือกอันที่ได้ภาพใหญ่กว่า ซึ่งบานสูง 760 ก็ถูกหมุนไปด้วย
        ทั้งที่ยังวางตั้งได้สบาย · ช่างอ่านแบบชุดเดียวกันแล้วเจอบางใบตั้งบางใบนอนโดยไม่มีเหตุผลที่จำได้
@@ -27075,17 +27094,29 @@ const ShopPaper = (function(){
     };
     Object.keys(seen4).forEach(k=>{
       s+=`<path d="${bandPath(+k)}" fill="#dbeafe" stroke="${INK}" stroke-width="0.8"/>`; });
-    const lab=(t,x,y,anc)=>`<text x="${rnd1(x)}" y="${rnd1(y)}" text-anchor="${anc||"middle"}" font-family="monospace" font-size="12" fill="${DIM}">${esc(t)}</text>`;
-    const labR=(t,x,y)=>`<text x="${rnd1(x)}" y="${rnd1(y)}" text-anchor="middle" font-family="monospace" font-size="12" fill="${DIM}" transform="rotate(-90 ${rnd1(x)} ${rnd1(y)})">${esc(t)}</text>`;
+    const lab=(t,x,y,anc)=>`<text x="${rnd1(x)}" y="${rnd1(y)}" text-anchor="${anc||"middle"}" font-family="monospace" font-size="16" fill="${INK}">${esc(t)}</text>`;
+    const labR=(t,x,y)=>`<text x="${rnd1(x)}" y="${rnd1(y)}" text-anchor="middle" font-family="monospace" font-size="16" fill="${INK}" transform="rotate(-90 ${rnd1(x)} ${rnd1(y)})">${esc(t)}</text>`;
+    /* ───────── v39.0: ป้ายบอกเส้นออกไปอยู่นอกกรอบบาน + หัวลูกศรชี้กลับเข้าเส้น ─────────
+       ของเดิมวางตัวหนังสือทับอยู่บนแถบเส้นเลย อ่านยากและบังลายเส้นของแถบ
+       ตอนนี้ตัวหนังสืออยู่นอกกรอบเสมอ มีสามเหลี่ยมทึบชี้กลับไปที่แถบที่ป้ายนั้นหมายถึง
+       ป้ายซ้าย-ขวายังตะแคงตามแนวเส้น ตามที่ช่างอ่านแบบคุ้นอยู่แล้ว */
+    const ARW=16, TXT=34;
+    const arw=(sd,cx,cy)=>{ let p;
+      if(sd===2)      p=[[cx,cy],[cx-8,cy-ARW],[cx+8,cy-ARW]];      // บน: ชี้ลง
+      else if(sd===0) p=[[cx,cy],[cx-8,cy+ARW],[cx+8,cy+ARW]];      // ล่าง: ชี้ขึ้น
+      else if(sd===1) p=[[cx,cy],[cx-ARW,cy-8],[cx-ARW,cy+8]];      // ซ้าย: ชี้ขวา
+      else            p=[[cx,cy],[cx+ARW,cy-8],[cx+ARW,cy+8]];      // ขวา: ชี้ซ้าย
+      return `<polygon points="${p.map(q=>rnd1(q[0])+","+rnd1(q[1])).join(" ")}" fill="url(#lblArw)" stroke="#8A5A00" stroke-width="0.7"/>`; };
     const EN={0:"E1",1:"E2",2:"E3",3:"E4"};
     fd.secs.forEach(z=>{ const sd=S4[z.dir], t=EN[z.dir]+" "+z.code;
-      if(sd===0) s+=lab(t, dx+HW/2, dy+HH-4);
-      else if(sd===2) s+=lab(t, dx+HW/2, dy+band-3);
-      else if(sd===1) s+=labR(t, dx+band-3, dy+HH/2);
-      else s+=labR(t, dx+HW-band+11, dy+HH/2); });
+      const mx=dx+HW/2, my=dy+HH/2;
+      if(sd===2){      s+=arw(sd,mx,dy);        s+=lab(t, mx, dy-TXT+6); }
+      else if(sd===0){ s+=arw(sd,mx,dy+HH);     s+=lab(t, mx, dy+HH+TXT); }
+      else if(sd===1){ s+=arw(sd,dx,my);        s+=labR(t, dx-TXT+8, my); }
+      else{            s+=arw(sd,dx+HW,my);     s+=labR(t, dx+HW+TXT-8, my); } });
     /* v38.8: เส้นบอกขนาดกินถึงขอบนอกของรูป ซึ่งรวมแถบอลูแล้ว = บานสำเร็จ */
-    s+=dimH(dx,dx+HW,dy+HH+46,String(ROT?FW:FL));
-    s+=dimV(dy,dy+HH,dx+HW+46,String(ROT?FL:FW));
+    s+=dimH(dx,dx+HW,dy+HH+88,String(ROT?FW:FL));
+    s+=dimV(dy,dy+HH,dx+HW+88,String(ROT?FL:FW));
     /* ───────── ระยะถ้วยบานพับ + สัญลักษณ์ทิศเปิด ─────────
        เอาเฉพาะ "ระยะ" ไม่บอกขนาดดอก เพราะสเปคดอกอยู่ในไฟล์เจาะแล้ว */
     (function(){
@@ -27115,13 +27146,13 @@ const ShopPaper = (function(){
         ticks.forEach(X=>{ s+=`<line x1="${rnd1(X)}" y1="${rnd1(ly-5)}" x2="${rnd1(X)}" y2="${rnd1(ly+5)}" stroke="${HC}" stroke-width="1.4"/>`; });
         uq.forEach(a=>{ const X=px(a); const cy=(sd===2)?(dy+band/2):(dy+HH-band/2);
           s+=`<circle cx="${rnd1(X)}" cy="${rnd1(cy)}" r="4.5" fill="none" stroke="${HC}" stroke-width="1.6"/>`; });
-        for(let k=0;k<ticks.length-1;k++) s+=`<text x="${rnd1((ticks[k]+ticks[k+1])/2)}" y="${rnd1(ly+((sd===2)?-8:16))}" text-anchor="middle" font-family="monospace" font-size="12.5" font-weight="600" fill="${HC}">${gaps[k]}</text>`;
-        s+=`<text x="${rnd1(dx-10)}" y="${rnd1(ly+4)}" text-anchor="end" font-family="'Sarabun',sans-serif" font-size="11.5" fill="${HC}">บานพับ ${uq.length} ตัว</text>`;
+        for(let k=0;k<ticks.length-1;k++) s+=`<text x="${rnd1((ticks[k]+ticks[k+1])/2)}" y="${rnd1(ly+((sd===2)?-8:16))}" text-anchor="middle" font-family="monospace" font-size="14" font-weight="600" fill="${HC}">${gaps[k]}</text>`;
+        s+=`<text x="${rnd1(dx-10)}" y="${rnd1(ly+4)}" text-anchor="end" font-family="'Sarabun',sans-serif" font-size="13" fill="${HC}">บานพับ ${uq.length} ตัว</text>`;
         const hy=(sd===2)?dy:(dy+HH), oy=(sd===2)?(dy+HH):dy;
         s+=`<path d="M ${rnd1(dx)} ${rnd1(oy)} L ${rnd1(dx+HW/2)} ${rnd1(hy)} L ${rnd1(dx+HW)} ${rnd1(oy)}" fill="none" stroke="${HC}" stroke-width="1.2" stroke-dasharray="9 6" opacity=".8"/>`;
       } else {
         const py=a=>dy+HH/2-a*sc0;
-        const onL=(sd===1), lx=onL?(dx-26):(dx+HW+26);
+        const onL=(sd===1), lx=onL?(dx-64):(dx+HW+64);
         const ticks=[dy].concat(uq.map(py)).concat([dy+HH]);
         s+=`<line x1="${rnd1(lx)}" y1="${rnd1(dy)}" x2="${rnd1(lx)}" y2="${rnd1(dy+HH)}" stroke="${HC}" stroke-width="1"/>`;
         ticks.forEach(Y=>{ s+=`<line x1="${rnd1(lx-5)}" y1="${rnd1(Y)}" x2="${rnd1(lx+5)}" y2="${rnd1(Y)}" stroke="${HC}" stroke-width="1.4"/>`; });
@@ -27129,12 +27160,12 @@ const ShopPaper = (function(){
           s+=`<circle cx="${rnd1(cx2)}" cy="${rnd1(Y)}" r="4.5" fill="none" stroke="${HC}" stroke-width="1.6"/>`; });
         for(let k=0;k<ticks.length-1;k++){ const my=(ticks[k]+ticks[k+1])/2;
           s+=`<text x="${rnd1(lx-8)}" y="${rnd1(my+4)}" text-anchor="end" font-family="monospace" font-size="12.5" font-weight="600" fill="${HC}" transform="rotate(-90 ${rnd1(lx-8)} ${rnd1(my+4)})">${gaps[k]}</text>`; }
-        s+=`<text x="${rnd1(lx)}" y="${rnd1(dy-14)}" text-anchor="middle" font-family="'Sarabun',sans-serif" font-size="11.5" fill="${HC}">บานพับ ${uq.length} ตัว</text>`;
+        s+=`<text x="${rnd1(lx)}" y="${rnd1(dy-14)}" text-anchor="middle" font-family="'Sarabun',sans-serif" font-size="13" fill="${HC}">บานพับ ${uq.length} ตัว</text>`;
         const hxS=onL?dx:(dx+HW), oxS=onL?(dx+HW):dx;
         s+=`<path d="M ${rnd1(oxS)} ${rnd1(dy)} L ${rnd1(hxS)} ${rnd1(dy+HH/2)} L ${rnd1(oxS)} ${rnd1(dy+HH)}" fill="none" stroke="${HC}" stroke-width="1.2" stroke-dasharray="9 6" opacity=".8"/>`;
       }
     })();
-    s+=`<text x="${ex+8}" y="${ey+eh-10}" font-family="'Sarabun',sans-serif" font-size="11.5" fill="${THIN}">มองจากด้านหน้าบาน${ROT?" · หมุนวางนอนให้พอดีกระดาษ (ขอบล่างของบานอยู่ทางซ้าย)":""} · แถบฟ้า = ด้านที่ติดเส้นโปรไฟล์ · ม่วง = ถ้วยบานพับกับทิศเปิด</text>`;
+    s+=`<text x="${ex+8}" y="${ey+eh-10}" font-family="'Sarabun',sans-serif" font-size="13" fill="${THIN}">มองจากด้านหน้าบาน${ROT?" · หมุนวางนอนให้พอดีกระดาษ (ขอบล่างของบานอยู่ทางซ้าย)":""} · แถบฟ้า = ด้านที่ติดเส้นโปรไฟล์ · ม่วง = ถ้วยบานพับกับทิศเปิด</text>`;
 
     /* ── ขวา: หน้าตัดจริง เรียงลงมาเป็นคอลัมน์ ── */
     const grp=[]; const gmap={};
@@ -27146,8 +27177,8 @@ const ShopPaper = (function(){
     grp.forEach((z,i)=>{
       const gx=cx0, gy=cy0+i*(chH+SGAP);
       s+=`<rect x="${rnd1(gx)}" y="${rnd1(gy)}" width="${SCW}" height="${rnd1(chH)}" fill="#fafbfc" stroke="${THIN}" stroke-width="1"/>`;
-      s+=`<text x="${rnd1(gx+10)}" y="${rnd1(gy+19)}" font-family="'Sarabun',sans-serif" font-size="12.5" font-weight="700" fill="${INK}">${esc(z.code)}</text>`;
-      s+=`<text x="${rnd1(gx+10)}" y="${rnd1(gy+34)}" font-family="'Sarabun',sans-serif" font-size="11" fill="${THIN}">${esc(z.sides.join(" · "))}</text>`;
+      s+=`<text x="${rnd1(gx+10)}" y="${rnd1(gy+19)}" font-family="'Sarabun',sans-serif" font-size="14" font-weight="700" fill="${INK}">${esc(z.code)}</text>`;
+      s+=`<text x="${rnd1(gx+10)}" y="${rnd1(gy+34)}" font-family="'Sarabun',sans-serif" font-size="12.5" fill="${THIN}">${esc(z.sides.join(" · "))}</text>`;
       const oX=parseFloat(p2.frameOffX)||0, oY=parseFloat(p2.frameOffY)||0;
       const w0=z.bx.w+Math.abs(oX), h0=Math.max(z.bx.h+oY, T);
       const padL=52, padR=46, padT=46, padB=44;
@@ -27155,8 +27186,8 @@ const ShopPaper = (function(){
       const px=gx+padL, py=gy+chH-padB;
       s+=`<line x1="${rnd1(px-22)}" y1="${rnd1(py)}" x2="${rnd1(px+w0*sc+18)}" y2="${rnd1(py)}" stroke="${THIN}" stroke-width="1" stroke-dasharray="5 4"/>`;
       s+=`<line x1="${rnd1(px-22)}" y1="${rnd1(py-T*sc)}" x2="${rnd1(px+w0*sc+18)}" y2="${rnd1(py-T*sc)}" stroke="${THIN}" stroke-width="1" stroke-dasharray="5 4"/>`;
-      s+=`<text x="${rnd1(px-24)}" y="${rnd1(py+12)}" text-anchor="start" font-family="'Sarabun',sans-serif" font-size="10" fill="${THIN}">ผิวหลัง</text>`;
-      s+=`<text x="${rnd1(px-24)}" y="${rnd1(py-T*sc-5)}" text-anchor="start" font-family="'Sarabun',sans-serif" font-size="10" fill="${THIN}">ผิวหน้า</text>`;
+      s+=`<text x="${rnd1(px-24)}" y="${rnd1(py+12)}" text-anchor="start" font-family="'Sarabun',sans-serif" font-size="11.5" fill="${THIN}">ผิวหลัง</text>`;
+      s+=`<text x="${rnd1(px-24)}" y="${rnd1(py-T*sc-5)}" text-anchor="start" font-family="'Sarabun',sans-serif" font-size="11.5" fill="${THIN}">ผิวหน้า</text>`;
       s+=`<line x1="${rnd1(px+oX*sc)}" y1="${rnd1(py+12)}" x2="${rnd1(px+oX*sc)}" y2="${rnd1(py-Math.max(h0,T)*sc-10)}" stroke="${DIM}" stroke-width="1" stroke-dasharray="3 3"/>`;
       s+=`<path d="${secPoly(z.ls, px+oX*sc, py, sc, oY)}" fill="#e5e7eb" stroke="${INK}" stroke-width="1.3" fill-rule="evenodd"/>`;
       s+=dimH(px+oX*sc, px+(oX+z.bx.w)*sc, py+30, "ลึก "+rnd1(z.bx.w));
@@ -27182,7 +27213,7 @@ const ShopPaper = (function(){
       };
       const _lens=[...new Set(z.dirs.map(_lenOf))];
       note.push("ยาว "+_lens.join(" / ")+" ("+z.dirs.length+" เส้น)");
-      s+=`<text x="${rnd1(gx+10)}" y="${rnd1(gy+chH-9)}" font-family="'Sarabun',sans-serif" font-size="10.5" fill="${THIN}">${esc(note.join(" · "))}</text>`;
+      s+=`<text x="${rnd1(gx+10)}" y="${rnd1(gy+chH-9)}" font-family="'Sarabun',sans-serif" font-size="12" fill="${THIN}">${esc(note.join(" · "))}</text>`;
     });
     P.nparts=fd.qty;
     /* ───────── v38.9: ช่อง W × D × H ในหัวกระดาษต้องเป็นขนาดของ "บานใบนี้" ─────────
