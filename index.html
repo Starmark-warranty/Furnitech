@@ -1646,9 +1646,14 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"37.0", build:"2026-08-19/glass-hanger-vertical",
+  name:"StarNexus Cabinet", version:"37.5", build:"2026-08-20/frame-in-bom",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["37.5","2026-08-20","FEAT เส้นเฟรมเข้าใบ BOM Fitting แล้ว เหมือนรางไฟ — เฟรมเป็นของที่ต้องเบิกและตัดจริงเหมือนราง แต่ไม่เคยโผล่ในใบนี้เลยสักครั้ง ฝ่ายจัดซื้อจึงไม่รู้ว่าต้องสั่งเส้นยาวเท่าไรกี่เส้น ต้องไปนับเอาเองจากแบบ · แยกแถวตาม รหัสหน้าตัด × ความยาว เพราะสั่งตัดคนละความยาวคือคนละรายการ บานเดียวจึงได้ 397 มม. ×2 เส้น กับ 467 มม. ×2 เส้น ไม่ใช่ 008 ×4 ที่ไม่บอกอะไรเลย · ลูกที่สอดอยู่ในเส้นแสดงเป็นแถวย่อยใต้แม่ ยาวเท่ากันเป๊ะ พร้อมรหัสสั่งซื้อของตัวเอง รูปแบบเดียวกับฝาครอบรางไฟ · เส้นที่ยังไม่ได้ตั้ง Purchase ID ขึ้นป้ายเตือนเหมือนอุปกรณ์อื่น จะได้เห็นตั้งแต่ในใบ ไม่ใช่ไปเจอตอนสั่งของ"],
+    ["37.4","2026-08-20","FEAT ความยาวตัดจริงของเส้นเฟรม พร้อมรหัสสั่งซื้อ — เดิมเส้นเฟรมทั้งสี่เก็บกรอบของบานเหมือนกันหมด ต่างกันแค่หมายเลขด้าน ไม่มีความยาวตัดอยู่เลยสักที่ ฝ่ายตัดต้องไปวัดเอาเองจากแบบ · จุดสำคัญคือเฟรมหุ้มอยู่นอกบาน ยาวเต็มช่องเดิม = ขนาดก่อนหักค่าลดของ Part หยิบ b.L/b.W ตรง ๆ จะสั้นไปข้างละ 3 ทุกเส้น (ได้ 391 ทั้งที่ต้องเป็น 397) ตอนนี้บวกค่าที่หักไปแล้วกลับเข้ามาเก็บไว้ที่ _cutLen ของแต่ละเส้น · frameCutList() รวมเป็นหนึ่งแถวต่อ รหัสหน้าตัด × ความยาว พร้อมจำนวนเส้นและรหัสสั่งซื้อ รูปแบบเดียวกับรางไฟที่ของชิ้นเดียวมีได้หลายรหัส ทั้งตัวเส้นเองและลูกที่สอดอยู่ในนั้นซึ่งยาวเท่ากันเป๊ะ"],
+    ["37.3","2026-08-19","FIX มาร์ค 4 ด้านไม่เคยออก แม้เห็นครบ 4 กลุ่มเต็มตาในช่อง — กล่อง ใส่แบบมีภาพ เขียนค่าใหม่กลับแค่ช่องบนจอ (ta.value) แต่ไม่ได้เขียนลงข้อมูล (cur.drill) · ta.oninput ทำงานเฉพาะตอนคนพิมพ์เอง การเซ็ต value ด้วยโค้ดไม่ยิง event ค่าใหม่จึงโชว์อยู่แต่ของจริงยังเป็นของเก่า กดบันทึกไปก็ได้ของเดิมกลับมาทุกครั้ง สองรอบที่แล้วผมไล่ผิดที่ ไปตรวจตัวแยกสเปกกับจังหวะเรียกตัวเจาะ ซึ่งทั้งคู่ทำงานถูกอยู่แล้ว · ช่อง Pocket มีบั๊กเดียวกันเป๊ะ แก้พร้อมกัน · FIX ตู้แผ่นเดียวหดลง 6 มม. ทุกครั้งที่กดปรับขนาดแล้วกดตกลงโดยไม่แก้เลข — ไม่มีแผ่นข้างให้วัด ตัวปรับขนาดจึงไปวัดกรอบรวมซึ่งเป็นขนาดหลังหักค่าลดของ Part ไปแล้ว แล้วเอาไปเป็นฐานใหม่ให้หักซ้ำอีกรอบ ตอนนี้บวกค่าที่หักไปแล้วกลับเข้ามาก่อน ได้ขนาดก่อนหักเสมอ"],
+    ["37.2","2026-08-19","FIX บันทึก Part แล้วชิ้นในฉากไม่ถูกเจาะใหม่ — สเปกเก็บครบ 4 กลุ่มจริง (ตรวจแล้วตัวแยกกลุ่มอ่านได้ 4 กลุ่ม) แต่ชิ้นยังถือรูชุดเก่าจากตอนที่สเปกมีกลุ่มเดียว เพราะตอนกดบันทึกเรียกแต่ตัวเจาะ ไม่ได้เรียกตัวคิดค่าลดขนาด และรอบ render ก็ข้ามไป · FIX ค่าลดขนาดรายด้านของ Part ไม่ถูกใช้กับแผ่นเดี่ยว — boardAdj() เช็ค _door บานในตู้ปกติจึงได้ -3 ทุกด้าน ส่วนแผ่นเดียวกันที่ผูก Part เดียวกันได้ขนาดเต็ม ย้ายมาใช้ตัวชี้ขาดกลาง isFrontPanel() ตัวเดียวกับเฟรมและมือจับ จะได้ไม่ต้องไล่แก้ทีละจุดอีก · FIX หูแขวนกระจกเจาะผิดผิว ตั้ง top ทำให้รูโผล่หน้าบานที่ลูกค้าเห็น เปลี่ยนเป็นผิวหลัง · FIX หูแขวนกระจกไม่ตามขนาดตู้ ของเดิมคำนวณครั้งเดียวแล้วเขียนพิกัดตาย ขยายตู้ทีระยะร่นขอบ 50 หลุดทันที ตอนนี้จำขนาดที่คิดไว้ พอขนาดเปลี่ยนก็วางผังใหม่เองในรอบเดียวกับตัวเจาะประจำ Part"],
+    ["37.1","2026-08-19","FEAT ตู้ตื้นเหลือขาแถวเดียว — มีกฎตู้แคบ (กว้างต่ำกว่า legNarrowW เหลือแถวละตัว) มาตั้งแต่ v25.3 แต่แนวลึกไม่เคยมีกฎเลย บังคับสองแถวหน้า-หลังเสมอ ตู้ลึก 150 ที่ร่นขอบข้างละ 50 จึงเหลือช่องระหว่างขาแค่ 50 เบียดกันจนแทบชน · ตอนนี้วัดความลึกจริงของโครงตู้ ถ้าต่ำกว่าเกณฑ์ก็เหลือแถวเดียววางกลางความลึก ใช้เกณฑ์ legNarrowD ถ้าไม่ได้ตั้งจะยืมค่าเดียวกับด้านกว้างมาใช้ · ตัวคำนวณตำแหน่ง z รองรับแถวกลางอยู่แล้ว ไม่ต้องแก้เพิ่ม"],
     ["37.0","2026-08-19","FIX บากหูแขวนกระจกออกมาเป็นแนวนอน ทั้งที่ต้องเป็นแนวตั้งเสมอ — v36.7 หยิบค่าจากไฟล์ตัวอย่าง 2076 (LA=45 BR=18 · WI=-180) ซึ่งเป็นชุดแนวนอน ที่ถูกคือชุดของไฟล์ 2071 (LA=18 BR=45 · WI=0) บากยาวไปตามแกน Y ผมอ่านคำว่า แขวนไม้ด้านนอน ของ 2071 เป็นทิศของบาก ทั้งที่หมายถึงแนววางของแผ่น · ย้ายคำสั่งจากปุ่มในแผงขวาไปอยู่ในเมนูคลิกขวา หมวดใส่หูแขวน ที่เดียวกับหูแขวนตู้ลอย จะได้ไม่ต้องจำว่าอันไหนอยู่ที่ไหน พร้อมเมนูวางผังใหม่และเอาออก"],
     ["36.9","2026-08-19","FIX แผ่นเดี่ยวที่เลือกแบบบานเดียวกับตู้ปกติ แต่ไม่ได้เฟรมอลูกับหน้าตัดมือจับตัดขนาด — ตัวสร้างเฟรมคัดด้วยธง _door ซึ่งติดให้เฉพาะบานที่เกิดจากผังบานหรือลิ้นชัก ตู้ LTF007 ที่ผูก Part FrontShapeP1 และเลือกรหัสแบบบานเดียวกับ WNL043 (xCAx129) เป๊ะ จึงถูกข้ามเงียบ ๆ ไม่มีข้อความบอกด้วยว่าทำไมไม่ขึ้น · เพิ่มตัวชี้ขาด isFrontPanel() ที่ดูจาก Part ที่ผูกไว้ว่ามีหน้าตัดเฟรมสั่งไว้หรือไม่ ปลอดภัยกว่าดูแนววาง เพราะแผ่นหลังก็ orient front เหมือนกันแต่ผูก Part 0000_Mat09 ซึ่งไม่มีหน้าตัด ใช้ตัวเดียวกันทั้งเฟรมอลู หน้าตัดมือจับ และมือจับ"],
     ["36.8","2026-08-19","FEAT ใส่มือจับกับไม้แผ่นเดียวได้แล้ว — เดิมด่านคัดดูแค่ธง _door ซึ่งติดให้เฉพาะบานที่เกิดจากผังบานหรือลิ้นชัก แผ่นเดี่ยวที่ผูก Part แบบบานไว้เอง (เช่น FrontShapeP1) จึงถูกปฏิเสธ ทั้งที่เป็นหน้าบานทุกประการ ไม่ใช่ข้อจำกัดทางเทคนิค เป็นแค่เงื่อนไขที่เขียนแคบไป · ตอนนี้เปิดให้แผ่นที่วางแนวหน้าบาน (orient = front) สั่งใส่มือจับได้ · จุดที่ต้องระวังคือแผ่นหลังก็ orient front เหมือนกัน ถ้าปล่อยตามแนววางอย่างเดียวจะกลายเป็นหน้าบานไปทั้งคลัง ตัวเจาะกับตัวสร้างภาพ 3D จึงรับเพิ่มเฉพาะชิ้นที่ถูกสั่งใส่มือจับเองแล้วจริง ๆ ตู้เดิมทุกใบพฤติกรรมไม่เปลี่ยน"],
@@ -8527,7 +8532,12 @@ function hasAdj(b){ const a=b&&b.adj; return !!(a&&[a.L0,a.L1,a.W0,a.W1].some(v=
    ใช้ทางเดียวกับช่อง "ปรับขอบชิ้น" เดิม (adj) ชิ้นที่ตั้ง adj เองไว้แล้วชนะ ไม่ถูกทับ */
 function boardAdj(b){
   if(hasAdj(b)) return b.adj;
-  if(!b||!b._door||!String(b.part||"").trim()) return null;   // v9.85: เฉพาะบานที่ผูก Part ไว้ ไม่ต้องไปไล่ทุกชิ้นทุกรอบ
+  /* v37.2: ค่าลดรายด้านของ Part ต้องใช้กับแผ่นเดี่ยวที่ผูก Part แบบบานไว้ด้วย
+     ด่านนี้เช็ค _door ซึ่งติดให้เฉพาะบานจากผังบาน/ลิ้นชัก แผ่นเดี่ยวจึงไม่เคยถูกหัก
+     บานในตู้ปกติได้ -3 ทุกด้าน ส่วนแผ่นเดียวกันที่ผูก Part เดียวกันได้ขนาดเต็ม
+     ปัญหาเดียวกันนี้ลามไปทุกที่ที่ใช้ _door เป็นตัวตัดสิน จึงใช้ตัวชี้ขาดกลาง isFrontPanel() */
+  if(!b||!String(b.part||"").trim()) return null;
+  if(!(b._door||isFrontPanel(b))) return null;
   const p2=partDef(b.part,b); if(!p2) return null;
   const g=k=>{ const v=parseFloat(p2[k]); return isFinite(v)?v:0; };
   const a1=g("frameAdj1"), a2=g("frameAdj2"), a3=g("frameAdj3"), a4=g("frameAdj4");
@@ -9559,6 +9569,7 @@ function addHangerMenu(b,x,y){   // เมนูเลือกแบบหู�
   if(hasGH) items.push({label:"✕ เอาหูแขวนกระจกออก",danger:true,fn:()=>{
     b.holes=(b.holes||[]).filter(h=>h.src!=="glasshanger");
     b.pockets=(b.pockets||[]).filter(k=>k.src!=="glasshanger");
+    delete b._glassHanger;
     sync(0); toast("เอาหูแขวนกระจกออกแล้ว"); }});
   varCtxShow(x,y,items);
 }
@@ -10238,6 +10249,7 @@ function render3D(refit){
   _bgClear();
   syncUid();   // ดัน id counter ให้พ้น id ที่โหลดมา → สร้างตู้ใหม่ไม่ได้ id ซ้ำ (คลิกเลือกได้ถูกใบ)
   try{ const fg=cabFitSig(); if(fg!==_cabFitSig){ _cabFitSig=fg; applyCabFittings(); } }catch(e){ console.error(e); }   // อุปกรณ์ default ตามรหัสตู้: วาง/อัปเดตตะแกรงอัตโนมัติ
+  try{ sxRefreshGlassHangers(); }catch(e){ console.error(e); }   // v37.2: หูแขวนกระจกตามขนาดตู้
   try{ applyPartDrills(); }catch(e){ console.error(e); }   // v8.77: รู/มาร์คประจำ Part — คิดใหม่ทุกรอบ render (idempotent) ไม่ผูกกับ cabFitSig
   try{ reslideAll(); }catch(e){ console.error(e); }   // รางรับข้าง/Alto: เจาะรูทุกรอบ render (idempotent) → บอร์ดมีรูเสมอ แม้ถูก rebuild ระหว่างโหลด/ซิงค์
   // migrate ชื่อคานเก่า (ไทย) → อังกฤษ ครั้งเดียวตอนเจอ
@@ -14527,6 +14539,28 @@ function frameFillBoard(b,p2,gl,gw,gt,gx,gy,gz){
   }
   return o;
 }
+/* v37.4: สรุปรายการตัดเฟรม — หนึ่งแถวต่อ (รหัสหน้าตัด × ความยาว)
+   รูปแบบเดียวกับรางไฟ: ของชิ้นเดียวมีได้หลายรหัสสั่งซื้อ (ตัวเส้น + ลูกที่สอดในนั้น)
+   ลูกยาวเท่าแม่เป๊ะ จึงตัดความยาวเดียวกันและมีรหัสของตัวเอง */
+function frameCutList(boards){
+  const map={};
+  (boards||state.boards||[]).forEach(b=>{
+    if(!b||!b._framePart) return;
+    const code=String(b._frameSec||"").trim(); if(!code) return;
+    const len=round(+b._cutLen||0); if(!(len>0)) return;
+    const k=code+"|"+len;
+    if(!map[k]) map[k]={code:code, len:len, qty:0, items:[]};
+    map[k].qty++;
+    if(!map[k].items.length){
+      const push=(id,note)=>{ id=String(id||"").trim();
+        if(id&&!map[k].items.some(x=>x.id===id)) map[k].items.push({id:id,note:note||""}); };
+      try{ push(purchaseOf(code),"เส้นเฟรม"); }catch(e){}
+      push(b._secItem,"ตามสีที่เลือก");
+      try{ const el=elemByCode(code)||{};
+        (el.kids||el.children||[]).forEach(c=>push(c.itemId||c.item||c.code,c.desc||"ลูกในเส้น")); }catch(e){}
+    }
+  });
+  return Object.values(map).sort((a,b)=>a.code.localeCompare(b.code)||a.len-b.len); }
 function applyFrameParts(){
   state.boards=state.boards.filter(b=>!(b&&b._framePart));
   state.boards.forEach(b=>{ if(b&&b._frameDoor) delete b._frameDoor; if(b&&b._frameFit) delete b._frameFit; });
@@ -14571,7 +14605,15 @@ function applyFrameParts(){
         _virtual:true, _framePart:true, _frameOwner:b.id, _frameSec:code, _frameEdge:i+1,
         _shape:"sect", _sectLoops:ls, _sectDir:i, _sectMiter:_miter,
         _sectOffX:_oX, _sectOffY:_oY, _hex:_hex||undefined, _secItem:_item||undefined,
-        _secWood:_wood||undefined });
+        _secWood:_wood||undefined,
+        /* ───────── v37.4: ความยาวตัดจริงรายเส้น ─────────
+           เดิมทั้งสี่เส้นเก็บกรอบของบานเหมือนกันหมด (L,W) ไม่มีความยาวตัดอยู่เลย
+           ตัวออกรายการจึงไม่มีตัวเลขให้ส่งฝ่ายตัด ต้องไปวัดเอาเองจากแบบ
+           เฟรมหุ้มอยู่นอกบาน ยาวเต็มช่องเดิม = ขนาดก่อนหักค่าลดของ Part
+           หยิบ b.L/b.W ตรง ๆ จะสั้นไปข้างละ 3 ทุกเส้น (391 แทนที่จะเป็น 397) */
+        _cutLen: round(((i+1)===1||(i+1)===3)
+          ? ((+b.L||0)-((b._adjApplied||{}).dL||0))
+          : ((+b.W||0)-((b._adjApplied||{}).dW||0))) });
     });
     if(!add.some(x=>x._frameOwner===b.id)) return;
     /* v9.88: มุมของเฟรม = ที่ที่มีเส้นสองด้านมาชนกัน (E1-E2 · E2-E3 · E3-E4 · E4-E1)
@@ -16696,7 +16738,11 @@ function renderElements(){
         const bar=document.createElement("div"); bar.style.cssText="display:flex;gap:6px;flex-wrap:wrap;margin-top:5px";
         { const bt=document.createElement("button"); bt.className="ibtn";
           bt.textContent="▦ ใส่แบบมีภาพ…"; bt.style.cssText="font-size:11px;padding:4px 10px;background:var(--accent);color:#fff;border-color:transparent";
-          bt.onclick=()=>partOpDialog("drill",cur,v=>{ ta.value=v; }); bar.appendChild(bt); }
+          /* ───────── v37.3: กล่อง "ใส่แบบมีภาพ" เขียนกลับแค่ช่องบนจอ ไม่ได้เขียนลงข้อมูล ─────────
+             ta.oninput ทำงานเฉพาะตอนคนพิมพ์เอง การเซ็ต .value ด้วยโค้ดไม่ยิง event
+             ค่าใหม่จึงโชว์อยู่ในกล่องแต่ cur.drill ยังเป็นของเก่า กดบันทึกไปก็ได้ของเดิมกลับมา
+             นี่คือเหตุผลที่มาร์ค 4 ด้านไม่เคยออก แม้จะเห็นครบ 4 กลุ่มเต็มตาในช่อง */
+          bt.onclick=()=>partOpDialog("drill",cur,v=>{ ta.value=v; cur.drill=v; }); bar.appendChild(bt); }
         [["＋ มาร์คคู่ริม (37 · สูง 32)","37,32 ; -37,32"],
          ["＋ มาร์ค 4 มุม (50/50)","50,50 ; -50,50 ; 50,-50 ; -50,-50"],
          ["＋ มาร์คกึ่งกลาง","c0,cW/2"],
@@ -16715,7 +16761,7 @@ function renderElements(){
         { const bar2=document.createElement("div"); bar2.style.cssText="margin-top:5px";
           const bt=document.createElement("button"); bt.className="ibtn";
           bt.textContent="▦ ใส่แบบมีภาพ…"; bt.style.cssText="font-size:11px;padding:4px 10px;background:var(--accent);color:#fff;border-color:transparent";
-          bt.onclick=()=>partOpDialog("pocket",cur,v=>{ tp.value=v; }); bar2.appendChild(bt); d.appendChild(bar2); }
+          bt.onclick=()=>partOpDialog("pocket",cur,v=>{ tp.value=v; cur.pocket=v; }); bar2.appendChild(bt); d.appendChild(bar2); }   // v37.3: บั๊กเดียวกันกับช่องรูเจาะ
         form.appendChild(d); }
       { const d=document.createElement("div"); d.className="emFld wide"; d.innerHTML=`<label>เพ / ตีเฉียงที่สัน ประจำ Part — <code>ด้าน[,สันตรง][,กว้าง][,ผิวอ้างอิง]</code> คั่นกลุ่มด้วย <code>;</code><br>
         ด้าน: <code>บน</code> <code>ล่าง</code> (ตามด้านกว้าง W) · <code>ซ้าย</code> <code>ขวา</code> (ตามด้านยาว L) &nbsp;|&nbsp;
@@ -16950,7 +16996,8 @@ function renderElements(){
     state.boards.filter(b=>b.cabInst==null).forEach(b=>{ if(applyThick(b))n++; });
     /* v8.77: เดิมจะ render ใหม่เฉพาะตอนความหนาเปลี่ยน — แก้แค่สเปครูเจาะ/Pocket ของ Part
        จึงไม่มีอะไรอัปเดตเลย รูมาร์คไม่โผล่จนกว่าจะไปแตะอย่างอื่น · ตอนนี้คิดรูใหม่ทุกครั้งที่บันทึก */
-    let nd=0; try{ nd=applyPartDrills(); }catch(e){ console.error(e); }
+    let nd=0; try{ applyPartAdjust(); }catch(e){ console.error(e); }   // v37.2: ค่าลดขนาดของ Part ก็ต้องคิดใหม่ตอนบันทึก
+    try{ nd=applyPartDrills(); }catch(e){ console.error(e); }
     render3D(false); renderList();
     toast("บันทึก Element แล้ว"+(n?(" · ปรับหนาตามวัสดุ "+n+" ชิ้น"):"")+(nd?(" · รู/ร่องประจำ Part "+nd+" จุด"):"")); renderInspectorIfOpen(); };
   /* v16.0: ปุ่มบันทึกบนหัวแผงใช้ตัวเดียวกับปุ่มท้ายฟอร์ม จะได้ไม่มีทางทำงานต่างกัน */
@@ -20614,11 +20661,20 @@ function _placeLegSet(grp, inst, v, Wc, mny, quiet){   // วางชุดข�
     { const carc=state.boards.filter(b=>b.cabInst===inst&&!b._door&&!b._virtual&&!isRail(b)&&(b.T>0));
       let a=Infinity,z=-Infinity; carc.forEach(b=>{ const d=worldDims(b); a=Math.min(a,b.x-d[0]/2); z=Math.max(z,b.x+d[0]/2); });
       W0=(isFinite(a)&&z>a)?(z-a):(+Wc||0); }
+    /* ───────── v37.1: ตู้ตื้นก็ต้องเหลือขาแถวเดียว เหมือนที่ตู้แคบเหลือแถวละตัว ─────────
+       ของเดิมวัดแต่ความกว้าง ส่วนแนวลึกบังคับสองแถว (หน้า+หลัง) เสมอ
+       ตู้ลึก 150 จึงได้ขาหน้า-หลังเบียดกันจนแทบชน ทั้งที่ร่นขอบข้างละ 50 แล้วเหลือช่องแค่ 50 */
+    let D0=0;
+    { const carc=state.boards.filter(b=>b.cabInst===inst&&!b._door&&!b._virtual&&!isRail(b)&&(b.T>0));
+      let a=Infinity,z=-Infinity; carc.forEach(b=>{ const d=worldDims(b); a=Math.min(a,b.z-d[2]/2); z=Math.max(z,b.z+d[2]/2); });
+      D0=(isFinite(a)&&z>a)?(z-a):0; }
+    const nd=Math.max(+settings.legNarrowD||+settings.legNarrowW||0,0);
+    const oneRow = nd>0 && D0>0 && D0<nd-0.5;
     let cnt=legCountFor(W0);
     if(v.mid==="ไม่ใส่") cnt=Math.min(cnt,4);      // v25.3: ตู้แคบที่ได้ 2 ขา ต้องไม่ถูกดันกลับเป็น 4
     else if(v.mid==="ใส่"&&cnt<6) cnt=6;
     const fxs=legFxList(cnt);
-    let n=0; ["F","B"].forEach(az=>fxs.forEach(fx=>{ n++;
+    let n=0; (oneRow?["C"]:["F","B"]).forEach(az=>fxs.forEach(fx=>{ n++;
       state.boards.push({ id:uid(), name:"Leg "+n, cab:grp.cab||undefined, cabInst:inst,
         rule:{kind:"leg",ax:(fx<=0.0001?"L":fx>=0.9999?"R":"C"),az:az,fx:fx,inset:Math.max(v.inset||0,0),h:Math.max(v.h||10,10),d:Math.max(v.d||20,15),code:(v.code||"LEG").trim(),model:v._model||undefined,xmlLeg:v.xmlLeg||undefined,
               midMode:((v.mid==="ใส่"||v.mid==="ไม่ใส่")?v.mid:undefined)},   // v9.69: บังคับไว้ = ตัวปรับอัตโนมัติต้องเคารพ
@@ -21569,7 +21625,17 @@ function cabSwapXZ(inst){ const y=(((cabYawOf(inst)||0)%360)+360)%360; return (y
 function sideNominalHD(inst){ return _sideNominalHD0(inst); }
 function _sideNominalHD0(inst){
   let sd=state.boards.filter(b=>b.cabInst===inst&&b.orient==="side"&&!b._door&&!b._virtual&&!b._dx&&!isRail(b)&&b.zoneLo==null);
-  if(sd.length<2) return null;
+  /* ───────── v37.3: ตู้ที่เป็นแผ่นเดียวไม่มีแผ่นข้างให้วัด ─────────
+     ตัวนี้คืน null แล้วตัวปรับขนาดไปวัดกรอบรวมแทน ซึ่งเป็นขนาด "หลังหักค่าลดของ Part" แล้ว
+     กดตกลงทั้งที่ไม่ได้แก้เลข ขนาดนั้นกลายเป็นฐานใหม่แล้วโดนหักซ้ำอีก -6 ทุกครั้ง หดไปเรื่อย ๆ
+     แผ่นหน้าเดี่ยวจึงต้องบวกค่าที่หักไปแล้วกลับเข้ามาก่อน ให้ได้ขนาดก่อนหักเสมอ */
+  if(sd.length<2){
+    const fp=state.boards.filter(b=>b.cabInst===inst&&!b._virtual&&b.orient==="front"&&b._adjApplied);
+    if(fp.length===1&&state.boards.filter(b=>b.cabInst===inst&&!b._virtual).length===1){
+      const b=fp[0], pv=b._adjApplied;
+      return {H:Math.round(b.W-(pv.dW||0)), D:Math.round(b.L-(pv.dL||0))};
+    }
+    return null; }
   /* v8.50: ใช้เฉพาะ "แผ่นข้างนอกสุดซ้าย/ขวา" เป็นฐานวัด
      เดิมรวมทุกชิ้นที่วางแนวข้าง (เสาแบ่ง แผงลึกไม่เท่ากัน) แล้วเอาช่วงรวม
      ตู้ที่มีเสาแบ่งลึกกว่าจึงโชว์ความลึกเกินจริง เช่น 584 ทั้งที่แผ่นข้างลึก 300 */
@@ -23352,7 +23418,7 @@ function addPocket(b){   // เพิ่ม Pocket + 2D preview สด · อ้
    เก็บทั้งชุดไว้ในหน่วยความจำ (window._pkClip) พร้อมขนาดแผ่นต้นทาง
    เพราะการวางต้องรู้ว่าแผ่นเดิมใหญ่แค่ไหน ถึงจะรักษาระยะจากขอบ/สเกลตามสัดส่วนได้ */
 function copyPockets(b){
-  if(!b){ toast("เลือกชิ้นก่อน"); return; }
+  if(!b){ if(!quiet) toast("เลือกชิ้นก่อน"); return; }
   const items=pocketList(b).map(p=>JSON.parse(JSON.stringify(p)));
   if(!items.length){ toast("ชิ้นนี้ยังไม่มี Pocket"); return; }
   window._pkClip={ src:{ name:b.name||"", L:Math.max(b.L||1,1), W:Math.max(b.W||1,1), T:Math.max(b.T||18,1) }, items };
@@ -23557,21 +23623,38 @@ function sxHangerGrid(L,W){
   const xs=spread(nCol,L), ys=spread(nRow,W);
   const pts=[]; xs.forEach(x=>ys.forEach(y=>pts.push({x,y})));
   return {xs,ys,pts,nCol,nRow}; }
-function sxAddGlassHangers(b){
+function sxAddGlassHangers(b,quiet){
   if(!b){ toast("เลือกชิ้นก่อน"); return; }
   const L=+b.L||0, W=+b.W||0;
-  if(L<2*GLASS_HANGER.inset+10||W<2*GLASS_HANGER.inset+10){ toast("แผ่นเล็กเกินไปสำหรับหูแขวน"); return; }
+  if(L<2*GLASS_HANGER.inset+10||W<2*GLASS_HANGER.inset+10){ if(!quiet) toast("แผ่นเล็กเกินไปสำหรับหูแขวน"); return; }
   const g=sxHangerGrid(L,W);
   b.holes=(b.holes||[]).filter(h=>h.src!=="glasshanger");
   b.pockets=(b.pockets||[]).filter(k=>k.src!=="glasshanger");
   g.pts.forEach(pt=>{
     const lx=round(pt.x-L/2), ly=round(pt.y-W/2);
-    b.holes.push({d:GLASS_HANGER.dia,x:lx,y:ly,depth:GLASS_HANGER.deep,face:"top",src:"glasshanger",sys:true});
+    /* v37.2: เจาะจากผิวหลังบาน ไม่ใช่ผิวหน้า — หูแขวนอยู่ด้านหลังเสมอ
+       ของเดิมตั้ง top ทำให้รูไปโผล่หน้าบานที่ลูกค้าเห็น */
+    b.holes.push({d:GLASS_HANGER.dia,x:lx,y:ly,depth:GLASS_HANGER.deep,face:"bottom",src:"glasshanger",sys:true});
     GLASS_HANGER.pockets.forEach(q=>b.pockets.push({x:lx,y:ly,w:q.w,h:q.h,depth:q.depth,r:q.r,
       wi:GLASS_HANGER.wi, zt:GLASS_HANGER.zt, src:"glasshanger"}));
   });
+  b._glassHanger={L:round(L),W:round(W)};      // จำไว้ว่าชิ้นนี้ขอผังหูแขวน + ขนาดที่คิดไว้ตอนนั้น
+  if(quiet) return;
   sync(0); try{ showInspector(); }catch(e){}
   toast("หูแขวนกระจก "+g.pts.length+" ตัว · "+g.nCol+" คอลัมน์ × "+g.nRow+" แถว (ร่นขอบ "+GLASS_HANGER.inset+")"); }
+/* ───────── v37.2: ขนาดเปลี่ยนแล้วต้องคิดระยะใหม่ ─────────
+   ของเดิมคำนวณครั้งเดียวตอนกดปุ่มแล้วเขียนพิกัดตายลงชิ้น
+   ขยายตู้ทีรูค้างที่เดิม ระยะร่นขอบ 50 หลุดทันทีโดยไม่มีอะไรเตือน
+   ตัวนี้วิ่งรอบเดียวกับตัวเจาะประจำ Part จึงตามขนาดตลอด */
+function sxRefreshGlassHangers(){
+  let n=0;
+  (state.boards||[]).forEach(b=>{
+    const g=b&&b._glassHanger; if(!g) return;
+    const L=round(+b.L||0), W=round(+b.W||0);
+    if(Math.abs(L-(+g.L||0))<0.05 && Math.abs(W-(+g.W||0))<0.05) return;   // ขนาดเท่าเดิม ไม่ต้องทำ
+    try{ sxAddGlassHangers(b,true); n++; }catch(e){}
+  });
+  return n; }
 function clearFeatures(b){ b.holes=[]; b.grooves=[]; sync(0); }
 function flashInspector(){const insp=$("insp"),body=$("inspBody");if(!insp)return;if(body)body.scrollTop=0;insp.classList.remove("flash");void insp.offsetWidth;insp.classList.add("flash");const fn=$("f_name");if(fn)setTimeout(()=>fn.focus(),60);}
 function bindCtx(){
@@ -24706,7 +24789,8 @@ function renderSummary(){
   const rows=fitBomRows();
   const GRP=[["fit","อุปกรณ์ · เดือย · ราง · ไฟ"],["edge","ขอบ (PVC / Edge band)"],["line","Accessory จากแท็บเส้น / Line"]];
   const oid=(()=>{ try{ return orderId(); }catch(e){ return ""; } })();
-  let h='<div class="sumh">ออเดอร์: '+escapeHtml(oid)+' · '+rows.length+' รายการ · '
+  let _nFrm=0; try{ _nFrm=frameCutList().length; }catch(e){}
+  let h='<div class="sumh">ออเดอร์: '+escapeHtml(oid)+' · '+(rows.length+_nFrm)+' รายการ · '
     +'<span style="opacity:.7">รหัสชุดที่ตั้งไว้ว่าออกเฉพาะลูก จะไม่ปรากฏในนี้ ตรงกับไฟล์ที่ส่งออกทุกบรรทัด</span></div>';
   let any=false;
   GRP.forEach(([g,title])=>{
@@ -24735,6 +24819,31 @@ function renderSummary(){
         +'<td class="num"><b>'+(Math.round((f.count||0)*100)/100)+'</b></td>'
         +'<td>'+escapeHtml(String(f.unit||""))+'</td></tr>'; });
     h+='</tbody></table>'; });
+  /* ───────── v37.5: เส้นเฟรมเข้า BOM Fitting เหมือนรางไฟ ─────────
+     เฟรมเป็นของที่ต้องเบิกและตัดจริงเหมือนราง แต่ไม่เคยโผล่ในใบนี้เลย
+     ฝ่ายจัดซื้อจึงไม่รู้ว่าต้องสั่งเส้นยาวเท่าไรกี่เส้น ต้องไปนับเอาเองจากแบบ
+     แยกแถวตาม รหัสหน้าตัด × ความยาว เพราะสั่งตัดคนละความยาวคือคนละรายการ */
+  try{
+    const fc=frameCutList();
+    if(fc.length){ any=true;
+      const tot=fc.reduce((n,r)=>n+r.qty,0);
+      h+='<div class="sumh">เส้นเฟรม / หน้าตัด — '+fc.length+' รายการ · '+tot+' เส้น</div>'
+        +'<table class="sumtbl"><thead><tr><th>รหัส</th><th>Purchase ID</th><th>ชื่อ</th><th>จำนวน</th><th>หน่วย</th></tr></thead><tbody>';
+      fc.forEach(r=>{
+        const main=r.items[0], kids=r.items.slice(1);
+        h+='<tr><td style="font-family:var(--mono)">'+escapeHtml(r.code)+'</td>'
+          +'<td style="font-family:var(--mono)">'
+            +(main?escapeHtml(main.id):'<span class="warn" style="padding:2px 6px;border-radius:5px">ยังไม่ได้ใส่ Purchase ID</span>')+'</td>'
+          +'<td>เส้นเฟรม '+escapeHtml(r.code)+' <span style="opacity:.6;font-size:11px">ตัดยาว '+r.len+' มม.</span></td>'
+          +'<td class="num"><b>'+r.qty+'</b></td><td>เส้น</td></tr>';
+        kids.forEach(k=>{ h+='<tr style="opacity:.93"><td style="font-family:var(--mono);padding-left:18px">'+escapeHtml(r.code)+'</td>'
+          +'<td style="font-family:var(--mono)">'+escapeHtml(k.id)+'</td>'
+          +'<td><span style="opacity:.55">↳</span> '+escapeHtml(k.note||"ลูกในเส้น")
+          +' <span style="opacity:.5;font-size:11px">(ยาวเท่าเส้นแม่ '+r.len+' มม.)</span></td>'
+          +'<td class="num"><b>'+r.qty+'</b></td><td>เส้น</td></tr>'; });
+      });
+      h+='</tbody></table>'; }
+  }catch(e){ console.error("frameCutList:",e); }
   if(!any) h+='<div style="padding:16px;color:var(--ink-dim);font-size:12.5px">ยังไม่มีอุปกรณ์ในงานนี้</div>';
   h+='<div style="padding:10px 2px;font-size:11.5px;color:var(--ink-dim);line-height:1.8">'
     +'รายการเจาะกับพิกัดรูย้ายไปอยู่ที่ไฟล์เจาะ MPR และปุ่มดาวน์โหลด CSV แทน หน้านี้เหลือเฉพาะของที่ต้องเบิก · '
