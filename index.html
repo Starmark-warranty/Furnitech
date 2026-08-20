@@ -1646,9 +1646,13 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"38.4", build:"2026-08-20/cut-lookup-diagnostics",
+  name:"StarNexus Cabinet", version:"38.8", build:"2026-08-20/finished-door-size-on-sheet",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["38.8","2026-08-20","FIX เส้นบอกขนาดในแบบหน้าตัดเฟรมบอกขนาดแผ่นไม้ ไม่ใช่ขนาดบานสำเร็จ — เส้นโปรไฟล์แปะคร่อมขอบไม้ ยื่นพ้นออกไปข้างละเท่ากับระยะเลื่อนที่ตั้งไว้ติดลบ (frameOffX) บานสำเร็จจึงโตกว่าแผ่นข้างละเท่านั้น แผ่น 734 × 744 กับเส้นยื่นข้างละ 3 ได้บาน 740 × 750 แต่ในรูปกลับขึ้น 734 กับ 744 · แบบที่ส่งออกไปคือตัวที่ฝ่ายผลิตใช้ตรวจของหน้างาน ขนาดในรูปต้องเป็นขนาดที่วัดได้จริงตอนบานประกอบเสร็จ · แก้ทั้งเส้นบอกขนาด กรอบในรูป และสเกล ให้เป็นขอบนอกของบานสำเร็จ ส่วนหัวแบบยังบอกขนาดแผ่นในวงเล็บไว้ให้ฝ่ายตัดไม้ · v38.6 คิดจากค่าลดของ Part ซึ่งบังเอิญได้เลขเดียวกันในงานนี้ แต่คนละเรื่องกัน ค่าลดคือช่องว่างที่เว้นให้บานในตู้ ส่วนตัวที่ทำให้บานโตคือเส้นที่ยื่นพ้นแผ่น ตั้งค่าคนละอย่างเมื่อไหร่จะเพี้ยนทันที ตอนนี้คิดจากรูปเรขาคณิตจริง"],
+    ["38.7","2026-08-20","FEAT แบบผลิตกรองพิมพ์เฉพาะหน้าตัดเฟรมได้แล้ว ทั้งจ็อบ — ชุดนี้เอาไปให้ฝ่ายตัดอลูอย่างเดียว ไม่ได้เอาหน้าแผ่นไม้ไปด้วย เดิมต้องพิมพ์ทั้งเล่มแล้วไปไล่เลือกหน้าเอาที่เครื่องพิมพ์ ซึ่งหน้าตัดเฟรมแทรกปนอยู่กับหน้าแผ่นทั้งจ็อบ · เลือกแล้วสร้างเฉพาะชุดที่จะพิมพ์จริง แล้วเดินเลขหน้าใหม่ในชุดนั้น ไม่ใช่แค่ซ่อน ไม่งั้นหัวกระดาษเขียนว่า หน้า 12/40 ทั้งที่พิมพ์ออกมาสามแผ่น · ใช้ร่วมกับขอบเขต ทั้งฉาก/ตู้ที่เลือก ได้ตามปกติ · FIX เปลี่ยนชุดกรองแล้วหน้าที่เปิดค้างอยู่อาจไม่มีในชุดใหม่ ของเดิมตกไปที่หน้ารวมซึ่งชุดกรองไม่มี จอจึงว่างเปล่า ตอนนี้เด้งไปหน้าแรกของชุดให้เอง และปุ่มดาวน์โหลด PNG หน้าปัจจุบันก็ตามชุดที่กรองไว้"],
+    ["38.6","2026-08-20","FIX บานไม้ที่ติดเส้นโปรไฟล์ไม่มีหน้า หน้าตัดเฟรมบาน ในแบบผลิตเลย — v36.9 เปิดให้แผ่นเดี่ยวที่ผูก Part แบบบานขึ้นเฟรมได้แล้วผ่าน isFrontPanel แต่หน้าแบบนี้ยังกรองด้วย b._door อยู่ตัวเดียว แผ่นที่ไม่ได้ถูกทำเครื่องหมายว่าเป็นบานจึงมีเส้นเฟรมครบสี่ด้านในฉาก มีความยาวตัดครบในใบอุปกรณ์ แต่ไม่มีแบบหน้าตัดให้ช่างสักใบ · ใช้เกณฑ์เดียวกับตัวสร้างเฟรม ของที่ขึ้นเฟรมได้ก็ต้องมีแบบได้ · FIX ความยาวเส้นในแบบอ่านจาก b.L/b.W ตรง ๆ ซึ่งสั้นไปข้างละ 3 ทุกเส้น เพราะเฟรมหุ้มอยู่นอกแผ่น ยาวเต็มช่องเดิมคือขนาดก่อนหักค่าลดของ Part แบบกับใบอุปกรณ์จึงบอกคนละเลข ช่างตัดตามแบบแล้วเส้นสั้น · เปลี่ยนไปอ่าน _cutLen ตัวเดียวกับที่ออกใบ · FIX หัวแบบบอกบานสำเร็จเป็นขนาดแผ่นไม้ ซึ่งเล็กกว่าบานจริงเพราะเส้นแปะอยู่นอกขอบไม้ ตอนนี้บอกทั้งบานสำเร็จและขนาดแผ่นไม้ · FIX บานไม้ถูกตัดหน้าแผ่นธรรมดาทิ้งไปด้วยตามกฎ v23.5 ซึ่งเขียนไว้สำหรับบานเฟรมอลูที่ไม่มีแผ่นไม้จริง แต่บานไม้มีแผ่นจริงและมีงานเจาะของตัวเอง (มาร์คสัน บาก รูหูแขวน) ตัดทิ้งแล้วช่างไม่เหลือแบบที่บอกตำแหน่งรูสักใบ ตอนนี้บานไม้ได้ทั้งสองหน้า"],
+    ["38.5","2026-08-20","FEAT ก็อปแบบบานไม้ให้เป็นเวอร์ชันเฟรมอลู + กระจก ในคลิกเดียว — บานสองแบบนี้เป็นบานเดียวกันในสายตาคนออกแบบ ต่างกันแค่ตรงกลางเป็นไม้หรือกระจก แต่ในโปรแกรมต่างกันหลายช่อง และช่องที่ต้องเอาออกคือช่องที่พลาดง่ายที่สุด · มาร์คเดือยมือจับ e1..e4 เป็นของบานไม้ ถ้าติดมาด้วยจะได้ไฟล์เจาะที่ไม่มีแผ่นให้เจาะ · บ่ารับกระจกที่กัดในเนื้อไม้ไม่เกี่ยวกับบานเฟรมเลย กระจกนั่งในร่องของเส้นอลูแทน · ตำแหน่งกระจกตามความหนาต้องตรงกับร่องในเส้น ไม่ใช่กึ่งกลางบานเสมอไป · ปุ่มนี้จัดให้ครบทุกช่อง แล้วอ่านร่องจากหน้าตัดจริงมาเติมค่ากระจกให้เอง · FEAT ตัวอ่านหน้าตัดบอกได้แล้วว่าเส้นนั้นมีร่องรับกระจกหรือไม่ กว้างเท่าไหร่ ลึกเท่าไหร่ กึ่งกลางร่องอยู่ระดับไหนของความหนาบาน — ยิงเส้นแนวนอนทีละระดับแล้วดูว่าเนื้ออลูลึกเข้าไปได้ถึงไหน ร่องคือช่วงที่ตื้นกว่าทั้งด้านบนและด้านล่างของมันเอง ส่วนเดือยหนามได้รูปตรงข้าม จึงไม่สับสนกัน · จุดนี้สำคัญเพราะถ้าเอาเส้นมือจับโปรไฟล์ไปปิดสวิตช์บานไม้เฉย ๆ จะได้บานที่ไม่มีอะไรจับกระจกเลย แต่โปรแกรมก็ยังวาดให้เหมือนใช้งานได้ ตอนนี้บอกตรง ๆ ทั้งในแผงแบบบานและตอนกดสร้างเวอร์ชันใหม่"],
     ["38.4","2026-08-20","FIX เพิ่มรหัสท่อนในคลังอุปกรณ์แล้ว แต่โปรแกรมยังขึ้นว่าหาไม่เจอ — ผลค้นถูกจำไว้ทั้งรอบการใช้งาน รวมทั้งผลที่ค้นไม่เจอด้วย ค้นครั้งแรกตอนที่คลังยังไม่มีรหัส คำตอบ ไม่เจอ ก็ค้างอยู่อย่างนั้นจนกว่าจะปิดเปิดโปรแกรมใหม่ และไม่มีอะไรบอกไว้เลยว่าต้องทำแบบนั้น · เพิ่มปุ่ม ค้นรหัสท่อนใหม่ ในหน้า BOM Fitting ล้างของที่จำไว้แล้วถามคลังใหม่ทั้งชุด · FIX ค้นไม่เจอแล้วเงียบ — ของเดิมเก็บผลว่า null เฉย ๆ แล้วเตือนบรรทัดเดียวใน console ซึ่งกลืนสามกรณีที่ต้องแก้คนละทางไว้ด้วยกัน คือ ถามคลังไม่ผ่าน (q.error ถูกทิ้งทิ้งไปเงียบ ๆ ไม่มีใครเห็น) · ไม่มีรหัสไหนขึ้นต้นด้วย Purchase ID นั้นเลย (ผูก Purchase ID ผิดหรือยังไม่ผูก) · มีรหัสรุ่นนั้นแต่ยังไม่มีท่อนความยาวนี้ (ต้องไปเพิ่มท่อน) · ตอนนี้แยกสามกรณีให้ชัด แล้วขึ้นเหตุผลในใบ BOM Fitting ตรงบรรทัดนั้นเลย ไม่ต้องเปิด console หา · FEAT ใบ BOM Fitting บอกที่มาของ Purchase ID แล้ว — รหัสที่กรอกไว้ที่ Part กับรหัสที่ส่งออกจริงเป็นคนละตัวได้ ถ้า Element ของรหัสนั้นผูก Purchase Item ID ไว้เป็นอีกรหัสหนึ่ง ซึ่งถูกต้องตามที่ออกแบบไว้ แต่ไม่มีที่ไหนบอกว่าเกิดอะไรขึ้น กรอกรหัสหนึ่งแล้วออกไปอีกรหัสหนึ่งจึงดูเหมือนโปรแกรมมั่ว ทั้งที่มันอ่านตามที่ผูกไว้เป๊ะ ๆ · ตอนนี้บรรทัดที่รหัสไม่ตรงกันจะขึ้นบอกว่ามาจาก Element ตัวไหนและผูกไว้เป็นอะไร"],
     ["38.3","2026-08-20","FEAT รุ่นบานพับ (Hinge Models) — v22.3 ให้แบบบานเลือกรหัสบานพับของตัวเองได้ แต่ระยะเจาะยังใช้ชุดกลางชุดเดียวทั้งฉาก · บานพับคนละรุ่นมี Ø ถ้วย ความลึก ระยะร่นจากขอบ และผังรูฐานที่แผ่นข้างไม่เท่ากัน พอเปลี่ยนไปใช้บานพับอีกแบบ รหัสเปลี่ยนได้แต่รูยังเจาะตามรุ่นเดิม ไฟล์เจาะจึงผิดทั้งงานโดยไม่มีอะไรเตือน · ตอนนี้เก็บเป็นรุ่นทั้งชุด (รหัส + ระยะทั้ง 11 ค่า) เพิ่มได้ไม่จำกัดที่ ตั้งค่า → บานพับ → รุ่นบานพับ แล้วผูกรุ่นไว้ที่แบบบานใน Element → FrontStyle · ทุกที่ที่เคยอ่านค่ากลางตรง ๆ (3D · แบบ 2D · ไฟล์ MPR · รูฐานที่แผ่นข้าง · ใบอุปกรณ์) ผ่านตัวเดียวกันหมดคือ hingeSpecOf(บาน) จะได้ไม่มีทางเพี้ยนกันคนละทาง · ช่องไหนเว้นว่างในรุ่น = ใช้ค่ากลาง · แบบบานที่ตั้งไว้แค่รหัสแบบเดิมยังทำงานเหมือนเดิม และถ้ารหัสนั้นตรงกับรุ่นไหน ระยะจะตามรุ่นนั้นให้เอง · บานที่ไม่ได้ผูกอะไรเลย ค่าไม่ขยับสักตัว · FEAT กดเปิดแก้ออเดอร์แล้วมีกล่องรอเหมือนตอนโหลด XML — v30.2 ใส่ให้เฉพาะทางโหลด XML แต่ทางเปิดแก้เงียบสนิททั้งที่ทำงานหนักกว่า ต้องดึงก้อนจากคลาวด์แล้วไล่ตรวจผิวกับความลึกชั้นทีละใบ ออเดอร์หลายสิบใบจึงค้างอยู่กับฉากเดิมหลายวินาทีโดยไม่มีอะไรบอก บางคนกดซ้ำเพราะคิดว่าไม่ติด · ตอนนี้บอกว่าทำถึงตู้ใบไหนจากทั้งหมดกี่ใบ พร้อมแถบความคืบหน้า และคืนคิวให้เบราว์เซอร์เป็นระยะ แถบจึงเดินให้เห็น"],
     ["38.2","2026-08-20","FIX ชั้นสูง 100 (และ 94) ไม่ได้หูแขวนกระจกสักตัว — ด่านขั้นต่ำเขียนไว้ว่าต้องยาวเกิน 2×ระยะร่นขอบ+10 = 110 ทั้งสองแกน ซึ่งเป็นเงื่อนไขของ หลายจุด ไม่ใช่ จุดเดียว · แถวเดียววางกึ่งกลางแผ่นไม่ได้ใช้ระยะร่นขอบเลย (spread(1) คืนกึ่งกลางตรง ๆ) ชั้นสูง 100 ที่บากสูงแค่ 45 จึงวางสบาย ๆ แต่ถูกตัดทิ้งทั้งแผ่น · เปลี่ยนเป็นวัดแยกแกน แกนไหนสั้นก็ลดจำนวนจุดในแกนนั้นลง เหลืออย่างน้อยหนึ่งจุดกลางแกน และด่านขั้นต่ำคิดจากขนาดบากจริง (กว้าง 30 · สูง 57) แผ่นสูงกว่านี้จึงได้แถวเดียว 2 ตัวเสมอ แผ่นสูง ๆ ผังเดิมไม่ขยับสักใบ · FIX รูหูแขวนถูกถอดป้ายทิ้งทุกครั้งที่เปิดไฟล์ แล้วกลายเป็นรูผีที่ล้างไม่ได้อีกเลย — healHoleSrc ถือว่า h.src คือ id ของชิ้นเจ้าของเสมอ เจอ glasshanger ที่ไม่มีในทะเบียน id ก็ลบป้าย พอไม่มีป้าย ตัววางผังใหม่ก็ล้างของเดิมไม่เจอ ผังเก่าจึงค้างทับกันไปเรื่อย ๆ ทุกครั้งที่เปิด (ไฟล์จริงมีรูผี 108 รู บางแผ่นมีรู Ø15 ซ้อนกันแปดรูจากผังสองรุ่น) และตัวนับใบอุปกรณ์ก็นับไม่ครบเพราะนับจากป้ายที่โดนลบ · กฎเดียวกับ cleanOrphanSrcHoles ที่แก้ไปแล้วใน v37.8 ตัวนี้หลุดไป · เพิ่มตัวชี้ขาด isGlassHangerHole() ที่จับรูที่ถูกถอดป้ายไปแล้วได้ด้วย ไฟล์ที่เสียไปแล้วจึงล้างตัวเองตอนเปิด"],
@@ -12818,6 +12822,98 @@ function sectXform(ls,p){
   out[0].forEach(q=>{ x0=Math.min(x0,q[0]); y0=Math.min(y0,q[1]); });
   return out.map(l=>l.map(q=>[round(q[0]-x0),round(q[1]-y0)]));
 }
+/* ═════════ v38.5: หน้าตัดนี้รับกระจกได้ไหม และร่องอยู่ตรงไหน ═════════
+   บานเฟรมอลู+กระจก ต่างจากบานไม้ตรงที่กระจกต้องนั่งอยู่ใน "ร่อง" ที่กัดไว้ในเส้นอลู
+   ถ้าเส้นที่ใส่ไว้ไม่มีร่อง (เช่นมือจับโปรไฟล์ที่มีแต่เดือยหนามเสียบเข้าขอบไม้)
+   ปิดสวิตช์บานไม้เฉย ๆ จะได้บานที่ไม่มีอะไรจับกระจก แต่โปรแกรมก็วาดให้เหมือนใช้ได้
+   ตัวนี้อ่านรูปหน้าตัดแล้วบอกตรง ๆ ว่ามีร่องหรือไม่มี ลึกเท่าไหร่ อยู่ระดับไหนในความหนาบาน
+
+   วิธีดู: ยิงเส้นแนวนอนทีละระดับความสูง หาว่าเนื้ออลูลึกเข้าไปในบานได้ถึง x เท่าไหร่
+   ร่อง = ช่วงที่ "ลึกน้อยกว่า" ทั้งด้านบนและด้านล่างของมันเอง (สูง-ต่ำ-สูง)
+   เดือยหนามจะได้ตรงข้าม (ต่ำ-สูง-ต่ำ) จึงแยกออกจากกันได้ ไม่ไปเข้าใจผิดว่าเป็นร่อง */
+function _sectXmaxAt(ls,y){
+  let mx=-Infinity;
+  (ls||[]).forEach(loop=>{ const n=loop.length;
+    for(let i=0;i<n;i++){ const a=loop[i], b=loop[(i+1)%n];
+      const y0=+a[1], y1=+b[1]; if(y0===y1) continue;
+      if((y<Math.min(y0,y1)-1e-9)||(y>Math.max(y0,y1)+1e-9)) continue;
+      const t=(y-y0)/(y1-y0); if(t<-1e-9||t>1+1e-9) continue;
+      mx=Math.max(mx,(+a[0])+t*((+b[0])-(+a[0]))); } });
+  return isFinite(mx)?mx:null;
+}
+function sectGroove(ls){
+  const bb=sectBoxOf(ls); if(!bb||!(bb.h>0)) return null;
+  const N=200, ys=[], xs=[];
+  for(let i=1;i<N;i++){ const y=bb.y0+bb.h*i/N; const x=_sectXmaxAt(ls,y);
+    if(x==null) return null; ys.push(y); xs.push(x); }
+  const deep=Math.max.apply(null,xs);
+  const TOL=1.0;                                   // ตื้นกว่าสุดลึกเกิน 1 มม. ถือว่าเป็นร่อง
+  let best=null, i=0;
+  while(i<xs.length){
+    if(xs[i]>deep-TOL){ i++; continue; }
+    let j=i; while(j<xs.length&&xs[j]<=deep-TOL) j++;
+    const encl=(i>0)&&(j<xs.length);               // ต้องมีเนื้อที่ลึกกว่าขนาบทั้งบนและล่าง
+    if(encl){ let mn=Infinity; for(let k=i;k<j;k++) mn=Math.min(mn,xs[k]);
+      const cand={y0:ys[i-1],y1:ys[j],cy:(ys[i-1]+ys[j])/2,w:ys[j]-ys[i-1],depth:deep-mn,inner:deep};
+      if(!best||cand.w>best.w) best=cand; }
+    i=j; }
+  if(!best||!(best.depth>1)||!(best.w>1)) return null;
+  return { y0:round(best.y0), y1:round(best.y1), cy:round(best.cy),
+           w:round(best.w), depth:round(best.depth), inner:round(best.inner), H:round(bb.h) };
+}
+/* v38.5: ก็อปแบบบานไม้ให้เป็นเวอร์ชันเฟรมอลู + กระจก ในคลิกเดียว
+   บานสองแบบนี้เป็นบานเดียวกันในสายตาคนออกแบบ ต่างกันแค่ตรงกลางเป็นไม้หรือกระจก
+   แต่ในโปรแกรมต่างกันหลายช่อง และช่องที่ต้อง "เอาออก" คือช่องที่พลาดง่ายที่สุด
+     · มาร์คเดือยมือจับ (e1..e4) เป็นของบานไม้ ถ้าติดมาด้วยจะได้ไฟล์เจาะที่ไม่มีแผ่นให้เจาะ
+     · บ่ารับกระจกที่กัดในเนื้อไม้ ไม่เกี่ยวกับบานเฟรมเลย กระจกนั่งในร่องของเส้นอลูแทน
+     · ตำแหน่งกระจกตามความหนา ต้องตรงกับร่องในเส้น ไม่ใช่กึ่งกลางบานเสมอไป */
+async function makeGlassFrameVariant(cur){
+  if(!cur){ toast("เลือกแบบบานก่อน"); return; }
+  if(!settings.elements) settings.elements={};
+  const list=(settings.elements.parts=(settings.elements.parts||[]));
+  const base=String(cur.code||"").trim()||"PART";
+  let code=base+"_G", n=2; while(list.some(x=>x&&x.code===code)) code=base+"_G"+(n++);
+  const secs=[cur.frameSec1,cur.frameSec2,cur.frameSec3,cur.frameSec4].map(x=>String(x||"").trim());
+  const c0=secs.find(Boolean)||"";
+  const gr=c0?sectGrooveOf(c0,cur):null;
+  const v=await promptFields("สร้างเวอร์ชันเฟรมอลู + กระจก จาก “"+base+"”",[
+    {key:"code",label:"รหัสแบบบานใหม่",value:code},
+    {key:"sec",label:"รหัสเส้นเฟรม 4 ด้าน (ต้องเป็นเส้นที่มีร่องรับกระจก)",value:c0},
+    {key:"gt",label:"กระจกหนา (มม.)",value:gr?Math.max(round(gr.w-1),2):5}]);
+  if(!v) return;
+  const nc=String(v.code||code).trim(); if(!nc){ toast("ต้องมีรหัส"); return; }
+  if(list.some(x=>x&&x.code===nc)){ toast("รหัส “"+nc+"” มีอยู่แล้ว"); return; }
+  const sc=String(v.sec||c0).trim();
+  const nw=JSON.parse(JSON.stringify(cur));
+  nw.code=nc;
+  nw.name=(String(cur.name||"").trim()?(cur.name+" · เฟรมอลู+กระจก"):nc);
+  nw.frameSec1=nw.frameSec2=nw.frameSec3=nw.frameSec4=sc;
+  nw.frameWood=false;                                   // แผ่นบานไม่วาดแล้ว ความหนาบาน = ความสูงหน้าตัด
+  nw.drill="";                                          // มาร์คเดือยมือจับเป็นของบานไม้ล้วน ๆ
+  ["woodCutFrame","woodRebFrame","woodRebDepth","woodRebSide","woodGlassClr",
+   "frameFillKind","frameFillMat","frameFillEdge","frameFillSurfT","frameFillSurfB"].forEach(k=>{ delete nw[k]; });
+  nw.frameGlassT=Math.max(+v.gt||5,1);
+  const g2=sectGrooveOf(sc,nw);
+  if(g2){ nw.frameGlassZ=g2.cy+(parseFloat(nw.frameOffY)||0);
+          nw.frameGlassLap=Math.max(round(g2.depth-1),0); }
+  else  { delete nw.frameGlassZ; delete nw.frameGlassLap; }
+  list.push(nw);
+  lsSet("furnitech:settings",settings);
+  try{ renderElements(); sync(1); }catch(e){ console.error(e); }
+  if(!g2){
+    dialog({title:"สร้าง “"+nc+"” แล้ว — แต่เส้น “"+sc+"” ไม่มีร่องรับกระจก",
+      html:'<div style="font-size:12.5px;line-height:1.75;color:var(--ink-dim)">'
+        +'เส้นที่ใช้อยู่เป็น<b>มือจับโปรไฟล์</b> — มีเดือยหนามสำหรับเสียบเข้าขอบไม้ ไม่มีร่องให้กระจกนั่ง<br>'
+        +'บานเฟรมอลูต้องใช้เส้นอีกแบบที่มีร่องกระจกในตัว ซึ่งเป็นคนละรหัสและคนละแม่พิมพ์<br><br>'
+        +'ให้ไปเพิ่มหน้าตัดของเส้นเฟรมกระจกที่ <b>Section</b> ก่อน แล้วกลับมาเปลี่ยนรหัสเส้นทั้ง 4 ด้านของแบบบานนี้<br>'
+        +'ช่องกระจกหนา / ซ้อนเข้าในเฟรม / ระยะจากหลังบาน จะถูกเติมให้เองทันทีที่เส้นมีร่อง</div>', ok:"เข้าใจแล้ว"});
+  } else {
+    toast("สร้าง “"+nc+"” แล้ว — กระจก "+nw.frameGlassT+" มม. ซ้อนเข้าเฟรมด้านละ "+nw.frameGlassLap
+      +" · อยู่ที่ "+nw.frameGlassZ+" มม. จากหลังบาน (ตามร่องของเส้น "+sc+")");
+  }
+}
+function sectGrooveOf(code,p2){ const l=sectLoops(code); if(!l) return null;
+  return sectGroove(p2?sectXform(l,p2):l); }
 function sectBoxOf(ls){
   if(!ls||!ls.length) return null;
   let x0=Infinity,x1=-Infinity,y0=Infinity,y1=-Infinity;
@@ -16738,9 +16834,15 @@ function renderElements(){
             const b0=sectBoxOf(l3), b1=sectBoxOf(sectXform(l3,cur));
             const oX=parseFloat(cur.frameOffX)||0, oY=parseFloat(cur.frameOffY)||0;
             const x0=round(oX), x1=round(oX+b1.w), y0=round(oY), y1=round(oY+b1.h);
+            /* v38.5: บอกไปเลยว่าเส้นนี้มีร่องรับกระจกหรือไม่ — บานเฟรมอลูขึ้นอยู่กับตรงนี้ทั้งหมด */
+            let gtxt='';
+            try{ const gr=sectGroove(sectXform(l3,cur));
+              gtxt = gr ? ('<br>　<span style="color:#0c7a5a">ร่องรับกระจก: กว้าง <b>'+gr.w+'</b> · ลึก <b>'+gr.depth
+                      +'</b> · กึ่งกลางร่องอยู่ที่ <b>'+round(gr.cy+oY)+'</b> จากหลังบาน → ใส่กระจกได้ถึง '+Math.max(round(gr.w-1),0)+' มม.</span>')
+                  : '<br>　<span style="color:#e58a24">ไม่มีร่องรับกระจก — เส้นนี้ใช้ได้เฉพาะโหมดบานไม้ (เดือยเสียบขอบไม้)</span>'; }catch(e){}
             rows.push(pr[1]+" · "+escapeHtml(c3)+" — วาดไว้ "+b0.w+"×"+b0.h
               +" → ลึกจากขอบบาน <b>"+x0+" ถึง "+x1+"</b>"+(x0<0?' <span style="color:#e58a24">(โผล่พ้นขอบ '+(-x0)+')</span>':"")
-              +" · ตามหนาจากหลังบาน <b>"+y0+" ถึง "+y1+"</b>"); });
+              +" · ตามหนาจากหลังบาน <b>"+y0+" ถึง "+y1+"</b>"+gtxt); });
           st2.innerHTML=rows.length?rows.join("<br>"):'<span style="color:var(--ink-dim)">ยังไม่ได้ใส่รหัส Section</span>';
           d.appendChild(st2); }
         { const bar=document.createElement("div"); bar.style.cssText="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px";
@@ -16756,6 +16858,14 @@ function renderElements(){
             bt2.textContent="✕ เอาเฟรมออก";
             bt2.onclick=()=>{ cur.frameSec1=cur.frameSec2=cur.frameSec3=cur.frameSec4=""; renderElements(); sync(1); };
             bar.appendChild(bt2); }
+          /* v38.5: บานเดียวกันมีสองเวอร์ชัน ไม้กับกระจก — ต่างกันหลายช่องและพลาดง่าย
+             ถ้าก็อป Part แล้วปลดสวิตช์บานไม้เฉย ๆ จะได้บานที่ยังพกมาร์คเดือยมือจับ
+             ยังพกบ่ารับกระจกของบานไม้ และไม่มีอะไรบอกว่าเส้นที่ใช้อยู่มีร่องรับกระจกหรือเปล่า */
+          if(cur.frameWood){ const bt3=document.createElement("button"); bt3.className="ibtn";
+            bt3.style.cssText="font-size:11px;padding:4px 10px;background:var(--accent);color:#fff;border-color:transparent";
+            bt3.textContent="🪟 สร้างเวอร์ชันเฟรมอลู + กระจก";
+            bt3.onclick=()=>makeGlassFrameVariant(cur);
+            bar.appendChild(bt3); }
           d.appendChild(bar); }
         { const st=document.createElement("div"); st.style.cssText="font-size:11px;margin-top:6px;line-height:1.6";
           const any=[1,2,3,4].some(k=>String(cur["frameSec"+k]||"").trim());
@@ -26540,7 +26650,7 @@ const SVGKit = (function(){
    =================================================================== */
 const ShopPaper = (function(){
   const {SW,SH,INK,DIM,THIN,rnd,rnd1,esc,dimH,dimV,frame,grab3D}=SVGKit;   // v4: ของกลาง
-  const S={ sheet:"summary", scope:"scene" };
+  const S={ sheet:"summary", scope:"scene", only:"all" };   // v38.7: only = ชุดหน้าที่จะพิมพ์
 
   function tb(P,page,pages,ptitle,bb){
     return SVGKit.titleBlock([["PROJECT",P.project||"-","TYPE",P.type||"-"],
@@ -26858,7 +26968,14 @@ const ShopPaper = (function(){
   function frameDoorList(bs){
     const out=[], seen=new Map();
     (bs||[]).forEach(b=>{
-      if(!b||!b._door||b._box||b.orient!=="front") return;
+      /* ───────── v38.6: ใช้เกณฑ์เดียวกับตัวสร้างเฟรม ─────────
+         v36.9 เปิดให้ "แผ่นเดี่ยวที่ผูก Part แบบบาน" ขึ้นเฟรมได้แล้ว (isFrontPanel)
+         แต่หน้าแบบนี้ยังกรองด้วย b._door อยู่ตัวเดียว
+         แผ่นบานที่ไม่ได้ถูกทำเครื่องหมายว่าเป็นบานจึงมีเส้นเฟรมครบสี่ด้านในฉาก
+         มีความยาวตัดครบในใบอุปกรณ์ แต่ไม่มีแบบหน้าตัดให้ช่างสักใบ
+         เกณฑ์เดียวกันทั้งสองที่ ของที่ขึ้นเฟรมได้ก็ต้องมีแบบได้ */
+      if(!b||b._box||b._virtual||b.orient!=="front") return;
+      if(!isFrontPanel(b)) return;
       let p2=null; try{ p2=partDef(b.part,b); }catch(e){}
       if(!p2) return;
       const secs=[];
@@ -26890,7 +27007,19 @@ const ShopPaper = (function(){
     const b=fd.b, p2=fd.p2, T=Math.max(+b.T||18,1);
     let s=`<svg class="sp-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${SW} ${SH}" width="${SW}" height="${SH}"><rect width="${SW}" height="${SH}" fill="#fff"/>`+frame();
     s+=`<text x="34" y="52" font-family="'Sarabun',sans-serif" font-size="22" font-weight="800" fill="${INK}">หน้าตัดเฟรมบาน · ${esc(b.name||"บาน")}</text>`;
-    s+=`<text x="34" y="76" font-family="'Sarabun',sans-serif" font-size="13" fill="${THIN}">แบบบาน ${esc(String(b.part||"-"))} · บานสำเร็จ ${rnd(b.L)} × ${rnd(b.W)} × หนา ${rnd(T)} มม. · จำนวน ${fd.qty} ใบ${p2.frameWood?" · บานไม้ (เส้นเป็นมือจับโปรไฟล์)":" · บานเฟรม"}</text>`;
+    /* ───────── v38.8: ขนาดในแบบต้องเป็นขนาดบานสำเร็จ ─────────
+       เส้นโปรไฟล์แปะคร่อมขอบไม้ ยื่นพ้นออกไปข้างละเท่ากับระยะเลื่อนที่ตั้งไว้ติดลบ (frameOffX)
+       บานสำเร็จจึงโตกว่าแผ่นไม้ข้างละเท่านั้น — แผ่น 734 × 744 กับเส้นยื่นข้างละ 3 ได้บาน 740 × 750
+       ทั้งเส้นบอกขนาดในรูปและหัวแบบต้องเป็นเลขนี้ ไม่ใช่ขนาดแผ่นไม้
+       v38.6 คิดจากค่าลดของ Part ซึ่งบังเอิญได้เลขเดียวกันในงานนี้ แต่คนละเรื่องกัน
+       ค่าลดคือช่องว่างที่เว้นให้บานในตู้ ส่วนตัวที่ทำให้บานโตคือเส้นที่ยื่นออกมา */
+    const _oXp=parseFloat(p2.frameOffX)||0;
+    const _over=Math.max(0,-_oXp);
+    const FL=rnd((+b.L||0)+2*_over), FW=rnd((+b.W||0)+2*_over);
+    const _sizeTxt=(FL!==rnd(b.L)||FW!==rnd(b.W))
+      ? (`บานสำเร็จ ${FL} × ${FW} (${p2.frameWood?"แผ่นไม้":"แผ่นบาน"} ${rnd(b.L)} × ${rnd(b.W)})`)
+      : (`บานสำเร็จ ${rnd(b.L)} × ${rnd(b.W)}`);
+    s+=`<text x="34" y="76" font-family="'Sarabun',sans-serif" font-size="13" fill="${THIN}">แบบบาน ${esc(String(b.part||"-"))} · ${_sizeTxt} × หนา ${rnd(T)} มม. · จำนวน ${fd.qty} ใบ${p2.frameWood?" · บานไม้ (เส้นเป็นมือจับโปรไฟล์)":" · บานเฟรม"}</text>`;
 
     /* ───────── v23.7: รูปด้านหน้าบานกินพื้นที่ส่วนใหญ่ · หน้าตัดย่อลงไปเรียงชิดขวา ─────────
        บานสูง ๆ เมื่อวางตั้งจะโดนบีบจนเล็กกว่ารูปหน้าตัดที่อยู่ข้าง ๆ เสียอีก
@@ -26904,11 +27033,12 @@ const ShopPaper = (function(){
        เดิมเทียบสเกลสองท่าแล้วเลือกอันที่ได้ภาพใหญ่กว่า ซึ่งบานสูง 760 ก็ถูกหมุนไปด้วย
        ทั้งที่ยังวางตั้งได้สบาย · ช่างอ่านแบบชุดเดียวกันแล้วเจอบางใบตั้งบางใบนอนโดยไม่มีเหตุผลที่จำได้
        กติกาใหม่ตรงไปตรงมา: สูงไม่เกินเกณฑ์ = วางตั้ง · เกินเกณฑ์ = วางนอน (ตั้งต้น 1000 มม.) */
-    const scV=Math.min(aw/Math.max(b.L,1), ah/Math.max(b.W,1));
-    const scH=Math.min(aw/Math.max(b.W,1), ah/Math.max(b.L,1));
+    /* v38.8: กรอบบนกระดาษคือขอบนอกของบานสำเร็จ (รวมส่วนที่เส้นยื่นพ้นแผ่น) */
+    const scV=Math.min(aw/Math.max(FL,1), ah/Math.max(FW,1));
+    const scH=Math.min(aw/Math.max(FW,1), ah/Math.max(FL,1));
     const ROT=(Math.max(+b.W||0,0) > Math.max(+settings.frameRotOver||1000,50));
     const sc0=ROT?scH:scV;
-    const HW=(ROT?b.W:b.L)*sc0, HH=(ROT?b.L:b.W)*sc0;        // ขนาดกรอบบนกระดาษ
+    const HW=(ROT?FW:FL)*sc0, HH=(ROT?FL:FW)*sc0;            // ขนาดกรอบบนกระดาษ = บานสำเร็จ
     const dx=ex+(ew-HW)/2, dy=ey+(eh-HH)/2;
     s+=`<rect x="${rnd1(dx)}" y="${rnd1(dy)}" width="${rnd1(HW)}" height="${rnd1(HH)}" fill="#fff" stroke="${INK}" stroke-width="1.5"/>`;
     /* ด้านของบาน (0 ล่าง · 1 ซ้าย · 2 บน · 3 ขวา) → ด้านบนกระดาษ
@@ -26952,8 +27082,9 @@ const ShopPaper = (function(){
       else if(sd===2) s+=lab(t, dx+HW/2, dy+band-3);
       else if(sd===1) s+=labR(t, dx+band-3, dy+HH/2);
       else s+=labR(t, dx+HW-band+11, dy+HH/2); });
-    s+=dimH(dx,dx+HW,dy+HH+46,String(rnd(ROT?b.W:b.L)));
-    s+=dimV(dy,dy+HH,dx+HW+46,String(rnd(ROT?b.L:b.W)));
+    /* v38.8: เส้นบอกขนาดกินถึงขอบนอกของรูป ซึ่งรวมแถบอลูแล้ว = บานสำเร็จ */
+    s+=dimH(dx,dx+HW,dy+HH+46,String(ROT?FW:FL));
+    s+=dimV(dy,dy+HH,dx+HW+46,String(ROT?FL:FW));
     /* ───────── ระยะถ้วยบานพับ + สัญลักษณ์ทิศเปิด ─────────
        เอาเฉพาะ "ระยะ" ไม่บอกขนาดดอก เพราะสเปคดอกอยู่ในไฟล์เจาะแล้ว */
     (function(){
@@ -27037,7 +27168,18 @@ const ShopPaper = (function(){
       if(rot2) note.push("หมุน "+rot2+"°");
       if(p2.frameFlipX) note.push("พลิกลึก");
       if(p2.frameFlipY) note.push("พลิกหนา");
-      const _lens=[...new Set(z.dirs.map(dd=>rnd((dd===0||dd===2)?b.L:b.W)))];
+      /* ───────── v38.6: ความยาวต้องเป็นความยาวตัดจริง ไม่ใช่ขนาดแผ่น ─────────
+         เฟรมหุ้มอยู่นอกแผ่น ยาวเต็มช่องเดิม = ขนาดก่อนหักค่าลดของ Part
+         หยิบ b.L/b.W ตรง ๆ จะสั้นไปข้างละ 3 ทุกเส้น (344 แทนที่จะเป็น 350)
+         แบบกับใบอุปกรณ์จะได้ตัวเลขไม่ตรงกัน ช่างตัดตามแบบแล้วเส้นสั้น
+         _cutLen คือตัวเดียวกับที่ v37.4/v37.8 ใช้ออกใบ จึงอ่านจากตัวนั้น */
+      const _adj=b._adjApplied||{};
+      const _lenOf=dd=>{
+        const fp=(state.boards||[]).find(z2=>z2&&z2._framePart&&z2._frameOwner===b.id&&z2._sectDir===dd);
+        if(fp&&+fp._cutLen>0) return rnd(+fp._cutLen);
+        return rnd((dd===0||dd===2)?((+b.L||0)-(+_adj.dL||0)):((+b.W||0)-(+_adj.dW||0)));
+      };
+      const _lens=[...new Set(z.dirs.map(_lenOf))];
       note.push("ยาว "+_lens.join(" / ")+" ("+z.dirs.length+" เส้น)");
       s+=`<text x="${rnd1(gx+10)}" y="${rnd1(gy+chH-9)}" font-family="'Sarabun',sans-serif" font-size="10.5" fill="${THIN}">${esc(note.join(" · "))}</text>`;
     });
@@ -27210,10 +27352,29 @@ const ShopPaper = (function(){
     const bs=getBoards(); if(!bs.length) return null;
     const bb=sceneBBox(bs), P=readTitle();
     let frms=[]; try{ frms=frameDoorList(bs); }catch(e){ console.error("frameSec:",e); }
+    /* ───────── v38.7: พิมพ์เฉพาะหน้าตัดเฟรม ─────────
+       งานจริงเอาชุดนี้ไปให้ฝ่ายตัดอลูอย่างเดียว ไม่ได้เอาหน้าแผ่นไม้ไปด้วย
+       เดิมต้องพิมพ์ทั้งจ็อบแล้วไปเลือกหน้าเอาที่เครื่องพิมพ์ ซึ่งหน้าเรียงปนกันทั้งเล่ม
+       สร้างเฉพาะชุดที่จะพิมพ์จริง แล้วเดินเลขหน้าใหม่ในชุดนั้น
+       ไม่ใช่แค่ซ่อน — ไม่งั้นได้หัวกระดาษเขียนว่า หน้า 12/40 ทั้งที่พิมพ์ออกมา 3 แผ่น */
+    if(S.only==="frm"){
+      const out={}, titles={}, cabOf={};
+      frms.forEach((fd,i)=>{ const k="frm"+i;
+        out[k]=sheetFrameSec({...P},fd,i+1,frms.length,bb);
+        titles[k]="หน้าตัดเฟรม · "+((fd.b.name||"บาน")+" ×"+fd.qty);
+        cabOf[k]=String((fd.b&&(fd.b.cab||fd.b.cabInst))||""); });
+      out._cab=cabOf; out._titles=titles; out._order=frms.map((f,i)=>"frm"+i);
+      out._empty=!frms.length;
+      return out;
+    }
     /* v23.5: บานที่มีหน้า "หน้าตัดเฟรมบาน" แล้ว ไม่ต้องมีหน้าแผ่นธรรมดาซ้ำอีก
        หน้าแผ่นของบานเฟรมบอกได้แค่กรอบสี่เหลี่ยมกับรูถ้วย ซึ่งหน้าเฟรมมีครบกว่า
        ช่างเปิดสองหน้าที่พูดเรื่องเดียวกันแล้วสับสนว่าต้องใช้ใบไหน */
-    const _fSkip=new Set(); frms.forEach(f=>{ (f.ids||[]).forEach(id=>_fSkip.add(id)); });
+    /* v38.6: ตัดหน้าแผ่นทิ้งได้เฉพาะบานเฟรมอลู ซึ่งไม่มีแผ่นไม้จริงให้เจาะ
+       บานไม้ที่ติดเส้นมือจับ แผ่นไม้เป็นชิ้นจริงและมีงานเจาะของตัวเอง (มาร์คสัน · บาก · รูหูแขวน)
+       ตัดหน้าแผ่นของมันทิ้งไปด้วย ช่างจะไม่เหลือแบบที่บอกตำแหน่งรูเลยสักใบ */
+    const _fSkip=new Set(); frms.forEach(f=>{ if(f&&f.p2&&f.p2.frameWood) return;
+      (f.ids||[]).forEach(id=>_fSkip.add(id)); });
     /* ───────── v36.0: ชิ้นของกล่องโค้งออกแบบสองชุดซ้อนกัน ─────────
        ชุดบน (กล่องโค้ง·สรุป / แผ่นชั้น / ครีบ / แผ่นตัด) มาจากตัวสร้างกล่องโค้งโดยตรง
        แล้วชิ้นเดียวกันยังถูกเอาไปทำหน้าแผ่นทั่วไปอีกชุด (Shelf 1 ×2 · Fin 1 ×6 · Bent Face ×1)
@@ -27256,7 +27417,12 @@ const ShopPaper = (function(){
     const sh=build(); if(!sh)return;
     /* โชว์ให้ครบเท่าที่จะพิมพ์จริง — เดิมมีแค่ 2 แท็บ แต่พิมพ์ออกมา 6 หน้า */
     const ord=(sh._order||["summary","flat"]).filter(k=>sh[k]);
-    v.innerHTML = sh[S.sheet] || sh.summary;
+    if(!ord.length){
+      v.innerHTML='<div style="color:var(--ink-faint);padding:40px;line-height:1.7">ไม่มีหน้าตัดเฟรมในขอบเขตที่เลือก<br><span style="font-size:12px">บานจะมีหน้านี้ก็ต่อเมื่อแบบบานของมันใส่รหัส Section ไว้อย่างน้อยหนึ่งด้าน</span></div>';
+      const lb0=$("spList"); if(lb0) lb0.innerHTML=""; return; }
+    /* v38.7: เปลี่ยนชุดกรองแล้วหน้าที่ค้างอยู่อาจไม่มีในชุดใหม่ — เดิมตกไปที่ sh.summary ซึ่งชุดกรองไม่มี จอจึงว่าง */
+    if(!S.sheet||!sh[S.sheet]) S.sheet=ord[0];
+    v.innerHTML = sh[S.sheet] || sh[ord[0]];
     /* ───────── v24.0: รายการแผ่นเป็นคอลัมน์ทางขวา จัดกลุ่มตามตู้ ─────────
        ตู้ที่มี Part เป็นร้อย แท็บแนวนอนล้นหลายบรรทัดจนกินที่ดูแบบ และไล่หาไม่เจอ
        คอลัมน์ขวาบรรทัดละแผ่น เลื่อนหาได้ · หัวกลุ่มบอกชื่อตู้พร้อมจำนวน และค้างไว้ตอนเลื่อน */
@@ -27292,12 +27458,14 @@ const ShopPaper = (function(){
   }
   const EX = SVGKit.exporter({ prefix:"production_", cls:"sp-svg", empty:"ไม่มีชิ้นงาน",
     order:()=>{ const sh=build(); return (sh&&sh._order)||["summary","flat"]; },
-    cur:()=>S.sheet||"summary", sheets:build });
+    cur:()=>{ const sh=build(); const o=(sh&&sh._order)||[]; return (S.sheet&&sh&&sh[S.sheet])?S.sheet:(o[0]||"summary"); }, sheets:build });
 
   function init(){
     bind("shopPaperBtn",open);   // ปุ่มบนแถบเครื่องมือถูกถอดออกแล้ว (v6.4) — bind ไว้เผื่อมีคนใส่กลับ
     document.querySelectorAll("#spModal .sp-tab").forEach(t=> t.onclick=()=>{ document.querySelectorAll("#spModal .sp-tab").forEach(x=>x.classList.remove("on")); t.classList.add("on"); S.sheet=t.dataset.sheet; refresh(); });
     document.querySelectorAll("#spModal .sp-scope").forEach(t=> t.onclick=()=>{ document.querySelectorAll("#spModal .sp-scope").forEach(x=>x.classList.remove("on")); t.classList.add("on"); S.scope=t.dataset.scope; refresh(); });
+    /* v38.7: กรองชุดหน้าที่จะพิมพ์ — เปลี่ยนชุดแล้วหน้าที่เปิดค้างอยู่อาจไม่มีในชุดใหม่ ต้องรีเซ็ตด้วย */
+    document.querySelectorAll("#spModal .sp-only").forEach(t=> t.onclick=()=>{ document.querySelectorAll("#spModal .sp-only").forEach(x=>x.classList.remove("on")); t.classList.add("on"); S.only=t.dataset.only; S.sheet=null; refresh(); });
     bind("spPrintBtn",EX.print); bind("spSvgBtn",EX.dlSVG); bind("spPngBtn",EX.dlPNG); bind("spRefreshBtn",refresh);
     ["spProject","spType","spBy"].forEach(id=>{bind(id,refresh,"oninput");});
   }
@@ -28562,6 +28730,11 @@ const CurvedShelf = (function(){
       <div class="sp-seg">
         <button class="sp-scope on" data-scope="scene">ทั้งฉาก</button>
         <button class="sp-scope" data-scope="cab">ตู้ที่เลือก</button>
+      </div>
+      <div class="cb-fld"><label>พิมพ์เฉพาะ</label></div>
+      <div class="sp-seg">
+        <button class="sp-only on" data-only="all">ทุกหน้า</button>
+        <button class="sp-only" data-only="frm">หน้าตัดเฟรม</button>
       </div>
       <button class="ibtn" id="spRefreshBtn" style="width:100%;justify-content:center;margin-bottom:12px">🔄 อัปเดตแบบจากฉาก</button>
       <div style="font-size:11px;font-weight:600;color:var(--ink-faint);margin-bottom:7px">หัวกระดาษ (Title Block)</div>
