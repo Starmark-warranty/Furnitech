@@ -1646,9 +1646,10 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"37.5", build:"2026-08-20/frame-in-bom",
+  name:"StarNexus Cabinet", version:"37.6", build:"2026-08-20/frame-cut-code",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["37.6","2026-08-20","FIX เฟรมอลูโผล่สองรอบใน BOM และได้รหัสรุ่นกลางที่สั่งของไม่ได้ — v37.5 ผมไปสร้างหมวดใหม่แยกต่างหาก ทั้งที่ของเดิมออกอยู่แล้วในหมวดอุปกรณ์ (008 × 4 เส้น) เฟรมจึงถูกนับสองรอบ และหมวดใหม่ก็ได้แต่รหัสหน้าตัดเปล่า ๆ เพราะไม่ได้ผ่านตัวค้นรหัสท่อน · ถอดหมวดนั้นออก แล้วส่งเฟรมเข้า bomCutRow ตัวเดียวกับเส้น DX และรางไฟแทน ได้หนึ่งแถวต่อความยาวและตัวค้นรหัสท่อนหาโค้ดตามความยาวให้เอง ยาว 600 ได้ 406AL25140230106 · ยาว 800 ได้ 406AL25140230098 ไม่ใช่รหัสรุ่นกลาง 406AL2514023 ที่สั่งของไม่ได้ · ของเดิมยกเว้นบานไม้ไว้เพราะออกทางมือจับโปรไฟล์อยู่แล้ว จึงไม่ซ้อนกัน"],
     ["37.5","2026-08-20","FEAT เส้นเฟรมเข้าใบ BOM Fitting แล้ว เหมือนรางไฟ — เฟรมเป็นของที่ต้องเบิกและตัดจริงเหมือนราง แต่ไม่เคยโผล่ในใบนี้เลยสักครั้ง ฝ่ายจัดซื้อจึงไม่รู้ว่าต้องสั่งเส้นยาวเท่าไรกี่เส้น ต้องไปนับเอาเองจากแบบ · แยกแถวตาม รหัสหน้าตัด × ความยาว เพราะสั่งตัดคนละความยาวคือคนละรายการ บานเดียวจึงได้ 397 มม. ×2 เส้น กับ 467 มม. ×2 เส้น ไม่ใช่ 008 ×4 ที่ไม่บอกอะไรเลย · ลูกที่สอดอยู่ในเส้นแสดงเป็นแถวย่อยใต้แม่ ยาวเท่ากันเป๊ะ พร้อมรหัสสั่งซื้อของตัวเอง รูปแบบเดียวกับฝาครอบรางไฟ · เส้นที่ยังไม่ได้ตั้ง Purchase ID ขึ้นป้ายเตือนเหมือนอุปกรณ์อื่น จะได้เห็นตั้งแต่ในใบ ไม่ใช่ไปเจอตอนสั่งของ"],
     ["37.4","2026-08-20","FEAT ความยาวตัดจริงของเส้นเฟรม พร้อมรหัสสั่งซื้อ — เดิมเส้นเฟรมทั้งสี่เก็บกรอบของบานเหมือนกันหมด ต่างกันแค่หมายเลขด้าน ไม่มีความยาวตัดอยู่เลยสักที่ ฝ่ายตัดต้องไปวัดเอาเองจากแบบ · จุดสำคัญคือเฟรมหุ้มอยู่นอกบาน ยาวเต็มช่องเดิม = ขนาดก่อนหักค่าลดของ Part หยิบ b.L/b.W ตรง ๆ จะสั้นไปข้างละ 3 ทุกเส้น (ได้ 391 ทั้งที่ต้องเป็น 397) ตอนนี้บวกค่าที่หักไปแล้วกลับเข้ามาเก็บไว้ที่ _cutLen ของแต่ละเส้น · frameCutList() รวมเป็นหนึ่งแถวต่อ รหัสหน้าตัด × ความยาว พร้อมจำนวนเส้นและรหัสสั่งซื้อ รูปแบบเดียวกับรางไฟที่ของชิ้นเดียวมีได้หลายรหัส ทั้งตัวเส้นเองและลูกที่สอดอยู่ในนั้นซึ่งยาวเท่ากันเป๊ะ"],
     ["37.3","2026-08-19","FIX มาร์ค 4 ด้านไม่เคยออก แม้เห็นครบ 4 กลุ่มเต็มตาในช่อง — กล่อง ใส่แบบมีภาพ เขียนค่าใหม่กลับแค่ช่องบนจอ (ta.value) แต่ไม่ได้เขียนลงข้อมูล (cur.drill) · ta.oninput ทำงานเฉพาะตอนคนพิมพ์เอง การเซ็ต value ด้วยโค้ดไม่ยิง event ค่าใหม่จึงโชว์อยู่แต่ของจริงยังเป็นของเก่า กดบันทึกไปก็ได้ของเดิมกลับมาทุกครั้ง สองรอบที่แล้วผมไล่ผิดที่ ไปตรวจตัวแยกสเปกกับจังหวะเรียกตัวเจาะ ซึ่งทั้งคู่ทำงานถูกอยู่แล้ว · ช่อง Pocket มีบั๊กเดียวกันเป๊ะ แก้พร้อมกัน · FIX ตู้แผ่นเดียวหดลง 6 มม. ทุกครั้งที่กดปรับขนาดแล้วกดตกลงโดยไม่แก้เลข — ไม่มีแผ่นข้างให้วัด ตัวปรับขนาดจึงไปวัดกรอบรวมซึ่งเป็นขนาดหลังหักค่าลดของ Part ไปแล้ว แล้วเอาไปเป็นฐานใหม่ให้หักซ้ำอีกรอบ ตอนนี้บวกค่าที่หักไปแล้วกลับเข้ามาก่อน ได้ขนาดก่อนหักเสมอ"],
@@ -24433,6 +24434,18 @@ function fittingAgg(boards){   // รวมเดือย + พินรอง�
     const sc=(settings.sections||{})[String(b._frameSec||"").trim()]||{};
     const el8=(((settings.elements||{}).fittings)||[]).find(x=>x.code===k);
     bomCutRow(m,k,((el8&&el8.desc)||sc.desc||("มือจับโปรไฟล์ "+k)),((el8&&el8.unit)||sc.unit||"เส้น"),b.L,"pull"); });
+  /* ───────── v37.6: เฟรมอลูเข้าท่อ "ตัดตามยาว" เหมือนเส้น DX กับรางไฟ ─────────
+     ของเดิมออกเป็นรายการรวม 008 × 4 เส้น ซึ่งบอกจำนวนแต่ไม่บอกความยาว
+     ทั้งที่รหัสสั่งซื้อจริงผูกกับความยาว (600 = ...0106 · 800 = ...0098)
+     ฝ่ายจัดซื้อจึงได้รหัสรุ่นกลางที่สั่งของไม่ได้
+     ส่งผ่าน bomCutRow ตัวเดียวกับรางไฟ ตัวค้นรหัสท่อนจะหาโค้ดตามความยาวให้เอง
+     (v37.5 ผมไปทำหมวดใหม่แยกต่างหาก ทำให้เฟรมถูกนับสองรอบและได้แต่รหัสรุ่นกลาง — ถอดออกแล้ว) */
+  boards.forEach(b=>{ if(!b||!b._framePart||b._secWood||b._glass)return;
+    const k=String(b._secItem||b._frameSec||"").trim(); if(!k)return;
+    const sc=(settings.sections||{})[String(b._frameSec||"").trim()]||{};
+    const el9=(((settings.elements||{}).fittings)||[]).find(x=>x.code===k);
+    const len=+b._cutLen||+b.L||0;
+    bomCutRow(m,k,((el9&&el9.desc)||sc.desc||("เส้นเฟรม "+k)),((el9&&el9.unit)||sc.unit||"เส้น"),len,"frameSec"); });
   boards.forEach(b=>{ const ff=b&&b._frameFit; if(!ff||!ff.corners)return;
     const put=(code,qty,nm,un)=>{ const k=String(code||"").trim(); if(!k||!(qty>0))return;
       const el6=(((settings.elements||{}).fittings)||[]).find(x=>x.code===k);
@@ -24789,8 +24802,7 @@ function renderSummary(){
   const rows=fitBomRows();
   const GRP=[["fit","อุปกรณ์ · เดือย · ราง · ไฟ"],["edge","ขอบ (PVC / Edge band)"],["line","Accessory จากแท็บเส้น / Line"]];
   const oid=(()=>{ try{ return orderId(); }catch(e){ return ""; } })();
-  let _nFrm=0; try{ _nFrm=frameCutList().length; }catch(e){}
-  let h='<div class="sumh">ออเดอร์: '+escapeHtml(oid)+' · '+(rows.length+_nFrm)+' รายการ · '
+  let h='<div class="sumh">ออเดอร์: '+escapeHtml(oid)+' · '+rows.length+' รายการ · '
     +'<span style="opacity:.7">รหัสชุดที่ตั้งไว้ว่าออกเฉพาะลูก จะไม่ปรากฏในนี้ ตรงกับไฟล์ที่ส่งออกทุกบรรทัด</span></div>';
   let any=false;
   GRP.forEach(([g,title])=>{
@@ -24819,31 +24831,6 @@ function renderSummary(){
         +'<td class="num"><b>'+(Math.round((f.count||0)*100)/100)+'</b></td>'
         +'<td>'+escapeHtml(String(f.unit||""))+'</td></tr>'; });
     h+='</tbody></table>'; });
-  /* ───────── v37.5: เส้นเฟรมเข้า BOM Fitting เหมือนรางไฟ ─────────
-     เฟรมเป็นของที่ต้องเบิกและตัดจริงเหมือนราง แต่ไม่เคยโผล่ในใบนี้เลย
-     ฝ่ายจัดซื้อจึงไม่รู้ว่าต้องสั่งเส้นยาวเท่าไรกี่เส้น ต้องไปนับเอาเองจากแบบ
-     แยกแถวตาม รหัสหน้าตัด × ความยาว เพราะสั่งตัดคนละความยาวคือคนละรายการ */
-  try{
-    const fc=frameCutList();
-    if(fc.length){ any=true;
-      const tot=fc.reduce((n,r)=>n+r.qty,0);
-      h+='<div class="sumh">เส้นเฟรม / หน้าตัด — '+fc.length+' รายการ · '+tot+' เส้น</div>'
-        +'<table class="sumtbl"><thead><tr><th>รหัส</th><th>Purchase ID</th><th>ชื่อ</th><th>จำนวน</th><th>หน่วย</th></tr></thead><tbody>';
-      fc.forEach(r=>{
-        const main=r.items[0], kids=r.items.slice(1);
-        h+='<tr><td style="font-family:var(--mono)">'+escapeHtml(r.code)+'</td>'
-          +'<td style="font-family:var(--mono)">'
-            +(main?escapeHtml(main.id):'<span class="warn" style="padding:2px 6px;border-radius:5px">ยังไม่ได้ใส่ Purchase ID</span>')+'</td>'
-          +'<td>เส้นเฟรม '+escapeHtml(r.code)+' <span style="opacity:.6;font-size:11px">ตัดยาว '+r.len+' มม.</span></td>'
-          +'<td class="num"><b>'+r.qty+'</b></td><td>เส้น</td></tr>';
-        kids.forEach(k=>{ h+='<tr style="opacity:.93"><td style="font-family:var(--mono);padding-left:18px">'+escapeHtml(r.code)+'</td>'
-          +'<td style="font-family:var(--mono)">'+escapeHtml(k.id)+'</td>'
-          +'<td><span style="opacity:.55">↳</span> '+escapeHtml(k.note||"ลูกในเส้น")
-          +' <span style="opacity:.5;font-size:11px">(ยาวเท่าเส้นแม่ '+r.len+' มม.)</span></td>'
-          +'<td class="num"><b>'+r.qty+'</b></td><td>เส้น</td></tr>'; });
-      });
-      h+='</tbody></table>'; }
-  }catch(e){ console.error("frameCutList:",e); }
   if(!any) h+='<div style="padding:16px;color:var(--ink-dim);font-size:12.5px">ยังไม่มีอุปกรณ์ในงานนี้</div>';
   h+='<div style="padding:10px 2px;font-size:11.5px;color:var(--ink-dim);line-height:1.8">'
     +'รายการเจาะกับพิกัดรูย้ายไปอยู่ที่ไฟล์เจาะ MPR และปุ่มดาวน์โหลด CSV แทน หน้านี้เหลือเฉพาะของที่ต้องเบิก · '
