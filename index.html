@@ -1646,9 +1646,10 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"38.3", build:"2026-08-20/hinge-models-and-open-busy",
+  name:"StarNexus Cabinet", version:"38.4", build:"2026-08-20/cut-lookup-diagnostics",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["38.4","2026-08-20","FIX เพิ่มรหัสท่อนในคลังอุปกรณ์แล้ว แต่โปรแกรมยังขึ้นว่าหาไม่เจอ — ผลค้นถูกจำไว้ทั้งรอบการใช้งาน รวมทั้งผลที่ค้นไม่เจอด้วย ค้นครั้งแรกตอนที่คลังยังไม่มีรหัส คำตอบ ไม่เจอ ก็ค้างอยู่อย่างนั้นจนกว่าจะปิดเปิดโปรแกรมใหม่ และไม่มีอะไรบอกไว้เลยว่าต้องทำแบบนั้น · เพิ่มปุ่ม ค้นรหัสท่อนใหม่ ในหน้า BOM Fitting ล้างของที่จำไว้แล้วถามคลังใหม่ทั้งชุด · FIX ค้นไม่เจอแล้วเงียบ — ของเดิมเก็บผลว่า null เฉย ๆ แล้วเตือนบรรทัดเดียวใน console ซึ่งกลืนสามกรณีที่ต้องแก้คนละทางไว้ด้วยกัน คือ ถามคลังไม่ผ่าน (q.error ถูกทิ้งทิ้งไปเงียบ ๆ ไม่มีใครเห็น) · ไม่มีรหัสไหนขึ้นต้นด้วย Purchase ID นั้นเลย (ผูก Purchase ID ผิดหรือยังไม่ผูก) · มีรหัสรุ่นนั้นแต่ยังไม่มีท่อนความยาวนี้ (ต้องไปเพิ่มท่อน) · ตอนนี้แยกสามกรณีให้ชัด แล้วขึ้นเหตุผลในใบ BOM Fitting ตรงบรรทัดนั้นเลย ไม่ต้องเปิด console หา · FEAT ใบ BOM Fitting บอกที่มาของ Purchase ID แล้ว — รหัสที่กรอกไว้ที่ Part กับรหัสที่ส่งออกจริงเป็นคนละตัวได้ ถ้า Element ของรหัสนั้นผูก Purchase Item ID ไว้เป็นอีกรหัสหนึ่ง ซึ่งถูกต้องตามที่ออกแบบไว้ แต่ไม่มีที่ไหนบอกว่าเกิดอะไรขึ้น กรอกรหัสหนึ่งแล้วออกไปอีกรหัสหนึ่งจึงดูเหมือนโปรแกรมมั่ว ทั้งที่มันอ่านตามที่ผูกไว้เป๊ะ ๆ · ตอนนี้บรรทัดที่รหัสไม่ตรงกันจะขึ้นบอกว่ามาจาก Element ตัวไหนและผูกไว้เป็นอะไร"],
     ["38.3","2026-08-20","FEAT รุ่นบานพับ (Hinge Models) — v22.3 ให้แบบบานเลือกรหัสบานพับของตัวเองได้ แต่ระยะเจาะยังใช้ชุดกลางชุดเดียวทั้งฉาก · บานพับคนละรุ่นมี Ø ถ้วย ความลึก ระยะร่นจากขอบ และผังรูฐานที่แผ่นข้างไม่เท่ากัน พอเปลี่ยนไปใช้บานพับอีกแบบ รหัสเปลี่ยนได้แต่รูยังเจาะตามรุ่นเดิม ไฟล์เจาะจึงผิดทั้งงานโดยไม่มีอะไรเตือน · ตอนนี้เก็บเป็นรุ่นทั้งชุด (รหัส + ระยะทั้ง 11 ค่า) เพิ่มได้ไม่จำกัดที่ ตั้งค่า → บานพับ → รุ่นบานพับ แล้วผูกรุ่นไว้ที่แบบบานใน Element → FrontStyle · ทุกที่ที่เคยอ่านค่ากลางตรง ๆ (3D · แบบ 2D · ไฟล์ MPR · รูฐานที่แผ่นข้าง · ใบอุปกรณ์) ผ่านตัวเดียวกันหมดคือ hingeSpecOf(บาน) จะได้ไม่มีทางเพี้ยนกันคนละทาง · ช่องไหนเว้นว่างในรุ่น = ใช้ค่ากลาง · แบบบานที่ตั้งไว้แค่รหัสแบบเดิมยังทำงานเหมือนเดิม และถ้ารหัสนั้นตรงกับรุ่นไหน ระยะจะตามรุ่นนั้นให้เอง · บานที่ไม่ได้ผูกอะไรเลย ค่าไม่ขยับสักตัว · FEAT กดเปิดแก้ออเดอร์แล้วมีกล่องรอเหมือนตอนโหลด XML — v30.2 ใส่ให้เฉพาะทางโหลด XML แต่ทางเปิดแก้เงียบสนิททั้งที่ทำงานหนักกว่า ต้องดึงก้อนจากคลาวด์แล้วไล่ตรวจผิวกับความลึกชั้นทีละใบ ออเดอร์หลายสิบใบจึงค้างอยู่กับฉากเดิมหลายวินาทีโดยไม่มีอะไรบอก บางคนกดซ้ำเพราะคิดว่าไม่ติด · ตอนนี้บอกว่าทำถึงตู้ใบไหนจากทั้งหมดกี่ใบ พร้อมแถบความคืบหน้า และคืนคิวให้เบราว์เซอร์เป็นระยะ แถบจึงเดินให้เห็น"],
     ["38.2","2026-08-20","FIX ชั้นสูง 100 (และ 94) ไม่ได้หูแขวนกระจกสักตัว — ด่านขั้นต่ำเขียนไว้ว่าต้องยาวเกิน 2×ระยะร่นขอบ+10 = 110 ทั้งสองแกน ซึ่งเป็นเงื่อนไขของ หลายจุด ไม่ใช่ จุดเดียว · แถวเดียววางกึ่งกลางแผ่นไม่ได้ใช้ระยะร่นขอบเลย (spread(1) คืนกึ่งกลางตรง ๆ) ชั้นสูง 100 ที่บากสูงแค่ 45 จึงวางสบาย ๆ แต่ถูกตัดทิ้งทั้งแผ่น · เปลี่ยนเป็นวัดแยกแกน แกนไหนสั้นก็ลดจำนวนจุดในแกนนั้นลง เหลืออย่างน้อยหนึ่งจุดกลางแกน และด่านขั้นต่ำคิดจากขนาดบากจริง (กว้าง 30 · สูง 57) แผ่นสูงกว่านี้จึงได้แถวเดียว 2 ตัวเสมอ แผ่นสูง ๆ ผังเดิมไม่ขยับสักใบ · FIX รูหูแขวนถูกถอดป้ายทิ้งทุกครั้งที่เปิดไฟล์ แล้วกลายเป็นรูผีที่ล้างไม่ได้อีกเลย — healHoleSrc ถือว่า h.src คือ id ของชิ้นเจ้าของเสมอ เจอ glasshanger ที่ไม่มีในทะเบียน id ก็ลบป้าย พอไม่มีป้าย ตัววางผังใหม่ก็ล้างของเดิมไม่เจอ ผังเก่าจึงค้างทับกันไปเรื่อย ๆ ทุกครั้งที่เปิด (ไฟล์จริงมีรูผี 108 รู บางแผ่นมีรู Ø15 ซ้อนกันแปดรูจากผังสองรุ่น) และตัวนับใบอุปกรณ์ก็นับไม่ครบเพราะนับจากป้ายที่โดนลบ · กฎเดียวกับ cleanOrphanSrcHoles ที่แก้ไปแล้วใน v37.8 ตัวนี้หลุดไป · เพิ่มตัวชี้ขาด isGlassHangerHole() ที่จับรูที่ถูกถอดป้ายไปแล้วได้ด้วย ไฟล์ที่เสียไปแล้วจึงล้างตัวเองตอนเปิด"],
     ["38.1","2026-08-20","FIX บากหูแขวนกระจกอยู่คนละด้านกับรู Ø15 ใน 3D ทั้งที่ไฟล์เจาะถูก — v37.2 ย้ายรูไปผิวหลังแล้ว แต่ลืมบากสองใบที่ซ้อนพิกัดเดียวกัน · Pocket ที่ไม่ระบุ face ถือว่าเจาะจากผิวบนเสมอ (pocketZTop) รูปสามมิติจึงวาดบากไว้หน้าบาน ส่วน MPR ออกบากตามฝั่งงานเจาะหลักของชิ้น ซึ่งวิ่งตามรูอยู่แล้ว ไฟล์เลยถูกมาตลอด ผิดแค่ที่ตาเห็น · ใส่ face ให้บากตรงกับรู และติดเลขรุ่นผังไว้ ไฟล์ที่วางผังไปแล้วจะวางใหม่ให้เองตอนเปิด ไม่ต้องไปกดใหม่ทีละแผ่น · FIX แผ่นที่เล็กเกินไปสำหรับหูแขวนถูก return ทิ้งเฉย ๆ ไม่เก็บกวาดผังเดิม ย่อแผ่นแล้วบากค้างครบทุกใบแต่รูหายไป (ในไฟล์จริงมี 13 แผ่นที่มีบากแต่ไม่มีรู) ตอนนี้ล้างให้และคืนผังเองเมื่อแผ่นโตพอ · FEAT หูแขวนกระจกออกใบอุปกรณ์แล้ว 1 จุด = 1 ตัว นับจากรู Ø15 บากสองใบต่อจุดเป็นของตัวเดียวกันจึงไม่นับซ้ำ · ตั้งรหัสได้ในตั้งค่า หมวดหูแขวนกระจก ตั้งต้น GLASSHANGER สร้างแถวรหัสนี้ใน Element → Fittings แล้วใส่ Purchase ID ได้ตามปกติ เว้นรหัสว่าง = ไม่ออกในใบ"],
@@ -13153,14 +13154,31 @@ function cutLen(v){ return Math.floor((+v||0)+1e-6); }
    ค้นด้วยชื่อรุ่นที่กรอกไว้บวกความยาว เช่น "ตัดขนาด 867" จึงเจอเฉพาะท่อนที่ตัดไว้แล้ว
    ไม่เจอก็ไม่เดา ใช้รหัสตั้งต้นไปก่อนแล้วขึ้นเตือนว่าให้ไปเพิ่มในคลัง */
 const _fgCut={};                        // cache: "รหัสต้นทาง|ยาว" -> {code,name,unit}|null
+/* ───────── v38.4: หาไม่เจอแล้วต้องบอกได้ว่าไม่เจอเพราะอะไร ─────────
+   ของเดิมเก็บผลว่า null เฉย ๆ แล้ว console.warn บรรทัดเดียว
+   ซึ่งกลืนกันหมดสามกรณีที่ต้องแก้คนละทาง
+     · ถามคลังไม่ผ่านเลย (สิทธิ์/เน็ต) — q.error ถูกทิ้งเงียบ ไม่มีใครเห็น
+     · ไม่มีรหัสที่ขึ้นต้นด้วย Purchase ID นั้นสักตัว = ผูก Purchase ID ผิด/ยังไม่ผูก
+     · มีรหัสของรุ่นนั้น แต่ยังไม่มีท่อนความยาวนี้ = ต้องไปเพิ่มท่อนในคลัง
+   และผลลบถูกจำไว้ตลอดทั้งรอบการใช้งาน เพิ่มรหัสในคลังระหว่างเปิดโปรแกรมอยู่
+   ก็จะยังขึ้นว่าไม่เจอเหมือนเดิมจนกว่าจะปิดเปิดใหม่ ซึ่งไม่มีอะไรบอกไว้เลย */
+const _fgMiss={};                       // "รหัส|ยาว" -> {pre,L,why,n}
 function cutKey(code,len){ return String(code||"")+"|"+cutLen(len); }
+function cutCacheClear(){ Object.keys(_fgCut).forEach(k=>delete _fgCut[k]); Object.keys(_fgMiss).forEach(k=>delete _fgMiss[k]); }
+function cutMissOf(f){
+  const codes=cutSrcList(f); if(!(+f._cut>0)||!codes.length) return null;
+  for(const c of codes){ const m=_fgMiss[cutKey(c,f._cut)]; if(m) return m; }
+  return null;
+}
 async function cutLookup(code,len,hint){
   const k=cutKey(code,len); if(_fgCut[k]!==undefined) return _fgCut[k];
   _fgCut[k]=null;
+  const L0=cutLen(len), pre0=String(code||"").trim();
+  const miss=(why,n)=>{ _fgMiss[k]={pre:pre0,L:L0,why:why,n:n||0}; return null; };
   try{
-    const sb=await getDB(); if(!sb) return null;
+    const sb=await getDB(); if(!sb) return miss("ต่อคลังอุปกรณ์ไม่ได้");
     const L=cutLen(len), pre=String(code||"").trim();
-    if(!pre) return null;
+    if(!pre) return miss("ยังไม่ได้ผูก Purchase ID ให้รหัสนี้");
     /* v13.1: ยึด "รหัสต้นทาง" เป็นตัวตั้ง ไม่ใช่ค้นจากชื่อสินค้า
        คลังตั้งรหัสท่อนที่ตัดเป็น รหัสรุ่น + เลขลำดับ เช่น ACCLT00245 -> ACCLT00245000337
        ค้นจากชื่ออย่างเดียวจึงหลุดไปเจอสินค้าคนละเรื่องที่บังเอิญมีเลขเดียวกัน
@@ -13168,7 +13186,13 @@ async function cutLookup(code,len,hint){
        -> กรองด้วยรหัสที่ขึ้นต้นตรงกันก่อน แล้วค่อยหาความยาวในชื่อ ผิดรุ่นจึงเป็นไปไม่ได้ */
     const q=await sb.from("fitting_global").select("item_number,product_name,unit")
       .ilike("item_number",pre+"%").ilike("product_name","%"+L+"%").limit(200);
-    if(q.error||!q.data||!q.data.length) return null;
+    if(q.error){ console.error("cutLookup:",q.error); return miss("ถามคลังไม่ผ่าน: "+(q.error.message||q.error)); }
+    if(!q.data||!q.data.length){
+      /* แยกให้ออกว่ารหัสรุ่นมีอยู่ในคลังไหม — ผูก Purchase ID ผิด กับ ยังไม่มีท่อนความยาวนี้ แก้คนละทางกัน */
+      let any=0; try{ const q2=await sb.from("fitting_global").select("item_number").ilike("item_number",pre+"%").limit(1);
+        any=(!q2.error&&q2.data)?q2.data.length:0; }catch(e){}
+      return miss(any? ("มีรหัสรุ่นนี้ในคลัง แต่ยังไม่มีท่อนยาว "+L+" มม.") : ("ไม่มีรหัสไหนขึ้นต้นด้วย "+pre+" ในคลัง — เช็ค Purchase ID"));
+    }
     const kw=(String(settings.cutLookupKey||DEF_SETTINGS.cutLookupKey||"ตัดขนาด")).trim();
     /* ความยาวต้องตรงตัว ไม่ใช่เป็นส่วนหนึ่งของเลขอื่น (371 ต้องไม่ไปเจอ 1371 หรือ 3710) */
     const exact=new RegExp("(^|[^0-9])"+L+"([^0-9]|$)");
@@ -13176,12 +13200,12 @@ async function cutLookup(code,len,hint){
     const cutRe=new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*"+L+"(?![0-9])");
     let rows=q.data.filter(x=>cutRe.test(String(x.product_name||"")));
     if(!rows.length) rows=q.data.filter(x=>exact.test(String(x.product_name||"")));
-    if(!rows.length) return null;
+    if(!rows.length) return miss("เจอ "+q.data.length+" รหัสที่มีเลข "+L+" อยู่ในชื่อ แต่ไม่มีตัวไหนเขียนว่า “"+kw+" "+L+"”",q.data.length);
     rows.sort((a,b)=>String(a.item_number||"").localeCompare(String(b.item_number||"")));
     const pick=rows[0];
     _fgCut[k]={code:String(pick.item_number||"").trim(),name:String(pick.product_name||""),unit:String(pick.unit||"")};
     return _fgCut[k];
-  }catch(e){ console.error("cutLookup:",e); return null; }
+  }catch(e){ console.error("cutLookup:",e); return miss("ผิดพลาด: "+(e&&e.message||e)); }
 }
 /* เรียกค้นทุกรายการที่ตัดตามยาวในฉาก แล้วสั่งคิดใหม่เมื่อผลกลับมา
    ใช้ Purchase ID เป็นตัวตั้ง เพราะนั่นคือรหัสที่มีอยู่จริงในคลัง ส่วนรหัสใน Element เป็นชื่อเรียกภายใน */
@@ -13216,7 +13240,8 @@ function cutLookupAll(list){
   const miss=list.filter(f=>(+f._cut>0)&&cutSrcList(f).length&&_fgCut[cutKeySeq(cutSrcList(f),f._cut)]===undefined);
   if(!miss.length) return false;
   const ps=miss.map(f=>cutLookupSeq(cutSrcList(f),f._cut,f.name).then(r=>{
-    if(!r) console.warn("ตัดขนาด "+cutSrcList(f).join(" / ")+" "+cutLen(f._cut)+" มม.: ไม่พบรหัสท่อนนี้ในคลังอุปกรณ์"); }));
+    if(!r){ let why=""; try{ const ms=cutMissOf(f); if(ms&&ms.why) why=" — "+ms.why; }catch(e){}
+      console.warn("ตัดขนาด "+cutSrcList(f).join(" / ")+" "+cutLen(f._cut)+" มม.: ไม่พบรหัสท่อนนี้ในคลังอุปกรณ์"+why); } }));
   _cutPending=_cutPending.concat(ps);                       // v13.5: ไว้ให้ตัวส่งออกรอได้
   Promise.all(ps).then(()=>{ try{ _cabFitSig=""; sync(0); }catch(e){} });
   return true;
@@ -24534,6 +24559,17 @@ function fitDef(code){ const c=String(code==null?"":code).trim(); if(!c) return 
    ใส่รหัสสั่งซื้อได้หลายตัวในช่องเดียว คั่นด้วยจุลภาค เช่น 414LT0000007,TPP0000083
    ทุกรหัสได้ความยาวเดียวกันไปค้นรหัสท่อนของตัวเองในคลัง แยกเป็นคนละบรรทัดตอนออกใบ
    รหัสเดียวก็ยังทำงานเหมือนเดิมทุกอย่าง ไม่ต้องไปแก้ของเก่า */
+/* v38.4: บอกได้ว่า Purchase ID ของบรรทัดนี้มาจากไหน
+   รหัสที่กรอกไว้ที่ Part กับรหัสที่ส่งออกจริงเป็นคนละตัวได้ ถ้า Element ของรหัสนั้นผูก
+   Purchase Item ID ไว้เป็นอีกรหัสหนึ่ง ซึ่งถูกต้องตามออกแบบ แต่ไม่มีที่ไหนบอกว่าเกิดอะไรขึ้น
+   กรอก FITBK00018 แล้วออกไปเป็น FITBK00014 จึงดูเหมือนโปรแกรมมั่ว ทั้งที่มันอ่านตามที่ผูกไว้ */
+function fitPidSrc(code){
+  const c=String(code==null?"":code).trim(), f=fitDef(c);
+  if(!f) return {from:"raw", code:c};
+  const ids=String(f.itemId||"").trim();
+  if(ids) return {from:"element", code:c, itemId:ids};
+  return {from:"elementSelf", code:c};
+}
 function fitPidList(code){
   const c=String(code==null?"":code).trim(), f=fitDef(c);
   const out=[], seen={};
@@ -24827,7 +24863,7 @@ function fittingAgg(boards){   // รวมเดือย + พินรอง�
   /* v29.0: บรรทัดที่พกรายชื่อรหัสมาแล้ว (มาจากช่องที่พิมพ์หลายรหัส) ห้ามถูกเขียนทับ
      ไม่งั้นรหัสสำรองหายตั้งแต่ยังไม่ทันได้ไปค้น */
   const parents=Object.values(m).map(f=>{ const ps=(f._pidList&&f._pidList.length)?f._pidList:fitPidList(f.art);
-    return {...f, purchase:ps[0], _pidList:ps}; });   // ผูก Purchase ID จาก Element → Fittings · v28.7: พกรหัสสำรองไปด้วย
+    return {...f, purchase:ps[0], _pidList:ps, _pidSrcInfo:fitPidSrc(f.art)}; });   // ผูก Purchase ID จาก Element → Fittings · v28.7: พกรหัสสำรองไปด้วย · v38.4: จำที่มาไว้ด้วย
   return expandFitKids(parents);
 }
 /* v27.6: แยกตัวกางลูกออกมา เพื่อให้หน้ารายการไฟใช้ตัวเดียวกับตอนส่งออก
@@ -24855,7 +24891,7 @@ function expandFitKids(parents){
       kids.forEach(ch=>{ if(!ch)return; const raw=String(ch.code==null?"":ch.code).trim(); if(!raw)return;
         const q=Math.max(parseFloat(ch.qty)||1,0); if(!q)return;
         /* v29.0: ช่องรหัสลูกพิมพ์ได้หลายรหัส (รหัสเก่า/ใหม่ของของตัวเดียวกัน) */
-        const cc=fitCodeMain(raw), cd=fitDef(raw)||fitDef(cc), pids=fitPidList(raw);
+        const cc=fitCodeMain(raw), cd=fitDef(raw)||fitDef(cc), pids=fitPidList(raw), psi=fitPidSrc(raw);
         /* ───────── v13.9: ลูกที่เป็นของตัดตามยาวด้วย ─────────
            ฝาครอบพลาสติกที่สอดปิดหน้ารางไฟ ยาวเท่ารางเป๊ะ จึงต้องตัดตามความยาวเดียวกัน
            และมีรหัสของตัวเองแยกตามความยาวเหมือนราง
@@ -24869,7 +24905,7 @@ function expandFitKids(parents){
           /* v28.0: ลูกที่ไม่มี Element รองรับ = พิมพ์รหัสสั่งซื้อลงไปตรง ๆ ใช้รหัสนั้นเป็น Purchase ID ได้เลย */
           _rawPid:!cd||undefined,
           count:f.count*q, qtyPer:q, _cut:cut||undefined,
-          purchase:pids[0], _pidList:pids }); }); }   // v28.7: ลูกก็มีรหัสเก่า/ใหม่ของตัวเอง
+          purchase:pids[0], _pidList:pids, _pidSrcInfo:psi }); }); }   // v28.7: ลูกก็มีรหัสเก่า/ใหม่ของตัวเอง
   });
   /* v28.7: v28.6 แตกรหัสสำรองเป็นคนละบรรทัด ซึ่งผิด — ถอนออกแล้ว
      ของยังเป็นชิ้นเดียว บรรทัดเดียว แค่มีหลายรหัสให้ไล่หา (ดูที่ cutLookupSeq) */
@@ -25122,7 +25158,11 @@ function renderSummary(){
   const GRP=[["fit","อุปกรณ์ · เดือย · ราง · ไฟ"],["edge","ขอบ (PVC / Edge band)"],["line","Accessory จากแท็บเส้น / Line"]];
   const oid=(()=>{ try{ return orderId(); }catch(e){ return ""; } })();
   let h='<div class="sumh">ออเดอร์: '+escapeHtml(oid)+' · '+rows.length+' รายการ · '
-    +'<span style="opacity:.7">รหัสชุดที่ตั้งไว้ว่าออกเฉพาะลูก จะไม่ปรากฏในนี้ ตรงกับไฟล์ที่ส่งออกทุกบรรทัด</span></div>';
+    +'<span style="opacity:.7">รหัสชุดที่ตั้งไว้ว่าออกเฉพาะลูก จะไม่ปรากฏในนี้ ตรงกับไฟล์ที่ส่งออกทุกบรรทัด</span></div>'
+    /* v38.4: ผลค้นรหัสท่อนถูกจำไว้ตลอดรอบการใช้งาน เพิ่มรหัสในคลังระหว่างเปิดโปรแกรมอยู่จึงยังขึ้นว่าไม่เจอ
+       เดิมต้องปิดเปิดโปรแกรมใหม่ถึงจะรู้ และไม่มีอะไรบอกไว้ */
+    +'<div style="margin:6px 0 10px"><button class="ibtn" id="sumRecut">🔄 ค้นรหัสท่อนใหม่</button>'
+    +'<span style="font-size:11px;color:var(--ink-dim);margin-left:8px">เพิ่งเพิ่มรหัสท่อนในคลังอุปกรณ์ ให้กดปุ่มนี้ — ผลค้นถูกจำไว้ ไม่งั้นต้องปิดเปิดโปรแกรมใหม่</span></div>';
   let any=false;
   GRP.forEach(([g,title])=>{
     const rs=rows.filter(r=>r.grp===g); if(!rs.length) return; any=true;
@@ -25144,6 +25184,15 @@ function renderSummary(){
               +((f._fg.src&&(f._pidList||[]).length>1&&f._fg.src!==f._pidList[0])
                  ?(' · เจอที่รหัสสำรอง '+escapeHtml(String(f._fg.src))):'')+'</div>')
              :(rawPid?'<div style="font-size:10px;color:var(--ink-dim)">รหัสที่พิมพ์ไว้เอง</div>':''))
+          /* v38.4: รหัสที่กรอกกับรหัสที่ส่งออกเป็นคนละตัวได้ตามที่ผูกไว้ — ต้องเห็นว่ามันมาจากไหน */
+          +((()=>{ const si=f._pidSrcInfo;
+              if(!si||si.from!=="element"||!pid||pid===String(f.art).trim()) return "";
+              return '<div style="font-size:10px;color:#b26a00">← Element “'+escapeHtml(String(si.code))+'” ผูก Purchase ID ไว้เป็น '+escapeHtml(String(si.itemId))+'</div>'; })())
+          /* v38.4: ค้นรหัสท่อนไม่เจอ ต้องขึ้นในใบ ไม่ใช่ซ่อนอยู่ใน console */
+          +((()=>{ if(f._fg||!(+f._cut>0)) return "";
+              let ms=null; try{ ms=cutMissOf(f); }catch(e){}
+              if(!ms) return "";
+              return '<div style="font-size:10px;color:#b0322b">ค้นรหัสท่อนไม่เจอ — '+escapeHtml(String(ms.why||""))+'</div>'; })())
           +((!f._fg&&+f._cut>0&&(f._pidList||[]).length>1)
              ?('<div style="font-size:10px;color:#e58a24">หาความยาวนี้ไม่เจอสักรหัส ('+escapeHtml(f._pidList.join(" / "))+')</div>'):'')+'</td>'
         +'<td>'+nm+'</td>'
@@ -25159,6 +25208,12 @@ function renderSummary(){
     +'รายการเจาะกับพิกัดรูย้ายไปอยู่ที่ไฟล์เจาะ MPR และปุ่มดาวน์โหลด CSV แทน หน้านี้เหลือเฉพาะของที่ต้องเบิก · '
     +'แก้ว่ารหัสชุดไหนออกอะไรได้ที่ Element → Fittings → ออกใบสั่งซื้อแบบ</div>';
   body.innerHTML=h;
+  { const rb=body.querySelector("#sumRecut"); if(rb) rb.onclick=async()=>{
+      rb.disabled=true; const t0=rb.textContent; rb.textContent="กำลังค้น…";
+      try{ cutCacheClear(); _cabFitSig=""; await cutLookupReady(); }catch(e){ console.error(e); }
+      rb.disabled=false; rb.textContent=t0;
+      renderSummary(); try{ sync(0); }catch(e){}
+      toast("ค้นรหัสท่อนใหม่จากคลังอุปกรณ์แล้ว"); }; }
 }
 function _renderSummaryOld(){
   const ex=buildExport(); const E={left:"ซ้าย",right:"ขวา",top:"บน",bottom:"ล่าง"};
