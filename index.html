@@ -1646,9 +1646,10 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"38.2", build:"2026-08-20/hanger-single-row-and-src-tag",
+  name:"StarNexus Cabinet", version:"38.3", build:"2026-08-20/hinge-models-and-open-busy",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["38.3","2026-08-20","FEAT รุ่นบานพับ (Hinge Models) — v22.3 ให้แบบบานเลือกรหัสบานพับของตัวเองได้ แต่ระยะเจาะยังใช้ชุดกลางชุดเดียวทั้งฉาก · บานพับคนละรุ่นมี Ø ถ้วย ความลึก ระยะร่นจากขอบ และผังรูฐานที่แผ่นข้างไม่เท่ากัน พอเปลี่ยนไปใช้บานพับอีกแบบ รหัสเปลี่ยนได้แต่รูยังเจาะตามรุ่นเดิม ไฟล์เจาะจึงผิดทั้งงานโดยไม่มีอะไรเตือน · ตอนนี้เก็บเป็นรุ่นทั้งชุด (รหัส + ระยะทั้ง 11 ค่า) เพิ่มได้ไม่จำกัดที่ ตั้งค่า → บานพับ → รุ่นบานพับ แล้วผูกรุ่นไว้ที่แบบบานใน Element → FrontStyle · ทุกที่ที่เคยอ่านค่ากลางตรง ๆ (3D · แบบ 2D · ไฟล์ MPR · รูฐานที่แผ่นข้าง · ใบอุปกรณ์) ผ่านตัวเดียวกันหมดคือ hingeSpecOf(บาน) จะได้ไม่มีทางเพี้ยนกันคนละทาง · ช่องไหนเว้นว่างในรุ่น = ใช้ค่ากลาง · แบบบานที่ตั้งไว้แค่รหัสแบบเดิมยังทำงานเหมือนเดิม และถ้ารหัสนั้นตรงกับรุ่นไหน ระยะจะตามรุ่นนั้นให้เอง · บานที่ไม่ได้ผูกอะไรเลย ค่าไม่ขยับสักตัว · FEAT กดเปิดแก้ออเดอร์แล้วมีกล่องรอเหมือนตอนโหลด XML — v30.2 ใส่ให้เฉพาะทางโหลด XML แต่ทางเปิดแก้เงียบสนิททั้งที่ทำงานหนักกว่า ต้องดึงก้อนจากคลาวด์แล้วไล่ตรวจผิวกับความลึกชั้นทีละใบ ออเดอร์หลายสิบใบจึงค้างอยู่กับฉากเดิมหลายวินาทีโดยไม่มีอะไรบอก บางคนกดซ้ำเพราะคิดว่าไม่ติด · ตอนนี้บอกว่าทำถึงตู้ใบไหนจากทั้งหมดกี่ใบ พร้อมแถบความคืบหน้า และคืนคิวให้เบราว์เซอร์เป็นระยะ แถบจึงเดินให้เห็น"],
     ["38.2","2026-08-20","FIX ชั้นสูง 100 (และ 94) ไม่ได้หูแขวนกระจกสักตัว — ด่านขั้นต่ำเขียนไว้ว่าต้องยาวเกิน 2×ระยะร่นขอบ+10 = 110 ทั้งสองแกน ซึ่งเป็นเงื่อนไขของ หลายจุด ไม่ใช่ จุดเดียว · แถวเดียววางกึ่งกลางแผ่นไม่ได้ใช้ระยะร่นขอบเลย (spread(1) คืนกึ่งกลางตรง ๆ) ชั้นสูง 100 ที่บากสูงแค่ 45 จึงวางสบาย ๆ แต่ถูกตัดทิ้งทั้งแผ่น · เปลี่ยนเป็นวัดแยกแกน แกนไหนสั้นก็ลดจำนวนจุดในแกนนั้นลง เหลืออย่างน้อยหนึ่งจุดกลางแกน และด่านขั้นต่ำคิดจากขนาดบากจริง (กว้าง 30 · สูง 57) แผ่นสูงกว่านี้จึงได้แถวเดียว 2 ตัวเสมอ แผ่นสูง ๆ ผังเดิมไม่ขยับสักใบ · FIX รูหูแขวนถูกถอดป้ายทิ้งทุกครั้งที่เปิดไฟล์ แล้วกลายเป็นรูผีที่ล้างไม่ได้อีกเลย — healHoleSrc ถือว่า h.src คือ id ของชิ้นเจ้าของเสมอ เจอ glasshanger ที่ไม่มีในทะเบียน id ก็ลบป้าย พอไม่มีป้าย ตัววางผังใหม่ก็ล้างของเดิมไม่เจอ ผังเก่าจึงค้างทับกันไปเรื่อย ๆ ทุกครั้งที่เปิด (ไฟล์จริงมีรูผี 108 รู บางแผ่นมีรู Ø15 ซ้อนกันแปดรูจากผังสองรุ่น) และตัวนับใบอุปกรณ์ก็นับไม่ครบเพราะนับจากป้ายที่โดนลบ · กฎเดียวกับ cleanOrphanSrcHoles ที่แก้ไปแล้วใน v37.8 ตัวนี้หลุดไป · เพิ่มตัวชี้ขาด isGlassHangerHole() ที่จับรูที่ถูกถอดป้ายไปแล้วได้ด้วย ไฟล์ที่เสียไปแล้วจึงล้างตัวเองตอนเปิด"],
     ["38.1","2026-08-20","FIX บากหูแขวนกระจกอยู่คนละด้านกับรู Ø15 ใน 3D ทั้งที่ไฟล์เจาะถูก — v37.2 ย้ายรูไปผิวหลังแล้ว แต่ลืมบากสองใบที่ซ้อนพิกัดเดียวกัน · Pocket ที่ไม่ระบุ face ถือว่าเจาะจากผิวบนเสมอ (pocketZTop) รูปสามมิติจึงวาดบากไว้หน้าบาน ส่วน MPR ออกบากตามฝั่งงานเจาะหลักของชิ้น ซึ่งวิ่งตามรูอยู่แล้ว ไฟล์เลยถูกมาตลอด ผิดแค่ที่ตาเห็น · ใส่ face ให้บากตรงกับรู และติดเลขรุ่นผังไว้ ไฟล์ที่วางผังไปแล้วจะวางใหม่ให้เองตอนเปิด ไม่ต้องไปกดใหม่ทีละแผ่น · FIX แผ่นที่เล็กเกินไปสำหรับหูแขวนถูก return ทิ้งเฉย ๆ ไม่เก็บกวาดผังเดิม ย่อแผ่นแล้วบากค้างครบทุกใบแต่รูหายไป (ในไฟล์จริงมี 13 แผ่นที่มีบากแต่ไม่มีรู) ตอนนี้ล้างให้และคืนผังเองเมื่อแผ่นโตพอ · FEAT หูแขวนกระจกออกใบอุปกรณ์แล้ว 1 จุด = 1 ตัว นับจากรู Ø15 บากสองใบต่อจุดเป็นของตัวเดียวกันจึงไม่นับซ้ำ · ตั้งรหัสได้ในตั้งค่า หมวดหูแขวนกระจก ตั้งต้น GLASSHANGER สร้างแถวรหัสนี้ใน Element → Fittings แล้วใส่ Purchase ID ได้ตามปกติ เว้นรหัสว่าง = ไม่ออกในใบ"],
     ["38.0","2026-08-20","FIX เส้นเฟรมออกไปในใบสั่งของ 2220 เส้น ทั้งที่ในฉากมี 60 — และเป็นของผมเองที่ทำพังตอน v37.7 · เส้นเฟรมเป็นชิ้น _virtual ผู้เรียกบางทางส่งลิสต์ที่กรอง virtual ทิ้งแล้ว ผมจึงแก้ด้วยการไปอ่าน state.boards ตรง ๆ ซึ่งถูกเฉพาะตอนคิดทั้งงาน · แต่ตัวส่งออก (buildImosData) เรียกคิดทีละใบด้วย fittingAgg(grp.boards) ทุกใบจึงหยิบเฟรมของทั้งออเดอร์มาเป็นของตัวเอง ออเดอร์นี้ 37 ใบ ของเลยคูณ 37 พอดี — 50 เส้นที่ยังไม่เจอรหัสท่อนกลายเป็น 1850 และท่อน 100 มม. 10 เส้นกลายเป็น 370 · ที่สังเกตยาก คือหน้า BOM Fitting บนจอคิดทั้งงานรอบเดียว เลขบนจอจึงถูกอยู่ (60) ผิดเฉพาะไฟล์ที่ส่งออก · เปลี่ยนเป็น frameSrcOf() ที่คืนลิสต์เดิมถ้ามีเฟรมอยู่แล้ว ไม่มีค่อยไปหยิบเฉพาะเส้นที่เจ้าของอยู่ในลิสต์นั้น ใช้กับทั้งเฟรมอลูและบานไม้ · FEAT หน้า BOM Fitting เพิ่มคอลัมน์ ขนาดตัด — ชื่อรายการพึ่งไม่ได้ รหัสที่ไม่มีคำอธิบายใน Element จะโชว์เป็นรหัสเปล่า ๆ เส้นเฟรมเก้าความยาวจึงขึ้นว่า 008 เหมือนกันหมด แยกไม่ออกว่าบรรทัดไหนคืออะไร ตอนนี้ความยาวมีคอลัมน์ของตัวเอง"],
@@ -2437,7 +2438,7 @@ const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, d
   dxPlateCode:"DXPLATE", dxPlateName:"เพลทยึดคาน DX กับแผ่นข้าง", dxPlateQty:2,   // v8.32
   dxHI:70, dxTI:16, dxClrBack:0.5, dxClrDown:0.5,   // v8.38: DX I — สูง 70 · หนา 16 · เผื่อบากลึก/ลงล่างด้านละ 0.5   // v8.22/8.26: เพดานความสูงกล่อง · หักจากความสูงหน้าบาน · ปัดลงเป็นขั้น
   legMarkEdgeX:32, legMarkFront:75, legMarkBack:143, legMarkPair:12, legMarkMidOver:900,
-  hingeCupD:35, hingeCupDepth:12.5, hingeCupOffset:22.5, hingeDowelD:8, hingeDowelDepth:12, hingeDowelSpacing:45, hingeDowelOffset:0, hingeName:"บานพับ", hingeCode:"HINGE", hingeFormulaActive:"มาตรฐาน",
+  hingeCupD:35, hingeCupDepth:12.5, hingeCupOffset:22.5, hingeDowelD:8, hingeDowelDepth:12, hingeDowelSpacing:45, hingeDowelOffset:0, hingeName:"บานพับ", hingeCode:"HINGE", hingeFormulaActive:"มาตรฐาน", hingeModels:[],
   hingePlateD:3, hingePlateDepth:2, hingePlateFromFront:37, hingePlateSpacing:32,
   xmlMap:[ {field:"K_Carcass_Color",target:"Carcass"}, {field:"K_Front_Color1",target:"Front"}, {field:"K_Front_Shape1",target:"$FrontShape1"} ],
   /* v7.79: ค่าตั้งต้นเมื่อออเดอร์ไม่ได้ส่งค่ามา — กัน Variable ว่าง/ค้างค่าออเดอร์ก่อนหน้าหลุดไปถึงไฟล์ส่งออก */
@@ -4133,6 +4134,47 @@ function connectorPoints(b,c){
 // Z (centered, -T/2..+T/2) of a minifix Ø8 bolt: centered for T<=mfCenterMax, else fixed 8.1 from the facing side
 function mfBoreZ(c,T){ if(!c||c.type!=="minifix") return 0; if((T||0)<=(settings.mfCenterMax||16)) return 0;
   const off=(settings.mfFixFromFace||8.1); return c.face==="bottom" ? (-T/2+off) : (T/2-off); }
+/* ═════════ v38.3: รุ่นบานพับ (Hinge Models) ═════════
+   v22.3 ให้แบบบานเลือก "รหัส" บานพับของตัวเองได้ แต่ระยะเจาะยังใช้ชุดกลางชุดเดียวทั้งฉาก
+   บานพับคนละรุ่นมี Ø ถ้วย ความลึก ระยะร่นจากขอบ และผังรูฐานที่แผ่นข้างไม่เท่ากัน
+   พอ Kit02 ใช้บานพับอีกแบบ รหัสเปลี่ยนได้แต่รูยังเจาะตามรุ่นเดิม = ไฟล์เจาะผิดทั้งงาน
+   ตอนนี้เก็บเป็น "รุ่น" ทั้งชุด (รหัส + ระยะทุกตัว) แล้วผูกรุ่นไว้ที่แบบบาน
+   ทุกที่ที่เคยอ่าน settings.hingeXxx ตรง ๆ ต้องผ่าน hingeSpecOf(บาน) แทน
+   ไม่ตั้งรุ่น = ใช้ค่ากลางเหมือนเดิมเป๊ะ ของเก่าจึงไม่ขยับ */
+const HINGE_FIELDS=["cupD","cupDepth","cupOffset","dowelD","dowelDepth","dowelSpacing","dowelOffset",
+                    "plateD","plateDepth","plateFromFront","plateSpacing"];
+function hingeBaseSpec(){
+  const g=(k,d)=>{ const v=settings[k]; return (v==null||v==="")?d:(+v||0); };
+  return { key:"", name:settings.hingeName||"บานพับ", code:settings.hingeCode||"HINGE",
+    cupD:g("hingeCupD",35), cupDepth:g("hingeCupDepth",12.5), cupOffset:g("hingeCupOffset",22.5),
+    dowelD:g("hingeDowelD",0), dowelDepth:g("hingeDowelDepth",12),
+    dowelSpacing:g("hingeDowelSpacing",45), dowelOffset:g("hingeDowelOffset",0),
+    plateD:g("hingePlateD",3), plateDepth:g("hingePlateDepth",2),
+    plateFromFront:g("hingePlateFromFront",37), plateSpacing:g("hingePlateSpacing",32) };
+}
+function hingeModelList(){ return Array.isArray(settings.hingeModels)?settings.hingeModels.filter(Boolean):[]; }
+function hingeModelFind(k){ const t=String(k||"").trim(); if(!t) return null;
+  return hingeModelList().find(m=>String(m.key||m.name||"").trim()===t)||null; }
+function hingeSpecOf(b){
+  const base=hingeBaseSpec();
+  let pd=null; try{ pd=partDef(b&&b.part,b); }catch(e){}
+  if(!pd) return base;
+  let md=hingeModelFind(pd.hingeModel);
+  /* เข้ากันได้กับของเดิม: แบบบานที่ตั้งไว้แค่ "รหัส" ถ้ารหัสนั้นตรงกับรุ่นไหน ก็ใช้ระยะของรุ่นนั้น */
+  if(!md){ const pc=String(pd.hingeCode||"").trim();
+    if(pc) md=hingeModelList().find(m=>String(m.code||"").trim()===pc)||null; }
+  if(!md){ const pc=String(pd.hingeCode||"").trim();
+    if(pc){ const o=Object.assign({},base); o.code=pc;
+      try{ const el=(((settings.elements||{}).fittings)||[]).find(x=>x.code===pc); if(el&&el.desc) o.name=el.desc; }catch(e){}
+      return o; }
+    return base; }
+  const out=Object.assign({},base);
+  out.key=String(md.key||md.name||"").trim();
+  if(md.name) out.name=md.name;
+  if(md.code) out.code=String(md.code).trim();
+  HINGE_FIELDS.forEach(f=>{ const v=md[f]; if(v==null||v==="") return; const n=+v; if(isFinite(n)) out[f]=n; });
+  return out;
+}
 function buildConnectorMeshes(b){
   const arr=[]; const M=orientMatrix(b.orient,b.yaw); const bp=new THREE.Vector3(b.x,b.y,b.z);
   const zW=new THREE.Vector3(0,0,1).transformDirection(M);
@@ -4140,8 +4182,9 @@ function buildConnectorMeshes(b){
     const {pts,axisLocal}=connectorPoints(b,c); const axW=axisLocal.clone().transformDirection(M);
     const T=b.T||18;
     if(c.type==="hinge"){                                                              // บานพับ: รูถ้วย Ø35 + เดือยยึด บนผิวบาน
-      const cupOff=settings.hingeCupOffset||22.5, cupD=settings.hingeCupDepth||12.5, cupR=Math.max((settings.hingeCupD||35)/2,1);
-      const dwD=settings.hingeDowelD||0, dwR=Math.max(dwD/2,.5), dwDep=settings.hingeDowelDepth||12, dwSp=settings.hingeDowelSpacing||45, dwOff=settings.hingeDowelOffset||0;
+      const _hs=hingeSpecOf(b);                                                       // v38.3: ระยะตามรุ่นบานพับของแบบบานนั้น
+      const cupOff=_hs.cupOffset, cupD=_hs.cupDepth, cupR=Math.max(_hs.cupD/2,1);
+      const dwD=_hs.dowelD, dwR=Math.max(dwD/2,.5), dwDep=_hs.dowelDepth, dwSp=_hs.dowelSpacing, dwOff=_hs.dowelOffset;
       const alongW=new THREE.Vector3().crossVectors(zW,axW).normalize();
       const cupZ=c.face==="bottom"?(-T/2+cupD/2):(T/2-cupD/2);
       const dwZ =c.face==="bottom"?(-T/2+dwDep/2):(T/2-dwDep/2);
@@ -4521,9 +4564,10 @@ function drillHingePlateHoles(b){
   // ระดับศูนย์ถ้วยแต่ละตัว (world Y) — สูตร/กำหนดเอง ใช้ logic เดิมทั้งหมด
   const M=orientMatrix(b.orient,b.yaw), bp=new THREE.Vector3(b.x,b.y,b.z);
   const pts=connectorPoints(b,c).pts.map(lp=>lp.clone().applyMatrix4(M).add(bp));
-  const dia=Math.max(settings.hingePlateD||3,1), dep=Math.max(settings.hingePlateDepth||2,0.5);
-  const fromFront=settings.hingePlateFromFront!=null?settings.hingePlateFromFront:37;
-  const sp=Math.max(settings.hingePlateSpacing||32,2);
+  const _hs=hingeSpecOf(b);                                                          // v38.3: ผังรูฐานก็ตามรุ่นของบานใบนั้น
+  const dia=Math.max(_hs.plateD,1), dep=Math.max(_hs.plateDepth,0.5);
+  const fromFront=_hs.plateFromFront;
+  const sp=Math.max(_hs.plateSpacing,2);
   const sdd=worldDims(sd), sLlo=sd.y-sdd[1]/2, sLhi=sd.y+sdd[1]/2;
   if(!sd.holes)sd.holes=[];
   let n=0;
@@ -10456,15 +10500,16 @@ function hingeCupWorld(door,c,i){
   const d=_viewDoor(door), M=orientMatrix(d.orient,d.yaw), bp=new THREE.Vector3(d.x,d.y,d.z);
   const r=connectorPoints(d,c), lp=r.pts[i]; if(!lp)return null;
   const zW=new THREE.Vector3(0,0,1).transformDirection(M), axW=r.axisLocal.clone().transformDirection(M);
-  const T=d.T||18, cupD=settings.hingeCupDepth||12.5;
+  const _hs=hingeSpecOf(d);
+  const T=d.T||18, cupD=_hs.cupDepth;
   const cupZ=(c.face==="bottom")?(-T/2+cupD/2):(T/2-cupD/2);
-  return {p:lp.clone().applyMatrix4(M).add(bp).addScaledVector(axW,-(settings.hingeCupOffset||22.5)).addScaledVector(zW,cupZ), zW};
+  return {p:lp.clone().applyMatrix4(M).add(bp).addScaledVector(axW,-_hs.cupOffset).addScaledVector(zW,cupZ), zW};
 }
 function showHingeHL(door,c,i){
   if(noGL||!scene)return; clearHingeHL();
   let w=null; try{ w=hingeCupWorld(door,c,i); }catch(e){}
   if(!w)return;
-  const rad=Math.max((settings.hingeCupD||35)/2,6), q=new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,0,1),w.zW);
+  const rad=Math.max(hingeSpecOf(_viewDoor(door)).cupD/2,6), q=new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,0,1),w.zW);
   const mk=(geo,op)=>{ const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:0xff9500,transparent:true,opacity:op,depthTest:false,depthWrite:false,side:THREE.DoubleSide}));
     m.quaternion.copy(q); m.renderOrder=999; m.frustumCulled=false; return m; };
   const g=new THREE.Group();
@@ -16601,6 +16646,19 @@ function renderElements(){
           w.querySelector("input").oninput=e=>cur.hingeCode=e.target.value;
           w.querySelector("input").onchange=()=>{ renderElements(); sync(1); };
           g9.appendChild(w); }
+        /* v38.3: เลือก "รุ่น" ได้ด้วย ไม่ใช่แค่รหัส — รุ่นพารหัส + ระยะเจาะทั้งชุดไปพร้อมกัน
+           แบบบานที่ตั้งไว้แค่รหัสยังทำงานเหมือนเดิม ถ้ารหัสนั้นตรงกับรุ่นไหน ระยะจะตามรุ่นนั้นให้เอง */
+        { const w=document.createElement("div"); const ms=hingeModelList();
+          w.innerHTML='<div style="font-size:10.5px;color:var(--ink-dim);margin-bottom:2px">รุ่นบานพับ (ระยะเจาะ) — ว่าง = ใช้รุ่นกลางในตั้งค่า</div>'
+            +'<select class="nameinp" style="width:100%;font-size:11px">'
+            +'<option value=""'+(!cur.hingeModel?" selected":"")+'>— รุ่นกลาง —</option>'
+            +ms.map(m=>{ const k=String(m.key||m.name||"");
+                return '<option value="'+escapeHtml(k)+'"'+(String(cur.hingeModel||"")===k?" selected":"")+'>'+escapeHtml(k+(m.code?(" · "+m.code):""))+'</option>'; }).join("")
+            +'</select>';
+          w.querySelector("select").onchange=e=>{ const v=e.target.value;
+            if(v) cur.hingeModel=v; else delete cur.hingeModel;
+            renderElements(); sync(1); };
+          g9.appendChild(w); }
         { const w=document.createElement("div");
           w.innerHTML='<label style="display:flex;align-items:center;gap:6px;font-size:11px;cursor:pointer;padding-bottom:5px">'
             +'<input type="checkbox" '+(cur.noMpr?"checked":"")+'><span>ไม่ออกไฟล์เจาะ (MPR) — บานที่แค่ตีเส้นโปรไฟล์</span></label>';
@@ -18019,6 +18077,8 @@ function renderSettings(){
     <div class="sumh" style="margin-top:12px">บานพับ — หมายเหตุ / ชื่อรหัส</div>
     <div style="font-size:11px;opacity:.62;margin-top:2px">รูถ้วยเจาะที่ผิวหลังบาน · ตำแหน่งตามความสูงบานใช้สูตรเดียวกับเดือย (เลือกในกล่องใส่บานพับ) · เดือยยึด 2 รู วางตามความสูง ±ครึ่งระยะห่าง</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${txt("hingeName","ชื่อบานพับในสรุป/ส่งออก")}${txt("hingeCode","รหัสบานพับ (Element → Fittings) เช่น HINGE")}</div>
+    <div style="margin-top:8px"><button class="ibtn" id="setHingeModels">🔧 รุ่นบานพับ (Hinge Models) — ${(Array.isArray(settings.hingeModels)?settings.hingeModels.length:0)} รุ่น</button></div>
+    <div style="font-size:11px;opacity:.62;margin-top:4px">ค่าด้านบนคือ <b>รุ่นกลาง</b> ที่ใช้กับบานทุกใบที่ไม่ได้ระบุอะไร · บานพับรุ่นอื่นที่ระยะไม่เหมือนกัน (Ø ถ้วย ความลึก ระยะร่นจากขอบ ผังรูฐานที่แผ่นข้าง) ให้เพิ่มเป็นรุ่นแล้วผูกไว้ที่แบบบานใน Element → FrontStyle · รหัสของรุ่นจะออกใบอุปกรณ์แยกให้เอง</div>
     <div class="sumh" style="margin-top:12px">แผ่นหลัง — เซาะร่อง (Back groove)</div>
     <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="setBackGroove" ${settings.backGroove!==false?"checked":""}> เซาะร่องรับแผ่นหลังในด้านที่เลือก “ฝังใน” (ตอนสร้างตู้)</label>
     ${num("backset","BackSet — ร่นแผ่นหลังจากหลัง / ขอบหลังของร่อง (มม.)")}
@@ -18347,6 +18407,8 @@ function renderSettings(){
   { const vb=body.querySelector("#setVarFbNow"); if(vb)vb.onclick=()=>{ collectSettings();
       const n=applyVarFallbackAllCabs(); sync(0); toast(n?("เติมค่าตั้งต้นให้ "+n+" ช่องที่ยังว่าง"):"ทุกตู้มีค่าครบอยู่แล้ว"); }; }
   { const rb=body.querySelector("#setRound"); if(rb)rb.onclick=()=>{ const n=normalizeWholeMM(); sync(0); toast(n?("ปัดขนาดเป็นจำนวนเต็มแล้ว "+n+" ชิ้น"):"ทุกชิ้นเป็นจำนวนเต็มอยู่แล้ว"); }; }
+  { const hm=body.querySelector("#setHingeModels"); if(hm)hm.onclick=()=>{ collectSettings();      // v38.3
+      lsSet("furnitech:settings",settings); openHingeModels(); }; }
   function collectSettings(){
     body.querySelectorAll("[data-sk]").forEach(inp=>{ const k=inp.dataset.sk; settings[k]=(inp.type==="number")?(parseFloat(inp.value)||DEF_SETTINGS[k]):(inp.value.trim()||DEF_SETTINGS[k]); });
     const xs=body.querySelector("#setXmlScale"); if(xs)settings.xmlScale=xs.checked;
@@ -18732,9 +18794,16 @@ async function cloudSaveOrder(){
   }catch(e){ toast("บันทึกออเดอร์ไม่สำเร็จ: "+sbErr(e)); }
 }
 async function cloudListOrders(){ const db=await getDB(); const r=await db.from("furnitech_cabinets").select("id,part_count,updated_at").like("id","ORD::%").order("updated_at",{ascending:false}).limit(300); if(r.error)throw r.error; return r.data||[]; }
+/* ───────── v38.3: เปิดออเดอร์ที่บันทึกไว้ ก็ต้องมีกล่องรอเหมือนตอนโหลด XML ─────────
+   v30.2 ใส่กล่องรอให้เฉพาะทางโหลด XML เข้าฉาก แต่ทาง "เปิดแก้" เงียบสนิท
+   ทั้งที่ทำงานหนักกว่าอีก — ดึงก้อนจากคลาวด์ แล้วไล่ซ่อมผิว+ความลึกชั้นทีละใบ
+   ออเดอร์เจ็ดสิบกว่าใบจึงค้างอยู่กับฉากเดิมหลายวินาทีโดยไม่มีอะไรบอก บางคนกดซ้ำ */
 async function cloudLoadOrder(oid){
-  try{ const db=await getDB(); const r=await db.from("furnitech_cabinets").select("data").eq("id","ORD::"+oid).single(); if(r.error)throw r.error;
+  let _bz=null;
+  try{ try{ _bz=busyOpen("กำลังเปิดออเดอร์ “"+oid+"”"); _bz.step("ติดต่อคลาวด์…",4); await _bz.tick(); }catch(e){}
+    const db=await getDB(); const r=await db.from("furnitech_cabinets").select("data").eq("id","ORD::"+oid).single(); if(r.error)throw r.error;
     const src=(r.data&&r.data.data)||{}; const boards=src.boards||[]; if(!boards.length){toast("ออเดอร์ว่าง");return false;}
+    if(_bz){ _bz.step("เตรียมชิ้น "+boards.length+" ชิ้น",18); await _bz.tick(); }
     const idMap={}; const norm=boards.map(b=>{ const nid=uid(); if(b.id!=null)idMap[b.id]=nid; return Object.assign({yaw:0,tone:null,r:0},JSON.parse(JSON.stringify(b)),{id:nid}); });
     remapRuleRefs(norm,idMap); remapHoleSrc(norm,idMap); healHoleSrc(norm);
     state.boards=norm; if(src.globalTone!=null)state.globalTone=src.globalTone; if(src.cabColors)state.cabColors=src.cabColors;
@@ -18744,21 +18813,28 @@ async function cloudLoadOrder(oid){
        เพราะตอนสร้าง refitInterior ข้ามไปตอนตู้หมุน · เปิดกลับมาก็ต้องซ่อมให้ด้วย
        ไม่งั้นต้องไปแก้มือทุกออเดอร์เก่า */
     let _fixed=0;
-    [...new Set(norm.map(b=>b.cabInst).filter(Boolean))].forEach(inst=>{
+    const _insts=[...new Set(norm.map(b=>b.cabInst).filter(Boolean))];
+    for(let i=0;i<_insts.length;i++){ const inst=_insts[i];
       const grp=norm.filter(b=>b.cabInst===inst&&!b._autoFit);
       const sig=()=>grp.map(b=>[b.L,b.W,b.T].join()).join("|");
       const before=sig();
       try{ applyCabinetSkin(inst); }catch(e){ console.error("applyCabinetSkin:",e); }
       try{ refitInterior(grp); }catch(e){ console.error("refitInterior:",e); }
       if(before!==sig()) _fixed++;
-    });
+      /* คืนคิวให้เบราว์เซอร์เป็นระยะ แถบจะได้เดินให้เห็น ไม่ใช่กระโดดทีเดียวตอนจบ */
+      if(_bz && (i%4===3 || i===_insts.length-1)){
+        _bz.step("ตรวจผิว + ความลึกชั้น · ตู้ "+(i+1)+"/"+_insts.length, 22+68*(i+1)/Math.max(_insts.length,1));
+        await _bz.tick(); }
+    }
     const exEl=$("exOrderId"); if(exEl) exEl.value=oid;
+    if(_bz){ _bz.step("สร้างฉาก…",94); await _bz.tick(); }
     state.selectedId=null; buildGTones(); sync(1);
     if(_fixed) toast("ปรับความหนาผิว + ความลึกชั้นให้ "+_fixed+" ตู้ (ค่าเดิมฝังมาจากตอนสร้าง)");
     const m=$("cloudModal"); if(m)m.classList.remove("show");
     toast("📂 เปิดออเดอร์ “"+oid+"” แล้ว ("+norm.length+" ชิ้น) — แก้แล้วบันทึกทับ หรือ Save As ชื่อใหม่ได้");
     return true;
   }catch(e){ toast("เปิดออเดอร์ไม่สำเร็จ: "+sbErr(e)); return false; }
+  finally{ try{ if(_bz) _bz.done(); }catch(e){} }
 }
 async function cloudDeleteOrder(oid){ const db=await getDB(); const r=await db.from("furnitech_cabinets").delete().eq("id","ORD::"+oid); if(r.error)throw r.error; }
 async function renderCloudOrders(){
@@ -20005,6 +20081,62 @@ function ovCard(w,mh){
     +"box-shadow:0 30px 80px -20px rgba(0,0,0,.5);overflow:hidden;display:flex;flex-direction:column;"
     +"width:min("+w+"px,96vw);max-height:"+(mh||92)+"vh";
   return {ov, cardCSS, xbtn:'style="flex:none;margin-left:auto;padding:6px 10px"'};
+}
+/* v38.3: ตัวแก้ "รุ่นบานพับ" — หนึ่งรุ่น = รหัส + ระยะเจาะครบชุด
+   แยกเป็นกล่องของตัวเอง ไม่ยัดลงหน้าตั้งค่า เพราะช่องเยอะและเพิ่มรุ่นได้ไม่จำกัด */
+const HINGE_FIELD_LABELS=[["cupD","Ø รูถ้วย"],["cupDepth","ลึกรูถ้วย"],["cupOffset","ศูนย์ถ้วยห่างจากขอบบาน"],
+  ["dowelD","Ø เดือยยึด (0 = ไม่เจาะ)"],["dowelDepth","ลึกเดือยยึด"],["dowelSpacing","ระยะห่างเดือยยึด 2 รู"],
+  ["dowelOffset","เยื้องเดือยยึดเข้าใน จากศูนย์ถ้วย"],["plateD","แผ่นข้าง: Ø รูฐาน"],["plateDepth","แผ่นข้าง: ลึกรู"],
+  ["plateFromFront","แผ่นข้าง: ระยะรูจากหน้าตู้"],["plateSpacing","แผ่นข้าง: ระยะห่างรูคู่"]];
+function openHingeModels(){
+  const {ov,cardCSS,xbtn}=ovCard(880,90);
+  const card=document.createElement("div"); card.style.cssText=cardCSS;
+  card.innerHTML='<div class="mh" style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)">'
+    +'<h3 style="margin:0;font-size:15px">รุ่นบานพับ (Hinge Models)</h3>'
+    +'<button class="ibtn hmAdd">+ เพิ่มรุ่น</button><button class="ibtn hmX" '+xbtn+'>✕</button></div>'
+    +'<div class="hmBody" style="padding:14px 16px;overflow:auto"></div>';
+  ov.appendChild(card); document.body.appendChild(ov);
+  const close=()=>{ try{ov.remove();}catch(e){} };
+  card.querySelector(".hmX").onclick=close;
+  ov.onclick=e=>{ if(e.target===ov) close(); };
+  const base=hingeBaseSpec();
+  const draw=()=>{
+    const box=card.querySelector(".hmBody"); const list=hingeModelList();
+    let h='<div style="font-size:11.5px;color:var(--ink-dim);line-height:1.65;margin-bottom:10px">'
+      +'ช่องที่เว้นว่าง = ใช้ค่ากลางในหน้าตั้งค่า · ผูกรุ่นเข้ากับบานได้ที่ <b>Element → แบบบาน (FrontStyle) → รุ่นบานพับ</b><br>'
+      +'บานที่ไม่ได้ผูกรุ่นไหนเลย ใช้ค่ากลางเหมือนเดิมทุกประการ</div>';
+    if(!list.length) h+='<div class="empty" style="padding:14px">ยังไม่มีรุ่นเพิ่มเติม — กด “+ เพิ่มรุ่น” แล้วกรอกเฉพาะค่าที่ต่างจากค่ากลาง</div>';
+    list.forEach((m,i)=>{
+      h+='<div class="hmRow" data-i="'+i+'" style="border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px">'
+        +'<div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;margin-bottom:8px">'
+        +'<div class="fld"><label>ชื่อรุ่น (ใช้อ้างอิง)</label><input class="nameinp hmF" data-f="name" value="'+escapeHtml(String(m.name||""))+'" style="width:100%"></div>'
+        +'<div class="fld"><label>รหัส Fitting (Purchase ID ผูกที่ Element)</label><input class="nameinp hmF" data-f="code" list="dlFit" value="'+escapeHtml(String(m.code||""))+'" style="width:100%;font-family:var(--mono)"></div>'
+        +'<button class="ibtn hmDel" style="height:34px">🗑</button></div>'
+        +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px">';
+      HINGE_FIELD_LABELS.forEach(([f,lb])=>{
+        h+='<div class="fld"><label style="font-size:10.5px">'+escapeHtml(lb)+' <span style="opacity:.5">(กลาง '+base[f]+')</span></label>'
+          +'<input class="nameinp hmF" data-f="'+f+'" type="number" step="0.5" placeholder="'+base[f]+'" value="'+escapeHtml(m[f]==null?"":String(m[f]))+'" style="width:100%;font-family:var(--mono)"></div>'; });
+      h+='</div></div>';
+    });
+    box.innerHTML=h;
+    box.querySelectorAll(".hmRow").forEach(row=>{ const i=+row.dataset.i;
+      row.querySelectorAll(".hmF").forEach(inp=>{ inp.onchange=()=>{
+        const m=hingeModelList()[i]; if(!m) return; const f=inp.dataset.f;
+        const v=String(inp.value||"").trim();
+        if(v==="") delete m[f]; else m[f]=(f==="name"||f==="code")?v:(+v);
+        if(f==="name") m.key=v;
+        lsSet("furnitech:settings",settings); if(f==="name"||f==="code") draw();
+        try{ sync(1); }catch(e){} }; });
+      row.querySelector(".hmDel").onclick=async()=>{
+        if(!await dialog({title:"ลบรุ่น “"+(hingeModelList()[i]||{}).name+"” ?",ok:"ลบ"})) return;
+        settings.hingeModels.splice(i,1); lsSet("furnitech:settings",settings); draw(); try{ sync(1); }catch(e){} };
+    });
+  };
+  card.querySelector(".hmAdd").onclick=()=>{
+    if(!Array.isArray(settings.hingeModels)) settings.hingeModels=[];
+    const n="รุ่นที่ "+(settings.hingeModels.length+1);
+    settings.hingeModels.push({key:n,name:n,code:""}); lsSet("furnitech:settings",settings); draw(); };
+  draw();
 }
 function sectSVG(code,w,h,opt){
   const ls=sectLoops(code), bb=sectBox(code);
@@ -22992,8 +23124,9 @@ function part2DSvg(b,o){
       if(c2.edge==="left"){ex=-L/2;ey=a;} else if(c2.edge==="right"){ex=L/2;ey=a;} else if(c2.edge==="top"){ey=W/2;ex=a;} else {ey=-W/2;ex=a;}
       const cx=SX(ex,ey),cy=SY(ex,ey);
       const _push=(px,py)=>{ cDX.push(tx(px,py)); cDY.push(ty(px,py)); };
-      if(c2.type==="hinge"){ USED.hinge=1; const cupOff=settings.hingeCupOffset||22.5, cupR=(settings.hingeCupD||35)/2;
-        const cupD=settings.hingeCupD||35, cupDep=settings.hingeCupDepth||12.5;
+      if(c2.type==="hinge"){ USED.hinge=1; const _hs=hingeSpecOf(b);
+        const cupOff=_hs.cupOffset, cupR=_hs.cupD/2;
+        const cupD=_hs.cupD, cupDep=_hs.cupDepth;
         /* v9.97: คิดทิศแบบทั่วไป — เดิมคิดแค่ขอบซ้าย/ขวา บานพับที่ขอบบน-ล่างจึงวาดผิดที่
            n = ทิศเข้าเนื้อบานจากขอบนั้น · al = ทิศไล่ไปตามขอบ */
         const n=(c2.edge==="left")?[1,0]:(c2.edge==="right")?[-1,0]:(c2.edge==="top")?[0,-1]:[0,1];
@@ -23010,8 +23143,8 @@ function part2DSvg(b,o){
           +`<text x="${(SX(ex,ey)+SX(ccx,ccy))/2}" y="${SY(ccx,ccy)+cupR+18}" text-anchor="middle" font-size="13" fill="#6f3df0">${fmt(cupOff)} จากขอบ</text>`;
         /* v9.97: รูยึดข้างถ้วย — มีในไฟล์เจาะและใน 3D มาตลอด แต่ไม่เคยถูกวาดลงแบบ
            ช่างเลยเห็นแต่ถ้วย Ø35 ไม่รู้ว่ามีรูเล็กคู่ข้าง ๆ ต้องเจาะด้วย และห่างกันเท่าไหร่ */
-        const dwD=+settings.hingeDowelD||0, dwDep=+settings.hingeDowelDepth||12;
-        const dwSp=+settings.hingeDowelSpacing||45, dwOff=+settings.hingeDowelOffset||0;
+        const dwD=_hs.dowelD, dwDep=_hs.dowelDepth;
+        const dwSp=_hs.dowelSpacing, dwOff=_hs.dowelOffset;
         if(dwD>0){ const dr=Math.max(dwD/2,3);
           [-1,1].forEach(sg=>{
             const px=ex+n[0]*(cupOff+dwOff)+al[0]*sg*dwSp/2;
@@ -24202,8 +24335,9 @@ function boardToMPR(b, side){   // side=1/2 → เอาเฉพาะรู�
     const opSide = (c.type==="hinge"||c.type==="minifix") ? connFaceSide(b,c) : primary;   // ดอกข้าง(เดือย)→ฝั่งหลัก
     if(side && opSide!==side) return;
     if(c.type==="hinge"){                                                  // บานพับ: รูถ้วย Ø35 + เดือยยึด เป็น BohrVert บนผิวบาน
-      const cupOff=settings.hingeCupOffset||22.5, cupD=settings.hingeCupD||35, cupTi=settings.hingeCupDepth||12.5;
-      const dwD=settings.hingeDowelD||0, dwTi=settings.hingeDowelDepth||12, dwSp=settings.hingeDowelSpacing||45, dwOff=settings.hingeDowelOffset||0;
+      const _hs=hingeSpecOf(b);                                                       // v38.3
+      const cupOff=_hs.cupOffset, cupD=_hs.cupD, cupTi=_hs.cupDepth;
+      const dwD=_hs.dowelD, dwTi=_hs.dowelDepth, dwSp=_hs.dowelSpacing, dwOff=_hs.dowelOffset;
       const vert=(c.edge==="left"||c.edge==="right");                      // along the edge: left/right → Y axis · top/bottom → X axis
       along.forEach(a=>{ // cup center in 0..L / 0..W
         let cupX,cupY,inax;   // inax = inward unit step in MPR coords
@@ -24516,11 +24650,10 @@ function fittingAgg(boards){   // รวมเดือย + พินรอง�
          เดิมทั้งฉากใช้รหัสเดียวจากตั้งค่า จึงต้องมาแก้เองทุกตู้
          ใส่รหัสไว้ที่แบบบาน แล้วบานที่ผูกแบบนั้นหยิบรุ่นของตัวเองไปเลย ตำแหน่งไม่แตะ */
       if(c.type==="hinge"){
-        let k=settings.hingeCode||"HINGE", nm=settings.hingeName||"บานพับ";
-        try{ const pd=partDef(b.part,b), pk=pd&&String(pd.hingeCode||"").trim();
-          if(pk){ k=pk; const el9=(((settings.elements||{}).fittings)||[]).find(x=>x.code===pk);
-            nm=(el9&&el9.desc)||pk; } }catch(e){}
-        (m[k]||(m[k]={art:k,dia:settings.hingeCupD||35,kind:"hinge",name:nm,unit:"ตัว",count:0})).count+=n; return; }
+        /* v38.3: รหัส ชื่อ และ Ø ถ้วย มาจากรุ่นของบานใบนั้น ไม่ใช่ชุดกลางชุดเดียวทั้งฉาก */
+        const _hs=hingeSpecOf(b); const k=_hs.code||"HINGE"; let nm=_hs.name||"บานพับ";
+        try{ const el9=(((settings.elements||{}).fittings)||[]).find(x=>x.code===k); if(el9&&el9.desc) nm=el9.desc; }catch(e){}
+        (m[k]||(m[k]={art:k,dia:_hs.cupD,kind:"hinge",name:nm,unit:"ตัว",count:0})).count+=n; return; }
       if(c.type==="minifix"){ const k=settings.mfCode||"MINIFIX";
         (m[k]||(m[k]={art:k,dia:settings.mfCamD||15,kind:"minifix",name:settings.mfName||"Minifix",unit:"ชุด",count:0})).count+=n; return; }
       if(c.type==="screw"){ const k=settings.screwCode||"SCREW5"; (m[k]||(m[k]={art:k,dia:settings.screwD||5,kind:"screw",name:settings.screwName||"สกรู Ø5",unit:"ตัว",count:0})).count+=n; return; }
