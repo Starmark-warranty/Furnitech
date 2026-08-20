@@ -1646,9 +1646,11 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"37.7", build:"2026-08-20/frame-rows-visible",
+  name:"StarNexus Cabinet", version:"37.9", build:"2026-08-20/leg-rows-recheck",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["37.9","2026-08-20","FIX ขาตู้ตื้นโผล่พ้นตัวตู้ทั้งหน้าและหลัง — เคส BNF068 ลึก 70 ได้ขาสองแถวห่างกัน 80 ขาหน้าไปยืนหลังแผ่นหลัง 30 ขาหลังโผล่พ้นหน้าตู้ 30 · ไม่ใช่เรื่องหมุนตู้ตอนโหลดออเดอร์ ตู้ใบนี้ yaw=0 และตำแหน่งขาตรงกับสูตร az F/B เป๊ะทุกตัว แปลว่าอ่านแกนลึกถูกแล้ว แต่ไปตัดสินว่าต้องมีสองแถว · v37.1 ที่ทำกฎ ตู้ตื้นเหลือแถวเดียว ไว้ ตัดสินครั้งเดียวตอนกดใส่ขาแล้วฝากคำตอบไว้ในช่อง az แต่ syncLegCount ที่วิ่งทุก commit สร้างชุดขาใหม่ด้วย [F,B] ตายตัว และเทียบแค่จำนวน ตู้ตื้นที่ได้แถวเดียว 2 ขา จึงถูกมองว่าขาดไป 2 แล้วสร้างทับเป็นสองแถวทันทีในรอบแรก กฎ v37.1 เลยไม่เคยมีผลจริงสักครั้ง · ย้ายการตัดสินมาที่ legOneRow() ตัวเดียว ตรวจใหม่ทุกครั้งพร้อมเทียบผังแถวไม่ใช่แค่จำนวน ไฟล์ที่ขาเพี้ยนไปแล้วจึงซ่อมตัวเองตอนเปิด · วัดความลึกในแกนของตู้เอง ตู้ที่หมุนตามผัง 90/270 แกนลึกไปอยู่ที่ x ถ้าวัด z ตรง ๆ จะได้ความกว้างมาแทนแล้วตัดสินผิดทั้งสองทาง (จุดนี้แหละที่การหมุนจะกัด ถ้าไม่กัน) · รูมาร์คใต้แผ่นพื้นเหลือแถวเดียวตามขา และตัวหาสัดส่วนขาเลิกกรองเฉพาะแถวหน้า ไม่งั้นตู้ตื้นคืนลิสต์ว่างแล้วรูไปเดาเอง · กิ๊ฟขาตู้นับแถว C ด้วย ตู้ตื้นจะได้ไม่หล่นกิ๊ฟหายเงียบ ๆ ตอนกฎเริ่มทำงาน"],
+    ["37.8","2026-08-20","FIX สามอาการที่ไล่มาหลายรอบแล้วไม่จบ — ทั้งสามอยู่คนละที่กับที่ผมไปแก้ทุกครั้ง · (1) รูมาร์คไม่ขึ้น 4 ด้าน: สเปคเก็บครบ ตัวเจาะสร้างครบ 4 ใบจริง แต่ถูก dedupeHoles กวาดทิ้งทุกครั้งที่ commit — กุญแจกันรูซ้อนอ่านแต่ face/x/y/Ø/ลึก ซึ่งรูสัน (e1..e4) ไม่มีสักช่อง เพราะเก็บตำแหน่งไว้ที่ edge/pos/z คนละชุดกัน มาร์คสี่ด้านที่ Ø กับลึกเท่ากันจึงได้กุญแจเหมือนกันหมด เหลือรอดใบเดียว · ข้อความ ยุบ 3 รู ที่ขึ้นซ้ำใน console คือตัวมันเองบอกอยู่แล้วว่าทำอะไรลงไป · (2) กดปรับขนาดแล้วหดทุกครั้ง: ตู้แผ่นเดียวไม่มีโครงให้วัด ตัวปรับขนาดจึงวัดกรอบรวมซึ่งเป็นขนาดหลังหักค่าลดของ Part แล้ว เอาไปเป็นเป้าใหม่ = สั่งหักซ้ำอีกรอบ 800 → 794 → 788 · v37.3 แก้ผิดจุด ไปคืนค่าให้ช่อง สูง/ลึก แต่ช่อง กว้าง ยังเป็นเลขหลังหักอยู่เหมือนเดิม แถมคืน ลึก = ความกว้างของแผ่น (โชว์ ลึก 800 ให้แผ่นหนา 18.4) · ตอนนี้แผ่นเดียวมีทางของตัวเอง อ่าน/เขียนขนาดตรง ๆ ที่ตัวแผ่นโดยยึดขนาดตามแบบเสมอ ช่องที่สามเป็นความหนา ไม่ใช่ความลึกตู้ · (3) ขนาดตัดเส้นเฟรมไม่ไปหารหัสในคลัง: v37.4 คิด _cutLen รายเส้นไว้ถูกแล้ว (800 ×2 · 600 ×2) แต่บล็อกที่ออก BOM ของบานไม้ยังส่ง b.L ซึ่งเส้นทั้งสี่ก็อปมาจากบานเหมือนกันหมดและเป็นเลขหลังหักด้วย จึงยุบเป็น 794 ×4 เส้น ตัวค้นรหัสท่อนหา 794 ไม่เจอเพราะไม่มีใครตัดความยาวนี้ · FIX รู Ø15 ของหูแขวนกระจกหายทุกครั้งที่ commit เหลือแต่บาก — ตัวล้างรูกำพร้าถือว่า h.src คือ id ของชิ้นเจ้าของเสมอ แต่หูแขวนใช้ src เป็นป้ายชื่อผัง (glasshanger) หาในทะเบียน id ไม่เจอก็ลบทิ้ง"],
     ["37.7","2026-08-20","FIX เส้นเฟรมยังไม่โผล่ใน BOM แม้แก้ไป 2 รอบ — เส้นเฟรมเป็นชิ้น _virtual และผู้เรียกหลายทางส่งรายการที่กรอง virtual ทิ้งไปแล้ว บล็อกที่ผมเพิ่มจึงไม่เคยเจอเส้นเฟรมสักเส้น ไม่ว่าจะแก้ตรรกะข้างในดีแค่ไหนก็ไม่มีอะไรออก · อ่านจาก state.boards ตรง ๆ แทน · หมายเหตุ แถว 008 x 4 ที่เห็นอยู่เดิมไม่ได้มาจากตัวเฟรม แต่มาจากอุปกรณ์ประจำ Part ที่กรอกไว้เอง "],
     ["37.6","2026-08-20","FIX เฟรมอลูโผล่สองรอบใน BOM และได้รหัสรุ่นกลางที่สั่งของไม่ได้ — v37.5 ผมไปสร้างหมวดใหม่แยกต่างหาก ทั้งที่ของเดิมออกอยู่แล้วในหมวดอุปกรณ์ (008 × 4 เส้น) เฟรมจึงถูกนับสองรอบ และหมวดใหม่ก็ได้แต่รหัสหน้าตัดเปล่า ๆ เพราะไม่ได้ผ่านตัวค้นรหัสท่อน · ถอดหมวดนั้นออก แล้วส่งเฟรมเข้า bomCutRow ตัวเดียวกับเส้น DX และรางไฟแทน ได้หนึ่งแถวต่อความยาวและตัวค้นรหัสท่อนหาโค้ดตามความยาวให้เอง ยาว 600 ได้ 406AL25140230106 · ยาว 800 ได้ 406AL25140230098 ไม่ใช่รหัสรุ่นกลาง 406AL2514023 ที่สั่งของไม่ได้ · ของเดิมยกเว้นบานไม้ไว้เพราะออกทางมือจับโปรไฟล์อยู่แล้ว จึงไม่ซ้อนกัน"],
     ["37.5","2026-08-20","FEAT เส้นเฟรมเข้าใบ BOM Fitting แล้ว เหมือนรางไฟ — เฟรมเป็นของที่ต้องเบิกและตัดจริงเหมือนราง แต่ไม่เคยโผล่ในใบนี้เลยสักครั้ง ฝ่ายจัดซื้อจึงไม่รู้ว่าต้องสั่งเส้นยาวเท่าไรกี่เส้น ต้องไปนับเอาเองจากแบบ · แยกแถวตาม รหัสหน้าตัด × ความยาว เพราะสั่งตัดคนละความยาวคือคนละรายการ บานเดียวจึงได้ 397 มม. ×2 เส้น กับ 467 มม. ×2 เส้น ไม่ใช่ 008 ×4 ที่ไม่บอกอะไรเลย · ลูกที่สอดอยู่ในเส้นแสดงเป็นแถวย่อยใต้แม่ ยาวเท่ากันเป๊ะ พร้อมรหัสสั่งซื้อของตัวเอง รูปแบบเดียวกับฝาครอบรางไฟ · เส้นที่ยังไม่ได้ตั้ง Purchase ID ขึ้นป้ายเตือนเหมือนอุปกรณ์อื่น จะได้เห็นตั้งแต่ในใบ ไม่ใช่ไปเจอตอนสั่งของ"],
@@ -2753,9 +2755,15 @@ function pull(m,val){ return m==="กลาง"? Math.max(val,0)/2 : Math.max(va
 let undoStack=[], redoStack=[], lastSnap=null;
 function snap(){ return JSON.stringify({boards:state.boards,globalTone:state.globalTone}); }
 // รูที่ชิ้นอื่นมาเจาะฝากไว้ (src=เจ้าของ): ถ้าเจ้าของถูกลบไม่ว่าทางไหน รูต้องหายตาม — กวาดกลางทุกครั้งที่ commit
+/* v37.8: h.src ส่วนใหญ่คือ "id ของชิ้นที่เป็นเจ้าของรู" แต่ไม่ใช่ทุกตัว
+   รูของระบบบางชุดใช้ src เป็น "ป้ายชื่อผัง" ไม่ใช่ id ของชิ้น (หูแขวนกระจก = "glasshanger")
+   ตัวล้างรูกำพร้าจึงหาไม่เจอในทะเบียน id แล้วลบทิ้งทุกครั้งที่ commit
+   ผลคือรู Ø15 ของหูแขวนหายเงียบ ๆ เหลือแต่บาก (ในไฟล์ที่ส่งมามีบากครบ 8 แต่ไม่มีรูสักใบ)
+   ชุดพวกนี้ติดธง sys ไว้แล้ว ให้ข้ามไป */
+const SYS_HOLE_SRC={glasshanger:1};
 function cleanOrphanSrcHoles(){ const ids=new Set(state.boards.map(b=>b.id)); let n=0;
   state.boards.forEach(o=>{ if(!o.holes||!o.holes.length)return; const m=o.holes.length;
-    o.holes=o.holes.filter(h=>!h.src||ids.has(h.src)); n+=m-o.holes.length; });
+    o.holes=o.holes.filter(h=>!!h&&(!h.src||h.sys||SYS_HOLE_SRC[h.src]||ids.has(h.src))); n+=m-o.holes.length; });
   if(n){ render3D(false); }
   return n; }
 // แจก id ใหม่ทั้งกลุ่ม → ต้อง remap ป้ายเจ้าของรู (h.src) ตาม ไม่งั้นลิงก์ขาด
@@ -4608,7 +4616,11 @@ function dedupeHoles(){
   let n=0;
   state.boards.forEach(b=>{
     const hs=b&&b.holes; if(!hs||hs.length<2) return;
+    /* v37.8: มีตัวชื่อเดียวกันนี้อีกตัวอยู่ด้านล่างของไฟล์ ซึ่งเป็นตัวที่ทำงานจริง (ประกาศทีหลังชนะ)
+       ตัวนี้จึงเป็นโค้ดตาย แต่ต้องคุมกุญแจให้ตรงกัน เผื่อวันหน้ามีใครสลับลำดับ
+       รูสันต้องนับ pos/z ด้วย ไม่งั้นมาร์คหลายจุดบนขอบเดียวกันจะยุบเหลือจุดเดียว */
     const out=[], key=h=>[h.face||"",h.edge||"",Math.round((+h.x||0)*4),Math.round((+h.y||0)*4),
+      Math.round((+h.pos||0)*4),Math.round((+h.z||0)*4),
       Math.round((+h.d||0)*4),Math.round((+h.depth||0)*4),h.through?1:0].join("|");
     const seen=new Set();
     hs.forEach(h=>{ const k=key(h);
@@ -8256,7 +8268,7 @@ function _legMarkCfg(){
 /* v9.64: ลายเซ็นรูมาร์ค — รวมสัดส่วนขาที่ใช้อยู่ด้วย เปลี่ยนจำนวนขาแล้วรูจึงถูกเจาะใหม่
    เดิมดูแค่ขนาดแผ่นกับค่าตั้งค่า ตู้ที่เปลี่ยนจาก 6 ขาเป็น 8 ขาจึงค้างรูชุดเดิมไว้ */
 function _legMarkSigOf(bp,c,yd){
-  return [bp.L,bp.W,c.ex,c.fr,c.bk,c.pitch,c.D,c.dep,c.midOver,yd,(c.mid1?1:0)].map(v=>Math.round(v*10)).join(",")
+  return [bp.L,bp.W,c.ex,c.fr,c.bk,c.pitch,c.D,c.dep,c.midOver,yd,(c.mid1?1:0),(legOneRow(bp.cabInst)?1:0)].map(v=>Math.round(v*10)).join(",")
     +"|"+_legFxOf(bp.cabInst).map(f=>Math.round(f*1000)).join(".");
 }
 function drillLegMarks(bp){
@@ -8282,11 +8294,14 @@ function drillLegMarks(bp){
   /* v9.68: ขาริมซ้าย/ขวาเจาะ "รูคู่" ไว้เผื่อขยับขาหนีขอบ/หนีเดือย
      ขากลางไม่ต้องขยับ จึงมาร์ครูเดียวตรงศูนย์ขาพอ — เจาะคู่คือรูเกินที่ไม่มีใครใช้
      ปิดสวิตช์ในตั้งค่าแล้วกลับไปเจาะคู่ทุกจุดเหมือนเดิมได้ */
+  /* v37.9: ตู้ตื้นมีขาแถวเดียววางกลางความลึก รูมาร์คต้องเป็นแถวเดียวตรงกลางเหมือนกัน
+     ไม่งั้นเจาะรูหน้า-หลังทิ้งไว้สองแถว แต่ไม่มีขาไปยืนสักแถว */
+  const yRows = legOneRow(bp.cabInst) ? [round((yFront+yBack)/2)] : [yFront,yBack];
   let n=0;
   xs.forEach((cx,i)=>{
     const isEnd=(i===0||i===xs.length-1);
     const offs=(c.mid1&&!isEnd)?[0]:[-c.pitch/2, c.pitch/2];
-    [yFront,yBack].forEach(cy=>{ offs.forEach(dx=>{
+    yRows.forEach(cy=>{ offs.forEach(dx=>{
       bp.holes.push({d:c.D,x:round(cx+dx),y:round(cy),depth:c.dep,face:"bottom",legMark:true}); n++; }); });
   });
   bp._legMarkSig=_legMarkSigOf(bp,c,yToFront);
@@ -8319,7 +8334,8 @@ function autoLegMarks(){
          -> นับให้ตรงจำนวนที่ขาชุดปัจจุบันต้องใช้ (จุดละคู่ · แถวหน้า+แถวหลัง) */
       /* v9.68: ขาริม 2 จุด จุดละคู่ · ขากลางที่เหลือจุดละรูเดียว · คูณสองแถว (หน้า+หลัง) */
       const np=Math.max(_legFxOf(inst).length,2);
-      const need=c.mid1 ? 2*(4+(np-2)) : np*4;
+      const nRow=legOneRow(inst)?1:2;                 // v37.9: ตู้ตื้น = แถวเดียว จำนวนรูที่ต้องมีก็ครึ่งเดียว
+      const need=nRow*(c.mid1 ? (4+(np-2)) : np*2);
       const have=(bp.holes||[]).filter(h=>h.legMark).length;
       if(bp._legMarkSig===sig && have===need) return;   // เหมือนเดิมและครบ -> ไม่แตะ
       if(drillLegMarks(bp)) n++; });
@@ -8981,13 +8997,22 @@ function reslideAll(){   // เจาะรางรับข้างให้�
 /* v8.01: รูที่ตำแหน่ง/ฝั่ง/Ø/ลึก เท่ากันเป๊ะ = รูเดียวกัน เก็บไว้ใบเดียวพอ
    รูซ้อนกันมองด้วยตาไม่ออก (ทับกันสนิท) แต่ออกไฟล์ MPR แล้วเครื่องจะเจาะซ้ำที่เดิม
    เกิดได้เวลาเปลี่ยนระบบราง/ไฟล์เก่าที่รูไม่มี src ให้ตามล้าง จึงกวาดทิ้งตรงนี้ทีเดียว */
+/* ───────── v37.8: รูที่ "สัน" ไม่ได้ระบุตัวด้วย x/y ─────────
+   รูสัน (edge) เก็บตำแหน่งไว้คนละชุดกับรูหน้าผิว — edge/pos/z ไม่ใช่ face/x/y
+   กุญแจเดิมอ่านแต่ face/x/y/Ø/ลึก ซึ่งรูสันไม่มีเลยสักช่อง ทุกใบจึงได้กุญแจ ""|0|0|Ø|ลึก เหมือนกันหมด
+   มาร์คสี่ด้าน (e1..e4) ที่ Ø กับลึกเท่ากันจึงถูกมองว่าเป็นรูเดียวกัน เหลือรอดใบเดียว
+   นี่คือต้นเหตุจริงของ "รูมาร์คไม่ขึ้น 4 ด้าน" และของข้อความ ยุบ 3 รู ที่ขึ้นซ้ำใน console
+   (สเปคเก็บครบ · ตัวเจาะสร้างครบ 4 · แต่ถูกกวาดทิ้งทีหลังตอน commit ทุกครั้ง) */
 function dedupeHoles(){
   let n=0;
   state.boards.forEach(b=>{ if(!b.holes||b.holes.length<2) return;
     const seen=new Set(), out=[];
     b.holes.forEach(h=>{ if(!h){ return; }
-      const k=[h.face||"", Math.round((+h.x||0)*10), Math.round((+h.y||0)*10),
-               Math.round((+h.d||0)*10), Math.round((+h.depth||0)*10)].join("|");
+      const k=[h.face||"", h.edge||"",
+               Math.round((+h.x||0)*10), Math.round((+h.y||0)*10),
+               Math.round((+h.pos||0)*10), Math.round((+h.z||0)*10),
+               Math.round((+h.d||0)*10), Math.round((+h.depth||0)*10),
+               h.through?1:0].join("|");
       if(seen.has(k)){ n++; return; } seen.add(k); out.push(h); });
     if(out.length!==b.holes.length) b.holes=out; });
   if(n) console.log("🕳 รูซ้อนที่จุดเดียวกัน ถูกยุบ",n,"รู");
@@ -19397,6 +19422,25 @@ function legAnchorsFromMarks(inst){
    ตัวนี้เทียบจำนวนที่ควรเป็นกับที่มีอยู่ ต่างเมื่อไหร่ก็สร้างชุดใหม่จากสเปคของขาเดิม
    (ความสูง · Ø · ร่นจากขอบ · รหัส · โมเดล 3D · ค่าดิบจาก XML ติดไปครบ)
    ตู้ที่ผู้ใช้สั่ง "ใส่/ไม่ใส่ขากลาง" เองไว้ ยังเคารพคำสั่งนั้น ไม่ถูกดันกลับ */
+/* ═════════ v37.9: "ตู้ตื้นเหลือขาแถวเดียว" ต้องเป็นกฎที่ตรวจใหม่ทุกครั้ง ═════════
+   v37.1 ตัดสินเรื่องนี้ครั้งเดียวตอนกดใส่ขา แล้วฝากคำตอบไว้ในช่อง az ของแต่ละขา
+   แต่ syncLegCount ที่วิ่งทุก commit สร้างชุดขาใหม่ด้วย ["F","B"] ตายตัว
+   ตู้ตื้นจึงถูกดันกลับเป็นสองแถวทันทีในรอบแรก กฎเลยไม่เคยมีผลจริงสักครั้ง
+   วัดความลึกในแกนของตู้เอง — ตู้ที่หมุนตามผัง (yaw 90/270) แกนลึกไปอยู่ที่ x
+   ถ้าวัด z ตรง ๆ จะได้ความกว้างมาแทน แล้วตัดสินผิดแบบเงียบ ๆ ทั้งสองทาง */
+function legOneRow(inst){
+  const nd=Math.max(+settings.legNarrowD||+settings.legNarrowW||0,0);
+  if(!(nd>0)) return false;
+  const carc=state.boards.filter(b=>b.cabInst===inst&&!b._door&&!b._virtual&&!isRail(b)&&(b.T>0));
+  if(!carc.length) return false;
+  const sw=cabSwapXZ(inst);
+  let a=Infinity,z=-Infinity;
+  carc.forEach(b=>{ const d=worldDims(b); const c=sw?b.x:b.z, e=sw?d[0]:d[2];
+    a=Math.min(a,c-e/2); z=Math.max(z,c+e/2); });
+  const D0=(isFinite(a)&&z>a)?(z-a):0;
+  return D0>0 && D0<nd-0.5;
+}
+function legRowsFor(inst){ return legOneRow(inst)?["C"]:["F","B"]; }
 let _inLegCount=false;
 function syncLegCount(inst,W){
   if(_inLegCount||!(W>1)) return 0;
@@ -19406,17 +19450,23 @@ function syncLegCount(inst,W){
   let want=legCountFor(W);
   if(t.midMode==="ไม่ใส่") want=Math.min(want,4);      // v25.3: ตู้ที่ย่อจนแคบ ต้องลงเหลือ 2 ขาได้
   else if(t.midMode==="ใส่"&&want<6) want=6;
-  if(want===legs.length) return 0;
+  const rows=legRowsFor(inst), fxs=legFxList(want);
+  const total=rows.length*fxs.length;                  // แถวเดียว = ครึ่งหนึ่งของตาราง (ตารางนับเป็นสองแถวเสมอ)
+  /* v37.9: ต้องดูผังแถวด้วย ไม่ใช่ดูแต่จำนวน — ไฟล์ที่ขาเพี้ยนไปแล้วจะได้ซ่อมตัวเองตอนเปิด
+     ตู้ลึก 70 ที่ค้างเป็น F/B อยู่ 4 ขา นับจำนวนแล้วตรง เลยไม่มีอะไรมาแตะมันเลยตลอดกาล */
+  const azNow=[...new Set(legs.map(b=>String((b.rule||{}).az||"")))].sort().join(",");
+  const azWant=rows.slice().sort().join(",");
+  if(total===legs.length && azNow===azWant) return 0;
   _inLegCount=true;
   try{
-    const cab=legs[0].cab, fxs=legFxList(want);
+    const cab=legs[0].cab;
     state.boards=state.boards.filter(b=>!(b.cabInst===inst&&b.rule&&b.rule.kind==="leg"));
     let n=0;
-    ["F","B"].forEach(az=>fxs.forEach(fx=>{ n++;
+    rows.forEach(az=>fxs.forEach(fx=>{ n++;
       state.boards.push({ id:uid(), name:"Leg "+n, cab:cab, cabInst:inst,
         rule:Object.assign({},t,{ax:(fx<=0.0001?"L":fx>=0.9999?"R":"C"),az:az,fx:fx}),
         L:10,W:10,T:10,x:0,y:0,z:0,orient:"side",yaw:0,tone:null,r:0,holes:[],grooves:[],connectors:[],_virtual:true,_leg:true }); }));
-    return want;
+    return total;
   } finally{ _inLegCount=false; }
 }
 function reapplyLegs(inst){   // จัดเฉพาะขาตู้เกาะมุมโครง — ไม่แตะคาน (กันคานที่ย้ายเองเด้งกลับ)
@@ -20654,6 +20704,7 @@ function _placeLegSet(grp, inst, v, Wc, mny, quiet){   // วางชุดข�
      และไม่เขียนทับ settings.legCode ด้วยตู้ใบสุดท้ายในไฟล์ (ค่านั้นคือ "รุ่นที่เพิ่งเลือกด้วยมือ") */
   { const mc=(v.modelCode||v.code||"LEG").trim(); const bbM=fitModelBBox(mc);   // โมเดล 3D (จาก legModel หรือรหัสนี้) → ใช้รูปวาด + ขนาดจริง
     if(bbM){ v.h=Math.max(round(bbM.y1-bbM.y0),10); v.d=Math.max(round(Math.max(bbM.x1-bbM.x0,bbM.z1-bbM.z0)),15); v._model=mc; } }
+  let oneRow=false;                                   // v37.9: ตัดสินข้างใน run (ตอนตู้ขนานแกนแล้ว) แต่ข้อความสรุปอยู่ข้างนอก
   const run=()=>{
     state.boards=state.boards.filter(b=>!(b.cabInst===inst&&b.rule&&b.rule.kind==="leg"));   // ใส่ซ้ำ = แทนชุดเดิม
     if(v.lift==="ยก"){ const dy=Math.max(v.h||0,0); state.boards.filter(b=>b.cabInst===inst).forEach(b=>{ b.y=round(b.y+dy); }); }
@@ -20666,17 +20717,15 @@ function _placeLegSet(grp, inst, v, Wc, mny, quiet){   // วางชุดข�
     /* ───────── v37.1: ตู้ตื้นก็ต้องเหลือขาแถวเดียว เหมือนที่ตู้แคบเหลือแถวละตัว ─────────
        ของเดิมวัดแต่ความกว้าง ส่วนแนวลึกบังคับสองแถว (หน้า+หลัง) เสมอ
        ตู้ลึก 150 จึงได้ขาหน้า-หลังเบียดกันจนแทบชน ทั้งที่ร่นขอบข้างละ 50 แล้วเหลือช่องแค่ 50 */
-    let D0=0;
-    { const carc=state.boards.filter(b=>b.cabInst===inst&&!b._door&&!b._virtual&&!isRail(b)&&(b.T>0));
-      let a=Infinity,z=-Infinity; carc.forEach(b=>{ const d=worldDims(b); a=Math.min(a,b.z-d[2]/2); z=Math.max(z,b.z+d[2]/2); });
-      D0=(isFinite(a)&&z>a)?(z-a):0; }
-    const nd=Math.max(+settings.legNarrowD||+settings.legNarrowW||0,0);
-    const oneRow = nd>0 && D0>0 && D0<nd-0.5;
+    /* v37.9: ย้ายการตัดสินไปที่ legOneRow() ตัวเดียว ให้ตัวสร้างกับตัวซิงก์คิดเหมือนกันเสมอ
+       ของเดิมคิดกันคนละที่ ตัวสร้างได้แถวเดียว แล้วตัวซิงก์สร้างทับเป็นสองแถวในรอบถัดมา */
+    const rows=legRowsFor(inst);
+    oneRow=(rows.length===1);
     let cnt=legCountFor(W0);
     if(v.mid==="ไม่ใส่") cnt=Math.min(cnt,4);      // v25.3: ตู้แคบที่ได้ 2 ขา ต้องไม่ถูกดันกลับเป็น 4
     else if(v.mid==="ใส่"&&cnt<6) cnt=6;
     const fxs=legFxList(cnt);
-    let n=0; (oneRow?["C"]:["F","B"]).forEach(az=>fxs.forEach(fx=>{ n++;
+    let n=0; rows.forEach(az=>fxs.forEach(fx=>{ n++;
       state.boards.push({ id:uid(), name:"Leg "+n, cab:grp.cab||undefined, cabInst:inst,
         rule:{kind:"leg",ax:(fx<=0.0001?"L":fx>=0.9999?"R":"C"),az:az,fx:fx,inset:Math.max(v.inset||0,0),h:Math.max(v.h||10,10),d:Math.max(v.d||20,15),code:(v.code||"LEG").trim(),model:v._model||undefined,xmlLeg:v.xmlLeg||undefined,
               midMode:((v.mid==="ใส่"||v.mid==="ไม่ใส่")?v.mid:undefined)},   // v9.69: บังคับไว้ = ตัวปรับอัตโนมัติต้องเคารพ
@@ -20687,8 +20736,8 @@ function _placeLegSet(grp, inst, v, Wc, mny, quiet){   // วางชุดข�
   if(quiet) return n;
   settings.legCode=(v.code||"LEG").trim(); lsSet("furnitech:settings",settings);
   buildGTones(); sync(1);
-  toast("ใส่ขาตู้ "+n+" ตัว (หน้า "+(n/2)+" หลัง "+(n/2)+")"+(v._model?(" · ใช้โมเดล 3D \""+v._model+"\" (สูง "+v.h+")"):"")+(v.lift==="ยก"?(" · ยกตู้ขึ้น "+v.h+" มม."):"")
-    +" — Fitting ออกขา "+n+" ตัว"+(legClipCodeOf(v.code)?(" · กิ๊ฟ "+(n/2)+" ตัว"):"")+"/ตู้");
+  toast("ใส่ขาตู้ "+n+" ตัว ("+(oneRow?("แถวเดียว วางกลางความลึก "+n+" ตัว"):("หน้า "+(n/2)+" หลัง "+(n/2)))+")"+(v._model?(" · ใช้โมเดล 3D \""+v._model+"\" (สูง "+v.h+")"):"")+(v.lift==="ยก"?(" · ยกตู้ขึ้น "+v.h+" มม."):"")
+    +" — Fitting ออกขา "+n+" ตัว"+(legClipCodeOf(v.code)?(" · กิ๊ฟ "+(oneRow?n:n/2)+" ตัว"):"")+"/ตู้");
   return n;
 }
 async function addLegsDialog(sel){   // กำหนดเอง — กล่อง prompt เดิม
@@ -20778,8 +20827,11 @@ function legFxList(n){   // สัดส่วนตามแนวกว้า�
 function legFxOfRule(r){ if(!r) return 0;
   return (r.fx!=null&&isFinite(+r.fx))?+r.fx:(r.ax==="L"?0:r.ax==="R"?1:0.5); }
 function _legFxOf(inst){   // สัดส่วนของขาแถวหน้าที่ตู้ใบนี้ใช้อยู่จริง (รูมาร์คต้องตรงกับของจริง)
-  return [...new Set(state.boards.filter(b=>b.cabInst===inst&&b.rule&&b.rule.kind==="leg"&&b.rule.az==="F")
-    .map(b=>legFxOfRule(b.rule)))].sort((a,b)=>a-b);
+  /* v37.9: ตู้ตื้นมีแถวเดียวเป็น az "C" ไม่มี "F" เลย ตัวนี้เคยคืนลิสต์ว่าง
+     แล้วตัวเจาะรูมาร์คถอยไปเดาเองจากความกว้าง รูจึงไม่ตรงกับขาที่ยืนอยู่จริง */
+  const legs=state.boards.filter(b=>b.cabInst===inst&&b.rule&&b.rule.kind==="leg");
+  const row=legs.filter(b=>b.rule.az==="F");
+  return [...new Set((row.length?row:legs).map(b=>legFxOfRule(b.rule)))].sort((a,b)=>a-b);
 }
 /* ═════════ v9.71: มือจับ (Pull) ═════════
    XML ส่งมารายบาน ชุดละ 5 ช่อง ต่อท้ายด้วยเลขบาน 1/2/3
@@ -21627,17 +21679,12 @@ function cabSwapXZ(inst){ const y=(((cabYawOf(inst)||0)%360)+360)%360; return (y
 function sideNominalHD(inst){ return _sideNominalHD0(inst); }
 function _sideNominalHD0(inst){
   let sd=state.boards.filter(b=>b.cabInst===inst&&b.orient==="side"&&!b._door&&!b._virtual&&!b._dx&&!isRail(b)&&b.zoneLo==null);
-  /* ───────── v37.3: ตู้ที่เป็นแผ่นเดียวไม่มีแผ่นข้างให้วัด ─────────
-     ตัวนี้คืน null แล้วตัวปรับขนาดไปวัดกรอบรวมแทน ซึ่งเป็นขนาด "หลังหักค่าลดของ Part" แล้ว
-     กดตกลงทั้งที่ไม่ได้แก้เลข ขนาดนั้นกลายเป็นฐานใหม่แล้วโดนหักซ้ำอีก -6 ทุกครั้ง หดไปเรื่อย ๆ
-     แผ่นหน้าเดี่ยวจึงต้องบวกค่าที่หักไปแล้วกลับเข้ามาก่อน ให้ได้ขนาดก่อนหักเสมอ */
-  if(sd.length<2){
-    const fp=state.boards.filter(b=>b.cabInst===inst&&!b._virtual&&b.orient==="front"&&b._adjApplied);
-    if(fp.length===1&&state.boards.filter(b=>b.cabInst===inst&&!b._virtual).length===1){
-      const b=fp[0], pv=b._adjApplied;
-      return {H:Math.round(b.W-(pv.dW||0)), D:Math.round(b.L-(pv.dL||0))};
-    }
-    return null; }
+  /* ───────── v37.8: ถอดสาขา "แผ่นเดียว" ของ v37.3 ออก ─────────
+     สาขานั้นคืน D = b.L ซึ่งของแผ่นหน้าคือ "ความกว้าง" ไม่ใช่ความลึก
+     กล่องปรับขนาดจึงขึ้น ลึก 800 ให้แผ่นหนา 18.4 ส่วนช่อง กว้าง ยังเป็นเลขหลังหักอยู่เหมือนเดิม
+     กดตกลงเฉย ๆ ก็ยังหดซ้ำทุกครั้ง — ตัวนี้แก้ไม่ตรงจุดตั้งแต่แรก
+     แผ่นเดียวไม่มีโครงให้วัด จึงต้องมีทางของตัวเอง ดู soloPanelOf() / resizeSoloPanel() */
+  if(sd.length<2) return null;
   /* v8.50: ใช้เฉพาะ "แผ่นข้างนอกสุดซ้าย/ขวา" เป็นฐานวัด
      เดิมรวมทุกชิ้นที่วางแนวข้าง (เสาแบ่ง แผงลึกไม่เท่ากัน) แล้วเอาช่วงรวม
      ตู้ที่มีเสาแบ่งลึกกว่าจึงโชว์ความลึกเกินจริง เช่น 584 ทั้งที่แผ่นข้างลึก 300 */
@@ -21652,6 +21699,38 @@ function _sideNominalHD0(inst){
     z0=Math.min(z0,cz-nomW/2); z1=Math.max(z1,cz+nomW/2); });
   return isFinite(y0)?{H:Math.round(y1-y0),D:Math.round(z1-z0)}:null;
 }
+/* ═════════ v37.8: ตู้ที่เป็น "แผ่นเดียว" มีทางปรับขนาดของตัวเอง ═════════
+   ตัวปรับขนาดของตู้ปกติทำงานแบบ วัดกรอบรวม → คิดอัตราส่วน → สเกลทุกชิ้นตาม
+   ซึ่งกับแผ่นเดียวใช้ไม่ได้เลยสองข้อ
+     · กรอบรวมที่วัดได้คือตัวแผ่นเอง และเป็นขนาด "หลังหักค่าลดของ Part" ไปแล้ว
+       เอาไปเป็นเป้าหมายใหม่ = สั่งให้หักซ้ำอีกรอบ 800 → 794 → 788 ทุกครั้งที่กดตกลง
+     · แกน "ลึก" ของแผ่นหน้าคือความหนา ไม่ใช่มิติที่ผู้ใช้หมายถึงตอนพิมพ์เลขลึก
+   จึงอ่าน/เขียนขนาดตรง ๆ ที่ตัวแผ่น โดยยึด "ขนาดตามแบบ" (ก่อนหักค่าลด) เสมอ
+   แล้วปล่อยให้ commit() → applyPartAdjust() หักให้รอบเดียวเหมือนเดิม */
+function soloPanelOf(inst){
+  if(!inst) return null;
+  /* ชิ้นที่ตัวสร้างเฟรมปั้นขึ้นมาไม่นับเป็นชิ้นของตู้ — แผ่นกลาง "ไม้" ตั้ง _virtual=false ไว้
+     ถ้าไม่กันออก บานเฟรมที่ใส่แผ่นกลางไม้จะกลายเป็น 2 ชิ้นแล้วหลุดออกจากทางนี้ */
+  const all=state.boards.filter(b=>b&&b.cabInst===inst&&!b._virtual&&!b._framePart);
+  if(all.length!==1) return null;
+  const b=all[0];
+  return (b&&(b.orient||"front")==="front")?b:null;
+}
+function panelNomSize(b){
+  const pv=(b&&b._adjApplied)||{};
+  return { L:round((+b.L||0)-(+pv.dL||0)), W:round((+b.W||0)-(+pv.dW||0)), T:round(+b.T||0) };
+}
+function resizeSoloPanel(b,L,W,T){
+  if(!b) return false;
+  const nm=panelNomSize(b);
+  const nL=round(Math.max(+L||nm.L,20)), nW=round(Math.max(+W||nm.W,20));
+  stripPartAdjust(b.cabInst);                 // กลับไปเป็นขนาดก่อนหักก่อน แล้วเขียนทับด้วยเป้าใหม่
+  b.L=nL; b.W=nW;
+  if(+T>0) b.T=round(+T);
+  buildGTones(); sync(0,0,0); updateSelBox(); autosave(); commit();
+  toast("ปรับขนาดแผ่นแล้ว — กว้าง "+nL+" × สูง "+nW+" มม. (ขนาดตามแบบ · ค่าลดของ Part หักให้ตอนคำนวณ)");
+  return true;
+}
 function stripPartAdjust(inst){
   let n=0;
   state.boards.filter(b=>b.cabInst===inst&&b._adjApplied).forEach(b=>{ const pv=b._adjApplied;
@@ -21665,6 +21744,9 @@ function _resizeCabinetToCore(inst, W, H, D, lock){
   lock=lock||{};
   const boards=state.boards.filter(x=>x.cabInst===inst);
   if(!boards.length){toast("ไม่พบตู้");return false;}
+  /* v37.8: แผ่นเดียว = ไม่มีอะไรให้สเกล เขียนขนาดลงชิ้นตรง ๆ
+     ความหนาไม่แตะที่นี่ เพราะ D ที่ผู้เรียกอื่น (นำเข้า XML / วางจาก Library) ส่งมาคือความลึกตู้ */
+  { const sp=soloPanelOf(inst); if(sp) return resizeSoloPanel(sp,W,H,null); }
   if(cabYawOf(inst)) return withCabAxisAligned(inst,()=>_resizeCabinetToCore(inst,W,H,D,lock));   // ตู้หมุนตามผัง: คลายหมุนก่อนเสมอ
   let mn=[Infinity,Infinity,Infinity],mx=[-Infinity,-Infinity,-Infinity];
   boards.filter(z=>!z._door&&!z._virtual).forEach(bb=>{const d=worldDims(bb),c=[bb.x,bb.y,bb.z];for(let a=0;a<3;a++){mn[a]=Math.min(mn[a],c[a]-d[a]/2);mx[a]=Math.max(mx[a],c[a]+d[a]/2);}});
@@ -21832,6 +21914,20 @@ async function resizeCabinet(){
   const sel=selBoard(); if(!sel){toast("เลือกชิ้นในตู้ก่อน");return;}
   const inst=sel.cabInst; const boards=state.boards.filter(x=>x.cabInst===inst);
   if(!boards.length){toast("ไม่พบตู้");return;}
+  /* ───────── v37.8: แผ่นเดียวใช้กล่องของตัวเอง ─────────
+     ช่อง กว้าง/สูง = ขนาดของแผ่นเอง (L/W) ก่อนหักค่าลดของ Part · ช่องที่สามคือความหนา ไม่ใช่ความลึกตู้
+     ของเดิมโชว์ กว้าง = เลขหลังหักแล้ว (794) และ ลึก = ความกว้าง (800) ซึ่งผิดทั้งคู่ */
+  { const sp=soloPanelOf(inst);
+    if(sp){ const nm=panelNomSize(sp);
+      const v2=await promptFields("ปรับขนาดแผ่น "+(sel.cab||"")+" (มม.)",[
+        {key:"W",label:"กว้าง (ขนาดตามแบบ — ก่อนหักค่าลดของ Part)",value:nm.L},
+        {key:"H",label:"สูง (ขนาดตามแบบ)",value:nm.W},
+        {key:"T",label:"หนา",value:nm.T}]);
+      if(!v2)return;
+      const nt=round(Math.max(+v2.T||nm.T,1));
+      if(Math.abs(nt-(+sp.T||0))>0.01) sp.T=nt;
+      resizeCabinetTo(inst, +v2.W||nm.L, +v2.H||nm.W, nt, {});
+      return; } }
   let mn=[Infinity,Infinity,Infinity],mx=[-Infinity,-Infinity,-Infinity];
   boards.filter(z=>!z._door&&!z._virtual).forEach(bb=>{const d=worldDims(bb),c=[bb.x,bb.y,bb.z];for(let a=0;a<3;a++){mn[a]=Math.min(mn[a],c[a]-d[a]/2);mx[a]=Math.max(mx[a],c[a]+d[a]/2);}});
   const _sw=cabSwapXZ(inst);                                        // v8.52: ตู้หมุน 90/270 -> กว้าง/ลึก สลับแกน
@@ -24430,11 +24526,20 @@ function fittingAgg(boards){   // รวมเดือย + พินรอง�
   /* v20.8: มือจับโปรไฟล์ของบานไม้ — 1 เส้น 1 รายการ พร้อมความยาวจริง
      ใช้ทางเดียวกับเส้น DX · รหัสที่ออกใช้ "รหัสสินค้า" ที่ตั้งไว้ที่แบบบาน ถ้าไม่ตั้งใช้รหัสหน้าตัด
      บานเฟรมอลูไม่ออกทางนี้เหมือนเดิม เพราะรหัสขึ้นกับสีและขนาดบาน ฝั่ง Production หาเอง */
-  boards.forEach(b=>{ if(!b||!b._framePart||!b._secWood||b._glass)return;
+  /* ───────── v37.8: ความยาวต้องเป็นความยาวตัดจริงของ "เส้นนั้น" ─────────
+     ของเดิมส่ง b.L ซึ่งเส้นเฟรมทุกเส้นก็อปมาจากบานเหมือนกันหมด
+     ทั้งสี่เส้นจึงยุบเป็นแถวเดียว ยาวเท่ากับความกว้างบาน "หลังหักค่าลดของ Part" แล้วด้วย
+     บาน 800×600 จึงออกเป็น 794 ×4 เส้น ตัวค้นรหัสท่อนหา 794 ในคลังไม่เจอ (ไม่มีใครตัดความยาวนี้)
+     ที่ถูกคือ 800 ×2 (E1/E3) กับ 600 ×2 (E2/E4) ซึ่ง v37.4 คิดไว้ให้แล้วที่ _cutLen
+     บล็อกนี้แค่ไม่เคยหยิบไปใช้ · อ่านจาก state.boards ด้วยเหตุผลเดียวกับ v37.7 (เส้นเฟรมเป็นชิ้น _virtual)
+     ลูกที่สอดอยู่ในเส้นยาวเท่าแม่เป๊ะ จึงได้ความยาวถูกตามไปเองผ่าน expandFitKids */
+  ((state.boards&&state.boards.some(x=>x&&x._framePart))?state.boards:boards).forEach(b=>{
+    if(!b||!b._framePart||!b._secWood||b._glass)return;
     const k=String(b._secItem||b._frameSec||"").trim(); if(!k)return;
     const sc=(settings.sections||{})[String(b._frameSec||"").trim()]||{};
     const el8=(((settings.elements||{}).fittings)||[]).find(x=>x.code===k);
-    bomCutRow(m,k,((el8&&el8.desc)||sc.desc||("มือจับโปรไฟล์ "+k)),((el8&&el8.unit)||sc.unit||"เส้น"),b.L,"pull"); });
+    const len8=+b._cutLen||+b.L||0;
+    bomCutRow(m,k,((el8&&el8.desc)||sc.desc||("มือจับโปรไฟล์ "+k)),((el8&&el8.unit)||sc.unit||"เส้น"),len8,"pull"); });
   /* ───────── v37.6: เฟรมอลูเข้าท่อ "ตัดตามยาว" เหมือนเส้น DX กับรางไฟ ─────────
      ของเดิมออกเป็นรายการรวม 008 × 4 เส้น ซึ่งบอกจำนวนแต่ไม่บอกความยาว
      ทั้งที่รหัสสั่งซื้อจริงผูกกับความยาว (600 = ...0106 · 800 = ...0098)
@@ -24462,7 +24567,9 @@ function fittingAgg(boards){   // รวมเดือย + พินรอง�
     const el5=(((settings.elements||{}).fittings)||[]).find(x=>x.code===k);
     (m[k]||(m[k]={art:k,dia:"",kind:"pull",name:(el5&&el5.desc)||settings.pullName||"มือจับ",unit:(el5&&el5.unit)||"ตัว",count:0})).count+=1; }); });
   // กิ๊ฟขาตู้: เฉพาะขาแถวหน้า 1 ตัว/ขา (แผ่นปิดขาปิดด้านหน้า) — ขา 4 ได้ 2 · ขา 6 ได้ 3 · ขา 8 ได้ 4
-  boards.forEach(b=>{ const r=b.rule; if(!r||r.kind!=="leg"||r.az!=="F")return;
+  /* v37.9: ตู้ตื้นมีขาแถวเดียว (az C) แถวนั้นคือแถวหน้าของมันเอง จึงต้องได้กิ๊ฟเหมือนกัน
+     ถ้าเช็ค F อย่างเดียว ตู้ตื้นจะหล่นกิ๊ฟหายไปเงียบ ๆ ตอนกฎแถวเดียวเริ่มทำงาน */
+  boards.forEach(b=>{ const r=b.rule; if(!r||r.kind!=="leg"||!(r.az==="F"||r.az==="C"))return;
     const k=legClipCodeOf(r.code||settings.legCode||"LEG"); if(!k)return;
     const el4=(((settings.elements||{}).fittings)||[]).find(x=>x.code===k);
     (m[k]||(m[k]={art:k,dia:"",kind:"legclip",name:(el4&&el4.desc)||settings.legClipName||"กิ๊ฟขาตู้ (ยึดแผ่นปิดขา)",unit:(el4&&el4.unit)||"ตัว",count:0})).count+=1; });
