@@ -1646,9 +1646,10 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"38.0", build:"2026-08-20/frame-scope-and-cutlen-column",
+  name:"StarNexus Cabinet", version:"38.1", build:"2026-08-20/glass-hanger-face-and-bom",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["38.1","2026-08-20","FIX บากหูแขวนกระจกอยู่คนละด้านกับรู Ø15 ใน 3D ทั้งที่ไฟล์เจาะถูก — v37.2 ย้ายรูไปผิวหลังแล้ว แต่ลืมบากสองใบที่ซ้อนพิกัดเดียวกัน · Pocket ที่ไม่ระบุ face ถือว่าเจาะจากผิวบนเสมอ (pocketZTop) รูปสามมิติจึงวาดบากไว้หน้าบาน ส่วน MPR ออกบากตามฝั่งงานเจาะหลักของชิ้น ซึ่งวิ่งตามรูอยู่แล้ว ไฟล์เลยถูกมาตลอด ผิดแค่ที่ตาเห็น · ใส่ face ให้บากตรงกับรู และติดเลขรุ่นผังไว้ ไฟล์ที่วางผังไปแล้วจะวางใหม่ให้เองตอนเปิด ไม่ต้องไปกดใหม่ทีละแผ่น · FIX แผ่นที่เล็กเกินไปสำหรับหูแขวนถูก return ทิ้งเฉย ๆ ไม่เก็บกวาดผังเดิม ย่อแผ่นแล้วบากค้างครบทุกใบแต่รูหายไป (ในไฟล์จริงมี 13 แผ่นที่มีบากแต่ไม่มีรู) ตอนนี้ล้างให้และคืนผังเองเมื่อแผ่นโตพอ · FEAT หูแขวนกระจกออกใบอุปกรณ์แล้ว 1 จุด = 1 ตัว นับจากรู Ø15 บากสองใบต่อจุดเป็นของตัวเดียวกันจึงไม่นับซ้ำ · ตั้งรหัสได้ในตั้งค่า หมวดหูแขวนกระจก ตั้งต้น GLASSHANGER สร้างแถวรหัสนี้ใน Element → Fittings แล้วใส่ Purchase ID ได้ตามปกติ เว้นรหัสว่าง = ไม่ออกในใบ"],
     ["38.0","2026-08-20","FIX เส้นเฟรมออกไปในใบสั่งของ 2220 เส้น ทั้งที่ในฉากมี 60 — และเป็นของผมเองที่ทำพังตอน v37.7 · เส้นเฟรมเป็นชิ้น _virtual ผู้เรียกบางทางส่งลิสต์ที่กรอง virtual ทิ้งแล้ว ผมจึงแก้ด้วยการไปอ่าน state.boards ตรง ๆ ซึ่งถูกเฉพาะตอนคิดทั้งงาน · แต่ตัวส่งออก (buildImosData) เรียกคิดทีละใบด้วย fittingAgg(grp.boards) ทุกใบจึงหยิบเฟรมของทั้งออเดอร์มาเป็นของตัวเอง ออเดอร์นี้ 37 ใบ ของเลยคูณ 37 พอดี — 50 เส้นที่ยังไม่เจอรหัสท่อนกลายเป็น 1850 และท่อน 100 มม. 10 เส้นกลายเป็น 370 · ที่สังเกตยาก คือหน้า BOM Fitting บนจอคิดทั้งงานรอบเดียว เลขบนจอจึงถูกอยู่ (60) ผิดเฉพาะไฟล์ที่ส่งออก · เปลี่ยนเป็น frameSrcOf() ที่คืนลิสต์เดิมถ้ามีเฟรมอยู่แล้ว ไม่มีค่อยไปหยิบเฉพาะเส้นที่เจ้าของอยู่ในลิสต์นั้น ใช้กับทั้งเฟรมอลูและบานไม้ · FEAT หน้า BOM Fitting เพิ่มคอลัมน์ ขนาดตัด — ชื่อรายการพึ่งไม่ได้ รหัสที่ไม่มีคำอธิบายใน Element จะโชว์เป็นรหัสเปล่า ๆ เส้นเฟรมเก้าความยาวจึงขึ้นว่า 008 เหมือนกันหมด แยกไม่ออกว่าบรรทัดไหนคืออะไร ตอนนี้ความยาวมีคอลัมน์ของตัวเอง"],
     ["37.9","2026-08-20","FIX ขาตู้ตื้นโผล่พ้นตัวตู้ทั้งหน้าและหลัง — เคส BNF068 ลึก 70 ได้ขาสองแถวห่างกัน 80 ขาหน้าไปยืนหลังแผ่นหลัง 30 ขาหลังโผล่พ้นหน้าตู้ 30 · ไม่ใช่เรื่องหมุนตู้ตอนโหลดออเดอร์ ตู้ใบนี้ yaw=0 และตำแหน่งขาตรงกับสูตร az F/B เป๊ะทุกตัว แปลว่าอ่านแกนลึกถูกแล้ว แต่ไปตัดสินว่าต้องมีสองแถว · v37.1 ที่ทำกฎ ตู้ตื้นเหลือแถวเดียว ไว้ ตัดสินครั้งเดียวตอนกดใส่ขาแล้วฝากคำตอบไว้ในช่อง az แต่ syncLegCount ที่วิ่งทุก commit สร้างชุดขาใหม่ด้วย [F,B] ตายตัว และเทียบแค่จำนวน ตู้ตื้นที่ได้แถวเดียว 2 ขา จึงถูกมองว่าขาดไป 2 แล้วสร้างทับเป็นสองแถวทันทีในรอบแรก กฎ v37.1 เลยไม่เคยมีผลจริงสักครั้ง · ย้ายการตัดสินมาที่ legOneRow() ตัวเดียว ตรวจใหม่ทุกครั้งพร้อมเทียบผังแถวไม่ใช่แค่จำนวน ไฟล์ที่ขาเพี้ยนไปแล้วจึงซ่อมตัวเองตอนเปิด · วัดความลึกในแกนของตู้เอง ตู้ที่หมุนตามผัง 90/270 แกนลึกไปอยู่ที่ x ถ้าวัด z ตรง ๆ จะได้ความกว้างมาแทนแล้วตัดสินผิดทั้งสองทาง (จุดนี้แหละที่การหมุนจะกัด ถ้าไม่กัน) · รูมาร์คใต้แผ่นพื้นเหลือแถวเดียวตามขา และตัวหาสัดส่วนขาเลิกกรองเฉพาะแถวหน้า ไม่งั้นตู้ตื้นคืนลิสต์ว่างแล้วรูไปเดาเอง · กิ๊ฟขาตู้นับแถว C ด้วย ตู้ตื้นจะได้ไม่หล่นกิ๊ฟหายเงียบ ๆ ตอนกฎเริ่มทำงาน"],
     ["37.8","2026-08-20","FIX สามอาการที่ไล่มาหลายรอบแล้วไม่จบ — ทั้งสามอยู่คนละที่กับที่ผมไปแก้ทุกครั้ง · (1) รูมาร์คไม่ขึ้น 4 ด้าน: สเปคเก็บครบ ตัวเจาะสร้างครบ 4 ใบจริง แต่ถูก dedupeHoles กวาดทิ้งทุกครั้งที่ commit — กุญแจกันรูซ้อนอ่านแต่ face/x/y/Ø/ลึก ซึ่งรูสัน (e1..e4) ไม่มีสักช่อง เพราะเก็บตำแหน่งไว้ที่ edge/pos/z คนละชุดกัน มาร์คสี่ด้านที่ Ø กับลึกเท่ากันจึงได้กุญแจเหมือนกันหมด เหลือรอดใบเดียว · ข้อความ ยุบ 3 รู ที่ขึ้นซ้ำใน console คือตัวมันเองบอกอยู่แล้วว่าทำอะไรลงไป · (2) กดปรับขนาดแล้วหดทุกครั้ง: ตู้แผ่นเดียวไม่มีโครงให้วัด ตัวปรับขนาดจึงวัดกรอบรวมซึ่งเป็นขนาดหลังหักค่าลดของ Part แล้ว เอาไปเป็นเป้าใหม่ = สั่งหักซ้ำอีกรอบ 800 → 794 → 788 · v37.3 แก้ผิดจุด ไปคืนค่าให้ช่อง สูง/ลึก แต่ช่อง กว้าง ยังเป็นเลขหลังหักอยู่เหมือนเดิม แถมคืน ลึก = ความกว้างของแผ่น (โชว์ ลึก 800 ให้แผ่นหนา 18.4) · ตอนนี้แผ่นเดียวมีทางของตัวเอง อ่าน/เขียนขนาดตรง ๆ ที่ตัวแผ่นโดยยึดขนาดตามแบบเสมอ ช่องที่สามเป็นความหนา ไม่ใช่ความลึกตู้ · (3) ขนาดตัดเส้นเฟรมไม่ไปหารหัสในคลัง: v37.4 คิด _cutLen รายเส้นไว้ถูกแล้ว (800 ×2 · 600 ×2) แต่บล็อกที่ออก BOM ของบานไม้ยังส่ง b.L ซึ่งเส้นทั้งสี่ก็อปมาจากบานเหมือนกันหมดและเป็นเลขหลังหักด้วย จึงยุบเป็น 794 ×4 เส้น ตัวค้นรหัสท่อนหา 794 ไม่เจอเพราะไม่มีใครตัดความยาวนี้ · FIX รู Ø15 ของหูแขวนกระจกหายทุกครั้งที่ commit เหลือแต่บาก — ตัวล้างรูกำพร้าถือว่า h.src คือ id ของชิ้นเจ้าของเสมอ แต่หูแขวนใช้ src เป็นป้ายชื่อผัง (glasshanger) หาในทะเบียน id ไม่เจอก็ลบทิ้ง"],
@@ -2375,7 +2376,7 @@ const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, d
   healOnVarChange:true,                           // v31.1: แก้ค่าตัวแปรของตู้แล้วเชื่อมเดือยใหม่ให้ตู้ใบนั้น
   kitField:"K_Fitting_Concept", kitPushMap:"B:top, W:bottom", xmlThinMin:1, xmlSkipNoModel:false, orderProgNo:"700", doorGapWarn:50, csNewGap:120, ledSets:[{id:"12V-COB", volt:12, wPerM:9.6,
     stripCode:"", psuMap:"30, 60, 100", psuCode:"", psuUse:80, maxRunM:5,
-    wireCode:"", wireMode:"ต่อเส้นไฟ", wireQty:1}], ledSetPerRun:false, cutSizeFmt:"{ชื่อ} ตัดขนาด {ยาว} mm.", cutLookupKey:"ตัดขนาด", cutLookupOn:true, pullXmlOn:true, pullField:"K_Pull", pullOriField:"K_Orientation", pullPosField:"K_Pull_Position", pullXField:"K_Pull_Coordinate_X", pullYField:"K_Pull_Coordinate_Y", pullNo:"nopull,none,-", pullName:"มือจับ", pull3D:true, dxNotchGap:0.5, railLikeMaxW:100, pullDefPos:"UpMiddle", pullDefOri:"H", pullDefX:35, pullDefY:0, legClipOn:true, legClipMap:"", legClipCode:"LEGCLIP", legClipName:"กิ๊ฟขาตู้ (ยึดแผ่นปิดขา)", doorSwing:true, shelfT:16, hangRailCode:"HANGRAIL", hangRailName:"ราวแขวนผ้า สแตนเลส C", hangRailThruD:8, hangRailCsD:13, hangRailCsDepth:2, hangRailEndGap:25, hangRailMap:"", drawerSideT:16, drawerBotT:9, drawerBoxH:120, drawerBoxLift:20, screwD:5, screwMateDepth:28, screwInset:9, screwCode:"SCREW5", screwName:"สกรู Ø5", altoMapA:"350:552.35.362, 400:552.35.363, 450:552.35.364, 500:552.35.365", altoMapW:"350:552.35.762, 400:552.35.763, 450:552.35.764, 500:552.35.765",
+    wireCode:"", wireMode:"ต่อเส้นไฟ", wireQty:1}], ledSetPerRun:false, cutSizeFmt:"{ชื่อ} ตัดขนาด {ยาว} mm.", cutLookupKey:"ตัดขนาด", cutLookupOn:true, pullXmlOn:true, pullField:"K_Pull", pullOriField:"K_Orientation", pullPosField:"K_Pull_Position", pullXField:"K_Pull_Coordinate_X", pullYField:"K_Pull_Coordinate_Y", pullNo:"nopull,none,-", pullName:"มือจับ", pull3D:true, dxNotchGap:0.5, railLikeMaxW:100, pullDefPos:"UpMiddle", pullDefOri:"H", pullDefX:35, pullDefY:0, legClipOn:true, legClipMap:"", legClipCode:"LEGCLIP", legClipName:"กิ๊ฟขาตู้ (ยึดแผ่นปิดขา)", doorSwing:true, shelfT:16, hangRailCode:"HANGRAIL", hangRailName:"ราวแขวนผ้า สแตนเลส C", glassHangerCode:"GLASSHANGER", glassHangerName:"หูแขวนกระจก", hangRailThruD:8, hangRailCsD:13, hangRailCsDepth:2, hangRailEndGap:25, hangRailMap:"", drawerSideT:16, drawerBotT:9, drawerBoxH:120, drawerBoxLift:20, screwD:5, screwMateDepth:28, screwInset:9, screwCode:"SCREW5", screwName:"สกรู Ø5", altoMapA:"350:552.35.362, 400:552.35.363, 450:552.35.364, 500:552.35.365", altoMapW:"350:552.35.762, 400:552.35.763, 450:552.35.764, 500:552.35.765",
   /* v7.88: ซีรีส์ราง Kitchen 4.0 — โครงเดียวกับ ALTO แต่มีสีเดียว (ไม่มีตัวเลือกสี) */
   k40Code:"KITCHEN40_H80", k40Name:"ราง Kitchen 4.0", k40SideH:80, k40BackH:63, k40PanelT:16,
   k40HMap:"63:KITCHEN40_H80, 148:KITCHEN40_H150", altoHMapA:"", altoHMapW:"",
@@ -18258,6 +18259,9 @@ function renderSettings(){
       <span>ขากลางมาร์ค <b>รูเดียว</b> ตรงศูนย์ขา — ขาริมซ้าย/ขวายังเป็นรูคู่เหมือนเดิม (ปิด = เจาะคู่ทุกจุด)</span></label>
     <div style="font-size:11px;opacity:.62;margin:2px 0 4px">รูคู่มีไว้ให้ขยับขาหนีขอบ/หนีเดือยได้ ซึ่งจำเป็นเฉพาะขาริม · ขากลางไม่ได้ขยับ เจาะคู่จึงเป็นรูเกินที่ไม่มีใครใช้ · ตู้ 8 ขา = ริม 2 จุดจุดละคู่ + กลาง 2 จุดจุดละรูเดียว ต่อแถว</div>
     ${num("legMarkMidOver","กว้างเกินกี่ มม. ถึงเพิ่มขากลาง")}
+    <div class="sumh" style="margin-top:12px">หูแขวนกระจก</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${pick("glassHangerCode","รหัส Fitting (Element → Fittings) — ใส่ Purchase ID ที่แถวนี้","fittings")}${txt("glassHangerName","ชื่อในใบอุปกรณ์ (ใช้เมื่อยังไม่มีแถวใน Element)")}</div>
+    <div style="font-size:11px;opacity:.62;margin:2px 0 4px">1 จุด = 1 ตัว นับจากรู Ø15 ที่ผังวางไว้ (บาก 45×18 กับ 20×8 ที่ซ้อนพิกัดเดียวกันเป็นของตัวเดียวกัน ไม่นับซ้ำ) · เว้นรหัสว่าง = ไม่ออกในใบอุปกรณ์</div>
     <div class="sumh" style="margin-top:12px">คาน DX (บานล้วง)</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${num("dxHTop","สูงคาน DX บน/ล่างสุด (มม.)")}${num("dxHMid","สูงคาน DX กลาง ระหว่างบาน (มม.)")}</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${num("dxHI","DX I: สูงคานตั้งต้น (มม.)")}${num("dxTI","DX I: หนาแผ่นตั้งต้น (มม.)")}</div>
@@ -23712,7 +23716,7 @@ function sxSetBackCNC(b,on){
 /* v37.0: ทิศบากต้องเป็นแนวตั้ง — v36.7 หยิบค่าจากไฟล์ 2076 (LA=45 BR=18 · WI=-180)
    ซึ่งเป็นชุดแนวนอน ที่ถูกคือชุดของไฟล์ 2071 (LA=18 BR=45 · WI=0) บากยาวไปตามแกน Y */
 const GLASS_HANGER={ inset:50, dia:15, deep:9,
-  pockets:[{w:18,h:45,depth:3,r:9},{w:8,h:20,depth:8,r:4}], wi:0, zt:0 };
+  pockets:[{w:18,h:45,depth:3,r:9},{w:8,h:20,depth:8,r:4}], wi:0, zt:0, ver:2 };
 function sxHangerGrid(L,W){
   const IN=GLASS_HANGER.inset;
   const nCol = (L>=1800) ? 4 : (L>1200 ? 3 : 2);          // กว้าง >1200 เพิ่มกลาง · ≥1800 เป็น 4 สุดแค่นี้
@@ -23725,7 +23729,15 @@ function sxHangerGrid(L,W){
 function sxAddGlassHangers(b,quiet){
   if(!b){ toast("เลือกชิ้นก่อน"); return; }
   const L=+b.L||0, W=+b.W||0;
-  if(L<2*GLASS_HANGER.inset+10||W<2*GLASS_HANGER.inset+10){ if(!quiet) toast("แผ่นเล็กเกินไปสำหรับหูแขวน"); return; }
+  if(L<2*GLASS_HANGER.inset+10||W<2*GLASS_HANGER.inset+10){
+    /* v38.1: แผ่นเล็กเกินไป — ต้องเก็บกวาดผังเดิมด้วย ไม่ใช่ return เฉย ๆ
+       ย่อแผ่นจนเล็กแล้วบากยังค้างครบทุกใบ ส่วนรูหายไป (เจอในไฟล์จริง แผ่น 344×94 มี 8 บาก 0 รู)
+       ไม่ลบ _glassHanger ทิ้ง เพื่อให้ผังกลับมาเองเมื่อแผ่นโตพอ */
+    const had=((b.holes||[]).some(h=>h&&h.src==="glasshanger")||(b.pockets||[]).some(k=>k&&k.src==="glasshanger"));
+    if(had){ b.holes=(b.holes||[]).filter(h=>h.src!=="glasshanger");
+             b.pockets=(b.pockets||[]).filter(k=>k.src!=="glasshanger"); }
+    if(!quiet) toast("แผ่นเล็กเกินไปสำหรับหูแขวน"+(had?" — เอาผังเดิมออกให้แล้ว":""));
+    return; }
   const g=sxHangerGrid(L,W);
   b.holes=(b.holes||[]).filter(h=>h.src!=="glasshanger");
   b.pockets=(b.pockets||[]).filter(k=>k.src!=="glasshanger");
@@ -23734,10 +23746,15 @@ function sxAddGlassHangers(b,quiet){
     /* v37.2: เจาะจากผิวหลังบาน ไม่ใช่ผิวหน้า — หูแขวนอยู่ด้านหลังเสมอ
        ของเดิมตั้ง top ทำให้รูไปโผล่หน้าบานที่ลูกค้าเห็น */
     b.holes.push({d:GLASS_HANGER.dia,x:lx,y:ly,depth:GLASS_HANGER.deep,face:"bottom",src:"glasshanger",sys:true});
+    /* ───────── v38.1: บากต้องอยู่ผิวเดียวกับรู ─────────
+       v37.2 ย้ายรู Ø15 ไปผิวหลัง (face "bottom") แต่ลืมบากสองใบที่ซ้อนพิกัดเดียวกัน
+       Pocket ที่ไม่ระบุ face ถือว่าเจาะจากผิวบนเสมอ (ดู pocketZTop) รูปสามมิติจึงวาดบากไว้หน้าบาน
+       ส่วนไฟล์ MPR ออกบากตามฝั่งงานเจาะหลักของชิ้น (primarySideOf) ซึ่งวิ่งตามรู จึงถูกอยู่แล้ว
+       = อาการ "ไฟล์เจาะถูก แต่ 3D บากอยู่คนละด้านกับรู 15" */
     GLASS_HANGER.pockets.forEach(q=>b.pockets.push({x:lx,y:ly,w:q.w,h:q.h,depth:q.depth,r:q.r,
-      wi:GLASS_HANGER.wi, zt:GLASS_HANGER.zt, src:"glasshanger"}));
+      wi:GLASS_HANGER.wi, zt:GLASS_HANGER.zt, face:"bottom", src:"glasshanger"}));
   });
-  b._glassHanger={L:round(L),W:round(W)};      // จำไว้ว่าชิ้นนี้ขอผังหูแขวน + ขนาดที่คิดไว้ตอนนั้น
+  b._glassHanger={L:round(L),W:round(W),v:GLASS_HANGER.ver};   // จำขนาดที่คิดไว้ + รุ่นของผัง (ไฟล์เก่าจะได้วางใหม่เอง)
   if(quiet) return;
   sync(0); try{ showInspector(); }catch(e){}
   toast("หูแขวนกระจก "+g.pts.length+" ตัว · "+g.nCol+" คอลัมน์ × "+g.nRow+" แถว (ร่นขอบ "+GLASS_HANGER.inset+")"); }
@@ -23750,7 +23767,8 @@ function sxRefreshGlassHangers(){
   (state.boards||[]).forEach(b=>{
     const g=b&&b._glassHanger; if(!g) return;
     const L=round(+b.L||0), W=round(+b.W||0);
-    if(Math.abs(L-(+g.L||0))<0.05 && Math.abs(W-(+g.W||0))<0.05) return;   // ขนาดเท่าเดิม ไม่ต้องทำ
+    /* v38.1: ผังรุ่นเก่า (ก่อนใส่ face ให้บาก) ต้องวางใหม่ให้เอง ไฟล์ที่ทำไว้แล้วจะได้ไม่ค้างบากผิดด้าน */
+    if((+g.v||1)>=GLASS_HANGER.ver && Math.abs(L-(+g.L||0))<0.05 && Math.abs(W-(+g.W||0))<0.05) return;   // ขนาดเท่าเดิม ไม่ต้องทำ
     try{ sxAddGlassHangers(b,true); n++; }catch(e){}
   });
   return n; }
@@ -24588,6 +24606,18 @@ function fittingAgg(boards){   // รวมเดือย + พินรอง�
     const k=legClipCodeOf(r.code||settings.legCode||"LEG"); if(!k)return;
     const el4=(((settings.elements||{}).fittings)||[]).find(x=>x.code===k);
     (m[k]||(m[k]={art:k,dia:"",kind:"legclip",name:(el4&&el4.desc)||settings.legClipName||"กิ๊ฟขาตู้ (ยึดแผ่นปิดขา)",unit:(el4&&el4.unit)||"ตัว",count:0})).count+=1; });
+  /* ───────── v38.1: หูแขวนกระจก — 1 จุด = 1 ตัว ─────────
+     ของเดิมวางผังเจาะให้อย่างเดียว ไม่เคยออกใบอุปกรณ์เลยสักครั้ง
+     ฝ่ายจัดซื้อจึงไม่มีทางรู้ว่าต้องสั่งกี่ตัว ต้องไปนับรูเอาจากแบบ
+     นับจากรู Ø15 ที่ผังวางไว้ (บากสองใบต่อจุดเป็นของตัวเดียวกัน ไม่นับซ้ำ)
+     รหัสตั้งได้ในตั้งค่า → ไปสร้างแถวรหัสนี้ใน Element → Fittings แล้วใส่ Purchase ID ได้ตามปกติ */
+  { const gk=String(settings.glassHangerCode||DEF_SETTINGS.glassHangerCode||"").trim();
+    if(gk){ let ng=0;
+      (boards||[]).forEach(b=>{ if(!b||!b.holes||!b.holes.length) return;
+        ng+=b.holes.filter(h=>h&&h.src==="glasshanger").length; });
+      if(ng>0){ const elg=(((settings.elements||{}).fittings)||[]).find(x=>x.code===gk);
+        (m[gk]||(m[gk]={art:gk,dia:"",kind:"hanger",name:(elg&&elg.desc)||settings.glassHangerName||DEF_SETTINGS.glassHangerName,
+          unit:(elg&&elg.unit)||"ตัว",count:0,_pidList:fitPidList(gk)})).count+=ng; } } }
   // รางลิ้นชัก: 1 ลูก = 1 ชุด · เลือกรหัสตามความลึกกล่องจาก "ซีรีส์ราง" ใน Element → Fittings (settings.slideCode ชี้ตัวที่ใช้)
   // ตาราง lenMap อยู่ในตัว Element → Save As ได้ทั้งซีรีส์ · ไม่มีใน Element ค่อย fallback settings.slideMap
   { const fitDefs0=(settings.elements&&settings.elements.fittings)||[];
