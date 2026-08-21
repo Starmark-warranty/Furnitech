@@ -1243,6 +1243,7 @@
   .emFld.wide>input,.emFld.wide>textarea{width:100%;box-sizing:border-box}
   .emFld.wide code{background:rgba(127,127,127,.16);padding:1px 4px;border-radius:4px;font-size:11px}
   .modal .card.wide{width:min(1240px,97vw)}
+  #fieldsModal .card.wide{width:min(1500px,97vw)}          /* v39.9: กล่องที่มีรูปตัวอย่าง กางกว้างกว่าปกติ */
   .modal .card.wide .mbody{max-height:86vh;overflow:auto}
   /* Element Manager always (near-)fullscreen */
   #elemModal .card{width:97vw;max-width:1700px;height:95vh;max-height:95vh}
@@ -1646,9 +1647,18 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"39.1", build:"2026-08-20/pin-beats-backflush",
+  name:"StarNexus Cabinet", version:"40.0", build:"2026-08-20/new-order-blank",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["40.0","2026-08-20","FEAT ปุ่ม ออเดอร์ใหม่ (หน้าเปล่า) ที่กล่อง Order — เดิมไม่มีทางเริ่มงานใหม่นอกจากกด F5 · ปุ่ม ตู้เปล่า ที่มีอยู่ในกล่องเปิดตู้ล้างแค่ state.boards ส่วนเลขออเดอร์ ตัวแปรรายตู้ ($D4 ฯลฯ) สีรายตู้ ลำดับบาร์โค้ด บรรทัดสั่งของ และตัวเลือกบาน ยังค้างจากงานก่อนทั้งหมด งานใหม่จึงพกของงานเก่าติดไปโดยไม่มีใครเห็น จนไปโผล่ตอนส่งออก · ตอนนี้ล้างทุกช่องที่ผูกกับออเดอร์ให้ครบในทีเดียว และปุ่ม ตู้เปล่า เดิมก็ใช้ทางเดียวกันแล้ว · ถามก่อนถ้าฉากยังมีของ พร้อมบอกว่าจะล้างอะไรบ้างและเตือนให้ไปเซฟก่อน · ชิ้นงานยังกด Ctrl+Z เอาคืนได้ถ้าเผลอ"],
+    ["39.9","2026-08-20","FIX รูปตัวอย่างในกล่องเซาะร่องอยู่ล่างสุดของกล่องกว้าง 600 — รูปเลยแคบ และต้องเลื่อนลงไปดูทุกครั้งที่แก้เลข ซึ่งเสียเวลาพอ ๆ กับกดออกไปดูข้างนอก คือไม่ได้แก้ปัญหาที่ตั้งใจจะแก้เลย · กล่องไหนมีฟิลด์รูปตัวอย่าง กางเป็นสองคอลัมน์เต็มจอให้อัตโนมัติ ช่องกรอกอยู่ซ้าย รูปอยู่ขวาแบบติดหนึบไม่เลื่อนหนี แก้เลขแล้วเห็นผลในสายตาเดียวกัน · รูปได้พื้นที่จาก 560 เป็น 900 กว้าง สูงได้ถึง 420 แผ่น 1000×400 จึงวาดที่สเกล 0.84 เกือบเท่าของจริง · กล่องที่ไม่มีรูปยังกว้าง 600 เท่าเดิม · เพิ่มบรรทัดสรุปในรูปว่าแผ่นเท่าไหร่ ร่องกว้างลึกเท่าไหร่ และระยะที่กรอกวัดถึงอะไร กับคำเตือนตัวใหญ่เมื่อร่องล้นออกนอกแผ่น"],
+    ["39.8","2026-08-20","FEAT กล่องเซาะร่องมีรูปตัวอย่างสด — วาดแผ่นย่อพร้อมร่องที่กำลังจะได้ ร่องเดิมที่มีอยู่แล้วเป็นสีเทา และเส้นบอกระยะจากขอบ ขยับตามทุกครั้งที่พิมพ์หรือกดสลับตัวเลือก ไม่ต้องกดตกลงออกไปดูแล้วเข้ามาแก้วนไปเรื่อย ๆ · เตือนให้ด้วยถ้าร่องล้นออกนอกแผ่น ซึ่งของเดิมรู้ตอนกดตกลงไปแล้ว · ทำเป็นฟิลด์ชนิด preview ของกล่องกรอกค่ากลาง กล่องอื่นเอาไปใช้ได้ทันที · FEAT เลือกได้แล้วว่าระยะที่กรอกวัดถึงอะไร กึ่งกลางร่อง ขอบร่องด้านใกล้ หรือขอบร่องด้านไกล — ของเดิมเป็นกึ่งกลางตายตัวและไม่มีที่ไหนบอกไว้ แต่แบบที่ได้มาจากหน้างานมักให้เป็นระยะถึงขอบร่อง ต้องมานั่งบวกลบครึ่งความกว้างเอาเองทุกครั้ง พลาดทีเดียวร่องเลื่อนไปครึ่งดอก · โปรแกรมแปลงเป็นกึ่งกลางให้เอง โมเดลข้างในยังเก็บกึ่งกลางเหมือนเดิม ไฟล์เจาะกับแบบไม่เปลี่ยนพฤติกรรมสักตัว และจำไว้ว่ากรอกมาแบบไหน กดแก้ไขทีหลังจึงขึ้นเลขเดิมที่พิมพ์ไป ไม่ใช่เลขที่แปลงแล้ว"],
+    ["39.7","2026-08-20","FIX แถวรายการร่องในแผงขวาอ่านไม่ได้ — ผมวางตัวหนังสือไว้ข้างปุ่มสี่ตัวในแผงที่แคบอยู่แล้ว ปุ่มกินไปหมด เหลือให้ข้อความไม่ถึงร้อยพิกเซล ตัดคำลงมาบรรทัดละคำจนอ่านไม่ออก · จัดใหม่เป็นตัวหนังสือเต็มความกว้างแถว แล้วปุ่มลงไปอยู่บรรทัดของตัวเองชิดขวา · แยกข้อความเป็นสองบรรทัด บรรทัดบนบอกว่าเป็นร่องอะไร แนวไหน ผิวไหน (กับ CNC ถ้าเป็น) บรรทัดล่างเป็นตัวเลขล้วน กว้าง ลึก วัดจากขอบไหน ร่นหัวท้ายหรือวิ่งสุด"],
+    ["39.6","2026-08-20","ปรับแบบผลิตตามที่สั่งสามข้อ · (1) กล่องขยาย DETAIL ย้ายไปคอลัมน์ขวา เหมือนที่หน้าหน้าตัดเฟรมทำอยู่ — วางเป็นแถบล่างทำให้รูปแผ่นถูกบีบเตี้ยลงทั้งหน้า ทั้งที่แผ่นส่วนใหญ่เป็นแนวนอนยาว ที่ว่างจริงอยู่ทางขวา และทำให้สองหน้าเหมือนกัน ช่างหาของที่เดิม · (2) FIX แถวระยะบอกไม่ครบสองแกน บางแผ่นบอกด้านยาวไม่บอกด้านกว้าง บางแผ่นกลับกัน — สองสาเหตุ · แถวบานพับเขียนเป็น ถ้าแกน X มีตั้งแต่ 2 ค่า ให้ออกแกน X ไม่งั้นค่อยดูแกน Y ซึ่งออกได้แกนเดียวเสมอ ทั้งที่อีกแกนคือ ศูนย์ถ้วยห่างจากขอบบาน ซึ่งช่างต้องใช้ตั้งเครื่องพอกัน · และแถวหูแขวนที่เพิ่งเพิ่มไปวางที่ ±150 จากขอบกรอบซึ่งเกินระยะกันขอบ 120 ที่มีอยู่ หลุดออกนอกกรอบทันที ซ้ายได้ -30 · ตอนนี้กันที่ตามจำนวนแถวจริงแถวละ 52 ทั้งซ้ายและล่าง และทุกแถวออกครบสองแกนเสมอ · (3) เอาป้ายของหูแขวนออกจากผังหลักแล้ว จุดเดียวมีทั้งรูและบากสองใบซ้อนพิกัดกัน ป้ายสามอันทับกันจนอ่านไม่ออกทั้งกอง ระยะภายในไปดูที่กล่องขยายซึ่งบอกครบกว่า ส่วนตำแหน่งชุดยังมีแถวสีเขียวบอกอยู่"],
+    ["39.5","2026-08-20","FEAT กล่องขยาย DETAIL ของอุปกรณ์ที่เป็นชุด — หูแขวนกระจกกับบานพับ ใช้แนวเดียวกับหน้าตัดร่องของ v39.4 · หูแขวนหนึ่งจุดคือบากสองใบซ้อนพิกัดเดียวกันบวกรู Ø15 ระยะภายในอยู่ระดับ 8 ถึง 45 มม. บนแผ่นยาว 2200 มันเล็กจนไม่มีทางอ่านได้ · FIX ที่หนักกว่าคือขอบบากทุกใบถูกยัดเข้าโซ่ระยะของหน้าหลัก หูแขวน 6 จุดเพิ่มขีดเข้าไป 24 ขีดต่อแกน โซ่เลยอ่านไม่ออกสักตัว (ในแบบที่ส่งมาขึ้นเป็น 277.5 · 50 · 60.5 · 1005 · 12.5 · 50 · 62.5) · ชุดพวกนี้เป็นของสำเร็จ ระยะภายในเท่ากันทุกจุด ไม่มีใครวัดจากหน้าหลัก · เอาบากหูแขวนออกจากโซ่ แล้วให้ชุดมีแถวระยะของตัวเองสีเขียว บอกแค่ว่าเข้ามาจากขอบเท่าไหร่ ห่างกันเท่าไหร่ กี่จุด แบบเดียวกับแถวสีม่วงของบานพับที่ v23.3 ทำไว้ · ระยะภายในไปอยู่ในกล่องขยาย ขยาย 1 จุด บอก Ø รู ความลึก ขนาดบากทุกใบ ความลึก และ R · กล่องบานพับบอก Ø ถ้วย ความลึก ศูนย์ถ้วยจากขอบ และผังเดือยยึด ดึงจากรุ่นบานพับของบานใบนั้น (v38.3) ไม่ใช่ค่ากลาง ระบุชื่อรุ่นในหัวกล่องด้วย · แถบล่างของแบบรวมทุกกล่องเข้าด้วยกัน หน้าตัดร่อง หูแขวน บานพับ สูงสุด 5 กล่องต่อหน้า"],
+    ["39.4","2026-08-20","FEAT ร่องมีรายการให้จัดการแล้ว ไม่ใช่มีแต่ปุ่มเพิ่ม — แผงขวาแสดงร่องทุกเส้นของแผ่นนั้น พร้อมสรุปว่าแนวไหน ผิวไหน กว้างลึกเท่าไหร่ วัดจากขอบไหนกี่มิล ร่นหัวท้ายหรือวิ่งสุด และเป็น CNC หรือเปล่า · แต่ละเส้นมีปุ่ม แก้ไข · ทำสำเนาในแผ่นนี้ · คัดลอกไปแผ่นอื่น · ลบ · ของเดิมใส่ผิดทีเดียวต้องล้างร่องทั้งแผ่นแล้วกรอกใหม่ทุกเส้น และร่องชุดเดียวกันที่ต้องมีทั้งแผ่นซ้ายขวาก็ต้องกรอกสองรอบ · กล่องแก้ไขใช้ตัวเดียวกับกล่องเพิ่ม เติมค่าเดิมให้ครบก่อน · ตอนบันทึกทับ ธงของระบบ (ร่องแผ่นหลัง ความหนาแผ่นหลัง backset ธง CNC ร่องรางไฟ) ถูกยกมาด้วย ไม่งั้นแก้ความลึกทีเดียว ร่องแผ่นหลังกลายเป็นร่องธรรมดา หลุดจากมาโครและสายเลื่อยทันที · FEAT แบบผลิตมีแถบ หน้าตัดร่อง (SECTION) แล้ว — ผังด้านบนบอกได้แค่ว่าร่องอยู่แนวไหนยาวแค่ไหน ไม่มีทางเห็นว่ามันกินเข้าไปในเนื้อไม้เท่าไหร่ ช่างต้องรู้สามตัวก่อนตั้งเครื่องคือ ระยะจากขอบ กว้าง ลึก เทียบกับความหนาแผ่น · ตัดขวางแนวร่องให้ดูตรง ๆ พร้อมบอกว่าวัดจากขอบไหน · วาดเป็นภาพขยายเฉพาะช่วงจากขอบถึงร่อง ไม่ใช่ทั้งความกว้างแผ่น ไม่งั้นร่อง 8 มม. บนแผ่น 570 เล็กจนมองไม่เห็นอะไรเลย และกำกับไว้ในรูปว่าคนละมาตราส่วนกับผังด้านบน"],
+    ["39.3","2026-08-20","FIX อาการหน่วงตอนเปิดงานและทุกครั้งที่กระทำกับตู้ — ไม่เกี่ยวกับรางไฟ (งานที่ส่งมาไม่มีรางไฟสักเส้น) · ต้นเหตุคือแคชรูปทรง v20.1 ที่สร้างไว้ครบแล้ว ถูกสั่งล้างทิ้งก่อนการวาดจริงทุกครั้ง เผื่อของค้าง เหลือประโยชน์เฉพาะช่วงอนิเมชันกางบาน ทุกคลิกจึงปั้นรูปทรงใหม่ทั้งฉาก งานนี้มีเส้นเฟรม 60 เส้น (Extrude หน้าตัด 25 จุดต่อเส้น) กับบานทรง Part อีก 70 กว่าใบ เลยหน่วงทุกการกระทำทั้งที่ 95% ของชิ้นไม่ได้ขยับเลย · การล้างนั้นกันเกินเหตุ เพราะกุญแจแคชถอดจากเนื้อหาของชิ้นล้วน ๆ ชิ้นถูกแก้ = กุญแจใหม่ = ปั้นใหม่เองอยู่แล้ว ของเก่าเป็นได้แค่ขยะกินหน่วยความจำ · เปลี่ยนเป็นกวาดตามรุ่น ชิ้นที่ไม่ได้ใช้ในการวาดสองรอบล่าสุดค่อยทิ้ง · สองเหตุที่กุญแจมองไม่เห็นยังล้างทั้งแคชให้ถูกจุด คือบันทึกตั้งค่า/Element (รูปทรง Part กับตารางสีอยู่ในนั้น) · FEAT จับเวลาคิดฉากทุกครั้ง ช้าเกิน 150ms รายงานใน console (⏱) ว่าเวลาหายไปช่วงไหน เตรียมข้อมูล/วาด 3D/ปั้นรูปทรงกี่ชิ้นกี่ ms/รายการ/บันทึก — เลิกเดากันได้ · FIX แผ่นที่เล็กเกินสำหรับหูแขวนถูกเรียกมาลองวางผังใหม่ทุกครั้งที่วาดฉาก วนฟรีตลอด เพราะขนาดที่จำไว้ไม่ตรงกับตัวแผ่น ตอนนี้จำขนาดที่ตัดสินแล้วพร้อมธง small แผ่นโตพอเมื่อไหร่ผังกลับมาเอง"],
+    ["39.2","2026-08-20","FIX ร่องรับแผ่นหลังแบบ CNC ไม่เคยถูกกัดจริงในไฟล์ MPR — ของเดิมกัน g.back ออกจากไฟล์เจาะทั้งหมด ซึ่งถูกกับร่องวิ่งสุด (งานเลื่อย มาโคร V) แต่ร่องที่วิ่งไม่สุดเลื่อยทำไม่ได้ และช่อง Groove3 ก็ได้แค่คำว่า CNC ลอย ๆ ไม่มีเครื่องไหนได้พิกัดร่องไปเลย แผ่นข้างซ้ายขวาจึงออกจากโรงงานโดยไม่มีร่อง · ตอนนี้ร่องหลังแบบ CNC เดินทางเดียวกับร่องรางไฟ ออก <112 ตามหน้า ตามฝั่งไฟล์ หัวท้ายตาม off0/off1 · แผ่นที่มีแต่ร่องนี้ก็ได้ไฟล์ MPR ของตัวเองแล้ว (boardHasDrilling/boardMprSides เคยกันร่องหลังออกหมด แผ่นข้างที่งานเดียวคือร่องนี้เลยไม่มีไฟล์เลย) · FIX ร่องที่วิ่งไม่สุดต้องเป็น CNC โดยสภาพ ไม่ใช่เรื่องให้เลือก — วัดหัวท้ายกับแผ่นหลังใบที่รับทุกครั้งที่คิดฉาก เหลือเกิน 30 มม. (พ้นช่วงที่ทอป/พื้นปิดหัวท้ายร่องอยู่) = วิ่งไม่สุด = ติดธง CNC และตัดช่วงให้เอง แผ่นหลังเต็มแผ่นยังเป็นเลื่อย+มาโคร V ตามเดิม · เดิมธงนี้ตั้งเฉพาะตอนกดใช้งานในกล่องแผ่นหลัง ตู้ที่สร้างจากตัวสร้างตู้หรือแผ่นหลังที่ถูกย่อ/แบ่งทีหลังจึงถือธงเก่าไปออกไฟล์ · FIX แผ่นถือร่องหลังได้หลายเส้น (ชั้นตายที่รับแผ่นหลังบน-ล่างคนละใบ) มาโครเดิม find() หยิบเส้นแรกเส้นเดียวแล้วแต่ดวง ตอนนี้มีเส้นไหนเป็น CNC ก็ขึ้น CNC · FIX แผ่นที่ถูกหมุน 90 เข้าเครื่อง ร่องตันแนวยาวต้องสลับหัวท้าย ไม่งั้นร่นหัว 200 กลายเป็นร่นท้าย 200"],
     ["39.1","2026-08-20","FIX ตรึงขอบหลังด้วยหมุดแล้วใส่ -50 ขนาดล็อคค้างที่ 541.4 เหมือนหมุดไม่ทำงาน — หมุดทำงานครับ แต่ applyShelfBackFlush (ตัวช่วย v23.1 ที่ดันก้นชั้นซึ่งเกือบถึงแผ่นหลังให้ไปชนพอดี) วิ่ง หลัง applyPins ในลำดับคิดฉาก หมุดจึงแพ้ทุกรอบ · เคสจริง: หมุดตั้ง W=520 ขอบหลัง -235 → ห่างผิวหน้าแผ่นหลังตัวล่าง (-256.4) แค่ 21.4 ซึ่งน้อยกว่าระยะดูด 30 → ตัวช่วยดันกลับไปชนที่ 541.4 / z 14.3 ทุกครั้งที่คิดฉาก โดยช่องหมุดยังโชว์ -50 อยู่ · เลข 541.4 กับ 14.3 ที่เห็นค้างคือผลของตัวดันเป๊ะ ๆ ไม่ใช่ค่าที่หมุดคิด · กรณีเดียวกับ v33.6 (หมุดยืดทับสูตรล็อก): คำสั่งที่คนตั้งเองต้องชนะความสะดวกอัตโนมัติเสมอ · ตัวดันชนแผ่นหลังและตัวดันฟิลเลอร์ ข้ามชิ้นที่หมุดคุมความลึกอยู่ และชิ้นที่สูตรล็อกความลึกไว้ ทั้งคู่"],
     ["39.0","2026-08-20","แบบหน้าตัดเฟรม ปรับตามที่สั่งสามข้อ · (1) ป้ายบอกเส้น E1–E4 ออกไปอยู่นอกกรอบบานเสมอ ของเดิมวางตัวหนังสือทับอยู่บนแถบเส้นเลย อ่านยากและบังลายเส้นของแถบ · (2) เพิ่มหัวลูกศรสามเหลี่ยมสีไล่ระดับทองชี้กลับเข้าไปที่แถบที่ป้ายนั้นหมายถึง แบบเดียวกับที่ใช้ใน AutoCAD · (3) ป้ายซ้าย-ขวาตะแคงตามแนวเส้น อ่านไปทางเดียวกับเส้นที่มันชี้ · ตัวหนังสือทั้งแบบใหญ่ขึ้นหนึ่งขั้น หัวเรื่อง 22 → 25 · บรรทัดรอง 13 → 15 · ป้ายเส้น 12 → 16 · เลขบอกขนาด 15 → 17 (ตัวนี้เป็นของกลาง แบบแผ่นกับแบบกล่องโค้งได้ไปด้วย) · ระยะกันขอบรอบรูปบานขยายจาก 76 เป็น 112 แล้วดันแถวระยะบานพับกับเส้นบอกขนาดออกไปเป็น 64 กับ 88 เพราะป้ายที่ย้ายออกมาอยู่นอกกรอบไปกินที่ตรงนั้นพอดี ไม่ขยับก็ทับกันทันทีที่ขอบล่างและขอบขวา"],
     ["38.9","2026-08-20","FIX ช่อง W × D × H ในหัวกระดาษเป็นกรอบรวมของทั้งฉาก ไม่ใช่ขนาดของชิ้นในแบบ — ตัวเลขนั้นมาจากผังว่าของวางกินพื้นที่แค่ไหน แบบบานใบเดียวจึงขึ้นขนาดตู้ทั้งจ็อบ ช่างอ่านแล้วเอาไปเทียบอะไรไม่ได้เลย และถ้าย้ายตำแหน่งตู้ในผัง ตัวเลขในหัวแบบก็เปลี่ยนตามทั้งที่บานไม่ได้เปลี่ยนขนาดสักนิด · หน้าหน้าตัดเฟรมใส่ กว้าง × หนา × สูง ของบานสำเร็จ (รวมส่วนที่เส้นยื่นพ้นแผ่นแล้ว) · หน้าแผ่นใส่ขนาดของแผ่นนั้น"],
@@ -2500,6 +2510,7 @@ function bind(id,fn,ev){ const e=(typeof id==="string")?$(id):id; if(e) e[ev||"o
    sync(1)      = rebuild + autosave + commit      sync(0)      = ไม่ rebuild + autosave + commit
    sync(1,1,0)  = ไม่ commit                        sync(1,0,0)  = ไม่ autosave/commit           */
 function sync(rebuild,save,cm){
+  const _tSy0=performance.now();
   /* v8.77: รู/มาร์ค + Pocket ที่ฝากไว้กับ Part ต้องคิดใหม่ "ทุกครั้งที่ sync" จริง ๆ
      เดิมถูกเรียกอยู่ใน applyCabFittings() ซึ่งทำงานเฉพาะตอน cabFitSig() เปลี่ยน
      ลายเซ็นนั้นไม่รวมสเปคของ Part และไม่รวมว่าชิ้นไหนผูก Part อะไร
@@ -2530,6 +2541,10 @@ function sync(rebuild,save,cm){
   try{ applyKitPush(); }catch(e){ console.error(e); }        // v15.1: กดกระเด้งจากชุดอุปกรณ์
   try{ applyFillerDepth(); }catch(e){ console.error("filler:",e); }   // v22.9: ฟิลเลอร์ห้ามทะลุแผ่นหลัง
   try{ applyShelfBackFlush(); }catch(e){ console.error("shelfBack:",e); }   // v23.1: ชั้นชนผิวหน้าแผ่นหลัง
+  /* v39.2: ธง CNC กับหัวท้ายร่องรับแผ่นหลัง ต้องสดเสมอ — เดิมคิดเฉพาะตอนกดใช้งานในกล่องแผ่นหลัง
+     ตู้ที่สร้างจากตัวสร้างตู้ หรือแผ่นหลังที่ถูกย่อ/แบ่งทีหลัง จึงถือธงเก่าไปออกไฟล์ */
+  try{ const _bi={}; (state.boards||[]).forEach(b=>{ if(b&&b.cabInst&&(b.grooves||[]).some(g=>g&&g.back)) (_bi[b.cabInst]=_bi[b.cabInst]||1); });
+    Object.keys(_bi).forEach(k=>sxSyncBackGrooves({boards:state.boards.filter(b=>b&&b.cabInst===k)})); }catch(e){ console.error("bgSync:",e); }
   try{ fitSceneFog(); }catch(e){}                           // v26.9: หมอกตามขนาดงานจริง
   try{ applyLedStrips(); }catch(e){ console.error(e); }     // v11.5: รางไฟ (ร่อง + ตัวราง + ฝาปิด)
   try{ applyLedCorners(); }catch(e){ console.error(e); }     // v16.6: รางเลี้ยวมุมเป็นตัว L
@@ -2538,9 +2553,21 @@ function sync(rebuild,save,cm){
   try{ applyEdgeNotchProfiles(); }catch(e){ console.error(e); }   // v11.0: บากที่ขอบ = เว้ารูปแผ่น
   try{ applyFrameParts(); }catch(e){ console.error(e); }   // v9.83: บานเฟรมอลู — สี่เส้นตัด 45 + กระจก
   try{ applyPullDrills(); }catch(e){ console.error(e); }   // v9.71: รู/Pocket/รูป 3D ของมือจับ คิดใหม่ทุกครั้ง ขยับบานแล้วตามเอง
-  render3D(!!rebuild); renderList(); showInspector();
+  /* v39.3: จับเวลาคิดฉากไว้เสมอ — ช้าเกิน 150ms ค่อยรายงานใน console ว่าเวลาหายไปไหน
+     จะได้เลิกเดากันว่า "หน่วงเพราะอะไร" · ดูได้จากแจ้งเตือน/console: ⏱ */
+  const _tR0=performance.now(); _bmHit=0; _bmMiss=0; _bmMs=0;
+  render3D(!!rebuild);
+  const _tR1=performance.now();
+  renderList(); showInspector();
+  const _tR2=performance.now();
   if(save!==0) autosave();
   if(cm!==0)   commit();
+  const _tR3=performance.now();
+  if(_tR3-_tSy0>150){
+    console.log("⏱ คิดฉากช้า "+Math.round(_tR3-_tSy0)+"ms — เตรียมข้อมูล "+Math.round(_tR0-_tSy0)
+      +" · วาด 3D "+Math.round(_tR1-_tR0)+" (ปั้นรูปทรงใหม่ "+_bmMiss+" ชิ้น "+Math.round(_bmMs)+"ms · แคชช่วย "+_bmHit+" ชิ้น)"
+      +" · รายการ/แผงขวา "+Math.round(_tR2-_tR1)+" · บันทึก+commit "+Math.round(_tR3-_tR2));
+  }
 }
 /* ความยาวกางแผ่น (developed length) ของแผ่นดัดโค้ง
    ปัญหาเดิม: ใช้กรอบสี่เหลี่ยมของเส้นโค้ง = "คอร์ด" (เส้นตรงเชื่อมปลายถึงปลาย)
@@ -3145,25 +3172,39 @@ function _bgKey(b){
     s+=k+"="+((v!==null&&typeof v==="object")?JSON.stringify(v):v)+";"; }
   return s; }
 function _bgDrop(o){ try{ if(o.geo.userData&&o.geo.userData.edges) o.geo.userData.edges.dispose(); o.geo.dispose(); }catch(e){} }
-/* กันของค้าง: แคชมีอายุแค่ช่วงอนิเมชันเท่านั้น
-   การวาดจริง (ไม่ใช่เฟรมกลางทาง) ล้างทิ้งก่อนเสมอ แล้วปั้นใหม่หมดเหมือนเดิมทุกประการ
-   ระหว่างอนิเมชันไม่มีใครแก้ชิ้น/ตั้งค่า/Part ได้อยู่แล้ว ของในแคชจึงตรงกับความจริงเสมอ */
+/* ───────── v39.3: แคชรูปทรงต้องรอดข้ามการวาดจริง ไม่ใช่แค่ช่วงอนิเมชัน ─────────
+   v20.1 สร้างแคชไว้ครบแล้ว แต่ล้างทิ้งก่อนการวาดจริงทุกครั้ง "กันของค้าง"
+   ซึ่งกันเกินเหตุ — กุญแจแคชถอดจากเนื้อหาของชิ้นล้วน ๆ ชิ้นถูกแก้ = กุญแจใหม่ = ปั้นใหม่เอง
+   ของเก่าในแคชเป็นได้แค่ขยะกินหน่วยความจำ ไม่มีทางถูกหยิบผิด
+   ผลของการล้างทุกครั้ง: ทุกคลิกปั้นทุกชิ้นใหม่หมด — ฉากที่มีเส้นเฟรม 60 เส้น (Extrude 25 จุด/เส้น)
+   กับบานทรง Part อีก 70 กว่าใบ จึงหน่วงทุกการกระทำ ทั้งที่ 95% ของชิ้นไม่ได้ขยับเลย
+   เปลี่ยนเป็นกวาดตามรุ่น: ชิ้นที่ไม่ได้ถูกใช้ในการวาดสองรอบล่าสุดค่อยทิ้ง
+   ยกเว้นสองเหตุที่กุญแจมองไม่เห็น ต้องล้างทั้งแคชจริง ๆ:
+     · แก้ตั้งค่า/Element/Part (รูปทรง Part กับตารางสีอยู่ในตั้งค่า ไม่ใช่ในตัวชิ้น) → ล้างตอนบันทึกตั้งค่า
+     · โหลดโปรเจกต์/ออเดอร์ใหม่ → ล้างตอนโหลด (ทาง syncUid เดิมครอบอยู่แล้วผ่านการเปลี่ยน id) */
+let _bgGen=1;
+function _bgSweep(){ _bgGen++;
+  const dead=[]; _bgC.forEach((o,k)=>{ if((o.gen||0)<_bgGen-2) dead.push(k); });
+  dead.forEach(k=>{ const o=_bgC.get(k); _bgC.delete(k); _bgDrop(o); }); }
 function _bgClear(){ _bgC.forEach(_bgDrop); _bgC.clear(); }
 function _bgTrim(){
   if(_bgC.size<=_BG_MAX) return;
   const ks=[]; for(const k of _bgC.keys()){ ks.push(k); if(ks.length>=250) break; }
   ks.forEach(k=>{ const o=_bgC.get(k); _bgC.delete(k); _bgDrop(o); }); }
+let _bmHit=0,_bmMiss=0,_bmMs=0;
 function buildBoardMesh(b){
   let key=null; try{ key=_bgKey(b); }catch(e){ key=null; }
   if(key){ const hit=_bgC.get(key);
-    if(hit){ b._pkGeo=hit.pk; return {geo:hit.geo, mats:hit.mats, d:hit.d}; } }
+    if(hit){ hit.gen=_bgGen; _bmHit++; b._pkGeo=hit.pk; return {geo:hit.geo, mats:hit.mats, d:hit.d}; } }
+  const _t0=performance.now();
   const r=buildBoardMeshRaw(b);
+  _bmMs+=performance.now()-_t0; _bmMiss++;
   if(key&&r&&r.geo){ try{
     r.geo.userData=r.geo.userData||{};
     r.geo.userData._keep=true;                                  // กันไม่ให้ถูก dispose ตอนล้างฉาก
     if(!r.geo.userData.edges) r.geo.userData.edges=new THREE.EdgesGeometry(r.geo,25);
     const eg=r.geo.userData.edges; eg.userData=eg.userData||{}; eg.userData._keep=true;
-    _bgC.set(key,{geo:r.geo, mats:r.mats, d:r.d, pk:!!b._pkGeo});
+    _bgC.set(key,{geo:r.geo, mats:r.mats, d:r.d, pk:!!b._pkGeo, gen:_bgGen});
     _bgTrim();
   }catch(e){ console.error("geocache:",e); } }
   return r; }
@@ -4977,6 +5018,7 @@ function openBackGrooveModal(back){
 const SX_BACK_GROOVE_MAX_T=12;                       // หนาตั้งแต่นี้ = ไม่เซาะร่อง
 function sxBackPanelsOf(grp){ return ((grp&&grp.boards)||[]).filter(x=>
   x.orient==="front" && !x._door && !x._virtual && !x._dx && !x._dwall && !isRail(x)); }
+const SX_BACK_RUN_TOL=30;   // หัวท้ายร่องที่ไม้ปิดอยู่ วิ่งทะลุได้ไม่เกินเท่านี้
 function sxSyncBackGrooves(grp){
   if(!grp) return 0;
   const backs=sxBackPanelsOf(grp); if(!backs.length) return 0;
@@ -4989,17 +5031,25 @@ function sxSyncBackGrooves(grp){
     let bp=null,best=1e9;
     backs.forEach(x=>{ const dd=Math.abs(x.z-gz); if(dd<best){ best=dd; bp=x; } });
     if(!bp||best>60) return;
-    g.backThk=bp.T; g.cnc=!!bp._backCNC;
-    if(bp._backCNC){                                  // ตัดร่องให้เหลือเฉพาะช่วงของแผ่นหลังใบนี้
-      const bd=worldDims(bp);
-      if(p.orient==="side"){                          // แผ่นข้าง: แกน len = ความสูง
-        g.off0=Math.max(round((bp.y-bd[1]/2)-(p.y-d[1]/2)),0);
-        g.off1=Math.max(round((p.y+d[1]/2)-(bp.y+bd[1]/2)),0);
-      } else {                                        // แผ่นนอน: แกน len = ความกว้าง
-        g.off0=Math.max(round((bp.x-bd[0]/2)-(p.x-d[0]/2)),0);
-        g.off1=Math.max(round((p.x+d[0]/2)-(bp.x+bd[0]/2)),0);
-      }
-    } else { delete g.off0; delete g.off1; }
+    g.backThk=bp.T;
+    /* ───────── v39.2: ร่องที่วิ่งไม่สุดแผ่น "คือ" ร่อง CNC โดยสภาพ ไม่ใช่เรื่องให้เลือก ─────────
+       เลื่อยเดินยาวทำได้แต่ร่องทะลุหัวท้าย ร่องที่ต้องหยุดกลางแผ่นทำได้ทางเดียวคือกัด
+       ของเดิมถือว่าเป็น CNC เฉพาะตอนติ๊กไว้ที่แผ่นหลัง แผ่นหลังที่สั้นกว่าช่วงวิ่งของร่อง
+       (เช่นแผ่นหลังครึ่งบนของตู้แบ่งช่อง) จึงได้ร่องยาวตลอดแผ่นพร้อมมาโคร V ทั้งที่ทำจริงแบบนั้นไม่ได้
+       ตอนนี้วัดหัวท้ายก่อนเสมอ เหลือหัวหรือท้ายเกินครึ่งมิล = วิ่งไม่สุด = CNC ให้เอง */
+    const bd=worldDims(bp); let o0,o1;
+    if(p.orient==="side"){                            // แผ่นข้าง: แกน len = ความสูง
+      o0=Math.max(round((bp.y-bd[1]/2)-(p.y-d[1]/2)),0);
+      o1=Math.max(round((p.y+d[1]/2)-(bp.y+bd[1]/2)),0);
+    } else {                                          // แผ่นนอน: แกน len = ความกว้าง
+      o0=Math.max(round((bp.x-bd[0]/2)-(p.x-d[0]/2)),0);
+      o1=Math.max(round((p.x+d[0]/2)-(bp.x+bd[0]/2)),0);
+    }
+    /* หัวท้ายสั้นกว่าแผ่นข้างเล็กน้อยเป็นเรื่องปกติ — ช่วงนั้นทอป/พื้นปิดอยู่ ร่องเลื่อยวิ่งทะลุได้
+       เกณฑ์ = 30 มม. (คลุมหนาไม้ + เผื่อ) เกินนั้นคือร่องจะโผล่ให้เห็น ต้องหยุด = CNC */
+    g.cnc = !!bp._backCNC || o0>SX_BACK_RUN_TOL || o1>SX_BACK_RUN_TOL;
+    if(g.cnc){ g.off0=o0; g.off1=o1; }
+    else { delete g.off0; delete g.off1; }
     n++; }); });
   return n; }
 function cabBBox(boards){ let x0=Infinity,x1=-Infinity,y0=Infinity,y1=-Infinity,z0=Infinity,z1=-Infinity;
@@ -10338,7 +10388,7 @@ function render3D(refit){
      สี่อย่างนี้คิดจาก state.boards ล้วน ๆ ระหว่างบานกางอยู่ไม่มีทางเปลี่ยนค่า
      แต่เดิมถูกคิดใหม่ทุกเฟรม (ทุก ~16 มิลลิวินาที) วนทุกชิ้นในฉาก */
   if(!_fastFrame){
-  _bgClear();
+  _bgSweep();                                          // v39.3: กวาดของที่ไม่ได้ใช้ ไม่ใช่ล้างทั้งแคช
   syncUid();   // ดัน id counter ให้พ้น id ที่โหลดมา → สร้างตู้ใหม่ไม่ได้ id ซ้ำ (คลิกเลือกได้ถูกใบ)
   try{ const fg=cabFitSig(); if(fg!==_cabFitSig){ _cabFitSig=fg; applyCabFittings(); } }catch(e){ console.error(e); }   // อุปกรณ์ default ตามรหัสตู้: วาง/อัปเดตตะแกรงอัตโนมัติ
   try{ sxRefreshGlassHangers(); }catch(e){ console.error(e); }   // v37.2: หูแขวนกระจกตามขนาดตู้
@@ -11758,6 +11808,23 @@ function showInspector(){
       </div>
       <div class="muted" style="font-size:11px;margin-top:4px;line-height:1.55;white-space:normal">ตู้แบ่งช่องที่มีแผ่นหลังหลายใบ ร่องวิ่งยาวตลอดแผ่นข้างไม่ได้ ช่วงที่ไม่มีแผ่นหลังจะเห็นเป็นร่องโล่ง · เลือก <b>CNC</b> แล้วร่องจะถูกตัดให้เหลือเฉพาะช่วงของแผ่นนี้ และมาโครออกเป็น <b>CNC</b> แทนรหัส V · แผ่นหนา ${SX_BACK_GROOVE_MAX_T} มม. ขึ้นไปไม่เซาะร่องเลย ใช้เดือย/มินิฟิก</div></div>`:""}
     <div class="ibtns"><button class="ibtn" id="f_hole">＋ เจาะรู (${(b.holes||[]).length})</button><button class="ibtn" id="f_groove">＋ ร่อง (${(b.grooves||[]).length})</button><button class="ibtn" id="f_2d">🗎 Preview 2D</button></div>
+    ${(()=>{ /* v39.4: รายการร่องพร้อมปุ่ม แก้ไข / ทำสำเนา / คัดลอก / ลบ
+        ของเดิมมีแต่ปุ่มเพิ่ม ใส่ผิดทีเดียวต้องล้างทั้งแผ่นแล้วกรอกใหม่ทุกเส้น */
+      const gs=b.grooves||[]; if(!gs.length&&!_gClip) return "";
+      /* v39.7: ตัวหนังสือกินเต็มความกว้างแถว ปุ่มลงไปอยู่บรรทัดของตัวเองชิดขวา */
+      let h='<div style="margin-top:8px">';
+      gs.forEach((g,i)=>{ const lb=grooveLabel(b,g);
+        h+=`<div style="margin-top:5px;padding:7px 8px;border:1px solid var(--line);border-radius:8px">`
+        +`<div style="font-size:11.5px;font-weight:600;line-height:1.45;white-space:normal">${escapeHtml(lb.a)}</div>`
+        +`<div style="font-size:11px;line-height:1.45;white-space:normal;color:var(--ink-dim);margin-top:1px">${escapeHtml(lb.b)}</div>`
+        +`<div style="display:flex;gap:5px;justify-content:flex-end;margin-top:6px">`
+        +`<button class="ibtn f_gEd"  data-i="${i}" style="padding:2px 9px;font-size:12px" title="แก้ไขร่องนี้">✎</button>`
+        +`<button class="ibtn f_gDup" data-i="${i}" style="padding:2px 9px;font-size:12px" title="ทำสำเนาในแผ่นนี้">⧉</button>`
+        +`<button class="ibtn f_gCp"  data-i="${i}" style="padding:2px 9px;font-size:12px" title="คัดลอกไปวางที่แผ่นอื่น">📋</button>`
+        +`<button class="ibtn f_gDel" data-i="${i}" style="padding:2px 9px;font-size:12px" title="ลบร่องนี้">🗑</button>`
+        +`</div></div>`; });
+      if(_gClip) h+=`<button class="ibtn" id="f_gPaste" style="margin-top:6px;width:100%">📋 วางร่องที่คัดลอกไว้ (กว้าง ${escapeHtml(String(_gClip.width||""))} ลึก ${escapeHtml(String(_gClip.depth||""))})</button>`;
+      return h+"</div>"; })()}
       ${((b.holes||[]).length||(b.grooves||[]).length)?'<button class="ibtn" id="f_clrfeat" style="margin-top:8px">ล้างรู/ร่องทั้งหมด</button>':''}
       ${(()=>{ /* v9.09: ล้างเฉพาะร่องรับแผ่นหลังทั้งตู้ — เผื่อเปลี่ยนใจไม่ใส่แผ่นหลัง หรือร่องค้างจากรอบก่อน */
         let nb=0; try{ (state.boards||[]).forEach(o2=>{ if(o2&&o2.cabInst===b.cabInst&&o2.grooves) nb+=o2.grooves.filter(g=>g&&g.back).length; }); }catch(e){}
@@ -12077,6 +12144,11 @@ function showInspector(){
   body.querySelector("#f_hole").onclick=()=>addHole(b);
   { const b2=body.querySelector("#f_2d"); if(b2)b2.onclick=()=>open2D(b); }
   body.querySelector("#f_groove").onclick=()=>addGroove(b);
+  body.querySelectorAll(".f_gEd").forEach(x=>x.onclick=()=>addGroove(b,+x.dataset.i));      // v39.4
+  body.querySelectorAll(".f_gDup").forEach(x=>x.onclick=()=>grooveDup(b,+x.dataset.i));
+  body.querySelectorAll(".f_gCp").forEach(x=>x.onclick=()=>grooveCopy(b,+x.dataset.i));
+  body.querySelectorAll(".f_gDel").forEach(x=>x.onclick=()=>grooveDel(b,+x.dataset.i));
+  { const gp=body.querySelector("#f_gPaste"); if(gp)gp.onclick=()=>groovePaste(b); }
   { const cf=body.querySelector("#f_clrfeat"); if(cf)cf.onclick=()=>clearFeatures(b); }
   { const sh=body.querySelector("#f_shelf"); if(sh)sh.onclick=()=>{try{addShelf();}catch(e){console.error(e);}}; }
   { const redrill=(msg)=>{ try{ const inf=shelfCabInfo(b);
@@ -12597,7 +12669,9 @@ const SX_TAB=(()=>{ try{ const m=/[?&#]tab=(\w+)/.exec(location.href); return m?
 const SCENE_KEY="boardforge:v1"+(SX_TAB?(":"+SX_TAB):"");
 async function autosave(){ if(state.editing)return; try{ await store.set(SCENE_KEY,JSON.stringify({boards:state.boards,globalTone:state.globalTone,cabColors:state.cabColors,cabNums:state.cabNums,cabVarTxt:state.cabVarTxt,cabDX:state.cabDX,bcSeq:state.bcSeq,bcMax:state.bcMax,orderLines:state.orderLines,cabDP:state.cabDP})); }catch(e){} }
 async function loadSaved(){ try{ const v=await store.get(SCENE_KEY); return v?JSON.parse(v):null; }catch(e){ return null; } }
-async function lsSet(k,v){ try{ await store.set(k,JSON.stringify(v)); }catch(e){} }
+async function lsSet(k,v){ try{ await store.set(k,JSON.stringify(v)); }catch(e){}
+  /* v39.3: รูปทรงของ Part กับตารางสีอยู่ในตั้งค่า กุญแจแคชรูปทรงมองไม่เห็น — บันทึกตั้งค่าเมื่อไหร่ ล้างแคชทิ้ง */
+  if(k==="furnitech:settings"){ try{ _bgClear(); }catch(e){} } }
 async function lsGet(k,def){ try{ const v=await store.get(k); return (v!=null)?JSON.parse(v):def; }catch(e){ return def; } }
 
 /* ---------- in-app dialog (replaces prompt/confirm; sandbox-safe) ---------- */
@@ -18943,6 +19017,38 @@ async function cloudSaveOrder(){
   }catch(e){ toast("บันทึกออเดอร์ไม่สำเร็จ: "+sbErr(e)); }
 }
 async function cloudListOrders(){ const db=await getDB(); const r=await db.from("furnitech_cabinets").select("id,part_count,updated_at").like("id","ORD::%").order("updated_at",{ascending:false}).limit(300); if(r.error)throw r.error; return r.data||[]; }
+/* ───────── v40.0: เริ่มออเดอร์ใหม่แบบหน้าเปล่า ─────────
+   ของเดิมมีแต่ปุ่ม "ตู้เปล่า" ในกล่องเปิดตู้ ซึ่งล้างแค่ state.boards
+   เลขออเดอร์ ตัวแปรรายตู้ สีรายตู้ ลำดับบาร์โค้ด และบรรทัดสั่งของ ยังค้างจากงานก่อนทั้งหมด
+   งานใหม่จึงพกของงานเก่าติดไปด้วยโดยไม่มีใครเห็น จนไปโผล่ตอนส่งออก
+   คนเลยต้องกด F5 เอาเอง ซึ่งได้ผลถูกต้องแต่ไม่มีใครบอกไว้ และเสี่ยงทิ้งงานที่ยังไม่ได้เซฟ
+   ตัวนี้ล้างทุกช่องที่ผูกกับออเดอร์ให้ครบในทีเดียว พร้อมถามก่อนถ้าฉากยังมีของอยู่ */
+async function newOrder(opts){
+  opts=opts||{};
+  if(state.editing){ toast("กำลังแก้โมเดลอยู่ — กดเสร็จก่อน"); return false; }
+  if(typeof isLocked==="function" && isLocked()){ guardEdit("เริ่มออเดอร์ใหม่"); return false; }
+  const n=(state.boards||[]).filter(b=>b&&!b._virtual).length;
+  if(n && !opts.force){
+    const ok=await dialog({title:"เริ่มออเดอร์ใหม่ (หน้าเปล่า)?",
+      html:'<div style="font-size:13px;line-height:1.75;color:var(--ink-dim)">'
+        +'ฉากตอนนี้มี <b>'+n+'</b> ชิ้น จะถูกล้างทิ้งทั้งหมด พร้อมกับ<br>'
+        +'เลขออเดอร์ · ตัวแปรรายตู้ ($D4 ฯลฯ) · สีรายตู้ · ลำดับบาร์โค้ด · บรรทัดสั่งของ<br><br>'
+        +'<b>ยังไม่ได้บันทึกใช่ไหม?</b> กดยกเลิกแล้วไปที่ Order → บันทึก / Save As… ก่อน<br>'
+        +'<span style="opacity:.7">ถ้าเผลอ กด ย้อนกลับ (Ctrl+Z) เอาชิ้นคืนได้</span></div>',
+      ok:"ล้างแล้วเริ่มใหม่"});
+    if(!ok) return false;
+  }
+  state.boards=[]; state.selectedId=null; state.selectedCab=null; state.hidden=[];
+  state.cabColors={}; state.cabNums={}; state.cabVarTxt={}; state.cabDX={};
+  state.bcSeq={}; state.bcMax={}; state.orderLines=[]; state.cabDP={};
+  state.doorPick=[]; state.doorProg={}; state.explode=0;
+  try{ if(typeof clearMeasure==="function") clearMeasure(); }catch(e){}
+  { const el=$("exOrderId"); if(el) el.value=""; }
+  try{ _gClip=null; }catch(e){}
+  buildGTones(); sync(1);
+  toast("เริ่มออเดอร์ใหม่ — หน้าเปล่า · ตั้งเลขออเดอร์ได้ที่ Order");
+  return true;
+}
 /* ───────── v38.3: เปิดออเดอร์ที่บันทึกไว้ ก็ต้องมีกล่องรอเหมือนตอนโหลด XML ─────────
    v30.2 ใส่กล่องรอให้เฉพาะทางโหลด XML เข้าฉาก แต่ทาง "เปิดแก้" เงียบสนิท
    ทั้งที่ทำงานหนักกว่าอีก — ดึงก้อนจากคลาวด์ แล้วไล่ซ่อมผิว+ความลึกชั้นทีละใบ
@@ -22376,7 +22482,8 @@ async function renderLoader(){
     <div class="sumh" style="display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap"><span>🗄 เปิดตู้เดี่ยวจากคลาวด์</span>
       <input id="ldCloudSearch" placeholder="🔍 ค้นหารหัสตู้…" autocomplete="off" style="font-size:12px;padding:5px 9px;border:1px solid var(--line);border-radius:7px;width:190px;font-weight:400">
     </div><div id="ldCloud" style="max-height:300px;overflow-y:auto;border:.5px solid var(--line);border-radius:8px;padding:2px"><div class="empty">กำลังโหลด…</div></div>`;
-  $("ldNew").onclick=()=>{ state.boards=[];state.selectedId=null;sync(1);closeLoader();toast("เริ่มตู้เปล่า"); };
+  /* v40.0: ปุ่มนี้เคยล้างแค่ state.boards ของที่ผูกกับออเดอร์ยังค้างจากงานก่อน — ใช้ทางเดียวกับออเดอร์ใหม่ */
+  $("ldNew").onclick=async()=>{ if(await newOrder()) closeLoader(); };
   $("ldGen").onclick=()=>{ closeLoader(); try{genCabinet();}catch(e){console.error(e);} };
   $("ldCont").onclick=async()=>{
     try{ const saved=await loadSaved();
@@ -22608,6 +22715,7 @@ async function renderXmlImport(){
   /* v7.4: สองคอลัมน์ — ซ้าย "ออเดอร์ของเรา" (ที่ใช้บ่อยสุด) · ขวา "ประวัติ XML"
      สองรายการนี้ยาวทั้งคู่ วางซ้อนกันทำให้ต้องเลื่อนไปเลื่อนมาเทียบกันไม่ได้ */
   body.innerHTML=`<div class="xi-bar">
+      <button class="ibtn" id="xiNew" title="ล้างฉากและข้อมูลที่ผูกกับออเดอร์ทั้งหมด แล้วเริ่มงานใหม่">✨ ออเดอร์ใหม่ (หน้าเปล่า)</button>
       <button class="ibtn" id="xiOrdSave" style="background:var(--accent);color:#fff;border-color:transparent">💾 บันทึก / Save As…</button>
       <button class="ibtn" id="xiFile">📁 โหลดไฟล์ XML</button>
       <button class="ibtn" id="xiCabFile">📦 นำเข้าตู้ (.json)</button>
@@ -22627,6 +22735,7 @@ async function renderXmlImport(){
       </div>
     </div>`;
   { const os=body.querySelector("#xiOrdSave"); if(os)os.onclick=async()=>{ await cloudSaveOrder(); renderXmlOrders(1); }; }
+  { const nw=body.querySelector("#xiNew"); if(nw)nw.onclick=async()=>{ if(await newOrder()) closeXmlImport(); }; }   // v40.0
   { const qs=body.querySelector("#xiOrdSearch"); if(qs)qs.oninput=()=>drawXmlOrders(); }
   renderXmlOrders(1);
   body.querySelector("#xiCabFile").onclick=()=>{ closeXmlImport(); importCabinetFile(); };
@@ -22716,8 +22825,24 @@ function setSkTool(t){ SK.tool=t; SK.sel1=null; SK.rect0=null; SK.drag=null; SK.
 function promptFields(title,fields){return new Promise(res=>{
   const m=$("fieldsModal"); m.querySelector("#fieldsTitle").textContent=title;
   const body=m.querySelector("#fieldsBody"); body.innerHTML=""; const refs=[]; const items=[];
+  /* ───────── v39.9: กล่องที่มีรูปตัวอย่าง กางเป็นสองคอลัมน์เต็มจอ ─────────
+     ยัดรูปต่อท้ายช่องกรอกในกล่องกว้าง 600 ทำให้รูปแคบและอยู่ล่างสุด
+     ต้องเลื่อนลงไปดูทุกครั้งที่แก้เลข ซึ่งพอ ๆ กับกดออกไปดูข้างนอก
+     ช่องกรอกอยู่ซ้าย รูปอยู่ขวาแบบติดหนึบ แก้เลขแล้วเห็นผลในสายตาเดียวกัน */
+  const _card=m.querySelector(".card");
+  const _hasPv=(fields||[]).some(f=>f&&f.type==="preview");
+  let colL=body, colR=null;
+  if(_hasPv){ _card.classList.add("wide"); _card.style.width="";
+    const g=document.createElement("div");
+    g.style.cssText="display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:20px;align-items:start";
+    colL=document.createElement("div"); colR=document.createElement("div");
+    colR.style.cssText="position:sticky;top:0";
+    g.appendChild(colL); g.appendChild(colR); body.appendChild(g);
+  } else { _card.classList.remove("wide"); _card.style.width="min(600px,94vw)"; }
   const vals=()=>{ const o={}; refs.forEach(r=>o[r.key]=r.get()); return o; };
-  const refresh=()=>{ const cur=vals(); items.forEach(it=>{ it.wrap.style.display=(it.showIf && !it.showIf(cur))?"none":""; }); };
+  const refresh=()=>{ const cur=vals();
+    items.forEach(it=>{ it.wrap.style.display=(it.showIf && !it.showIf(cur))?"none":"";
+      if(it.draw && it.wrap.style.display!=="none") it.draw(); }); };
   fields.forEach(f=>{ const wrap=document.createElement("div"); wrap.className="fld";
     if(f.type==="edges4"){ wrap.innerHTML=`<label>${f.label}</label>`;
       const grid=document.createElement("div"); grid.style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:8px";
@@ -22737,6 +22862,16 @@ function promptFields(title,fields){return new Promise(res=>{
       wrap.appendChild(seg); refs.push({key:f.key,get:()=>wrap._val});
     } else if(f.type==="note"){   // ข้อความอธิบายเฉย ๆ ไม่มีช่องกรอก (v7.6)
       wrap.innerHTML=`<div style="font-size:12px;line-height:1.5;color:var(--ink-dim,#5f5f66);background:rgba(0,0,0,.04);border-radius:9px;padding:9px 11px">${f.label}</div>`;
+    } else if(f.type==="preview"){
+      /* ───────── v39.8: ช่องรูปตัวอย่างที่วาดใหม่ทุกครั้งที่ค่าเปลี่ยน ─────────
+         กล่องกรอกค่าแบบเดิมไม่มีทางรู้ว่าของจะไปตกตรงไหนจนกว่าจะกดตกลงแล้วปิดออกไปดู
+         ค่าที่ต้องเดาอย่างระยะกับจุดอ้างอิง จึงต้องลองผิดลองถูกวนหลายรอบ
+         ตัวนี้เป็นของกลาง กล่องไหนอยากมีรูปตัวอย่างก็ใส่ฟิลด์ชนิดนี้ได้เลย */
+      if(f.label) wrap.innerHTML=`<label>${f.label}</label>`;
+      const box=document.createElement("div");
+      box.style.cssText="background:#fafbfc;border:1px solid var(--line,#e4e7ec);border-radius:9px;padding:6px;overflow:hidden";
+      wrap.appendChild(box); items.push({wrap,showIf:f.showIf,draw:()=>{ try{ box.innerHTML=f.render(vals())||""; }catch(e){ box.innerHTML=""; } }});
+      (colR||body).appendChild(wrap); return;
     } else if(f.type==="area"){   // v7.59: ช่องหลายบรรทัด (ใช้กับตัวแปรตู้)
       wrap.innerHTML=`<label>${f.label}</label><textarea class="nameinp" rows="${f.rows||8}" style="width:100%;font-family:var(--mono);line-height:1.6;resize:vertical" placeholder="${f.placeholder||""}"></textarea>`;
       const ta=wrap.querySelector("textarea"); ta.value=(f.value!=null?String(f.value):"");
@@ -22745,7 +22880,7 @@ function promptFields(title,fields){return new Promise(res=>{
       const inp=wrap.querySelector("input"); refs.push({key:f.key,get:()=>inp.value.trim()});
     } else { wrap.innerHTML=`<label>${f.label}</label><input type="number" step="any" class="nameinp" style="width:100%;font-family:var(--mono)" value="${f.value}">`;
       const inp=wrap.querySelector("input"); refs.push({key:f.key,get:()=>parseFloat(inp.value)}); }
-    items.push({wrap,showIf:f.showIf}); body.appendChild(wrap);
+    items.push({wrap,showIf:f.showIf}); colL.appendChild(wrap);
   });
   refresh();
   m.classList.add("show"); setTimeout(()=>{const i=body.querySelector("input");if(i){i.focus();i.select();}},40);
@@ -22754,6 +22889,7 @@ function promptFields(title,fields){return new Promise(res=>{
   ok.onclick=()=>{const o={};refs.forEach(r=>o[r.key]=r.get());done(o);};
   cancel.onclick=()=>done(null); x.onclick=()=>done(null);
   body.querySelectorAll("input").forEach(i=>i.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();ok.onclick();}else if(e.key==="Escape")done(null);});
+  if(items.some(it=>it.draw)) body.querySelectorAll("input,textarea").forEach(i=>{ i.addEventListener("input",refresh); });   // v39.8: พิมพ์แล้วรูปขยับตาม
 });}
 async function skMakeRect(){
   const v=await promptFields("สี่เหลี่ยม",[{key:"w",label:"กว้าง (มม.)",value:300},{key:"l",label:"ยาว (มม.)",value:600}]);
@@ -23178,11 +23314,19 @@ function part2DSvg(b,o){
      ช่างที่จะตั้งเครื่องเจาะถ้วยบานพับจึงต้องไล่หาเลขของตัวเองจากโซ่ที่มีสิบกว่าช่อง
      เพิ่มอีกแถวที่นับเฉพาะศูนย์ถ้วยบานพับ อ่านทีเดียวรู้เลยว่า 96 แล้วห่างกัน 526.25 */
   const _hgOn=(b.connectors||[]).some(c=>c&&c.type==="hinge");
+  /* ───────── v39.6: แถวระยะพิเศษต้องมีที่ยืน ─────────
+     ของเดิม pad ตายตัว 120 แถวบานพับไปอยู่ที่ pad-98 / pad+DW+98 ยังพอดี
+     พอเพิ่มแถวหูแขวนที่ ±150 มันหลุดออกนอกกรอบ vw/vh ทันที (ซ้ายได้ -30)
+     ผลคือบางแผ่นเห็นแถวเดียว บางแผ่นเห็นคนละแกน แล้วแต่ว่าอันไหนหลุด
+     กันที่ไว้ตามจำนวนแถวจริง แถวละ 52 ทั้งซ้ายและล่าง */
+  const _ghOn=(b.holes||[]).some(h=>{ try{ return isGlassHangerHole(h); }catch(e){ return false; } });
   /* v23.4: จดไว้ว่ารูปนี้วาดอะไรไปบ้างจริง ๆ แล้วให้คำอธิบายสร้างจากรายการนี้
      ถ้าเดาจากข้อมูลชิ้นงานเอง วันหลังแก้เงื่อนไขการวาดตรงไหน คำอธิบายจะหลุดจากรูปทันที
      จดตรงจุดที่วาดจริงจึงไม่มีทางไม่ตรงกัน */
   const USED={};
-  const pad=120, vw=DL+pad*2, vh=DW+pad*2+((_hgOn&&SHOWDIM)?52:0);
+  const _rowN=SHOWDIM?((_hgOn?1:0)+(_ghOn?1:0)):0;
+  const pad=120+_rowN*52, vw=DL+pad*2, vh=DW+pad*2;
+  const _rowY=k=>pad+DW+46+52*k, _rowX=k=>pad-46-52*k;      // แถวที่ k (1 = ถัดจากโซ่หลัก)
   /* v9.95: แผ่นข้างซ้ายกับขวาเป็นภาพกระจกกัน แต่พิกัดในกรอบของตัวเองเหมือนกันเป๊ะ
      ต่างกันแค่ "งานเจาะอยู่คนละผิว" (ซ้ายเจาะผิวบน ขวาเจาะผิวล่าง) เดิมจึงต่างกันแค่สีรู
      ปริ้นขาวดำแล้วสองใบเหมือนกันทุกประการ ช่างหยิบใบไหนไปเจาะก็ได้ = ผิดข้าง
@@ -23259,7 +23403,10 @@ function part2DSvg(b,o){
     s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${thru?"none":col+"30"}" stroke="${col}" stroke-width="2.5"${dash}/>`;
     if(thru) s+=`<line x1="${cx-r}" y1="${cy}" x2="${cx+r}" y2="${cy}" stroke="${col}" stroke-width="1.6"/><line x1="${cx}" y1="${cy-r}" x2="${cx}" y2="${cy+r}" stroke="${col}" stroke-width="1.6"/>`;
     else s+=`<circle cx="${cx}" cy="${cy}" r="2.2" fill="${near?col:"#fff"}" stroke="${col}" stroke-width="1.2"/>`;
-    s+=`<text x="${cx}" y="${cy-r-6}" text-anchor="middle" font-size="14" fill="${col}">Ø${fmt(h.d)}${h.pin?" พิน":thru?" ทะลุ":(" ลึก"+fmt(h.depth))}${(!thru&&!near)?" ⟂อีกด้าน":""}</text>`;
+    /* v39.6: หูแขวนไม่ต้องมีป้ายในผังแล้ว — กล่องขยาย DETAIL บอกครบกว่า
+       จุดเดียวมีทั้งรูและบากสองใบซ้อนพิกัดกัน ป้ายสามอันจึงทับกันจนอ่านไม่ออกทั้งกอง */
+    let _gh=false; try{ _gh=isGlassHangerHole(h); }catch(e){}
+    if(!_gh) s+=`<text x="${cx}" y="${cy-r-6}" text-anchor="middle" font-size="14" fill="${col}">Ø${fmt(h.d)}${h.pin?" พิน":thru?" ทะลุ":(" ลึก"+fmt(h.depth))}${(!thru&&!near)?" ⟂อีกด้าน":""}</text>`;
   });
   /* ───────── v9.96: งานเจาะจาก connector ต้องมีตัวเลขกำกับเหมือนรูอื่น ─────────
      เดิมวาดแค่รูปวงกลม/สี่เหลี่ยม ไม่มี Ø ไม่มีความลึก ไม่มีระยะร่นจากขอบ
@@ -23342,7 +23489,8 @@ function part2DSvg(b,o){
     s+=`<rect x="${x0}" y="${y0}" width="${ww}" height="${hh}" fill="${col}" fill-opacity="${thru?.18:.10}" stroke="${col}" stroke-width="2"${thru?"":' stroke-dasharray="7 4"'}/>`;
     if(thru) s+=`<line x1="${x0}" y1="${y0}" x2="${x0+ww}" y2="${y0+hh}" stroke="${col}" stroke-width="1"/>`
       +`<line x1="${x0+ww}" y1="${y0}" x2="${x0}" y2="${y0+hh}" stroke="${col}" stroke-width="1"/>`;
-    s+=`<text x="${c[0]}" y="${y0-6}" text-anchor="middle" font-size="13" fill="${col}">${q._dxNotch?"บากเส้นโปรไฟล์ ":""}${fmt(w)}×${fmt(h)}${thru?" ทะลุ":(" ลึก "+fmt(q.depth))}</text>`;
+    if(q.src!=="glasshanger")                                    // v39.6: ระยะภายในของหูแขวนอยู่ในกล่องขยาย
+      s+=`<text x="${c[0]}" y="${y0-6}" text-anchor="middle" font-size="13" fill="${col}">${q._dxNotch?"บากเส้นโปรไฟล์ ":""}${fmt(w)}×${fmt(h)}${thru?" ทะลุ":(" ลึก "+fmt(q.depth))}</text>`;
   });
   // grooves
   /* ───────── v15.9: ร่องต้องบอกขนาดในแบบ ─────────
@@ -23393,12 +23541,22 @@ function part2DSvg(b,o){
     const rr=v=>Math.round(v*100)/100;
     const dfmt=v=>{ const n=rr(v); return (Math.abs(n-Math.round(n))<0.005)?String(Math.round(n)):String(n); };
     const uniq=a=>[...new Set(a.map(rr))].sort((m,n)=>m-n);
-    const dxs=[], dys=[]; (b.holes||[]).filter(h=>!h.edge).forEach(h=>{ dxs.push(tx(h.x||0,h.y||0)); dys.push(ty(h.x||0,h.y||0)); });
+    const dxs=[], dys=[], ghX=[], ghY=[];
+    (b.holes||[]).filter(h=>!h.edge).forEach(h=>{
+      let gh=false; try{ gh=isGlassHangerHole(h); }catch(e){}
+      if(gh){ ghX.push(tx(h.x||0,h.y||0)); ghY.push(ty(h.x||0,h.y||0)); return; }   // v39.5: หูแขวนมีแถวของตัวเอง
+      dxs.push(tx(h.x||0,h.y||0)); dys.push(ty(h.x||0,h.y||0)); });
     /* v9.96: ถ้วยบานพับกับแคมมินิฟิกมาจาก connector ไม่ได้อยู่ใน holes
        เดิมจึงไม่ถูกนับเข้าโซ่ระยะ ระยะบานพับตัวแรก-ตัวที่สองเลยไม่มีบอก */
     try{ cDX.forEach(v=>dxs.push(v)); cDY.forEach(v=>dys.push(v)); }catch(e){}
-    /* v10.9: ขอบช่องบากเข้าโซ่ระยะด้วย ช่างจะได้รู้ว่าเริ่มกัดที่ระยะเท่าไหร่ */
-    (b.pockets||[]).forEach(q=>{ if(!q)return; const w=+q.w||0, h=+q.h||0;
+    /* v10.9: ขอบช่องบากเข้าโซ่ระยะด้วย ช่างจะได้รู้ว่าเริ่มกัดที่ระยะเท่าไหร่
+       ───────── v39.5: ยกเว้นบากของหูแขวนกระจก ─────────
+       หูแขวนหนึ่งจุดมีบากสองใบซ้อนพิกัดเดียวกัน = ขอบ 4 เส้นต่อจุด ต่อสองแกน
+       แผ่นที่มีหูแขวน 6 จุดจึงยัดเข้าโซ่ระยะเกือบห้าสิบขีด อ่านไม่ออกสักตัว
+       (เห็นชัดในแบบที่ส่งมา: 277.5 · 50 · 60.5 · 1005 · 12.5 · 50 · 62.5 …)
+       ชุดพวกนี้เป็นของสำเร็จ ระยะภายในเท่ากันทุกจุดอยู่แล้ว ไม่มีใครวัดจากแบบหน้าหลัก
+       หน้าหลักบอกแค่ "ชุดอยู่ตรงไหน" ส่วนระยะภายในไปดูที่กล่องขยาย DETAIL */
+    (b.pockets||[]).forEach(q=>{ if(!q||q.src==="glasshanger")return; const w=+q.w||0, h=+q.h||0;
       [[-w/2,-h/2],[w/2,h/2]].forEach(d2=>{ dxs.push(tx((q.x||0)+d2[0],(q.y||0)+d2[1]));
         dys.push(ty((q.x||0)+d2[0],(q.y||0)+d2[1])); }); });
     /* v15.9: ขอบร่องก็เข้าโซ่ด้วย ไม่งั้นรู้ว่ามีร่องแต่ไม่รู้ว่าห่างจากขอบแผ่นเท่าไหร่
@@ -23431,8 +23589,11 @@ function part2DSvg(b,o){
     if(_hgOn){
       const hc="#6f3df0";
       const hx=uniq(hDX), hy=uniq(hDY);
-      if(hx.length>=2){
-        const xs=uniq([-DL/2, ...hx, DL/2]), yB2=pad+DW+98;
+      /* v39.6: ออกทั้งสองแกนเสมอ — บานพับเรียงตามแกนเดียว อีกแกนมีค่าเดียวคือ "ศูนย์ถ้วยห่างจากขอบบาน"
+         ซึ่งเป็นเลขที่ช่างต้องใช้ตั้งเครื่องพอ ๆ กัน ของเดิมเลือกออกแกนใดแกนหนึ่งด้วย else if
+         แผ่นจึงบอกด้านยาวแต่ไม่บอกด้านกว้าง หรือกลับกัน แล้วแต่ชิ้น */
+      if(hx.length){
+        const xs=uniq([-DL/2, ...hx, DL/2]), yB2=_rowY(1);
         s+=`<line x1="${Sx(xs[0])}" y1="${yB2}" x2="${Sx(xs[xs.length-1])}" y2="${yB2}" stroke="${hc}" stroke-width="1"/>`;
         xs.forEach(v=>{ const X=Sx(v);
           s+=`<line x1="${X}" y1="${yB2-5}" x2="${X}" y2="${yB2+5}" stroke="${hc}" stroke-width="1.4"/>`; });
@@ -23440,10 +23601,11 @@ function part2DSvg(b,o){
           s+=`<line x1="${X}" y1="${pad+DW}" x2="${X}" y2="${yB2-5}" stroke="${hc}" stroke-width=".5" stroke-dasharray="2 4" opacity=".55"/>`; });
         for(let k=0;k<xs.length-1;k++){ const g=rr(xs[k+1]-xs[k]); if(g>0.005)
           s+=`<text x="${Sx((xs[k]+xs[k+1])/2)}" y="${yB2-8}" text-anchor="middle" font-size="14" font-weight="600" fill="${hc}">${dfmt(g)}</text>`; }
-        s+=`<text x="${Sx(xs[0])-10}" y="${yB2+5}" text-anchor="end" font-size="13" fill="${hc}">บานพับ ${hx.length} ตัว</text>`;
+        s+=`<text x="${Sx(xs[0])-10}" y="${yB2+5}" text-anchor="end" font-size="13" fill="${hc}">บานพับ ${hx.length>1?(hx.length+" ตัว"):"จากขอบ"}</text>`;
         USED.hrow=1;
-      } else if(hy.length>=2){
-        const ys2=uniq([-DW/2, ...hy, DW/2]), xL2=pad-98;
+      }
+      if(hy.length){
+        const ys2=uniq([-DW/2, ...hy, DW/2]), xL2=_rowX(1);
         s+=`<line x1="${xL2}" y1="${Sy(ys2[0])}" x2="${xL2}" y2="${Sy(ys2[ys2.length-1])}" stroke="${hc}" stroke-width="1"/>`;
         ys2.forEach(v=>{ const Y=Sy(v);
           s+=`<line x1="${xL2-5}" y1="${Y}" x2="${xL2+5}" y2="${Y}" stroke="${hc}" stroke-width="1.4"/>`; });
@@ -23453,6 +23615,27 @@ function part2DSvg(b,o){
           s+=`<text x="${xL2-8}" y="${Sy((ys2[k]+ys2[k+1])/2)+4}" text-anchor="end" font-size="14" font-weight="600" fill="${hc}">${dfmt(g)}</text>`; }
         USED.hrow=1;
       }
+    }
+    /* ───────── v39.5: แถวระยะของ "ชุด" หูแขวนกระจก ─────────
+       บอกแค่ว่าชุดเข้ามาจากขอบเท่าไหร่ และห่างกันเท่าไหร่ — ระยะภายในไปดูที่กล่องขยาย */
+    if(ghX.length){
+      const gc="#0c7a5a";
+      const gx2=uniq(ghX), gy2=uniq(ghY);
+      const _k=(_hgOn?2:1);
+      if(gx2.length){ const xs=uniq([-DL/2, ...gx2, DL/2]), yB3=_rowY(_k);
+        s+=`<line x1="${Sx(xs[0])}" y1="${yB3}" x2="${Sx(xs[xs.length-1])}" y2="${yB3}" stroke="${gc}" stroke-width="1"/>`;
+        xs.forEach(v=>{ const X=Sx(v); s+=`<line x1="${X}" y1="${yB3-5}" x2="${X}" y2="${yB3+5}" stroke="${gc}" stroke-width="1.4"/>`; });
+        gx2.forEach(v=>{ const X=Sx(v); s+=`<line x1="${X}" y1="${pad+DW}" x2="${X}" y2="${yB3-5}" stroke="${gc}" stroke-width=".5" stroke-dasharray="2 4" opacity=".5"/>`; });
+        for(let k=0;k<xs.length-1;k++){ const g=rr(xs[k+1]-xs[k]); if(g>0.005)
+          s+=`<text x="${Sx((xs[k]+xs[k+1])/2)}" y="${yB3-8}" text-anchor="middle" font-size="14" font-weight="600" fill="${gc}">${dfmt(g)}</text>`; }
+        s+=`<text x="${Sx(xs[0])-10}" y="${yB3+5}" text-anchor="end" font-size="13" fill="${gc}">หูแขวน ${ghX.length} จุด</text>`; }
+      if(gy2.length){ const ys3=uniq([-DW/2, ...gy2, DW/2]), xL3=_rowX(_k);
+        s+=`<line x1="${xL3}" y1="${Sy(ys3[0])}" x2="${xL3}" y2="${Sy(ys3[ys3.length-1])}" stroke="${gc}" stroke-width="1"/>`;
+        ys3.forEach(v=>{ const Y=Sy(v); s+=`<line x1="${xL3-5}" y1="${Y}" x2="${xL3+5}" y2="${Y}" stroke="${gc}" stroke-width="1.4"/>`; });
+        gy2.forEach(v=>{ const Y=Sy(v); s+=`<line x1="${xL3+5}" y1="${Y}" x2="${pad}" y2="${Y}" stroke="${gc}" stroke-width=".5" stroke-dasharray="2 4" opacity=".5"/>`; });
+        for(let k=0;k<ys3.length-1;k++){ const g=rr(ys3[k+1]-ys3[k]); if(g>0.005)
+          s+=`<text x="${xL3-8}" y="${Sy((ys3[k]+ys3[k+1])/2)+4}" text-anchor="end" font-size="14" font-weight="600" fill="${gc}">${dfmt(g)}</text>`; } }
+      USED.ghrow=1;
     }
   }
   s+=`</svg>`;
@@ -23593,22 +23776,37 @@ function open2D(b){
     apply(); }
   m.classList.add("show");
 }
-async function addGroove(b){
+/* ───────── v39.4: กล่องเดียวใช้ได้ทั้ง เพิ่ม / แก้ไข ─────────
+   ของเดิมมีแต่ทาง "เพิ่ม" ร่องที่ใส่ผิดต้องล้างทั้งแผ่นแล้วใส่ใหม่ทุกเส้น
+   ส่ง gi (ลำดับร่อง) เข้ามา = แก้ไขเส้นนั้น กล่องเดิมเป๊ะ ๆ แค่เติมค่าที่มีอยู่ให้ก่อน */
+async function addGroove(b,gi){
   const T=Math.max(b.T||18,1);
-  const v=await promptFields("เซาะร่อง (CNC) — ร่องไฟ/ร่องทั่วไป",[
-    {key:"face",label:"ด้านที่เซาะ",type:"toggle",options:["บน","ล่าง","สัน"],value:"บน"},
-    {key:"axis",label:"แนวร่อง",type:"toggle",options:["ตามยาว","ตามกว้าง"],value:"ตามยาว",showIf:c=>c.face!=="สัน"},
-    {key:"edge",label:"ขอบ (ตามเลข Edge 1-4)",type:"toggle",options:["ขอบ1·ยาว","ขอบ2·กว้าง","ขอบ3·ยาว","ขอบ4·กว้าง"],value:"ขอบ1·ยาว",showIf:c=>c.face==="สัน"},
-    {key:"refLen",label:"วัดตำแหน่งจาก (แนวลึก หน้า↔หลัง)",type:"toggle",options:["กึ่งกลาง","หน้า","หลัง"],value:"หลัง",showIf:c=>c.face!=="สัน"&&c.axis!=="ตามกว้าง"},
-    {key:"refWid",label:"วัดตำแหน่งจาก (แนวกว้าง ซ้าย↔ขวา)",type:"toggle",options:["กึ่งกลาง","ซ้าย","ขวา"],value:"ซ้าย",showIf:c=>c.face!=="สัน"&&c.axis==="ตามกว้าง"},
-    {key:"pos",label:"ระยะตามจุดอ้างอิง (มม.)",value:0,showIf:c=>c.face!=="สัน"},
-    {key:"posT",label:"กึ่งกลางร่องจากผิวบน (มม.)",value:Math.round(T/2*10)/10,showIf:c=>c.face==="สัน"},
-    {key:"width",label:"ความกว้างร่อง (มม.)",value:8},
-    {key:"depth",label:"ความลึก (มม.)",value:Math.max(2,Math.min(8,Math.round(T/2)))},
-    {key:"off0",label:"หัว: ร่นจากขอบ (มม.) — 0 = ทะลุ",value:0},
-    {key:"off1",label:"ท้าย: ร่นจากขอบ (มม.) — 0 = ทะลุ",value:0},
-    {key:"end",label:"ปลายร่อง (เมื่อร่นเข้า)",type:"toggle",options:["โค้งตาม R","เหลี่ยม"],value:"โค้งตาม R"},
-    {key:"r",label:"R ปลายร่อง (มม.) — 0 = กว้างร่อง/2 (ตามดอก)",value:0,showIf:c=>c.end==="โค้งตาม R"}]);
+  const ed=(gi!=null)?((b.grooves||[])[gi]||null):null;
+  const EL={1:"ขอบ1·ยาว",2:"ขอบ2·กว้าง",3:"ขอบ3·ยาว",4:"ขอบ4·กว้าง"};
+  const dFace = ed ? (ed.face==="edge"?"สัน":(ed.face==="bottom"?"ล่าง":"บน")) : "บน";
+  const dAxis = ed ? (ed.axis==="wid"?"ตามกว้าง":"ตามยาว") : "ตามยาว";
+  const dRef  = (ed&&ed.ref)||null;
+  const v=await promptFields((ed?"แก้ไขร่อง":"เซาะร่อง (CNC)")+" — ร่องไฟ/ร่องทั่วไป",[
+    {key:"face",label:"ด้านที่เซาะ",type:"toggle",options:["บน","ล่าง","สัน"],value:dFace},
+    {key:"axis",label:"แนวร่อง",type:"toggle",options:["ตามยาว","ตามกว้าง"],value:dAxis,showIf:c=>c.face!=="สัน"},
+    {key:"edge",label:"ขอบ (ตามเลข Edge 1-4)",type:"toggle",options:["ขอบ1·ยาว","ขอบ2·กว้าง","ขอบ3·ยาว","ขอบ4·กว้าง"],value:(ed&&EL[ed.edge])||"ขอบ1·ยาว",showIf:c=>c.face==="สัน"},
+    {key:"refLen",label:"วัดตำแหน่งจาก (แนวลึก หน้า↔หลัง)",type:"toggle",options:["กึ่งกลาง","หน้า","หลัง"],value:(dAxis==="ตามยาว"&&dRef)||"หลัง",showIf:c=>c.face!=="สัน"&&c.axis!=="ตามกว้าง"},
+    {key:"refWid",label:"วัดตำแหน่งจาก (แนวกว้าง ซ้าย↔ขวา)",type:"toggle",options:["กึ่งกลาง","ซ้าย","ขวา"],value:(dAxis==="ตามกว้าง"&&dRef)||"ซ้าย",showIf:c=>c.face!=="สัน"&&c.axis==="ตามกว้าง"},
+    /* v39.8: ระยะที่กรอกวัดถึงอะไร — เดิมเป็น "กึ่งกลางร่อง" ตายตัว ไม่มีที่ไหนบอกไว้
+       แบบจริงมักให้มาเป็นระยะถึงขอบร่อง (ชิดขอบด้านใกล้/ไกล) ต้องมานั่งบวกลบครึ่งความกว้างเอง
+       เลือกได้แล้ว โปรแกรมแปลงเป็นกึ่งกลางให้เอง โมเดลข้างในยังเก็บกึ่งกลางเหมือนเดิมทุกอย่าง */
+    {key:"anchor",label:"ระยะนั้นวัดถึง",type:"toggle",options:["กึ่งกลางร่อง","ขอบร่องด้านใกล้","ขอบร่องด้านไกล"],
+      value:(ed&&ed.anchor)||"กึ่งกลางร่อง",showIf:c=>c.face!=="สัน"&&c.refLen!=="กึ่งกลาง"&&c.refWid!=="กึ่งกลาง"},
+    {key:"pos",label:"ระยะตามจุดอ้างอิง (มม.)",value:ed?(ed.refVal!=null?ed.refVal:(ed.pos||0)):0,showIf:c=>c.face!=="สัน"},
+    {key:"posT",label:"กึ่งกลางร่องจากผิวบน (มม.)",value:ed&&ed.posT!=null?ed.posT:Math.round(T/2*10)/10,showIf:c=>c.face==="สัน"},
+    {key:"width",label:"ความกว้างร่อง (มม.)",value:ed?(ed.width||8):8},
+    {key:"depth",label:"ความลึก (มม.)",value:ed?(ed.depth||2):Math.max(2,Math.min(8,Math.round(T/2)))},
+    {key:"off0",label:"หัว: ร่นจากขอบ (มม.) — 0 = ทะลุ",value:ed?(ed.off0||0):0},
+    {key:"off1",label:"ท้าย: ร่นจากขอบ (มม.) — 0 = ทะลุ",value:ed?(ed.off1||0):0},
+    {key:"end",label:"ปลายร่อง (เมื่อร่นเข้า)",type:"toggle",options:["โค้งตาม R","เหลี่ยม"],value:(ed&&ed.end==="sq")?"เหลี่ยม":"โค้งตาม R"},
+    {key:"r",label:"R ปลายร่อง (มม.) — 0 = กว้างร่อง/2 (ตามดอก)",value:(ed&&ed.r)||0,showIf:c=>c.end==="โค้งตาม R"},
+    {key:"_pv",type:"preview",label:"ตัวอย่างตำแหน่ง (มองจากผิวบน)",showIf:c=>c.face!=="สัน",
+      render:c=>groovePreviewSvg(b,c,gi)}]);
   if(!v)return; if(!b.grooves)b.grooves=[];
   const isE=v.face==="สัน";
   const edgeMap={"ขอบ1·ยาว":1,"ขอบ2·กว้าง":2,"ขอบ3·ยาว":3,"ขอบ4·กว้าง":4};
@@ -23616,21 +23814,104 @@ async function addGroove(b){
   // แปลง "วัดจากขอบ" → ตำแหน่งจากกึ่งกลาง (โมเดลภายในเก็บ pos จากกึ่งกลางเหมือนเดิม)
   // len วัดข้ามแนวลึก W (หน้า=+W/2 · หลัง=−W/2) · wid วัดข้ามแนวกว้าง L (ขวา=+L/2 · ซ้าย=−L/2)
   let posC=0, ref="กึ่งกลาง";
-  if(!isE){ const val=v.pos||0;
+  if(!isE){ let val=v.pos||0;
     ref=(gAxis==="len")?v.refLen:v.refWid;
     const cross=(gAxis==="len")?b.W:b.L;
     const sg=grooveRefSign(b.orient,gAxis,ref);
+    /* v39.8: แปลง "ระยะถึงขอบร่อง" เป็น "ระยะถึงกึ่งกลาง" ก่อนเก็บ */
+    const gwv=Math.max(v.width||1,1);
+    if(sg!==0){ if(v.anchor==="ขอบร่องด้านใกล้") val+=gwv/2; else if(v.anchor==="ขอบร่องด้านไกล") val-=gwv/2; }
     posC = sg===0?val : sg>0?(cross/2-val) : (-cross/2+val); }
-  b.grooves.push({ axis:gAxis,
+  const ng={ axis:gAxis,
     face:isE?"edge":(v.face==="ล่าง"?"bottom":"top"), edge:isE?edgeMap[v.edge]:undefined,
     pos:isE?0:round(posC), posT:isE?(v.posT||T/2):undefined,
-    ref:isE?undefined:ref, refVal:isE?undefined:(v.pos||0),
+    ref:isE?undefined:ref, refVal:isE?undefined:(v.pos||0), anchor:isE?undefined:(v.anchor||"กึ่งกลางร่อง"),
     width:Math.max(v.width||1,1), depth:Math.max(v.depth||1,.5),
     off0:Math.max(v.off0||0,0), off1:Math.max(v.off1||0,0),
-    end:(v.end==="เหลี่ยม")?"sq":"r", r:Math.max(v.r||0,0)||undefined });
+    end:(v.end==="เหลี่ยม")?"sq":"r", r:Math.max(v.r||0,0)||undefined };
+  /* v39.4: แก้ไขต้องรักษาธงของระบบไว้ (ร่องแผ่นหลัง / ร่องรางไฟ / ธง CNC)
+     ไม่งั้นแก้ความลึกทีเดียว ร่องแผ่นหลังกลายเป็นร่องธรรมดา หลุดจากมาโครและสายเลื่อยทันที */
+  if(ed){ ["back","backThk","backset","cnc","_led","_ledId","_kerf"].forEach(k=>{ if(ed[k]!==undefined) ng[k]=ed[k]; });
+    b.grooves[gi]=ng; } else b.grooves.push(ng);
   sync(0);
-  toast("เซาะร่องแล้ว"+(isE?" (สัน — ออก MPR อัตโนมัติยังไม่รองรับ ส่งไฟล์ตัวอย่างร่องสันมาได้)":""));
+  toast((ed?"แก้ไขร่องแล้ว":"เซาะร่องแล้ว")+(isE?" (สัน — ออก MPR อัตโนมัติยังไม่รองรับ ส่งไฟล์ตัวอย่างร่องสันมาได้)":""));
 }
+/* v39.8: รูปตัวอย่างในกล่องเซาะร่อง — วาดแผ่นย่อ ร่องที่กำลังจะได้ และร่องเดิมที่มีอยู่แล้ว
+   ใช้เลขชุดเดียวกับตอนบันทึกจริง จะได้ไม่มีทางที่รูปกับผลลัพธ์ไม่ตรงกัน */
+function groovePreviewSvg(b,c,gi){
+  if(!c||c.face==="สัน") return "";
+  const L=Math.max(+b.L||1,1), W=Math.max(+b.W||1,1);
+  const gAxis=(c.axis==="ตามกว้าง")?"wid":"len";
+  const cross=(gAxis==="len")?W:L;
+  const ref=(gAxis==="len")?c.refLen:c.refWid;
+  const sg=grooveRefSign(b.orient,gAxis,ref);
+  const gw=Math.max(+c.width||1,1);
+  let val=+c.pos||0;
+  if(sg!==0){ if(c.anchor==="ขอบร่องด้านใกล้") val+=gw/2; else if(c.anchor==="ขอบร่องด้านไกล") val-=gw/2; }
+  const pos = sg===0?val : sg>0?(cross/2-val) : (-cross/2+val);
+  const o0=Math.max(+c.off0||0,0), o1=Math.max(+c.off1||0,0);
+  const VW=900, PAD=30, sc=Math.min((VW-2*PAD)/L, 420/W), pw=L*sc, ph=W*sc, VH=ph+2*PAD+26;
+  const X=v=>PAD+(v+L/2)*sc, Y=v=>PAD+(W/2-v)*sc;                      // y ขึ้นเป็นบวก
+  const okPos=Math.abs(pos)+gw/2<=cross/2+0.01;
+  const col=okPos?"#a0522d":"#c0392b";
+  let out=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VW} ${Math.round(VH)}" width="100%" style="display:block">`
+    +`<rect x="${PAD}" y="${PAD}" width="${pw.toFixed(1)}" height="${ph.toFixed(1)}" fill="#fff" stroke="#1f2933" stroke-width="1.4"/>`;
+  (b.grooves||[]).forEach((g,i)=>{ if(i===gi||!g||g.face==="edge") return;
+    const gp=+g.pos||0, gwd=Math.max(+g.width||1,1);
+    if(g.axis==="wid") out+=`<rect x="${(X(gp-gwd/2)).toFixed(1)}" y="${PAD}" width="${(gwd*sc).toFixed(1)}" height="${ph.toFixed(1)}" fill="#c9ced6" opacity=".55"/>`;
+    else out+=`<rect x="${PAD}" y="${(Y(gp+gwd/2)).toFixed(1)}" width="${pw.toFixed(1)}" height="${(gwd*sc).toFixed(1)}" fill="#c9ced6" opacity=".55"/>`; });
+  if(gAxis==="wid"){
+    const x0=X(pos-gw/2), wpx=Math.max(gw*sc,1.5), y0=Y(W/2-o0), y1=Y(-W/2+o1);
+    out+=`<rect x="${x0.toFixed(1)}" y="${y0.toFixed(1)}" width="${wpx.toFixed(1)}" height="${Math.max(y1-y0,1).toFixed(1)}" fill="${col}" opacity=".75"/>`;
+    out+=`<line x1="${PAD}" y1="${(PAD+ph+13)}" x2="${X(pos).toFixed(1)}" y2="${(PAD+ph+13)}" stroke="#c0392b" stroke-width="1"/>`;
+    out+=`<text x="${((PAD+X(pos))/2).toFixed(1)}" y="${(PAD+ph+10)}" text-anchor="middle" font-family="monospace" font-size="11" fill="#c0392b">${Math.round((pos+L/2)*10)/10}</text>`;
+  } else {
+    const y0=Y(pos+gw/2), hpx=Math.max(gw*sc,1.5), x0=X(-L/2+o0), x1=X(L/2-o1);
+    out+=`<rect x="${x0.toFixed(1)}" y="${y0.toFixed(1)}" width="${Math.max(x1-x0,1).toFixed(1)}" height="${hpx.toFixed(1)}" fill="${col}" opacity=".75"/>`;
+    out+=`<line x1="${(PAD-10)}" y1="${(PAD+ph).toFixed(1)}" x2="${(PAD-10)}" y2="${Y(pos).toFixed(1)}" stroke="#c0392b" stroke-width="1"/>`;
+    out+=`<text x="${(PAD-13)}" y="${((PAD+ph+Y(pos))/2).toFixed(1)}" text-anchor="end" font-family="monospace" font-size="11" fill="#c0392b">${Math.round((pos+W/2)*10)/10}</text>`;
+  }
+  const anc=(c.anchor&&c.anchor!=="กึ่งกลางร่อง")?c.anchor:"กึ่งกลางร่อง";
+  out+=`<text x="${PAD}" y="${PAD-10}" font-family="'Sarabun',sans-serif" font-size="13" fill="#6b7280">แผ่น ${Math.round(L)} × ${Math.round(W)} · ผิว${c.face==="ล่าง"?"ล่าง":"บน"} · ร่อง ${round(gw)} ลึก ${round(+c.depth||0)} · วัดถึง${anc}</text>`;
+  if(!okPos) out+=`<text x="${PAD}" y="${(PAD+ph+34)}" font-family="'Sarabun',sans-serif" font-size="13" font-weight="700" fill="#c0392b">⚠ ร่องล้นออกนอกแผ่น — ลองเปลี่ยนจุดอ้างอิงหรือเพิ่มระยะ</text>`;
+  out+=`</svg>`;
+  return out;
+}
+/* v39.4: คลิปบอร์ดร่อง — คัดลอกร่องจากแผ่นหนึ่งไปวางอีกแผ่นได้
+   ร่องชุดเดียวกันมักต้องมีทั้งแผ่นซ้ายและขวา ของเดิมต้องกรอกใหม่ทั้งกล่องทีละแผ่น */
+let _gClip=null;
+function grooveCopy(b,gi){ const g=(b.grooves||[])[gi]; if(!g){toast("ไม่พบร่อง");return;}
+  _gClip=JSON.parse(JSON.stringify(g)); showInspector();
+  toast("คัดลอกร่องแล้ว — ไปที่แผ่นปลายทางแล้วกด “วางร่อง”"); }
+function groovePaste(b){ if(!_gClip){toast("ยังไม่ได้คัดลอกร่อง");return;}
+  if(!b.grooves)b.grooves=[];
+  b.grooves.push(JSON.parse(JSON.stringify(_gClip)));
+  sync(0); toast("วางร่องแล้ว — ตรวจระยะอีกที ถ้าแผ่นปลายทางขนาดไม่เท่ากัน"); }
+function grooveDup(b,gi){ const g=(b.grooves||[])[gi]; if(!g)return;
+  b.grooves.splice(gi+1,0,JSON.parse(JSON.stringify(g))); sync(0); toast("ทำสำเนาร่องแล้ว — กดแก้ไขเพื่อย้ายตำแหน่ง"); }
+function grooveDel(b,gi){ if(!(b.grooves||[])[gi])return;
+  b.grooves.splice(gi,1); sync(0); toast("ลบร่องแล้ว"); }
+/* v39.7: คืนสองบรรทัด — หัวเรื่องกับตัวเลข
+   ของเดิมยัดทุกอย่างเป็นสายเดียวแล้ววางข้างปุ่มสี่ตัวในแผงขวาที่แคบอยู่แล้ว
+   เหลือที่ให้ตัวหนังสือไม่ถึงร้อยพิกเซล ตัดคำลงมาบรรทัดละคำ อ่านไม่ได้เลย */
+function grooveLabel(b,g){
+  if(!g) return {a:"",b:""};
+  if(g.face==="edge") return {a:"ร่องสัน · ขอบ"+(g.edge||"?"),
+    b:rnd1n(g.width)+" × ลึก "+rnd1n(g.depth)+" · กลางร่องจากผิวบน "+rnd1n(g.posT)};
+  const along=(g.axis==="wid")?"ตามกว้าง":"ตามยาว";
+  const face=(g.face==="bottom")?"ผิวล่าง":"ผิวบน";
+  const cross=(g.axis==="len")?(+b.W||0):(+b.L||0);
+  const dLo=round((+g.pos||0)+cross/2), dHi=round(cross/2-(+g.pos||0));
+  const near=(g.ref&&g.ref!=="กึ่งกลาง")?(g.ref+" "+rnd1n(g.refVal)):((dLo<=dHi)?("ขอบใกล้ "+rnd1n(dLo)):("ขอบใกล้ "+rnd1n(dHi)));
+  const o0=+g.off0||0, o1=+g.off1||0;
+  return {
+    a:(g.back?"ร่องแผ่นหลัง":(g._led?"ร่องรางไฟ":"ร่อง"))+" · "+along+" · "+face+(g.cnc?" · CNC":""),
+    b:"กว้าง "+rnd1n(g.width)+" · ลึก "+rnd1n(g.depth)+" · จาก"+near
+      +((g.anchor&&g.anchor!=="กึ่งกลางร่อง")?(" ("+g.anchor+")"):"")
+      +((o0||o1)?(" · ร่น "+rnd1n(o0)+"/"+rnd1n(o1)):" · วิ่งสุด")
+  };
+}
+function rnd1n(v){ return Math.round((+v||0)*10)/10; }
 function addPocket(b){   // เพิ่ม Pocket + 2D preview สด · อ้างอิงจากมุม/กึ่งกลาง → ออก MPR RechteckTasche
   if(!b){toast("เลือกชิ้นก่อน");return;}
   const L=Math.max(b.L||1,1), W=Math.max(b.W||1,1);
@@ -24048,6 +24329,9 @@ function sxAddGlassHangers(b,quiet){
     const had=((b.holes||[]).some(isGlassHangerHole)||(b.pockets||[]).some(k=>k&&k.src==="glasshanger"));
     if(had){ b.holes=(b.holes||[]).filter(h=>!isGlassHangerHole(h));
              b.pockets=(b.pockets||[]).filter(k=>k.src!=="glasshanger"); }
+    /* v39.3: จำขนาดที่ตัดสินไว้ด้วย (ติดธง small) — ไม่งั้นตัวรีเฟรชเห็นขนาดไม่ตรงที่จำ
+       แล้วเรียกมาลองใหม่ทุกครั้งที่วาดฉาก วนฟรีไปตลอด · แผ่นโตพอเมื่อไหร่ ขนาดเปลี่ยน ผังกลับมาเอง */
+    if(b._glassHanger) b._glassHanger={L:round(L),W:round(W),v:GLASS_HANGER.ver,small:1};
     if(!quiet) toast("แผ่นเล็กเกินไปสำหรับหูแขวน"+(had?" — เอาผังเดิมออกให้แล้ว":""));
     return; }
   const g=sxHangerGrid(L,W);
@@ -24335,7 +24619,11 @@ function rotateBoard90(b){   // หมุน 90° CW (x,y)->(y,-x) · L<->W · �
     if(co.edge==="left")n.edge="top"; else if(co.edge==="right")n.edge="bottom"; else if(co.edge==="top"){n.edge="right";n.pos=-(co.pos||0);} else if(co.edge==="bottom"){n.edge="left";n.pos=-(co.pos||0);}
     return n; });
   nb.grooves=(b.grooves||[]).map(g=>{ const n=Object.assign({},g);
-    if(g.axis==="wid"){n.axis="len";n.pos=-(g.pos||0);} else {n.axis="wid";n.pos=(g.pos||0);}
+    if(g.axis==="wid"){n.axis="len";n.pos=-(g.pos||0);}
+    else {n.axis="wid";n.pos=(g.pos||0);
+      /* v39.2: หมุนตามเข็ม ปลาย X ต่ำของแกนยาวไปโผล่ปลาย Y สูง — ร่องตันต้องสลับหัวท้ายด้วย
+         ไม่งั้นร่องที่ร่นหัว 200 กลายเป็นร่นท้าย 200 บนแผ่นที่ถูกหมุนเข้าเครื่อง */
+      if(g.off0!=null||g.off1!=null){ n.off0=(g.off1||0); n.off1=(g.off0||0); } }
     return n; });
   if(Array.isArray(b.pockets)) nb.pockets=b.pockets.map(p=>{ const n=Object.assign({},p); n.x=(p.y||0); n.y=-(p.x||0); n.w=(p.h||0); n.h=(p.w||0); return n; });
   if(Array.isArray(b.profile)) nb.profile=b.profile.map(p=>[p[1], -p[0]]);
@@ -24530,7 +24818,12 @@ function boardToMPR(b, side){   // side=1/2 → เอาเฉพาะรู�
   });
   // ร่องหน้า (บน/ล่าง) → <112 RechteckTasche ตามฟอร์แมตเครื่องจริง (RD=R ปลายร่อง · 0=เหลี่ยม)
   (b.grooves||[]).forEach(g=>{
-    if(g.back) return;                                                 // ร่องรับแผ่นหลัง: งานเลื่อย/สายการผลิตแยก — ไม่ออกในไฟล์เจาะ
+    /* ───────── v39.2: ร่องรับแผ่นหลังแบบ CNC ต้องกัดจริงในไฟล์ เหมือนร่องรางไฟ ─────────
+       ของเดิมกัน g.back ออกจากไฟล์เจาะทั้งหมด เพราะร่องวิ่งสุดเป็นงานเลื่อย (มาโคร V) ซึ่งถูก
+       แต่ร่องที่วิ่งไม่สุด เลื่อยทำไม่ได้ ช่อง Groove3 ก็ได้แค่คำว่า CNC ลอย ๆ
+       ไม่มีเครื่องไหนได้พิกัดร่องไปเลย — แผ่นข้างซ้ายขวาจึงออกจากโรงงานโดยไม่มีร่อง
+       ร่อง CNC เดินทางเดียวกับร่องรางไฟ: <112 ตามหน้า ตามฝั่งไฟล์ หัวท้ายตาม off0/off1 */
+    if(g.back && !g.cnc) return;                                       // ร่องวิ่งสุด: งานเลื่อย/มาโคร V ตามเดิม
     if(g.face==="edge"){ P('<101 \\Kommentar\\'); P('KM="EDGE GROOVE edge'+(g.edge||"?")+' w'+(g.width||0)+' d'+(g.depth||0)+' — manual"'); P(' '); return; }
     if(side!=null && g.face!==mFace) return;                           // ออกเฉพาะไฟล์ฝั่งหน้าที่กัดจริง
     const o0=Math.max(g.off0||0,0), o1=Math.max(g.off1||0,0);
@@ -25090,7 +25383,7 @@ function boardHasDrilling(b){
   if((b.holes||[]).length>0)return true;
   if(allPockets(b).length>0)return true;                                                // Pocket/บาก (รวมที่ถอดจาก profile) = งานกัด CNC
   if(profileNeedsContour(b))return true;                                                // ชิ้นวาดเองเส้นโค้ง = ต้องกัดตามเส้น
-  if((b.grooves||[]).some(g=>g.face!=="edge"&&!g.back))return true;                     // ร่องหน้า = งานกัด ต้องออกไฟล์ตามฝั่ง
+  if((b.grooves||[]).some(g=>g.face!=="edge"&&(!g.back||g.cnc)))return true;           // ร่องหน้า + ร่องหลังแบบ CNC = งานกัด ต้องออกไฟล์
   return (b.connectors||[]).some(c=>connCount(b,c)>0); }
 // หน้าไหน → บาร์ไหน ตามทิศอ้างอิงของตู้ (local face "top"=+Z, "bottom"=-Z)
 //  flat (ทอป/พื้น/ชั้น): มองบนลงล่าง → top=บาร์1, bottom=บาร์2
@@ -25112,7 +25405,7 @@ function primarySideOf(b){
 // ฝั่งบาร์ที่มีรูเจาะจริง (ต้องออกไฟล์ MPR) → [1], [2], หรือ [1,2]
 function boardMprSides(b){ const s=new Set();
   (b.holes||[]).forEach(h=>{ if(h.edge)return; s.add(holeFaceSide(b,h)); });
-  (b.grooves||[]).forEach(g=>{ if(g.face==="edge"||g.back)return; s.add(faceBarcodeSide(b,g.face)); });   // ร่องหน้า (ไม่นับร่องแผ่นหลัง) กำหนดฝั่งไฟล์
+  (b.grooves||[]).forEach(g=>{ if(g.face==="edge"||(g.back&&!g.cnc))return; s.add(faceBarcodeSide(b,g.face)); });   // ร่องหน้า + ร่องหลัง CNC กำหนดฝั่งไฟล์ (ร่องหลังวิ่งสุด = เลื่อย ไม่นับ)
   (b.connectors||[]).forEach(c=>{ if(connCount(b,c)<=0)return; if(c.type==="minifix"||c.type==="hinge") s.add(connFaceSide(b,c)); });
   /* v11.1: งานกัด (Pocket · บาก · เว้ารูปแผ่น) เคยบังคับออกฝั่งบาร์ 1 เสมอ
      แผ่นที่งานเจาะอยู่ฝั่ง 2 (เช่นแผ่นข้างที่แคมมินิฟิกอยู่อีกหน้า) จึงได้ไฟล์กัดคนละใบกับไฟล์เจาะ
@@ -25134,8 +25427,12 @@ function boardBarcode(b,sideDigit,seqMap){ const seq=String((seqMap||orderPartSe
 //  เช่น แผ่นหลัง 9 + backset 16 + ลึก 5 → V100160050 · backset เกิน 30 มม. → ออก "CNC" ไม่ออกมาโคร
 const SX_BACKSET_MAX=30;
 function backGrooveMacro(b, grp){
-  const bg=(b.grooves||[]).find(g=>g.back);
-  if(!bg) return "";
+  const bgs=(b.grooves||[]).filter(g=>g&&g.back);
+  if(!bgs.length) return "";
+  /* v39.2: แผ่นเดียวถือร่องหลังได้หลายเส้น (ชั้นตายที่รับแผ่นหลังบน-ล่างคนละใบ)
+     มีเส้นไหนเป็น CNC ก็ต้องขึ้น CNC — ของเดิม find() หยิบเส้นแรกเส้นเดียวแล้วแต่ดวง */
+  if(bgs.some(g=>g.cnc)) return "CNC";
+  const bg=bgs[0];
   let Tb = bg.backThk;                                              // หนาแผ่นหลัง (เก็บไว้ตอนเซาะ)
   if(Tb==null && grp){                                             // ตู้เก่าที่ยังไม่เก็บค่า → หาแผ่นหลังจริงในตู้
     const bk = grp.boards.find(z=>z.orient==="front" && !z._door && !z._virtual && !z._dx && !z._dwall && !isRail(z))
@@ -27223,6 +27520,119 @@ const ShopPaper = (function(){
     s+=tb(P,page,pages,"FRAME SECTION",{dx:FL, dz:T, dy:FW});
     return s+`</svg>`;
   }
+  /* v39.4: หนึ่งกล่อง = หนึ่งร่อง — ตัดขวางแผ่นตรงแนวร่อง
+     วาดเป็น "ภาพขยายเฉพาะช่วง" จากขอบที่ใกล้ที่สุดถึงร่อง ไม่ใช่ทั้งความกว้างแผ่น
+     ไม่งั้นร่อง 8 มม. บนแผ่น 570 จะเล็กจนมองไม่เห็นอะไรเลย */
+  /* ───────── v39.5: กล่องขยาย (DETAIL) ของอุปกรณ์ที่เป็น "ชุด" ─────────
+     หูแขวนกระจกหนึ่งจุด = บาก 2 ใบซ้อนพิกัดเดียวกัน + รู Ø15 ระยะภายในเล็กระดับ 8-45 มม.
+     บนแผ่นยาว 2200 มันเล็กจนไม่มีทางอ่านได้ ถ้ายัดทุกขอบเข้าโซ่ระยะก็รกจนอ่านไม่ออกทั้งแบบ
+     วิธีที่แบบงานไม้ใช้กันคือ ขยายมาดูข้างนอกหนึ่งจุด แล้วหน้าหลักบอกแค่ว่าชุดอยู่ตรงไหน
+     บานพับก็เรื่องเดียวกัน — หน้าหลักบอกระยะศูนย์ถ้วย ส่วน Ø ถ้วย ความลึก ระยะร่นจากขอบ
+     กับผังเดือยยึด อยู่ในกล่องขยาย และดึงจากรุ่นบานพับของบานใบนั้น (v38.3) ไม่ใช่ค่ากลาง */
+  function detailBoxHanger(b,gx,Y,bwx,Ht){
+    let out=`<rect x="${rnd1(gx)}" y="${rnd1(Y)}" width="${rnd1(bwx)}" height="${rnd1(Ht)}" fill="#fafbfc" stroke="${THIN}" stroke-width="1"/>`;
+    const hs=(b.holes||[]).filter(h=>{ try{ return isGlassHangerHole(h); }catch(e){ return false; } });
+    const h0=hs[0]; if(!h0) return out;
+    const pk=(b.pockets||[]).filter(q=>q&&q.src==="glasshanger"
+      &&Math.abs((+q.x||0)-(+h0.x||0))<0.6&&Math.abs((+q.y||0)-(+h0.y||0))<0.6)
+      .slice().sort((a,c)=>((+c.w||0)*(+c.h||0))-((+a.w||0)*(+a.h||0)));
+    const bigW=Math.max(...pk.map(q=>+q.w||0), +h0.d||0, 8);
+    const bigH=Math.max(...pk.map(q=>+q.h||0), +h0.d||0, 8);
+    const padT=44,padB=44,padL=64,padR=64;
+    const sc=Math.min((bwx-padL-padR)/(bigW*1.6), (Ht-padT-padB)/(bigH*1.12), 3.2);   // เพดานสเกล กันกล่องเดียวโดด ๆ ขยายจนล้น
+    const cx=gx+bwx/2, cy=Y+padT+(Ht-padT-padB)/2;
+    pk.forEach((q,i)=>{ const w=(+q.w||0)*sc, h=(+q.h||0)*sc, r=Math.min((+q.r||0)*sc,Math.min(w,h)/2);
+      out+=`<rect x="${rnd1(cx-w/2)}" y="${rnd1(cy-h/2)}" width="${rnd1(w)}" height="${rnd1(h)}" rx="${rnd1(r)}" fill="${i?"#e6d7c3":"#f2e7d8"}" stroke="${INK}" stroke-width="1.3"/>`; });
+    if(+h0.d>0) out+=`<circle cx="${rnd1(cx)}" cy="${rnd1(cy)}" r="${rnd1((+h0.d)/2*sc)}" fill="#fff" stroke="${INK}" stroke-width="1.3"/>`;
+    const q0=pk[0];
+    if(q0){ out+=dimH(cx-(+q0.w||0)/2*sc, cx+(+q0.w||0)/2*sc, cy+(+q0.h||0)/2*sc+28, rnd1(q0.w));
+            out+=dimV(cy-(+q0.h||0)/2*sc, cy+(+q0.h||0)/2*sc, cx+(+q0.w||0)/2*sc+34, rnd1(q0.h)); }
+    const q1=pk[1];
+    if(q1){ out+=dimH(cx-(+q1.w||0)/2*sc, cx+(+q1.w||0)/2*sc, cy-(+q0?(+q0.h||0):0)/2*sc-16, rnd1(q1.w)); }
+    out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+17)}" font-family="'Sarabun',sans-serif" font-size="12.5" font-weight="700" fill="${INK}">หูแขวนกระจก · ขยาย 1 จุด (มี ${hs.length} จุด)</text>`;
+    const dl=[]; if(+h0.d>0) dl.push("รู Ø"+rnd1(h0.d)+" ลึก "+rnd1(h0.depth));
+    pk.forEach(q=>dl.push("บาก "+rnd1(q.w)+"×"+rnd1(q.h)+" ลึก "+rnd1(q.depth)+(q.r?(" R"+rnd1(q.r)):"")));
+    out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+31)}" font-family="'Sarabun',sans-serif" font-size="11.5" fill="${THIN}">${esc(dl.join(" · "))}</text>`;
+    out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+Ht-9)}" font-family="'Sarabun',sans-serif" font-size="11" fill="${THIN}">ทุกจุดเหมือนกัน · เจาะผิว${(h0.face==="bottom")?"หลัง":"หน้า"} · ตำแหน่งชุดดูที่แถวสีเขียวในผัง</text>`;
+    return out;
+  }
+  function detailBoxHinge(b,gx,Y,bwx,Ht){
+    let out=`<rect x="${rnd1(gx)}" y="${rnd1(Y)}" width="${rnd1(bwx)}" height="${rnd1(Ht)}" fill="#fafbfc" stroke="${THIN}" stroke-width="1"/>`;
+    let hp=null; try{ hp=hingeSpecOf(b); }catch(e){}
+    if(!hp) return out;
+    const n=(b.connectors||[]).filter(c=>c&&c.type==="hinge").reduce((a,c)=>a+(connCount(b,c)||0),0);
+    const win=Math.max(hp.cupOffset+hp.cupD/2+14, hp.dowelSpacing*0.62+14);
+    const padL=54,padR=54,padT=44,padB=48;
+    const sc=Math.min((bwx-padL-padR)/(win*1.15), (Ht-padT-padB)/Math.max(hp.dowelSpacing+hp.dowelD+16,hp.cupD+18), 3.2);
+    const ex=gx+padL, cy=Y+padT+(Ht-padT-padB)/2;                 // ex = ขอบบาน
+    out+=`<line x1="${rnd1(ex)}" y1="${rnd1(cy-(Ht-padT-padB)/2-6)}" x2="${rnd1(ex)}" y2="${rnd1(cy+(Ht-padT-padB)/2+6)}" stroke="${INK}" stroke-width="1.8"/>`;
+    const cxp=ex+hp.cupOffset*sc;
+    out+=`<circle cx="${rnd1(cxp)}" cy="${rnd1(cy)}" r="${rnd1(hp.cupD/2*sc)}" fill="#f2e7d8" stroke="${INK}" stroke-width="1.4"/>`;
+    if(hp.dowelD>0){ const dx2=ex+(hp.cupOffset-hp.dowelOffset)*sc;
+      [-1,1].forEach(sg=>{ out+=`<circle cx="${rnd1(dx2)}" cy="${rnd1(cy+sg*hp.dowelSpacing/2*sc)}" r="${rnd1(Math.max(hp.dowelD/2*sc,2))}" fill="#fff" stroke="${INK}" stroke-width="1.2"/>`; });
+      out+=dimV(cy-hp.dowelSpacing/2*sc, cy+hp.dowelSpacing/2*sc, dx2-30, rnd1(hp.dowelSpacing)); }
+    out+=dimH(ex,cxp,cy+hp.cupD/2*sc+30,rnd1(hp.cupOffset));
+    out+=`<text x="${rnd1(cxp)}" y="${rnd1(cy-hp.cupD/2*sc-12)}" text-anchor="middle" font-family="monospace" font-size="14" fill="${INK}">Ø${rnd1(hp.cupD)}</text>`;
+    out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+17)}" font-family="'Sarabun',sans-serif" font-size="12.5" font-weight="700" fill="${INK}">บานพับ · ขยาย 1 ตัว (มี ${n} ตัว)${hp.key?(" · รุ่น "+esc(hp.key)):""}</text>`;
+    out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+31)}" font-family="'Sarabun',sans-serif" font-size="11.5" fill="${THIN}">ถ้วย Ø${rnd1(hp.cupD)} ลึก ${rnd1(hp.cupDepth)} · ศูนย์ถ้วยจากขอบ ${rnd1(hp.cupOffset)}${hp.dowelD>0?(" · เดือย Ø"+rnd1(hp.dowelD)+" ลึก "+rnd1(hp.dowelDepth)+" ห่าง "+rnd1(hp.dowelSpacing)+" เยื้องเข้า "+rnd1(hp.dowelOffset)):""}</text>`;
+    out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+Ht-9)}" font-family="'Sarabun',sans-serif" font-size="11" fill="${THIN}">ทุกตัวเหมือนกัน · ระยะศูนย์ถ้วยตามยาวบานดูที่แถวสีม่วงในผัง</text>`;
+    return out;
+  }
+  function detailColumn(b,gs,hasGH,hasHG,X,Y,Wd,Ht){
+    const boxes=[];
+    if(hasGH) boxes.push((y,h)=>detailBoxHanger(b,X,y,Wd,h));
+    if(hasHG) boxes.push((y,h)=>detailBoxHinge(b,X,y,Wd,h));
+    grooveSectionList(b,gs).forEach(u=>boxes.push((y,h)=>grooveSectionBox(b,u,X,y,Wd,h)));
+    const HD=22;                                                   // หัวคอลัมน์
+    const n=Math.min(boxes.length,4), gap=10;
+    const bh2=Math.min(250,(Ht-HD-gap*(n-1))/Math.max(n,1));
+    let out=`<text x="${rnd1(X)}" y="${rnd1(Y+14)}" font-family="'Sarabun',sans-serif" font-size="13" font-weight="700" fill="${INK}">รายละเอียดขยาย (DETAIL)${boxes.length>n?(" · "+n+"/"+boxes.length):""}</text>`;
+    boxes.slice(0,n).forEach((f,i)=>{ out+=f(Y+HD+i*(bh2+gap),bh2); });
+    out+=`<text x="${rnd1(X)}" y="${rnd1(Y+HD+n*(bh2+gap)+2)}" font-family="'Sarabun',sans-serif" font-size="11" fill="${THIN}">คนละมาตราส่วนกับผังด้านซ้าย</text>`;
+    return out;
+  }
+  function grooveSectionList(b,gs){
+    const uniq=[], seen={};
+    (gs||[]).forEach(g=>{ const cross=(g.axis==="len")?(+b.W||0):(+b.L||0);
+      const dLo=round((+g.pos||0)+cross/2-(+g.width||0)/2), dHi=round(cross/2-(+g.pos||0)-(+g.width||0)/2);
+      const fromLo=dLo<=dHi, dist=Math.max(fromLo?dLo:dHi,0);
+      const k=[g.face,g.axis,g.width,g.depth,dist,fromLo].join("|");
+      if(seen[k]){ seen[k].n++; return; }
+      seen[k]={g,dist,fromLo,cross,n:1}; uniq.push(seen[k]); });
+    return uniq;
+  }
+  function grooveSectionBox(b,u,gx,Y,bwx,Ht){
+    let out="";
+    {
+      const g=u.g, T=Math.max(+b.T||18,1);
+      out+=`<rect x="${rnd1(gx)}" y="${rnd1(Y)}" width="${rnd1(bwx)}" height="${rnd1(Ht)}" fill="#fafbfc" stroke="${THIN}" stroke-width="1"/>`;
+      const gw=+g.width||0, gd=Math.min(+g.depth||0,T);
+      const win=Math.max(u.dist+gw+Math.max(u.dist,gw)*0.45+8, gw*3);          // ช่วงที่เอามาโชว์
+      const padL=42,padR=42,padT=42,padB=52;
+      const sc=Math.min((bwx-padL-padR)/win, (Ht-padT-padB)/Math.max(T,1));
+      const px=gx+padL, pyB=Y+Ht-padB, pyT=pyB-T*sc;                            // ผิวล่าง / ผิวบน
+      const ex=px, gx0=px+u.dist*sc, gx1=gx0+gw*sc;                             // ขอบแผ่น · ปากร่อง
+      const onTop=(g.face!=="bottom");
+      const gyO=onTop?pyT:pyB, gyI=onTop?(pyT+gd*sc):(pyB-gd*sc);               // ปาก / ก้นร่อง
+      out+=`<path d="M${rnd1(ex)} ${rnd1(pyT)} L${rnd1(gx0)} ${rnd1(pyT)}`
+        +(onTop?` L${rnd1(gx0)} ${rnd1(gyI)} L${rnd1(gx1)} ${rnd1(gyI)} L${rnd1(gx1)} ${rnd1(pyT)}`:"")
+        +` L${rnd1(px+win*sc)} ${rnd1(pyT)} L${rnd1(px+win*sc)} ${rnd1(pyB)}`
+        +(onTop?"":` L${rnd1(gx1)} ${rnd1(pyB)} L${rnd1(gx1)} ${rnd1(gyI)} L${rnd1(gx0)} ${rnd1(gyI)} L${rnd1(gx0)} ${rnd1(pyB)}`)
+        +` L${rnd1(ex)} ${rnd1(pyB)} Z" fill="#efe3d3" stroke="${INK}" stroke-width="1.4"/>`;
+      out+=`<line x1="${rnd1(ex)}" y1="${rnd1(pyT-14)}" x2="${rnd1(ex)}" y2="${rnd1(pyB+16)}" stroke="${DIM}" stroke-width="1" stroke-dasharray="3 3"/>`;
+      out+=dimH(ex,gx0,pyB+30,rnd1(u.dist));
+      out+=dimH(gx0,gx1,pyT-24,rnd1(gw));
+      out+=dimV(Math.min(gyO,gyI),Math.max(gyO,gyI),gx1+30,rnd1(gd));
+      out+=dimV(pyT,pyB,px+win*sc+16,rnd1(T));
+      const ttl=(g.back?"ร่องแผ่นหลัง":(g._led?"ร่องรางไฟ":"ร่อง"))+" · "+((g.axis==="wid")?"ตามกว้าง":"ตามยาว")+" · ผิว"+(onTop?"บน":"ล่าง")+(u.n>1?("  ×"+u.n):"");
+      out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+17)}" font-family="'Sarabun',sans-serif" font-size="12.5" font-weight="700" fill="${INK}">${esc(ttl)}</text>`;
+      const from=(g.ref&&g.ref!=="กึ่งกลาง")?("ขอบ"+g.ref):(u.fromLo?((g.axis==="len")?"ขอบหลัง":"ขอบซ้าย"):((g.axis==="len")?"ขอบหน้า":"ขอบขวา"));
+      const o0=+g.off0||0,o1=+g.off1||0;
+      out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+31)}" font-family="'Sarabun',sans-serif" font-size="11.5" fill="${THIN}">วัดจาก${esc(from)} · ${(o0||o1)?("ร่น "+rnd1(o0)+"/"+rnd1(o1)):"วิ่งสุด"}${g.cnc?" · CNC":""}</text>`;
+      out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+Ht-9)}" font-family="'Sarabun',sans-serif" font-size="11" fill="${THIN}">ขยายเฉพาะช่วงจากขอบถึงร่อง</text>`;
+    }
+    return out;
+  }
   function sheetPart(P,p,bb,page,pages){
     let s=`<svg class="sp-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${SW} ${SH}" width="${SW}" height="${SH}"><rect width="${SW}" height="${SH}" fill="#fff"/>`+frame();
     s+=`<text x="34" y="52" font-family="'Sarabun',sans-serif" font-size="22" font-weight="800" fill="${INK}">แผ่นงาน #${p.n} · ${esc(p.name)}</text>`;
@@ -27263,9 +27673,23 @@ const ShopPaper = (function(){
     }else{
       /* v9.90: ใช้รูปเดียวกับ Preview 2D — เห็นรูเจาะ ร่อง Pocket เดือย บานพับ และโซ่ระยะครบ
          ช่างอ่านจากแบบผลิตแผ่นเดียวจบ ไม่ต้องเปิด Preview 2D เทียบอีกหน้าต่าง */
+      /* ───────── v39.4: แถบหน้าตัดร่อง ─────────
+         ผังด้านบนบอกว่าร่องอยู่แนวไหน ยาวแค่ไหน แต่ไม่มีทางเห็นว่ามันกินเข้าไปในเนื้อไม้เท่าไหร่
+         ช่างต้องรู้สามตัวก่อนตั้งเครื่อง: ระยะจากขอบ · กว้าง · ลึก เทียบกับความหนาแผ่น
+         ตัดขวางให้ดูตรง ๆ อ่านจบในรูปเดียว ไม่ต้องไปเปิดไฟล์เจาะเทียบ */
+      const _gsec=(p.board.grooves||[]).filter(g=>g&&g.face!=="edge"&&(+g.width>0)&&(+g.depth>0));
+      const _hasGH=(p.board.holes||[]).some(h=>{ try{ return isGlassHangerHole(h); }catch(e){ return false; } });
+      const _hasHG=(p.board.connectors||[]).some(c=>c&&c.type==="hinge"&&connCount(p.board,c)>0);
+      const _nDet=_gsec.length+(_hasGH?1:0)+(_hasHG?1:0);
+      /* ───────── v39.6: กล่องขยายย้ายไปคอลัมน์ขวา ─────────
+         วางเรียงเป็นแถบล่างทำให้รูปแผ่นถูกบีบเตี้ยลงทั้งหน้า ทั้งที่แผ่นส่วนใหญ่เป็นแนวนอนยาว
+         ที่ว่างจริง ๆ อยู่ทางขวา — แบบหน้าตัดเฟรม (sheetFrameSec) ใช้คอลัมน์ขวามาตั้งแต่ต้นแล้ว
+         ทำให้เหมือนกันทั้งสองหน้า ช่างเปิดแบบไหนก็หาของที่เดิม */
+      const _dcw=_nDet?312:0, _dgp=_nDet?12:0;
       let _p2d="";
-      try{ _p2d=part2DSvg(p.board,{dim:true,embed:{x:bx+8,y:by+8,w:bw-16,h:bh-16}}); }catch(e){ console.error("part2DSvg:",e); }
+      try{ _p2d=part2DSvg(p.board,{dim:true,embed:{x:bx+8,y:by+8,w:bw-16-_dcw-_dgp,h:bh-16}}); }catch(e){ console.error("part2DSvg:",e); }
       if(_p2d){ s+=_p2d; }
+      if(_dcw){ try{ s+=detailColumn(p.board,_gsec,_hasGH,_hasHG,bx+bw-8-_dcw,by+8,_dcw,bh-16); }catch(e){ console.error("detail:",e); } }
       else{
         const sc=Math.min(aw/Math.max(p.L,1),ah/Math.max(p.W,1)),pw=p.L*sc,ph=p.W*sc;
         const px=bx+(bw-pw)/2, py=by+(bh-ph)/2;
