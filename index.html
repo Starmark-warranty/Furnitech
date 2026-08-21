@@ -1647,9 +1647,22 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"40.0", build:"2026-08-20/new-order-blank",
+  name:"StarNexus Cabinet", version:"41.3", build:"2026-08-20/back-groove-face-and-cnc-rule",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   changelog:[
+    ["41.3","2026-08-20","FIX ร่องรับแผ่นหลังไปโผล่คนละผิวกับมินิฟิก เพราะเลือกผิวผิด — แผ่นนอนที่เป็นตัวรับต้องเซาะผิวที่แผ่นหลังแตะจริง ตัวรับล่างมีแผ่นหลังอยู่เหนือมันจึงเซาะผิวบน ตัวรับบนมีแผ่นหลังอยู่ใต้มันจึงเซาะผิวล่าง · ของเดิมใช้เงื่อนไขเดียวกันทั้งคู่คือ ชิ้นนี้อยู่ต่ำกว่ากลางตู้ไหม ซึ่งบังเอิญถูกเฉพาะตู้ที่มีแผ่นหลังใบเดียวเต็มความสูง พอตู้แบ่งช่อง ตัวรับบนของช่องล่างคือชั้นตายซึ่งอยู่ต่ำกว่ากลางตู้ จึงได้ผิวบนทั้งที่แผ่นหลังอยู่ข้างใต้ · ในไฟล์ที่ส่งมา Fixed Shelf 1 ร่องอยู่ผิวบน แต่มินิฟิกอยู่ผิวล่าง ไฟล์เจาะจึงแยกเป็นสองใบคนละฝั่ง (1005 มีร่อง 2005 มีแคม) · ไฟล์เก่าซ่อมตัวเองตอนเปิด · FIX CNC หรือมาโคร ตัดสินจากธงที่ติดไว้ที่แผ่นหลังซึ่งบังคับทั้งชุด แผ่นพื้นกับชั้นตายที่ร่องวิ่งทะลุหัวท้ายของตัวเองอยู่แล้ว (ร่น 0/0) จึงกลายเป็น CNC ไปด้วย ทั้งที่เป็นงานเลื่อย · เปลี่ยนเป็นวัดรายแผ่นอย่างเดียวตามที่ควรเป็น ร่องวิ่งสุดในแผ่นตัวเอง = มาโคร V · ร่องหยุดกลางแผ่น = CNC พร้อมช่วงหัวท้าย · เคสจริง พื้นกับชั้นตายได้มาโคร V ส่วนแผ่นข้างที่ร่นหัวท้าย 12/1702 ได้ CNC · FIX ปลายร่องรับแผ่นหลังออกเป็นปลายมน R เท่าครึ่งความกว้างร่อง (ในไฟล์จริง RD=4.85) แผ่นหลังเป็นสี่เหลี่ยม มุมจึงไม่ลงร่อง ตอนนี้ปลายเหลี่ยมเสมอทั้งในไฟล์เจาะและในแบบ"],
+    ["41.2","2026-08-20","FIX กดกลับด้านตู้แล้วหน้าลิ้นชักกับบานสลับความสูงกันเอง — สัดส่วนความสูงของกองแนวตั้ง (hrs) ถูกกลับลำดับไปพร้อมกับช่องไฟแนวนอนตอนสะท้อนซ้าย-ขวา ตั้งแต่ v19.5 · hrs จับคู่กับ vn/vi ซึ่งเป็นลำดับล่างขึ้นบน การสะท้อนซ้าย-ขวาไม่ได้สลับบนกับล่างสักนิด แต่พอกลับลิสต์ ตัวจัดผังก็คำนวณความสูงใหม่ตามสัดส่วนที่สลับแล้ว · เคสจริงในไฟล์ที่ส่งมา หน้าลิ้นชักกับบานอยู่คอลัมน์เดียวกัน hrs [3,5] ถูกกลับเป็น [5,3] หน้าลิ้นชักจึงโตจาก 358.1 เป็น 596.9 และบานหดจาก 596.9 เหลือ 358.1 สลับกันพอดี · ตัวที่ต้องกลับตอนสะท้อนซ้าย-ขวามีแค่ gaps ซึ่งเป็นช่องไฟของแถวแนวนอน ส่วน hrs vgaps vfix เป็นของแนวตั้งทั้งชุด ห้ามแตะ · ที่เหลือของการกลับด้านทำงานถูกหมด ชื่อชิ้นสลับซ้ายขวา ตำแหน่งสะท้อน รูเจาะ ร่อง บานพับ และขอบอ้างอิงของบานสลับให้ครบ"],
+    ["41.1","2026-08-20","FIX แผ่นพื้นถูกเจาะรูที่ผิวบนโดยไม่มีอะไรมาต่อจริง — เหล็กข้างลิ้นชัก K40 ยิงรูเดือยลงแผ่นพื้น 3 จุด ทั้งที่ก้นเหล็กลอยอยู่เหนือผิวแผ่นพื้น 10.3 มม. ตามค่ายกลิ้นชัก เดือยยาว 12 จึงจมเนื้อไม้ได้แค่ 1.7 · ตัวเจาะรูคู่ยิงลำแสงไปไกลอย่างน้อย 30 มม. แล้วเจอชิ้นไหนก็เจาะ ไม่เคยตรวจว่าสองชิ้นชนกันจริงหรือมีช่องว่างคั่น · เพิ่มด่านระยะ จุดยิงอยู่ห่างผิว 2 มม. ระยะที่เจอจึงต้องราว 2 เกินกว่านั้นคือไม่ได้ชนกัน · FIX รูคู่ชิดขอบจนแตก ของเดิมกันเนื้อไม้ระหว่างรูกับขอบไว้แค่ 1 มม. รู Ø8 ที่ห่างขอบ 6.5 จึงผ่านฉลุยโดยเหลือเนื้อ 2.5 มม. · ยกเป็น 5 มม. และถ้าต้องเลื่อนรูเข้ามาเกิน 2 มม. ถึงจะพอ ถือว่าไม่ใช่รอยต่อจริง ข้ามไปแทนที่จะเลื่อนให้ผิดที่ · บอกจำนวนที่ข้ามไปในข้อความสรุปด้วย · FEAT เตือนเมื่อแผ่นหลังฝังอยู่ในเนื้อชิ้นอื่นแต่ชิ้นนั้นไม่มีร่องรับสักเส้น — ตำแหน่งแผ่นหลังถูกวางแบบฝังเข้าไปแล้ว แต่ถ้าไม่มีใครกดใช้งานกล่องแผ่นหลัง ชิ้นที่รับก็ไม่มีร่อง ทั้งไฟล์เจาะและช่อง Groove3 จึงว่างเปล่า ของออกโรงงานไปโดยไม่มีร่องให้เสียบ · บนจอมองไม่เห็นเลยเพราะแผ่นหลังจมอยู่ในเนื้อไม้พอดี ดูเหมือนประกอบได้"],
+    ["41.0","2026-08-20","FEAT ป้ายบอกผิวเติมทิศจริงในตู้ให้ด้วย — คำว่า ผิวบน/ผิวล่าง เป็นพิกัดของแผ่น ไม่ใช่ของตู้ แผ่นทอปกับแผ่นพื้นเป็นแผ่นนอนเหมือนกัน ร่องรับแผ่นหลังอยู่ฝั่งที่หันเข้าตู้ทั้งคู่ แต่ในพิกัดของแผ่นเอง ทอปเป็นผิวล่าง ส่วนพื้นเป็นผิวบน คนละคำทั้งที่เป็นเรื่องเดียวกัน ช่างอ่านสองใบต่อกันแล้วต้องหยุดคิดว่าตกลงตีร่องด้านไหน · ตอนนี้เขียนว่า เซาะผิวบน (หันขึ้น) กับ เซาะผิวล่าง (หันลง) แผ่นข้างได้ หันซ้าย/หันขวา บานได้ หันหน้า/หันหลัง อ่านแล้ววางบนแท่นได้เลยไม่ต้องแปลอีกชั้น · คิดจากทิศของผิวจริงผ่าน orientMatrix จึงถูกกับตู้ที่หมุนตามผังด้วย · FIX บรรทัดสรุปงานรายผิวที่เพิ่งเพิ่มไปวางชั้นเดียวกับคำอธิบายสัญลักษณ์ แผ่นที่ไม่กว้างพอสองข้อความจึงชนกันกลางทาง แยกเป็นสามชั้นจริง ๆ บนสุดชื่อกับมุมมอง กลางคำอธิบาย ล่างสุดสรุปงานรายผิว"],
+    ["40.9","2026-08-20","FEAT แบบบอกผิวที่ทำงานเป็นตัวหนังสือแล้ว ไม่ต้องเดาจากเส้นทึบหรือเส้นประ — กฎเส้นทึบเท่ากับผิวที่มองอยู่ ใช้ได้ก็ต่อเมื่ออ่านหัวแบบก่อนว่ากำลังมองผิวไหน แล้วแปลงในหัวอีกทีว่าแปลว่าผิวบนหรือผิวล่างของแผ่น ซึ่งเป็นสองขั้นตอนที่พลาดได้ · หน้างานจริงคนหยิบแผ่นขึ้นมาดูรูปแล้วเซาะเลย เดาผิดทีเดียวคือแผ่นเสีย · ตอนนี้ป้ายร่องเขียนว่า เซาะผิวบน หรือ เซาะผิวล่าง ตรง ๆ ป้ายรูกับป้ายบากบอกผิวเหมือนกัน และป้ายถ้วยบานพับก็บอก · เพิ่มบรรทัดสรุปที่หัวแบบว่าผิวไหนมีงานอะไรกี่จุด อ่านบรรทัดเดียวจบ เช่น งานผิวบน ร่อง 1 รู 4 กับ งานผิวล่าง ไม่มี · เส้นทึบเส้นประยังอยู่เหมือนเดิม แค่ไม่ต้องพึ่งมันอย่างเดียวแล้ว · FIX ป้ายสามอันของมินิฟิกตัวเดียว (แคม ระยะจากขอบ สลักสัน) กองอยู่ที่ระดับใกล้กันจนทับกันทั้งกอง แยกชั้นตามความสูงตัวอักษรจริง"],
+    ["40.8","2026-08-20","FIX ระยะเจาะถ้วยบานพับไม่หักค่าลดขอบของแบบบาน — สเปคบานพับบอก 22.5 ซึ่งวัดจากขอบบานสำเร็จ แต่ไฟล์เจาะทำบนแผ่นไม้ซึ่งถูกลดขอบไปแล้วด้านละ 3 จึงต้องเจาะที่ 19.5 จากขอบแผ่น ถ้วยถึงจะไปอยู่ที่ 22.5 จากขอบบานตอนประกอบเสร็จ · ของเดิมใช้ 22.5 ตรง ๆ ทุกใบ บานที่ลดขอบไว้จึงเจาะเลยเข้าไป 3 มม. ทุกตัว ตรวจกับไฟล์ MPR ที่ส่งมาแล้ว ออก YA=22.5 จริงบนบานที่ลด -3 ทุกด้าน · แก้พร้อมกันทั้งไฟล์เจาะ แบบ 2D สามมิติ และกล่องขยาย · แบบบานที่ไม่ได้ตั้งลดขอบ ค่าไม่ขยับ · FIX ค่าลดรายด้านไม่ถูกหมุนตามตอนแผ่นถูกวางนอนเข้าเครื่อง ขอบของ connector ถูกแมปใหม่แล้วแต่ค่าลดยังเป็นของแนวเดิม ตัวคิดระยะจะไปหยิบค่าลดของขอบผิดด้านทันที · FIX รูคู่ข้างถ้วยในกล่องขยายวาดกลับด้าน ไปอยู่ฝั่งขอบบาน ทั้งที่ผังหลักกับไฟล์เจาะวางไว้ลึกเข้าไปจากถ้วย · FIX ตัวหนังสือล้นกรอบกล่องขยาย บรรทัดสเปคยาวเกินความกว้างกล่องแล้วไปทับของข้าง ๆ ตัดเป็นสองบรรทัดตายตัว · เอาป้ายสเปครูยึดออกจากผังหลัก ถ้วยกับรูคู่อยู่ชิดกัน ป้ายสองอันทับกันจนอ่านไม่ออกทั้งคู่ ตัวเลขชุดนี้อยู่ในกล่องขยายครบแล้ว ผังหลักเหลือแค่เส้นบอกแนวกับตำแหน่ง"],
+    ["40.7","2026-08-20","FIX รู บาก ร่อง ที่อยู่อีกด้านกลับเป็นเส้นเต็มหมด ป้ายเขียนว่าอีกด้านแต่เส้นไม่ประ = กฎเส้นซ่อนที่เพิ่งทำใน v40.4 ใช้ไม่ได้เลยสักอย่าง · ผมทำพังเองตอน v40.5 ตอนไล่คูณขนาดทุกอย่างให้โตตามชิ้น ตัวไล่แทนค่าไปแตะจังหวะเส้นประสามจุดที่บังเอิญเขียนอยู่ในสตริงอัญประกาศเดี่ยว ซึ่งไม่แทนค่า ${} ให้ SVG จึงได้ข้อความ ${SW(6)} ตรง ๆ ไม่ใช่ตัวเลข เบราว์เซอร์ทิ้งแอตทริบิวต์ทั้งตัว เส้นเลยเต็มหมด · เปลี่ยนสามจุดนั้นเป็น template literal · ตรวจทั้งไฟล์แล้วไม่มีที่อื่นเป็นแบบเดียวกันอีก"],
+    ["40.6","2026-08-20","FIX หัวแบบทับกันและหลุดออกนอกกรอบหลังขยายตัวอักษรใน v40.5 — สามบรรทัดบนหัวแบบตรึงระยะไว้ที่ pad ลบ 46 กับ 24 ซึ่งเป็นหน่วยมิลลิเมตร ไม่ได้โตตามตัวหนังสือ พอตัวอักษรสูง 41 หน่วยแต่บรรทัดห่างกันแค่ 22 จึงทับกันทันที และบรรทัดขวาที่ยาวเกินขอบแผ่นก็ไปทับบรรทัดซ้าย · แยกเป็นสามชั้นตามความสูงตัวอักษรจริง และกันที่ว่างด้านบนให้พอเสมอ · FIX ร่องบนแผ่นที่ถูกหมุนวางนอนไม่เคยเข้าโซ่ระยะเลย จึงไม่มีระยะจากขอบให้อ่าน — ตำแหน่งร่องมีค่าตามแกนเดียว อีกแกนเป็นความยาวร่องซึ่งกินทั้งแผ่น ของเดิมยัดค่าเข้าแกนตายตัวตาม axis โดยไม่ดูว่ารูปถูกหมุนหรือยัง พอหมุน 90 องศา ค่าที่ควรไปอยู่แกน x กลับถูกส่งไปแกน y แล้วกลายเป็นศูนย์ทุกเส้น โซ่ระยะจึงได้ขีดที่กึ่งกลางแผ่นแทนตำแหน่งร่อง · เคสจริง ร่องที่ควรโชว์ 748 กับ 752 จากขอบ กลายเป็นขีดเดียวที่ 1100 ซึ่งคือกึ่งกลางแผ่น · ระยะร่นหัวท้ายร่องก็ผิดแกนเหมือนกัน แก้ทั้งชุด"],
+    ["40.5","2026-08-20","FIX ชิ้นใหญ่แล้วตัวหนังสือในแบบเล็กจนอ่านไม่ออก — รูปทั้งใบเป็นหน่วยมิลลิเมตรแล้วถูกย่อลงให้พอดีกรอบกระดาษ ขนาดตัวหนังสือที่เขียนไว้ตายตัวจึงโดนย่อไปด้วยตามส่วน แผ่น 2200 × 1000 ย่อราวสองเท่าครึ่ง ป้าย 13 จุดจึงเหลือราว 6 จุดบนกระดาษ ส่วนแผ่นเล็กกลับตัวโตเกินไป · คูณกลับตามขนาดชิ้น ตัวหนังสือจึงออกมาใกล้เคียงกันทุกแผ่น แผ่น 2440 × 1220 จาก 5.4 เป็น 13.1 · 2200 × 1000 จาก 5.9 เป็น 13.7 · 1200 × 600 จาก 9.6 เป็น 13.1 · ชิ้นที่เล็กกว่า 700 ไม่แตะเลย ของเดิมที่อ่านได้อยู่แล้วจึงไม่ขยับสักตัว · ความหนาเส้น รัศมีจุด จังหวะเส้นประ ระยะเว้นของป้าย และระยะโซ่ระยะ คูณตามไปด้วยทั้งชุด ไม่งั้นตัวหนังสือโตแต่เส้นยังบางเป็นเส้นผมและป้ายไปทับรูป · มีผลทั้ง Preview 2D และแบบผลิต เพราะใช้ตัววาดตัวเดียวกัน"],
+    ["40.4","2026-08-20","FIX เส้นประในแบบไม่ตรงกับกฎที่หัวแบบเขียนไว้เอง — หัวแบบบอกว่า วงทึบ = เจาะจากผิวที่มองอยู่ ซึ่งใช้จริงแค่กับรู ส่วนบากใช้เส้นประแทนความหมายว่า ไม่ทะลุ และร่องเป็นเส้นประตายตัวทุกเส้นไม่ว่ามองจากผิวไหน · เห็นชัดที่แผ่นหูแขวน หน้าแบบเขียนว่ามองจากผิวล่าง ตัวหูแขวนก็กัดผิวล่าง แต่กลับวาดเป็นเส้นประ ช่างอ่านแล้วนึกว่าต้องพลิกแผ่น · ตอนนี้ทั้งรู บาก และร่อง ใช้กฎเดียวกันหมดตามหลักเขียนแบบ ทำจากผิวที่มองอยู่ = เส้นเต็ม · ทำจากอีกด้าน = เส้นประ พร้อมคำว่า อีกด้าน กำกับที่ป้าย · ทะลุหรือไม่ทะลุยังบอกด้วยกากบาททแยงกับตัวเลขความลึกเหมือนเดิม ไม่เสียข้อมูลอะไรไป · FIX ตัวเลือกด้านที่จะมองนับแต่รูกับบาก ไม่นับร่อง แผ่นที่มีแต่ร่อง เช่นแผ่นข้างที่มีร่องรับแผ่นหลังอย่างเดียว จึงถูกวาดจากผิวบนเสมอ ร่องที่เซาะผิวล่างขึ้นเป็นเส้นประทั้งที่เป็นงานหลักของแผ่นนั้น"],
+    ["40.3","2026-08-20","FIX ปุ่ม Isolate ที่แผงขวาโฟกัสได้ใบเดียว — อ่านจากตู้ที่โฟกัสอยู่ตัวเดียว (g.boards[0].cabInst) เลือกไว้สามใบแล้วกด จึงซ่อนอีกสองใบที่เพิ่งเลือกไปด้วย ซึ่งตรงข้ามกับที่ตั้งใจ · ตอนนี้เลือกไว้กี่ใบก็โฟกัสเท่านั้นใบ ปุ่มบอกจำนวนไว้ที่ชื่อปุ่มด้วย · เลือกใบเดียวยังทำงานเหมือนเดิมทุกอย่าง · เมนูคลิกขวา แสดงเฉพาะชิ้นนี้ ยังเป็นระดับชิ้นตามเดิม เพราะเป็นคนละงานกัน"],
+    ["40.2","2026-08-20","FEAT ปุ่ม ออกแบบผลิต ที่แผงขวาตอนเลือกทั้งตู้ — เปิดพร้อมตั้งขอบเขตเป็น ตู้ที่เลือก ให้เลย ของเดิมเปิดมาเป็นทั้งฉากเสมอ ต้องไปกดสลับขอบเขตเองทุกครั้งทั้งที่เพิ่งกดจากแผงของตู้ใบนั้นมาหมาด ๆ · ปุ่มบอกจำนวนใบที่จะออกให้ด้วย · FIX คลิกขวาบนตู้ที่อยู่ในชุดที่เลือกไว้ แล้วสั่งออกแบบผลิต ได้ใบเดียว — ตัวรับคลิกขวาเรียก select() ตรง ๆ ซึ่งล้างการเลือกหลายใบทิ้งก่อนเมนูจะเปิดด้วยซ้ำ · ตอนนี้ถ้าชิ้นที่คลิกขวาอยู่ในชุดที่เลือกไว้ ชุดนั้นอยู่ครบ ย้ายแค่จุดโฟกัส ถ้าคลิกขวานอกชุดถึงจะยุบเหลือใบเดียวเหมือนเดิม · เมนูคลิกขวาสั่งออกแบบผลิตตอนเลือกหลายใบ ตั้งขอบเขตให้เองเช่นกัน · แผงขวาบอกไว้ด้วยว่าช่องแก้ค่ามีผลกับใบที่โฟกัสอยู่ใบเดียว ส่วนปุ่มออกแบบผลิตใช้ทั้งชุด กันเข้าใจผิดว่าพิมพ์ค่าครั้งเดียวแล้วเปลี่ยนทุกใบ"],
+    ["40.1","2026-08-20","FEAT เลือกตู้ได้ทีละหลายใบในรายการฝั่งซ้าย — Shift+คลิก = เลือกเป็นช่วงจากใบที่เลือกไว้ก่อนหน้า · Ctrl หรือ Cmd+คลิก = สลับทีละใบ · คลิกเปล่า = กลับไปเลือกใบเดียวเหมือนเดิม · แบบผลิตขอบเขต ตู้ที่เลือก รับหลายใบแล้ว ปุ่มบอกจำนวนที่เลือกไว้ด้วย · ของเดิมขอบเขตนี้อ่านจากชิ้นที่เลือกอยู่ตัวเดียว จึงได้ตู้ใบเดียวเสมอ งานที่ต้องพิมพ์เฉพาะบางใบต้องพิมพ์ทั้งจ็อบแล้วไปคัดหน้าเอาที่เครื่องพิมพ์ ใช้คู่กับตัวกรอง พิมพ์เฉพาะหน้าตัดเฟรม ของ v38.7 ได้ · แถวที่เลือกไว้ขึ้นแถบสีที่ขอบซ้าย และกรอบในสามมิติครอบทุกใบที่เลือกรวมกัน จะได้เห็นว่าเลือกอะไรไว้บ้าง · เลือกชิ้นเดี่ยวหรือลบตู้ ล้างการเลือกหลายใบให้เอง"],
     ["40.0","2026-08-20","FEAT ปุ่ม ออเดอร์ใหม่ (หน้าเปล่า) ที่กล่อง Order — เดิมไม่มีทางเริ่มงานใหม่นอกจากกด F5 · ปุ่ม ตู้เปล่า ที่มีอยู่ในกล่องเปิดตู้ล้างแค่ state.boards ส่วนเลขออเดอร์ ตัวแปรรายตู้ ($D4 ฯลฯ) สีรายตู้ ลำดับบาร์โค้ด บรรทัดสั่งของ และตัวเลือกบาน ยังค้างจากงานก่อนทั้งหมด งานใหม่จึงพกของงานเก่าติดไปโดยไม่มีใครเห็น จนไปโผล่ตอนส่งออก · ตอนนี้ล้างทุกช่องที่ผูกกับออเดอร์ให้ครบในทีเดียว และปุ่ม ตู้เปล่า เดิมก็ใช้ทางเดียวกันแล้ว · ถามก่อนถ้าฉากยังมีของ พร้อมบอกว่าจะล้างอะไรบ้างและเตือนให้ไปเซฟก่อน · ชิ้นงานยังกด Ctrl+Z เอาคืนได้ถ้าเผลอ"],
     ["39.9","2026-08-20","FIX รูปตัวอย่างในกล่องเซาะร่องอยู่ล่างสุดของกล่องกว้าง 600 — รูปเลยแคบ และต้องเลื่อนลงไปดูทุกครั้งที่แก้เลข ซึ่งเสียเวลาพอ ๆ กับกดออกไปดูข้างนอก คือไม่ได้แก้ปัญหาที่ตั้งใจจะแก้เลย · กล่องไหนมีฟิลด์รูปตัวอย่าง กางเป็นสองคอลัมน์เต็มจอให้อัตโนมัติ ช่องกรอกอยู่ซ้าย รูปอยู่ขวาแบบติดหนึบไม่เลื่อนหนี แก้เลขแล้วเห็นผลในสายตาเดียวกัน · รูปได้พื้นที่จาก 560 เป็น 900 กว้าง สูงได้ถึง 420 แผ่น 1000×400 จึงวาดที่สเกล 0.84 เกือบเท่าของจริง · กล่องที่ไม่มีรูปยังกว้าง 600 เท่าเดิม · เพิ่มบรรทัดสรุปในรูปว่าแผ่นเท่าไหร่ ร่องกว้างลึกเท่าไหร่ และระยะที่กรอกวัดถึงอะไร กับคำเตือนตัวใหญ่เมื่อร่องล้นออกนอกแผ่น"],
     ["39.8","2026-08-20","FEAT กล่องเซาะร่องมีรูปตัวอย่างสด — วาดแผ่นย่อพร้อมร่องที่กำลังจะได้ ร่องเดิมที่มีอยู่แล้วเป็นสีเทา และเส้นบอกระยะจากขอบ ขยับตามทุกครั้งที่พิมพ์หรือกดสลับตัวเลือก ไม่ต้องกดตกลงออกไปดูแล้วเข้ามาแก้วนไปเรื่อย ๆ · เตือนให้ด้วยถ้าร่องล้นออกนอกแผ่น ซึ่งของเดิมรู้ตอนกดตกลงไปแล้ว · ทำเป็นฟิลด์ชนิด preview ของกล่องกรอกค่ากลาง กล่องอื่นเอาไปใช้ได้ทันที · FEAT เลือกได้แล้วว่าระยะที่กรอกวัดถึงอะไร กึ่งกลางร่อง ขอบร่องด้านใกล้ หรือขอบร่องด้านไกล — ของเดิมเป็นกึ่งกลางตายตัวและไม่มีที่ไหนบอกไว้ แต่แบบที่ได้มาจากหน้างานมักให้เป็นระยะถึงขอบร่อง ต้องมานั่งบวกลบครึ่งความกว้างเอาเองทุกครั้ง พลาดทีเดียวร่องเลื่อนไปครึ่งดอก · โปรแกรมแปลงเป็นกึ่งกลางให้เอง โมเดลข้างในยังเก็บกึ่งกลางเหมือนเดิม ไฟล์เจาะกับแบบไม่เปลี่ยนพฤติกรรมสักตัว และจำไว้ว่ากรอกมาแบบไหน กดแก้ไขทีหลังจึงขึ้นเลขเดิมที่พิมพ์ไป ไม่ใช่เลขที่แปลงแล้ว"],
@@ -2545,6 +2558,7 @@ function sync(rebuild,save,cm){
      ตู้ที่สร้างจากตัวสร้างตู้ หรือแผ่นหลังที่ถูกย่อ/แบ่งทีหลัง จึงถือธงเก่าไปออกไฟล์ */
   try{ const _bi={}; (state.boards||[]).forEach(b=>{ if(b&&b.cabInst&&(b.grooves||[]).some(g=>g&&g.back)) (_bi[b.cabInst]=_bi[b.cabInst]||1); });
     Object.keys(_bi).forEach(k=>sxSyncBackGrooves({boards:state.boards.filter(b=>b&&b.cabInst===k)})); }catch(e){ console.error("bgSync:",e); }
+  try{ checkBackGrooveMissing(); }catch(e){ console.error("bgCheck:",e); }   // v41.1
   try{ fitSceneFog(); }catch(e){}                           // v26.9: หมอกตามขนาดงานจริง
   try{ applyLedStrips(); }catch(e){ console.error(e); }     // v11.5: รางไฟ (ร่อง + ตัวราง + ฝาปิด)
   try{ applyLedCorners(); }catch(e){ console.error(e); }     // v16.6: รางเลี้ยวมุมเป็นตัว L
@@ -4201,6 +4215,28 @@ function hingeBaseSpec(){
     plateD:g("hingePlateD",3), plateDepth:g("hingePlateDepth",2),
     plateFromFront:g("hingePlateFromFront",37), plateSpacing:g("hingePlateSpacing",32) };
 }
+/* ───────── v40.8: ระยะศูนย์ถ้วยวัดจาก "ขอบบานสำเร็จ" ไม่ใช่ขอบแผ่นไม้ ─────────
+   แบบบานที่ตั้งค่าลดขอบไว้ แผ่นไม้เล็กกว่าบานจริงด้านละเท่าที่ลด (เช่น -3)
+   สเปคบานพับบอก 22.5 จากขอบบาน แต่ไฟล์เจาะทำบนแผ่นไม้ซึ่งขอบร่นเข้ามาแล้ว 3
+   จึงต้องเจาะที่ 19.5 จากขอบแผ่น ถ้วยถึงจะไปอยู่ที่ 22.5 จากขอบบานตอนประกอบเสร็จ
+   ของเดิมใช้ 22.5 ตรง ๆ ทุกใบ บานที่ลดขอบไว้จึงเจาะเลยเข้าไป 3 มม. ทุกตัว
+   แบบบานที่ไม่ได้ตั้งลดขอบ ค่าไม่ขยับ (l0..w1 เป็น 0) */
+function hingeEdgeAdj(b,edge){
+  const pv=b&&b._adjApplied; if(!pv) return 0;
+  if(edge==="left")   return +pv.l0||0;
+  if(edge==="right")  return +pv.l1||0;
+  if(edge==="bottom") return +pv.w0||0;
+  if(edge==="top")    return +pv.w1||0;
+  return 0;
+}
+function hingeCupOffOf(b,edge,spec){
+  const hs=spec||hingeSpecOf(b);
+  return Math.max(round((+hs.cupOffset||0)+hingeEdgeAdj(b,edge)),1);
+}
+function hingeMainEdge(b){
+  const c=(b&&b.connectors||[]).find(x=>x&&x.type==="hinge");
+  return c?(c.edge||"left"):null;
+}
 function hingeModelList(){ return Array.isArray(settings.hingeModels)?settings.hingeModels.filter(Boolean):[]; }
 function hingeModelFind(k){ const t=String(k||"").trim(); if(!t) return null;
   return hingeModelList().find(m=>String(m.key||m.name||"").trim()===t)||null; }
@@ -4232,7 +4268,7 @@ function buildConnectorMeshes(b){
     const T=b.T||18;
     if(c.type==="hinge"){                                                              // บานพับ: รูถ้วย Ø35 + เดือยยึด บนผิวบาน
       const _hs=hingeSpecOf(b);                                                       // v38.3: ระยะตามรุ่นบานพับของแบบบานนั้น
-      const cupOff=_hs.cupOffset, cupD=_hs.cupDepth, cupR=Math.max(_hs.cupD/2,1);
+      const cupOff=hingeCupOffOf(b,c.edge,_hs), cupD=_hs.cupDepth, cupR=Math.max(_hs.cupD/2,1);   // v40.8
       const dwD=_hs.dowelD, dwR=Math.max(dwD/2,.5), dwDep=_hs.dowelDepth, dwSp=_hs.dowelSpacing, dwOff=_hs.dowelOffset;
       const alongW=new THREE.Vector3().crossVectors(zW,axW).normalize();
       const cupZ=c.face==="bottom"?(-T/2+cupD/2):(T/2-cupD/2);
@@ -4275,7 +4311,8 @@ function drillMates(b){   // adds matching through-holes on mating panels; retur
   const M=orientMatrix(b.orient,b.yaw), bp=new THREE.Vector3(b.x,b.y,b.z);
   const zW=new THREE.Vector3(0,0,1).transformDirection(M);
   const others=meshes.filter(o=>o.id!==b.id && !o.groove && !o.connector);
-  const rc=new THREE.Raycaster(), mates=new Set(); let added=0, thin=0;
+  const rc=new THREE.Raycaster(), mates=new Set(); let added=0, thin=0, gap=0, edge=0;
+  const _MATE_GAP_TOL=Math.max(+settings.mateGapTol||1.2,0);
   (b.connectors||[]).forEach(c=>{
     if(c.type==="hinge") return;
     if(c.type==="screw"){ const {pts,axisLocal}=connectorPoints(b,c); const T=b.T||18;
@@ -4308,6 +4345,13 @@ function drillMates(b){   // adds matching through-holes on mating panels; retur
       rc.set(w.clone().addScaledVector(axW,-2), axW); rc.far=reach;
       const hit=rc.intersectObjects(others.map(o=>o.mesh),false)[0];
       if(!hit)return; const mb=state.boards.find(x=>x.id===hit.object.userData.id); if(!mb)return;
+      /* ───────── v41.1: ต้อง "ชนกันจริง" ถึงจะเจาะรูคู่ ─────────
+         ลำแสงถูกยิงไปไกลถึงสองเท่ากว่าของความลึกเดือย (อย่างน้อย 30 มม.) แล้วเจอชิ้นไหนก็เจาะ
+         ชิ้นที่ลอยอยู่เหนือกันโดยมีช่องว่างจึงถูกเจาะด้วย ทั้งที่เดือยเอื้อมไปไม่ถึง
+         เคสจริง เหล็กข้างลิ้นชัก K40 ยกสูงจากแผ่นพื้น 10.3 มม. (ค่า lift 25)
+         แต่ยังยิงรูเดือยลงแผ่นพื้น 3 จุด เดือยยาว 12 จึงจมเนื้อไม้แค่ 1.7
+         จุดยิงอยู่ห่างผิวชิ้น 2 มม. ระยะที่เจอจึงควรราว 2 ถ้าเกินกว่านั้นคือมีช่องว่างคั่น */
+      if(hit.distance>2+_MATE_GAP_TOL){ gap++; return; }
       if((mb.T||18)<11){ thin++; return; }                         // can't drill a panel thinner than 11 mm
       mates.add(mb.id);
       const Mi=orientMatrix(mb.orient,mb.yaw).clone().invert();
@@ -4316,7 +4360,14 @@ function drillMates(b){   // adds matching through-holes on mating panels; retur
       const face=axLocalMate.z>=0 ? "bottom" : "top";          // ผิวที่เจาะเข้า (ฝั่งที่เดือยชน) → รูตัน
       let lx=loc.x,ly=loc.y;
       const mdia=Math.max((mf?settings.mfMateD:(settings.dowelMateD||c.d))||8,1);
-      if(!(mb.profile&&mb.profile.length>=3)){ const mx=Math.max(mb.L/2-mdia/2-1,0),my=Math.max(mb.W/2-mdia/2-1,0); lx=Math.max(-mx,Math.min(mx,lx)); ly=Math.max(-my,Math.min(my,ly)); }
+      /* v41.1: เนื้อไม้ที่เหลือระหว่างรูกับขอบต้องพอ ของเดิมกันไว้แค่ 1 มม.
+         รู Ø8 ที่ห่างขอบ 6.5 จึงผ่านฉลุย เหลือเนื้อ 2.5 มม. = แตกตอนเจาะแน่นอน (เจอในไฟล์จริง)
+         ถ้าต้องเลื่อนเข้ามาเกิน 2 มม. ถึงจะพอ แปลว่าจุดนั้นไม่ใช่รอยต่อจริง ข้ามไปดีกว่าเลื่อนให้ผิดที่ */
+      const _em=Math.max(+settings.dowelEdgeMin||5,0);
+      if(!(mb.profile&&mb.profile.length>=3)){ const lx0=lx, ly0=ly;
+        const mx=Math.max(mb.L/2-mdia/2-_em,0),my=Math.max(mb.W/2-mdia/2-_em,0);
+        lx=Math.max(-mx,Math.min(mx,lx)); ly=Math.max(-my,Math.min(my,ly));
+        if(Math.hypot(lx-lx0,ly-ly0)>2){ edge++; return; } }
       if(!mb.holes)mb.holes=[];
       const mdep=Math.min(Math.max((mf?settings.mfMateDepth:(c.mateDepth!=null?c.mateDepth:settings.dowelMateDepth))||12,1),(mb.T||18)-0.5);
       const ex=mb.holes.find(h=>Math.hypot((h.x||0)-lx,(h.y||0)-ly)<1.5);
@@ -4324,16 +4375,18 @@ function drillMates(b){   // adds matching through-holes on mating panels; retur
       else { mb.holes.push({d:mdia,x:round(lx),y:round(ly),depth:round(mdep),face,dowel:true,src:b.id}); added++; }
     });
   });
-  return {added,mates,thin};
+  return {added,mates,thin,gap,edge};
 }
 function connectMate(b){
   if(!(b.connectors||[]).length){toast("ชิ้นนี้ยังไม่มีเดือย — กด ＋เดือย ก่อน");return;}
   if((b.T||18)<11){toast("แผ่นนี้บางกว่า 11 มม. ใส่เดือยไม่ได้");return;}
   if(state.view!=="assembled"){toast("สลับเป็นมุมมอง “ประกอบ” ก่อนตรวจชน");return;}
-  const {added,mates,thin}=drillMates(b);
+  const {added,mates,thin,gap,edge}=drillMates(b);
   sync(0);
   if(mates.size){ const names=[...mates].map(id=>"#"+(state.boards.findIndex(x=>x.id===id)+1)).join(", ");
-    toast("ชิ้นนี้ชนเข้ากับ "+names+" · เจาะรูคู่ให้ "+added+" จุด"+(thin?" · ข้ามแผ่นบาง <11 มม. "+thin+" จุด":"")); }
+    toast("ชิ้นนี้ชนเข้ากับ "+names+" · เจาะรูคู่ให้ "+added+" จุด"+(thin?" · ข้ามแผ่นบาง <11 มม. "+thin+" จุด":"")
+      +(gap?(" · ข้าม "+gap+" จุดที่ไม่ได้ชนกันจริง (มีช่องว่างคั่น)"):"")
+      +(edge?(" · ข้าม "+edge+" จุดที่ชิดขอบเกินไป"):"")); }
   else toast(thin?("พบแผ่นที่ชนแต่บางกว่า 11 มม. ("+thin+" จุด) จึงไม่เจาะ"):"ไม่พบแผ่นที่เดือยชน — เลื่อนให้ขอบแตะอีกแผ่นก่อน");
 }
 // one-click: detect every edge-to-face butt joint in the cabinet, add dowels + drill mating holes
@@ -4939,6 +4992,7 @@ function openBackGrooveModal(back){
         <div class="seg" style="flex:none">
           <button type="button" id="bgNormal" class="${bcnc?"":"sel"}" style="flex:1;padding:6px 4px">ร่องปกติ (เลื่อยยาวตลอดแผ่น)</button>
           <button type="button" id="bgCNC" class="${bcnc?"sel":""}" style="flex:1;padding:6px 4px">ร่อง CNC (เป็นท่อนเฉพาะช่วงนี้)</button></div>
+        <div style="font-size:11px;opacity:.62;margin-top:4px;line-height:1.5"><b>v41.3:</b> ตอนนี้ระบบตัดสินให้เองรายแผ่นแล้ว — แผ่นที่ร่องวิ่งทะลุหัวท้ายของตัวเอง (พื้น/ทอป/ชั้นตาย) ออกมาโคร V ตามงานเลื่อย ส่วนแผ่นที่ร่องต้องหยุดกลางแผ่น (แผ่นข้างของตู้แบ่งช่อง) ออก CNC พร้อมช่วงหัวท้าย ปุ่มคู่นี้เก็บไว้เป็นบันทึกของแผ่นหลังใบนี้เท่านั้น</div>
         <div style="font-size:11px;opacity:.62;margin-top:4px;line-height:1.5">ตู้แบ่งช่องที่มีแผ่นหลังหลายใบ ร่องวิ่งยาวไม่ได้ ช่วงที่ไม่มีแผ่นหลังจะเห็นเป็นร่องโล่ง · CNC จะตัดร่องให้พอดีช่วงของแผ่นนี้ และมาโครออกเป็น CNC${Tb>=SX_BACK_GROOVE_MAX_T?" · <b>แผ่นนี้หนา "+Tb+" มม. — ไม่เซาะร่องเลย ใช้เดือย/มินิฟิก</b>":""}</div></div>
       <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;margin-top:4px"><input type="checkbox" id="bgShift" ${shiftSh?"checked":""}> ขยับชั้น/ของในตู้ร่นเข้า (ปัดเลขเต็ม)</label>
       <div id="bgPrev" style="font-family:var(--mono);font-size:11px;line-height:1.6;background:rgba(127,127,127,.08);border-radius:8px;padding:7px 9px;margin-top:8px"></div>`;
@@ -4989,8 +5043,14 @@ function openBackGrooveModal(back){
     const gv=(p,face,pos)=>{ if(!p.grooves)p.grooves=[]; p.grooves.push({axis:"len",face,pos:round(pos),width:gWc,depth:gDc,back:true,backThk:Tb,backset:backset}); };
     if(sel.left==="groove")  gv(leftS,  leftS.x<centerX?"top":"bottom",  targetZ-leftS.z);    // side: worldZ = panel.z + posLocalW
     if(sel.right==="groove") gv(rightS, rightS.x<centerX?"top":"bottom", targetZ-rightS.z);
-    if(sel.bottom==="groove"&&recvB) gv(recvB, recvB.y<centerY?"top":"bottom", recvB.z-targetZ);  // flat/คานนอน: worldZ = panel.z - posLocalW
-    if(sel.top==="groove"&&recvT)    gv(recvT, recvT.y<centerY?"top":"bottom", recvT.z-targetZ);
+    /* ───────── v41.3: แผ่นนอนต้องเซาะ "ผิวที่แผ่นหลังแตะจริง" ไม่ใช่ดูว่าตัวเองอยู่สูงหรือต่ำกว่ากลางตู้ ─────────
+       ตัวรับล่างมีแผ่นหลังอยู่เหนือมัน จึงเซาะผิวบนเสมอ · ตัวรับบนมีแผ่นหลังอยู่ใต้มัน จึงเซาะผิวล่างเสมอ
+       ของเดิมใช้เงื่อนไขเดียวกันทั้งคู่คือ อยู่ต่ำกว่ากลางตู้ไหม ซึ่งบังเอิญถูกเฉพาะตู้ที่มีแผ่นหลังใบเดียวเต็มความสูง
+       (ตัวรับล่าง = แผ่นพื้น อยู่ต่ำกว่ากลาง · ตัวรับบน = ทอป อยู่สูงกว่ากลาง)
+       พอตู้แบ่งช่อง ตัวรับบนของช่องล่างคือชั้นตายซึ่งอยู่ต่ำกว่ากลางตู้ จึงได้ผิวบนทั้งที่แผ่นหลังอยู่ข้างใต้
+       ร่องเลยไปโผล่คนละผิวกับที่ประกอบจริง และคนละไฟล์กับมินิฟิกที่ตั้งใจวางไว้ผิวเดียวกัน */
+    if(sel.bottom==="groove"&&recvB) gv(recvB, "top",    recvB.z-targetZ);   // แผ่นหลังอยู่เหนือตัวรับ
+    if(sel.top==="groove"&&recvT)    gv(recvT, "bottom", recvT.z-targetZ);   // แผ่นหลังอยู่ใต้ตัวรับ
     back._backset=backset;                            // v35.3: จำค่าไว้ที่แผ่น เปิดมาอีกทีจะได้ขึ้นค่าเดิม
     if(bcnc) back._backCNC=true; else delete back._backCNC;
     if(Tb>=SX_BACK_GROOVE_MAX_T){                     // v35.1: ไม้หนา = ไม่เซาะร่อง ใช้เดือย/มินิฟิก
@@ -5018,6 +5078,34 @@ function openBackGrooveModal(back){
 const SX_BACK_GROOVE_MAX_T=12;                       // หนาตั้งแต่นี้ = ไม่เซาะร่อง
 function sxBackPanelsOf(grp){ return ((grp&&grp.boards)||[]).filter(x=>
   x.orient==="front" && !x._door && !x._virtual && !x._dx && !x._dwall && !isRail(x)); }
+/* ───────── v41.1: แผ่นหลังฝังอยู่ในเนื้อชิ้นอื่น แต่ชิ้นนั้นไม่มีร่อง ─────────
+   ตำแหน่งแผ่นหลังถูกวางไว้แบบฝังเข้าไปในแผ่นข้าง/ทอป/พื้น อยู่แล้ว (ซ้อนกันจริงในสามมิติ)
+   แต่ถ้าไม่มีใครกดใช้งานกล่องแผ่นหลัง ชิ้นที่รับก็ไม่มีร่องสักเส้น
+   ผลคือทั้งไฟล์เจาะและช่อง Groove3 ว่างเปล่า ของออกโรงงานไปโดยไม่มีร่องให้เสียบ
+   บนจอมองไม่เห็นเพราะแผ่นหลังจมอยู่ในเนื้อไม้พอดี ดูเหมือนประกอบได้
+   ตรวจให้ตอนคิดฉาก แล้วเตือนครั้งเดียวต่อตู้ */
+let _bgWarned={};
+function checkBackGrooveMissing(){
+  const seen={};
+  const backs=state.boards.filter(b=>b&&b.orient==="front"&&!b._door&&!b._virtual&&!b._dx&&!b._dwall&&!isRail(b));
+  backs.forEach(bp=>{
+    const inst=bp.cabInst; if(inst==null) return;
+    const bd=worldDims(bp);
+    const hit=state.boards.filter(o=>o&&o!==bp&&o.cabInst===inst&&!o._virtual&&!o._door&&(o.orient==="side"||o.orient==="flat"))
+      .filter(o=>{ const d=worldDims(o);
+        const ov=(a0,a1,b0,b1)=>Math.min(a1,b1)-Math.max(a0,b0);
+        return ov(bp.x-bd[0]/2,bp.x+bd[0]/2,o.x-d[0]/2,o.x+d[0]/2)>0.6
+            && ov(bp.y-bd[1]/2,bp.y+bd[1]/2,o.y-d[1]/2,o.y+d[1]/2)>0.6
+            && ov(bp.z-bd[2]/2,bp.z+bd[2]/2,o.z-d[2]/2,o.z+d[2]/2)>0.6; })
+      .filter(o=>!(o.grooves||[]).some(g=>g&&g.back));
+    if(hit.length && !seen[inst]){ seen[inst]=hit.length;
+      if(_bgWarned[inst]!==hit.length){ _bgWarned[inst]=hit.length;
+        console.warn("🪵 ตู้ "+((bp.cab)||inst)+": แผ่นหลังฝังอยู่ในชิ้นอื่น "+hit.length
+          +" ชิ้น แต่ชิ้นเหล่านั้นไม่มีร่องรับสักเส้น ("+hit.map(o=>o.name||o.id).join(", ")
+          +") — ไฟล์เจาะและมาโครจะว่างเปล่า ให้เปิดกล่องแผ่นหลังแล้วกดใช้งานอีกครั้ง"); } }
+  });
+  Object.keys(_bgWarned).forEach(k=>{ if(!(k in seen)) delete _bgWarned[k]; });
+}
 const SX_BACK_RUN_TOL=30;   // หัวท้ายร่องที่ไม้ปิดอยู่ วิ่งทะลุได้ไม่เกินเท่านี้
 function sxSyncBackGrooves(grp){
   if(!grp) return 0;
@@ -5032,6 +5120,9 @@ function sxSyncBackGrooves(grp){
     backs.forEach(x=>{ const dd=Math.abs(x.z-gz); if(dd<best){ best=dd; bp=x; } });
     if(!bp||best>60) return;
     g.backThk=bp.T;
+    /* v41.3: ซ่อมผิวที่เซาะให้ไฟล์เก่าด้วย — ดูจากตำแหน่งจริงว่าแผ่นหลังอยู่เหนือหรือใต้ตัวรับ
+       ชิ้นตั้ง (แผ่นข้าง) ไม่แตะ เพราะผิวในกับผิวนอกถูกอยู่แล้วตั้งแต่ต้น */
+    if(p.orient!=="side"){ const want=(bp.y>p.y)?"top":"bottom"; if(g.face!==want) g.face=want; }
     /* ───────── v39.2: ร่องที่วิ่งไม่สุดแผ่น "คือ" ร่อง CNC โดยสภาพ ไม่ใช่เรื่องให้เลือก ─────────
        เลื่อยเดินยาวทำได้แต่ร่องทะลุหัวท้าย ร่องที่ต้องหยุดกลางแผ่นทำได้ทางเดียวคือกัด
        ของเดิมถือว่าเป็น CNC เฉพาะตอนติ๊กไว้ที่แผ่นหลัง แผ่นหลังที่สั้นกว่าช่วงวิ่งของร่อง
@@ -5045,9 +5136,14 @@ function sxSyncBackGrooves(grp){
       o0=Math.max(round((bp.x-bd[0]/2)-(p.x-d[0]/2)),0);
       o1=Math.max(round((p.x+d[0]/2)-(bp.x+bd[0]/2)),0);
     }
-    /* หัวท้ายสั้นกว่าแผ่นข้างเล็กน้อยเป็นเรื่องปกติ — ช่วงนั้นทอป/พื้นปิดอยู่ ร่องเลื่อยวิ่งทะลุได้
-       เกณฑ์ = 30 มม. (คลุมหนาไม้ + เผื่อ) เกินนั้นคือร่องจะโผล่ให้เห็น ต้องหยุด = CNC */
-    g.cnc = !!bp._backCNC || o0>SX_BACK_RUN_TOL || o1>SX_BACK_RUN_TOL;
+    /* ───────── v41.3: ตัดสิน CNC จาก "ร่องวิ่งสุดในแผ่นตัวเองไหม" อย่างเดียว ─────────
+       เลื่อยเดินได้แต่ร่องทะลุหัวท้าย ร่องที่ต้องหยุดกลางแผ่นทำได้ทางเดียวคือกัด
+       ธง CNC ที่ติดไว้ที่แผ่นหลัง (v35.1) เป็นตัวแทนหยาบ ๆ ของเรื่องนี้สมัยที่ยังไม่ได้วัดจริง
+       แต่มันบังคับทั้งชุด ทุกแผ่นที่รับแผ่นหลังใบนั้นจึงกลายเป็น CNC หมด
+       รวมทั้งแผ่นพื้นกับชั้นตายที่ร่องวิ่งทะลุหัวท้ายของตัวเองอยู่แล้ว (off0 = off1 = 0)
+       ซึ่งเป็นงานเลื่อย ควรออกมาโคร V ตามปกติ ไม่ใช่ CNC
+       หัวท้ายสั้นกว่าเล็กน้อยยังถือว่าวิ่งสุด เพราะช่วงนั้นมีไม้ปิดอยู่ (เกณฑ์ 30 มม.) */
+    g.cnc = o0>SX_BACK_RUN_TOL || o1>SX_BACK_RUN_TOL;
     if(g.cnc){ g.off0=o0; g.off1=o1; }
     else { delete g.off0; delete g.off1; }
     n++; }); });
@@ -10561,7 +10657,7 @@ function hingeCupWorld(door,c,i){
   const _hs=hingeSpecOf(d);
   const T=d.T||18, cupD=_hs.cupDepth;
   const cupZ=(c.face==="bottom")?(-T/2+cupD/2):(T/2-cupD/2);
-  return {p:lp.clone().applyMatrix4(M).add(bp).addScaledVector(axW,-_hs.cupOffset).addScaledVector(zW,cupZ), zW};
+  return {p:lp.clone().applyMatrix4(M).add(bp).addScaledVector(axW,-hingeCupOffOf(d,c.edge,_hs)).addScaledVector(zW,cupZ), zW};
 }
 function showHingeHL(door,c,i){
   if(noGL||!scene)return; clearHingeHL();
@@ -10585,6 +10681,18 @@ function applyHingeHL(){                                   // เรียกซ
 }
 function updateSelBox(){
   if(state.selectedCab){                                 // โหมดทั้งตู้ → ครอบทั้งใบ
+    /* v40.1: เลือกหลายใบ → กรอบครอบทุกใบที่เลือกรวมกัน จะได้เห็นว่าเลือกอะไรไว้บ้าง */
+    const _ks=cabSelKeys();
+    if(_ks.length>1){ const gg=cabGroups().filter(x=>_ks.indexOf(String(x.key))>=0);
+      const bs2=gg.flatMap(x=>x.boards);
+      let mn=[1e9,1e9,1e9],mx=[-1e9,-1e9,-1e9],got=false;
+      bs2.forEach(bb=>{ const o=meshes.find(m=>m.id===bb.id); if(!o)return; got=true;
+        const p=[o.mesh.position.x,o.mesh.position.y,o.mesh.position.z];
+        for(let a=0;a<3;a++){mn[a]=Math.min(mn[a],p[a]-o.d[a]/2);mx[a]=Math.max(mx[a],p[a]+o.d[a]/2);} });
+      if(got){ selBox.geometry.dispose();
+        selBox.geometry=new THREE.EdgesGeometry(new THREE.BoxGeometry((mx[0]-mn[0])+6,(mx[1]-mn[1])+6,(mx[2]-mn[2])+6));
+        selBox.position.set((mn[0]+mx[0])/2,(mn[1]+mx[1])/2,(mn[2]+mx[2])/2);
+        selBox.visible=true; return; } }
     const g=cabGroups().find(x=>x.key===state.selectedCab);
     if(g&&g.boards.length){ let mn=[1e9,1e9,1e9],mx=[-1e9,-1e9,-1e9],got=false;
       g.boards.forEach(bb=>{ const o=meshes.find(m=>m.id===bb.id); if(!o)return; got=true; const p=[o.mesh.position.x,o.mesh.position.y,o.mesh.position.z];
@@ -10612,7 +10720,14 @@ function bindPointer(dom){
     if(pPan){pPan=false;return;}                 // was a right-drag pan, not a click
     ndc.x=(e.clientX/innerWidth)*2-1; ndc.y=-(e.clientY/innerHeight)*2+1; ray.setFromCamera(ndc,camera);
     const _h1=ray.intersectObjects(meshes.map(m=>m.mesh),false); const hit=pickFromHits(_h1);
-    if(hit){ select(hit.object.userData.id); showCtx(e.clientX,e.clientY,hit.object.userData.id); }
+    if(hit){ const _id=hit.object.userData.id;
+      /* v40.2: คลิกขวาบนตู้ที่อยู่ในชุดที่เลือกไว้ ห้ามยุบเหลือใบเดียว
+         ของเดิมเรียก select() ตรง ๆ ซึ่งล้างการเลือกหลายใบทิ้ง เลือกไว้สามใบแล้วคลิกขวาสั่งออกแบบผลิต จึงได้ใบเดียว */
+      const _bb=state.boards.find(x=>x.id===_id);
+      const _gg=_bb?cabGroups().find(x=>x.boards.some(y=>y.id===_id)):null;
+      if(_gg&&cabSelKeys().length>1&&cabSelHas(_gg.key)){ state.selectedId=_id; state.selectedCab=String(_gg.key); renderList(); showInspector(); updateSelBox(); }
+      else select(_id);
+      showCtx(e.clientX,e.clientY,_id); }
     else hideCtx();
   });
   dom.addEventListener("pointerdown",e=>{
@@ -11289,10 +11404,31 @@ const b=state.boards.find(x=>x.id===id);if(!b)return;
   sync(0);
   toast((b._dg?("ลบลิ้นชักทั้งชุด "+nDel+" ชิ้น"):"ลบชิ้นแล้ว")+(removed?(" + รูที่ฝากแผ่นอื่น "+removed+" จุด"):"")
     +((_bg&&_bg.n)?(" + ล้างร่องแผ่นหลัง "+_bg.n+" ร่อง จาก "+_bg.boards+" แผ่น"):""));}
-function select(id){state.selectedCab=null;state.selectedId=id;
+/* ───────── v40.1: เลือกตู้ได้ทีละหลายใบในรายการฝั่งซ้าย ─────────
+   Shift = เลือกเป็นช่วงจากใบที่เลือกไว้ก่อนหน้า · Ctrl/⌘ = สลับทีละใบ · คลิกเปล่า = เลือกใบเดียว
+   ที่ต้องมีเพราะแบบผลิตมีขอบเขต "ตู้ที่เลือก" แต่เลือกได้ทีละใบ
+   งานที่ต้องพิมพ์เฉพาะบางใบจึงต้องพิมพ์ทั้งจ็อบแล้วไปคัดหน้าเอาที่เครื่องพิมพ์ */
+function cabSelKeys(){ return Array.isArray(state.selectedCabs)?state.selectedCabs.filter(Boolean):[]; }
+function cabSelHas(k){ return cabSelKeys().indexOf(String(k))>=0 || String(state.selectedCab||"")===String(k); }
+function cabSelSet(keys){ state.selectedCabs=[...new Set((keys||[]).map(String))]; }
+function cabSelClear(){ state.selectedCabs=[]; }
+function select(id){state.selectedCab=null;cabSelClear();state.selectedId=id;
   if(_hingePin&&_hingePin.id!==id){_hingePin=null;try{clearHingeHL();}catch(e){}}   // v7.32: เปลี่ยนชิ้น = ถอนหมุดไฮไลต์บานพับ
   renderList();showInspector();updateSelBox();}
-function selectCab(g){ if(!g)return; state.selectedCab=g.key; state.selectedId=(g.boards[0]&&g.boards[0].id)||null; renderList(); showInspector(); updateSelBox(); focusCab(g); }
+function selectCab(g,ev){ if(!g)return;
+  const keys=cabGroups().map(x=>String(x.key));
+  const k=String(g.key);
+  if(ev&&ev.shiftKey&&state.selectedCab){
+    const a=keys.indexOf(String(state.selectedCab)), b2=keys.indexOf(k);
+    if(a>=0&&b2>=0){ const lo=Math.min(a,b2), hi=Math.max(a,b2); cabSelSet(keys.slice(lo,hi+1)); }
+    else cabSelSet([k]);
+  } else if(ev&&(ev.ctrlKey||ev.metaKey)){
+    const cur=new Set(cabSelKeys().length?cabSelKeys():(state.selectedCab?[String(state.selectedCab)]:[]));
+    if(cur.has(k)&&cur.size>1) cur.delete(k); else cur.add(k);
+    cabSelSet([...cur]);
+  } else cabSelClear();
+  state.selectedCab=k; state.selectedId=(g.boards[0]&&g.boards[0].id)||null;
+  renderList(); showInspector(); updateSelBox(); if(!(ev&&(ev.shiftKey||ev.ctrlKey||ev.metaKey))) focusCab(g); }
 
 /* ---------- UI: list ---------- */
 let listExpanded={};
@@ -11320,14 +11456,15 @@ function renderList(){
   let _selRow=null;
   const orow=document.createElement("div"); orow.className="row orderrow";
   orow.innerHTML=`<button class="iact tg" title="แตก/พับ">${open?"▾":"▸"}</button>
-    <div class="info"><div class="nm">📦 ${escapeHtml(oid)}</div><div class="dm">${groups.length} ตู้ · ${state.boards.filter(b=>!isGuide(b)).length} ชิ้น</div></div>`;
+    <div class="info"><div class="nm">📦 ${escapeHtml(oid)}</div><div class="dm">${groups.length} ตู้ · ${state.boards.filter(b=>!isGuide(b)).length} ชิ้น${cabSelKeys().length>1?(" · <b>เลือกไว้ "+cabSelKeys().length+" ใบ</b>"):" · Shift/Ctrl+คลิก = เลือกหลายใบ"}</div></div>`;
   const toggle=()=>{ listExpanded[oid]=!open; renderList(); };
   orow.querySelector(".tg").onclick=toggle; orow.querySelector(".info").onclick=toggle;
   body.addEventListener("mouseleave",()=>{ try{ hoverCab(null); }catch(e){} });
   body.appendChild(orow);
   if(open) groups.forEach(g=>{
-    const sel=g.boards.some(b=>b.id===state.selectedId);
+    const sel=g.boards.some(b=>b.id===state.selectedId)||cabSelHas(g.key);
     const row=document.createElement("div"); row.className="row cabrow"+(sel?" sel":""); row.style.paddingLeft="20px";
+    if(cabSelKeys().length>1&&cabSelHas(g.key)) row.style.boxShadow="inset 3px 0 0 var(--accent)";
     row.innerHTML=`<span class="sw" style="background:${TONES[toneOf(g.boards[0])].base}"></span>
       <div class="info"><div class="nm">${escapeHtml(g.productId)}</div><div class="dm">${escapeHtml(g.cab)} · ${g.boards.filter(b=>!isGuide(b)).length} ชิ้น</div></div>
       <div class="acts">
@@ -11336,8 +11473,8 @@ function renderList(){
         <button class="iact dup" title="ทำสำเนาตู้"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></button>
         <button class="iact del" title="ลบตู้นี้"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4a1 1 0 011-1h6a1 1 0 011 1v2M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></button>
       </div>`;
-    row.querySelector(".info").onclick=()=>{ selectCab(g); };
-    row.querySelector(".sw").onclick=()=>{ selectCab(g); };
+    row.querySelector(".info").onclick=e=>{ selectCab(g,e); };
+    row.querySelector(".sw").onclick=e=>{ selectCab(g,e); };
     row.addEventListener("mouseenter",()=>{ row.classList.add("hov"); try{ hoverCab(g); }catch(e){} });
     row.addEventListener("mouseleave",()=>{ row.classList.remove("hov"); try{ hoverCab(null); }catch(e){} });
     row.querySelector(".edit").onclick=e=>{ e.stopPropagation(); enterEditCab(g); };
@@ -11398,7 +11535,7 @@ function renderCabInspector(g,insp,body,rf){
   const W=Math.round(mx[0]-mn[0]),H=Math.round(mx[1]-mn[1]),D=Math.round(mx[2]-mn[2]);
   const code=(g.boards[0]&&g.boards[0].cab)||"";
   body.innerHTML=`
-    <div class="muted" style="font-size:11px;margin-bottom:8px;padding:6px 9px;background:rgba(0,122,255,.10);border-radius:8px;color:#0a5fd0">🗄️ เลือกทั้งตู้ <b>${escapeHtml(g.productId)}</b> · ${g.boards.filter(x=>!isGuide(x)).length} ชิ้น — ปรับค่าที่ใช้ร่วมกันทั้งตู้ได้ที่นี่ (คลิกชิ้นใน 3D เพื่อแก้รายชิ้น)</div>
+    <div class="muted" style="font-size:11px;margin-bottom:8px;padding:6px 9px;background:rgba(0,122,255,.10);border-radius:8px;color:#0a5fd0">🗄️ เลือกทั้งตู้ <b>${escapeHtml(g.productId)}</b> · ${g.boards.filter(x=>!isGuide(x)).length} ชิ้น — ปรับค่าที่ใช้ร่วมกันทั้งตู้ได้ที่นี่ (คลิกชิ้นใน 3D เพื่อแก้รายชิ้น)${cabSelKeys().length>1?('<br><b>เลือกไว้ '+cabSelKeys().length+' ใบ</b> — ช่องแก้ค่าด้านล่างมีผลกับใบนี้ใบเดียว ส่วนปุ่มออกแบบผลิตใช้ทั้ง '+cabSelKeys().length+' ใบ'):""}</div>
     <div class="fld"><label>รหัสตู้ (Cabinet Code) — เปลี่ยนทั้งตู้</label><input class="nameinp" id="cab_code" value="${escapeHtml(code)}" placeholder="เช่น BND001" style="width:100%"></div>
     <div class="fld"><label>ขนาดตู้ปัจจุบัน (มม.)</label>
       <div class="grid3">
@@ -11406,7 +11543,8 @@ function renderCabInspector(g,insp,body,rf){
         <div class="num"><span>สูง</span><input type="number" id="cab_H" value="${H}"></div>
         <div class="num"><span>ลึก</span><input type="number" id="cab_D" value="${D}"></div></div></div>
     <div class="ibtns" style="margin-top:4px"><button class="ibtn" id="cab_resize" style="background:var(--accent);color:#fff;border-color:transparent;flex:1">📐 ปรับขนาดตู้ (รีฟิตชั้น/บาน/ลิ้นชัก)</button></div>
-    <div class="ibtns" style="margin-top:4px"><button class="ibtn" id="cab_isolate" style="flex:1">${(state.hidden&&state.hidden.length)?"👁 แสดงทุกตู้ (เลิกโฟกัส)":"🔍 แสดงเฉพาะตู้นี้ (Isolate)"}</button></div>
+    <div class="ibtns" style="margin-top:4px"><button class="ibtn" id="cab_shop" style="flex:1;background:var(--accent);color:#fff;border-color:transparent">🗎 ออกแบบผลิต${cabSelKeys().length>1?(" ("+cabSelKeys().length+" ใบที่เลือก)"):" (ตู้นี้)"}</button></div>
+    <div class="ibtns" style="margin-top:4px"><button class="ibtn" id="cab_isolate" style="flex:1">${(state.hidden&&state.hidden.length)?"👁 แสดงทุกตู้ (เลิกโฟกัส)":("🔍 แสดงเฉพาะ"+(cabSelKeys().length>1?(cabSelKeys().length+" ใบที่เลือก"):"ตู้นี้")+" (Isolate)")}</button></div>
     <div class="ibtns" style="margin-top:4px"><button class="ibtn" id="cab_export" style="flex:1">📦 ส่งออกตู้เป็นไฟล์ (.json)</button><button class="ibtn" id="cab_attach" style="flex:1">📎 แปะตู้จากรหัส (ปิดข้าง/หน้า)</button></div>
     <div class="fld" style="margin-top:8px"><label>ตำแหน่งตู้ (มม.) — มุมหลังซ้ายล่างของโครง · พิมพ์แล้ว Enter เพื่อย้าย</label>
       <div class="grid3">
@@ -11425,12 +11563,19 @@ function renderCabInspector(g,insp,body,rf){
   body.querySelector("#cab_resize").onclick=()=>resizeCabinet();
   { const ib=body.querySelector("#cab_isolate"); if(ib)ib.onclick=()=>{        // v7.67: โฟกัสทั้งตู้
       if(state.hidden&&state.hidden.length){ state.hidden=[]; render3D(true); renderList(); toast("แสดงทุกตู้แล้ว"); return; }
-      const inst=(g&&g.boards&&g.boards[0])?g.boards[0].cabInst:null;
-      if(!inst){ toast("ไม่พบตู้"); return; }
-      const keep=state.boards.filter(x=>x.cabInst===inst);
-      state.hidden=state.boards.filter(x=>x.cabInst!==inst).map(x=>x.id);
+      /* v40.3: เลือกไว้กี่ใบ ก็โฟกัสเท่านั้นใบ — ของเดิมอ่านจากตู้ที่โฟกัสอยู่ใบเดียว
+         เลือกไว้สามใบแล้วกด Isolate จึงซ่อนอีกสองใบที่เพิ่งเลือกไปด้วย */
+      const keys=cabSelKeys();
+      const insts=new Set();
+      if(keys.length>1) cabGroups().filter(x=>keys.indexOf(String(x.key))>=0)
+        .forEach(x=>x.boards.forEach(y=>{ if(y.cabInst!=null) insts.add(String(y.cabInst)); }));
+      else { const i0=(g&&g.boards&&g.boards[0])?g.boards[0].cabInst:null; if(i0!=null) insts.add(String(i0)); }
+      if(!insts.size){ toast("ไม่พบตู้"); return; }
+      const keep=state.boards.filter(x=>insts.has(String(x.cabInst)));
+      state.hidden=state.boards.filter(x=>!insts.has(String(x.cabInst))).map(x=>x.id);
       render3D(true); renderList(); showInspector();
-      toast("แสดงเฉพาะตู้ "+(g.cab||"")+" · "+keep.length+" ชิ้น"); }; }
+      toast(insts.size>1 ? ("แสดงเฉพาะ "+insts.size+" ตู้ที่เลือก · "+keep.length+" ชิ้น")
+                         : ("แสดงเฉพาะตู้ "+(g.cab||"")+" · "+keep.length+" ชิ้น")); }; }
   { const ex=body.querySelector("#cab_export"); if(ex)ex.onclick=()=>exportCabinetFile(g); }
   { const at=body.querySelector("#cab_attach"); if(at)at.onclick=()=>attachCabinetByCode(); }
   // ย้ายตู้: เลื่อนทุกชิ้น (รวมบาน) เท่ากับส่วนต่างของมุมอ้างอิง
@@ -11447,7 +11592,11 @@ function renderCabInspector(g,insp,body,rf){
     sync(0); toast("หมุนตู้ "+g.productId+" → "+target+"°"); });
   body.querySelector("#cab_door").onclick=()=>addDoor();
   body.querySelector("#cab_dup").onclick=()=>duplicateCabinet(g);
-  body.querySelector("#cab_del").onclick=()=>{ deleteCabinet(g); state.selectedCab=null; };
+  body.querySelector("#cab_del").onclick=()=>{ deleteCabinet(g); state.selectedCab=null; cabSelClear(); };
+  /* v40.2: เปิดแบบผลิตพร้อมตั้งขอบเขตเป็น "ตู้ที่เลือก" ให้เลย — ของเดิมเปิดมาเป็นทั้งฉากเสมอ
+     ต้องไปกดสลับขอบเขตเองทุกครั้ง ทั้งที่เพิ่งกดจากแผงของตู้ใบนั้นมาหมาด ๆ */
+  { const sp=body.querySelector("#cab_shop"); if(sp)sp.onclick=()=>{
+      try{ ShopPaper.open({scope:"cab"}); }catch(err){ console.error(err); toast("เปิดแบบผลิตไม่สำเร็จ"); } }; }
 }
 function showInspector(){
   const insp=$("insp"), body=$("inspBody");
@@ -19038,7 +19187,7 @@ async function newOrder(opts){
       ok:"ล้างแล้วเริ่มใหม่"});
     if(!ok) return false;
   }
-  state.boards=[]; state.selectedId=null; state.selectedCab=null; state.hidden=[];
+  state.boards=[]; state.selectedId=null; state.selectedCab=null; cabSelClear(); state.hidden=[];
   state.cabColors={}; state.cabNums={}; state.cabVarTxt={}; state.cabDX={};
   state.bcSeq={}; state.bcMax={}; state.orderLines=[]; state.cabDP={};
   state.doorPick=[]; state.doorProg={}; state.explode=0;
@@ -19438,8 +19587,15 @@ function _mirrorBoard(b){
       { const t=d.L; d.L=d.R; d.R=t; }
       if(+d.n>1&&d.i!=null) d.i=Math.max(0,(+d.n||1)-1-(+d.i||0));
       if(Array.isArray(d.gaps)) d.gaps=d.gaps.slice().reverse();
-      if(Array.isArray(d.hrs)) d.hrs=d.hrs.slice().reverse();
       if(Array.isArray(d.fix)) d.fix=d.fix.slice().reverse();
+      /* ───────── v41.2: hrs เป็นสัดส่วนของ "กองแนวตั้ง" ไม่ใช่แถวแนวนอน ─────────
+         v19.5 กลับ hrs ไปพร้อมกับ gaps/fix ตอนสะท้อนซ้าย-ขวา ทั้งที่ hrs จับคู่กับ vn/vi
+         คือลำดับล่างขึ้นบน การสะท้อนซ้าย-ขวาไม่ได้สลับบนกับล่างสักนิด
+         ผลคือของในกองแนวตั้งสลับสัดส่วนความสูงกันเอง แล้วตัวจัดผังคำนวณความสูงใหม่ตามนั้น
+         เคสจริง หน้าลิ้นชักกับบานอยู่คอลัมน์เดียวกัน hrs [3,5] ถูกกลับเป็น [5,3]
+         หน้าลิ้นชักจึงโตจาก 358.1 เป็น 596.9 และบานหดจาก 596.9 เหลือ 358.1 สลับกันพอดี
+         ตัวที่ต้องกลับตอนสะท้อนซ้าย-ขวาคือ gaps กับ fix ซึ่งเป็นของแถวแนวนอนเท่านั้น
+         ส่วน vgaps/vfix/hrs เป็นของแนวตั้ง ห้ามแตะ */
     }
   }
   if(flipLocalY){
@@ -23301,6 +23457,25 @@ function addHole(b){
    ตอนนี้ยกออกมาเป็นฟังก์ชันเดียว ใครเรียกก็ได้รูปเดียวกันเป๊ะ แก้ที่เดียวเห็นผลทั้งสองที่
      o.dim   = โชว์โซ่ระยะไหม (ไม่ใส่ = โชว์)
      o.embed = {x,y,w,h} วางซ้อนใน SVG อื่น (แบบผลิต) · ไม่ใส่ = เต็มกรอบของตัวเอง */
+/* ───────── v41.0: "ผิวบน/ผิวล่าง" ของแผ่นที่ถอดออกมาแล้ว ไม่มีความหมายกับคนถือแผ่น ─────────
+   แผ่นทอปกับแผ่นพื้นเป็นแผ่นนอนเหมือนกัน ร่องรับแผ่นหลังอยู่ฝั่งที่หันเข้าตู้ทั้งคู่
+   แต่ในพิกัดของแผ่นเอง ทอปเป็น "ผิวล่าง" ส่วนพื้นเป็น "ผิวบน" — คนละคำ ทั้งที่เป็นเรื่องเดียวกัน
+   ช่างอ่านสองใบนี้ต่อกันแล้วต้องหยุดคิดว่าตกลงตีร่องด้านไหนกันแน่
+   เติมคำที่ชี้ทิศจริงในตู้ต่อท้ายให้ อ่านแล้วเอาไปวางบนแท่นได้เลยโดยไม่ต้องแปลอะไรอีก */
+function faceAimName(b,face){
+  try{
+    const M=orientMatrix(b.orient,b.yaw);
+    const v=new THREE.Vector3(0,0,(face==="bottom")?-1:1).transformDirection(M);
+    const a=[Math.abs(v.x),Math.abs(v.y),Math.abs(v.z)];
+    const i=(a[1]>=a[0]&&a[1]>=a[2])?1:((a[2]>=a[0])?2:0);
+    const pos=[v.x,v.y,v.z][i]>=0;
+    return i===1?(pos?"หันขึ้น":"หันลง") : i===2?(pos?"หันหน้า":"หันหลัง") : (pos?"หันขวา":"หันซ้าย");
+  }catch(e){ return ""; }
+}
+function faceLabel(b,face){
+  const n=(face==="bottom")?"ผิวล่าง":"ผิวบน", a=faceAimName(b,face);
+  return a?(n+" ("+a+")"):n;
+}
 function part2DSvg(b,o){
   o=o||{};
   const SHOWDIM=(o.dim!==false);
@@ -23313,6 +23488,16 @@ function part2DSvg(b,o){
      โซ่ระยะรวมนับทุกอย่างที่มีในแผ่น ทั้งรูเดือย ขอบร่อง ขอบช่องบาก
      ช่างที่จะตั้งเครื่องเจาะถ้วยบานพับจึงต้องไล่หาเลขของตัวเองจากโซ่ที่มีสิบกว่าช่อง
      เพิ่มอีกแถวที่นับเฉพาะศูนย์ถ้วยบานพับ อ่านทีเดียวรู้เลยว่า 96 แล้วห่างกัน 526.25 */
+  /* ───────── v40.5: ตัวหนังสือกับสัญลักษณ์ต้องโตตามชิ้น ─────────
+     รูปทั้งใบเป็นหน่วยมิลลิเมตรแล้วถูกย่อลงให้พอดีกรอบกระดาษ
+     ขนาดตัวหนังสือที่เขียนไว้ตายตัวจึงโดนย่อไปด้วย แผ่น 2200 ย่อราวสองเท่าครึ่ง
+     ป้าย 13 จุด เหลือราว 5 จุดบนกระดาษ = อ่านไม่ออก ส่วนแผ่นเล็กกลับตัวโตเกิน
+     คูณกลับตามขนาดชิ้น ตัวหนังสือจึงออกมาเท่ากันทุกแผ่นบนกระดาษจริง
+     ชิ้นที่เล็กกว่า 900 ไม่แตะ (TS=1) ของเดิมที่อ่านได้อยู่แล้วจึงไม่ขยับสักตัว */
+  const TS=Math.max(1,Math.max(DL,DW)/700);
+  const FS=n=>Math.round(n*TS*10)/10;                 // ขนาดตัวหนังสือ
+  const SW=n=>Math.round(n*TS*100)/100;               // ความหนาเส้น · รัศมีจุด · จังหวะเส้นประ
+  const G =n=>Math.round(n*TS*10)/10;                 // ระยะเว้นของป้ายและโซ่ระยะ
   const _hgOn=(b.connectors||[]).some(c=>c&&c.type==="hinge");
   /* ───────── v39.6: แถวระยะพิเศษต้องมีที่ยืน ─────────
      ของเดิม pad ตายตัว 120 แถวบานพับไปอยู่ที่ pad-98 / pad+DW+98 ยังพอดี
@@ -23325,8 +23510,9 @@ function part2DSvg(b,o){
      จดตรงจุดที่วาดจริงจึงไม่มีทางไม่ตรงกัน */
   const USED={};
   const _rowN=SHOWDIM?((_hgOn?1:0)+(_ghOn?1:0)):0;
-  const pad=120+_rowN*52, vw=DL+pad*2, vh=DW+pad*2;
-  const _rowY=k=>pad+DW+46+52*k, _rowX=k=>pad-46-52*k;      // แถวที่ k (1 = ถัดจากโซ่หลัก)
+  /* v40.6: ที่ว่างด้านบนต้องพอสำหรับหัวแบบสามบรรทัดที่โตตามตัวอักษร ไม่งั้นบรรทัดบนสุดหลุดออกนอกกรอบ */
+  const pad=Math.max(G(120+_rowN*52), FS(21)*3+G(40)), vw=DL+pad*2, vh=DW+pad*2;
+  const _rowY=k=>pad+DW+G(46+52*k), _rowX=k=>pad-G(46+52*k);      // แถวที่ k (1 = ถัดจากโซ่หลัก)
   /* v9.95: แผ่นข้างซ้ายกับขวาเป็นภาพกระจกกัน แต่พิกัดในกรอบของตัวเองเหมือนกันเป๊ะ
      ต่างกันแค่ "งานเจาะอยู่คนละผิว" (ซ้ายเจาะผิวบน ขวาเจาะผิวล่าง) เดิมจึงต่างกันแค่สีรู
      ปริ้นขาวดำแล้วสองใบเหมือนกันทุกประการ ช่างหยิบใบไหนไปเจาะก็ได้ = ผิดข้าง
@@ -23335,6 +23521,10 @@ function part2DSvg(b,o){
   let _nTop=0,_nBot=0;
   (b.holes||[]).forEach(h=>{ if(!h||h.edge) return; if(h.face==="top")_nTop++; else if(h.face==="bottom")_nBot++; });
   (b.pockets||[]).forEach(q=>{ if(!q) return; if(q.face==="top")_nTop++; else if(q.face==="bottom")_nBot++; });
+  /* v40.4: ร่องก็เป็นงานที่ต้องเข้าเครื่องจากผิวใดผิวหนึ่ง ต้องมีสิทธิ์เลือกด้านที่มองเหมือนรูกับบาก
+     ไม่งั้นแผ่นที่มีแต่ร่อง (เช่นแผ่นข้างที่มีร่องรับแผ่นหลังอย่างเดียว) ถูกวาดจากผิวบนเสมอ
+     ร่องที่เซาะผิวล่างจึงขึ้นเป็นเส้นประทั้งที่เป็นงานหลักของแผ่นนั้น */
+  (b.grooves||[]).forEach(g=>{ if(!g||g.face==="edge") return; if(g.face==="bottom")_nBot++; else _nTop++; });
   const VIEW=(o.viewFace==="top"||o.viewFace==="bottom")?o.viewFace:((_nBot>_nTop)?"bottom":"top");
   const MIR=(VIEW==="bottom")&&!BENT;
   const tx=(x,y)=> rot? y : x, ty=(x,y)=> rot? -x : y;       // หมุน 90° ถ้า rot
@@ -23347,22 +23537,22 @@ function part2DSvg(b,o){
     : `<svg viewBox="0 0 ${vw} ${vh}" style="width:100%;height:100%;background:#fff" preserveAspectRatio="xMidYMid meet" font-family="ui-sans-serif,system-ui">`;
   if(BENT){
     /* ---- หน้าตาแบบ woodWOP: แผ่นแบนกางออก มองจากด้านบน ---- */
-    s+=`<rect x="${pad}" y="${pad}" width="${DL}" height="${DW}" fill="#d9d9d9" stroke="#222" stroke-width="2"/>`;
+    s+=`<rect x="${pad}" y="${pad}" width="${DL}" height="${DW}" fill="#d9d9d9" stroke="#222" stroke-width="${SW(2)}"/>`;
     if(_kp.allow>0){ const a=_kp.allow/2;
       s+=`<rect x="${pad}" y="${pad}" width="${a}" height="${DW}" fill="#9aa0a6" opacity=".5"/>`
         +`<rect x="${pad+DL-a}" y="${pad}" width="${a}" height="${DW}" fill="#9aa0a6" opacity=".5"/>`; }
     _kp.cuts.forEach(c=>{ s+=`<rect x="${(pad+c-_kp.width/2).toFixed(2)}" y="${pad}" width="${_kp.width}" height="${DW}" fill="#1a1a1a"/>`; });
     /* แกน X/Y มุมล่างซ้าย เหมือน woodWOP */
     const ax=pad, ay=pad+DW;
-    s+=`<g stroke="#222" stroke-width="3" fill="#222">`
+    s+=`<g stroke="#222" stroke-width="${SW(3)}" fill="#222">`
       +`<line x1="${ax}" y1="${ay}" x2="${ax+90}" y2="${ay}"/><polygon points="${ax+90},${ay} ${ax+76},${ay-7} ${ax+76},${ay+7}"/>`
       +`<line x1="${ax}" y1="${ay}" x2="${ax}" y2="${ay-90}"/><polygon points="${ax},${ay-90} ${ax-7},${ay-76} ${ax+7},${ay-76}"/>`
-      +`<text x="${ax+100}" y="${ay+9}" font-size="24" stroke="none">X</text>`
-      +`<text x="${ax-26}" y="${ay-98}" font-size="24" stroke="none">Y</text></g>`;
-    s+=`<text x="${pad+DL/2}" y="${vh-34}" text-anchor="middle" font-size="22" fill="#666">l (ยาว) = ${fmt(DL)}  ·  กางออก ${fmt(_bd.dev)} + เผื่อตัด ${fmt(_bd.allow)}</text>`;
-    s+=`<text x="34" y="${pad+DW/2}" text-anchor="middle" font-size="22" fill="#666" transform="rotate(-90 34 ${pad+DW/2})">b (กว้าง) = ${fmt(DW)}</text>`;
-    s+=`<text x="${pad}" y="${pad-76}" font-size="20" font-weight="700" fill="#c0392b">แผ่นแบนก่อนดัด · d (หนา) = ${fmt(_bd.T)} มม.</text>`;
-    s+=`<text x="${pad}" y="${pad-46}" font-size="16" fill="#999">ร่องเซาะ ${_kp.n} ร่อง · ดอก ${_kp.width} · พิตช์ ${_kp.pitch} · ลึก ${_kp.depth} (เหลือเนื้อ ${_kp.leave}) · เซาะฝั่ง${_kp.face==="top"?"บน":"ล่าง"} · แถบเทาหัวท้าย = เผื่อตัด ${_kp.allow/2}/ข้าง</text>`;
+      +`<text x="${ax+100}" y="${ay+9}" font-size="${FS(24)}" stroke="none">X</text>`
+      +`<text x="${ax-26}" y="${ay-98}" font-size="${FS(24)}" stroke="none">Y</text></g>`;
+    s+=`<text x="${pad+DL/2}" y="${vh-34}" text-anchor="middle" font-size="${FS(22)}" fill="#666">l (ยาว) = ${fmt(DL)}  ·  กางออก ${fmt(_bd.dev)} + เผื่อตัด ${fmt(_bd.allow)}</text>`;
+    s+=`<text x="34" y="${pad+DW/2}" text-anchor="middle" font-size="${FS(22)}" fill="#666" transform="rotate(-90 34 ${pad+DW/2})">b (กว้าง) = ${fmt(DW)}</text>`;
+    s+=`<text x="${pad}" y="${pad-76}" font-size="${FS(20)}" font-weight="700" fill="#c0392b">แผ่นแบนก่อนดัด · d (หนา) = ${fmt(_bd.T)} มม.</text>`;
+    s+=`<text x="${pad}" y="${pad-46}" font-size="${FS(16)}" fill="#999">ร่องเซาะ ${_kp.n} ร่อง · ดอก ${_kp.width} · พิตช์ ${_kp.pitch} · ลึก ${_kp.depth} (เหลือเนื้อ ${_kp.leave}) · เซาะฝั่ง${_kp.face==="top"?"บน":"ล่าง"} · แถบเทาหัวท้าย = เผื่อตัด ${_kp.allow/2}/ข้าง</text>`;
     /* รูปหลังดัดย่อ มุมขวาบน */
     if(b.profile&&b.profile.length>=3){
       let u0=1e9,u1=-1e9,v0=1e9,v1=-1e9;
@@ -23371,27 +23561,43 @@ function part2DSvg(b,o){
       const sc=Math.min((iw-16)/Math.max(u1-u0,1),(ih-16)/Math.max(v1-v0,1));
       const px=ix+(iw-(u1-u0)*sc)/2-u0*sc, py=iy+(ih-(v1-v0)*sc)/2-v0*sc;
       if(iy>0) s+=`<rect x="${ix}" y="${iy}" width="${iw}" height="${ih}" fill="#fafbfc" stroke="#ccc"/>`
-        +`<path d="M ${b.profile.map(q=>`${(px+q[0]*sc).toFixed(1)} ${(py+q[1]*sc).toFixed(1)}`).join(" L ")} Z" fill="#f3efe7" stroke="#333" stroke-width="1.5"/>`
-        +`<text x="${ix+8}" y="${iy+18}" font-size="14" fill="#999">รูปหลังดัด (คอร์ด ${fmt(_bd.chord)})</text>`;
+        +`<path d="M ${b.profile.map(q=>`${(px+q[0]*sc).toFixed(1)} ${(py+q[1]*sc).toFixed(1)}`).join(" L ")} Z" fill="#f3efe7" stroke="#333" stroke-width="${SW(1.5)}"/>`
+        +`<text x="${ix+8}" y="${iy+18}" font-size="${FS(14)}" fill="#999">รูปหลังดัด (คอร์ด ${fmt(_bd.chord)})</text>`;
     }
   }
-  else if(b.profile&&b.profile.length>=3) s+=`<polygon points="${b.profile.map(p=>SX(p[0],p[1])+","+SY(p[0],p[1])).join(" ")}" fill="#f3efe7" stroke="#333" stroke-width="2"/>`;
-  else s+=`<rect x="${pad}" y="${pad}" width="${DL}" height="${DW}" rx="${b.r||0}" fill="#f3efe7" stroke="#333" stroke-width="2"/>`;
+  else if(b.profile&&b.profile.length>=3) s+=`<polygon points="${b.profile.map(p=>SX(p[0],p[1])+","+SY(p[0],p[1])).join(" ")}" fill="#f3efe7" stroke="#333" stroke-width="${SW(2)}"/>`;
+  else s+=`<rect x="${pad}" y="${pad}" width="${DL}" height="${DW}" rx="${b.r||0}" fill="#f3efe7" stroke="#333" stroke-width="${SW(2)}"/>`;
   if(!BENT){
-  s+=`<text x="${pad+DL/2}" y="${vh-34}" text-anchor="middle" font-size="22" fill="#666">ยาว = ${fmt(DL)}</text>`;
-  s+=`<text x="34" y="${pad+DW/2}" text-anchor="middle" font-size="22" fill="#666" transform="rotate(-90 34 ${pad+DW/2})">กว้าง = ${fmt(DW)}</text>`;
-  s+=`<text x="${pad}" y="${pad-46}" font-size="16" fill="#999">${MIR?"หน้า (front) ↓":"หน้า (front) ↑"} · ${b.orient||"flat"}${rot?" · หมุนวางนอน 90°":""}</text>`;
+  s+=`<text x="${pad+DL/2}" y="${vh-G(34)}" text-anchor="middle" font-size="${FS(22)}" fill="#666">ยาว = ${fmt(DL)}</text>`;
+  s+=`<text x="${G(34)}" y="${pad+DW/2}" text-anchor="middle" font-size="${FS(22)}" fill="#666" transform="rotate(-90 ${G(34)} ${pad+DW/2})">กว้าง = ${fmt(DW)}</text>`;
+  /* ───────── v40.6: หัวแบบสามบรรทัดต้องแยกชั้นกันตามขนาดตัวอักษรจริง ─────────
+     ของเดิมตรึงระยะไว้ที่ pad-46 / pad-24 ซึ่งเป็นหน่วยมิลลิเมตร ไม่ได้โตตามตัวหนังสือ
+     พอ v40.5 ขยายตัวอักษรให้ชิ้นใหญ่ บรรทัดสูง 41 หน่วยแต่ห่างกันแค่ 22 จึงทับกันทันที
+     และบรรทัดขวายาวเกินขอบแผ่นก็ไปทับบรรทัดซ้าย — แยกคนละชั้นไปเลย อ่านได้ทุกความกว้าง */
+  /* v41.0: สามชั้นจริง ๆ — บนสุดชื่อ/มุมมอง · กลางคำอธิบายสัญลักษณ์ · ล่างสุดสรุปงานรายผิว
+     v40.9 เอาบรรทัดสรุปไปวางชั้นเดียวกับคำอธิบาย แผ่นที่ไม่กว้างพอสองข้อความจึงชนกลางทาง */
+  const _h1=pad-G(26), _h2=_h1-FS(21), _h3=_h2-FS(21);
+  s+=`<text x="${pad}" y="${_h3}" font-size="${FS(16)}" fill="#999">${MIR?"หน้า (front) ↓":"หน้า (front) ↑"} · ${b.orient||"flat"}${rot?" · หมุนวางนอน 90°":""}</text>`;
   /* v9.95: บอกให้ชัดว่ากำลังมองจากผิวไหน — ตัวชี้ขาดตอนปริ้นขาวดำที่หายไปคือข้อมูลนี้ */
-  s+=`<text x="${pad+DL}" y="${pad-46}" text-anchor="end" font-size="17" font-weight="700" fill="#222">`
+  s+=`<text x="${pad+DL}" y="${_h3}" text-anchor="end" font-size="${FS(17)}" font-weight="700" fill="#222">`
     +`มองจากผิว${VIEW==="bottom"?"ล่าง — พลิกแผ่นแล้ว (หน้าอยู่ล่าง)":"บน (หน้าอยู่บน)"}</text>`;
-  s+=`<text x="${pad+DL}" y="${pad-24}" text-anchor="end" font-size="13" fill="#888">วงทึบ = เจาะจากผิวที่มองอยู่ · วงประ = เจาะจากอีกด้าน · มีกากบาท = ทะลุ</text>`; }
+  s+=`<text x="${pad+DL}" y="${_h2}" text-anchor="end" font-size="${FS(13)}" fill="#888">เส้นเต็ม = ทำจากผิวที่มองอยู่ · เส้นประ = ทำจากอีกด้าน (รู · บาก · ร่อง) · มีกากบาท = ทะลุ</text>`;
+  /* v40.9: สรุปว่าผิวไหนมีงานอะไรบ้าง อ่านบรรทัดเดียวจบ ไม่ต้องไล่ดูทีละจุดว่าทึบหรือประ */
+  { const cnt={top:{h:0,p:0,g:0},bottom:{h:0,p:0,g:0}};
+    (b.holes||[]).forEach(h=>{ if(!h||h.edge)return; const f=(h.face==="bottom")?"bottom":"top";
+      if(h.face||!(!h.depth||h.depth<=0)) cnt[f].h++; });
+    (b.pockets||[]).forEach(q=>{ if(!q||q.face==="through")return; cnt[(q.face==="bottom")?"bottom":"top"].p++; });
+    (b.grooves||[]).forEach(g=>{ if(!g||g.face==="edge")return; cnt[(g.face==="bottom")?"bottom":"top"].g++; });
+    const say=f=>{ const c=cnt[f], t=[]; if(c.g)t.push("ร่อง "+c.g); if(c.h)t.push("รู "+c.h); if(c.p)t.push("บาก "+c.p);
+      return t.length?t.join(" · "):"—"; };
+    s+=`<text x="${pad}" y="${_h1}" font-size="${FS(13)}" fill="#888">งาน${faceLabel(b,"top")}: ${say("top")}　|　งาน${faceLabel(b,"bottom")}: ${say("bottom")}</text>`; } }
   // holes
   (b.holes||[]).forEach(h=>{
     if(h.edge){ let ex,ey; const pos=h.pos||0;
       if(h.edge==="left"){ex=-L/2;ey=pos;} else if(h.edge==="right"){ex=L/2;ey=pos;} else if(h.edge==="front"){ey=-W/2;ex=pos;} else {ey=W/2;ex=pos;}
       const cx=SX(ex,ey),cy=SY(ex,ey), r=Math.max((h.d||8)/2,4);
-      s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#b3299a" stroke-width="2.5"/>`;
-      s+=`<text x="${cx}" y="${cy-r-6}" text-anchor="middle" font-size="15" fill="#b3299a">Ø${fmt(h.d)} ${h.through?"ทะลุ":("ลึก"+fmt(h.depth))}</text>`; USED.edge=1; return; }
+      s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#b3299a" stroke-width="${SW(2.5)}"/>`;
+      s+=`<text x="${cx}" y="${cy-r-G(6)}" text-anchor="middle" font-size="${FS(15)}" fill="#b3299a">Ø${fmt(h.d)} ${h.through?"ทะลุ":("ลึก"+fmt(h.depth))}</text>`; USED.edge=1; return; }
     const cx=SX(h.x||0,h.y||0),cy=SY(h.x||0,h.y||0), r=Math.max((h.d||8)/2,4);
     const thru=(h.through===true)||(!h.face&&!(h.depth>0));
     const col=h.pin?"#888":thru?"#2f6df0":colFace(h.face);
@@ -23399,14 +23605,17 @@ function part2DSvg(b,o){
     /* v9.95: อย่าให้ "ผิวที่เจาะ" ต่างกันแค่สี ปริ้นขาวดำแล้วหายไปหมด
        ผิวที่มองอยู่ = วงทึบ + จุดกลางทึบ · อีกด้าน = วงประ + จุดกลางกลวง · ทะลุ = วงทึบ + กากบาท */
     const near=thru||!h.face||(h.face===VIEW);
-    const dash=near?"":' stroke-dasharray="6 4"';
-    s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${thru?"none":col+"30"}" stroke="${col}" stroke-width="2.5"${dash}/>`;
-    if(thru) s+=`<line x1="${cx-r}" y1="${cy}" x2="${cx+r}" y2="${cy}" stroke="${col}" stroke-width="1.6"/><line x1="${cx}" y1="${cy-r}" x2="${cx}" y2="${cy+r}" stroke="${col}" stroke-width="1.6"/>`;
-    else s+=`<circle cx="${cx}" cy="${cy}" r="2.2" fill="${near?col:"#fff"}" stroke="${col}" stroke-width="1.2"/>`;
+    /* v40.7: ต้องเป็น template literal — v40.5 ใส่ ${} ลงในสตริงอัญประกาศเดี่ยว
+       ค่าจึงไม่ถูกแทน SVG ได้ข้อความ ${SW(6)} ตรง ๆ ซึ่งไม่ใช่ตัวเลข เบราว์เซอร์ทิ้งทั้งแอตทริบิวต์
+       ผลคือรู บาก ร่อง ที่อยู่ "อีกด้าน" กลายเป็นเส้นเต็มทั้งหมด ป้ายบอกอีกด้านแต่เส้นไม่ประ */
+    const dash=near?"":` stroke-dasharray="${SW(6)} ${SW(4)}"`;
+    s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${thru?"none":col+"30"}" stroke="${col}" stroke-width="${SW(2.5)}"${dash}/>`;
+    if(thru) s+=`<line x1="${cx-r}" y1="${cy}" x2="${cx+r}" y2="${cy}" stroke="${col}" stroke-width="${SW(1.6)}"/><line x1="${cx}" y1="${cy-r}" x2="${cx}" y2="${cy+r}" stroke="${col}" stroke-width="${SW(1.6)}"/>`;
+    else s+=`<circle cx="${cx}" cy="${cy}" r="${SW(2.2)}" fill="${near?col:"#fff"}" stroke="${col}" stroke-width="${SW(1.2)}"/>`;
     /* v39.6: หูแขวนไม่ต้องมีป้ายในผังแล้ว — กล่องขยาย DETAIL บอกครบกว่า
        จุดเดียวมีทั้งรูและบากสองใบซ้อนพิกัดกัน ป้ายสามอันจึงทับกันจนอ่านไม่ออกทั้งกอง */
     let _gh=false; try{ _gh=isGlassHangerHole(h); }catch(e){}
-    if(!_gh) s+=`<text x="${cx}" y="${cy-r-6}" text-anchor="middle" font-size="14" fill="${col}">Ø${fmt(h.d)}${h.pin?" พิน":thru?" ทะลุ":(" ลึก"+fmt(h.depth))}${(!thru&&!near)?" ⟂อีกด้าน":""}</text>`;
+    if(!_gh) s+=`<text x="${cx}" y="${cy-r-G(6)}" text-anchor="middle" font-size="${FS(14)}" fill="${col}">Ø${fmt(h.d)}${h.pin?" พิน":thru?" ทะลุ":(" ลึก"+fmt(h.depth)+" · ผิว"+((h.face==="bottom")?"ล่าง":"บน"))}</text>`;
   });
   /* ───────── v9.96: งานเจาะจาก connector ต้องมีตัวเลขกำกับเหมือนรูอื่น ─────────
      เดิมวาดแค่รูปวงกลม/สี่เหลี่ยม ไม่มี Ø ไม่มีความลึก ไม่มีระยะร่นจากขอบ
@@ -23421,7 +23630,7 @@ function part2DSvg(b,o){
       const cx=SX(ex,ey),cy=SY(ex,ey);
       const _push=(px,py)=>{ cDX.push(tx(px,py)); cDY.push(ty(px,py)); };
       if(c2.type==="hinge"){ USED.hinge=1; const _hs=hingeSpecOf(b);
-        const cupOff=_hs.cupOffset, cupR=_hs.cupD/2;
+        const cupOff=hingeCupOffOf(b,c2.edge,_hs), cupR=_hs.cupD/2;   // v40.8
         const cupD=_hs.cupD, cupDep=_hs.cupDepth;
         /* v9.97: คิดทิศแบบทั่วไป — เดิมคิดแค่ขอบซ้าย/ขวา บานพับที่ขอบบน-ล่างจึงวาดผิดที่
            n = ทิศเข้าเนื้อบานจากขอบนั้น · al = ทิศไล่ไปตามขอบ */
@@ -23430,13 +23639,13 @@ function part2DSvg(b,o){
         const ccx=ex+n[0]*cupOff, ccy=ey+n[1]*cupOff;
         _push(ccx,ccy);
         hDX.push(tx(ccx,ccy)); hDY.push(ty(ccx,ccy));      // v23.3: เก็บไว้ทำแถวระยะเฉพาะบานพับ
-        s+=`<circle cx="${SX(ccx,ccy)}" cy="${SY(ccx,ccy)}" r="${cupR}" fill="#8a5cf630" stroke="#6f3df0" stroke-width="2.5"/>`
-          +`<circle cx="${SX(ccx,ccy)}" cy="${SY(ccx,ccy)}" r="2.4" fill="#6f3df0"/>`
-          +`<text x="${SX(ccx,ccy)}" y="${SY(ccx,ccy)+5}" text-anchor="middle" font-size="13" fill="#6f3df0">Ø${fmt(cupD)}</text>`
-          +`<text x="${SX(ccx,ccy)}" y="${SY(ccx,ccy)-cupR-8}" text-anchor="middle" font-size="13" fill="#6f3df0">ถ้วยบานพับ ${ai+1} · Ø${fmt(cupD)} ลึก ${fmt(cupDep)}</text>`;
+        s+=`<circle cx="${SX(ccx,ccy)}" cy="${SY(ccx,ccy)}" r="${cupR}" fill="#8a5cf630" stroke="#6f3df0" stroke-width="${SW(2.5)}"/>`
+          +`<circle cx="${SX(ccx,ccy)}" cy="${SY(ccx,ccy)}" r="${SW(2.4)}" fill="#6f3df0"/>`
+          +`<text x="${SX(ccx,ccy)}" y="${SY(ccx,ccy)+5}" text-anchor="middle" font-size="${FS(13)}" fill="#6f3df0">Ø${fmt(cupD)}</text>`
+          +`<text x="${SX(ccx,ccy)}" y="${SY(ccx,ccy)-cupR-G(8)}" text-anchor="middle" font-size="${FS(13)}" fill="#6f3df0">ถ้วยบานพับ ${ai+1} · Ø${fmt(cupD)} ลึก ${fmt(cupDep)} · ${faceLabel(b,c2.face||"bottom")}</text>`;
         /* ระยะร่นจากขอบบานถึงศูนย์ถ้วย — ตัวเลขที่ช่างตั้งเครื่องต้องใช้ */
-        s+=`<line x1="${SX(ex,ey)}" y1="${SY(ex,ey)}" x2="${SX(ccx,ccy)}" y2="${SY(ccx,ccy)}" stroke="#6f3df0" stroke-width="1" stroke-dasharray="4 3"/>`
-          +`<text x="${(SX(ex,ey)+SX(ccx,ccy))/2}" y="${SY(ccx,ccy)+cupR+18}" text-anchor="middle" font-size="13" fill="#6f3df0">${fmt(cupOff)} จากขอบ</text>`;
+        s+=`<line x1="${SX(ex,ey)}" y1="${SY(ex,ey)}" x2="${SX(ccx,ccy)}" y2="${SY(ccx,ccy)}" stroke="#6f3df0" stroke-width="${SW(1)}" stroke-dasharray="${SW(4)} ${SW(3)}"/>`
+          +`<text x="${(SX(ex,ey)+SX(ccx,ccy))/2}" y="${SY(ccx,ccy)+cupR+G(18)}" text-anchor="middle" font-size="${FS(13)}" fill="#6f3df0">${fmt(cupOff)} จากขอบแผ่น</text>`;
         /* v9.97: รูยึดข้างถ้วย — มีในไฟล์เจาะและใน 3D มาตลอด แต่ไม่เคยถูกวาดลงแบบ
            ช่างเลยเห็นแต่ถ้วย Ø35 ไม่รู้ว่ามีรูเล็กคู่ข้าง ๆ ต้องเจาะด้วย และห่างกันเท่าไหร่ */
         const dwD=_hs.dowelD, dwDep=_hs.dowelDepth;
@@ -23446,24 +23655,29 @@ function part2DSvg(b,o){
             const px=ex+n[0]*(cupOff+dwOff)+al[0]*sg*dwSp/2;
             const py=ey+n[1]*(cupOff+dwOff)+al[1]*sg*dwSp/2;
             _push(px,py);
-            s+=`<circle cx="${SX(px,py)}" cy="${SY(px,py)}" r="${dr}" fill="#8a5cf620" stroke="#6f3df0" stroke-width="2"/>`
-              +`<circle cx="${SX(px,py)}" cy="${SY(px,py)}" r="1.6" fill="#6f3df0"/>`; });
+            s+=`<circle cx="${SX(px,py)}" cy="${SY(px,py)}" r="${dr}" fill="#8a5cf620" stroke="#6f3df0" stroke-width="${SW(2)}"/>`
+              +`<circle cx="${SX(px,py)}" cy="${SY(px,py)}" r="${SW(1.6)}" fill="#6f3df0"/>`; });
           const p1x=ex+n[0]*(cupOff+dwOff)-al[0]*dwSp/2, p1y=ey+n[1]*(cupOff+dwOff)-al[1]*dwSp/2;
           const p2x=ex+n[0]*(cupOff+dwOff)+al[0]*dwSp/2, p2y=ey+n[1]*(cupOff+dwOff)+al[1]*dwSp/2;
-          s+=`<line x1="${SX(p1x,p1y)}" y1="${SY(p1x,p1y)}" x2="${SX(p2x,p2y)}" y2="${SY(p2x,p2y)}" stroke="#6f3df0" stroke-width="1" stroke-dasharray="3 3"/>`
-            +`<text x="${(SX(p1x,p1y)+SX(p2x,p2y))/2}" y="${(SY(p1x,p1y)+SY(p2x,p2y))/2-8}" text-anchor="middle" font-size="12.5" fill="#6f3df0">รูยึด Ø${fmt(dwD)} ลึก ${fmt(dwDep)} · ห่าง ${fmt(dwSp)}${dwOff?(" · เยื้อง "+fmt(dwOff)):""}</text>`; }
+          /* v40.8: เอาป้ายสเปครูยึดออกจากผังหลัก — บานพับหนึ่งตัวมีถ้วยกับรูคู่อยู่ชิดกัน
+             ป้ายสองอันจึงทับกันจนอ่านไม่ออกทั้งคู่ (เห็นชัดในแบบบานที่มีบานพับสองตัว)
+             ตัวเลขชุดนี้อยู่ในกล่องขยาย DETAIL ครบแล้วและอ่านง่ายกว่ามาก
+             ผังหลักเหลือแค่เส้นบอกแนวกับตำแหน่ง ซึ่งเป็นสิ่งที่ผังหลักควรบอก */
+          s+=`<line x1="${SX(p1x,p1y)}" y1="${SY(p1x,p1y)}" x2="${SX(p2x,p2y)}" y2="${SY(p2x,p2y)}" stroke="#6f3df0" stroke-width="${SW(1)}" stroke-dasharray="${SW(3)} ${SW(3)}"/>`; }
       } else if(c2.type==="minifix"){ USED.mf=1; const camOff=settings.mfCamOffset||34, camR=(settings.mfCamD||15)/2;
         const camD=settings.mfCamD||15, camDep=settings.mfCamDepth||13;
         const boltD=settings.mfBoltD||8, boltDep=settings.mfBoltDepth||28;
         let ccx=ex,ccy=ey; if(c2.edge==="left")ccx=ex+camOff; else if(c2.edge==="right")ccx=ex-camOff; else if(c2.edge==="top")ccy=ey-camOff; else ccy=ey+camOff;
         _push(ccx,ccy);
         s+=`<rect x="${cx-5}" y="${cy-5}" width="10" height="10" fill="#0c7a5a"/>`
-          +`<circle cx="${SX(ccx,ccy)}" cy="${SY(ccx,ccy)}" r="${camR}" fill="#12b88630" stroke="#0c7a5a" stroke-width="2.5"/>`
-          +`<circle cx="${SX(ccx,ccy)}" cy="${SY(ccx,ccy)}" r="2.4" fill="#0c7a5a"/>`
-          +`<text x="${SX(ccx,ccy)}" y="${SY(ccx,ccy)-camR-8}" text-anchor="middle" font-size="13" fill="#0c7a5a">แคม Ø${fmt(camD)} ลึก ${fmt(camDep)}</text>`
-          +`<line x1="${cx}" y1="${cy}" x2="${SX(ccx,ccy)}" y2="${SY(ccx,ccy)}" stroke="#0c7a5a" stroke-width="1" stroke-dasharray="4 3"/>`
-          +`<text x="${(cx+SX(ccx,ccy))/2}" y="${(cy+SY(ccx,ccy))/2+(isSide?18:-6)}" text-anchor="middle" font-size="13" fill="#0c7a5a">${fmt(camOff)} จากขอบ</text>`
-          +`<text x="${cx}" y="${cy+(isSide?0:(ey>0?-14:22))}" text-anchor="${isSide?(ex<0?"start":"end"):"middle"}" font-size="12" fill="#0c7a5a">${isSide?" ":""}สลักสัน Ø${fmt(boltD)} ลึก ${fmt(boltDep)}</text>`;
+          +`<circle cx="${SX(ccx,ccy)}" cy="${SY(ccx,ccy)}" r="${camR}" fill="#12b88630" stroke="#0c7a5a" stroke-width="${SW(2.5)}"/>`
+          +`<circle cx="${SX(ccx,ccy)}" cy="${SY(ccx,ccy)}" r="${SW(2.4)}" fill="#0c7a5a"/>`
+          +`<text x="${SX(ccx,ccy)}" y="${SY(ccx,ccy)-camR-G(8)}" text-anchor="middle" font-size="${FS(13)}" fill="#0c7a5a">แคม Ø${fmt(camD)} ลึก ${fmt(camDep)}</text>`
+          +`<line x1="${cx}" y1="${cy}" x2="${SX(ccx,ccy)}" y2="${SY(ccx,ccy)}" stroke="#0c7a5a" stroke-width="${SW(1)}" stroke-dasharray="${SW(4)} ${SW(3)}"/>`
+          /* v40.9: สามป้ายของมินิฟิกตัวเดียวเคยกองอยู่ที่ระดับใกล้กันจนทับกันทั้งกอง
+             แยกชั้นตามความสูงตัวอักษรจริง แคมอยู่บนสุด ระยะจากขอบถัดลงมา สลักสันล่างสุด */
+          +`<text x="${(cx+SX(ccx,ccy))/2}" y="${(cy+SY(ccx,ccy))/2+(isSide?FS(20):-FS(6))}" text-anchor="middle" font-size="${FS(13)}" fill="#0c7a5a">${fmt(camOff)} จากขอบ</text>`
+          +`<text x="${cx}" y="${cy+(isSide?FS(20):(ey>0?-FS(20):FS(28)))}" text-anchor="${isSide?(ex<0?"start":"end"):"middle"}" font-size="${FS(12)}" fill="#0c7a5a">${isSide?" ":""}สลักสัน Ø${fmt(boltD)} ลึก ${fmt(boltDep)}</text>`;
       } else { const dD=Math.max(c2.d||settings.dowelD||8,1), dDep=Math.max(c2.depth||settings.dowelDepth||28,1);
         /* ───────── v18.7: เดือยที่สันต้องบอกระยะด้วย ─────────
            ถ้วยบานพับกับแคมมินิฟิกถูกนับเข้าโซ่ระยะไปแล้ว แต่เดือยกับมินิฟิกที่สันยังไม่เคยถูกนับ
@@ -23471,8 +23685,8 @@ function part2DSvg(b,o){
            ซึ่งเป็นตัวเลขที่ช่างต้องใช้ตั้งเครื่องจริง ๆ โดยเฉพาะสูตรที่ปล่อยหัวท้ายเท่ากัน
            ระยะจะไม่ใช่เลขกลม ๆ ต้องอ่านจากแบบเท่านั้น */
         _push(ex,ey); USED.dowel=1;
-        s+=`<circle cx="${cx}" cy="${cy}" r="5" fill="#c0392b"/>`
-          +`<text x="${cx}" y="${cy+(isSide?-10:(ey>0?-10:20))}" text-anchor="middle" font-size="12" fill="#c0392b">เดือย Ø${fmt(dD)} ลึก ${fmt(dDep)}</text>`; }
+        s+=`<circle cx="${cx}" cy="${cy}" r="${SW(5)}" fill="#c0392b"/>`
+          +`<text x="${cx}" y="${cy+(isSide?-10:(ey>0?-10:20))}" text-anchor="middle" font-size="${FS(12)}" fill="#c0392b">เดือย Ø${fmt(dD)} ลึก ${fmt(dDep)}</text>`; }
     });
   });
   /* v10.9: ช่องบาก/Pocket ไม่เคยถูกวาดในแบบเลย ทั้งที่เป็นงานกัดจริงที่ช่างต้องเห็น
@@ -23486,11 +23700,18 @@ function part2DSvg(b,o){
     const x0=Math.min(p1[0],p2[0]), y0=Math.min(p1[1],p2[1]);
     const ww=Math.abs(p2[0]-p1[0]), hh=Math.abs(p2[1]-p1[1]);
     const col=thru?"#0b7285":"#a0522d"; USED.pocket=1;
-    s+=`<rect x="${x0}" y="${y0}" width="${ww}" height="${hh}" fill="${col}" fill-opacity="${thru?.18:.10}" stroke="${col}" stroke-width="2"${thru?"":' stroke-dasharray="7 4"'}/>`;
-    if(thru) s+=`<line x1="${x0}" y1="${y0}" x2="${x0+ww}" y2="${y0+hh}" stroke="${col}" stroke-width="1"/>`
-      +`<line x1="${x0+ww}" y1="${y0}" x2="${x0}" y2="${y0+hh}" stroke="${col}" stroke-width="1"/>`;
+    /* ───────── v40.4: เส้นประ = "อยู่อีกด้าน" ไม่ใช่ "ไม่ทะลุ" ─────────
+       ของเดิมบากที่ไม่ทะลุถูกวาดประเสมอ ต่อให้กัดจากผิวที่มองอยู่ก็ตาม
+       ขัดกับกฎที่หัวแบบเขียนไว้เอง (วงทึบ = เจาะจากผิวที่มองอยู่) และขัดกับหลักเขียนแบบ
+       เห็นชัดที่บากหูแขวน: หน้าแบบบอกว่ามองจากผิวล่าง หูแขวนก็กัดผิวล่าง แต่กลับเป็นเส้นประ
+       ส่วน "ทะลุ/ไม่ทะลุ" ยังบอกด้วยกากบาททแยงกับตัวเลขความลึกเหมือนเดิม ไม่เสียข้อมูล */
+    const pf=(q.face==="through")?null:((q.face==="bottom")?"bottom":"top");
+    const pNear=thru||!pf||(pf===VIEW);
+    s+=`<rect x="${x0}" y="${y0}" width="${ww}" height="${hh}" fill="${col}" fill-opacity="${thru?.18:.10}" stroke="${col}" stroke-width="${SW(2)}"${pNear?"":` stroke-dasharray="${SW(7)} ${SW(4)}"`}/>`;
+    if(thru) s+=`<line x1="${x0}" y1="${y0}" x2="${x0+ww}" y2="${y0+hh}" stroke="${col}" stroke-width="${SW(1)}"/>`
+      +`<line x1="${x0+ww}" y1="${y0}" x2="${x0}" y2="${y0+hh}" stroke="${col}" stroke-width="${SW(1)}"/>`;
     if(q.src!=="glasshanger")                                    // v39.6: ระยะภายในของหูแขวนอยู่ในกล่องขยาย
-      s+=`<text x="${c[0]}" y="${y0-6}" text-anchor="middle" font-size="13" fill="${col}">${q._dxNotch?"บากเส้นโปรไฟล์ ":""}${fmt(w)}×${fmt(h)}${thru?" ทะลุ":(" ลึก "+fmt(q.depth))}</text>`;
+      s+=`<text x="${c[0]}" y="${y0-G(6)}" text-anchor="middle" font-size="${FS(13)}" fill="${col}">${q._dxNotch?"บากเส้นโปรไฟล์ ":""}${fmt(w)}×${fmt(h)}${thru?" ทะลุ":(" ลึก "+fmt(q.depth)+" · ผิว"+((q.face==="bottom")?"ล่าง":"บน"))}</text>`;
   });
   // grooves
   /* ───────── v15.9: ร่องต้องบอกขนาดในแบบ ─────────
@@ -23500,15 +23721,24 @@ function part2DSvg(b,o){
   (b.grooves||[]).forEach(g=>{ const w=Math.max(g.width||4,4);
     const gw=+g.width||0, gd=+g.depth||0;
     const o0=Math.max(+g.off0||0,0), o1=Math.max(+g.off1||0,0);
-    const rr=(g.end==="r")?Math.max(+g.r||gw/2,0):0;
+    const rr=(g.back||g.end==="sq")?0:((g.end==="r")?Math.max(+g.r||gw/2,0):0);   // v41.3
     let p1,p2,tp; if(g.axis==="wid"){ p1=[SX(g.pos||0,-W/2+o0),SY(g.pos||0,-W/2+o0)]; p2=[SX(g.pos||0,W/2-o1),SY(g.pos||0,W/2-o1)]; tp=[(g.pos||0),(o0-o1)/2]; }
     else { p1=[SX(-L/2+o0,g.pos||0),SY(-L/2+o0,g.pos||0)]; p2=[SX(L/2-o1,g.pos||0),SY(L/2-o1,g.pos||0)]; tp=[(o0-o1)/2,(g.pos||0)]; }
-    s+=`<line x1="${p1[0]}" y1="${p1[1]}" x2="${p2[0]}" y2="${p2[1]}" stroke="#a0522d" stroke-width="${w}" stroke-opacity=".45" stroke-dasharray="8 5"/>`; USED.groove=1;
+    /* v40.4: ร่องก็ใช้กฎเดียวกัน — เซาะจากผิวที่มองอยู่ = เส้นเต็ม · อีกด้าน = เส้นประ
+       ของเดิมประตายตัวทุกเส้น มองจากผิวไหนก็เหมือนกันหมด ช่างแยกไม่ออกว่าต้องพลิกแผ่นไหม */
+    const gNear=(g.face===VIEW);
+    s+=`<line x1="${p1[0]}" y1="${p1[1]}" x2="${p2[0]}" y2="${p2[1]}" stroke="#a0522d" stroke-width="${w}" stroke-opacity="${gNear?.45:.30}"${gNear?"":` stroke-dasharray="${SW(8)} ${SW(5)}"`}/>`; USED.groove=1;
     if(gw>0&&gd>0){
+      /* ───────── v40.9: บอกผิวที่เซาะเป็นตัวหนังสือ ไม่ใช่ให้เดาจากเส้นทึบ/ประ ─────────
+         กฎเส้นทึบ = ผิวที่มองอยู่ ใช้ได้ก็ต่อเมื่ออ่านหัวแบบก่อนว่ากำลังมองผิวไหน
+         ในสายการผลิตจริงคนหยิบแผ่นขึ้นมาดูรูปแล้วเซาะเลย เดาผิดทีเดียวคือแผ่นเสีย
+         เขียนไปเลยว่า เซาะผิวบน หรือ เซาะผิวล่าง อ่านจบในบรรทัดเดียวไม่ต้องเทียบกับอะไร */
+      const gFace=(g.face==="bottom")?"ล่าง":"บน";
       const lb=(g._led?"ร่องรางไฟ ":(g.back?"ร่องแผ่นหลัง ":"ร่อง "))+fmt(gw)+" × ลึก "+fmt(gd)
+        +" · เซาะ"+faceLabel(b,g.face)
         +(rr?(" · ปลายมน R"+fmt(rr)):"")+((o0||o1)?(" · ร่น "+fmt(o0)+"/"+fmt(o1)):" · วิ่งสุด");
       const tx0=SX(tp[0],tp[1]), ty0=SY(tp[0],tp[1]);
-      s+=`<text x="${tx0}" y="${ty0-Math.max(w/2,4)-5}" text-anchor="middle" font-size="13" fill="#a0522d">${lb}</text>`;
+      s+=`<text x="${tx0}" y="${ty0-Math.max(w/2,G(4))-G(5)}" text-anchor="middle" font-size="${FS(13)}" fill="#a0522d">${lb}</text>`;
     }
   });
   /* v25.6: สันที่เป็นหน้าตัด — ขีดเส้นบอกแนวกับความลึก เหมือนเพ ไม่ใช่คำสั่งเจาะ */
@@ -23519,8 +23749,8 @@ function part2DSvg(b,o){
     else if(es.side==="bottom"){ p1=[-b.L/2,-b.W/2+w]; p2=[b.L/2,-b.W/2+w]; tp=[0,-b.W/2+w]; }
     else if(es.side==="left"){ p1=[-b.L/2+w,-b.W/2]; p2=[-b.L/2+w,b.W/2]; tp=[-b.L/2+w,0]; }
     else { p1=[b.L/2-w,-b.W/2]; p2=[b.L/2-w,b.W/2]; tp=[b.L/2-w,0]; }
-    s+=`<line x1="${SX(p1[0],p1[1])}" y1="${SY(p1[0],p1[1])}" x2="${SX(p2[0],p2[1])}" y2="${SY(p2[0],p2[1])}" stroke="#0c7a5a" stroke-width="1.8" stroke-dasharray="10 5"/>`;
-    s+=`<text x="${SX(tp[0],tp[1])}" y="${SY(tp[0],tp[1])-6}" text-anchor="middle" font-size="14" fill="#0c7a5a">สัน ${escapeHtml(es.code)} · ลึก ${fmt(es.bx.w)}</text>`;
+    s+=`<line x1="${SX(p1[0],p1[1])}" y1="${SY(p1[0],p1[1])}" x2="${SX(p2[0],p2[1])}" y2="${SY(p2[0],p2[1])}" stroke="#0c7a5a" stroke-width="${SW(1.8)}" stroke-dasharray="${SW(10)} ${SW(5)}"/>`;
+    s+=`<text x="${SX(tp[0],tp[1])}" y="${SY(tp[0],tp[1])-G(6)}" text-anchor="middle" font-size="${FS(14)}" fill="#0c7a5a">สัน ${escapeHtml(es.code)} · ลึก ${fmt(es.bx.w)}</text>`;
     USED.edgesec=1;
   })();
   // เพ / ตีเฉียงที่สัน (v8.78) — เส้นบอกแนวเท่านั้น ไม่ใช่คำสั่งเจาะ
@@ -23530,8 +23760,8 @@ function part2DSvg(b,o){
       else if(v.side==="bottom"){ p1=[-L/2,-W/2+w]; p2=[L/2,-W/2+w]; tp=[0,-W/2+w]; }
       else if(v.side==="left"){   p1=[-L/2+w,-W/2]; p2=[-L/2+w,W/2]; tp=[-L/2+w,0]; }
       else { p1=[L/2-w,-W/2]; p2=[L/2-w,W/2]; tp=[L/2-w,0]; }
-      s+=`<line x1="${SX(p1[0],p1[1])}" y1="${SY(p1[0],p1[1])}" x2="${SX(p2[0],p2[1])}" y2="${SY(p2[0],p2[1])}" stroke="#7a5cff" stroke-width="1.6" stroke-dasharray="12 6"/>`; USED.bevel=1;
-      s+=`<text x="${SX(tp[0],tp[1])}" y="${SY(tp[0],tp[1])-6}" text-anchor="middle" font-size="14" fill="#7a5cff">เพ ${fmt(w)} · สันตรง ${fmt(v.land)} จากผิว${v.from==="back"?"หลัง":"หน้า"}</text>`;
+      s+=`<line x1="${SX(p1[0],p1[1])}" y1="${SY(p1[0],p1[1])}" x2="${SX(p2[0],p2[1])}" y2="${SY(p2[0],p2[1])}" stroke="#7a5cff" stroke-width="${SW(1.6)}" stroke-dasharray="${SW(12)} ${SW(6)}"/>`; USED.bevel=1;
+      s+=`<text x="${SX(tp[0],tp[1])}" y="${SY(tp[0],tp[1])-G(6)}" text-anchor="middle" font-size="${FS(14)}" fill="#7a5cff">เพ ${fmt(w)} · สันตรง ${fmt(v.land)} จากผิว${v.from==="back"?"หลัง":"หน้า"}</text>`;
     }); })();
   // ── เส้นบอกระยะ (dimension) นอกชิ้นงาน · โซ่จากขอบ → รู → ขอบ ──
   if(SHOWDIM){ const dc="#c0392b";
@@ -23564,24 +23794,29 @@ function part2DSvg(b,o){
     (b.grooves||[]).forEach(g=>{ if(!g||g.face==="edge")return;
       const gw=+g.width||0; if(!(gw>0))return;
       const o0=Math.max(+g.off0||0,0), o1=Math.max(+g.off1||0,0);
+      /* ───────── v40.6: แผ่นที่ถูกหมุนวางนอน ร่องไม่เคยเข้าโซ่ระยะเลย ─────────
+         ตำแหน่งร่องมีค่าตามแกนเดียว อีกแกนเป็นความยาวร่องซึ่งกินทั้งแผ่น
+         ของเดิมยัดค่าเข้าแกนตายตัวตาม axis โดยไม่ดูว่ารูปถูกหมุนหรือยัง
+         พอหมุน 90 องศา ค่าที่ควรไปอยู่แกน x กลับถูกส่งไปแกน y แล้วกลายเป็น 0 ทุกเส้น
+         โซ่ระยะจึงได้ขีดที่กึ่งกลางแผ่นแทนที่จะเป็นตำแหน่งร่อง = ไม่มีระยะจากขอบให้อ่าน */
       if(g.axis==="wid"){ const x0=(+g.pos||0);
-        [x0-gw/2,x0+gw/2].forEach(v=>dxs.push(tx(v,0)));
-        if(o0>0) dys.push(ty(x0,-W/2+o0));
-        if(o1>0) dys.push(ty(x0, W/2-o1));
+        [x0-gw/2,x0+gw/2].forEach(v=>{ if(rot) dys.push(ty(v,0)); else dxs.push(tx(v,0)); });
+        if(o0>0){ const q=[x0,-W/2+o0]; (rot?dxs:dys).push(rot?tx(q[0],q[1]):ty(q[0],q[1])); }
+        if(o1>0){ const q=[x0, W/2-o1]; (rot?dxs:dys).push(rot?tx(q[0],q[1]):ty(q[0],q[1])); }
       } else { const y0=(+g.pos||0);
-        [y0-gw/2,y0+gw/2].forEach(v=>dys.push(ty(0,v)));
-        if(o0>0) dxs.push(tx(-L/2+o0,y0));
-        if(o1>0) dxs.push(tx( L/2-o1,y0));
+        [y0-gw/2,y0+gw/2].forEach(v=>{ if(rot) dxs.push(tx(0,v)); else dys.push(ty(0,v)); });
+        if(o0>0){ const q=[-L/2+o0,y0]; (rot?dys:dxs).push(rot?ty(q[0],q[1]):tx(q[0],q[1])); }
+        if(o1>0){ const q=[ L/2-o1,y0]; (rot?dys:dxs).push(rot?ty(q[0],q[1]):tx(q[0],q[1])); }
       } });
-    if(dxs.length){ const xs=uniq([-DL/2, ...dxs, DL/2]); const yB=pad+DW+46;
-      s+=`<line x1="${Sx(xs[0])}" y1="${yB}" x2="${Sx(xs[xs.length-1])}" y2="${yB}" stroke="${dc}" stroke-width="1"/>`;
-      xs.forEach(v=>{ const X=Sx(v); s+=`<line x1="${X}" y1="${pad+DW}" x2="${X}" y2="${yB+6}" stroke="${dc}" stroke-width=".5" stroke-dasharray="3 3"/><line x1="${X}" y1="${yB-4}" x2="${X}" y2="${yB+4}" stroke="${dc}" stroke-width="1.2"/>`; });
-      for(let k=0;k<xs.length-1;k++){ const g=rr(xs[k+1]-xs[k]); if(g>0.005) s+=`<text x="${Sx((xs[k]+xs[k+1])/2)}" y="${yB-7}" text-anchor="middle" font-size="13" fill="${dc}">${dfmt(g)}</text>`; }
+    if(dxs.length){ const xs=uniq([-DL/2, ...dxs, DL/2]); const yB=pad+DW+G(46);
+      s+=`<line x1="${Sx(xs[0])}" y1="${yB}" x2="${Sx(xs[xs.length-1])}" y2="${yB}" stroke="${dc}" stroke-width="${SW(1)}"/>`;
+      xs.forEach(v=>{ const X=Sx(v); s+=`<line x1="${X}" y1="${pad+DW}" x2="${X}" y2="${yB+6}" stroke="${dc}" stroke-width="${SW(.5)}" stroke-dasharray="${SW(3)} ${SW(3)}"/><line x1="${X}" y1="${yB-4}" x2="${X}" y2="${yB+4}" stroke="${dc}" stroke-width="${SW(1.2)}"/>`; });
+      for(let k=0;k<xs.length-1;k++){ const g=rr(xs[k+1]-xs[k]); if(g>0.005) s+=`<text x="${Sx((xs[k]+xs[k+1])/2)}" y="${yB-G(7)}" text-anchor="middle" font-size="${FS(13)}" fill="${dc}">${dfmt(g)}</text>`; }
     }
-    if(dys.length){ const ys=uniq([-DW/2, ...dys, DW/2]); const xL=pad-46;
-      s+=`<line x1="${xL}" y1="${Sy(ys[0])}" x2="${xL}" y2="${Sy(ys[ys.length-1])}" stroke="${dc}" stroke-width="1"/>`;
-      ys.forEach(v=>{ const Y=Sy(v); s+=`<line x1="${pad}" y1="${Y}" x2="${xL-6}" y2="${Y}" stroke="${dc}" stroke-width=".5" stroke-dasharray="3 3"/><line x1="${xL-4}" y1="${Y}" x2="${xL+4}" y2="${Y}" stroke="${dc}" stroke-width="1.2"/>`; });
-      for(let k=0;k<ys.length-1;k++){ const g=rr(ys[k+1]-ys[k]); if(g>0.005) s+=`<text x="${xL-8}" y="${Sy((ys[k]+ys[k+1])/2)+4}" text-anchor="end" font-size="13" fill="${dc}">${dfmt(g)}</text>`; }
+    if(dys.length){ const ys=uniq([-DW/2, ...dys, DW/2]); const xL=pad-G(46);
+      s+=`<line x1="${xL}" y1="${Sy(ys[0])}" x2="${xL}" y2="${Sy(ys[ys.length-1])}" stroke="${dc}" stroke-width="${SW(1)}"/>`;
+      ys.forEach(v=>{ const Y=Sy(v); s+=`<line x1="${pad}" y1="${Y}" x2="${xL-6}" y2="${Y}" stroke="${dc}" stroke-width="${SW(.5)}" stroke-dasharray="${SW(3)} ${SW(3)}"/><line x1="${xL-4}" y1="${Y}" x2="${xL+4}" y2="${Y}" stroke="${dc}" stroke-width="${SW(1.2)}"/>`; });
+      for(let k=0;k<ys.length-1;k++){ const g=rr(ys[k+1]-ys[k]); if(g>0.005) s+=`<text x="${xL-G(8)}" y="${Sy((ys[k]+ys[k+1])/2)+4}" text-anchor="end" font-size="${FS(13)}" fill="${dc}">${dfmt(g)}</text>`; }
     }
     /* ───────── v23.3: แถวระยะเฉพาะศูนย์ถ้วยบานพับ ─────────
        นับเฉพาะบานพับ ไม่ปนกับรูอื่น ช่างตั้งเครื่องอ่านแถวเดียวจบ
@@ -23594,25 +23829,25 @@ function part2DSvg(b,o){
          แผ่นจึงบอกด้านยาวแต่ไม่บอกด้านกว้าง หรือกลับกัน แล้วแต่ชิ้น */
       if(hx.length){
         const xs=uniq([-DL/2, ...hx, DL/2]), yB2=_rowY(1);
-        s+=`<line x1="${Sx(xs[0])}" y1="${yB2}" x2="${Sx(xs[xs.length-1])}" y2="${yB2}" stroke="${hc}" stroke-width="1"/>`;
+        s+=`<line x1="${Sx(xs[0])}" y1="${yB2}" x2="${Sx(xs[xs.length-1])}" y2="${yB2}" stroke="${hc}" stroke-width="${SW(1)}"/>`;
         xs.forEach(v=>{ const X=Sx(v);
-          s+=`<line x1="${X}" y1="${yB2-5}" x2="${X}" y2="${yB2+5}" stroke="${hc}" stroke-width="1.4"/>`; });
+          s+=`<line x1="${X}" y1="${yB2-5}" x2="${X}" y2="${yB2+5}" stroke="${hc}" stroke-width="${SW(1.4)}"/>`; });
         hx.forEach(v=>{ const X=Sx(v);
-          s+=`<line x1="${X}" y1="${pad+DW}" x2="${X}" y2="${yB2-5}" stroke="${hc}" stroke-width=".5" stroke-dasharray="2 4" opacity=".55"/>`; });
+          s+=`<line x1="${X}" y1="${pad+DW}" x2="${X}" y2="${yB2-5}" stroke="${hc}" stroke-width="${SW(.5)}" stroke-dasharray="${SW(2)} ${SW(4)}" opacity=".55"/>`; });
         for(let k=0;k<xs.length-1;k++){ const g=rr(xs[k+1]-xs[k]); if(g>0.005)
-          s+=`<text x="${Sx((xs[k]+xs[k+1])/2)}" y="${yB2-8}" text-anchor="middle" font-size="14" font-weight="600" fill="${hc}">${dfmt(g)}</text>`; }
-        s+=`<text x="${Sx(xs[0])-10}" y="${yB2+5}" text-anchor="end" font-size="13" fill="${hc}">บานพับ ${hx.length>1?(hx.length+" ตัว"):"จากขอบ"}</text>`;
+          s+=`<text x="${Sx((xs[k]+xs[k+1])/2)}" y="${yB2-G(8)}" text-anchor="middle" font-size="${FS(14)}" font-weight="600" fill="${hc}">${dfmt(g)}</text>`; }
+        s+=`<text x="${Sx(xs[0])-10}" y="${yB2+5}" text-anchor="end" font-size="${FS(13)}" fill="${hc}">บานพับ ${hx.length>1?(hx.length+" ตัว"):"จากขอบ"}</text>`;
         USED.hrow=1;
       }
       if(hy.length){
         const ys2=uniq([-DW/2, ...hy, DW/2]), xL2=_rowX(1);
-        s+=`<line x1="${xL2}" y1="${Sy(ys2[0])}" x2="${xL2}" y2="${Sy(ys2[ys2.length-1])}" stroke="${hc}" stroke-width="1"/>`;
+        s+=`<line x1="${xL2}" y1="${Sy(ys2[0])}" x2="${xL2}" y2="${Sy(ys2[ys2.length-1])}" stroke="${hc}" stroke-width="${SW(1)}"/>`;
         ys2.forEach(v=>{ const Y=Sy(v);
-          s+=`<line x1="${xL2-5}" y1="${Y}" x2="${xL2+5}" y2="${Y}" stroke="${hc}" stroke-width="1.4"/>`; });
+          s+=`<line x1="${xL2-5}" y1="${Y}" x2="${xL2+5}" y2="${Y}" stroke="${hc}" stroke-width="${SW(1.4)}"/>`; });
         hy.forEach(v=>{ const Y=Sy(v);
-          s+=`<line x1="${xL2+5}" y1="${Y}" x2="${pad}" y2="${Y}" stroke="${hc}" stroke-width=".5" stroke-dasharray="2 4" opacity=".55"/>`; });
+          s+=`<line x1="${xL2+5}" y1="${Y}" x2="${pad}" y2="${Y}" stroke="${hc}" stroke-width="${SW(.5)}" stroke-dasharray="${SW(2)} ${SW(4)}" opacity=".55"/>`; });
         for(let k=0;k<ys2.length-1;k++){ const g=rr(ys2[k+1]-ys2[k]); if(g>0.005)
-          s+=`<text x="${xL2-8}" y="${Sy((ys2[k]+ys2[k+1])/2)+4}" text-anchor="end" font-size="14" font-weight="600" fill="${hc}">${dfmt(g)}</text>`; }
+          s+=`<text x="${xL2-G(8)}" y="${Sy((ys2[k]+ys2[k+1])/2)+4}" text-anchor="end" font-size="${FS(14)}" font-weight="600" fill="${hc}">${dfmt(g)}</text>`; }
         USED.hrow=1;
       }
     }
@@ -23623,18 +23858,18 @@ function part2DSvg(b,o){
       const gx2=uniq(ghX), gy2=uniq(ghY);
       const _k=(_hgOn?2:1);
       if(gx2.length){ const xs=uniq([-DL/2, ...gx2, DL/2]), yB3=_rowY(_k);
-        s+=`<line x1="${Sx(xs[0])}" y1="${yB3}" x2="${Sx(xs[xs.length-1])}" y2="${yB3}" stroke="${gc}" stroke-width="1"/>`;
-        xs.forEach(v=>{ const X=Sx(v); s+=`<line x1="${X}" y1="${yB3-5}" x2="${X}" y2="${yB3+5}" stroke="${gc}" stroke-width="1.4"/>`; });
-        gx2.forEach(v=>{ const X=Sx(v); s+=`<line x1="${X}" y1="${pad+DW}" x2="${X}" y2="${yB3-5}" stroke="${gc}" stroke-width=".5" stroke-dasharray="2 4" opacity=".5"/>`; });
+        s+=`<line x1="${Sx(xs[0])}" y1="${yB3}" x2="${Sx(xs[xs.length-1])}" y2="${yB3}" stroke="${gc}" stroke-width="${SW(1)}"/>`;
+        xs.forEach(v=>{ const X=Sx(v); s+=`<line x1="${X}" y1="${yB3-5}" x2="${X}" y2="${yB3+5}" stroke="${gc}" stroke-width="${SW(1.4)}"/>`; });
+        gx2.forEach(v=>{ const X=Sx(v); s+=`<line x1="${X}" y1="${pad+DW}" x2="${X}" y2="${yB3-5}" stroke="${gc}" stroke-width="${SW(.5)}" stroke-dasharray="${SW(2)} ${SW(4)}" opacity=".5"/>`; });
         for(let k=0;k<xs.length-1;k++){ const g=rr(xs[k+1]-xs[k]); if(g>0.005)
-          s+=`<text x="${Sx((xs[k]+xs[k+1])/2)}" y="${yB3-8}" text-anchor="middle" font-size="14" font-weight="600" fill="${gc}">${dfmt(g)}</text>`; }
-        s+=`<text x="${Sx(xs[0])-10}" y="${yB3+5}" text-anchor="end" font-size="13" fill="${gc}">หูแขวน ${ghX.length} จุด</text>`; }
+          s+=`<text x="${Sx((xs[k]+xs[k+1])/2)}" y="${yB3-G(8)}" text-anchor="middle" font-size="${FS(14)}" font-weight="600" fill="${gc}">${dfmt(g)}</text>`; }
+        s+=`<text x="${Sx(xs[0])-10}" y="${yB3+5}" text-anchor="end" font-size="${FS(13)}" fill="${gc}">หูแขวน ${ghX.length} จุด</text>`; }
       if(gy2.length){ const ys3=uniq([-DW/2, ...gy2, DW/2]), xL3=_rowX(_k);
-        s+=`<line x1="${xL3}" y1="${Sy(ys3[0])}" x2="${xL3}" y2="${Sy(ys3[ys3.length-1])}" stroke="${gc}" stroke-width="1"/>`;
-        ys3.forEach(v=>{ const Y=Sy(v); s+=`<line x1="${xL3-5}" y1="${Y}" x2="${xL3+5}" y2="${Y}" stroke="${gc}" stroke-width="1.4"/>`; });
-        gy2.forEach(v=>{ const Y=Sy(v); s+=`<line x1="${xL3+5}" y1="${Y}" x2="${pad}" y2="${Y}" stroke="${gc}" stroke-width=".5" stroke-dasharray="2 4" opacity=".5"/>`; });
+        s+=`<line x1="${xL3}" y1="${Sy(ys3[0])}" x2="${xL3}" y2="${Sy(ys3[ys3.length-1])}" stroke="${gc}" stroke-width="${SW(1)}"/>`;
+        ys3.forEach(v=>{ const Y=Sy(v); s+=`<line x1="${xL3-5}" y1="${Y}" x2="${xL3+5}" y2="${Y}" stroke="${gc}" stroke-width="${SW(1.4)}"/>`; });
+        gy2.forEach(v=>{ const Y=Sy(v); s+=`<line x1="${xL3+5}" y1="${Y}" x2="${pad}" y2="${Y}" stroke="${gc}" stroke-width="${SW(.5)}" stroke-dasharray="${SW(2)} ${SW(4)}" opacity=".5"/>`; });
         for(let k=0;k<ys3.length-1;k++){ const g=rr(ys3[k+1]-ys3[k]); if(g>0.005)
-          s+=`<text x="${xL3-8}" y="${Sy((ys3[k]+ys3[k+1])/2)+4}" text-anchor="end" font-size="14" font-weight="600" fill="${gc}">${dfmt(g)}</text>`; } }
+          s+=`<text x="${xL3-G(8)}" y="${Sy((ys3[k]+ys3[k+1])/2)+4}" text-anchor="end" font-size="${FS(14)}" font-weight="600" fill="${gc}">${dfmt(g)}</text>`; } }
       USED.ghrow=1;
     }
   }
@@ -24376,7 +24611,7 @@ function bindCtx(){
     const id=ctxTarget; hideCtx();
     const a=btn.dataset.act;
     if(a==="showall"){ state.hidden=[]; render3D(false); renderList(); toast("แสดงทุกชิ้นแล้ว"); return; }
-    if(a==="shoppaper"){ try{ ShopPaper.open(); }catch(err){ console.error(err); toast("เปิดแบบผลิตไม่สำเร็จ"); } return; }
+    if(a==="shoppaper"){ try{ ShopPaper.open(cabSelKeys().length>1?{scope:"cab"}:null); }catch(err){ console.error(err); toast("เปิดแบบผลิตไม่สำเร็จ"); } return; }
     const b=state.boards.find(x=>x.id===id); if(!b)return;
     /* หมายเหตุ: เมนูที่ต้องใช้ตัวแปร b ต้องอยู่ "ใต้" บรรทัดบนนี้เสมอ
        ถ้าวางไว้ข้างบนจะเป็น temporal dead zone ของ const -> ReferenceError ทันทีที่กด (v7.10) */
@@ -24627,6 +24862,12 @@ function rotateBoard90(b){   // หมุน 90° CW (x,y)->(y,-x) · L<->W · �
     return n; });
   if(Array.isArray(b.pockets)) nb.pockets=b.pockets.map(p=>{ const n=Object.assign({},p); n.x=(p.y||0); n.y=-(p.x||0); n.w=(p.h||0); n.h=(p.w||0); return n; });
   if(Array.isArray(b.profile)) nb.profile=b.profile.map(p=>[p[1], -p[0]]);
+  /* v40.8: ค่าลดรายด้านต้องหมุนตามขอบไปด้วย — ขอบของ connector ถูกแมปใหม่แล้วข้างบน
+     ถ้าไม่หมุนตาม ตัวคิดระยะถ้วยบานพับจะไปหยิบค่าลดของขอบผิดด้านทันทีที่แผ่นถูกวางนอน
+     (x,y)->(y,-x): แกน X ใหม่ = แกน Y เดิม · แกน Y ใหม่ = แกน X เดิมกลับทิศ */
+  if(b._adjApplied){ const a=b._adjApplied;
+    nb._adjApplied={ l0:(+a.w0||0), l1:(+a.w1||0), w0:(+a.l1||0), w1:(+a.l0||0),
+                     dL:(+a.dW||0), dW:(+a.dL||0) }; }
   return nb;
 }
 /* ───────── ชิ้นวาดเอง (profile) → Pocket สำหรับ MPR ─────────
@@ -24773,7 +25014,7 @@ function boardToMPR(b, side){   // side=1/2 → เอาเฉพาะรู�
     if(side && opSide!==side) return;
     if(c.type==="hinge"){                                                  // บานพับ: รูถ้วย Ø35 + เดือยยึด เป็น BohrVert บนผิวบาน
       const _hs=hingeSpecOf(b);                                                       // v38.3
-      const cupOff=_hs.cupOffset, cupD=_hs.cupD, cupTi=_hs.cupDepth;
+      const cupOff=hingeCupOffOf(b,c.edge,_hs), cupD=_hs.cupD, cupTi=_hs.cupDepth;   // v40.8
       const dwD=_hs.dowelD, dwTi=_hs.dowelDepth, dwSp=_hs.dowelSpacing, dwOff=_hs.dowelOffset;
       const vert=(c.edge==="left"||c.edge==="right");                      // along the edge: left/right → Y axis · top/bottom → X axis
       along.forEach(a=>{ // cup center in 0..L / 0..W
@@ -24831,7 +25072,9 @@ function boardToMPR(b, side){   // side=1/2 → เอาเฉพาะรู�
     let XA,YA,WI;
     if(g.axis==="wid"){ XA=(g.pos||0)+L/2; YA=W/2+((o0-o1)/2); WI="-90"; }
     else { XA=L/2+((o0-o1)/2); YA=(g.pos||0)+W/2; WI="-180"; }
-    const RD=(g.end==="sq")?0:Math.max(g.r||((g.width||8)/2),0);
+    /* v41.3: ร่องรับแผ่นหลังต้องปลายเหลี่ยม — แผ่นหลังเป็นสี่เหลี่ยม ปลายร่องมนทำให้มุมแผ่นไม่ลงร่อง
+       ของเดิมไม่ได้ตั้ง end ไว้ จึงตกไปที่ค่าปริยาย ปลายมน R = ครึ่งความกว้างร่อง (ในไฟล์จริงออก RD=4.85) */
+    const RD=(g.back||g.end==="sq")?0:Math.max(g.r||((g.width||8)/2),0);
     P('<112 \\RechteckTasche\\'); P('WI="'+WI+'"'); P('??="rtasche=1 "');
     P('XA="'+mprNum(mx(XA))+'"'); P('YA="'+mprNum(YA)+'"');
     P('TI="'+mprNum(g.depth||5)+'"'); P('LA="'+mprNum(run)+'"'); P('BR="'+mprNum(g.width||8)+'"'); P('RD="'+mprNum(RD)+'"');
@@ -26972,12 +27215,21 @@ const ShopPaper = (function(){
   /* ---- scene boards ---- */
   function getBoards(){
     let bs=state.boards.filter(b=>!(state.hidden&&state.hidden.includes(b.id))&&!b._virtual);
-    if(S.scope==="cab" && state.selectedId){
-      const sel=selBoard();
-      if(sel && sel.cabInst!=null){ const g=bs.filter(b=>b.cabInst===sel.cabInst); if(g.length) return g; }
+    if(S.scope==="cab"){
+      /* v40.1: รับหลายใบแล้ว — รายการฝั่งซ้ายเลือกด้วย Shift/Ctrl ได้
+         ของเดิมอ่านจากชิ้นที่เลือกอยู่ตัวเดียว จึงได้ตู้ใบเดียวเสมอ */
+      const keys=cabSelKeys();
+      if(keys.length){
+        const set=new Set(cabGroups().filter(g=>keys.indexOf(String(g.key))>=0)
+          .flatMap(g=>g.boards.map(b=>b.cabInst)).filter(v=>v!=null).map(String));
+        if(set.size){ const g2=bs.filter(b=>set.has(String(b.cabInst))); if(g2.length) return g2; }
+      }
+      if(state.selectedId){ const sel=selBoard();
+        if(sel && sel.cabInst!=null){ const g=bs.filter(b=>b.cabInst===sel.cabInst); if(g.length) return g; } }
     }
     return bs;
   }
+  function scopeLabel(){ const n=cabSelKeys().length; return n>1?("ตู้ที่เลือก ("+n+" ใบ)"):"ตู้ที่เลือก"; }
   function sceneBBox(bs){ let mn=[1e9,1e9,1e9],mx=[-1e9,-1e9,-1e9];
     bs.forEach(b=>{ const d=wd(b),c=[b.x,b.y,b.z]; for(let a=0;a<3;a++){ mn[a]=Math.min(mn[a],c[a]-d[a]/2); mx[a]=Math.max(mx[a],c[a]+d[a]/2); }});
     return {mn,mx,dx:mx[0]-mn[0],dy:mx[1]-mn[1],dz:mx[2]-mn[2]}; }
@@ -27561,21 +27813,29 @@ const ShopPaper = (function(){
     let hp=null; try{ hp=hingeSpecOf(b); }catch(e){}
     if(!hp) return out;
     const n=(b.connectors||[]).filter(c=>c&&c.type==="hinge").reduce((a,c)=>a+(connCount(b,c)||0),0);
-    const win=Math.max(hp.cupOffset+hp.cupD/2+14, hp.dowelSpacing*0.62+14);
-    const padL=54,padR=54,padT=44,padB=48;
-    const sc=Math.min((bwx-padL-padR)/(win*1.15), (Ht-padT-padB)/Math.max(hp.dowelSpacing+hp.dowelD+16,hp.cupD+18), 3.2);
+    /* v40.8: ใช้ระยะเดียวกับที่เจาะจริง (หักค่าลดขอบของแบบบานแล้ว) ไม่ใช่เลขดิบจากสเปค */
+    const cOff=hingeCupOffOf(b,hingeMainEdge(b)||"left",hp);
+    /* v40.8: เดือยยึดอยู่ "ลึกเข้าไปจากถ้วย" ตามที่ตั้งค่าไว้ว่าเยื้องเข้าด้านใน
+       กล่องขยายเดิมวาดไว้ฝั่งขอบบาน = กลับด้านกับที่ผังหลักและไฟล์เจาะทำจริง */
+    const dIn=cOff+(hp.dowelD>0?hp.dowelOffset:0);
+    const win=Math.max(cOff, dIn)+Math.max(hp.cupD/2,hp.dowelD)+16;
+    const padL=58,padR=58,padT=52,padB=54;
+    const sc=Math.min((bwx-padL-padR)/win, (Ht-padT-padB)/Math.max(hp.dowelSpacing+hp.dowelD+16,hp.cupD+18), 3.2);
     const ex=gx+padL, cy=Y+padT+(Ht-padT-padB)/2;                 // ex = ขอบบาน
-    out+=`<line x1="${rnd1(ex)}" y1="${rnd1(cy-(Ht-padT-padB)/2-6)}" x2="${rnd1(ex)}" y2="${rnd1(cy+(Ht-padT-padB)/2+6)}" stroke="${INK}" stroke-width="1.8"/>`;
-    const cxp=ex+hp.cupOffset*sc;
+    out+=`<line x1="${rnd1(ex)}" y1="${rnd1(cy-(Ht-padT-padB)/2-4)}" x2="${rnd1(ex)}" y2="${rnd1(cy+(Ht-padT-padB)/2+4)}" stroke="${INK}" stroke-width="1.8"/>`;
+    const cxp=ex+cOff*sc;
+    if(hp.dowelD>0){ const dx2=ex+dIn*sc;
+      [-1,1].forEach(sg=>{ out+=`<circle cx="${rnd1(dx2)}" cy="${rnd1(cy+sg*hp.dowelSpacing/2*sc)}" r="${rnd1(Math.max(hp.dowelD/2*sc,2.5))}" fill="#fff" stroke="${INK}" stroke-width="1.2"/>`; });
+      out+=dimV(cy-hp.dowelSpacing/2*sc, cy+hp.dowelSpacing/2*sc, Math.min(dx2+26,gx+bwx-10), rnd1(hp.dowelSpacing)); }
     out+=`<circle cx="${rnd1(cxp)}" cy="${rnd1(cy)}" r="${rnd1(hp.cupD/2*sc)}" fill="#f2e7d8" stroke="${INK}" stroke-width="1.4"/>`;
-    if(hp.dowelD>0){ const dx2=ex+(hp.cupOffset-hp.dowelOffset)*sc;
-      [-1,1].forEach(sg=>{ out+=`<circle cx="${rnd1(dx2)}" cy="${rnd1(cy+sg*hp.dowelSpacing/2*sc)}" r="${rnd1(Math.max(hp.dowelD/2*sc,2))}" fill="#fff" stroke="${INK}" stroke-width="1.2"/>`; });
-      out+=dimV(cy-hp.dowelSpacing/2*sc, cy+hp.dowelSpacing/2*sc, dx2-30, rnd1(hp.dowelSpacing)); }
-    out+=dimH(ex,cxp,cy+hp.cupD/2*sc+30,rnd1(hp.cupOffset));
-    out+=`<text x="${rnd1(cxp)}" y="${rnd1(cy-hp.cupD/2*sc-12)}" text-anchor="middle" font-family="monospace" font-size="14" fill="${INK}">Ø${rnd1(hp.cupD)}</text>`;
+    out+=dimH(ex,cxp,cy+hp.cupD/2*sc+26,rnd1(cOff));
+    out+=`<text x="${rnd1(cxp)}" y="${rnd1(cy-hp.cupD/2*sc-10)}" text-anchor="middle" font-family="monospace" font-size="14" fill="${INK}">Ø${rnd1(hp.cupD)}</text>`;
     out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+17)}" font-family="'Sarabun',sans-serif" font-size="12.5" font-weight="700" fill="${INK}">บานพับ · ขยาย 1 ตัว (มี ${n} ตัว)${hp.key?(" · รุ่น "+esc(hp.key)):""}</text>`;
-    out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+31)}" font-family="'Sarabun',sans-serif" font-size="11.5" fill="${THIN}">ถ้วย Ø${rnd1(hp.cupD)} ลึก ${rnd1(hp.cupDepth)} · ศูนย์ถ้วยจากขอบ ${rnd1(hp.cupOffset)}${hp.dowelD>0?(" · เดือย Ø"+rnd1(hp.dowelD)+" ลึก "+rnd1(hp.dowelDepth)+" ห่าง "+rnd1(hp.dowelSpacing)+" เยื้องเข้า "+rnd1(hp.dowelOffset)):""}</text>`;
-    out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+Ht-9)}" font-family="'Sarabun',sans-serif" font-size="11" fill="${THIN}">ทุกตัวเหมือนกัน · ระยะศูนย์ถ้วยตามยาวบานดูที่แถวสีม่วงในผัง</text>`;
+    /* v40.8: บรรทัดสเปคยาวเกินกล่องแล้วล้นออกไปทับของข้าง ๆ — ตัดเป็นสองบรรทัดตายตัว */
+    out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+31)}" font-family="'Sarabun',sans-serif" font-size="11.5" fill="${THIN}">ถ้วย Ø${rnd1(hp.cupD)} ลึก ${rnd1(hp.cupDepth)} · ศูนย์ถ้วยจากขอบแผ่น ${rnd1(cOff)}${(cOff!==rnd1(hp.cupOffset))?(" (สเปค "+rnd1(hp.cupOffset)+" จากขอบบาน)"):""}</text>`;
+    if(hp.dowelD>0)
+      out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+45)}" font-family="'Sarabun',sans-serif" font-size="11.5" fill="${THIN}">เดือย Ø${rnd1(hp.dowelD)} ลึก ${rnd1(hp.dowelDepth)} · ห่าง ${rnd1(hp.dowelSpacing)} · ลึกเข้าจากถ้วยอีก ${rnd1(hp.dowelOffset)}</text>`;
+    out+=`<text x="${rnd1(gx+9)}" y="${rnd1(Y+Ht-9)}" font-family="'Sarabun',sans-serif" font-size="11" fill="${THIN}">ทุกตัวเหมือนกัน · ระยะตามยาวบานดูแถวสีม่วงในผัง</text>`;
     return out;
   }
   function detailColumn(b,gs,hasGH,hasHG,X,Y,Wd,Ht){
@@ -27875,6 +28135,7 @@ const ShopPaper = (function(){
   function refresh(){ const v=$("spView"); if(!v)return;
     const bs=getBoards();
     if(!bs.length){ v.innerHTML='<div style="color:var(--ink-faint);padding:40px">ยังไม่มีชิ้นงานในฉาก — สร้างกล่องโค้ง หรือ import ตู้เข้ามาก่อน</div>'; return; }
+    { const sc=$("spScopeCab"); if(sc) sc.textContent=scopeLabel(); }   // v40.1
     const sh=build(); if(!sh)return;
     /* โชว์ให้ครบเท่าที่จะพิมพ์จริง — เดิมมีแค่ 2 แท็บ แต่พิมพ์ออกมา 6 หน้า */
     const ord=(sh._order||["summary","flat"]).filter(k=>sh[k]);
@@ -27930,7 +28191,10 @@ const ShopPaper = (function(){
     bind("spPrintBtn",EX.print); bind("spSvgBtn",EX.dlSVG); bind("spPngBtn",EX.dlPNG); bind("spRefreshBtn",refresh);
     ["spProject","spType","spBy"].forEach(id=>{bind(id,refresh,"oninput");});
   }
-  function open(){ $("spModal").classList.add("show"); refresh(); }
+  function open(opt){
+    if(opt&&opt.scope){ S.scope=opt.scope; S.sheet=null;
+      document.querySelectorAll("#spModal .sp-scope").forEach(x=>x.classList.toggle("on",x.dataset.scope===S.scope)); }
+    $("spModal").classList.add("show"); refresh(); }
   return { init, open, build };
 })();
 
@@ -29190,7 +29454,7 @@ const CurvedShelf = (function(){
       <div class="cb-fld"><label>ขอบเขต</label></div>
       <div class="sp-seg">
         <button class="sp-scope on" data-scope="scene">ทั้งฉาก</button>
-        <button class="sp-scope" data-scope="cab">ตู้ที่เลือก</button>
+        <button class="sp-scope" data-scope="cab" id="spScopeCab">ตู้ที่เลือก</button>
       </div>
       <div class="cb-fld"><label>พิมพ์เฉพาะ</label></div>
       <div class="sp-seg">
