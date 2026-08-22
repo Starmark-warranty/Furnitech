@@ -1649,7 +1649,7 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"1.019", build:"2026-08-21/drag-autoscroll",
+  name:"StarNexus Cabinet", version:"1.026", build:"2026-08-21/box-parts-selectable",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   /* ───────── เริ่มนับเวอร์ชันใหม่ที่ 1.001 (21/08/2026) ─────────
      ของเดิมนับมาถึง 42.1 แล้ววิ่งเป็นทศนิยมสองชั้นซึ่งอ่านลำดับยาก
@@ -1657,6 +1657,13 @@ const APP_META={
      ประวัติเก่าเก็บไว้ทั้งหมดตามเลขเดิม ไม่ไล่เขียนใหม่ เพราะเลขในนั้นถูกอ้างถึงไปแล้ว
      รายการที่อยู่ใต้ 1.001 ลงไปจึงเป็นเลขชุดเก่า อ่านต่อกันได้ตามวันที่ */
   changelog:[
+    ["1.026","2026-08-21","FIX คลิกพื้นกล่องลิ้นชักหรือหลังกล่องแล้วลิ้นชักไถออก เลือกชิ้นไปแก้ไม่ได้ — ชิ้นในกล่องลิ้นชักถือธงชุดลิ้นชักเหมือนหน้าลิ้นชัก เพราะต้องเลื่อนไปด้วยกัน แต่ตัวรับคลิกในโหมดเปิดบานใช้ธงนั้นเป็นเกณฑ์ตรง ๆ คลิกเพื่อจะเลือกไปแก้จึงกลายเป็นสั่งลิ้นชักไถออกแทน · และเลือกชิ้นพวกนั้นไม่ได้เลยตราบใดที่ยังอยู่ในโหมดเปิดบาน ต้องปิดโหมดก่อนทุกครั้ง ซึ่งไม่มีใครเดาออก · ตัวสั่งเปิดปิดควรเป็นสิ่งที่มองเห็นจากด้านหน้า คือหน้าบานกับหน้าลิ้นชัก ไม่ใช่ของข้างใน · ตอนนี้พื้นกล่อง หลังกล่อง และแผงเหล็กข้าง กลับไปเลือกได้ตามปกติ ส่วนการเลื่อนออกยังเลื่อนทั้งชุดเหมือนเดิมทุกประการ · คำสั่งเปิดทั้งตู้ด้วย Shift ใช้เกณฑ์เดียวกัน"],
+    ["1.025","2026-08-21","เก็บกวาดตัวเติมค่าตั้งต้น เรียกที่เดียวพอ — ตอนไล่หาสาเหตุที่ช่องมือจับไม่ขึ้น ผมใส่ตัวเติมไว้สองที่ทั้งในตัวโหลดตั้งค่าและในลำดับเปิดโปรแกรม เผื่อว่าที่หนึ่งไม่ทำงาน · สาเหตุจริงคือธง ทำครั้งเดียวแล้วจำไว้ ไม่ใช่ลำดับการเรียก พอแก้ธงแล้วตัวสำรองก็ไม่มีประโยชน์ เหลือไว้มีแต่ทำให้คนอ่านโค้ดสงสัยว่าทำไมต้องเรียกซ้ำ · เหลือที่เดียวคือในตัวโหลดตั้งค่า ซึ่งถูกต้องกว่าเพราะการดึงค่าจากคลาวด์ทับก็วิ่งผ่านทางนั้นเหมือนกัน · ต้นทุนของตัวเติมวัดได้ 0.001 มิลลิวินาทีต่อครั้ง และเขียนลงที่เก็บเฉพาะตอนค่าเปลี่ยนจริงเท่านั้น"],
+    ["1.024","2026-08-21","FIX สูตรชุดยึดหัวท้ายไม่มีให้เลือกในกล่องใส่เดือย — ผมสร้างสูตรตอนกดคลิกขวาใส่ชุดเท่านั้น ใครยังไม่เคยกดคลิกขวาก็เปิดกล่องมาแล้วไม่เจอ ซึ่งดูเหมือนสูตรหาย ทั้งที่ไม่เคยถูกสร้าง · ตอนนี้สร้างตั้งแต่เปิดโปรแกรม และสร้างซ้ำหลังดึงค่าจากคลาวด์ด้วย · อัปเดตทับให้เองเมื่อเปลี่ยนระยะที่ตั้งไว้ และบันทึกเฉพาะตอนที่ค่าเปลี่ยนจริง ไม่เขียนทับไฟล์ตั้งค่าทุกครั้งที่เปิด · บอกใน console ว่าใส่หรืออัปเดตสูตรไปเป็นระยะเท่าไหร่ จะได้ตรวจได้ว่าตรงกับที่ตั้งใจ"],
+    ["1.023","2026-08-21","เปลี่ยนระยะตั้งต้นของชุดยึดหัวท้ายตามที่ใช้จริงหน้างาน — เดือยเริ่มที่ 50 จากปลาย มินิฟิกถัดเข้ามาอีก 32 รวมเป็น 82 · เดิมตั้งไว้ 19 กับ 51 ซึ่งยืมมาจากระยะของคานที่หน้ากว้างแคบ ไม่ใช่ระยะที่ใช้กับเสาแบ่งและชั้น · สูตรที่ระบบเขียนเองถูกอัปเดตทับให้ตอนใส่ชุดครั้งถัดไป ไม่ต้องไปแก้เอง · ปรับได้ที่ค่า symFixIns กับ symFixGap ถ้างานไหนใช้ระยะอื่น และเพิ่มเข้าค่าตั้งต้นของโปรแกรมแล้ว"],
+    ["1.022","2026-08-21","FIX สูตรชุดยึดหัวท้ายที่เพิ่งเพิ่มไปเขียนผิดไวยากรณ์ จุดจึงกองอยู่ปลายเดียว — ในภาษาสูตรนี้เครื่องหมายทวิภาคคือค่าสะสมจากปลายเดียวกัน ต้องมีเลขหนึ่งคั่นถึงจะข้ามไปนับจากปลายอีกข้าง และเลขหนึ่งอีกตัวที่ว่างคือจุดกลางแบ่งเท่า ๆ กัน · ที่เขียนไว้เป็น 19 ทวิภาค 19 จึงได้ 19 กับ 38 ไม่ใช่หัวท้าย และมินิฟิก 51 ทวิภาค 51 ได้ 51 กับ 102 กองอยู่ปลายเดียวกันทั้งคู่ ตรงกับที่เห็นในกล่อง · แก้เป็น 19 ทวิภาค 1 ทวิภาค 19 สำหรับสองจุด และเติม 1 อีกตัวสำหรับจุดกลาง · คานยาว 862 ตอนนี้ได้เดือย 19 กับ 431 กับ 843 และมินิฟิก 51 กับ 811 · สูตรที่ระบบเขียนเองถูกอัปเดตทับได้เมื่อสูตรเปลี่ยน ของที่ผู้ใช้สร้างเองชื่ออื่นไม่ถูกแตะ · FEAT หัวถ้วยมินิฟิกหันเข้าในตู้ให้เอง รูถ้วย Ø15 เป็นรูโต เจาะผิดด้านแล้วไปโผล่ผิวที่มองเห็น โดยเฉพาะคานบังไฟซึ่งด้านนอกคือด้านที่คนมองเห็นตลอดเวลา · เลือกจากทิศจริงของผิวเทียบกับทิศไปหาใจกลางตู้ ไม่ได้เดาจากชนิดชิ้น"],
+    ["1.021","2026-08-21","FEAT คานบังไฟวางทับชั้นได้แล้ว ขอบบนคานเสมอผิวบนชั้น ความสูงคานเท่าเดิม ชนแผ่นข้างเหมือนเดิม — สองโหมดเดิมคือใต้ชั้นกับบนชั้น ซึ่งคานจะอยู่พ้นเนื้อชั้นเสมอ แต่คานบังไฟต้องคร่อมขอบหน้าของชั้นที่ติดไฟ เพื่อบังตัวรางกับแสงที่ยิงออกมาตรง ๆ · เดิมทำได้ทางเดียวคือวางใต้ชั้นแล้วมานั่งใส่ค่าขยับติดลบให้มันเลื่อนขึ้นไปทับ ซึ่งต้องคำนวณเองทุกครั้งและพังทันทีที่ความหนาชั้นหรือหน้ากว้างคานเปลี่ยน · โหมดใหม่ยึดกับผิวบนชั้นโดยตรง เปลี่ยนความหนาชั้นหรือหน้ากว้างคานแล้วยังเสมอกันเสมอ · ค่าขยับยังใช้ได้ตามปกติ บวกคือเลื่อนคานขึ้น · ตัวซ่อมการอ้างอิงตอนชั้นหายก็รู้จักโหมดนี้ด้วย จึงเล็งชั้นเดิมเจอเมื่อเปิดไฟล์กลับมา"],
+    ["1.020","2026-08-21","FEAT ชุดยึดหัวท้ายเท่ากัน เรียกจากคลิกขวาได้ในคำสั่งเดียว — ชุดเดิมให้เดือยกับมินิฟิกใช้สูตรเดียวกัน จุดจึงเรียงสลับกันไปตามความยาว ประกอบจริงต้องดูว่าฝั่งไหนขึ้นก่อน เพราะหน้ากับหลังของแผ่นไม่เหมือนกัน สลับทีเดียวเจาะผิดทั้งใบ · ชุดใหม่จัดให้สมมาตรจากปลายทั้งสองข้าง อ่านจากปลายไหนก็เห็นลำดับเดียวกัน จึงสลับหน้าหลังไม่ได้ · เดือยปลายละหนึ่งจุดที่ระยะร่นจากขอบ บวกจุดกลางเมื่อความยาวถึงเกณฑ์ · มินิฟิกปลายละหนึ่งจุด ถัดจากเดือยเข้ามาตามระยะที่ตั้ง ตั้งต้น 32 · จุดกลางมีแต่เดือย ไม่มีมินิฟิก เพราะกลางแผ่นไม่ต้องรับแรงดึง แค่กันบิด · สร้างสูตรสองบรรทัดให้เองถ้ายังไม่มี แก้ทีหลังได้ที่ตั้งค่า สูตรเดือย · FEAT ใส่แล้วเชื่อมเดือยให้ทันที ไม่ต้องไปกดเชื่อมอีกรอบ ซึ่งเป็นขั้นที่ลืมกันประจำแล้วได้ไฟล์เจาะที่ไม่มีรูคู่ · FEAT ถอดชุดยึดออกได้จากคลิกขวาเช่นกัน ลบทั้งตัวเชื่อมและรูคู่ที่มันเคยยิงไว้บนแผ่นอื่น ลบตัวเชื่อมอย่างเดียวจะเหลือรูค้างที่ไม่มีอะไรมาเข้า"],
     ["1.019","2026-08-21","FIX ลากรายการแล้วจอไม่เลื่อนตาม — ระหว่างลาก เบราว์เซอร์ไม่ส่งเหตุการณ์ล้อเมาส์ให้ กล่องที่มีแถบเลื่อนจึงค้างอยู่กับที่ ลากของจากท้ายลิสต์ไปวางบนสุด หรือลากเข้าโฟลเดอร์ที่อยู่นอกจอ จึงทำไม่ได้เลย ต้องปิดกล่องแล้วเลื่อนเองก่อนค่อยเปิดใหม่ · ตอนนี้จับตำแหน่งตัวชี้ระหว่างลาก ใกล้ขอบบนหรือขอบล่างเมื่อไหร่ก็ค่อย ๆ เลื่อนให้ ยิ่งใกล้ขอบยิ่งเร็ว · ใช้ลูปวาดภาพ ไม่ใช่รอเหตุการณ์ลากทีละครั้ง จึงเลื่อนต่อเนื่องแม้ค้างเมาส์นิ่งอยู่ที่ขอบ · ใส่ให้ทั้งรายการซ้ายและฟอร์มขวาของ Element Manager และต้นไม้ในหน้า Variables ซึ่งลากจัดลำดับได้เหมือนกัน"],
     ["1.018","2026-08-21","จัดบล็อกบานพับในแผงขวาให้อยู่ด้วยกัน — แถวเลือกด้านบานพับ ซ้าย/ขวา กับบล็อกขยับหลบชั้นที่ใส่ระยะรายตัว เป็นเรื่องเดียวกันทั้งคู่ แต่ถูกวางคนละที่ในแผง ห่างกันหลายช่วงจอ ต้องเลื่อนขึ้นลงสลับไปมาตอนตั้งค่าบานเดียว · ย้ายบล็อกขยับมาต่อท้ายแถวเลือกด้านทันที ทำตอนวาดเสร็จ ไม่ต้องรื้อลำดับในเทมเพลตซึ่งจะไปกระทบบล็อกอื่นที่แทรกอยู่ระหว่างกลาง"],
     ["1.017","2026-08-21","FEAT ซ่อนคำอธิบายในแผงขวาได้แล้ว ตั้งต้นซ่อนไว้ — แผงนี้มีบล็อกอธิบายยาว ๆ แทรกอยู่แทบทุกช่อง ซึ่งจำเป็นตอนใช้ครั้งแรก แต่พอใช้เป็นแล้วมันดันช่องกรอกจริงตกไปอยู่ล่างจอ ต้องเลื่อนหาทุกครั้ง บางช่องมีคำอธิบายยาวกว่าตัวช่องเองหลายเท่า · ปุ่ม ? คำอธิบาย ที่หัวแผง กดกางกลับมาเมื่อไหร่ก็ได้ จำค่าไว้ข้ามการเปิดโปรแกรม · ไม่ลบทิ้ง เพราะข้อความพวกนี้คือที่เดียวที่บอกกติกาของช่องนั้น ๆ เช่นความหมายของโหมดขอบบานหรือรูปแบบสูตร · เลือกบล็อกที่จะซ่อนจากลักษณะข้อความ คือตัวเล็ก ไม่มีช่องกรอกอยู่ข้างใน และยาวเกินสี่สิบห้าตัวอักษร ไม่ได้ไล่ติดป้ายทีละบล็อก ของที่เพิ่มเข้ามาทีหลังจึงถูกซ่อนตามไปด้วยเอง"],
@@ -2450,6 +2457,7 @@ const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, d
   k40BotMinusW:35, k40BackMinusW:38, k40BotMinusD:10, k40DrillRear:41, k40DrillH:37,
   k40FrontDrill:"37,32,5,12 ; -37,32,5,12",
   k40Map:"350:K40-350, 400:K40-400, 450:K40-450, 500:K40-500", slideMap:"250:FITDW00388, 300:FITDW00389, 350:FITDW00369, 400:FITDW00375, 450:FITDW00390, 500:FITDW00391",
+  symFixIns:50, symFixGap:32, symFixMidMin:600,     // v1.023: ชุดยึดหัวท้าย — เดือย 50 · มินิฟิก 82 · มีจุดกลางเมื่อยาว ≥ 600
   dowelSizeMode:true, dowelBackRelease:0, dowelFlipFront:false, dowelSizeRule:DEF_DOWEL_RULE,
   dowelFormulas:[{name:"มาตรฐาน",rule:DEF_DOWEL_RULE}], dowelFormulaActive:"มาตรฐาน", mfFormulaActive:"มาตรฐาน", cloudAutoSave:true,
   backset:16, backGroove:true, backOver:4.5, backClear:0.5,
@@ -2925,8 +2933,9 @@ function healRuleRefs(boards){
       return (best&&bd<=(tol||2))? best : null; };
     if(r.refShelf__lost){ delete r.refShelf__lost;
       const gap=Math.max(r.shelfGap||0,0);
-      const want=(r.shelfSide==="above")? (b.y-d[1]/2-gap) : (b.y+d[1]/2+gap);
-      const hit=pick(want, x=>{ const dd=worldDims(x); return (r.shelfSide==="above")? (x.y+dd[1]/2) : (x.y-dd[1]/2); });
+      /* v1.021: โหมดทับชั้น ขอบบนคานอยู่ที่ผิวบนชั้นพอดี จึงเล็งด้วยผิวบนของคานเอง */
+      const want=(r.shelfSide==="over")? (b.y+d[1]/2) : (r.shelfSide==="above")? (b.y-d[1]/2-gap) : (b.y+d[1]/2+gap);
+      const hit=pick(want, x=>{ const dd=worldDims(x); return (r.shelfSide==="above")? (x.y+dd[1]/2) : (x.y+dd[1]/2); });
       if(hit) r.refShelf=hit.id; else delete r.refShelf; }
     if(r.spanShelf__lost){ delete r.spanShelf__lost;
       const hit=pick(b.x, x=>x.x, 3) && pick(d[0], x=>worldDims(x)[0], 3);
@@ -10905,12 +10914,18 @@ function bindPointer(dom){
          ถ้าไม่แปลงกลับเป็นบานเจ้าของ จะกดเปิดบานนั้นไม่ได้เลย */
       if(tb&&(tb._frameOwner||tb._pullOwner||tb._ledOwner)){   // v12.0: รางไฟก็เป็นชิ้นลูกเหมือนกัน
         const own=state.boards.find(x=>x.id===(tb._frameOwner||tb._pullOwner||tb._ledOwner)); if(own) tb=own; }
-      const mv=tb&&(tb._dg||(tb._door&&!tb._box&&!tb._panel&&!tb._dummy));
+      /* ───────── v1.026: ในโหมดเปิดบาน ให้เฉพาะ "หน้าบาน/หน้าลิ้นชัก" เป็นตัวสั่งเปิดปิด ─────────
+         ชิ้นในกล่องลิ้นชัก (พื้นกล่อง หลังกล่อง แผงเหล็กข้าง) ถือธงชุดลิ้นชักเหมือนกัน
+         เดิมจึงนับเป็นตัวสั่งเปิดปิดด้วย คลิกเพื่อจะเลือกไปแก้ กลายเป็นสั่งลิ้นชักไถออกแทน
+         และเลือกชิ้นพวกนั้นไม่ได้เลยตราบใดที่ยังอยู่ในโหมดเปิดบาน ต้องปิดโหมดก่อนทุกครั้ง
+         ตัวสั่งเปิดปิดควรเป็นสิ่งที่มองเห็นจากด้านหน้า ซึ่งก็คือหน้าลิ้นชัก ไม่ใช่ของข้างใน
+         ของข้างในกลับไปเลือกได้ตามปกติ ส่วนการเลื่อนออกยังเลื่อนทั้งชุดเหมือนเดิม */
+      const mv=tb&&!tb._box&&!tb._panel&&!tb._dummy&&(tb._dg||tb._door);
       if(mv){ const key=tb._dg?((tb.cabInst||"")+"|dg:"+tb._dg):tb.id;   // v9.01: ผูกกับตู้ใบนั้น
         state.doorPick=state.doorPick||[];
         if(e.shiftKey){                                   // Shift = เปิดทั้งตู้ใบนั้นรวดเดียว
           const keys=[]; state.boards.forEach(x=>{ if(x.cabInst!==tb.cabInst) return;
-            if(!(x._dg||(x._door&&!x._box&&!x._panel&&!x._dummy))) return;
+            if(!(!x._box&&!x._panel&&!x._dummy&&(x._dg||x._door))) return;
             const k2=x._dg?((x.cabInst||"")+"|dg:"+x._dg):x.id; if(keys.indexOf(k2)<0) keys.push(k2); });
           const allOn=keys.every(k2=>state.doorPick.indexOf(k2)>=0);
           state.doorPick=allOn ? state.doorPick.filter(k2=>keys.indexOf(k2)<0)
@@ -18639,6 +18654,7 @@ async function loadSettings(){ const s=await lsGet("furnitech:settings",null);
   ensureSampleK40();      // ซีรีส์ราง Kitchen 4.0 (สีเดียว)
   if(!Array.isArray(settings.xmlMap)) settings.xmlMap=DEF_SETTINGS.xmlMap.map(x=>({...x}));
   try{ ensurePullVarsOnce(); }catch(e){ console.error(e); }   // v1.011: ช่องมือจับครบทุกบานตั้งแต่เปิดโปรแกรม
+  try{ ensureSymFixFormulas(settings.symFixIns,settings.symFixGap,settings.symFixMidMin); }catch(e){ console.error(e); }   // v1.024
   if(!Array.isArray(settings.dowelFormulas)||!settings.dowelFormulas.length) settings.dowelFormulas=[{name:"มาตรฐาน",rule:settings.dowelSizeRule||DEF_DOWEL_RULE}];
   settings.dowelFormulas=settings.dowelFormulas.filter(f=>f&&f.name).map(f=>({name:String(f.name),rule:String(f.rule||DEF_DOWEL_RULE)}));
   if(!settings.dowelFormulas.length) settings.dowelFormulas=[{name:"มาตรฐาน",rule:DEF_DOWEL_RULE}];
@@ -20255,7 +20271,16 @@ function deriveRail(rule,f,inst){
   let vFrom=(rule.refV&&rule.refV.from)||"บน", vOff=Math.max((rule.refV&&rule.refV.off)||0,0);
   let shelfRef=null;
   if(rule.refShelf){ const sh=refBoard(rule.refShelf); if(sh){ const sh1=worldDims(sh)[1]; const gap=Math.max(rule.shelfGap||0,0);
-    if(rule.shelfSide==="above"){ shelfRef=sh.y+sh1/2+gap; vFrom="ล่าง"; } else { shelfRef=sh.y-sh1/2-gap; vFrom="บน"; } } }
+    /* ───────── v1.021: คานบังไฟ "ทับชั้น" ─────────
+       สองโหมดเดิมคือวางใต้ชั้นหรือบนชั้น ซึ่งคานจะอยู่พ้นเนื้อชั้นเสมอ
+       คานบังไฟต้องคร่อมขอบหน้าของชั้นที่ติดไฟ เพื่อบังตัวรางกับแสงที่ยิงออกมาตรง ๆ
+       เดิมทำได้ทางเดียวคือวางใต้ชั้นแล้วมานั่งใส่ค่าขยับติดลบให้มันเลื่อนขึ้นไปทับ
+       ซึ่งต้องคำนวณเองทุกครั้งและพังทันทีที่ความหนาชั้นหรือหน้ากว้างคานเปลี่ยน
+       โหมดนี้ยึด "ขอบบนคานเสมอผิวบนชั้น" ความสูงคานเท่าเดิม ชนแผ่นข้างเหมือนเดิม
+       ค่าขยับยังใช้ได้ตามปกติ บวก = เลื่อนคานขึ้น */
+    if(rule.shelfSide==="over"){ shelfRef=sh.y+sh1/2+(+rule.shelfGap||0); vFrom="บน"; }
+    else if(rule.shelfSide==="above"){ shelfRef=sh.y+sh1/2+gap; vFrom="ล่าง"; }
+    else { shelfRef=sh.y-sh1/2-gap; vFrom="บน"; } } }
   /* v8.27: วางคาน "กึ่งกลางช่องไฟระหว่างสองชิ้น" — เก็บ id ทั้งคู่ไว้ คานจึงตามไปเองเมื่อบานขยับ/ตู้เปลี่ยนขนาด
      refShelf = ชิ้นบน · refShelfB = ชิ้นล่าง · จุดอ้าง = กึ่งกลางระหว่างขอบล่างของตัวบน กับ ขอบบนของตัวล่าง */
   if(rule.refShelfB){ const sa=refBoard(rule.refShelf), sb=refBoard(rule.refShelfB);
@@ -22434,6 +22459,84 @@ function swapRailFasteners(b){        // v7.38: สลับ เดือย ⇄
   toast("สลับตำแหน่ง เดือย ⇄ มินิฟิก ที่คานนี้ · เดือยอยู่ "+(r.swap?"ปลายใกล้":"ปลายไกล")
     +" ("+r.at[r.swap?0:1]+" มม.) · มินิฟิกอยู่ "+(r.swap?"ปลายไกล":"ปลายใกล้")+" ("+r.at[r.swap?1:0]+" มม.) · เจาะรูคู่ใหม่ "+r.holes+" จุด");
 }
+/* ═════════ v1.020: ชุดยึด "หัวท้ายเท่ากัน" — เดือยนำ มินิฟิกตาม ═════════
+   ปัญหาของชุดเดิม: เดือยกับมินิฟิกใช้สูตรเดียวกัน จุดจึงเรียงสลับกันไปตามความยาว
+   ประกอบจริงต้องดูว่าฝั่งไหนขึ้นก่อน เพราะหน้ากับหลังของแผ่นไม่เหมือนกัน สลับทีเดียวเจาะผิดทั้งใบ
+   ชุดนี้จัดให้สมมาตรจากปลายทั้งสองข้าง อ่านจากปลายไหนก็เห็นลำดับเดียวกัน จึงสลับหน้าหลังไม่ได้
+     · เดือย  = ปลายละหนึ่งจุด ที่ระยะร่นจากขอบ + จุดกลางถ้าความยาวพอ
+     · มินิฟิก = ปลายละหนึ่งจุด ถัดจากเดือยเข้ามาตามระยะที่ตั้ง (ตั้งต้น 32)
+   จุดกลางมีแต่เดือย ไม่มีมินิฟิก เพราะกลางแผ่นไม่ต้องรับแรงดึง แค่กันบิด
+   สูตรสองบรรทัดนี้ถูกใส่ให้เองถ้ายังไม่มี ผู้ใช้แก้ทีหลังได้ที่ตั้งค่า → สูตรเดือย */
+const SYMFIX_DOWEL="ชุดหัวท้าย · เดือย";
+const SYMFIX_MINI="ชุดหัวท้าย · มินิฟิก";
+function ensureSymFixFormulas(ins,gap,midMin){
+  ins=Math.max(+ins||19,1); gap=Math.max(+gap||32,1); midMin=Math.max(+midMin||600,1);
+  const F=getFormulas();
+  /* v1.022: สูตรพวกนี้ระบบเป็นคนเขียน จึงเขียนทับได้เมื่อสูตรเปลี่ยน
+     ของที่ผู้ใช้สร้างเองชื่ออื่นไม่ถูกแตะ · เปลี่ยนชื่อชุดแล้วจะกลายเป็นของผู้ใช้ทันที */
+  const put=(nm,txt)=>{ let f=F.find(x=>x&&x.name===nm);
+    if(!f){ f={name:nm,rule:txt,auto:1}; F.push(f); } else if(f.auto) f.rule=txt; return f; };
+  /* ───────── ไวยากรณ์สูตร: ":" คือค่าสะสม "จากปลายเดียวกัน" ─────────
+     ต้องมี 1 คั่นถึงจะข้ามไปนับจากปลายอีกข้าง และ 1 ที่ว่างอีกตัวคือจุดกลางแบ่งเท่า ๆ กัน
+     19 : 19        = 19 แล้วบวกอีก 19 → 19, 38   (กองอยู่ปลายเดียว ผิด)
+     19 : 1 : 19    = หัว 19 · ท้าย 19            (สองจุด ถูก)
+     19 : 1 : 1 : 19= หัว 19 · กลาง · ท้าย 19     (สามจุด ถูก) */
+  put(SYMFIX_DOWEL,
+    [ (2*ins+40)+"-"+(midMin-0.01)+" : "+ins+" : 1 : "+ins,
+      midMin+"-9999 : "+ins+" : 1 : 1 : "+ins ].join("\n"));
+  put(SYMFIX_MINI,
+    [ (2*(ins+gap)+40)+"-9999 : "+(ins+gap)+" : 1 : "+(ins+gap) ].join("\n"));
+  try{ lsSet("furnitech:settings",settings); }catch(e){}
+}
+/* ใส่ชุดยึดให้ชิ้นที่เลือก — เลือกขอบเอง หรือให้ระบบเดาจากทิศของชิ้น
+   ใส่เสร็จเชื่อมเดือยให้ทันที ไม่ต้องไปกดเชื่อมอีกรอบ ซึ่งเป็นขั้นที่ลืมกันประจำ */
+function applySymFasteners(b,opt){
+  if(!b) return null;
+  opt=opt||{};
+  /* v1.023: ระยะตั้งต้นตามที่ใช้จริงหน้างาน — เดือยเริ่มที่ 50 มินิฟิกถัดเข้ามาอีก 32 = 82
+     ปรับได้ที่ settings.symFixIns / symFixGap ถ้างานไหนใช้ระยะอื่น */
+  const ins=Math.max(+opt.ins||+settings.symFixIns||50,1);
+  const gap=Math.max(+opt.gap||+settings.symFixGap||32,1);
+  const midMin=Math.max(+opt.midMin||+settings.symFixMidMin||600,1);
+  ensureSymFixFormulas(ins,gap,midMin);
+  const dia=Math.max(+opt.d||+settings.dowelD||8,1);
+  /* ขอบที่ใส่: แผ่นตั้ง (เสาแบ่ง/แผ่นข้าง) ยึดที่ปลายบน-ล่าง · แผ่นนอนยึดที่ปลายซ้าย-ขวา */
+  let edges=opt.edges;
+  if(!edges||!edges.length) edges=(b.orient==="side")?["top","bottom"]:["left","right"];
+  b.connectors=b.connectors||[];
+  /* ───────── v1.022: หัวถ้วยมินิฟิกหันเข้าในตู้ให้เอง ─────────
+     รูถ้วย Ø15 เป็นรูโต ถ้าเจาะผิดด้านมันไปโผล่ผิวที่มองเห็น โดยเฉพาะคานบังไฟ
+     ซึ่งด้านนอกคือด้านที่คนมองเห็นตลอดเวลา · เลือกผิวที่หันเข้าหาใจกลางตู้เสมอ
+     คิดจากทิศจริงของผิว เทียบกับทิศไปหาใจกลางตู้ ไม่ได้เดาจากชนิดชิ้น */
+  let mfFace=null;
+  try{ const grp=(state.boards||[]).filter(x=>x&&x.cabInst===b.cabInst&&!x._virtual&&!x._door);
+    if(grp.length){ let sx=0,sy=0,sz=0; grp.forEach(x=>{ sx+=x.x; sy+=x.y; sz+=x.z; });
+      const cx=sx/grp.length, cy=sy/grp.length, cz=sz/grp.length;
+      const nv=new THREE.Vector3(0,0,1).transformDirection(orientMatrix(b.orient,b.yaw));
+      const toC=new THREE.Vector3(cx-b.x, cy-b.y, cz-b.z);
+      mfFace=(nv.dot(toC)>=0)?"top":"bottom"; } }catch(e){}
+  edges.forEach(e=>{
+    b.connectors=b.connectors.filter(c=>!(c&&c.edge===e&&(c.type==="dowel"||c.type==="minifix")));
+    b.connectors.push({type:"dowel",  edge:e, d:dia, count:3, margin:ins,     sizeRule:true, formula:SYMFIX_DOWEL, _symfix:1});
+    b.connectors.push({type:"minifix",edge:e, d:dia, count:2, margin:ins+gap, sizeRule:true, formula:SYMFIX_MINI,  _symfix:1, face:(opt.face||mfFace||undefined)});
+  });
+  let holes=0;
+  try{ render3D(false); const m=drillMates(b); holes=(m&&m.added)||0; }catch(e){ console.error("symFix:",e); }
+  try{ render3D(false); renderList(); showInspector(); autosave(); commit(); }catch(e){}
+  return {edges:edges.slice(), holes, ins, gap};
+}
+/* ลบชุดยึดของชิ้นนี้ พร้อมรูคู่ที่มันเคยยิงไว้ — ลบตัวเชื่อมอย่างเดียวจะเหลือรูค้างบนแผ่นอื่น */
+function clearFastenersOf(b){
+  if(!b) return 0;
+  const n0=(b.connectors||[]).length;
+  b.connectors=(b.connectors||[]).filter(c=>!(c&&(c.type==="dowel"||c.type==="minifix")));
+  let killed=0;
+  state.boards.forEach(o=>{ if(!o.holes||!o.holes.length) return; const m=o.holes.length;
+    o.holes=o.holes.filter(h=>!(h&&h.src===b.id&&(h.dowel||h.mf||h.screw)&&!h.manual&&!h.pin));
+    killed+=m-o.holes.length; });
+  try{ render3D(true); renderList(); showInspector(); autosave(); commit(); }catch(e){}
+  return {conn:n0-(b.connectors||[]).length, holes:killed};
+}
 function applyRailFasteners(b,opt){
   const r=railFasteners(b,opt); if(!r) return null;
   let holes=0;
@@ -22450,7 +22553,7 @@ async function addRail(){
     {key:"railW",type:"text",label:"หน้ากว้างคาน (มม. · ใส่ $D7 ได้)"+cabNumHint(sel.cabInst),value:"70"},
     {key:"T",label:"หนา (มม.)",value:Math.round(f.T||16)},
     {key:"vRef",label:"อ้างแนวสูงจาก",type:"toggle",options:["ชิ้นที่เลือก (ชั้น/หน้าบาน)","กึ่งกลางช่องไฟใต้ชิ้นที่เลือก","กึ่งกลางช่องไฟเหนือชิ้นที่เลือก","บนสุดตู้","ล่างสุดตู้"],value:(sel.orient==="flat"&&!sel._door&&!sel._virtual)?"ชิ้นที่เลือก (ชั้น/หน้าบาน)":((sel._door&&!sel._box)?"กึ่งกลางช่องไฟใต้ชิ้นที่เลือก":"บนสุดตู้")},
-    {key:"shelfSide",label:"คานอยู่ (เทียบชิ้นที่เลือก)",type:"toggle",options:["ใต้ชิ้น","บนชิ้น"],value:"ใต้ชิ้น",showIf:c=>c.vRef==="ชิ้นที่เลือก (ชั้น/หน้าบาน)"},
+    {key:"shelfSide",label:"คานอยู่ (เทียบชิ้นที่เลือก)",type:"toggle",options:["ใต้ชิ้น","บนชิ้น","ทับชิ้น (ขอบบนคานเสมอผิวบนชั้น)"],value:"ใต้ชิ้น",showIf:c=>c.vRef==="ชิ้นที่เลือก (ชั้น/หน้าบาน)"},
     {key:"shelfGap",label:"ขยับจากจุดอ้าง (มม. · + = ขึ้น)",value:0,showIf:c=>(c.vRef||"").indexOf("ชิ้นที่เลือก")>=0},
     {key:"vOff",label:"ระยะร่นเข้า (มม.) · เมื่ออ้างบนสุด/ล่างสุดตู้",value:0,showIf:c=>(c.vRef||"").indexOf("สุดตู้")>=0},
     {key:"dRef",label:"อ้างแนวลึกจาก",type:"toggle",options:["ขอบหน้าชั้นที่เลือก","ขอบหลังชั้นที่เลือก","หน้าตู้","หลังตู้"],value:(sel.orient==="flat"&&!sel._door&&!sel._virtual)?"ขอบหน้าชั้นที่เลือก":"หน้าตู้"},
@@ -22463,7 +22566,8 @@ async function addRail(){
   const inCompart=(v.scope&&v.scope.indexOf("ในช่อง")>=0);
   const rule={ kind:"rail", orient:v.orient, railW:(/\$/.test(String(v.railW||""))?String(v.railW).trim():Math.max(+v.railW||70,5)), T:Math.max(v.T||16,3),
     refV:{from:(v.vRef==="ล่างสุดตู้"?"ล่าง":"บน"),off:Math.max(v.vOff||0,0)},
-    refShelf:((v.vRef||"").indexOf("ชิ้นที่เลือก")>=0?sel.id:undefined), shelfSide:(v.shelfSide==="บนชิ้น"?"above":"below"), shelfGap:(+v.shelfGap||0),
+    refShelf:((v.vRef||"").indexOf("ชิ้นที่เลือก")>=0?sel.id:undefined),
+    shelfSide:((v.shelfSide||"").indexOf("ทับ")>=0?"over":(v.shelfSide==="บนชิ้น"?"above":"below")), shelfGap:(+v.shelfGap||0),
     refDShelf:((v.dRef||"").indexOf("ชั้นที่เลือก")>=0?sel.id:undefined), dShelfEdge:((v.dRef||"").indexOf("ขอบหลัง")>=0?"back":"front"),
     refD:{from:((v.dRef==="หลังตู้")?"หลัง":"หน้า"),off:Math.max(v.dOff||0,0)},
     behindBack:(v.dFrom==="หลัง"&&v.behind==="ใช่"),
@@ -25085,6 +25189,14 @@ function bindCtx(){
     if(a==="csedit"){ try{ CurvedShelf.editBoard(b); }catch(err){ console.error(err); toast("เปิดกล่องโค้งไม่สำเร็จ"); } return; }
     if(a==="adddoor"){ try{ addDoor(); }catch(err){ console.error(err); toast("เพิ่มหน้าบานไม่สำเร็จ: "+err.message); } return; }
     if(a==="pintouch"){ try{ pinToTouching(b); }catch(err){ console.error(err); toast("ตรึงไม่สำเร็จ: "+err.message); } return; }
+    if(a==="symfix"){ try{ const r=applySymFasteners(b);
+        if(r) toast("ใส่ชุดยึดหัวท้ายเท่ากันแล้ว — ขอบ "+r.edges.join(" + ")
+          +" · เดือยร่นจากขอบ "+r.ins+" มินิฟิกถัดเข้ามา "+r.gap
+          +" · เชื่อมเดือยให้เลย "+r.holes+" รู");
+      }catch(err){ console.error(err); toast("ใส่ชุดยึดไม่สำเร็จ — ดู console"); } return; }
+    if(a==="symfixclr"){ try{ const r=clearFastenersOf(b);
+        toast(r.conn?("ถอดตัวเชื่อม "+r.conn+" ชุด · ล้างรูคู่ "+r.holes+" รู"):"ชิ้นนี้ไม่มีเดือย/มินิฟิกอยู่แล้ว");
+      }catch(err){ console.error(err); } return; }
     if(a==="railfix"){ try{ const r=applyRailFasteners(b);
         if(r) toast("ใส่ให้แล้ว — เดือย 2 + มินิฟิก 2 · ที่ "+r.at[0]+" และ "+r.at[1]+" มม. จากขอบคาน (หน้ากว้าง "+r.W+") · เจาะรูคู่ "+r.holes+" จุด");
       }catch(err){ console.error(err); toast("ใส่ไม่สำเร็จ: "+err.message); } return; }
@@ -27611,7 +27723,12 @@ function boot(){ console.log("%c"+appVerStr(),"font-weight:700;color:#007aff");
   try{ const hb=$("inspHintBtn"); if(hb) hb.onclick=()=>{ settings.inspHints=(settings.inspHints!==true);
       lsSet("furnitech:settings",settings); applyInspHints();
       toast(settings.inspHints?"แสดงคำอธิบายในแผงขวาแล้ว":"ซ่อนคำอธิบายในแผงขวาแล้ว — กดปุ่มเดิมเพื่อกางกลับ"); }; }catch(e){}
-  try{ ensurePullVarsOnce(); }catch(e){ console.error("pullVars boot:",e); }   // v1.012: เรียกซ้ำที่ลำดับเปิดโปรแกรมด้วย กันพลาดจากลำดับการโหลด
+  /* ───────── v1.025: เรียกที่เดียวพอ ─────────
+     ของเดิมผมใส่ตัวเติมไว้สองที่ตอนไล่หาสาเหตุที่ช่องมือจับไม่ขึ้น
+     ซึ่งสาเหตุจริงคือธง "ทำครั้งเดียวแล้วจำไว้" ไม่ใช่ลำดับการเรียก
+     พอแก้ธงแล้วตัวสำรองก็ไม่มีประโยชน์ เหลือไว้มีแต่ทำให้คนอ่านโค้ดสงสัยว่าทำไมเรียกซ้ำ
+     ทั้งสองตัวถูกเรียกจากในตัวโหลดตั้งค่าอยู่แล้ว ซึ่งเป็นที่ที่ถูกต้องกว่า
+     เพราะดึงค่าจากคลาวด์ทับก็วิ่งผ่านทางนั้นเหมือนกัน */
   try{ applyFamDefaults(); }catch(e){ console.error(e); }   // v9.05: เปิดโปรแกรมมา หัว Family เริ่มที่ค่าตั้งต้นเสมอ
   /* v9.51: ติดตั้งโมเดลบานพับตั้งต้น ถ้าเครื่องนี้ยังไม่มีรหัสนั้น (ไม่ทับของที่ผู้ใช้แก้เองไว้) */
   try{ settings.fitModels=settings.fitModels||{};
@@ -29732,6 +29849,8 @@ const CurvedShelf = (function(){
   <div class="ctx-sep"></div>
   <div class="ctx-h">ประกอบ / เดือย</div>
   <button data-act="railfix" id="ctxRailFix"><span>⊕ ใส่เดือย + มินิฟิกแบบคาน (มาตรฐาน)</span></button>
+  <button data-act="symfix"><span>⊕ ชุดยึดหัวท้ายเท่ากัน (เดือยนำ · มินิฟิกตาม 32)</span></button>
+  <button data-act="symfixclr"><span>⊖ ถอดชุดยึดของชิ้นนี้ (พร้อมรูคู่)</span></button>
   <button data-act="pintouch"><span>📌 ตรึงผิวกับชิ้นที่ชนอยู่ (ยืดตามเมื่อชิ้นนั้นขยับ)</span></button>
   <button data-act="adddoor"><span>▭ เพิ่มหน้าบาน / แผงปิด…</span></button>
   <button data-act="conn"><span>⊕ ใส่เดือย (Connector)…</span></button>
