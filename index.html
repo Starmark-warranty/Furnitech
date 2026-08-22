@@ -1649,7 +1649,7 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"1.033", build:"2026-08-21/text-fields-not-number",
+  name:"StarNexus Cabinet", version:"1.035", build:"2026-08-21/revert-to-1.029",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   /* ───────── เริ่มนับเวอร์ชันใหม่ที่ 1.001 (21/08/2026) ─────────
      ของเดิมนับมาถึง 42.1 แล้ววิ่งเป็นทศนิยมสองชั้นซึ่งอ่านลำดับยาก
@@ -1657,6 +1657,8 @@ const APP_META={
      ประวัติเก่าเก็บไว้ทั้งหมดตามเลขเดิม ไม่ไล่เขียนใหม่ เพราะเลขในนั้นถูกอ้างถึงไปแล้ว
      รายการที่อยู่ใต้ 1.001 ลงไปจึงเป็นเลขชุดเก่า อ่านต่อกันได้ตามวันที่ */
   changelog:[
+    ["1.035","2026-08-21","ถอยของเรื่องตะแกรงออกทั้งหมด — เนื้อโปรแกรมเท่ากับ 1.029 ทุกประการ · สิ่งที่เอาออกคือ ตัวช่วยสร้างตู้ตะแกรงเป็นชุดกับรายการในเมนูคลิกขวา · ช่องถามรหัสตะแกรงและ Purchase ID ในกล่องบันทึกโมเดล · ตัวเลือกตะแกรงแบบดรอปดาวน์ · และช่องกรอกชนิดหลายบรรทัดกับชนิดเลือกจากรายการที่เพิ่มไว้รองรับของพวกนั้น ซึ่งไม่มีใครเรียกใช้แล้ว เก็บไว้ก็เป็นโค้ดตายเปล่า ๆ · กล่องบันทึกโมเดลกลับไปถามแค่รหัสตู้เหมือนเดิม และเติมรหัสปัจจุบันมาให้ตั้งแต่เปิด · เลขเวอร์ชันเดินหน้าต่อเป็น 1.035 ไม่ย้อนกลับไปเขียนว่า 1.029 เพราะไฟล์คนละไฟล์กัน ถ้าใช้เลขซ้ำจะแยกไม่ออกว่ากำลังถืออันไหนอยู่ · ประวัติของ 1.030 ถึง 1.034 ยังอยู่ครบด้านล่าง ไว้อ้างอิงตอนทำใหม่"],
+    ["1.034","2026-08-21","FEAT ช่องตะแกรงเปลี่ยนเป็นดรอปดาวน์เลือกจากคลังที่มีอยู่ — คลังของงานจริงมีตะแกรงเป็นร้อยรายการ ชื่ออย่าง ตะแกรง_545_14_323 ให้พิมพ์รหัสเองคือให้จำเลขสามชุด ผิดตัวเดียวก็ผูกไม่ติดและไม่มีอะไรบอก · ดรอปดาวน์แสดงรหัสพร้อม Purchase ID ที่ผูกไว้แล้ว เลือกแล้วจบ ไม่ต้องกรอกอะไรเพิ่ม · ยังสร้างรหัสใหม่ได้สำหรับรุ่นที่ยังไม่มีในคลัง โดยเลือกบรรทัดสร้างใหม่ แล้วช่องรหัส Purchase ID ชื่อ และหน่วยเบิกค่อยโผล่ขึ้นมา · รายชื่อจับจากช่อง kind หรือจากชื่อที่ขึ้นต้นด้วยคำว่าตะแกรง งานเก่าที่ยังไม่ได้ตั้ง kind จึงยังโผล่ในรายการ ไม่ต้องไล่ติดป้ายย้อนหลัง · เพิ่มช่องชนิดเลือกจากรายการให้กล่องกรอกค่ากลาง กล่องอื่นเอาไปใช้ได้ด้วย ของเดิมมีแต่ปุ่มสลับซึ่งเหมาะกับตัวเลือกสองสามอันเท่านั้น"],
     ["1.033","2026-08-21","FIX ช่องรหัสตู้ในกล่องบันทึกโมเดลว่างเปล่า ทั้งที่ตู้มีรหัสอยู่แล้ว และพิมพ์รหัสลงไปก็ไม่ติด — ผมไม่ได้ระบุชนิดช่อง กล่องกรอกค่ากลางจึงตกค่าปริยายเป็นช่องตัวเลข ซึ่งรับสตริงอย่าง BND226 ไม่ได้ เบราว์เซอร์เลยโชว์ว่างและทิ้งค่าไปเงียบ ๆ · เห็นได้จากลูกศรขึ้นลงที่มุมขวาของช่อง ซึ่งเป็นของช่องตัวเลขเท่านั้น · ระบุเป็นช่องข้อความให้ครบทุกช่องแล้ว รหัสเดิมจึงขึ้นมาให้ตั้งแต่เปิดกล่อง กดตกลงเลยเท่ากับบันทึกทับตัวเดิม ส่วนแก้รหัสเท่ากับ Save As ตามที่หัวกล่องเขียนไว้"],
     ["1.032","2026-08-21","FIX ช่องถามตะแกรงไปโผล่ผิดปุ่ม — v1.031 ผมใส่ไว้ที่ปุ่มเก็บทั้งฉากขึ้นคลาวด์ ซึ่งเป็นคนละปุ่มกับที่ใช้เก็บตู้เป็นโมเดล ปุ่มที่ใช้จริงคือตัวที่ถามรหัสตู้แล้วมีปุ่มถัดไป · ย้ายมาถูกที่แล้ว กล่องเดียวถามครบทั้งรหัสตู้ รหัสตะแกรง Purchase ID ชื่อ และหน่วยเบิก · ถ้ารหัสตู้เดิมเคยผูกตะแกรงไว้ ช่องรหัสตะแกรงเติมของเดิมมาให้ก่อน จะได้ไม่ต้องพิมพ์ซ้ำตอนบันทึกทับ · เว้นช่องตะแกรงว่างเท่ากับตู้ธรรมดา บันทึกตามเดิมทุกประการ · ปุ่มเก็บทั้งฉากคืนกลับเป็นแบบเดิมแล้ว"],
     ["1.031","2026-08-21","ย้ายการผูกตะแกรงมาถามตอนเก็บตู้ขึ้นคลัง แทนที่จะอยู่ในเมนูคลิกขวา — เมนูคลิกขวาเป็นเมนูที่ใช้บ่อยกับงานอื่นอยู่แล้ว รายการเพิ่มเข้าไปอีกก็ยิ่งยาวและกดโดนผิดง่าย ทั้งที่งานตะแกรงทำนาน ๆ ครั้ง · จังหวะที่ตรงกว่าคือตอนเก็บตู้ขึ้นคลัง เพราะเป็นตอนที่กำลังตั้งรหัสตู้อยู่พอดี และตู้ตะแกรงต่างจากตู้ต้นแบบแค่รหัสกับรุ่นตะแกรง · กล่องเก็บตู้ถามครบในที่เดียว ชื่อรหัสตู้ รหัสตะแกรง Purchase ID ชื่อตะแกรง และหน่วยเบิก · ช่องตะแกรงเว้นว่างไว้เท่ากับตู้ธรรมดา บันทึกตามปกติ ไม่มีอะไรเปลี่ยนจากเดิม · ใส่รหัสมาก็สร้างรายการในคลังอุปกรณ์และผูกเข้ากับรหัสตู้ให้ก่อนบันทึก ตัวที่ขึ้นคลาวด์จึงมีของครบตั้งแต่ต้น · รหัสที่มีอยู่แล้วเติมเฉพาะช่องที่ยังว่าง ไม่เขียนทับของเดิม"],
@@ -19824,45 +19826,9 @@ function cabLocalBoards(g){ const [mn,mx]=sceneXRange(g.boards); const cx=(mn+mx
   return g.boards.map(b=>{ const c=JSON.parse(JSON.stringify(b)); c.x=round(b.x-cx); delete c.cabInst; return c; }); }
 async function saveCabModel(g){
   const curCode=((g.boards[0]&&g.boards[0].cab)||"").trim();   // รหัสจริงที่ตั้งไว้ (ไม่เอา Order ID fallback)
-  /* ───────── v1.032: ถามรหัสตะแกรงกับ Purchase ID ในกล่องเดียวกับรหัสตู้ ─────────
-     v1.031 ผมไปใส่ไว้ที่ปุ่มเก็บ "ทั้งฉาก" ขึ้นคลาวด์ ซึ่งเป็นคนละปุ่มกับที่ใช้จริง
-     ปุ่มที่ใช้เก็บตู้เป็นโมเดลคือตัวนี้ ที่ถามรหัสตู้แล้วมีปุ่มถัดไป
-     ตู้ตะแกรงต่างจากตู้ต้นแบบแค่รหัสกับรุ่นตะแกรง จังหวะตั้งรหัสจึงเป็นที่ที่ตรงที่สุด
-     เว้นช่องตะแกรงว่าง = ตู้ธรรมดา บันทึกตามเดิมทุกประการ */
-  const rk0=(()=>{ try{ const c0=String(curCode||"").toUpperCase();
-      const r=(settings.cabFitSets||[]).find(x=>x&&String(x.cabs||"").trim().toUpperCase()===c0);
-      return r?String(r.items||"").trim().split(/\s+/)[0]:""; }catch(e){ return ""; } })();
-  const v=await promptFields("บันทึกโมเดลขึ้นคลาวด์ — เปลี่ยนรหัส = บันทึกเป็นตัวใหม่ (Save As)",[
-    /* v1.033: ต้องระบุ type text — กล่องกรอกค่ากลางตกค่าปริยายเป็นช่องตัวเลข
-       ช่องตัวเลขรับสตริงอย่าง BND226 ไม่ได้ เบราว์เซอร์จึงโชว์ว่าง
-       ผลคือทั้งรหัสเดิมที่เติมมาให้และรหัสที่พิมพ์ลงไป หายไปทั้งคู่แบบเงียบ ๆ */
-    {key:"code",type:"text",label:"รหัสตู้",value:curCode||""},
-    {key:"rack",type:"text",label:"รหัสตะแกรง (Element → Fittings) — เว้นว่าง = ตู้ธรรมดา",value:rk0},
-    {key:"pid",type:"text",label:"Purchase ID ของตะแกรง",value:"",showIf:c=>String(c.rack||"").trim()!==""},
-    {key:"rdesc",type:"text",label:"ชื่อ/คำอธิบายตะแกรง",value:"",showIf:c=>String(c.rack||"").trim()!==""},
-    {key:"runit",type:"text",label:"หน่วยเบิก",value:"ชุด",showIf:c=>String(c.rack||"").trim()!==""}]);
-  if(v==null)return; const code=String(v.code||"").trim();
+  const v=await dialog({title:"บันทึกโมเดลขึ้นคลาวด์ — ใส่/แก้รหัสตู้ (เปลี่ยนรหัส = บันทึกเป็นตัวใหม่ · Save As)", ok:"ถัดไป", input:true, value:curCode, placeholder:"เช่น BND001"});
+  if(v==null)return; const code=(v||"").trim();
   if(!code){toast("ต้องใส่รหัสตู้ก่อนบันทึก");return;}
-  /* ผูกตะแกรงก่อนบันทึก ของที่ขึ้นคลาวด์จึงมีครบตั้งแต่ต้น ไม่ต้องตามเก็บทีหลัง */
-  { const _rk=String(v.rack||"").trim();
-    if(_rk) try{
-      settings.elements=settings.elements||{};
-      const fits=(settings.elements.fittings=settings.elements.fittings||[]);
-      let e=fits.find(x=>x&&String(x.code||"").trim()===_rk);
-      if(!e){ e={code:_rk,kind:"ตะแกรง"}; fits.push(e); }
-      const pid=String(v.pid||"").trim(); if(pid) e.itemId=pid;
-      const dsc=String(v.rdesc||"").trim(); if(dsc&&!e.desc1&&!e.desc) e.desc1=dsc;
-      if(!e.unit) e.unit=String(v.runit||"ชุด");
-      if(!e.kind) e.kind="ตะแกรง";
-      settings.cabFitSets=Array.isArray(settings.cabFitSets)?settings.cabFitSets:[];
-      const rn="ตะแกรง "+code.toUpperCase();
-      let r=settings.cabFitSets.find(x=>x&&String(x.name||"").trim()===rn);
-      if(!r){ r={name:rn,cabs:code.toUpperCase(),items:_rk+" 1"}; settings.cabFitSets.push(r); }
-      else { r.cabs=code.toUpperCase(); r.items=_rk+" 1"; r.off=false; }
-      await lsSet("furnitech:settings",settings);
-      try{ _cabFitSig=""; }catch(e2){}
-      toast("ผูกตะแกรง "+_rk+(String(v.pid||"").trim()?(" · PID "+String(v.pid).trim()):"")+" เข้ากับรหัสตู้ "+code);
-    }catch(e){ console.error("rackBind:",e); } }
   const exists=await fetchCabModel(code);                       // มีรหัสนี้ในคลาวด์แล้วไหม
   if(exists){ const ok=await dialog({title:"รหัส “"+code+"” มีอยู่แล้วในคลาวด์ — บันทึกทับ?", ok:"บันทึกทับ"}); if(!ok)return; }
   g.boards.forEach(b=>{ b.cab=code; });                         // เซ็ตรหัสนี้ให้ทุกชิ้นในตู้ (session)
@@ -23650,15 +23616,6 @@ function promptFields(title,fields){return new Promise(res=>{
       const seg=document.createElement("div"); seg.className="seg"; seg.style.display="inline-flex"; seg.style.flexWrap="wrap"; wrap._val=f.value;
       f.options.forEach(op=>{const bt=document.createElement("button");bt.type="button";bt.textContent=op;if(op===f.value)bt.className="sel";bt.onclick=()=>{seg.querySelectorAll("button").forEach(x=>x.classList.remove("sel"));bt.classList.add("sel");wrap._val=op;refresh();};seg.appendChild(bt);});
       wrap.appendChild(seg); refs.push({key:f.key,get:()=>wrap._val});
-    } else if(f.type==="textarea"){
-      /* v1.030: ช่องกรอกหลายบรรทัด — ของเดิมมีแต่ช่องบรรทัดเดียว
-         งานที่รับเป็นตาราง เช่นรายการตะแกรงหลายรุ่น จึงไม่มีที่ให้วาง */
-      wrap.innerHTML=`<label>${f.label||""}</label>`;
-      const ta=document.createElement("textarea"); ta.className="nameinp";
-      ta.rows=Math.max(+f.rows||5,2); ta.value=(f.value==null?"":String(f.value));
-      ta.style.cssText="width:100%;font-family:var(--mono);font-size:12px;resize:vertical";
-      wrap.appendChild(ta); refs.push({key:f.key,get:()=>ta.value});
-      items.push({wrap,showIf:f.showIf}); colL.appendChild(wrap); return;
     } else if(f.type==="note"){   // ข้อความอธิบายเฉย ๆ ไม่มีช่องกรอก (v7.6)
       wrap.innerHTML=`<div style="font-size:12px;line-height:1.5;color:var(--ink-dim,#5f5f66);background:rgba(0,0,0,.04);border-radius:9px;padding:9px 11px">${f.label}</div>`;
     } else if(f.type==="preview"){
@@ -25926,62 +25883,6 @@ function fittingOut(code){ return fitPidList(code)[0]; }
    เช่นตู้ซิงค์ที่ต้องมีถาดฟรอยด์ ก็ต้องมีชุดอุปกรณ์ประจำใบไปด้วยเสมอ
    ตู้หนึ่งใบได้หนึ่งชุด ไม่ว่าตู้ใบนั้นจะมีกี่แผ่น เพราะชุดผูกกับใบ ไม่ได้ผูกกับแผ่น
    เขียนเป็นตารางกฎ แก้เพิ่มลบได้เองทีหลังโดยไม่ต้องแตะโปรแกรม */
-/* ═════════ v1.030: สร้างตู้ตะแกรงเป็นชุด ═════════
-   ตู้ตะแกรงคือตู้ใบเดิมทุกอย่าง ต่างกันแค่รหัสตู้ ชื่อ และรุ่นตะแกรงที่ใส่เข้าไป
-   รูปทรงไม่เปลี่ยน ไม่มีรูเจาะเพิ่มทั้งที่หน้าบานและแผ่นข้าง เพราะตะแกรงยึดกับรางของมันเอง
-   ทำเองต้องเดินสามที่ต่อหนึ่งรุ่น: ทำสำเนาตู้แล้วแก้รหัส · เพิ่มรหัสตะแกรงใน Element
-   · ผูกรหัสตะแกรงเข้ากับรหัสตู้ในชุดอุปกรณ์ประจำรหัสตู้ · สิบรุ่นคือสามสิบขั้น พลาดง่ายมาก
-   ตัวนี้รับตารางบรรทัดละรุ่น แล้วเดินให้ครบทั้งสามที่ในคลิกเดียว */
-async function rackCabWizard(){
-  let base=null;
-  try{ if(state.selectedCab) base=cabGroups().find(x=>String(x.key)===String(state.selectedCab));
-    if(!base){ const sel=selBoard(); if(sel) base=cabGroups().find(x=>x.boards.some(b=>b.id===sel.id)); } }catch(e){}
-  if(!base){ toast("เลือกตู้ต้นแบบก่อน (คลิกที่ตู้ในรายการซ้าย)"); return; }
-  const baseCab=String((base.boards[0]||{}).cab||"").trim();
-  const v=await promptFields("🧺 สร้างตู้ตะแกรงเป็นชุด — จากตู้ “"+(baseCab||base.key)+"”",[
-    {key:"rows",type:"textarea",rows:8,
-     label:"บรรทัดละหนึ่งรุ่น — รหัสตู้ | รหัสตะแกรง | Purchase ID | ชื่อ (เว้นช่องท้ายได้)",
-     value:"BND226 | RACK_AGENT | 545.13.951 | ชุดใส่อุปกรณ์ทำอาหาร Kessebohmer รุ่น cooking AGENT"},
-    {key:"unit",type:"text",label:"หน่วยเบิก",value:"ชุด"},
-    {key:"mk",label:"ทำสำเนาตู้ให้ด้วย",type:"toggle",options:["ทำ","ไม่ทำ (ผูกรหัสอย่างเดียว)"],value:"ทำ"}]);
-  if(!v) return;
-  const lines=String(v.rows||"").split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
-  if(!lines.length){ toast("ยังไม่ได้ใส่รายการ"); return; }
-  settings.elements=settings.elements||{}; const fits=(settings.elements.fittings=settings.elements.fittings||[]);
-  settings.cabFitSets=Array.isArray(settings.cabFitSets)?settings.cabFitSets:[];
-  let nFit=0,nRule=0,nCab=0; const bad=[];
-  for(const ln of lines){
-    const p=ln.split("|").map(x=>x.trim());
-    const cab=(p[0]||"").toUpperCase(), code=(p[1]||"").trim(), pid=(p[2]||"").trim(), desc=(p[3]||"").trim();
-    if(!cab||!code){ bad.push(ln); continue; }
-    /* 1) รหัสตะแกรงในคลังอุปกรณ์ — มีอยู่แล้วก็แค่เติมช่องที่ยังว่าง ไม่เขียนทับของเดิม */
-    let e=fits.find(x=>x&&String(x.code||"").trim()===code);
-    if(!e){ e={code,kind:"ตะแกรง"}; fits.push(e); nFit++; }
-    if(pid) e.itemId=pid;
-    if(desc&&!e.desc1&&!e.desc) e.desc1=desc;
-    if(!e.unit) e.unit=String(v.unit||"ชุด");
-    if(!e.kind) e.kind="ตะแกรง";
-    /* 2) ผูกรหัสตะแกรงเข้ากับรหัสตู้ — หนึ่งชุดต่อหนึ่งใบ */
-    const rn="ตะแกรง "+cab;
-    let r=settings.cabFitSets.find(x=>x&&String(x.name||"").trim()===rn);
-    if(!r){ r={name:rn,cabs:cab,items:code+" 1"}; settings.cabFitSets.push(r); nRule++; }
-    else { r.cabs=cab; r.items=code+" 1"; r.off=false; }
-    /* 3) ทำสำเนาตู้แล้วเปลี่ยนรหัสกับชื่อ — รูปทรงเหมือนต้นแบบทุกประการ ไม่แตะรูเจาะ */
-    if(v.mk==="ทำ"){
-      const before=state.boards.length;
-      try{ duplicateCabinet(base); }catch(err){ console.error(err); }
-      const made=state.boards.slice(before);
-      if(made.length){ made.forEach(b=>{ b.cab=cab;
-          if(baseCab&&b.name) b.name=String(b.name).split(baseCab).join(cab); });
-        nCab++; }
-    }
-  }
-  try{ await lsSet("furnitech:settings",settings); }catch(e){}
-  try{ _cabFitSig=""; }catch(e){}
-  buildGTones(); sync(1); try{ renderList(); }catch(e){}
-  toast("ตะแกรง: เพิ่มรหัสในคลัง "+nFit+" · ผูกรหัสตู้ "+nRule+" ชุด"+(nCab?(" · ทำสำเนาตู้ "+nCab+" ใบ"):"")
-    +(bad.length?(" · ข้ามบรรทัดที่อ่านไม่ออก "+bad.length):""));
-}
 function fitSetRules(){ const r=settings.cabFitSets; return Array.isArray(r)?r:[]; }
 /* รับได้ทั้ง "CODE 2" · "CODE,2" · "CODE x2" · หรือรหัสเปล่า (=1) บรรทัดละรายการ */
 function parseFitSetItems(txt){
