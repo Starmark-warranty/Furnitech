@@ -1649,7 +1649,7 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"1.031", build:"2026-08-21/rack-on-cloud-save",
+  name:"StarNexus Cabinet", version:"1.033", build:"2026-08-21/text-fields-not-number",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   /* ───────── เริ่มนับเวอร์ชันใหม่ที่ 1.001 (21/08/2026) ─────────
      ของเดิมนับมาถึง 42.1 แล้ววิ่งเป็นทศนิยมสองชั้นซึ่งอ่านลำดับยาก
@@ -1657,6 +1657,8 @@ const APP_META={
      ประวัติเก่าเก็บไว้ทั้งหมดตามเลขเดิม ไม่ไล่เขียนใหม่ เพราะเลขในนั้นถูกอ้างถึงไปแล้ว
      รายการที่อยู่ใต้ 1.001 ลงไปจึงเป็นเลขชุดเก่า อ่านต่อกันได้ตามวันที่ */
   changelog:[
+    ["1.033","2026-08-21","FIX ช่องรหัสตู้ในกล่องบันทึกโมเดลว่างเปล่า ทั้งที่ตู้มีรหัสอยู่แล้ว และพิมพ์รหัสลงไปก็ไม่ติด — ผมไม่ได้ระบุชนิดช่อง กล่องกรอกค่ากลางจึงตกค่าปริยายเป็นช่องตัวเลข ซึ่งรับสตริงอย่าง BND226 ไม่ได้ เบราว์เซอร์เลยโชว์ว่างและทิ้งค่าไปเงียบ ๆ · เห็นได้จากลูกศรขึ้นลงที่มุมขวาของช่อง ซึ่งเป็นของช่องตัวเลขเท่านั้น · ระบุเป็นช่องข้อความให้ครบทุกช่องแล้ว รหัสเดิมจึงขึ้นมาให้ตั้งแต่เปิดกล่อง กดตกลงเลยเท่ากับบันทึกทับตัวเดิม ส่วนแก้รหัสเท่ากับ Save As ตามที่หัวกล่องเขียนไว้"],
+    ["1.032","2026-08-21","FIX ช่องถามตะแกรงไปโผล่ผิดปุ่ม — v1.031 ผมใส่ไว้ที่ปุ่มเก็บทั้งฉากขึ้นคลาวด์ ซึ่งเป็นคนละปุ่มกับที่ใช้เก็บตู้เป็นโมเดล ปุ่มที่ใช้จริงคือตัวที่ถามรหัสตู้แล้วมีปุ่มถัดไป · ย้ายมาถูกที่แล้ว กล่องเดียวถามครบทั้งรหัสตู้ รหัสตะแกรง Purchase ID ชื่อ และหน่วยเบิก · ถ้ารหัสตู้เดิมเคยผูกตะแกรงไว้ ช่องรหัสตะแกรงเติมของเดิมมาให้ก่อน จะได้ไม่ต้องพิมพ์ซ้ำตอนบันทึกทับ · เว้นช่องตะแกรงว่างเท่ากับตู้ธรรมดา บันทึกตามเดิมทุกประการ · ปุ่มเก็บทั้งฉากคืนกลับเป็นแบบเดิมแล้ว"],
     ["1.031","2026-08-21","ย้ายการผูกตะแกรงมาถามตอนเก็บตู้ขึ้นคลัง แทนที่จะอยู่ในเมนูคลิกขวา — เมนูคลิกขวาเป็นเมนูที่ใช้บ่อยกับงานอื่นอยู่แล้ว รายการเพิ่มเข้าไปอีกก็ยิ่งยาวและกดโดนผิดง่าย ทั้งที่งานตะแกรงทำนาน ๆ ครั้ง · จังหวะที่ตรงกว่าคือตอนเก็บตู้ขึ้นคลัง เพราะเป็นตอนที่กำลังตั้งรหัสตู้อยู่พอดี และตู้ตะแกรงต่างจากตู้ต้นแบบแค่รหัสกับรุ่นตะแกรง · กล่องเก็บตู้ถามครบในที่เดียว ชื่อรหัสตู้ รหัสตะแกรง Purchase ID ชื่อตะแกรง และหน่วยเบิก · ช่องตะแกรงเว้นว่างไว้เท่ากับตู้ธรรมดา บันทึกตามปกติ ไม่มีอะไรเปลี่ยนจากเดิม · ใส่รหัสมาก็สร้างรายการในคลังอุปกรณ์และผูกเข้ากับรหัสตู้ให้ก่อนบันทึก ตัวที่ขึ้นคลาวด์จึงมีของครบตั้งแต่ต้น · รหัสที่มีอยู่แล้วเติมเฉพาะช่องที่ยังว่าง ไม่เขียนทับของเดิม"],
     ["1.030","2026-08-21","FEAT สร้างตู้ตะแกรงเป็นชุดในคลิกเดียว — ตู้ตะแกรงคือตู้ใบเดิมทุกอย่าง ต่างกันแค่รหัสตู้ ชื่อ และรุ่นตะแกรงที่ใส่เข้าไป รูปทรงไม่เปลี่ยน ไม่มีรูเจาะเพิ่มทั้งที่หน้าบานและแผ่นข้าง เพราะตะแกรงยึดกับรางของมันเอง · ทำเองต้องเดินสามที่ต่อหนึ่งรุ่น ทำสำเนาตู้แล้วแก้รหัส เพิ่มรหัสตะแกรงในคลังอุปกรณ์ และผูกรหัสตะแกรงเข้ากับรหัสตู้ในชุดอุปกรณ์ประจำรหัสตู้ สิบรุ่นคือสามสิบขั้น พลาดง่ายมาก · ตัวช่วยรับตารางบรรทัดละรุ่น รหัสตู้ ขีดตั้ง รหัสตะแกรง ขีดตั้ง Purchase ID ขีดตั้ง ชื่อ แล้วเดินให้ครบทั้งสามที่ · รหัสที่มีอยู่แล้วในคลังจะเติมเฉพาะช่องที่ยังว่าง ไม่เขียนทับคำอธิบายหรือหน่วยที่ตั้งไว้เอง · เลือกได้ว่าจะทำสำเนาตู้ด้วยหรือผูกรหัสอย่างเดียว สำหรับกรณีที่ตู้มีอยู่ในฉากแล้ว · เรียกจากคลิกขวาที่ตู้ต้นแบบ"],
     ["1.029","2026-08-21","FEAT สร้างตู้แล้วเชื่อมโครงให้เลย ไม่ต้องไปกดเอง — ตู้ที่เพิ่งสร้างไม่มีตัวเชื่อมสักตัว ต้องกดเชื่อมโครงเองทุกครั้ง ซึ่งลืมง่ายมาก แล้วส่งออกไปโดยไม่มีรูเดือยเลยสักรู · ตู้กล่องสี่เหลี่ยมมีรอยต่อแบบเดียวกันทุกใบอยู่แล้ว ไม่มีเหตุผลที่ต้องถามก่อน · ปิดได้ที่ค่า cabGenAutoFix ถ้าอยากเชื่อมเองทีหลัง · FIX เชื่อมโครงเขียนสเปคตัวเชื่อมไม่ครบ ตู้ที่เชื่อมคนละเวลาจึงได้คนละผัง — เดือยไม่ได้ระบุสูตรไว้ ปล่อยให้ไปตกที่สูตรที่กำลังเลือกอยู่ตอนนั้น ซึ่งเปลี่ยนได้ทีหลังโดยที่ตัวเชื่อมไม่รู้ตัว · มินิฟิกไม่ได้ระบุขนาดดอกกับความลึกเลย ต้องไปตกค่าปริยายอีกชั้น · ตอนนี้เขียนครบทุกช่องเหมือนกันทั้งคู่ ทั้งขนาดดอก ความลึกฝั่งตัวเอง ความลึกฝั่งแผ่นทับ ระยะร่นจากขอบ และชื่อสูตร ตู้ที่เชื่อมวันนี้กับปีหน้าจึงได้ผังเดียวกัน"],
@@ -19532,43 +19534,9 @@ async function cloudSaveCab(){
 
   if(!state.boards.length){toast("ยังไม่มีชิ้นงาน");return;}
   const def=orderId()||("ตู้ "+new Date().toLocaleDateString("th-TH"));
-  /* ───────── v1.031: ถามรหัสตะแกรงกับ Purchase ID ตรงนี้เลย ก่อนกดบันทึก ─────────
-     เดิมตัวช่วยตะแกรงอยู่ในเมนูคลิกขวา ซึ่งเป็นเมนูที่ใช้บ่อยกับงานอื่นอยู่แล้ว
-     รายการเพิ่มเข้าไปอีกก็ยิ่งยาวและกดโดนผิดง่าย ทั้งที่งานตะแกรงทำนาน ๆ ครั้ง
-     จังหวะที่ตรงกว่าคือตอนเก็บตู้ขึ้นคลัง เพราะเป็นตอนที่กำลังตั้งรหัสตู้อยู่พอดี
-     ตู้ตะแกรงต่างจากตู้ต้นแบบแค่รหัสกับรุ่นตะแกรง จึงถามต่อในกล่องเดียวกันได้เลย
-     เว้นว่างไว้ = ตู้ธรรมดา บันทึกตามปกติ ไม่มีอะไรเปลี่ยนจากเดิม */
-  const v=await promptFields("เก็บตู้ขึ้นคลัง",[
-    {key:"name",label:"ชื่อ/รหัสตู้ที่จะบันทึก",value:def},
-    {key:"rack",label:"รหัสตะแกรง (Element → Fittings) — เว้นว่าง = ตู้ธรรมดา ไม่ต้องผูก",value:""},
-    {key:"pid",label:"Purchase ID ของตะแกรง",value:"",showIf:c=>String(c.rack||"").trim()!==""},
-    {key:"rdesc",label:"ชื่อ/คำอธิบายตะแกรง",value:"",showIf:c=>String(c.rack||"").trim()!==""},
-    {key:"runit",label:"หน่วยเบิก",value:"ชุด",showIf:c=>String(c.rack||"").trim()!==""}]);
-  if(!v) return;
-  const name=String(v.name||"").trim(); if(!name) return;
-  /* ผูกรหัสตะแกรงเข้ากับรหัสตู้ก่อนบันทึก ตัวที่เก็บขึ้นคลาวด์จึงมีของครบตั้งแต่ต้น */
-  const _rk=String(v.rack||"").trim();
-  if(_rk){
-    try{
-      settings.elements=settings.elements||{};
-      const fits=(settings.elements.fittings=settings.elements.fittings||[]);
-      let e=fits.find(x=>x&&String(x.code||"").trim()===_rk);
-      if(!e){ e={code:_rk,kind:"ตะแกรง"}; fits.push(e); }
-      const pid=String(v.pid||"").trim(); if(pid) e.itemId=pid;
-      const dsc=String(v.rdesc||"").trim(); if(dsc&&!e.desc1&&!e.desc) e.desc1=dsc;
-      if(!e.unit) e.unit=String(v.runit||"ชุด");
-      if(!e.kind) e.kind="ตะแกรง";
-      settings.cabFitSets=Array.isArray(settings.cabFitSets)?settings.cabFitSets:[];
-      const rn="ตะแกรง "+name.toUpperCase();
-      let r=settings.cabFitSets.find(x=>x&&String(x.name||"").trim()===rn);
-      if(!r){ r={name:rn,cabs:name.toUpperCase(),items:_rk+" 1"}; settings.cabFitSets.push(r); }
-      else { r.cabs=name.toUpperCase(); r.items=_rk+" 1"; r.off=false; }
-      await lsSet("furnitech:settings",settings);
-      try{ _cabFitSig=""; sync(0); }catch(e2){}
-      toast("ผูกตะแกรง "+_rk+(String(v.pid||"").trim()?(" (PID "+String(v.pid).trim()+")"):"")+" เข้ากับรหัสตู้ "+name+" แล้ว");
-    }catch(e){ console.error("rackBind:",e); }
-  }
-  try{ const db=await getDB(); const id=name;
+  const name=await dialog({title:"ชื่อ/รหัสตู้ที่จะบันทึกขึ้นคลาวด์",input:true,value:def,ok:"บันทึก"});
+  if(name===null||!name.trim())return;
+  try{ const db=await getDB(); const id=name.trim();
     const data={boards:JSON.parse(JSON.stringify(state.boards)),globalTone:state.globalTone};
     const {error}=await db.from("furnitech_cabinets").upsert({id,name:id,part_count:state.boards.length,data,updated_at:new Date().toISOString()},{onConflict:"id"}); if(error)throw error;
     toast("บันทึกตู้ขึ้นคลาวด์: "+id); renderCloudCabs();
@@ -19856,9 +19824,45 @@ function cabLocalBoards(g){ const [mn,mx]=sceneXRange(g.boards); const cx=(mn+mx
   return g.boards.map(b=>{ const c=JSON.parse(JSON.stringify(b)); c.x=round(b.x-cx); delete c.cabInst; return c; }); }
 async function saveCabModel(g){
   const curCode=((g.boards[0]&&g.boards[0].cab)||"").trim();   // รหัสจริงที่ตั้งไว้ (ไม่เอา Order ID fallback)
-  const v=await dialog({title:"บันทึกโมเดลขึ้นคลาวด์ — ใส่/แก้รหัสตู้ (เปลี่ยนรหัส = บันทึกเป็นตัวใหม่ · Save As)", ok:"ถัดไป", input:true, value:curCode, placeholder:"เช่น BND001"});
-  if(v==null)return; const code=(v||"").trim();
+  /* ───────── v1.032: ถามรหัสตะแกรงกับ Purchase ID ในกล่องเดียวกับรหัสตู้ ─────────
+     v1.031 ผมไปใส่ไว้ที่ปุ่มเก็บ "ทั้งฉาก" ขึ้นคลาวด์ ซึ่งเป็นคนละปุ่มกับที่ใช้จริง
+     ปุ่มที่ใช้เก็บตู้เป็นโมเดลคือตัวนี้ ที่ถามรหัสตู้แล้วมีปุ่มถัดไป
+     ตู้ตะแกรงต่างจากตู้ต้นแบบแค่รหัสกับรุ่นตะแกรง จังหวะตั้งรหัสจึงเป็นที่ที่ตรงที่สุด
+     เว้นช่องตะแกรงว่าง = ตู้ธรรมดา บันทึกตามเดิมทุกประการ */
+  const rk0=(()=>{ try{ const c0=String(curCode||"").toUpperCase();
+      const r=(settings.cabFitSets||[]).find(x=>x&&String(x.cabs||"").trim().toUpperCase()===c0);
+      return r?String(r.items||"").trim().split(/\s+/)[0]:""; }catch(e){ return ""; } })();
+  const v=await promptFields("บันทึกโมเดลขึ้นคลาวด์ — เปลี่ยนรหัส = บันทึกเป็นตัวใหม่ (Save As)",[
+    /* v1.033: ต้องระบุ type text — กล่องกรอกค่ากลางตกค่าปริยายเป็นช่องตัวเลข
+       ช่องตัวเลขรับสตริงอย่าง BND226 ไม่ได้ เบราว์เซอร์จึงโชว์ว่าง
+       ผลคือทั้งรหัสเดิมที่เติมมาให้และรหัสที่พิมพ์ลงไป หายไปทั้งคู่แบบเงียบ ๆ */
+    {key:"code",type:"text",label:"รหัสตู้",value:curCode||""},
+    {key:"rack",type:"text",label:"รหัสตะแกรง (Element → Fittings) — เว้นว่าง = ตู้ธรรมดา",value:rk0},
+    {key:"pid",type:"text",label:"Purchase ID ของตะแกรง",value:"",showIf:c=>String(c.rack||"").trim()!==""},
+    {key:"rdesc",type:"text",label:"ชื่อ/คำอธิบายตะแกรง",value:"",showIf:c=>String(c.rack||"").trim()!==""},
+    {key:"runit",type:"text",label:"หน่วยเบิก",value:"ชุด",showIf:c=>String(c.rack||"").trim()!==""}]);
+  if(v==null)return; const code=String(v.code||"").trim();
   if(!code){toast("ต้องใส่รหัสตู้ก่อนบันทึก");return;}
+  /* ผูกตะแกรงก่อนบันทึก ของที่ขึ้นคลาวด์จึงมีครบตั้งแต่ต้น ไม่ต้องตามเก็บทีหลัง */
+  { const _rk=String(v.rack||"").trim();
+    if(_rk) try{
+      settings.elements=settings.elements||{};
+      const fits=(settings.elements.fittings=settings.elements.fittings||[]);
+      let e=fits.find(x=>x&&String(x.code||"").trim()===_rk);
+      if(!e){ e={code:_rk,kind:"ตะแกรง"}; fits.push(e); }
+      const pid=String(v.pid||"").trim(); if(pid) e.itemId=pid;
+      const dsc=String(v.rdesc||"").trim(); if(dsc&&!e.desc1&&!e.desc) e.desc1=dsc;
+      if(!e.unit) e.unit=String(v.runit||"ชุด");
+      if(!e.kind) e.kind="ตะแกรง";
+      settings.cabFitSets=Array.isArray(settings.cabFitSets)?settings.cabFitSets:[];
+      const rn="ตะแกรง "+code.toUpperCase();
+      let r=settings.cabFitSets.find(x=>x&&String(x.name||"").trim()===rn);
+      if(!r){ r={name:rn,cabs:code.toUpperCase(),items:_rk+" 1"}; settings.cabFitSets.push(r); }
+      else { r.cabs=code.toUpperCase(); r.items=_rk+" 1"; r.off=false; }
+      await lsSet("furnitech:settings",settings);
+      try{ _cabFitSig=""; }catch(e2){}
+      toast("ผูกตะแกรง "+_rk+(String(v.pid||"").trim()?(" · PID "+String(v.pid).trim()):"")+" เข้ากับรหัสตู้ "+code);
+    }catch(e){ console.error("rackBind:",e); } }
   const exists=await fetchCabModel(code);                       // มีรหัสนี้ในคลาวด์แล้วไหม
   if(exists){ const ok=await dialog({title:"รหัส “"+code+"” มีอยู่แล้วในคลาวด์ — บันทึกทับ?", ok:"บันทึกทับ"}); if(!ok)return; }
   g.boards.forEach(b=>{ b.cab=code; });                         // เซ็ตรหัสนี้ให้ทุกชิ้นในตู้ (session)
@@ -25938,7 +25942,7 @@ async function rackCabWizard(){
     {key:"rows",type:"textarea",rows:8,
      label:"บรรทัดละหนึ่งรุ่น — รหัสตู้ | รหัสตะแกรง | Purchase ID | ชื่อ (เว้นช่องท้ายได้)",
      value:"BND226 | RACK_AGENT | 545.13.951 | ชุดใส่อุปกรณ์ทำอาหาร Kessebohmer รุ่น cooking AGENT"},
-    {key:"unit",label:"หน่วยเบิก",value:"ชุด"},
+    {key:"unit",type:"text",label:"หน่วยเบิก",value:"ชุด"},
     {key:"mk",label:"ทำสำเนาตู้ให้ด้วย",type:"toggle",options:["ทำ","ไม่ทำ (ผูกรหัสอย่างเดียว)"],value:"ทำ"}]);
   if(!v) return;
   const lines=String(v.rows||"").split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
