@@ -1555,7 +1555,9 @@
 </aside>
 
 <aside id="insp" class="panel sidebar">
-  <div class="panel-h"><div class="t">แก้ไขชิ้นงาน</div><div class="badge" id="inspId">—</div></div>
+  <div class="panel-h"><div class="t">แก้ไขชิ้นงาน</div>
+    <button class="ibtn" id="inspHintBtn" title="ซ่อน/แสดงคำอธิบายในแผงนี้" style="margin-left:auto;flex:none;padding:2px 9px;font-size:11px">? คำอธิบาย</button>
+    <div class="badge" id="inspId">—</div></div>
   <div class="insp-body" id="inspBody"></div>
 </aside>
 
@@ -1647,7 +1649,7 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"1.003", build:"2026-08-21/width-before-length",
+  name:"StarNexus Cabinet", version:"1.019", build:"2026-08-21/drag-autoscroll",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   /* ───────── เริ่มนับเวอร์ชันใหม่ที่ 1.001 (21/08/2026) ─────────
      ของเดิมนับมาถึง 42.1 แล้ววิ่งเป็นทศนิยมสองชั้นซึ่งอ่านลำดับยาก
@@ -1655,6 +1657,22 @@ const APP_META={
      ประวัติเก่าเก็บไว้ทั้งหมดตามเลขเดิม ไม่ไล่เขียนใหม่ เพราะเลขในนั้นถูกอ้างถึงไปแล้ว
      รายการที่อยู่ใต้ 1.001 ลงไปจึงเป็นเลขชุดเก่า อ่านต่อกันได้ตามวันที่ */
   changelog:[
+    ["1.019","2026-08-21","FIX ลากรายการแล้วจอไม่เลื่อนตาม — ระหว่างลาก เบราว์เซอร์ไม่ส่งเหตุการณ์ล้อเมาส์ให้ กล่องที่มีแถบเลื่อนจึงค้างอยู่กับที่ ลากของจากท้ายลิสต์ไปวางบนสุด หรือลากเข้าโฟลเดอร์ที่อยู่นอกจอ จึงทำไม่ได้เลย ต้องปิดกล่องแล้วเลื่อนเองก่อนค่อยเปิดใหม่ · ตอนนี้จับตำแหน่งตัวชี้ระหว่างลาก ใกล้ขอบบนหรือขอบล่างเมื่อไหร่ก็ค่อย ๆ เลื่อนให้ ยิ่งใกล้ขอบยิ่งเร็ว · ใช้ลูปวาดภาพ ไม่ใช่รอเหตุการณ์ลากทีละครั้ง จึงเลื่อนต่อเนื่องแม้ค้างเมาส์นิ่งอยู่ที่ขอบ · ใส่ให้ทั้งรายการซ้ายและฟอร์มขวาของ Element Manager และต้นไม้ในหน้า Variables ซึ่งลากจัดลำดับได้เหมือนกัน"],
+    ["1.018","2026-08-21","จัดบล็อกบานพับในแผงขวาให้อยู่ด้วยกัน — แถวเลือกด้านบานพับ ซ้าย/ขวา กับบล็อกขยับหลบชั้นที่ใส่ระยะรายตัว เป็นเรื่องเดียวกันทั้งคู่ แต่ถูกวางคนละที่ในแผง ห่างกันหลายช่วงจอ ต้องเลื่อนขึ้นลงสลับไปมาตอนตั้งค่าบานเดียว · ย้ายบล็อกขยับมาต่อท้ายแถวเลือกด้านทันที ทำตอนวาดเสร็จ ไม่ต้องรื้อลำดับในเทมเพลตซึ่งจะไปกระทบบล็อกอื่นที่แทรกอยู่ระหว่างกลาง"],
+    ["1.017","2026-08-21","FEAT ซ่อนคำอธิบายในแผงขวาได้แล้ว ตั้งต้นซ่อนไว้ — แผงนี้มีบล็อกอธิบายยาว ๆ แทรกอยู่แทบทุกช่อง ซึ่งจำเป็นตอนใช้ครั้งแรก แต่พอใช้เป็นแล้วมันดันช่องกรอกจริงตกไปอยู่ล่างจอ ต้องเลื่อนหาทุกครั้ง บางช่องมีคำอธิบายยาวกว่าตัวช่องเองหลายเท่า · ปุ่ม ? คำอธิบาย ที่หัวแผง กดกางกลับมาเมื่อไหร่ก็ได้ จำค่าไว้ข้ามการเปิดโปรแกรม · ไม่ลบทิ้ง เพราะข้อความพวกนี้คือที่เดียวที่บอกกติกาของช่องนั้น ๆ เช่นความหมายของโหมดขอบบานหรือรูปแบบสูตร · เลือกบล็อกที่จะซ่อนจากลักษณะข้อความ คือตัวเล็ก ไม่มีช่องกรอกอยู่ข้างใน และยาวเกินสี่สิบห้าตัวอักษร ไม่ได้ไล่ติดป้ายทีละบล็อก ของที่เพิ่มเข้ามาทีหลังจึงถูกซ่อนตามไปด้วยเอง"],
+    ["1.016","2026-08-21","FEAT ช่องบานพับบอกระยะจากขอบบานแล้ว และพิมพ์เป็นระยะจากขอบได้เลย — เลข Y ที่โชว์อยู่เดิมคือความสูงในฉาก วัดจากพื้นห้อง ซึ่งไม่มีใครใช้ตอนตั้งเครื่อง แบบที่ส่งโรงงานบอกเป็นระยะจากขอบบานเสมอ อยากรู้ก็ต้องเอาความสูงบานมาลบเองทุกครั้ง ทุกตัว ทุกบาน · ตอนนี้แต่ละแถวบอกครบ บน กับ ล่าง กับ Y ในฉาก · ช่องกรอกมีตัวเลือกว่าเลขที่พิมพ์คือระยะจากบน จากล่าง หรือ Y ในฉาก ตั้งต้นเป็นจากบนซึ่งเป็นที่ใช้กันจริง สลับโหมดแล้วตัวเลขในช่องแปลงให้เองทันที ไม่ต้องคิดใหม่ · ข้อความยืนยันบอกด้วยว่าย้ายไปจากบนหรือจากล่างเท่าไหร่ ไม่ใช่บอกแต่เลขในฉากซึ่งเทียบกับแบบไม่ได้"],
+    ["1.015","2026-08-21","FEAT ช่องบานพับใส่ระยะ Y เป๊ะ ๆ ได้แล้ว รายตัวและเฉพาะตู้ใบนั้น — ของเดิมมีแต่ปุ่มขยับทีละ 96 กับ 32 ซึ่งเป็นระบบรูมาตรฐาน แต่ระยะบานพับจริงต้องหลบตะแกรงหรือรางที่อยู่ในตู้ใบนั้น ซึ่งเป็นเลขเฉพาะของงาน กดขยับทีละขั้นแล้วลุ้นให้บังเอิญตรง ทำไม่ได้จริงและเสียเวลามาก · ตอนนี้แต่ละแถวมีช่อง Y เป๊ะ พิมพ์ระยะที่ต้องการแล้วกดใช้ หรือกด Enter ก็ได้ ระบบคิดส่วนต่างจากตำแหน่งปัจจุบันแล้วส่งให้ตัวขยับตัวเดิม จึงเจาะฐานบนแผ่นข้างใหม่ให้เองเหมือนกดปุ่มลูกศรทุกประการ · อ่านตำแหน่งปัจจุบันจากตัวเดียวกับที่แผงขวาใช้แสดง เลขที่พิมพ์กับเลขที่ตาเห็นจึงเป็นเลขเดียวกัน · ค่าที่ตั้งเองติดกับบานพับตัวนั้นของตู้ใบนั้น ระบบอัตโนมัติเลิกยุ่งกับชุดนั้นทันที กดคืนค่าเพื่อคืนสิทธิ์ให้ระบบได้ตามเดิม"],
+    ["1.014","2026-08-21","FIX ตารางตัวแปรตัวเลขในหน้า Variables (ตู้นี้) เอาช่องมือจับของบานที่ตู้ใบนั้นไม่มี มาปนไว้ด้วย — ระบบสร้างช่องไว้ถึงบาน 6 เผื่อทุกงาน แต่ตู้ส่วนใหญ่มีบานเดียวหรือสองบาน ตู้บานเดียวจึงเห็น X1 ถึง X6 กับ Y1 ถึง Y6 เรียงกันยาว ทั้งที่ใช้จริงแค่ X1 กับ Y1 · ค่าที่เกินเป็นค่ากลางที่ตู้ใบนี้ไม่ได้ใช้ ไม่ควรมาปนกับของที่ต้องแก้จริง · ตอนนี้นับบานจากชิ้นจริงในตู้ แล้วยกเฉพาะตัวแปรของบานที่มีอยู่ขึ้นตารางบน ที่เหลือพับไว้ในกลุ่มค่ากลางตามเดิม กดดูได้ถ้าต้องการ · นับจากชิ้นจริง ไม่ใช่เดาจากจำนวนช่องที่ระบบสร้างไว้ · ทั้งสองตารางเรียงตามตัวอักษรแบบรู้ตัวเลข X2 จึงมาก่อน X10 · ตัวแปรตัวเลขของตู้อย่าง D2 D3 ไม่ถูกนับเป็นเลขบานเหมือนเดิม"],
+    ["1.013","2026-08-21","FEAT หน้า Variables หลักคั่นหัวข้อตามบานแล้ว — ที่ขอไว้ผมไปทำที่หน้า Variables (ตู้นี้) แทน หน้าหลักจึงยังเป็นรายการยาวเรียงตัวอักษรอย่างเดียว · ตัวแปรของบานหนึ่งใบกระจายเป็นหลายตัว FrontShape1 กับ FrontMat1 กับ FrontShapeP1 กับ FrontEdge1 กับ K_Pull1 กับ K_Pull_Position1 กับพิกัด X และ Y รวมแล้วบานละเจ็ดแปดตัว ชื่อขึ้นต้นต่างกันหมด เรียงตัวอักษรอย่างเดียวจึงยังต้องกวาดตาหาว่าตัวไหนของบานไหน · ตอนนี้คั่นด้วยหัวข้อ บานที่ 1 บานที่ 2 แล้วเรียงในกลุ่มตามตัวอักษร ตัวที่ไม่มีเลขบานอยู่กลุ่ม ค่ารวมของตู้ ด้านบนสุด · คั่นเฉพาะชั้นบนสุด ลูกที่ซ้อนใต้ Family ยังอยู่ใต้พ่อแม่ของมันเหมือนเดิม · ตัวแปรตัวเลขของตู้อย่าง D2 D3 D4 ลงท้ายด้วยเลขเหมือนกันแต่ไม่ใช่เลขบาน ถ้าเอาไปจัดกลุ่มด้วยจะไปโผล่ใต้ บานที่ 2 ซึ่งผิดความหมายคนละเรื่อง จึงกันไว้ให้อยู่กลุ่มค่ารวมตามเดิม"],
+    ["1.012","2026-08-21","FIX ช่องมือจับที่บอกว่าสร้างให้เองใน 1.011 ไม่ขึ้นจริง มีแต่ K_Pull1-3 ของเดิม — ตัวสร้างใช้ธง ทำครั้งเดียวแล้วจำไว้ ซึ่งมีปัญหาตรงที่ถ้ารอบแรกพลาดด้วยเหตุใดก็ตาม ธงก็ถูกตั้งไปแล้ว รอบต่อไปจึงข้ามตลอด ไม่มีวันได้ของครบ และไม่มีอะไรบอกว่าพลาด · เปลี่ยนเป็นนับของจริงก่อนทุกครั้งที่เปิด ขาดช่องไหนเติมช่องนั้น เพิ่มบานทีหลังก็ตามให้เอง ของที่มีอยู่แล้วไม่ถูกแตะ ตัวเลือกที่เพิ่มเองไว้ก็ไม่ถูกลบ · เรียกซ้ำที่ลำดับเปิดโปรแกรมด้วย ไม่ใช่เรียกจากในตัวโหลดตั้งค่าอย่างเดียว กันพลาดจากลำดับการโหลด · บอกใน console ว่าเติมช่องไหนไปบ้าง จะได้ตรวจได้ว่าทำงานจริง"],
+    ["1.011","2026-08-21","สร้างช่องมือจับให้เองตั้งแต่เปิดโปรแกรม ไม่ต้องไปกดปุ่ม — ช่องพวกนี้เป็นของที่ทุกงานใช้ ไม่ใช่ของพิเศษที่ต้องขอเปิด ครบ 30 ช่อง บาน 1 ถึง 6 ทั้งรหัส แนวรู ตำแหน่ง 9 แบบ และระยะ X กับ Y · ทำครั้งเดียวแล้วจดธงไว้ ใครลบทิ้งเองภายหลังจะไม่ถูกสร้างคืนให้รำคาญ ปุ่มเดิมยังอยู่ไว้เติมซ้ำหลังเพิ่มรุ่นมือจับใหม่ · FIX จัดกลุ่มของ 1.009 ลงผิดหน้า ไปลงหน้า Variables (ตู้นี้) ส่วนหน้าที่เปิดดูกันจริงคือ Variables หลัก ซึ่งยังเรียงตามลำดับที่ถูกเพิ่มเข้ามาเหมือนเดิม เป็นลำดับที่ XML โยนมาบ้างกดสร้างเองบ้าง เกินสิบกว่าตัวก็หาไม่เจอ · ตอนนี้หน้า Variables หลักเรียงตามตัวอักษรทุกชั้น แบบรู้ตัวเลข K_Pull2 จึงมาก่อน K_Pull10 · เรียงเฉพาะตอนแสดงผล ไม่แตะลำดับจริงในไฟล์ ลากย้ายเองยังใช้ได้เหมือนเดิม"],
+    ["1.010","2026-08-21","FEAT ปุ่มสร้าง Variable มือจับ สร้างให้ครบทั้งชุดแล้ว และขยายเป็นบาน 1-6 — หนึ่งบานมีห้าช่อง รหัส แนวรู ตำแหน่ง ระยะแนวตั้ง ระยะแนวนอน ของเดิมสร้างให้เฉพาะช่องรหัส อีกสี่ช่องจึงไม่มีที่ให้เลือกรายตู้เลย ต้องพึ่ง XML อย่างเดียว ออเดอร์ที่ไม่ได้ส่งมาก็ตั้งเองไม่ได้ · ช่องตำแหน่งได้ตัวเลือกครบ 9 แบบ LeftUp UpMiddle RightUp LeftMiddle Center RightMiddle LeftDown DownMiddle RightDown จึงเป็นดรอปดาวน์ ไม่ต้องจำคำสะกดและไม่พิมพ์ผิด · ช่องแนวรูได้ H กับ V · ระยะสองตัวเป็นตัวเลข ตั้งค่ากลางไว้ให้จากค่าตั้งต้นในหน้าตั้งค่า จึงโผล่ในตารางตัวแปรตัวเลขของทุกตู้และทับรายตู้ได้ · ค่าที่ XML ส่งมาซึ่งไม่อยู่ในรายการตัวเลือก ยังแสดงตามเดิมพร้อมกำกับว่ายังไม่ได้บันทึกเป็นตัวเลือก จึงไม่มีค่าไหนหายไปจากการเปลี่ยนเป็นดรอปดาวน์ · เคยจับคู่หรือสร้างไว้เองแล้วจะใช้ของเดิม ไม่สร้างซ้ำ และไม่ลบตัวเลือกที่มีอยู่"],
+    ["1.009","2026-08-21","FEAT รายการใน Element Manager เรียงตามตัวอักษรแล้ว ทั้งรายการและโฟลเดอร์ — ของเดิมเรียงตามลำดับที่เพิ่มเข้ามา แท็บที่มีของเยอะอย่าง Colors หรือ Fittings จึงหาไม่เจอ ต้องกวาดตาทีละบรรทัด · เรียงแบบรู้ตัวเลข A2 มาก่อน A10 ไม่ใช่หลัง · FEAT หน้า Variables (ตู้นี้) จัดกลุ่มตามบานแล้ว — ตัวแปรของบานหนึ่งใบกระจายอยู่คนละที่ ทั้ง FrontColor1 FrontShape1 K_Pull1 และกำลังจะมีตำแหน่งกับพิกัดเพิ่มอีก รวมแล้วบานละหกเจ็ดตัว เรียงตามลำดับที่ระบบเจอจึงหาไม่เจอว่าตัวไหนของบานไหน · ตอนนี้ดึงเลขท้ายชื่อมาเป็นเลขบาน แล้วขึ้นหัวข้อ บานที่ 1 บานที่ 2 ในกลุ่มเรียงตามตัวอักษร ตัวที่ไม่มีเลขบานอยู่กลุ่มบนสุด · FIX หน้า Element กระตุกตอนคลิกและเลื่อน — หน้านี้วาดใหม่ทั้งก้อนทุกครั้งที่คลิกรายการ และในก้อนนั้นมี datalist เจ็ดชุดที่กางรหัสทุกตัวในคลังออกมาเป็น option ทั้งหมด คลังใหญ่คือหลายพัน element ต่อคลิกหนึ่งครั้ง เบราว์เซอร์ต้องรื้อแล้วสร้าง DOM ชุดนั้นใหม่ทุกครั้ง · รายการพวกนี้เปลี่ยนเฉพาะตอนเพิ่มลบแก้รหัส จึงจำไว้แล้วใช้ซ้ำ เทียบด้วยลายเซ็นสั้น ๆ"],
+    ["1.008","2026-08-21","FIX กดกระเด้งเจาะผิดที่ทั้งหมด — ของเดิมเจาะเป็นรูบนผิวแผ่น ซึ่งเสียบตัวกดไม่ได้เลย ของจริงตัวกดเสียบเข้าสันไม้จากด้านหน้าตู้ ปลายจึงยื่นมาชนหลังบานได้ · ตอนนี้เจาะเป็นรูสัน ที่สันหันหน้าตู้เสมอ คิดทิศจริงผ่าน orientMatrix แผ่นนอนจึงได้สันหน้า ส่วนแผ่นข้างได้อีกสันหนึ่งเพราะแกนวางคนละทาง ออกไฟล์เจาะเป็น BohrHoriz ตามที่เครื่องรับอยู่แล้ว · เลือกได้ว่าจะเอาสันของแผ่นพื้น แผ่นบน แผ่นข้าง หรือคาน ที่ช่อง ติดที่ไหน · FIX ระยะร่น 50 วัดจากขอบตู้ ตอนนี้วัดจากปลายของชิ้นนั้นเอง · แผ่นนอน ร่นจากปลายฝั่งที่บานเปิด ตรงข้ามบานพับเสมอ · แผ่นข้าง ร่นจากปลายล่างขึ้นมา ตั้งต้น 50 ปรับได้ที่ช่องเดียวกัน · เปลี่ยนช่อง ระยะจากขอบหน้า เป็น ตำแหน่งตามความหนาสัน ว่าง = กึ่งกลางสัน เพราะรูสันไม่มีระยะจากขอบหน้าแล้ว มีแต่ตำแหน่งตามความหนา"],
+    ["1.007","2026-08-21","FIX จุดกดกระเด้งไปอยู่ฝั่งบานพับ ซึ่งกดไม่ออก — บานเดียวถูกปักไว้ที่ขอบซ้ายของแผ่นตายตัว โดยไม่ดูว่าบานพับอยู่ข้างไหน บานที่บานพับอยู่ซ้ายจึงได้จุดกดทับบานพับพอดี ฝั่งนั้นแทบไม่ขยับ ตัวกดจึงทำงานไม่ได้ · ตอนนี้ดูขอบบานพับของบานใบนั้นแล้ววางจุดที่ขอบเปิดเสมอ ร่นเข้ามาเท่าระยะที่ตั้งไว้ · เคสจริง บานพับซ้าย ของเดิมได้จุดที่ -133.8 ตอนนี้ได้ 148 ซึ่งเป็นฝั่งที่บานเปิด · บานคู่ได้จุดฝั่งเปิดของแต่ละใบ ไม่ใช่ขอบซ้ายขวาของแผ่น · ไม่มีข้อมูลบานพับค่อยถอยไปใช้พฤติกรรมเดิม · FEAT บอกผลการเจาะกดกระเด้งใน console และแจ้งเตือน ว่าเจาะกี่จุด ลงแผ่นไหน ผิวไหน — ของเดิมทำงานเงียบ และรูกดกระเด้งเป็นรูตื้น Ø12 ลึก 1 อยู่บนผิวที่หันเข้าตู้ มองผ่าน ๆ ในสามมิติแทบไม่เห็น จึงดูเหมือนไม่ได้เจาะทั้งที่เจาะแล้ว"],
+    ["1.006","2026-08-21","FIX ข้อยกเว้นรหัสตู้ไม่ทำงานเมื่อพิมพ์ติดกันโดยไม่เว้นวรรค — ตัวตัดคำว่า @ถาด ออกจากบรรทัดใช้รูปแบบที่วิ่งไปจนถึงช่องว่างแรก พิมพ์เป็น @ถาด,-BN* จึงถูกกินทั้งบรรทัด เหลือแต่รายชื่อถาดล้วน ๆ ข้อยกเว้นหายไปเงียบ ๆ โดยหน้าจอยังบอกว่ากฎทำงานอยู่ · ต้องเว้นวรรคหลังจุลภาคถึงจะรอด ซึ่งไม่มีใครรู้และไม่ควรต้องรู้ · ตอนนี้ตัดเฉพาะคำว่า @ถาด หยุดที่จุลภาค เขียนติดกันหรือเว้นวรรคได้ผลเหมือนกัน · FIX ชุดอุปกรณ์ KIT ที่กรอกระยะรูกดกระเด้งไว้ครบแต่ไม่มีรูออกมาสักรู — ช่อง กดกระเด้ง รหัส Element เป็นสวิตช์เปิดปิดของทั้งบล็อก เว้นว่างแปลว่าชุดนี้ไม่มีกดกระเด้ง แต่ช่องระยะทั้งหมดยังกรอกได้ปกติและมีค่าตั้งต้นอยู่แล้ว หน้าตาจึงเหมือนพร้อมทำงาน กรอกครบแล้วนั่งรอผลที่ไม่มีวันมา · ขึ้นสถานะในหน้าตั้งชุดให้เห็นทันทีว่าจะเจาะหรือไม่เจาะ พร้อมบอกว่าถ้ายังไม่มีรหัสสั่งซื้อ ใส่ PUSH_TIP ไปก่อนแล้วค่อยผูก Purchase ID ทีหลังได้ · และเตือนจากฝั่งฉากด้วยเมื่อมีตู้ใช้ชุดที่กรอกระยะไว้แต่สวิตช์ยังปิด"],
+    ["1.005","2026-08-21","FEAT ช่องรหัสตู้ของชุดอุปกรณ์ประจำรหัสตู้ รับรูปแบบและข้อยกเว้นได้แล้ว — @ถาด ยืมรายชื่อของถาดฟรอยด์มาทั้งชุด ซึ่งกว้างเกินไปสำหรับของบางอย่าง ตู้ที่ขึ้นต้นด้วย BN ก็มีถาดฟรอยด์เหมือนกันแต่ไม่ใช่ตู้ซิงค์ จึงไม่ควรได้อุปกรณ์ประปาไปด้วย · ก่อนหน้านี้ทางเดียวคือเลิกใช้ @ถาด แล้วไปพิมพ์รหัสตู้ซิงค์เองทีละรหัส ซึ่งต้องมาไล่ให้ตรงกับรายชื่อถาดทุกครั้งที่มีรุ่นใหม่เข้ามา หลุดแน่นอน · ใส่ ดอกจัน แทนส่วนที่เหลือได้ BA ดอกจัน แปลว่าขึ้นต้นด้วย BA และนำหน้าด้วยขีดลบเพื่อตัดออก · เขียนได้ทั้ง BA ดอกจัน ตรง ๆ หรือ @ถาด ตามด้วย ลบ BN ดอกจัน คือเอารายชื่อถาดแล้วตัด BN ทิ้ง · ข้อยกเว้นชนะเสมอ และถ้าใส่มาแต่ข้อยกเว้นก็แปลว่าเอาทุกใบยกเว้นที่ระบุ · บรรทัดสรุปใต้ช่องนับจากกฎจริงแล้ว ไม่ใช่นับจำนวนรหัสที่พิมพ์ จึงบอกได้ถูกว่าฉากนี้เข้าเงื่อนไขกี่ใบ"],
+    ["1.004","2026-08-21","FIX หน้าลิ้นชักไม่ตรงกับเส้นแบ่งที่ตั้งไว้ — ตั้งเส้นแบ่งไว้ที่ 180 จากบน แต่หน้าลิ้นชักออกมา 173.8 · บานที่ซ้อนกันในคอลัมน์เดียวกันแบ่งความสูงตาม สัดส่วนที่จำไว้ (hrs) ซึ่งถูกถ่ายไว้ตอนสร้างบานครั้งแรกแล้วค้างอยู่อย่างนั้น ในไฟล์นี้ค้างที่ 10 ต่อ 3 · ย้ายเส้นแบ่งทีหลังเท่าไหร่บานก็ไม่ขยับตาม เพราะมันดูแค่ตัวเลขสัดส่วน ไม่ได้ดูว่ามีอะไรคั่นอยู่ตรงไหน · เลข 173.8 มาจาก 753 คูณ 3 ส่วน 13 ซึ่งไม่ได้อ้างอิงกับเส้นแบ่งเลยสักนิด · ตอนนี้ถ้ามีชั้นหรือเส้นแบ่งคั่นอยู่กลางช่อง และจำนวนเส้นตรงกับจำนวนบานพอดี ให้บานหักที่เส้นนั้น แต่ละใบถอยจากรอยต่อครึ่งช่องไฟ · เคสจริงได้ 177 ตรงกับที่ควรเป็น คือ 180 ลบครึ่งช่องไฟสองข้าง และบานล่างได้ 576 · จำนวนเส้นไม่ตรงเมื่อไหร่ ถอยไปใช้สัดส่วนเดิมเหมือนเดิม จึงไม่กระทบตู้ที่ไม่มีเส้นคั่น · ตัวคั่นต้องกินความกว้างของบานจริงและอยู่ในช่อง ไม่นับพื้นกับคานที่เป็นขอบของช่องเอง"],
     ["1.003","2026-08-21","ช่องขนาดในแผงขวาเรียง กว้าง ก่อน ยาว — ใบสั่งงานและที่คุยกันหน้างานอ่านเป็น กว้าง คูณ ยาว ช่องที่เรียงกลับกันจึงกรอกสลับกันบ่อย โดยเฉพาะชิ้นที่กว้างมากกว่ายาว · สลับทั้งช่องขนาดหลัก ช่องขนาดระนาบอ้างอิงของเส้นแบ่ง และกล่องขนาดตัดที่หักความหนาขอบแล้ว ทั้งบรรทัดขนาดและบรรทัดระยะที่หัก · ข้อความแจ้งเตือนอ่านเป็น กว้าง คูณ ยาว ตามไปด้วย ทั้งตอนกลับแนวลายและหัวหน้าต่าง Preview 2D เพราะสลับที่ช่องแต่ปล่อยข้อความไว้แบบเดิมจะยิ่งสับสนกว่าเดิม · ตัวแปรข้างในและไฟล์ส่งออกไม่เปลี่ยน L ยังเป็น L และ W ยังเป็น W เปลี่ยนแค่ลำดับที่ตาเห็น"],
     ["1.002","2026-08-21","FIX คานหน้ากับคานหลังขึ้นลายตั้ง ต้องเป็นลายนอนเสมอ — คานเป็นไม้เส้นยาว สูงแค่ 70 มม. ลายต้องวิ่งตามความยาวอย่างเดียว ตั้งลายขวางบนชิ้นสูง 70 ไม่มีใครทำ ทั้งเปลืองแผ่นและไม้แตกง่ายตามแนวเสี้ยน · ของเดิมให้ท้ายรหัสสีชนะบทบาทชิ้น รหัสตู้ในไฟล์นี้คือ G01M0177Y ลงท้าย Y ซึ่งแปลว่าลายตั้ง จึงถูกสั่งลายตั้งไปด้วย · เป็นแผลเดียวกับแผ่นนอนที่แก้ไปใน 42.0 แค่คนละบทบาท ตอนนี้คานไม่รับคำสั่งแนวลายจากรหัสสีเช่นกัน · ไฟล์เก่าซ่อมตัวเองตอนคิดฉาก · แผ่นข้าง แผ่นหลัง และบาน ยังฟังรหัส X/Y เหมือนเดิม · FEAT ข้อความเตือนเรื่องสีไม่ขึ้นใน 3D บอกครบพอที่จะตามต่อได้เอง ทั้งชื่อชิ้น ลิงก์ที่ตั้งไว้ รหัสที่ resolve ออกมา และ Part ที่ใช้ ของเดิมบอกแต่รหัสปลายทาง ซึ่งถ้า resolve ไม่ออกก็ได้ค่าว่าง เตือนไปก็ยังไม่รู้ว่าชิ้นไหน"],
     ["1.001","2026-08-21","เริ่มนับเวอร์ชันใหม่ที่ 1.001 — เนื้อโปรแกรมเท่ากับ 42.1 ทุกประการ ไม่มีอะไรเปลี่ยน เปลี่ยนแค่วิธีนับเลขเวอร์ชัน · จากนี้เดินทีละหนึ่งเป็น 1.002 1.003 ไปเรื่อย ๆ · ประวัติเก่าตั้งแต่ 42.1 ลงไปยังอยู่ครบตามเลขเดิม ไม่ไล่เขียนใหม่ เพราะเลขในนั้นถูกอ้างถึงในบันทึกและในบทสนทนาไปแล้ว การเปลี่ยนย้อนหลังจะทำให้ตามรอยไม่ได้"],
@@ -6110,7 +6128,21 @@ function applyDoorSpecs(inst){
        ปัดขอบสะสม (ไม่ใช่ปัดความสูงทีละใบ) รอยต่อของสองใบที่ติดกันจึงตรงกันเป๊ะ ช่องไฟไม่เพี้ยน */
     const vn=Math.max(+sp.vn||1,1), vi=Math.min(Math.max(+sp.vi||0,0),vn-1), vgap=Math.max(+sp.vgap||0,0);
     const vgs=(Array.isArray(sp.vgaps)&&sp.vgaps.length===vn-1)?sp.vgaps.map(v=>Math.max(+v||0,0)):new Array(Math.max(vn-1,0)).fill(vgap);
-    if(vn>1 && B!=null && T!=null && Array.isArray(sp.hrs) && sp.hrs.length===vn){
+    /* ───────── v1.004: มีชั้นหรือเส้นแบ่งคั่นอยู่ในช่อง บานต้องหักตรงนั้น ─────────
+       ของเดิมแบ่งความสูงตาม "สัดส่วนที่จำไว้" (hrs) ซึ่งถูกถ่ายไว้ตอนสร้างบานครั้งแรก
+       ย้ายเส้นแบ่งทีหลังเท่าไหร่ บานก็ไม่ขยับตาม เพราะมันดูแค่ตัวเลขสัดส่วนเดิม
+       เคสจริง เส้นแบ่งอยู่ที่ 180 จากบน แต่ hrs ค้างที่ 10:3 หน้าลิ้นชักจึงได้ 173.8
+       ทั้งที่ควรได้ 177 คือ 180 ลบครึ่งช่องไฟสองข้างของรอยต่อ
+       ใช้ตำแหน่งเส้นแบ่งเมื่อจำนวนเส้นตรงกับจำนวนบานพอดีเท่านั้น ไม่งั้นถอยไปใช้สัดส่วนเดิม */
+    let _cuts=[];
+    if(vn>1 && B!=null && T!=null){ try{ _cuts=_deSplitCuts(b,B,T,xL,xR); }catch(e){ _cuts=[]; } }
+    if(vn>1 && B!=null && T!=null && _cuts.length===vn-1){
+      const ed=[B,..._cuts,T];
+      const y0=ed[vi]+((vi>0)?(vgs[vi-1]||0)/2:0);
+      const y1=ed[vi+1]-((vi<vn-1)?(vgs[vi]||0)/2:0);
+      if(y1-y0>=20){ yB=round(y0); yT=round(y1); }
+    }
+    else if(vn>1 && B!=null && T!=null && Array.isArray(sp.hrs) && sp.hrs.length===vn){
       const useFix=(settings.doorRatioAll===false);
       const fx2=Array.isArray(sp.vfix)?sp.vfix:[];
       let usable=(T-B)-vgs.reduce((a,v)=>a+v,0);
@@ -6171,6 +6203,24 @@ function applyDoorSpecs(inst){
    บน/ล่าง/ซ้าย/ขวา + ระหว่างบานแนวตั้ง/แนวนอน + สัดส่วนความสูงแต่ละแถว
    คิดจากผิวนอกของแผ่นข้างเสมอ (บานทับ) แล้วเขียนลงสเปคขอบให้ด้วย
    ตู้เปลี่ยนขนาดทีหลังจึงคำนวณคืนได้เป๊ะ ไม่ต้องมาไล่แก้ทีละบานอีก */
+/* v1.004: หาชั้น/เส้นแบ่งที่คั่นอยู่กลางช่องบาน — ต้องกินความกว้างของบานจริง ๆ
+   และต้องอยู่ "ใน" ช่อง ไม่ใช่ตัวขอบบนล่างของช่องเอง ไม่งั้นจะนับพื้นกับคานเข้ามาด้วย
+   คืนพิกัดกึ่งกลางของแต่ละเส้น เรียงจากล่างขึ้นบน */
+function _deSplitCuts(b,B,T,xL,xR){
+  const out=[]; const inst=b&&b.cabInst; if(inst==null) return out;
+  const wide=(isFinite(xR)&&isFinite(xL)&&xR>xL)?(xR-xL):0;
+  (state.boards||[]).forEach(x=>{
+    if(!x||x===b||x.cabInst!==inst) return;
+    if(x._door||x._dx||x._box) return;
+    if(x.orient!=="flat") return;
+    if(isRail(x)) return;
+    const d=worldDims(x), y0=x.y-d[1]/2, y1=x.y+d[1]/2;
+    if(y0<=B+2 || y1>=T-2) return;                       // ขอบบน/ล่างของช่อง ไม่ใช่ตัวคั่น
+    if(wide>0){ const ov=Math.min(x.x+d[0]/2,xR)-Math.max(x.x-d[0]/2,xL);
+      if(!(ov>Math.max(wide*0.5,40))) return; }          // ไม่กินความกว้างบาน = คนละช่อง
+    out.push(round((y0+y1)/2)); });
+  return [...new Set(out)].sort((a,c)=>a-c);
+}
 function frontFrameOf(inst,zone,hint){
   const carc=_deCarcOf(inst);
   const zEq=x=> (zone==null)?(x.zoneLo==null):(x.zoneLo===zone);
@@ -11691,6 +11741,30 @@ function renderCabInspector(g,insp,body,rf){
   { const sp=body.querySelector("#cab_shop"); if(sp)sp.onclick=()=>{
       try{ ShopPaper.open({scope:"cab"}); }catch(err){ console.error(err); toast("เปิดแบบผลิตไม่สำเร็จ"); } }; }
 }
+/* ───────── v1.017: ซ่อนคำอธิบายในแผงขวาได้ ─────────
+   แผงนี้มีบล็อกอธิบายยาว ๆ แทรกอยู่แทบทุกช่อง ซึ่งจำเป็นตอนใช้ครั้งแรก
+   แต่พอใช้เป็นแล้วมันดันช่องกรอกจริงตกไปอยู่ล่างจอ ต้องเลื่อนหาทุกครั้ง
+   เลือกได้เอง ตั้งต้นซ่อนไว้ กดปุ่มหัวแผงเพื่อกางกลับมาเมื่อไหร่ก็ได้
+   ไม่ลบทิ้ง เพราะข้อความพวกนี้คือที่เดียวที่บอกกติกาของช่องนั้น ๆ
+   เลือกด้วยลักษณะข้อความ ไม่ใช่ไล่ติดคลาสทีละบล็อก จะได้ครอบคลุมของที่เพิ่มทีหลังด้วย */
+function applyInspHints(){
+  try{
+    const on=(settings.inspHints===true);
+    const bd=$("inspBody"); if(!bd) return;
+    bd.querySelectorAll("div,span,p").forEach(el=>{
+      if(el._hintChecked===undefined){
+        const t=(el.textContent||"").trim();
+        const st=String(el.getAttribute("style")||"");
+        const small=/font-size:\s*1[012](\.\d)?px/.test(st)||el.classList.contains("muted");
+        const noCtl=!el.querySelector("input,select,button,textarea");
+        el._hintChecked=!!(small&&noCtl&&t.length>=45);
+      }
+      if(el._hintChecked) el.style.display=on?"":"none";
+    });
+    const b2=$("inspHintBtn"); if(b2){ b2.textContent=on?"? ซ่อนคำอธิบาย":"? คำอธิบาย";
+      b2.style.background=on?"var(--accent)":""; b2.style.color=on?"#fff":""; b2.style.borderColor=on?"transparent":""; }
+  }catch(e){}
+}
 function showInspector(){
   const insp=$("insp"), body=$("inspBody");
   const rf=$("resizeFloat");
@@ -11945,7 +12019,27 @@ function showInspector(){
             return `<div class="f_hgRow" data-e="${h.c.edge}" data-i="${h.i}" style="margin-top:6px;padding:6px 7px;border:1px solid ${pin?"#ff9500":"var(--line)"};border-radius:8px;cursor:pointer;${pin?"background:rgba(255,149,0,.09)":""}">
               <div style="display:flex;align-items:center;gap:6px">
                 <span style="font-size:12px;white-space:nowrap;${bad?"color:#c0392b;font-weight:700":"opacity:.85"}">${pin?"◉ ":""}${bad?"⚠ ":""}บานพับ ${n+1}</span>
-                <span style="font-size:11px;font-family:var(--mono);opacity:.7;margin-left:auto;white-space:nowrap">Y ${Math.round(h.y)}${off?(" ("+(off>0?"+":"")+off+")"):""}</span>
+                <span style="font-size:11px;font-family:var(--mono);opacity:.7;margin-left:auto;white-space:nowrap">${(()=>{
+                  /* ───────── v1.016: บอกระยะจากขอบบานด้วย ไม่ใช่มีแต่ระดับในฉาก ─────────
+                     Y ที่โชว์อยู่คือความสูงในฉาก วัดจากพื้นห้อง ซึ่งไม่มีใครใช้ตอนตั้งเครื่อง
+                     แบบที่ส่งโรงงานบอกเป็นระยะจากขอบบานเสมอ อยากรู้ก็ต้องเอาความสูงบานมาลบเอง
+                     ทุกครั้ง ทุกตัว ทุกบาน ซึ่งเป็นงานที่คอมพิวเตอร์ควรทำให้ตั้งนานแล้ว */
+                  const _dd=worldDims(b), _t=b.y+_dd[1]/2, _b0=b.y-_dd[1]/2;
+                  const _ft=Math.round((_t-h.y)*10)/10, _fb=Math.round((h.y-_b0)*10)/10;
+                  return "บน "+_ft+" · ล่าง "+_fb+" · Y "+Math.round(h.y)+(off?(" ("+(off>0?"+":"")+off+")"):""); })()}</span>
+              </div>
+              <!-- v1.015: ใส่ระยะเป๊ะ ๆ ได้ ไม่ใช่มีแต่ปุ่มขยับทีละ 96 กับ 32
+                   ระยะบานพับต้องหลบตะแกรงหรือรางที่อยู่ในตู้ใบนั้น ซึ่งเป็นเลขเฉพาะของงาน
+                   กดขยับทีละขั้นแล้วลุ้นให้บังเอิญตรง ทำไม่ได้จริงและเสียเวลามาก
+                   พิมพ์ Y ที่ต้องการลงไปตรง ๆ ระบบแปลงเป็นระยะขยับให้เอง เป็นค่าเฉพาะตู้ใบนี้ -->
+              <div style="display:flex;gap:4px;margin-top:5px;align-items:center">
+                <select class="nameinp f_hgYm" data-e="${h.c.edge}" data-i="${h.i}" style="flex:none;width:74px;padding:3px 4px;font-size:11px">
+                  <option value="top">จากบน</option><option value="bot">จากล่าง</option><option value="abs">Y ในฉาก</option>
+                </select>
+                <input type="number" step="any" class="nameinp f_hgY" data-e="${h.c.edge}" data-i="${h.i}"
+                  value="${(()=>{ const _dd=worldDims(b); return Math.round((b.y+_dd[1]/2-h.y)*10)/10; })()}" style="flex:1;min-width:0;padding:3px 6px;font-size:11px;font-family:var(--mono)">
+                <button class="ibtn f_hgYset" data-e="${h.c.edge}" data-i="${h.i}" title="ย้ายบานพับตัวนี้ไปที่ระยะ Y ที่กรอก"
+                  style="flex:none;padding:3px 10px;font-size:11px;background:var(--accent);color:#fff;border-color:transparent">ใช้</button>
               </div>
               <div style="display:flex;gap:4px;margin-top:5px">
                 ${B("u"+st,"↑"+st,"เลื่อนขึ้น "+st+" มม.")}${B("d"+st,"↓"+st,"เลื่อนลง "+st+" มม.")}
@@ -11955,7 +12049,7 @@ function showInspector(){
                 ${B("+d","＋↓"+st,"เพิ่มบานพับใหม่ 1 ตัว ใต้ตัวนี้ "+st+" มม.")}${B("+u","＋↑"+st,"เพิ่มบานพับใหม่ 1 ตัว เหนือตัวนี้ "+st+" มม.")}
                 ${B("0","คืนค่า","กลับไปตำแหน่งตามสูตร",off?"":";opacity:.4;pointer-events:none")}${B("x","✕","ลบบานพับตัวนี้")}
               </div></div>`; }).join("");
-          return `<div class="fld" style="margin-top:8px"><label>บานพับบานนี้ — ขยับหลบชั้น (เกณฑ์ ${cl} มม.)</label>${rows}
+          return `<div class="fld hgNudgeWrap" style="margin-top:8px"><label>บานพับบานนี้ — ขยับหลบชั้น (เกณฑ์ ${cl} มม.)</label>${rows}
             <div style="font-size:11px;opacity:.6;margin-top:5px;line-height:1.5">แดง = ตัวนั้นอยู่ใกล้ชั้นเกินเกณฑ์ · ↑↓ = เลื่อนตัวเดิม (96 หยาบ · 32 ละเอียดตามระบบ 32) · ＋ = เพิ่มบานพับตัวใหม่ห่าง 96 สำหรับบานหนัก · ✕ = ลบตัวนั้น · ทุกปุ่มเจาะฐานบนแผ่นข้างใหม่ให้เอง<br>ชี้ที่แถว = วงแหวนส้มโผล่ที่บานพับตัวนั้นใน 3D · คลิกแถว = ปักหมุดไว้ให้ค้าง (คลิกซ้ำเพื่อเอาออก)</div></div>`; })():""}
         ${(isRail(b)&&b.rule)?`<div style="display:flex;gap:6px;align-items:center;margin-top:6px;flex-wrap:nowrap">
           <span style="font-size:12px;opacity:.85;white-space:nowrap">คาน</span>
@@ -12135,7 +12229,7 @@ function showInspector(){
                <button type="button" class="mfFaceBtn ${c.face!=="bottom"?"sel":""}" data-ci="${i}" data-face="top">บน</button>
                <button type="button" class="mfFaceBtn ${c.face==="bottom"?"sel":""}" data-ci="${i}" data-face="bottom">ล่าง</button>
              </div></div>`:"").join("")+`</div>`:""}
-      ${(b.connectors||[]).some(c=>c.type==="hinge")?`<div style="margin-top:8px;display:grid;gap:6px;font-size:12px">`+
+      ${(b.connectors||[]).some(c=>c.type==="hinge")?`<div class="hgSideWrap" style="margin-top:8px;display:grid;gap:6px;font-size:12px">`+
         (b.connectors||[]).map((c,i)=> c.type==="hinge"?
           `<div style="display:flex;align-items:center;gap:8px">
              <span style="min-width:90px;opacity:.85">บานพับ</span>
@@ -12239,6 +12333,35 @@ function showInspector(){
     else if(a[0]==="u") nudgeHinge(b,c,i,+parseFloat(a.slice(1)));
     else if(a[0]==="d") nudgeHinge(b,c,i,-parseFloat(a.slice(1)));
     showInspector(); }; });
+  /* v1.015: ย้ายไปที่ระยะ Y ที่พิมพ์ — คิดส่วนต่างจากตำแหน่งปัจจุบันแล้วส่งให้ตัวขยับตัวเดิม
+     ใช้ทางเดียวกับปุ่ม ↑↓ ทุกประการ จึงเจาะฐานบนแผ่นข้างใหม่ให้เองเหมือนกัน */
+  body.querySelectorAll(".f_hgYset").forEach(el=>{ el.onclick=()=>{
+    const e=el.dataset.e, i=+el.dataset.i;
+    const inp=body.querySelector('.f_hgY[data-e="'+e+'"][data-i="'+i+'"]'); if(!inp) return;
+    const raw=parseFloat(inp.value); if(!isFinite(raw)) return;
+    /* v1.016: แปลงค่าที่พิมพ์ตามโหมดที่เลือก ให้กลายเป็นระดับในฉากก่อนคิดส่วนต่าง */
+    const md=(body.querySelector('.f_hgYm[data-e="'+e+'"][data-i="'+i+'"]')||{}).value||"top";
+    const _dd=worldDims(b), _top=b.y+_dd[1]/2, _bot=b.y-_dd[1]/2;
+    const want=(md==="top")?(_top-raw):(md==="bot")?(_bot+raw):raw;
+    const c=(b.connectors||[]).find(k=>k&&k.type==="hinge"&&k.edge===e); if(!c) return;
+    /* อ่านตำแหน่งปัจจุบันจากตัวเดียวกับที่แผงขวาใช้แสดง จะได้ตรงกับเลขที่ตาเห็นเป๊ะ */
+    let cur=null;
+    try{ const p0=(hingePointsOf(b)||[]).find(x=>x&&x.c&&x.c.edge===e&&x.i===i); if(p0) cur=p0.y; }catch(err){}
+    if(cur==null){ toast("อ่านตำแหน่งบานพับตัวนี้ไม่ได้"); return; }
+    const d=Math.round((want-cur)*10)/10;
+    if(Math.abs(d)<0.05){ toast("อยู่ที่ระยะนี้แล้ว"); return; }
+    _hingePin={id:b.id,edge:e,i}; c.manual=true;
+    nudgeHinge(b,c,i,d); showInspector();
+    toast("ย้ายบานพับตัวที่ "+(i+1)+" ไป"+(md==="top"?("จากบน "+raw):md==="bot"?("จากล่าง "+raw):("Y "+raw))+" มม. (ขยับ "+(d>0?"+":"")+d+")"); }; });
+  body.querySelectorAll(".f_hgYm").forEach(el=>{ el.onclick=ev=>ev.stopPropagation();
+    el.onchange=()=>{ const inp=body.querySelector('.f_hgY[data-e="'+el.dataset.e+'"][data-i="'+el.dataset.i+'"]'); if(!inp) return;
+      const p0=(hingePointsOf(b)||[]).find(x=>x&&x.c&&x.c.edge===el.dataset.e&&x.i===+el.dataset.i); if(!p0) return;
+      const dd=worldDims(b), t=b.y+dd[1]/2, b0=b.y-dd[1]/2;
+      inp.value=Math.round(((el.value==="top")?(t-p0.y):(el.value==="bot")?(p0.y-b0):p0.y)*10)/10; }; });
+  body.querySelectorAll(".f_hgY").forEach(el=>{ el.onkeydown=ev=>{ if(ev.key!=="Enter") return;
+    ev.preventDefault();
+    const btn=body.querySelector('.f_hgYset[data-e="'+el.dataset.e+'"][data-i="'+el.dataset.i+'"]'); if(btn) btn.click(); };
+    el.onclick=ev=>ev.stopPropagation(); });
   { const hr=body.querySelector("#f_hangRail"); if(hr)hr.onclick=()=>{try{addHangRail();}catch(e){console.error(e);}}; }
   { let hra=!!b._hangRail&&b._hrAuto; const abtns=body.querySelectorAll(".f_hrAuto");
     abtns.forEach(btn=>btn.onclick=()=>{ hra=btn.getAttribute("data-a")==="1"; abtns.forEach(x=>{const on=(x.getAttribute("data-a")==="1")===hra; x.style.cssText=on?"background:var(--accent);color:#fff;border-color:transparent":"";}); });
@@ -12559,6 +12682,13 @@ function showInspector(){
       sync(0); toast(r.n?("ล้างร่องแผ่นหลัง "+r.n+" ร่อง จาก "+r.boards+" แผ่น"):"ไม่มีร่องแผ่นหลังให้ล้าง"); }; }
   body.querySelector("#f_del").onclick=()=>deleteBoard(b.id);
   groupifyInspector(body);
+  try{ applyInspHints(); }catch(e){}   // v1.017
+  /* ───────── v1.018: รวมของบานพับไว้ด้วยกัน ─────────
+     แถวเลือกด้านบานพับ (ซ้าย/ขวา) กับบล็อกขยับหลบชั้น เป็นเรื่องเดียวกัน
+     แต่ถูกวางคนละที่ในแผง ห่างกันหลายช่วงจอ ต้องเลื่อนขึ้นลงสลับไปมาตอนตั้งค่า
+     ย้ายบล็อกขยับมาต่อท้ายแถวเลือกด้านทันที ทำตอนวาดเสร็จ ไม่ต้องรื้อลำดับเทมเพลต */
+  try{ const sw=body.querySelector(".hgSideWrap"), nw=body.querySelector(".hgNudgeWrap");
+    if(sw&&nw&&sw.parentNode&&nw!==sw.nextElementSibling) sw.parentNode.insertBefore(nw,sw.nextSibling); }catch(e){}
 }
 function groupifyInspector(body){
   try{ if(!body||body.dataset.grouped)return; const kids=Array.prototype.slice.call(body.children); if(kids.length<6)return;
@@ -13834,32 +13964,80 @@ function kitPushTarget(inst,where){
 }
 /* เจาะรูกดกระเด้ง — สองรูซ้อนที่จุดเดียว รูตื้นกว้างเป็นบ่า รูลึกกว่าเป็นดอกมาร์ค
    จำนวนจุดเท่าจำนวนบานของตู้ ฝั่งละจุด นับจากขอบข้างของแผ่นเข้ามา */
+/* v1.008: สันด้านไหนของชิ้นนี้หันไปทางหน้าตู้ — คิดจากทิศจริงผ่าน orientMatrix
+   แผ่นนอนได้สัน front · แผ่นข้างได้สัน back เพราะแกนของสองชนิดนี้วางคนละทาง */
+function kitFrontEdge(b){
+  try{ const M=orientMatrix(b.orient,b.yaw);
+    const cand=[["left",-1,0],["right",1,0],["front",0,-1],["back",0,1]];
+    let best="front",bd=-2;
+    cand.forEach(c=>{ const v=new THREE.Vector3(c[1],c[2],0).transformDirection(M);
+      if(v.z>bd){ bd=v.z; best=c[0]; } });
+    return best;
+  }catch(e){ return "front"; }
+}
+let _kitPushWarn={}, _kitPushWhere=[];
 function applyKitPush(){
   state.boards.forEach(b=>{ if(b&&b.holes&&b.holes.length) b.holes=b.holes.filter(h=>!(h&&h._kitPush)); });
   const insts=[...new Set(state.boards.filter(b=>b&&b.cabInst&&!b._virtual).map(b=>b.cabInst))];
-  let n=0;
+  let n=0; _kitPushWhere=[];
   insts.forEach(inst=>{
     const kit=cabKitOf(inst); if(!kit) return;
-    const pc=String(kit.pushCode||"").trim(); if(!pc) return;
+    const pc=String(kit.pushCode||"").trim();
+    if(!pc){
+      /* v1.006: ชุดที่กรอกระยะเจาะไว้ครบแต่ไม่มีรหัส = ตั้งใจจะให้เจาะแต่สวิตช์ยังปิด
+         เงียบไปเฉย ๆ ทำให้นั่งรอผลที่ไม่มีวันมา บอกครั้งเดียวต่อชุด */
+      const kc=String(kit.code||kit.name||"").trim();
+      if(kc&&(+kit.pushD1>0||+kit.pushD2>0||+kit.pushInset>0)&&_kitPushWarn[kc]!==1){
+        _kitPushWarn[kc]=1;
+        console.warn("🔘 ชุด “"+kc+"”: กรอกระยะรูกดกระเด้งไว้แล้ว แต่ช่อง กดกระเด้ง — รหัส Element ยังว่าง จึงไม่เจาะให้ · ช่องรหัสเป็นสวิตช์เปิดปิดของบล็อกนี้ ใส่ PUSH_TIP ไปก่อนได้แล้วค่อยผูก Purchase ID ทีหลัง");
+      }
+      return; }
     const where=kitPushWhere(inst,kit);
     const tg=kitPushTarget(inst,where); if(!tg||!(tg.T>0)) return;
     const doors=state.boards.filter(b=>b&&b.cabInst===inst&&b._door&&!b._virtual);
     const nd=Math.max(doors.length,1);
-    const ins=Math.max(+kit.pushInset||50,0), fr=Math.max(+kit.pushFront||50,0);
+    const ins=Math.max(+kit.pushInset||50,0);
     const d1=Math.max(+kit.pushD1||12,0.5), p1=Math.max(+kit.pushDep1||1,0.2);
     const d2=Math.max(+kit.pushD2||8,0.5),  p2=Math.max(+kit.pushDep2||5,0.2);
     const L=Math.max(+tg.L||1,1), W=Math.max(+tg.W||1,1);
-    /* ผิวที่เจาะ: แผ่นบนเจาะจากใต้ท้อง แผ่นพื้นเจาะจากผิวบน — ให้หันเข้าหาช่องตู้เสมอ */
-    const face=(where==="top")?"bottom":"top";
-    const xs=(nd>=2)?[-L/2+ins, L/2-ins]:[-L/2+ins];
-    const y=round(W/2-fr);                                   // นับจากขอบหน้าเข้ามา
+    /* ───────── v1.008: กดกระเด้งเจาะที่ "สันหน้า" ของชิ้น ไม่ใช่ผิวบน/ล่าง ─────────
+       ตัวกดถูกเสียบเข้าสันไม้จากด้านหน้าตู้ ปลายจึงยื่นมาชนหลังบานได้
+       ของเดิมเจาะเป็นรูบนผิวแผ่น ซึ่งเสียบตัวกดไม่ได้เลย
+       และเลือกได้ว่าจะเอาสันของแผ่นพื้น แผ่นบน หรือแผ่นข้าง ตามช่อง ติดที่ไหน
+       ระยะร่นวัดจากปลายของชิ้นนั้นเอง ไม่ใช่จากขอบตู้
+       แผ่นนอน: ร่นจากปลายฝั่งที่บานเปิด · แผ่นข้าง: ร่นจากปลายล่าง (ตั้งต้น 50 ปรับได้) */
+    const edge=kitFrontEdge(tg);
+    const alongL=(edge==="front"||edge==="back");
+    const span=Math.max(alongL?L:W,1);
+    let ux={x:1};
+    try{ ux=new THREE.Vector3(1,0,0).transformDirection(orientMatrix(tg.orient,tg.yaw)); }catch(e){}
+    const sgn=(ux.x>=0)?1:-1;                                // แกน L ของชิ้นชี้ไปทางขวาของโลกไหม
+    let poss=[];
+    if(where==="side"){ poss=[round(-span/2+ins)]; }          // สันหน้าแผ่นข้าง วัดจากล่างขึ้นมา
+    else{
+      doors.forEach(dr=>{ const hg=(dr.connectors||[]).find(c=>c&&c.type==="hinge");
+        const e=hg?String(hg.edge||"").toLowerCase():"";
+        if(e==="left")  poss.push(round(sgn*(span/2-ins)));   // บานพับซ้าย → กดฝั่งขวา
+        else if(e==="right") poss.push(round(-sgn*(span/2-ins))); });
+      poss=[...new Set(poss)];
+      if(!poss.length) poss=(nd>=2)?[round(-span/2+ins),round(span/2-ins)]:[round(span/2-ins)];
+    }
+    poss=poss.filter(v=>Math.abs(v)<=span/2-2);
+    const zc=round(+kit.pushZ||0);                            // ตำแหน่งตามความหนา 0 = กึ่งกลางสัน
     tg.holes=tg.holes||[];
-    xs.forEach(x=>{
-      tg.holes.push({d:round(d1),x:round(x),y:y,depth:round(p1),face:face,_kitPush:true,_kitCode:pc});
-      tg.holes.push({d:round(d2),x:round(x),y:y,depth:round(p2),face:face,_kitPush:true,_kitMark:true});
+    poss.forEach(x=>{
+      tg.holes.push({d:round(d1),edge:edge,pos:round(x),z:zc,depth:round(p1),through:false,_kitPush:true,_kitCode:pc});
+      tg.holes.push({d:round(d2),edge:edge,pos:round(x),z:zc,depth:round(p2),through:false,_kitPush:true,_kitMark:true});
       n++;
     });
+    const xs=poss;
+    try{ _kitPushWhere.push(((state.boards.find(b=>b.cabInst===inst)||{}).cab||inst)+" → "+(tg.name||tg.id)+" ผิว"+(face==="bottom"?"ล่าง":"บน")+" "+xs.length+" จุด"); }catch(e){}
   });
+  /* v1.007: บอกผลให้เห็น — ของเดิมทำงานเงียบ เจาะแล้วก็ไม่มีอะไรยืนยัน
+     รูกดกระเด้งเป็นรูตื้น Ø12 ลึก 1 อยู่บนผิวที่หันเข้าตู้ มองผ่าน ๆ ในสามมิติแทบไม่เห็น */
+  if(n!==applyKitPush._n && n>0){
+    try{ console.log("🔘 เจาะรูกดกระเด้ง "+n+" จุด ("+(n*2)+" รู) — "+_kitPushWhere.join(" · ")); }catch(e){}
+  }
   applyKitPush._n=n;
   return n;
 }
@@ -16059,9 +16237,39 @@ function renderVars(){
     const xm=body.querySelector("#varXmlMap"); if(xm)xm.onclick=()=>openXmlMap(); }
   body.dataset.vhsig=_hsig;
   const tree=body.querySelector("#varTree"); tree.textContent="";   // v7.57.6: ล้างเฉพาะต้นไม้ ในงานเดียวกับที่เติมกลับ
+  try{ dragAutoScroll(tree); dragAutoScroll(body); const md=body.closest?body.closest(".modal .card"):null; if(md) dragAutoScroll(md); }catch(e){}   // v1.019
   const trash='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>';
   let _vdl=0;
-  const renderNodes=(arr,depth,topFam,topColor)=>{ arr.forEach(n=>{ if(!n.children)n.children=[];
+  /* ───────── v1.011: หน้า Variables หลัก เรียงตามตัวอักษรทุกชั้น ─────────
+     ของเดิมเรียงตามลำดับที่ถูกเพิ่มเข้ามา ซึ่งเป็นลำดับที่ XML โยนมาบ้าง กดสร้างเองบ้าง
+     รายการเกินสิบกว่าตัวก็หาไม่เจอแล้ว ต้องกวาดตาทีละบรรทัด
+     เรียงแบบรู้ตัวเลข K_Pull2 จึงมาก่อน K_Pull10 ไม่ใช่หลัง
+     เรียงเฉพาะตอนแสดงผล ไม่แตะลำดับจริงในไฟล์ ลากย้ายเองยังใช้ได้เหมือนเดิม */
+  const _vcmp=(a,b)=>String((a&&a.name)||"").localeCompare(String((b&&b.name)||""),"th",{numeric:true,sensitivity:"base"});
+  /* ───────── v1.013: หัวข้อคั่นตามบาน ในหน้า Variables หลัก ─────────
+     ตัวแปรของบานหนึ่งใบกระจายเป็นหลายตัว FrontShape1 · $FrontMat1 · FrontShapeP1 · K_Pull1
+     · K_Pull_Position1 · K_Pull_Coordinate_X1/Y1 · $FrontEdge1 รวมแล้วบานละเจ็ดแปดตัว
+     เรียงตัวอักษรอย่างเดียวยังต้องกวาดตาหาว่าตัวไหนของบานไหน เพราะชื่อขึ้นต้นต่างกันหมด
+     คั่นด้วยหัวข้อ บานที่ 1 · บานที่ 2 แล้วเรียงในกลุ่มตามตัวอักษร มองปราดเดียวจบ
+     ใช้เลขท้ายชื่อเป็นเลขบาน ตัวที่ไม่มีเลขท้ายอยู่กลุ่ม ค่ารวมของตู้ ด้านบนสุด
+     คั่นเฉพาะชั้นบนสุด ลูกที่ซ้อนอยู่ใต้ Family ยังอยู่ใต้พ่อแม่ของมันเหมือนเดิม */
+  const _doorNoOf=v=>{ const nm=String((v&&v.name)||"").replace(/^\$/,"").trim();
+    /* ตัวแปรตัวเลขของตู้อย่าง D2 D3 D4 ก็ลงท้ายด้วยเลขเหมือนกัน แต่ไม่ใช่เลขบาน
+       ถ้าเอาไปจัดกลุ่มด้วย $D2 จะไปโผล่ใต้หัวข้อ บานที่ 2 ซึ่งผิดความหมายคนละเรื่อง
+       ตัวอักษรตัวเดียวแล้วตามด้วยเลข = พารามิเตอร์ของตู้ ไม่ใช่ของบาน */
+    if(/^[A-Za-z]\d+$/.test(nm)) return 0;
+    const m=/(\d+)\s*$/.exec(nm); return m?parseInt(m[1],10):0; };
+  let _vLastDoor=null;
+  const renderNodes=(arr,depth,topFam,topColor)=>{
+    const _seq=(arr||[]).slice().sort((a,b)=>{ if(depth!==0) return _vcmp(a,b);
+      const da=_doorNoOf(a), db=_doorNoOf(b); if(da!==db) return da-db; return _vcmp(a,b); });
+    _seq.forEach(n=>{ if(!n.children)n.children=[];
+    if(depth===0){ const dn=_doorNoOf(n);
+      if(dn!==_vLastDoor){ _vLastDoor=dn;
+        const hd=document.createElement("div");
+        hd.style.cssText="margin:14px 0 4px;padding:5px 10px;border-radius:8px;background:rgba(0,122,255,.10);color:#0a5fd0;font-size:11.5px;font-weight:700";
+        hd.textContent=dn?("บานที่ "+dn):"ค่ารวมของตู้ (ไม่ระบุบาน)";
+        tree.appendChild(hd); } }
     const hasKids=n.children.length>0, isFam=n.type==="Family", openN=n._open!==false;
     const lst={Material:"dlMatE",Surface:"dlSurfE",Edge:"dlEdgeE",Color:"dlColorE",Part:"dlPartE"}[n.type];
     const la=lst?`list="${lst}"`:"";
@@ -16219,6 +16427,7 @@ function renderVars(){
       : topColor;
     if(openN && n.children.length) renderNodes(n.children,depth+1, childTopFam, childTopColor);
   }); };
+  _vLastDoor=null;
   renderNodes(settings.vars||[],0,null,"");
   // empty-area: right-click = add Family, drop = move to root
   tree.oncontextmenu=e=>{ if(e.target===tree){ e.preventDefault(); varCtxShow(e.clientX,e.clientY,[{label:"＋ เพิ่ม Family",fn:()=>{ pushVarsUndo(); settings.vars.push(newVarNode("Family")); renderVars(); }}]); } };
@@ -16277,7 +16486,22 @@ function openCabVars(board){
       <button class="ibtn" id="cvUseDefAll">↺↺ ใช้ค่าตั้งต้นกับทุกตู้ในฉาก</button></div>
     <div class="muted" style="font-size:11px;margin:-6px 0 10px;line-height:1.55">ค่าสีของตู้เป็น "ค่าประจำตู้ใบนั้น" ถูกบันทึกไว้และคงอยู่หลังรีเฟรช ค่าตั้งต้นในหน้า Variables หลักไม่มาทับให้เอง เพราะจะไปทับสีที่ออเดอร์ส่งมาด้วย · ปุ่มนี้คือสั่งล้างค่าประจำตู้ทิ้ง แล้วให้ตกกลับไปใช้ค่าตั้งต้น</div>`
     :`<div class="muted" style="font-size:12px;margin-bottom:8px">ตู้นี้ไม่มี Part ที่ลิงก์ตัวแปรสี/วัสดุไว้</div>`;
+  /* ───────── v1.009: จัดกลุ่มตามบาน + เรียงตามตัวอักษร ─────────
+     ตัวแปรของบานหนึ่งใบกระจายอยู่คนละที่ ทั้ง FrontColor1 FrontShape1 K_Pull1
+     และกำลังจะมีตำแหน่งกับพิกัด X/Y เพิ่มอีก รวมแล้วบานละหกเจ็ดตัว
+     เรียงตามลำดับที่ระบบเจอ จึงหาไม่เจอว่าตัวไหนของบานไหน ต้องไล่อ่านทีละบรรทัด
+     ดึงเลขท้ายชื่อออกมาเป็นเลขบาน แล้วจัดเป็นกลุ่ม บานที่ 1 · บานที่ 2 …
+     ในกลุ่มเรียงตามตัวอักษร ตัวที่ไม่มีเลขบานอยู่กลุ่มบนสุดตามเดิม */
+  { const _cmpV=(a,b)=>String(a||"").localeCompare(String(b||""),"th",{numeric:true,sensitivity:"base"});
+    const _doorNo=n=>{ const m=/(\d+)\s*$/.exec(String(n||"")); return m?parseInt(m[1],10):0; };
+    fams.sort((a,b)=>{ const da=_doorNo(a.fam.name), db=_doorNo(b.fam.name);
+      if(da!==db) return da-db;
+      return _cmpV(a.fam.name,b.fam.name); }); }
+  let _lastDoor=null;
   fams.forEach(({fam,kids})=>{
+    { const m=/(\d+)\s*$/.exec(String(fam.name||"")), dn=m?parseInt(m[1],10):0;
+      if(dn!==_lastDoor){ _lastDoor=dn;
+        html+=`<div class="sumh" style="margin-top:14px">${dn?("บานที่ "+dn):"ค่ารวมของตู้ (ไม่ระบุบาน)"}</div>`; } }
     /* v9.78: ตู้ที่ยังไม่เคยเลือกเอง ให้โชว์ค่าที่ระบบใช้อยู่จริงก่อน แล้วค่อยถอยไปค่ากลางของ Family
        เดิมตกไปที่ค่ากลางทันที ดรอปดาวน์จึงขึ้น NoPull ทั้งที่ตู้ใบนั้นมีมือจับ H026 อยู่ */
     const cur=state.cabColors[inst][fam.name]||(_sysFam.has(fam.name)?sysFamCurrent(inst,fam.name):"")||fam.order||""; const opts=fam.options||[];
@@ -16337,8 +16561,19 @@ function openCabVars(board){
       scanEx(bb._wExpr&&bb._wExpr.e);      // ล็อกความกว้าง
       scanEx(bb._flRatio);                 // สัดส่วนหน้าบานที่ใส่ตัวแปรไว้
     });
-    const own=keys.filter(k=>xml[k]!=null||ovRaw[k]!=null||usedNum.has(k));
-    const other=keys.filter(k=>own.indexOf(k)<0);
+    /* ───────── v1.014: ตัวแปรรายบานที่ "ตู้ใบนี้มีจริง" ต้องอยู่ตารางบน ─────────
+       ระบบสร้างช่องมือจับไว้ถึงบาน 6 เผื่อทุกงาน แต่ตู้ส่วนใหญ่มีบานเดียวสองบาน
+       ค่าที่เกินจึงเป็นค่ากลางที่ตู้ใบนี้ไม่ได้ใช้ ไม่ควรมาปนกับของที่ต้องแก้จริง
+       ตู้บานเดียวก็ควรเห็นแค่ X1 กับ Y1 อยู่บนสุด ที่เหลือพับไว้ในกลุ่มค่ากลาง
+       นับบานจากชิ้นจริงในตู้ ไม่ใช่เดาจากจำนวนช่องที่ระบบสร้างไว้ */
+    const _nDoor=Math.max(boards.filter(b=>b&&b._door&&!b._virtual).length,1);
+    const _doorN=k=>{ const m=/(\d+)\s*$/.exec(String(k||"")); if(!m) return 0;
+      if(/^[A-Za-z]\d+$/.test(String(k||""))) return 0;     // D2 D3 = พารามิเตอร์ของตู้ ไม่ใช่เลขบาน
+      return parseInt(m[1],10); };
+    const _mine=k=>{ const d=_doorN(k); return d>0 && d<=_nDoor; };
+    const _cmpK=(a,b)=>String(a).localeCompare(String(b),"th",{numeric:true,sensitivity:"base"});
+    const own=keys.filter(k=>xml[k]!=null||ovRaw[k]!=null||usedNum.has(k)||_mine(k)).sort(_cmpK);
+    const other=keys.filter(k=>own.indexOf(k)<0).sort(_cmpK);
     const rowOf=k=>{ const base=(xml[k]!=null?xml[k]:gl[k]);
       const mine=(xml[k]!=null), ov=(ovRaw[k]!=null);
       const src=mine?"XML ตู้นี้":(ov?"ทับเองที่ตู้นี้":(usedNum.has(k)?"ใช้ในสูตรของตู้นี้ · ค่ามาจาก Variables กลาง":"Variables กลาง"));
@@ -16445,9 +16680,9 @@ const ELEM_FORM={
              ["__h","กดกระเด้ง (ใส่เฉพาะชุดที่มี · เว้นว่าง = ชุดนี้ไม่มีกดกระเด้ง)"],
              ["pushCode","กดกระเด้ง — รหัส Element"],
              ["pushPlateCode","แผ่นยึด (แบบติดลอย) — รหัส Element · เบิกตามแต่ไม่เจาะเพิ่ม"],
-             ["pushWhere","ติดที่ไหน — auto (เลือกตามชนิดตู้) / top (แผ่นบน) / bottom (แผ่นพื้น) / side (สันแผ่นข้าง) / rail (คานนอน)"],
-             ["pushInset","ระยะจากขอบข้างของแผ่น เข้ามาถึงศูนย์รู (มม. · ตั้งต้น 50)"],
-             ["pushFront","ระยะจากขอบหน้า เข้ามาถึงศูนย์รู (มม. · ตั้งต้น 50)"],
+             ["pushWhere","เจาะสันหน้าของชิ้นไหน — auto (ตามชนิดตู้) / bottom (แผ่นพื้น) / top (แผ่นบน) / side (แผ่นข้าง) / rail (คานนอน)"],
+             ["pushInset","ระยะร่นจากปลายของชิ้นนั้นเอง ถึงศูนย์รู (มม. · ตั้งต้น 50) — แผ่นนอน: ร่นจากปลายฝั่งที่บานเปิด · แผ่นข้าง: ร่นจากปลายล่าง"],
+             ["pushZ","ตำแหน่งตามความหนาสัน วัดจากกึ่งกลาง (มม. · ว่าง = กึ่งกลางสัน)"],
              ["pushD1","รูที่ 1 — Ø (มม. · ตั้งต้น 12)"],["pushDep1","รูที่ 1 — ลึก (มม. · ตั้งต้น 1)"],
              ["pushD2","รูที่ 2 — Ø (มม. · ตั้งต้น 8)"],["pushDep2","รูที่ 2 — ลึก (มม. · ตั้งต้น 5 · ดอกมาร์คให้รู้ว่าเป็นกดกระเด้ง)"],
              ["__h","Part List Information"],["itemId","Purchase Item ID (ถ้าชุดนี้มีรหัสของตัวเอง)"],["notes","Notes"]],
@@ -16840,6 +17075,28 @@ function fitKindOf(el){ const k=String((el&&el.kind)||"");
   if(/มือจับ|\bpull\b|\bhandle\b/i.test(k)) return "pull";
   return "basket"; }
 let _emShowAll=false;
+/* ───────── v1.019: ลากแล้วเลื่อนจอตามไม่ได้ ─────────
+   ระหว่างลาก เบราว์เซอร์ไม่ส่งเหตุการณ์ล้อเมาส์ให้ กล่องที่มีแถบเลื่อนจึงค้างอยู่กับที่
+   ลากของจากท้ายลิสต์ไปวางบนสุด หรือลากเข้าโฟลเดอร์ที่อยู่นอกจอ จึงทำไม่ได้เลย
+   ต้องปิดกล่อง เลื่อนเอง แล้วค่อยเปิดใหม่ ซึ่งไม่ใช่ทางที่ควรต้องทำ
+   จับตำแหน่งตัวชี้ระหว่างลาก ใกล้ขอบบนหรือขอบล่างเมื่อไหร่ก็ค่อย ๆ เลื่อนให้
+   ใช้ลูปวาดภาพ ไม่ใช่รอเหตุการณ์ลากทีละครั้ง จะได้เลื่อนต่อเนื่องแม้ค้างเมาส์นิ่ง */
+function dragAutoScroll(el){
+  if(!el||el._dAS) return; el._dAS=1;
+  let raf=0, dir=0;
+  const step=()=>{ raf=0; if(!dir) return;
+    el.scrollTop+=dir; if(el.scrollTop>0&&el.scrollTop<el.scrollHeight-el.clientHeight) raf=requestAnimationFrame(step); };
+  const stop=()=>{ dir=0; if(raf){ cancelAnimationFrame(raf); raf=0; } };
+  el.addEventListener("dragover",e=>{
+    const r=el.getBoundingClientRect(), pad=52;
+    const up=e.clientY-r.top, dn=r.bottom-e.clientY;
+    dir=(up<pad)?-Math.ceil((pad-up)/4):(dn<pad)?Math.ceil((pad-dn)/4):0;
+    if(dir&&!raf) raf=requestAnimationFrame(step); else if(!dir) stop();
+  },{passive:true});
+  ["dragleave","drop","dragend"].forEach(ev=>el.addEventListener(ev,stop,{passive:true}));
+  document.addEventListener("dragend",stop,{passive:true});
+}
+let _emDlSig="", _emDlHtml=null;
 function renderElements(){
   const body=$("elemBody"); if(!body)return;
   /* v9.80: หน้านี้วาดใหม่ทั้งก้อนด้วย innerHTML ทุกครั้งที่แตะอะไรก็ตาม
@@ -16858,13 +17115,22 @@ function renderElements(){
   if(elemSel[elemTab]>=list.length) elemSel[elemTab]=list.length-1;
   if(elemSel[elemTab]<0) elemSel[elemTab]=list.length?0:-1;
   const sel=elemSel[elemTab], cur=sel>=0?list[sel]:null;
-  const dl=`<datalist id="dlMat">${elemCodes("materials").map(c=>`<option>${escapeHtml(c)}</option>`).join("")}</datalist>
+  /* ───────── v1.009: ชุด datalist ถูกปั้นใหม่ทุกครั้งที่วาดหน้านี้ ─────────
+     หน้านี้วาดใหม่ทั้งก้อนทุกครั้งที่คลิกรายการ และในก้อนนั้นมี datalist เจ็ดชุด
+     ซึ่งกางรหัสทุกตัวในคลังออกมาเป็น option ทั้งหมด คลังใหญ่ ๆ คือหลายพัน element ต่อคลิก
+     เบราว์เซอร์ต้องรื้อแล้วสร้าง DOM ชุดนั้นใหม่ทุกครั้ง = อาการกระตุกตอนคลิกและตอนเลื่อน
+     รายการพวกนี้เปลี่ยนเฉพาะตอนเพิ่ม/ลบ/แก้รหัส จึงจำไว้แล้วใช้ซ้ำ เทียบด้วยลายเซ็นสั้น ๆ */
+  const _dlSig=[elemCodes("materials").length,elemCodes("surfaces").length,elemCodes("edges").length,
+                elemCodes("fittings").length,linkNames("Material").length,linkNames("Surface").length,
+                linkNames("Edge").length,(settings.elements&&settings.elements.colors||[]).length].join("|");
+  if(_emDlSig!==_dlSig){ _emDlSig=_dlSig; _emDlHtml=null; }
+  const dl=_emDlHtml||(_emDlHtml=`<datalist id="dlMat">${elemCodes("materials").map(c=>`<option>${escapeHtml(c)}</option>`).join("")}</datalist>
     <datalist id="dlSurf">${elemCodes("surfaces").map(c=>`<option>${escapeHtml(c)}</option>`).join("")}</datalist>
     <datalist id="dlEdge">${elemCodes("edges").map(c=>`<option>${escapeHtml(c)}</option>`).join("")}</datalist>
     <datalist id="dlMatVE">${linkNames("Material").map(c=>`<option>${escapeHtml(c)}</option>`).join("")}</datalist>
     <datalist id="dlSurfVE">${linkNames("Surface").map(c=>`<option>${escapeHtml(c)}</option>`).join("")}</datalist>
     <datalist id="dlEdgeVE">${["No Edge",...linkNames("Edge").filter(x=>x!=="No Edge")].map(c=>`<option>${escapeHtml(c)}</option>`).join("")}</datalist>
-    <datalist id="dlFit">${elemCodes("fittings").map(c=>`<option>${escapeHtml(c)}</option>`).join("")}</datalist>`;
+    <datalist id="dlFit">${elemCodes("fittings").map(c=>`<option>${escapeHtml(c)}</option>`).join("")}</datalist>`);
   const trash='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>';
   body.innerHTML=`${dl}
     <div class="seg tabs">${ELEM_TABS.map(t=>`<button type="button" data-tab="${t[0]}" class="${t[0]===elemTab?'sel':''}">${t[1]}</button>`).join("")}</div>
@@ -16904,8 +17170,13 @@ function renderElements(){
     const pick=(_emPick[tab]=(_emPick[tab]||[]).filter(x=>list.indexOf(x)>=0));
     const isPicked=r=>pick.indexOf(r)>=0;
     const vis=[];
-    const kids=q=>[...all].filter(f=>{ const i=f.lastIndexOf("/"); return (i<0?"":f.slice(0,i))===q; }).sort((a,b)=>a.localeCompare(b,"th"));
-    const itemsIn=q=>list.map((r,i)=>[r,i]).filter(x=>fpath(x[0])===q);
+    const kids=q=>[...all].filter(f=>{ const i=f.lastIndexOf("/"); return (i<0?"":f.slice(0,i))===q; }).sort((a,b)=>String(a).localeCompare(String(b),"th",{numeric:true,sensitivity:"base"}));
+    /* v1.009: เรียงตามตัวอักษร — ของเดิมเรียงตามลำดับที่เพิ่มเข้ามา
+       รายการเยอะ ๆ อย่าง Colors หรือ Fittings จึงหาไม่เจอ ต้องกวาดตาทีละบรรทัด
+       เรียงด้วย localeCompare แบบรู้ตัวเลข A2 จึงมาก่อน A10 ไม่ใช่หลัง */
+    const _cmp=(a,b)=>String(a||"").localeCompare(String(b||""),"th",{numeric:true,sensitivity:"base"});
+    const itemsIn=q=>list.map((r,i)=>[r,i]).filter(x=>fpath(x[0])===q)
+      .sort((a,b)=>_cmp(a[0].code,b[0].code));
     const mkItem=(row,i,depth)=>{ const r=document.createElement("div");
       r.className="emItem"+((i===sel||isPicked(row))?" sel":"");
       r.draggable=true; r.style.paddingLeft=(14+depth*14)+"px";
@@ -16985,7 +17256,19 @@ function renderElements(){
         +'ตั้งชื่อชุดให้ตรงกับรหัสที่ออเดอร์ส่งมาในช่อง <span style="font-family:var(--mono)">'+escapeHtml(String(settings.kitField||DEF_SETTINGS.kitField))+'</span> เช่น KIT01 · KIT02<br>'
         +(hasPush?('ชุดนี้มีกดกระเด้งแล้ว — เลือกชุดที่ตู้ได้ที่ <b>คลิกขวา → Variables (ตู้นี้)</b>')
                  :('ชุดนี้ยังไม่มีกดกระเด้ง เว้นช่องรหัสไว้ = ชุดนี้ไม่ต้องเจาะ'))
-        +'</span></div>';
+        +'</span></div>'
+        /* ───────── v1.006: ช่องรหัสคือสวิตช์เปิดปิด แต่ไม่มีอะไรบอกไว้ตรงที่ตั้งค่า ─────────
+           ช่องระยะเจาะทั้งหมดยังกรอกได้ปกติและมีค่าตั้งต้นอยู่แล้ว หน้าตาจึงเหมือนพร้อมทำงาน
+           กรอกระยะครบทุกช่องแล้วรอผลอยู่ แต่ไม่มีรูออกมาสักรู และไม่มีอะไรบอกว่าทำไม
+           ขึ้นสถานะตรงนี้ให้เห็นทันทีว่าตอนนี้จะเจาะหรือไม่เจาะ */
+        +((()=>{ if(hasPush) return '<div style="margin-top:8px;padding:8px 11px;border-radius:9px;background:rgba(47,158,68,.12);color:#2f9e44;font-size:11.5px;line-height:1.55">'
+              +'✔ ชุดนี้จะเจาะรูกดกระเด้งให้ — Ø'+escapeHtml(String(cur.pushD1||12))+' ลึก '+escapeHtml(String(cur.pushDep1||1))
+              +' ซ้อนกับ Ø'+escapeHtml(String(cur.pushD2||8))+' ลึก '+escapeHtml(String(cur.pushDep2||5))
+              +' · เจาะที่สันหน้า ร่นจากปลายชิ้น '+escapeHtml(String(cur.pushInset||50))+' มม. ('+escapeHtml(String(cur.pushWhere||"auto"))+')</div>';
+            return '<div style="margin-top:8px;padding:8px 11px;border-radius:9px;background:rgba(224,133,59,.14);color:#b5651d;font-size:11.5px;line-height:1.55">'
+              +'⚠ <b>ช่อง “กดกระเด้ง — รหัส Element” ยังว่างอยู่ → ชุดนี้จะไม่เจาะรูให้เลย</b><br>'
+              +'ช่องรหัสคือสวิตช์เปิดปิดของทั้งบล็อกนี้ ระยะที่กรอกไว้ด้านล่างจะยังไม่ถูกใช้จนกว่าจะใส่รหัส<br>'
+              +'ถ้ายังไม่มีรหัสสั่งซื้อ ใส่ <span style="font-family:var(--mono)">PUSH_TIP</span> ไปก่อนได้ แล้วค่อยไปผูก Purchase ID ทีหลังที่ Element → Fittings</div>'; })());
       form.appendChild(bar);
       bar.querySelector(".emKitWiz2").onclick=()=>kitWizard();
     }
@@ -17576,6 +17859,8 @@ function renderElements(){
       $("elemModal").classList.remove("show"); fn(c.code); renderVars(); toast("ใส่ค่า “"+c.code+"” กลับ Variables แล้ว"); };
     { const at=body.querySelector("#elemApplyTop"); if(at) at.onclick=()=>ap.onclick(); }   // v16.0
   }
+  try{ ["#emList",".emLeft",".emRight","#emForm"].forEach(q=>{ const el=body.querySelector(q); if(el) dragAutoScroll(el); });
+    dragAutoScroll(body); }catch(e){}   // v1.019: ลากแล้วจอเลื่อนตาม
   _scPut(); try{ requestAnimationFrame(_scPut); }catch(e){}   // v9.80: คืนตำแหน่งเลื่อน
 }
 // resolve a color/decor code → its full row (for reference)
@@ -18353,6 +18638,7 @@ async function loadSettings(){ const s=await lsGet("furnitech:settings",null);
   ensureSampleAlto();     // ซีรีส์ราง Alto + default รูเจาะข้าง/หน้าบาน
   ensureSampleK40();      // ซีรีส์ราง Kitchen 4.0 (สีเดียว)
   if(!Array.isArray(settings.xmlMap)) settings.xmlMap=DEF_SETTINGS.xmlMap.map(x=>({...x}));
+  try{ ensurePullVarsOnce(); }catch(e){ console.error(e); }   // v1.011: ช่องมือจับครบทุกบานตั้งแต่เปิดโปรแกรม
   if(!Array.isArray(settings.dowelFormulas)||!settings.dowelFormulas.length) settings.dowelFormulas=[{name:"มาตรฐาน",rule:settings.dowelSizeRule||DEF_DOWEL_RULE}];
   settings.dowelFormulas=settings.dowelFormulas.filter(f=>f&&f.name).map(f=>({name:String(f.name),rule:String(f.rule||DEF_DOWEL_RULE)}));
   if(!settings.dowelFormulas.length) settings.dowelFormulas=[{name:"มาตรฐาน",rule:DEF_DOWEL_RULE}];
@@ -18679,6 +18965,7 @@ function renderSettings(){
     <div style="font-size:11px;opacity:.72;line-height:1.7;margin-bottom:6px">
       ของที่ผูกกับ<b>ตู้ทั้งใบ</b> ไม่ได้ผูกกับแผ่นไหน — ตู้รหัสที่ระบุไว้ได้ชุดนี้ <b>1 ชุดต่อ 1 ใบ</b> ไม่ว่าตู้ใบนั้นจะมีกี่แผ่น<br>
       ช่องรหัสตู้ใส่ <span style="font-family:var(--mono)">@ถาด</span> ได้ = ใช้รายชื่อเดียวกับช่องรหัสตู้ของถาดฟรอยด์ข้างล่าง แก้ที่เดียวตามกันทั้งสองที่<br>
+      ใส่ <span style="font-family:var(--mono)">*</span> แทนส่วนที่เหลือได้ (<span style="font-family:var(--mono)">BA*</span> = ขึ้นต้นด้วย BA) และนำหน้าด้วย <span style="font-family:var(--mono)">-</span> เพื่อตัดออก เช่น <span style="font-family:var(--mono)">@ถาด, -BN*</span> = ตู้ที่มีถาด แต่ไม่เอาตู้ BN<br>
       รายการเขียนบรรทัดละรหัส เว้นวรรคแล้วตามด้วยจำนวน เช่น <span style="font-family:var(--mono)">ETCP001 1</span> · ไม่ใส่จำนวน = 1<br>
       รหัสที่มีใน Element → Fittings จะได้ชื่อ หน่วย Purchase ID และลูกของมันไปด้วย · ที่ไม่มีก็ยังออกโดยใช้รหัสนั้นเป็นรหัสสั่งซื้อ
     </div>
@@ -18762,7 +19049,7 @@ function renderSettings(){
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${num("dxJoinGap","ตู้ห่างกันไม่เกินกี่ มม. ถือว่าเป็นเส้นเดียว (ตั้งต้น 0 = ต้องชิดกันจริง)")}${num("dxNotchGap","เผื่อช่องบากแต่ละด้าน (มม. · ตั้งต้น 0.5)")}</div>
     <div style="font-size:11px;opacity:.62;margin:2px 0 6px;line-height:1.6">ค่าตั้งต้น 0 = <b>ตู้ต้องชิดกันจริง</b>ถึงจะรวมเป็นเส้นเดียว ห่างกันแม้แต่มิลเดียวก็ตัดเส้นแยก ตรงกับหน้างาน · ตู้ที่เพิ่งทำสำเนาถูกวางเว้นระยะไว้ก่อน เลื่อนเข้าที่แล้วเส้นจะรวมให้ทันที<br>
       เผื่อช่องบาก 0.5 หมายถึงโปรไฟล์ 24 × 52 จะได้ช่อง 24.5 × 52.5</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="ibtn" id="setPullMkVar">＋ สร้าง Variable รับช่องรหัสมือจับ บาน 1-3 (ให้ผู้ใช้เลือกรุ่น / ไม่มีมือจับ เองได้)</button></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="ibtn" id="setPullMkVar">↻ เติมช่องมือจับให้ครบอีกครั้ง (บาน 1-6) — ปกติสร้างให้เองตั้งแต่เปิดโปรแกรม</button></div>
     <div style="font-size:11px;opacity:.62;margin-top:3px;line-height:1.6">${(()=>{ const f=String(settings.pullField||DEF_SETTINGS.pullField).trim();
       const got=[1,2,3].map(i=>xmlFamOf(f+i)).filter(Boolean);
       return got.length?("ตอนนี้จับคู่ไว้กับ Variable <b>"+escapeHtml(got.join(" · "))+"</b> แล้ว — ผู้ใช้เลือกรายตู้ได้ที่ คลิกขวาที่ตู้ → Variables (ตู้นี้)")
@@ -18868,7 +19155,7 @@ function renderSettings(){
     const ha=body.querySelector("#setHingeAutoFix"); if(ha)ha.onclick=()=>autoShiftHingesOffShelves();
     const hv=body.querySelector("#setHingeAutoAvoid"); if(hv)hv.onchange=()=>{ settings.hingeAutoAvoid=hv.checked; try{lsSet("furnitech:settings",settings);}catch(e){} }; }
   { const pv2=body.querySelector("#setPullMkVar"); if(pv2)pv2.onclick=async()=>{ collectSettings();   // v9.77
-      const ns=ensurePullVars(3); await lsSet("furnitech:settings",settings); renderSettings();
+      const ns=ensurePullVars(6); await lsSet("furnitech:settings",settings); renderSettings();
       toast("พร้อมใช้แล้ว: "+ns.join(" · ")+" — เลือกรายตู้ได้ที่ คลิกขวาที่ตู้ \u2192 Variables (ตู้นี้)"); }; }
   { const mv=body.querySelector("#setLegXmlMkVar"); if(mv)mv.onclick=async()=>{ collectSettings();   // v9.63
       const nm=ensureLegVar("Leg"); await lsSet("furnitech:settings",settings); renderSettings();
@@ -18999,7 +19286,7 @@ function renderSettings(){
           let hit=0; try{ const seen={};
             state.boards.forEach(b=>{ if(!b||b._virtual) return;
               const k=String(b.cabInst||b.cab||""); if(!k||seen[k]) return; seen[k]=1;
-              if(cabs.indexOf(String(b.cab||"").trim().toUpperCase())>=0) hit++; }); }catch(e){}
+              if(fitSetCabMatch(r,b.cab)) hit++; }); }catch(e){}
           const box=document.createElement("div");
           box.style.cssText="border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-bottom:7px;background:var(--bg)";
           box.innerHTML='<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">'
@@ -19007,8 +19294,8 @@ function renderSettings(){
             +'<label style="display:flex;align-items:center;gap:5px;font-size:11.5px;white-space:nowrap;cursor:pointer">'
               +'<input type="checkbox" class="cfOn" '+(r.off?"":"checked")+'> ใช้งาน</label>'
             +'<button type="button" class="cfDel" title="ลบชุดนี้" style="border:1px solid var(--line);background:transparent;color:#e0853b;border-radius:7px;height:28px;width:30px;cursor:pointer">✕</button></div>'
-            +'<div style="font-size:10.5px;color:var(--ink-dim);margin-bottom:2px">รหัสตู้ (คั่นด้วย , · ใส่ @ถาด = ตามรายชื่อของถาดฟรอยด์)</div>'
-            +'<input class="nameinp cfC" value="'+escapeHtml(String(r.cabs||""))+'" placeholder="BAS60, BAS80  หรือ  @ถาด" style="width:100%;font-family:var(--mono);font-size:11.5px">'
+            +'<div style="font-size:10.5px;color:var(--ink-dim);margin-bottom:2px">รหัสตู้ (คั่นด้วย , · @ถาด = ตามรายชื่อถาดฟรอยด์ · BA* = ขึ้นต้นด้วย BA · -BN* = ตัดออก)</div>'
+            +'<input class="nameinp cfC" value="'+escapeHtml(String(r.cabs||""))+'" placeholder="BA*   หรือ   @ถาด, -BN*   หรือ   BAS60, BAS80" style="width:100%;font-family:var(--mono);font-size:11.5px">'
             +'<div style="font-size:10.5px;color:var(--ink-dim);margin:6px 0 2px">รายการอุปกรณ์ — บรรทัดละรหัส เว้นวรรคแล้วตามด้วยจำนวน</div>'
             +'<textarea class="nameinp cfI" rows="5" placeholder="ETCP001 1&#10;ETCP004 1&#10;FITCP00026 1" style="width:100%;font-family:var(--mono);font-size:11.5px;resize:vertical">'+escapeHtml(String(r.items||""))+'</textarea>'
             +'<div style="font-size:11px;margin-top:5px;color:'+(hit?"#2f9e44":"var(--ink-dim)")+'">'
@@ -21863,26 +22150,85 @@ function ensureLegVar(name){   // สร้าง Family รับช่อง�
   try{ lsSet("furnitech:settings",settings); }catch(e){}
   return nm;
 }
-function ensurePullVars(n){   // v9.77: สร้าง Family รับช่องรหัสมือจับ + จับคู่ + ใส่ตัวเลือกให้ครบ (รวม NoPull)
-  n=Math.max(1,Math.min(Math.round(+n||3),9));
+/* ───────── v1.010: ตำแหน่งมือจับ 9 แบบ ─────────
+   ชื่อพวกนี้คือคำที่ตัวอ่านตำแหน่งรู้จักอยู่แล้ว (อ่านแบบจับคำ ไม่ยึดลำดับ)
+   เอามาทำเป็นตัวเลือกในดรอปดาวน์ จะได้ไม่ต้องจำคำสะกดและไม่พิมพ์ผิด */
+const PULL_POS9=["LeftUp","UpMiddle","RightUp","LeftMiddle","Center","RightMiddle","LeftDown","DownMiddle","RightDown"];
+/* v1.010: สร้าง Family ของช่องมือจับให้ครบทั้งชุด ไม่ใช่แค่ช่องรหัส
+   หนึ่งบานมีห้าช่อง รหัส · แนวรู · ตำแหน่ง · ระยะแนวตั้ง · ระยะแนวนอน
+   ของเดิมสร้างให้เฉพาะช่องรหัส อีกสี่ช่องจึงไม่มีที่ให้เลือกรายตู้เลย
+   ต้องพึ่ง XML อย่างเดียว ออเดอร์ที่ไม่ได้ส่งมาก็ตั้งเองไม่ได้
+   ช่องตำแหน่งกับแนวรูเป็นตัวเลือกตายตัว จึงทำเป็น Family พร้อมรายการให้เลือก
+   ส่วนระยะสองตัวเป็นตัวเลข ไปโผล่ในตารางตัวแปรตัวเลขของตู้ ตั้งค่ากลางไว้ให้ก่อน */
+/* v1.011: สร้างให้เองตอนเปิดโปรแกรม ไม่ต้องให้ไปกดปุ่ม
+   ช่องมือจับเป็นของที่ทุกงานใช้ ไม่ใช่ของพิเศษที่ต้องขอเปิด
+   วางไว้หลังโหลดตั้งค่าเสร็จ ทำครั้งเดียวแล้วจดธงไว้ ใครลบทิ้งเองภายหลังจะไม่ถูกสร้างคืน */
+/* v1.012: เติมให้ครบทุกครั้งที่เปิด แทนที่จะทำครั้งเดียวแล้วจดธง
+   ธงครั้งเดียวมีปัญหาตรงที่ ถ้ารอบแรกพลาดด้วยเหตุใดก็ตาม ธงก็ถูกตั้งไปแล้ว
+   รอบต่อไปจึงข้ามตลอด ไม่มีวันได้ของครบ และไม่มีอะไรบอกว่าพลาด
+   ตัวนี้เช็คจำนวนจริงก่อน ขาดเมื่อไหร่เติมเมื่อนั้น เพิ่มบานทีหลังก็ตามให้เอง
+   ของที่มีอยู่แล้วไม่ถูกแตะ ตัวเลือกที่เพิ่มเองไว้ก็ไม่ถูกลบ */
+function ensurePullVarsOnce(){
+  try{
+    if(settings.pullXmlOn===false) return 0;
+    const want=6;
+    const nm=n=>String(n||"").replace(/^\$/,"");
+    const have=new Set(flattenVars(settings.vars||[]).map(v=>nm(v.name)));
+    const need=[];
+    [String(settings.pullField||DEF_SETTINGS.pullField),
+     String(settings.pullOriField||DEF_SETTINGS.pullOriField),
+     String(settings.pullPosField||DEF_SETTINGS.pullPosField),
+     String(settings.pullXField||DEF_SETTINGS.pullXField),
+     String(settings.pullYField||DEF_SETTINGS.pullYField)]
+      .forEach(f=>{ for(let i=1;i<=want;i++) if(!have.has(f.trim()+i)) need.push(f.trim()+i); });
+    if(!need.length) return 0;
+    const ns=ensurePullVars(want);
+    try{ lsSet("furnitech:settings",settings); }catch(e){}
+    console.log("🔩 เติมช่องมือจับที่ยังขาด "+need.length+" ช่อง ("+need.slice(0,6).join(", ")+(need.length>6?" …":"")+") — ตอนนี้ครบ บาน 1-6");
+    try{ renderVars(); }catch(e){}
+    return need.length;
+  }catch(e){ console.error("pullVars:",e); return 0; }
+}
+function ensurePullVars(n){
+  n=Math.max(1,Math.min(Math.round(+n||6),9));
   const fld=String(settings.pullField||DEF_SETTINGS.pullField).trim();
+  const fOri=String(settings.pullOriField||DEF_SETTINGS.pullOriField).trim();
+  const fPos=String(settings.pullPosField||DEF_SETTINGS.pullPosField).trim();
+  const fX=String(settings.pullXField||DEF_SETTINGS.pullXField).trim();
+  const fY=String(settings.pullYField||DEF_SETTINGS.pullYField).trim();
   settings.xmlMap=settings.xmlMap||[]; settings.vars=settings.vars||[];
   try{ ensureSamplePull(); }catch(e){}
   const codes=["NoPull"].concat(pullDefs().map(d=>d.code));
   const names=[];
-  for(let i=1;i<=n;i++){
-    const f=fld+i;
+  /* ตัวช่วยตัวเดียวใช้กับทุกช่อง — จับคู่ชื่อช่อง XML กับ Family แล้วเติมตัวเลือกให้
+     ถ้าเคยจับคู่ไว้เองแล้วจะใช้ของเดิม ไม่สร้างซ้ำ ตัวเลือกที่มีอยู่ก็ไม่ถูกลบ */
+  const mkFam=(f,opts)=>{
+    if(!f) return "";
     const ex=(settings.xmlMap||[]).find(m=>m&&String(m.field||"").trim().toLowerCase()===f.toLowerCase()&&m.target&&!isNumVarName(m.target));
     let nm=ex?String(ex.target).trim():f.replace(/[^A-Za-z0-9_]/g,"_");
     if(!ex) settings.xmlMap.push({field:f,target:nm});
     let v=findVar(nm);
     if(!v){ v=newVarNode("Family"); v.name=nm; v.cat="XML"; settings.vars.push(v); }
     v.type="Family"; v.options=v.options||[];
-    codes.forEach(c=>{ if(c&&v.options.indexOf(c)<0) v.options.push(c); });
-    names.push(nm);
+    (opts||[]).forEach(c=>{ if(c&&v.options.indexOf(c)<0) v.options.push(c); });
+    names.push(nm); return nm; };
+  for(let i=1;i<=n;i++){
+    mkFam(fld+i, codes);
+    mkFam(fPos+i, PULL_POS9);
+    mkFam(fOri+i, ["H","V"]);
+    /* ระยะสองตัวเป็นตัวเลข ตั้งค่ากลางไว้เพื่อให้โผล่ในตารางตัวแปรตัวเลขของทุกตู้
+       ตู้ใบไหนอยากได้คนละค่าก็ทับที่ตู้ใบนั้นได้ตามปกติ */
+    try{ const nx=fX+i, ny=fY+i;
+      /* ค่าตัวเลขของ Variable อ่านจากช่อง order (ไม่ใช่ value) — ใส่ผิดช่องแล้วจะไม่โผล่ในตารางตัวเลข */
+      if(!findVar(nx)){ const v2=newVarNode("Number"); v2.name=nx; v2.cat="XML"; v2.order=String(settings.pullDefX??35); settings.vars.push(v2); }
+      if(!findVar(ny)){ const v3=newVarNode("Number"); v3.name=ny; v3.cat="XML"; v3.order=String(settings.pullDefY??0); settings.vars.push(v3); }
+      if(!(settings.xmlMap||[]).some(m=>m&&String(m.field||"").trim().toLowerCase()===nx.toLowerCase())) settings.xmlMap.push({field:nx,target:nx});
+      if(!(settings.xmlMap||[]).some(m=>m&&String(m.field||"").trim().toLowerCase()===ny.toLowerCase())) settings.xmlMap.push({field:ny,target:ny});
+      names.push(nx,ny);
+    }catch(e){}
   }
   try{ lsSet("furnitech:settings",settings); }catch(e){}
-  return names;
+  return [...new Set(names)];
 }
 function setCabLegVar(inst,val){   // จำรุ่นขาที่เลือกไว้เป็นค่าประจำตู้ใบนั้น (ถ้าจับคู่ Variable ไว้)
   const fam=legFamName(); if(!fam||!inst) return "";
@@ -25398,6 +25744,41 @@ function fitSetCabList(r){
   if(/^@/.test(raw)) return String(settings.sinkTrayCabs||"").split(/[;,\s]+/).map(x=>x.trim().toUpperCase()).filter(Boolean);
   return raw.split(/[;,\s]+/).map(x=>x.trim().toUpperCase()).filter(Boolean);
 }
+/* ───────── v1.005: รหัสตู้รับรูปแบบและข้อยกเว้นได้ ─────────
+   @ถาด ยืมรายชื่อของถาดฟรอยด์มาทั้งชุด ซึ่งกว้างเกินไปสำหรับของบางอย่าง
+   ตู้ที่ขึ้นต้น BN ก็มีถาดฟรอยด์เหมือนกัน แต่ไม่ใช่ตู้ซิงค์ จึงไม่ควรได้อุปกรณ์ประปา
+   ก่อนหน้านี้ทางเดียวคือเลิกใช้ @ถาด แล้วไปพิมพ์รหัสตู้ซิงค์เองทีละรหัส
+   ซึ่งต้องมาไล่ให้ตรงกับรายชื่อถาดทุกครั้งที่มีรุ่นใหม่ = หลุดแน่นอน
+   ตอนนี้ใส่ * แทนส่วนที่เหลือได้ (BA* = ขึ้นต้นด้วย BA) และนำหน้าด้วย - เพื่อตัดออก
+   เขียนได้ทั้ง "BA*" ตรง ๆ หรือ "@ถาด, -BN*" คือเอารายชื่อถาดแล้วตัด BN ทิ้ง */
+function _fsTok(raw){ return String(raw||"").split(/[;,\s]+/).map(t=>t.trim()).filter(Boolean); }
+function _fsHit(tok,cab){
+  const t=tok.toUpperCase();
+  if(t.indexOf("*")<0) return t===cab;
+  const rx="^"+t.split("*").map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join(".*")+"$";
+  try{ return new RegExp(rx).test(cab); }catch(e){ return false; }
+}
+function fitSetCabMatch(r,cab){
+  const C=String(cab||"").trim().toUpperCase(); if(!C) return false;
+  const raw=String((r&&r.cabs)||"").trim(); if(!raw) return false;
+  let toks=[];
+  /* v1.006: ตัดเฉพาะคำว่า @ถาด ออก ไม่ใช่กลืนไปจนถึงช่องว่างแรก
+     ของเดิมใช้ \S* ซึ่งไม่หยุดที่จุลภาค พิมพ์ติดกันเป็น @ถาด,-BN* จึงถูกกินทั้งบรรทัด
+     เหลือแต่รายชื่อถาดล้วน ๆ ข้อยกเว้นหายไปเงียบ ๆ โดยหน้าจอยังบอกว่ากฎทำงาน
+     ต้องเว้นวรรคหลังจุลภาคถึงจะรอด ซึ่งไม่มีใครรู้ และไม่ควรต้องรู้ */
+  if(/^@/.test(raw)){ toks=_fsTok(settings.sinkTrayCabs).concat(_fsTok(raw.replace(/^@[^\s,;]*/,""))); }
+  else toks=_fsTok(raw);
+  if(!toks.length) return false;
+  let hasInc=false, inc=false;
+  for(const t0 of toks){
+    const neg=/^[-!]/.test(t0), t=t0.replace(/^[-!]/,"");
+    if(!t) continue;
+    const ok=_fsHit(t,C);
+    if(neg){ if(ok) return false; }        // ข้อยกเว้นชนะเสมอ
+    else { hasInc=true; if(ok) inc=true; }
+  }
+  return hasInc?inc:true;                  // ใส่มาแต่ข้อยกเว้น = เอาทุกใบยกเว้นที่ระบุ
+}
 function fitSetRows(boards){
   const rules=fitSetRules().filter(r=>r&&r.off!==true); if(!rules.length) return [];
   /* หนึ่งใบ = หนึ่ง cabInst · ตู้ใบเดียวกันมีหลายแผ่นก็นับครั้งเดียว */
@@ -25407,7 +25788,7 @@ function fitSetRows(boards){
     if(inst[k]===undefined) inst[k]=String(b.cab||"").trim().toUpperCase(); });
   const rows=[];
   Object.keys(inst).forEach(k=>{ const cab=inst[k]; if(!cab) return;
-    rules.forEach(r=>{ if(fitSetCabList(r).indexOf(cab)<0) return;
+    rules.forEach(r=>{ if(!fitSetCabMatch(r,cab)) return;
       parseFitSetItems(r.items).forEach(it=>rows.push({code:it.code,qty:it.qty,cab:cab})); }); });
   return rows;
 }
@@ -27227,6 +27608,10 @@ function boot(){ console.log("%c"+appVerStr(),"font-weight:700;color:#007aff");
     bind("fitStudioDoneBtn",()=>fitStudioExit(true));
     bind("fitStudioCancelBtn",()=>fitStudioExit(false)); }
   await loadSettings();
+  try{ const hb=$("inspHintBtn"); if(hb) hb.onclick=()=>{ settings.inspHints=(settings.inspHints!==true);
+      lsSet("furnitech:settings",settings); applyInspHints();
+      toast(settings.inspHints?"แสดงคำอธิบายในแผงขวาแล้ว":"ซ่อนคำอธิบายในแผงขวาแล้ว — กดปุ่มเดิมเพื่อกางกลับ"); }; }catch(e){}
+  try{ ensurePullVarsOnce(); }catch(e){ console.error("pullVars boot:",e); }   // v1.012: เรียกซ้ำที่ลำดับเปิดโปรแกรมด้วย กันพลาดจากลำดับการโหลด
   try{ applyFamDefaults(); }catch(e){ console.error(e); }   // v9.05: เปิดโปรแกรมมา หัว Family เริ่มที่ค่าตั้งต้นเสมอ
   /* v9.51: ติดตั้งโมเดลบานพับตั้งต้น ถ้าเครื่องนี้ยังไม่มีรหัสนั้น (ไม่ทับของที่ผู้ใช้แก้เองไว้) */
   try{ settings.fitModels=settings.fitModels||{};
