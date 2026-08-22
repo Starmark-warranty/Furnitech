@@ -1649,7 +1649,7 @@
    ===================================================================== */
 /* ---- APP_META: แหล่งความจริงเดียวของเวอร์ชัน (ดูได้จาก console / คลิกชื่อแอป) ---- */
 const APP_META={
-  name:"StarNexus Cabinet", version:"1.026", build:"2026-08-21/box-parts-selectable",
+  name:"StarNexus Cabinet", version:"1.031", build:"2026-08-21/rack-on-cloud-save",
   file:"StarNexus.html", basedOn:"Furnitech_V3.html (v3.11)",
   /* ───────── เริ่มนับเวอร์ชันใหม่ที่ 1.001 (21/08/2026) ─────────
      ของเดิมนับมาถึง 42.1 แล้ววิ่งเป็นทศนิยมสองชั้นซึ่งอ่านลำดับยาก
@@ -1657,6 +1657,11 @@ const APP_META={
      ประวัติเก่าเก็บไว้ทั้งหมดตามเลขเดิม ไม่ไล่เขียนใหม่ เพราะเลขในนั้นถูกอ้างถึงไปแล้ว
      รายการที่อยู่ใต้ 1.001 ลงไปจึงเป็นเลขชุดเก่า อ่านต่อกันได้ตามวันที่ */
   changelog:[
+    ["1.031","2026-08-21","ย้ายการผูกตะแกรงมาถามตอนเก็บตู้ขึ้นคลัง แทนที่จะอยู่ในเมนูคลิกขวา — เมนูคลิกขวาเป็นเมนูที่ใช้บ่อยกับงานอื่นอยู่แล้ว รายการเพิ่มเข้าไปอีกก็ยิ่งยาวและกดโดนผิดง่าย ทั้งที่งานตะแกรงทำนาน ๆ ครั้ง · จังหวะที่ตรงกว่าคือตอนเก็บตู้ขึ้นคลัง เพราะเป็นตอนที่กำลังตั้งรหัสตู้อยู่พอดี และตู้ตะแกรงต่างจากตู้ต้นแบบแค่รหัสกับรุ่นตะแกรง · กล่องเก็บตู้ถามครบในที่เดียว ชื่อรหัสตู้ รหัสตะแกรง Purchase ID ชื่อตะแกรง และหน่วยเบิก · ช่องตะแกรงเว้นว่างไว้เท่ากับตู้ธรรมดา บันทึกตามปกติ ไม่มีอะไรเปลี่ยนจากเดิม · ใส่รหัสมาก็สร้างรายการในคลังอุปกรณ์และผูกเข้ากับรหัสตู้ให้ก่อนบันทึก ตัวที่ขึ้นคลาวด์จึงมีของครบตั้งแต่ต้น · รหัสที่มีอยู่แล้วเติมเฉพาะช่องที่ยังว่าง ไม่เขียนทับของเดิม"],
+    ["1.030","2026-08-21","FEAT สร้างตู้ตะแกรงเป็นชุดในคลิกเดียว — ตู้ตะแกรงคือตู้ใบเดิมทุกอย่าง ต่างกันแค่รหัสตู้ ชื่อ และรุ่นตะแกรงที่ใส่เข้าไป รูปทรงไม่เปลี่ยน ไม่มีรูเจาะเพิ่มทั้งที่หน้าบานและแผ่นข้าง เพราะตะแกรงยึดกับรางของมันเอง · ทำเองต้องเดินสามที่ต่อหนึ่งรุ่น ทำสำเนาตู้แล้วแก้รหัส เพิ่มรหัสตะแกรงในคลังอุปกรณ์ และผูกรหัสตะแกรงเข้ากับรหัสตู้ในชุดอุปกรณ์ประจำรหัสตู้ สิบรุ่นคือสามสิบขั้น พลาดง่ายมาก · ตัวช่วยรับตารางบรรทัดละรุ่น รหัสตู้ ขีดตั้ง รหัสตะแกรง ขีดตั้ง Purchase ID ขีดตั้ง ชื่อ แล้วเดินให้ครบทั้งสามที่ · รหัสที่มีอยู่แล้วในคลังจะเติมเฉพาะช่องที่ยังว่าง ไม่เขียนทับคำอธิบายหรือหน่วยที่ตั้งไว้เอง · เลือกได้ว่าจะทำสำเนาตู้ด้วยหรือผูกรหัสอย่างเดียว สำหรับกรณีที่ตู้มีอยู่ในฉากแล้ว · เรียกจากคลิกขวาที่ตู้ต้นแบบ"],
+    ["1.029","2026-08-21","FEAT สร้างตู้แล้วเชื่อมโครงให้เลย ไม่ต้องไปกดเอง — ตู้ที่เพิ่งสร้างไม่มีตัวเชื่อมสักตัว ต้องกดเชื่อมโครงเองทุกครั้ง ซึ่งลืมง่ายมาก แล้วส่งออกไปโดยไม่มีรูเดือยเลยสักรู · ตู้กล่องสี่เหลี่ยมมีรอยต่อแบบเดียวกันทุกใบอยู่แล้ว ไม่มีเหตุผลที่ต้องถามก่อน · ปิดได้ที่ค่า cabGenAutoFix ถ้าอยากเชื่อมเองทีหลัง · FIX เชื่อมโครงเขียนสเปคตัวเชื่อมไม่ครบ ตู้ที่เชื่อมคนละเวลาจึงได้คนละผัง — เดือยไม่ได้ระบุสูตรไว้ ปล่อยให้ไปตกที่สูตรที่กำลังเลือกอยู่ตอนนั้น ซึ่งเปลี่ยนได้ทีหลังโดยที่ตัวเชื่อมไม่รู้ตัว · มินิฟิกไม่ได้ระบุขนาดดอกกับความลึกเลย ต้องไปตกค่าปริยายอีกชั้น · ตอนนี้เขียนครบทุกช่องเหมือนกันทั้งคู่ ทั้งขนาดดอก ความลึกฝั่งตัวเอง ความลึกฝั่งแผ่นทับ ระยะร่นจากขอบ และชื่อสูตร ตู้ที่เชื่อมวันนี้กับปีหน้าจึงได้ผังเดียวกัน"],
+    ["1.028","2026-08-21","FIX ลิ้นชักสามใบขนาดไม่เท่ากันทั้งที่ตั้งสัดส่วนเท่ากันหมด และช่องไฟระหว่างใบบนกับใบกลางกลายเป็น 10.8 แทนที่จะเป็น 3 — ตัวเลือกขอบบนล่างของช่องบานกวาดทุกชิ้นที่ไม่ใช่แผ่นตั้ง ซึ่งรวมแผ่นหลังเข้ามาด้วย แผ่นหลังสูงเกือบเท่าตู้ทั้งใบ พอถูกเลือกเป็นขอบ ช่องบานของแต่ละใบจึงคนละช่วงกัน · ใบล่างอ้างแผ่นพื้นได้ช่อง 756 หาร 3 ได้ 250 ส่วนอีกสองใบอ้างแผ่นหลังได้ช่อง 744.2 หาร 3 ได้ 246.1 · ขอบบนล่างต้องเป็นชิ้นที่วางขวางแนวนอนจริง อย่างพื้น ทอป ชั้น หรือคาน · ตัดด้วยความสูงของชิ้นเทียบกับความสูงตู้ เกินครึ่งตู้ถือว่าไม่ใช่ชิ้นขวาง ซึ่งคลุมทั้งแผ่นหลังและแผงตั้งสูงอื่น ๆ โดยไม่ต้องไล่ระบุชนิดทีละอย่าง · คานสูง 70 กับชั้นหนา 16.2 ยังผ่านเกณฑ์ตามปกติ"],
+    ["1.027","2026-08-21","FIX หน้าลิ้นชักสองใบไม่เท่ากัน ทั้งที่กล่องตั้งค่าโชว์เท่ากัน — ผมทำพังเองใน 1.004 ตอนแก้เรื่องบานไม่ตรงเส้นแบ่ง โดยให้แผ่นนอนทุกชิ้นที่อยู่ในช่องเป็นตัวหักบาน ซึ่งกว้างเกินไปมาก ชั้นตายที่อยู่ในตู้เป็นของข้างใน ไม่ได้แปลว่าหน้าบานต้องหักตรงนั้น · เคสจริง ช่องบาน 102 ถึง 859 ต้องการลิ้นชักสองใบเท่ากันใบละ 377 แต่มีชั้นตายอยู่ที่ 790 ถึง 806.2 ในช่วงนั้น หน้าลิ้นชักจึงถูกหักที่กึ่งกลางชั้น ได้ 59.4 กับ 694.6 ซึ่งไม่มีใครสั่ง · กล่องตั้งค่ายังโชว์ 377 อยู่เพราะคิดจากสัดส่วนคนละทางกับตัววางจริง สองที่จึงบอกคนละเลข · ตอนนี้นับเฉพาะเส้นแบ่ง ซึ่งเป็นชิ้นที่วางไว้เพื่อบอกตำแหน่งโดยเฉพาะ หนาศูนย์และไม่ออกในใบตัด จึงเป็นตัวเดียวที่ตีความได้แน่นอนว่าตั้งใจให้หักตรงนั้น · เคสเส้นแบ่งที่ 180 จากบนของ 1.004 ยังทำงานเหมือนเดิม"],
     ["1.026","2026-08-21","FIX คลิกพื้นกล่องลิ้นชักหรือหลังกล่องแล้วลิ้นชักไถออก เลือกชิ้นไปแก้ไม่ได้ — ชิ้นในกล่องลิ้นชักถือธงชุดลิ้นชักเหมือนหน้าลิ้นชัก เพราะต้องเลื่อนไปด้วยกัน แต่ตัวรับคลิกในโหมดเปิดบานใช้ธงนั้นเป็นเกณฑ์ตรง ๆ คลิกเพื่อจะเลือกไปแก้จึงกลายเป็นสั่งลิ้นชักไถออกแทน · และเลือกชิ้นพวกนั้นไม่ได้เลยตราบใดที่ยังอยู่ในโหมดเปิดบาน ต้องปิดโหมดก่อนทุกครั้ง ซึ่งไม่มีใครเดาออก · ตัวสั่งเปิดปิดควรเป็นสิ่งที่มองเห็นจากด้านหน้า คือหน้าบานกับหน้าลิ้นชัก ไม่ใช่ของข้างใน · ตอนนี้พื้นกล่อง หลังกล่อง และแผงเหล็กข้าง กลับไปเลือกได้ตามปกติ ส่วนการเลื่อนออกยังเลื่อนทั้งชุดเหมือนเดิมทุกประการ · คำสั่งเปิดทั้งตู้ด้วย Shift ใช้เกณฑ์เดียวกัน"],
     ["1.025","2026-08-21","เก็บกวาดตัวเติมค่าตั้งต้น เรียกที่เดียวพอ — ตอนไล่หาสาเหตุที่ช่องมือจับไม่ขึ้น ผมใส่ตัวเติมไว้สองที่ทั้งในตัวโหลดตั้งค่าและในลำดับเปิดโปรแกรม เผื่อว่าที่หนึ่งไม่ทำงาน · สาเหตุจริงคือธง ทำครั้งเดียวแล้วจำไว้ ไม่ใช่ลำดับการเรียก พอแก้ธงแล้วตัวสำรองก็ไม่มีประโยชน์ เหลือไว้มีแต่ทำให้คนอ่านโค้ดสงสัยว่าทำไมต้องเรียกซ้ำ · เหลือที่เดียวคือในตัวโหลดตั้งค่า ซึ่งถูกต้องกว่าเพราะการดึงค่าจากคลาวด์ทับก็วิ่งผ่านทางนั้นเหมือนกัน · ต้นทุนของตัวเติมวัดได้ 0.001 มิลลิวินาทีต่อครั้ง และเขียนลงที่เก็บเฉพาะตอนค่าเปลี่ยนจริงเท่านั้น"],
     ["1.024","2026-08-21","FIX สูตรชุดยึดหัวท้ายไม่มีให้เลือกในกล่องใส่เดือย — ผมสร้างสูตรตอนกดคลิกขวาใส่ชุดเท่านั้น ใครยังไม่เคยกดคลิกขวาก็เปิดกล่องมาแล้วไม่เจอ ซึ่งดูเหมือนสูตรหาย ทั้งที่ไม่เคยถูกสร้าง · ตอนนี้สร้างตั้งแต่เปิดโปรแกรม และสร้างซ้ำหลังดึงค่าจากคลาวด์ด้วย · อัปเดตทับให้เองเมื่อเปลี่ยนระยะที่ตั้งไว้ และบันทึกเฉพาะตอนที่ค่าเปลี่ยนจริง ไม่เขียนทับไฟล์ตั้งค่าทุกครั้งที่เปิด · บอกใน console ว่าใส่หรืออัปเดตสูตรไปเป็นระยะเท่าไหร่ จะได้ตรวจได้ว่าตรงกับที่ตั้งใจ"],
@@ -2457,7 +2462,7 @@ const DEF_SETTINGS={ dowelD:8, dowelDepth:28, dowelMateDepth:12, dowelMateD:8, d
   k40BotMinusW:35, k40BackMinusW:38, k40BotMinusD:10, k40DrillRear:41, k40DrillH:37,
   k40FrontDrill:"37,32,5,12 ; -37,32,5,12",
   k40Map:"350:K40-350, 400:K40-400, 450:K40-450, 500:K40-500", slideMap:"250:FITDW00388, 300:FITDW00389, 350:FITDW00369, 400:FITDW00375, 450:FITDW00390, 500:FITDW00391",
-  symFixIns:50, symFixGap:32, symFixMidMin:600,     // v1.023: ชุดยึดหัวท้าย — เดือย 50 · มินิฟิก 82 · มีจุดกลางเมื่อยาว ≥ 600
+  symFixIns:50, symFixGap:32, symFixMidMin:600, cabGenAutoFix:true,     // v1.023: ชุดยึดหัวท้าย — เดือย 50 · มินิฟิก 82 · มีจุดกลางเมื่อยาว ≥ 600
   dowelSizeMode:true, dowelBackRelease:0, dowelFlipFront:false, dowelSizeRule:DEF_DOWEL_RULE,
   dowelFormulas:[{name:"มาตรฐาน",rule:DEF_DOWEL_RULE}], dowelFormulaActive:"มาตรฐาน", mfFormulaActive:"มาตรฐาน", cloudAutoSave:true,
   backset:16, backGroove:true, backOver:4.5, backClear:0.5,
@@ -4519,11 +4524,20 @@ function autoCarcassDowels(){
       const mb=state.boards.find(x=>x.id===hit.object.userData.id); if(!mb||(mb.T||18)<11) return;   // target panel must be ≥ 11 mm
       const len=info.len, count=Math.max(2,Math.min(8,Math.round(len/Math.max(settings.dowelPitch,40))+1));
       if(!A.connectors)A.connectors=[];
-      A.connectors.push({type:"dowel",edge,count,d:settings.dowelD,depth:Math.max(6,settings.dowelDepth||13),mateDepth:Math.max(1,settings.dowelMateDepth||12),margin:Math.min(80,Math.max(10,settings.dowelMargin))});
+      /* ───────── v1.029: เชื่อมโครงออกสเปคเต็มชุดทั้งเดือยและมินิฟิก ─────────
+         ของเดิมเดือยไม่ได้ระบุสูตรไว้ ปล่อยให้ไปตกที่สูตรที่กำลังเลือกอยู่ตอนนั้น
+         ซึ่งเปลี่ยนได้ทีหลังโดยที่ตัวเชื่อมไม่รู้ตัว ตู้ที่เชื่อมคนละเวลาจึงได้คนละผัง
+         ส่วนมินิฟิกไม่ได้ระบุขนาดดอกกับความลึกเลย ต้องไปตกค่าปริยายอีกชั้น
+         ตอนนี้เขียนครบทุกช่องเหมือนกันทั้งคู่ ตู้ที่เชื่อมวันนี้กับปีหน้าจึงได้ผังเดียวกัน */
+      const _mg=Math.min(80,Math.max(10,settings.dowelMargin||32));
+      const _dep=Math.max(6,settings.dowelDepth||28), _mdep=Math.max(1,settings.dowelMateDepth||12);
+      A.connectors.push({type:"dowel",edge,count,d:settings.dowelD||8,depth:_dep,mateDepth:_mdep,margin:_mg,
+        sizeRule:true, formula:(settings.dowelFormulaActive||"มาตรฐาน")});
       addedConn++;
       if(A.orient==="flat"){                                              // แผ่นนอน → ใส่มินิฟิก หันหัวตามชนิดแผ่น · ตำแหน่งจับจากสูตรมินิฟิกที่เลือกไว้
         const k=A.cabInst||"_", isTop=(topYByInst[k]==null)||(A.y>=topYByInst[k]-1);
-        A.connectors.push({type:"minifix",edge,face:isTop?"top":"bottom",sizeRule:true,formula:settings.mfFormulaActive,count:2,margin:Math.min(60,Math.max(20,settings.dowelMargin||37))});
+        A.connectors.push({type:"minifix",edge,face:isTop?"top":"bottom",d:settings.dowelD||8,depth:_dep,mateDepth:_mdep,margin:_mg,
+          count, sizeRule:true, formula:(settings.mfFormulaActive||"มินิฟิก")});
         addedMf++;
       }
     });
@@ -6223,6 +6237,15 @@ function _deSplitCuts(b,B,T,xL,xR){
     if(x._door||x._dx||x._box) return;
     if(x.orient!=="flat") return;
     if(isRail(x)) return;
+    /* ───────── v1.027: นับเฉพาะ "เส้นแบ่ง" ไม่ใช่ชั้นจริง ─────────
+       v1.004 ให้แผ่นนอนทุกชิ้นที่อยู่ในช่องเป็นตัวหักบาน ซึ่งกว้างเกินไปมาก
+       ชั้นตายที่อยู่ในตู้เป็นของข้างใน ไม่ได้แปลว่าหน้าบานต้องหักตรงนั้น
+       เคสจริง ช่องบาน 102 ถึง 859 ต้องการลิ้นชักสองใบเท่ากันใบละ 377
+       แต่มีชั้นตายอยู่ที่ 790 ถึง 806.2 ในช่วงนั้น หน้าลิ้นชักจึงถูกหักที่กึ่งกลางชั้น
+       ได้ 59.4 กับ 694.6 ซึ่งไม่มีใครสั่ง และกล่องตั้งค่ายังโชว์ 377 อยู่เพราะคิดคนละทาง
+       เส้นแบ่งคือชิ้นที่วางไว้เพื่อบอกตำแหน่งโดยเฉพาะ หนาศูนย์และไม่ออกในใบตัด
+       จึงเป็นตัวเดียวที่ตีความได้แน่นอนว่า "ตั้งใจให้หักตรงนี้" */
+    if(!(isGuideLine(x)||!(+x.T>0))) return;
     const d=worldDims(x), y0=x.y-d[1]/2, y1=x.y+d[1]/2;
     if(y0<=B+2 || y1>=T-2) return;                       // ขอบบน/ล่างของช่อง ไม่ใช่ตัวคั่น
     if(wide>0){ const ov=Math.min(x.x+d[0]/2,xR)-Math.max(x.x-d[0]/2,xL);
@@ -6242,7 +6265,15 @@ function frontFrameOf(inst,zone,hint){
   if(!isFinite(x0)) return null;
   /* v8.36: เก็บ "ผิวอ้างอิง 3 แบบ" ของแต่ละด้าน (ทับ = ผิวนอก · กลาง = กึ่งกลางไม้ · ใน = ผิวใน)
      เพื่อให้ตั้งโหมดขอบบานได้ในหน้านี้เลย ไม่ต้องเปิดกล่อง ปรับขอบบาน แยกอีกที */
-  const horiz=carc.filter(x=>x.orient!=="side"&&!x._dx);
+  /* ───────── v1.028: แผ่นหลังไม่ใช่ "ขอบบน/ล่าง" ของช่องบาน ─────────
+     ตัวเลือกขอบบนล่างกวาดทุกชิ้นที่ไม่ใช่แผ่นตั้ง ซึ่งรวมแผ่นหลังเข้ามาด้วย
+     แผ่นหลังสูงเกือบเท่าตู้ทั้งใบ พอถูกเลือกเป็นขอบ ช่องบานจึงเพี้ยนทั้งชุด
+     เคสจริง ลิ้นชักสามใบ ใบแรกอ้างพื้นได้ 250 อีกสองใบอ้างแผ่นหลังได้ 246.1
+     ทั้งที่สัดส่วนตั้งไว้เท่ากันหมด และช่องไฟระหว่างใบแรกกับใบสองบานเป็น 10.8 แทน 3
+     ขอบบนล่างต้องเป็นชิ้นที่วางขวางแนวนอนจริง อย่างพื้น ทอป ชั้น หรือคาน
+     ตัดด้วยความสูงของชิ้นเทียบกับความสูงตู้ เกินครึ่งตู้ = ไม่ใช่ชิ้นขวาง */
+  const _cabH=Math.max(y1-y0,1);
+  const horiz=carc.filter(x=>x.orient!=="side"&&!x._dx&&worldDims(x)[1]<=_cabH*0.5);
   const lS=sides.length?sides.reduce((a,c)=>a.x<c.x?a:c):null;
   const rS=sides.length?sides.reduce((a,c)=>a.x>c.x?a:c):null;
   let bB=horiz.length?horiz.reduce((a,c)=>a.y<c.y?a:c):null;
@@ -7447,6 +7478,17 @@ async function genCabinet(){
   }
   state.selectedId=null;
   sync(1);
+  /* ───────── v1.029: สร้างตู้แล้วเชื่อมโครงให้เลย ─────────
+     ตู้ที่เพิ่งสร้างไม่มีตัวเชื่อมสักตัว ต้องไปกดเชื่อมโครงเองทุกครั้ง
+     ซึ่งเป็นขั้นที่ลืมได้ง่ายมาก แล้วส่งออกไปโดยไม่มีรูเดือยเลยสักรู
+     ตู้กล่องสี่เหลี่ยมมีรอยต่อแบบเดียวกันทุกใบอยู่แล้ว ไม่มีเหตุผลที่ต้องถามก่อน
+     ปิดได้ที่ settings.cabGenAutoFix ถ้าอยากเชื่อมเองทีหลัง */
+  if(v.kind==="ตู้" && settings.cabGenAutoFix!==false){
+    try{ const _bk=state.view; if(_bk!=="assembled") state.view="assembled";
+      render3D(true); autoCarcassDowels();
+      if(_bk!=="assembled") state.view=_bk;
+    }catch(e){ console.error("cabGen autoFix:",e); }
+  }
 }
 
 /* ───────── v8.99: ระนาบอ้างอิงแนวนอนของตู้ (ใช้ตอนเพิ่มชั้น / แผ่นหลัง) ─────────
@@ -19490,9 +19532,43 @@ async function cloudSaveCab(){
 
   if(!state.boards.length){toast("ยังไม่มีชิ้นงาน");return;}
   const def=orderId()||("ตู้ "+new Date().toLocaleDateString("th-TH"));
-  const name=await dialog({title:"ชื่อ/รหัสตู้ที่จะบันทึกขึ้นคลาวด์",input:true,value:def,ok:"บันทึก"});
-  if(name===null||!name.trim())return;
-  try{ const db=await getDB(); const id=name.trim();
+  /* ───────── v1.031: ถามรหัสตะแกรงกับ Purchase ID ตรงนี้เลย ก่อนกดบันทึก ─────────
+     เดิมตัวช่วยตะแกรงอยู่ในเมนูคลิกขวา ซึ่งเป็นเมนูที่ใช้บ่อยกับงานอื่นอยู่แล้ว
+     รายการเพิ่มเข้าไปอีกก็ยิ่งยาวและกดโดนผิดง่าย ทั้งที่งานตะแกรงทำนาน ๆ ครั้ง
+     จังหวะที่ตรงกว่าคือตอนเก็บตู้ขึ้นคลัง เพราะเป็นตอนที่กำลังตั้งรหัสตู้อยู่พอดี
+     ตู้ตะแกรงต่างจากตู้ต้นแบบแค่รหัสกับรุ่นตะแกรง จึงถามต่อในกล่องเดียวกันได้เลย
+     เว้นว่างไว้ = ตู้ธรรมดา บันทึกตามปกติ ไม่มีอะไรเปลี่ยนจากเดิม */
+  const v=await promptFields("เก็บตู้ขึ้นคลัง",[
+    {key:"name",label:"ชื่อ/รหัสตู้ที่จะบันทึก",value:def},
+    {key:"rack",label:"รหัสตะแกรง (Element → Fittings) — เว้นว่าง = ตู้ธรรมดา ไม่ต้องผูก",value:""},
+    {key:"pid",label:"Purchase ID ของตะแกรง",value:"",showIf:c=>String(c.rack||"").trim()!==""},
+    {key:"rdesc",label:"ชื่อ/คำอธิบายตะแกรง",value:"",showIf:c=>String(c.rack||"").trim()!==""},
+    {key:"runit",label:"หน่วยเบิก",value:"ชุด",showIf:c=>String(c.rack||"").trim()!==""}]);
+  if(!v) return;
+  const name=String(v.name||"").trim(); if(!name) return;
+  /* ผูกรหัสตะแกรงเข้ากับรหัสตู้ก่อนบันทึก ตัวที่เก็บขึ้นคลาวด์จึงมีของครบตั้งแต่ต้น */
+  const _rk=String(v.rack||"").trim();
+  if(_rk){
+    try{
+      settings.elements=settings.elements||{};
+      const fits=(settings.elements.fittings=settings.elements.fittings||[]);
+      let e=fits.find(x=>x&&String(x.code||"").trim()===_rk);
+      if(!e){ e={code:_rk,kind:"ตะแกรง"}; fits.push(e); }
+      const pid=String(v.pid||"").trim(); if(pid) e.itemId=pid;
+      const dsc=String(v.rdesc||"").trim(); if(dsc&&!e.desc1&&!e.desc) e.desc1=dsc;
+      if(!e.unit) e.unit=String(v.runit||"ชุด");
+      if(!e.kind) e.kind="ตะแกรง";
+      settings.cabFitSets=Array.isArray(settings.cabFitSets)?settings.cabFitSets:[];
+      const rn="ตะแกรง "+name.toUpperCase();
+      let r=settings.cabFitSets.find(x=>x&&String(x.name||"").trim()===rn);
+      if(!r){ r={name:rn,cabs:name.toUpperCase(),items:_rk+" 1"}; settings.cabFitSets.push(r); }
+      else { r.cabs=name.toUpperCase(); r.items=_rk+" 1"; r.off=false; }
+      await lsSet("furnitech:settings",settings);
+      try{ _cabFitSig=""; sync(0); }catch(e2){}
+      toast("ผูกตะแกรง "+_rk+(String(v.pid||"").trim()?(" (PID "+String(v.pid).trim()+")"):"")+" เข้ากับรหัสตู้ "+name+" แล้ว");
+    }catch(e){ console.error("rackBind:",e); }
+  }
+  try{ const db=await getDB(); const id=name;
     const data={boards:JSON.parse(JSON.stringify(state.boards)),globalTone:state.globalTone};
     const {error}=await db.from("furnitech_cabinets").upsert({id,name:id,part_count:state.boards.length,data,updated_at:new Date().toISOString()},{onConflict:"id"}); if(error)throw error;
     toast("บันทึกตู้ขึ้นคลาวด์: "+id); renderCloudCabs();
@@ -23570,6 +23646,15 @@ function promptFields(title,fields){return new Promise(res=>{
       const seg=document.createElement("div"); seg.className="seg"; seg.style.display="inline-flex"; seg.style.flexWrap="wrap"; wrap._val=f.value;
       f.options.forEach(op=>{const bt=document.createElement("button");bt.type="button";bt.textContent=op;if(op===f.value)bt.className="sel";bt.onclick=()=>{seg.querySelectorAll("button").forEach(x=>x.classList.remove("sel"));bt.classList.add("sel");wrap._val=op;refresh();};seg.appendChild(bt);});
       wrap.appendChild(seg); refs.push({key:f.key,get:()=>wrap._val});
+    } else if(f.type==="textarea"){
+      /* v1.030: ช่องกรอกหลายบรรทัด — ของเดิมมีแต่ช่องบรรทัดเดียว
+         งานที่รับเป็นตาราง เช่นรายการตะแกรงหลายรุ่น จึงไม่มีที่ให้วาง */
+      wrap.innerHTML=`<label>${f.label||""}</label>`;
+      const ta=document.createElement("textarea"); ta.className="nameinp";
+      ta.rows=Math.max(+f.rows||5,2); ta.value=(f.value==null?"":String(f.value));
+      ta.style.cssText="width:100%;font-family:var(--mono);font-size:12px;resize:vertical";
+      wrap.appendChild(ta); refs.push({key:f.key,get:()=>ta.value});
+      items.push({wrap,showIf:f.showIf}); colL.appendChild(wrap); return;
     } else if(f.type==="note"){   // ข้อความอธิบายเฉย ๆ ไม่มีช่องกรอก (v7.6)
       wrap.innerHTML=`<div style="font-size:12px;line-height:1.5;color:var(--ink-dim,#5f5f66);background:rgba(0,0,0,.04);border-radius:9px;padding:9px 11px">${f.label}</div>`;
     } else if(f.type==="preview"){
@@ -25837,6 +25922,62 @@ function fittingOut(code){ return fitPidList(code)[0]; }
    เช่นตู้ซิงค์ที่ต้องมีถาดฟรอยด์ ก็ต้องมีชุดอุปกรณ์ประจำใบไปด้วยเสมอ
    ตู้หนึ่งใบได้หนึ่งชุด ไม่ว่าตู้ใบนั้นจะมีกี่แผ่น เพราะชุดผูกกับใบ ไม่ได้ผูกกับแผ่น
    เขียนเป็นตารางกฎ แก้เพิ่มลบได้เองทีหลังโดยไม่ต้องแตะโปรแกรม */
+/* ═════════ v1.030: สร้างตู้ตะแกรงเป็นชุด ═════════
+   ตู้ตะแกรงคือตู้ใบเดิมทุกอย่าง ต่างกันแค่รหัสตู้ ชื่อ และรุ่นตะแกรงที่ใส่เข้าไป
+   รูปทรงไม่เปลี่ยน ไม่มีรูเจาะเพิ่มทั้งที่หน้าบานและแผ่นข้าง เพราะตะแกรงยึดกับรางของมันเอง
+   ทำเองต้องเดินสามที่ต่อหนึ่งรุ่น: ทำสำเนาตู้แล้วแก้รหัส · เพิ่มรหัสตะแกรงใน Element
+   · ผูกรหัสตะแกรงเข้ากับรหัสตู้ในชุดอุปกรณ์ประจำรหัสตู้ · สิบรุ่นคือสามสิบขั้น พลาดง่ายมาก
+   ตัวนี้รับตารางบรรทัดละรุ่น แล้วเดินให้ครบทั้งสามที่ในคลิกเดียว */
+async function rackCabWizard(){
+  let base=null;
+  try{ if(state.selectedCab) base=cabGroups().find(x=>String(x.key)===String(state.selectedCab));
+    if(!base){ const sel=selBoard(); if(sel) base=cabGroups().find(x=>x.boards.some(b=>b.id===sel.id)); } }catch(e){}
+  if(!base){ toast("เลือกตู้ต้นแบบก่อน (คลิกที่ตู้ในรายการซ้าย)"); return; }
+  const baseCab=String((base.boards[0]||{}).cab||"").trim();
+  const v=await promptFields("🧺 สร้างตู้ตะแกรงเป็นชุด — จากตู้ “"+(baseCab||base.key)+"”",[
+    {key:"rows",type:"textarea",rows:8,
+     label:"บรรทัดละหนึ่งรุ่น — รหัสตู้ | รหัสตะแกรง | Purchase ID | ชื่อ (เว้นช่องท้ายได้)",
+     value:"BND226 | RACK_AGENT | 545.13.951 | ชุดใส่อุปกรณ์ทำอาหาร Kessebohmer รุ่น cooking AGENT"},
+    {key:"unit",label:"หน่วยเบิก",value:"ชุด"},
+    {key:"mk",label:"ทำสำเนาตู้ให้ด้วย",type:"toggle",options:["ทำ","ไม่ทำ (ผูกรหัสอย่างเดียว)"],value:"ทำ"}]);
+  if(!v) return;
+  const lines=String(v.rows||"").split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  if(!lines.length){ toast("ยังไม่ได้ใส่รายการ"); return; }
+  settings.elements=settings.elements||{}; const fits=(settings.elements.fittings=settings.elements.fittings||[]);
+  settings.cabFitSets=Array.isArray(settings.cabFitSets)?settings.cabFitSets:[];
+  let nFit=0,nRule=0,nCab=0; const bad=[];
+  for(const ln of lines){
+    const p=ln.split("|").map(x=>x.trim());
+    const cab=(p[0]||"").toUpperCase(), code=(p[1]||"").trim(), pid=(p[2]||"").trim(), desc=(p[3]||"").trim();
+    if(!cab||!code){ bad.push(ln); continue; }
+    /* 1) รหัสตะแกรงในคลังอุปกรณ์ — มีอยู่แล้วก็แค่เติมช่องที่ยังว่าง ไม่เขียนทับของเดิม */
+    let e=fits.find(x=>x&&String(x.code||"").trim()===code);
+    if(!e){ e={code,kind:"ตะแกรง"}; fits.push(e); nFit++; }
+    if(pid) e.itemId=pid;
+    if(desc&&!e.desc1&&!e.desc) e.desc1=desc;
+    if(!e.unit) e.unit=String(v.unit||"ชุด");
+    if(!e.kind) e.kind="ตะแกรง";
+    /* 2) ผูกรหัสตะแกรงเข้ากับรหัสตู้ — หนึ่งชุดต่อหนึ่งใบ */
+    const rn="ตะแกรง "+cab;
+    let r=settings.cabFitSets.find(x=>x&&String(x.name||"").trim()===rn);
+    if(!r){ r={name:rn,cabs:cab,items:code+" 1"}; settings.cabFitSets.push(r); nRule++; }
+    else { r.cabs=cab; r.items=code+" 1"; r.off=false; }
+    /* 3) ทำสำเนาตู้แล้วเปลี่ยนรหัสกับชื่อ — รูปทรงเหมือนต้นแบบทุกประการ ไม่แตะรูเจาะ */
+    if(v.mk==="ทำ"){
+      const before=state.boards.length;
+      try{ duplicateCabinet(base); }catch(err){ console.error(err); }
+      const made=state.boards.slice(before);
+      if(made.length){ made.forEach(b=>{ b.cab=cab;
+          if(baseCab&&b.name) b.name=String(b.name).split(baseCab).join(cab); });
+        nCab++; }
+    }
+  }
+  try{ await lsSet("furnitech:settings",settings); }catch(e){}
+  try{ _cabFitSig=""; }catch(e){}
+  buildGTones(); sync(1); try{ renderList(); }catch(e){}
+  toast("ตะแกรง: เพิ่มรหัสในคลัง "+nFit+" · ผูกรหัสตู้ "+nRule+" ชุด"+(nCab?(" · ทำสำเนาตู้ "+nCab+" ใบ"):"")
+    +(bad.length?(" · ข้ามบรรทัดที่อ่านไม่ออก "+bad.length):""));
+}
 function fitSetRules(){ const r=settings.cabFitSets; return Array.isArray(r)?r:[]; }
 /* รับได้ทั้ง "CODE 2" · "CODE,2" · "CODE x2" · หรือรหัสเปล่า (=1) บรรทัดละรายการ */
 function parseFitSetItems(txt){
